@@ -1,0 +1,8 @@
+{
+  "/team/page": "app/team/page.js",
+  "/robotics-club/page": "app/robotics-club/page.js",
+  "/about/page": "app/about/page.js",
+  "/page": "app/page.js",
+  "/careers/page": "app/careers/page.js",
+  "/contact/page": "app/contact/page.js"
+}
