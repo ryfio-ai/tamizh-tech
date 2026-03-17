@@ -1,7 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || "");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
 
 const SYSTEM_PROMPT = `
 You are the AI assistant for TamizhTech Robotics Company (TTRC), Coimbatore.
@@ -32,53 +34,59 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid messages format" }, { status: 400 });
     }
 
-    // Filter and format history for Gemini
-    // 1. History must start with a 'user' role.
-    // 2. Roles must alternate between 'user' and 'model'.
-    let history: any[] = [];
-    const chatMessages = messages.slice(0, -1);
-    
-    for (const m of chatMessages) {
-      const role = m.sender === "user" ? "user" : "model";
-      // Ensure we start with a user message
-      if (history.length === 0 && role !== "user") continue;
-      
-      // Ensure roles alternate
-      if (history.length > 0 && history[history.length - 1].role === role) continue;
-
-      history.push({
-        role: role,
-        parts: [{ text: m.content }],
-      });
-    }
-
     const lastMessage = messages[messages.length - 1].content;
 
-    // Using gemini-flash-latest as verified from your available models list
-    const model = genAI.getGenerativeModel({ 
-        model: "gemini-flash-latest",
-        systemInstruction: SYSTEM_PROMPT 
-    });
+    // --- TRY GEMINI FIRST ---
+    try {
+      const history: any[] = [];
+      const chatMessages = messages.slice(0, -1);
+      
+      for (const m of chatMessages) {
+        const role = m.sender === "user" ? "user" : "model";
+        if (history.length === 0 && role !== "user") continue;
+        if (history.length > 0 && history[history.length - 1].role === role) continue;
+        history.push({ role, parts: [{ text: m.content }] });
+      }
 
-    const chat = model.startChat({
-      history: history,
-    });
+      const model = genAI.getGenerativeModel({ 
+          model: "gemini-flash-latest",
+          systemInstruction: SYSTEM_PROMPT 
+      });
 
-    const result = await chat.sendMessage(lastMessage);
-    const response = await result.response;
-    const text = response.text();
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(lastMessage);
+      const response = await result.response;
+      return NextResponse.json({ content: response.text() });
 
-    return NextResponse.json({ content: text });
-  } catch (error: any) {
-    console.error("Gemini API Error details:", error);
-    
-    // Provide a more user-friendly message for quota issues
-    if (error.message?.includes("429") || error.message?.includes("quota")) {
-      return NextResponse.json({ 
-        error: "AI is currently experiencing high demand (Quota Exceeded). Please wait a few seconds and try again." 
-      }, { status: 429 });
+    } catch (geminiError: any) {
+      console.error("Gemini failed, falling back to OpenAI:", geminiError);
+
+      // --- FALLBACK TO OPENAI ---
+      if (!process.env.OPENAI_API_KEY) {
+        throw geminiError; // Rethrow if no fallback available
+      }
+
+      const openaiHistory: any[] = [
+        { role: "system", content: SYSTEM_PROMPT }
+      ];
+
+      for (const m of messages) {
+        openaiHistory.push({
+          role: m.sender === "user" ? "user" : "assistant",
+          content: m.content
+        });
+      }
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // Or "gpt-4o" if your key supports it
+        messages: openaiHistory,
+      });
+
+      return NextResponse.json({ content: completion.choices[0].message.content });
     }
 
+  } catch (error: any) {
+    console.error("Chat API Error:", error);
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }

@@ -8,7 +8,7 @@ const clients = [
   { name: "Nura Robotics", type: "Robotics Partner" },
   { name: "Adithya Tech", type: "Tech Partner" },
   { name: "Tech-X Robot", type: "Robotics Partner" },
-  { name: "Fixus", type: "Industry Partner" },
+  { name: "RYFIO", type: "Platform Partner" },
   { name: "Yoi Robotics Lab LLP", type: "Research Partner" },
   { name: "RoboAiQ", type: "AI Partner" },
   { name: "Robo Club SREC", type: "College Club" },
