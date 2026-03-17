@@ -23,7 +23,7 @@ const config: Config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "var(--neon-cyan)",
+          DEFAULT: "var(--neon-orange)",
           foreground: "#000000",
         },
         secondary: {
@@ -51,7 +51,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
         neon: {
-          cyan: "#00f3ff",
+          orange: "#eb9234",
           magenta: "#ff00ff",
           violet: "#b026ff",
           green: "#00ff66",
@@ -60,11 +60,11 @@ const config: Config = {
         }
       },
       backgroundImage: {
-        'cyber-grid': 'linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px)',
+        'cyber-grid': 'linear-gradient(rgba(235, 146, 52, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(235, 146, 52, 0.1) 1px, transparent 1px)',
         'cyber-gradient': 'radial-gradient(circle at center, rgba(176, 38, 255, 0.15) 0%, rgba(10, 10, 26, 1) 100%)',
       },
       boxShadow: {
-        'neon-cyan': '0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3)',
+        'neon-orange': '0 0 10px rgba(235, 146, 52, 0.5), 0 0 20px rgba(235, 146, 52, 0.3)',
         'neon-magenta': '0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3)',
         'neon-green': '0 0 10px rgba(0, 255, 102, 0.5), 0 0 20px rgba(0, 255, 102, 0.3)',
       },

@@ -24,7 +24,7 @@ const caseStudies = [
     title: "Robotics Lab Setup for Engineering College",
     desc: "Partnered with a top Coimbatore engineering college to set up a full robotics lab — kits, tracks, and mentor training included.",
     outcome: "350+ students trained in Year 1.",
-    color: "neon-cyan",
+    color: "neon-orange",
   },
   {
     icon: "🏭",
@@ -43,7 +43,7 @@ const caseStudies = [
 ];
 
 const clientColors = [
-  { text: "text-neon-cyan", border: "border-neon-cyan/40", bg: "bg-neon-cyan/10" },
+  { text: "text-neon-orange", border: "border-neon-orange/40", bg: "bg-neon-orange/10" },
   { text: "text-neon-magenta", border: "border-neon-magenta/40", bg: "bg-neon-magenta/10" },
   { text: "text-neon-green", border: "border-neon-green/40", bg: "bg-neon-green/10" },
   { text: "text-neon-violet", border: "border-neon-violet/40", bg: "bg-neon-violet/10" },
@@ -60,7 +60,7 @@ export default function ClientsPage() {
             <span className="text-xs font-bold tracking-widest text-neon-violet uppercase">Clients & Partners</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
-            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-violet to-neon-magenta">Institutions</span> &amp; <span className="text-neon-cyan">Companies</span>
+            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-violet to-neon-magenta">Institutions</span> &amp; <span className="text-neon-orange">Companies</span>
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
             50+ enterprise collaborations and 100+ deployed solutions across India.
@@ -110,7 +110,7 @@ export default function ClientsPage() {
       <section className="py-16 container mx-auto px-4">
         <div className="glass-panel rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6 divide-x-0 divide-y md:divide-y-0 md:divide-x divide-white/10">
           {[
-            { val: "50+", label: "Enterprise Clients", color: "text-neon-cyan" },
+            { val: "50+", label: "Enterprise Clients", color: "text-neon-orange" },
             { val: "100+", label: "Solutions Deployed", color: "text-neon-magenta" },
             { val: "15+", label: "States Served", color: "text-neon-green" },
             { val: "150+", label: "Events Supported", color: "text-neon-violet" },

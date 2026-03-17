@@ -2,11 +2,11 @@ import { Lightbulb, Globe, GraduationCap, Users, Shield, Cpu } from "lucide-reac
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const values = [
-  { icon: <Lightbulb className="w-7 h-7 text-neon-cyan" />, title: "Innovation Leadership", desc: "Pushing the boundaries of what's possible with robotics and AI." },
+  { icon: <Lightbulb className="w-7 h-7 text-neon-orange" />, title: "Innovation Leadership", desc: "Pushing the boundaries of what's possible with robotics and AI." },
   { icon: <GraduationCap className="w-7 h-7 text-neon-magenta" />, title: "Educational Impact", desc: "Making robotics and AI learning accessible to every student in Tamil Nadu and beyond." },
   { icon: <Shield className="w-7 h-7 text-neon-green" />, title: "Enterprise Excellence", desc: "Delivering high-quality automation and IoT solutions to MSMEs and large enterprises." },
   { icon: <Globe className="w-7 h-7 text-neon-violet" />, title: "Global Reach", desc: "Operating across 15+ Indian states with ambitions to reach 50+ countries by 2030." },
-  { icon: <Users className="w-7 h-7 text-neon-cyan" />, title: "Community & Collaboration", desc: "Building a thriving ecosystem of makers, mentors, and innovators." },
+  { icon: <Users className="w-7 h-7 text-neon-orange" />, title: "Community & Collaboration", desc: "Building a thriving ecosystem of makers, mentors, and innovators." },
   { icon: <Cpu className="w-7 h-7 text-neon-magenta" />, title: "Ethics in AI", desc: "Committed to responsible, transparent, and human-centered AI development." },
 ];
 
@@ -23,7 +23,7 @@ export default function AboutPage() {
               <span className="text-xs font-bold tracking-widest text-neon-magenta uppercase">Our Story</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-heading font-black text-white mb-6 leading-tight">
-              Born in <span className="text-neon-cyan">Coimbatore.</span><br />
+              Born in <span className="text-neon-orange">Coimbatore.</span><br />
               Built for <span className="text-neon-magenta">India.</span>
             </h1>
             <p className="text-slate-300 text-lg leading-relaxed mb-6">
@@ -33,12 +33,12 @@ export default function AboutPage() {
               Today, TamizhTech drives innovation through hands-on training, custom automation solutions, and a thriving robotics club community, with the vision to become a global benchmark by 2030.
             </p>
           </div>
-          <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden border border-neon-cyan/20"
-            style={{ background: "radial-gradient(circle at top right, rgba(176, 38, 255, 0.2), rgba(0, 243, 255, 0.05) 60%, rgba(10, 10, 26, 0.9) 100%)" }}>
+          <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden border border-neon-orange/20"
+            style={{ background: "radial-gradient(circle at top right, rgba(176, 38, 255, 0.2), rgba(235, 146, 52, 0.05) 60%, rgba(10, 10, 26, 0.9) 100%)" }}>
             <div className="absolute inset-0 bg-cyber-grid opacity-20" />
             <div className="absolute inset-0 flex flex-col gap-4 items-center justify-center text-center p-8">
               <div className="text-6xl font-black text-white">2050</div>
-              <div className="text-neon-cyan text-xl font-bold tracking-widest font-heading">VISION</div>
+              <div className="text-neon-orange text-xl font-bold tracking-widest font-heading">VISION</div>
               <p className="text-slate-400 text-sm max-w-xs">Global robotics innovation hub — from Tamil Nadu to the world.</p>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
               <div className="relative rounded-lg bg-white/[0.03] p-10 h-full">
                 <h2 className="text-3xl font-heading font-black text-white mb-4 flex items-center gap-3">
-                  <span className="w-2 h-8 rounded-full bg-neon-cyan" /> Our Mission
+                  <span className="w-2 h-8 rounded-full bg-neon-orange" /> Our Mission
                 </h2>
                 <p className="text-slate-300 leading-relaxed text-lg">
                   To empower institutions worldwide with transformative robotics, automation, and training solutions that deliver measurable results and inspire the next generation of innovators.
@@ -99,7 +99,7 @@ export default function AboutPage() {
       <section className="py-16 border-t border-white/10">
         <div className="container mx-auto px-4 flex flex-wrap justify-center gap-4">
           {certifications.map((cert) => (
-            <span key={cert} className="px-5 py-2 rounded-full text-sm font-bold text-neon-cyan border border-neon-cyan/30 bg-neon-cyan/5 backdrop-blur">
+            <span key={cert} className="px-5 py-2 rounded-full text-sm font-bold text-neon-orange border border-neon-orange/30 bg-neon-orange/5 backdrop-blur">
               {cert}
             </span>
           ))}

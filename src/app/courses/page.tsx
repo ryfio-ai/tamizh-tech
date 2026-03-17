@@ -28,11 +28,11 @@ const courses: Record<string, { title: string; level: string; mode: string; dura
 
 const levelColors: Record<string, string> = {
   Beginner: "text-neon-green border-neon-green/30 bg-neon-green/5",
-  Intermediate: "text-neon-cyan border-neon-cyan/30 bg-neon-cyan/5",
+  Intermediate: "text-neon-orange border-neon-orange/30 bg-neon-orange/5",
   Advanced: "text-neon-magenta border-neon-magenta/30 bg-neon-magenta/5",
 };
 
-const langColors = ["bg-neon-cyan/10 text-neon-cyan", "bg-neon-magenta/10 text-neon-magenta", "bg-neon-green/10 text-neon-green"];
+const langColors = ["bg-neon-orange/10 text-neon-orange", "bg-neon-magenta/10 text-neon-magenta", "bg-neon-green/10 text-neon-green"];
 
 export default function CoursesPage() {
   const [activeTab, setActiveTab] = useState("Robotics");
@@ -45,7 +45,7 @@ export default function CoursesPage() {
             <span className="text-xs font-bold tracking-widest text-neon-magenta uppercase">Courses & Learning Tracks</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
-            Learn. Build. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-magenta to-neon-cyan">Launch.</span>
+            Learn. Build. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-magenta to-neon-orange">Launch.</span>
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
             Courses for students, college enthusiasts, and working professionals — in Tamil, English & Hindi.
@@ -58,7 +58,7 @@ export default function CoursesPage() {
           {tabs.map((tab) => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               className={`px-6 py-3 rounded-full font-bold text-sm transition-all border ${
-                activeTab === tab ? "bg-neon-cyan text-black border-neon-cyan shadow-neon-cyan" : "border-white/20 text-slate-300 hover:border-neon-cyan hover:text-neon-cyan bg-white/5"
+                activeTab === tab ? "bg-neon-orange text-black border-neon-orange shadow-neon-orange" : "border-white/20 text-slate-300 hover:border-neon-orange hover:text-neon-orange bg-white/5"
               }`}>
               {tab}
             </button>
@@ -85,7 +85,7 @@ export default function CoursesPage() {
                 </div>
                 <div className="flex gap-3 mt-auto pt-4 border-t border-white/10">
                   <a href={`https://wa.me/918148045030?text=Hello!%20I%20want%20the%20syllabus%20for%20${encodeURIComponent(course.title)}.`} target="_blank" rel="noopener noreferrer"
-                    className="flex-1 text-center px-4 py-2 border border-neon-cyan text-neon-cyan text-sm font-bold rounded-md bg-neon-cyan/5 hover:bg-neon-cyan/10 transition-all">
+                    className="flex-1 text-center px-4 py-2 border border-neon-orange text-neon-orange text-sm font-bold rounded-md bg-neon-orange/5 hover:bg-neon-orange/10 transition-all">
                     Get Syllabus
                   </a>
                   <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer"

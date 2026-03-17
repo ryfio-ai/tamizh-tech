@@ -34,7 +34,7 @@
 
     --radius: 0.75rem;
 
-    --neon-cyan: #00f3ff;
+    --neon-orange: #eb9234;
     --neon-magenta: #ff00ff;
     --neon-violet: #b026ff;
     --neon-green: #00ff66;
@@ -74,10 +74,10 @@
   .glass-card:hover {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), 0 0 20px rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px rgba(235, 146, 52, 0.2), 0 0 20px rgba(235, 146, 52, 0.1);
   }
-  .neon-text-cyan {
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
+  .neon-text-orange {
+    text-shadow: 0 0 10px rgba(235, 146, 52, 0.7);
   }
   .neon-text-magenta {
     text-shadow: 0 0 10px rgba(255, 0, 255, 0.7);

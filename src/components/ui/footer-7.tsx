@@ -74,7 +74,7 @@ const defaultLegalLinks = [
 export const Footer7 = ({
   logo = {
     url: "/",
-    src: require("@/public/logo/TTRC LOGO.png"),
+    src: "/logo/TTRC LOGO.png",
     alt: "TamizhTech Logo",
     title: "TamizhTech Robotics",
   },
@@ -101,8 +101,8 @@ export const Footer7 = ({
                   className="object-contain"
                 />
                 <div className="flex flex-col">
-                  <span className="text-xl font-heading font-bold tracking-wider text-gray-900 group-hover:text-cyan-600 transition-colors">
-                    TAMIZH<span className="text-cyan-600">TECH</span>
+                  <span className="text-xl font-heading font-bold tracking-wider text-orange-500 group-hover:text-orange-400 transition-colors">
+                    TAMIZH<span className="text-orange-500">TECH</span>
                   </span>
                   <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">Robotics Club</span>
                 </div>
@@ -113,7 +113,7 @@ export const Footer7 = ({
             </p>
             <ul className="flex items-center space-x-5 text-gray-400 justify-center lg:justify-start">
               {socialLinks.map((social, idx) => (
-                <li key={idx} className="font-medium hover:text-cyan-600 transition-colors">
+                <li key={idx} className="font-medium hover:text-orange-500 transition-colors">
                   <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
                     {social.icon}
                   </a>
@@ -129,7 +129,7 @@ export const Footer7 = ({
                   {section.links.map((link, linkIdx) => (
                     <li
                       key={linkIdx}
-                      className="font-medium hover:text-cyan-600 transition-colors"
+                      className="font-medium hover:text-orange-500 transition-colors"
                     >
                       <Link href={link.href}>{link.name}</Link>
                     </li>
@@ -143,7 +143,7 @@ export const Footer7 = ({
           <p className="order-2 lg:order-1">{copyright}</p>
           <ul className="order-1 flex flex-col gap-4 md:order-2 md:flex-row items-center">
             {legalLinks.map((link, idx) => (
-              <li key={idx} className="hover:text-cyan-600 transition-colors">
+              <li key={idx} className="hover:text-orange-500 transition-colors">
                 <Link href={link.href}> {link.name}</Link>
               </li>
             ))}

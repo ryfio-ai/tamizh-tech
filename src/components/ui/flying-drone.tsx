@@ -47,11 +47,11 @@ export function FlyingDrone() {
         <div className="drone-bob">
           {/* eslint-disable-next-line @typescript-eslint/no-require-imports */}
           <Image
-            src={require("@/public/pic/drone.png")}
+            src="/pic/drone.png"
             alt="Flying Drone"
             width={110}
             height={110}
-            className="object-contain drop-shadow-[0_0_20px_rgba(0,243,255,0.4)]"
+            className="object-contain drop-shadow-[0_0_20px_rgba(235,146,52,0.4)]"
           />
         </div>
       </div>

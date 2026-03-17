@@ -9,74 +9,75 @@ const teamMembers: iTestimonial[] = [
     name: "Tamizharasan K",
     designation: "Founder & CEO",
     description: "Visionary behind TamizhTech — driving robotics education and automation innovation across Tamil Nadu and beyond.",
-    profileImage: require("@/public/team/Tamizharasan K.jpg"),
+    profileImage: "/team/Tamizharasan K.jpg",
   },
   {
     name: "Suraj A",
     designation: "Co-founder & COO",
     description: "Operations strategist ensuring seamless delivery of robotics programs, events, and enterprise solutions.",
-    profileImage: require("@/public/team/suraj.jpg"),
+    profileImage: "/team/suraj.jpg",
   },
   {
     name: "Dhanush S",
     designation: "Co-founder & CTO",
     description: "Lead technologist architecting robotics platforms, embedded systems, and AI solutions at TamizhTech.",
-    profileImage: require("@/public/team/dhanus.jpg"),
-  },
-  {
-    name: "Chenjitha",
-    designation: "CFO",
-    description: "Financial architect designing sustainable growth and investment strategies for TamizhTech's expansion.",
-    profileImage: require("@/public/team/Chenjitha.jpeg"),
-  },
-  {
-    name: "Poongothai Subiksha M",
-    designation: "CMO",
-    description: "Brand builder and marketing strategist behind TamizhTech's growing national and digital presence.",
-    profileImage: require("@/public/team/Poongothai Subiksha M.jpg"),
-  },
-  {
-    name: "Aananth S",
-    designation: "Product & Dev Officer",
-    description: "Product thinker and developer driving TamizhTech's digital platforms and customer experience.",
-    profileImage: require("@/public/team/anandth.jpg"),
+    profileImage: "/team/dhanus.jpg",
   },
   {
     name: "Sathish P",
     designation: "CIO",
     description: "Information systems leader managing TamizhTech's tech infrastructure, data, and digital operations.",
-    profileImage: require("@/public/team/sathish.jpg"),
+    profileImage: "/team/sathish.jpg",
   },
   {
-    name: "Sukeshan",
-    designation: "R&D Head",
-    description: "Research pioneer leading cutting-edge robotics and AI development at TamizhTech's innovation lab.",
-    profileImage: require("@/public/team/sathish.jpg"),
+    name: "Chenjitha",
+    designation: "CFO",
+    description: "Financial architect designing sustainable growth and investment strategies for TamizhTech's expansion.",
+    profileImage: "/team/Chenjitha.jpeg",
   },
   {
-    name: "Dharanish K B",
-    designation: "PR Team Head",
-    description: "Public relations leader building TamizhTech's media presence and stakeholder relationships.",
-    profileImage: require("@/public/team/sathish.jpg"),
+    name: "Poongothai Subiksha M",
+    designation: "CMO",
+    description: "Brand builder and marketing strategist behind TamizhTech's growing national and digital presence.",
+    profileImage: "/team/Poongothai Subiksha M.jpg",
   },
   {
     name: "Kumara Dharshini T",
     designation: "HR & Operations",
     description: "Human resources and operations lead ensuring a vibrant, inclusive, and effective team culture at TamizhTech.",
-    profileImage: require("@/public/team/dharshini.jpeg"),
+    profileImage: "/team/dharshini.jpeg",
   },
   {
-    name: "Kowsik K",
-    designation: "Embedded Systems Engineer",
-    description: "Expert in microcontrollers, PCB design, and real-time systems powering TamizhTech's robot platforms.",
-    profileImage: require("@/public/team/kowsik.jpeg"),
+    name: "Aananth S",
+    designation: "Product & Dev Officer",
+    description: "Product thinker and developer driving TamizhTech's digital platforms and customer experience.",
+    profileImage: "/team/anandth.jpg",
+  },
+  {
+    name: "Sukeshan",
+    designation: "R&D Head",
+    description: "Research pioneer leading cutting-edge robotics and AI development at TamizhTech's innovation lab.",
+    profileImage: "/team/sukesh.jpeg",
+  },
+  {
+    name: "Dharanish K B",
+    designation: "PR Team Head",
+    description: "Public relations leader building TamizhTech's media presence and stakeholder relationships.",
+    profileImage: "/team/Dharaneesh.jpeg",
   },
   {
     name: "Yuvaraj K",
     designation: "Robotics Engineer",
     description: "Hands-on robotics engineer contributing to the design, build, and testing of TamizhTech's competition bots.",
-    profileImage: require("@/public/team/yuvaraj.png"),
+    profileImage: "/team/yuvaraj.png",
   },
+  {
+    name: "Kowsik K",
+    designation: "Embedded Systems Engineer",
+    description: "Expert in microcontrollers, PCB design, and real-time systems powering TamizhTech's robot platforms.",
+    profileImage: "/team/kowsik.jpeg",
+  },
+
 ];
 
 const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80";
@@ -101,7 +102,7 @@ export default function TeamPage() {
             <span className="text-xs font-bold tracking-widest text-neon-green uppercase">Our Team</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
-            The Minds <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-cyan">Behind TamizhTech</span>
+            The Minds <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-orange">Behind TamizhTech</span>
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             Passionate engineers, designers, and educators building a robotics revolution from Coimbatore. Click a card to read more.

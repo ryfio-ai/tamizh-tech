@@ -88,14 +88,14 @@ function Header1() {
                                     {item.href ? (
                                         <>
                                             <NavigationMenuLink href={item.href}>
-                                                <Button variant="ghost" className="text-gray-700 hover:text-cyan-600 hover:bg-gray-50 font-medium">
+                                                <Button variant="ghost" className="text-gray-700 hover:text-orange-500 hover:bg-gray-50 font-medium">
                                                     {item.title}
                                                 </Button>
                                             </NavigationMenuLink>
                                         </>
                                     ) : (
                                         <>
-                                            <NavigationMenuTrigger className="font-medium text-sm text-gray-700 hover:text-cyan-600 bg-transparent hover:bg-gray-50 data-[state=open]:bg-gray-50">
+                                            <NavigationMenuTrigger className="font-medium text-sm text-gray-700 hover:text-orange-500 bg-transparent hover:bg-gray-50 data-[state=open]:bg-gray-50">
                                                 {item.title}
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="!w-[450px] p-4 bg-white border border-gray-200 shadow-xl">
@@ -107,7 +107,7 @@ function Header1() {
                                                                 {item.description}
                                                             </p>
                                                         </div>
-                                                        <Button size="sm" className="mt-10 bg-cyan-600 hover:bg-cyan-700 text-white" asChild>
+                                                        <Button size="sm" className="mt-10 bg-orange-500 hover:bg-orange-600 text-white" asChild>
                                                             <Link href="/contact">Book a call</Link>
                                                         </Button>
                                                     </div>
@@ -116,7 +116,7 @@ function Header1() {
                                                             <NavigationMenuLink
                                                                 href={subItem.href}
                                                                 key={subItem.title}
-                                                                className="flex flex-row justify-between items-center text-gray-700 hover:text-cyan-600 hover:bg-gray-50 py-2.5 px-4 rounded transition-colors"
+                                                                className="flex flex-row justify-between items-center text-gray-700 hover:text-orange-500 hover:bg-gray-50 py-2.5 px-4 rounded transition-colors"
                                                             >
                                                                 <span className="font-medium">{subItem.title}</span>
                                                                 <MoveRight className="w-4 h-4 text-gray-400" />
@@ -136,31 +136,31 @@ function Header1() {
                     <Link href="/" className="flex items-center gap-2 group">
                         {/* eslint-disable-next-line @typescript-eslint/no-require-imports */}
                         <Image
-                            src={require("@/public/logo/TTRC LOGO.png")}
+                            src="/logo/TTRC LOGO.png"
                             alt="TamizhTech Logo"
                             width={50}
                             height={50}
                             className="object-contain"
                         />
-                        <span className="font-heading font-bold text-lg tracking-wider text-gray-900 group-hover:text-cyan-600 transition-colors hidden sm:block">
-                            TAMIZH<span className="text-cyan-600">TECH</span>
+                        <span className="font-heading font-bold text-lg tracking-wider text-orange-500 group-hover:text-orange-400 transition-colors hidden sm:block">
+                            TAMIZH<span className="text-orange-500">TECH</span>
                         </span>
                     </Link>
                 </div>
                 <div className="flex justify-end w-full gap-4 items-center">
-                    <Button variant="ghost" className="hidden md:inline-flex text-emerald-600 border border-emerald-100 hover:bg-emerald-50 hover:text-emerald-700 font-semibold" asChild>
+                    <Button variant="ghost" className="hidden md:inline-flex text-orange-600 border border-orange-200 hover:bg-orange-50 hover:text-orange-700 font-semibold" asChild>
                         <Link href="https://wa.me/918148045030" target="_blank">WhatsApp</Link>
                     </Button>
                     <div className="border-r h-8 border-gray-200 hidden md:inline"></div>
                     <Button variant="ghost" className="hidden sm:inline-flex border border-gray-100 text-gray-700 hover:bg-gray-50 hover:text-gray-900 font-semibold" asChild>
                         <Link href="/team">Team</Link>
                     </Button>
-                    <Button className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold shadow-sm" asChild>
-                        <Link href="/robotics-club">Join Club</Link>
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-sm" asChild>
+                        <Link href="/robotics-club/join">Join Club</Link>
                     </Button>
                 </div>
                 <div className="flex w-12 shrink lg:hidden items-center justify-end">
-                    <Button variant="ghost" size="icon" className="text-gray-700 hover:text-cyan-600 hover:bg-gray-50" onClick={() => setOpen(!isOpen)}>
+                    <Button variant="ghost" size="icon" className="text-gray-700 hover:text-orange-500 hover:bg-gray-50" onClick={() => setOpen(!isOpen)}>
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </Button>
                     {isOpen && (
@@ -174,8 +174,8 @@ function Header1() {
                                                 className="flex justify-between items-center py-2 group"
                                                 onClick={() => setOpen(false)}
                                             >
-                                                <span className="text-lg font-medium group-hover:text-cyan-600">{item.title}</span>
-                                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground group-hover:text-cyan-600" />
+                                                <span className="text-lg font-medium group-hover:text-orange-500">{item.title}</span>
+                                                <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground group-hover:text-orange-500" />
                                             </Link>
                                         ) : (
                                             <p className="text-lg font-semibold text-gray-900 border-b border-gray-50 pb-1">{item.title}</p>
@@ -188,18 +188,18 @@ function Header1() {
                                                     className="flex justify-between items-center pl-4 py-2 hover:bg-gray-50 rounded group"
                                                     onClick={() => setOpen(false)}
                                                 >
-                                                    <span className="text-gray-600 group-hover:text-cyan-600">
+                                                    <span className="text-gray-600 group-hover:text-orange-500">
                                                         {subItem.title}
                                                     </span>
-                                                    <MoveRight className="w-4 h-4 stroke-1 group-hover:text-cyan-600" />
+                                                    <MoveRight className="w-4 h-4 stroke-1 group-hover:text-orange-500" />
                                                 </Link>
                                             ))}
                                     </div>
                                 </div>
                             ))}
                             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-100">
-                                <Button className="w-full bg-cyan-600 text-white" asChild onClick={() => setOpen(false)}>
-                                    <Link href="/robotics-club">Join Tamizh Robotics Club</Link>
+                                <Button className="w-full bg-orange-500 text-white" asChild onClick={() => setOpen(false)}>
+                                    <Link href="/robotics-club/join">Join Tamizh Robotics Club</Link>
                                 </Button>
                                 <Button variant="outline" className="w-full" asChild onClick={() => setOpen(false)}>
                                     <Link href="https://wa.me/918148045030" target="_blank">WhatsApp Us</Link>

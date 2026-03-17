@@ -96,12 +96,12 @@ export function ChatBot() {
       position="bottom-right"
       icon={<Bot className="h-6 w-6" />}
     >
-      <ExpandableChatHeader className="flex-col text-center justify-center py-5 border-cyan-500/10 bg-slate-900/80 backdrop-blur-md">
+      <ExpandableChatHeader className="flex-col text-center justify-center py-5 border-orange-500/10 bg-slate-900/80 backdrop-blur-md">
         <div className="flex flex-col items-center gap-3">
           <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
             <Image
-              src={require("@/public/logo/TTRC LOGO.jpg")}
+              src="/logo/TTRC LOGO.jpg"
               alt="TTRC Logo"
               width={60}
               height={60}
@@ -110,9 +110,9 @@ export function ChatBot() {
           </div>
           <div className="flex flex-col items-center gap-0.5">
             <h1 className="text-lg font-heading font-black text-white tracking-tighter uppercase flex items-center gap-1.5">
-              TTRC <span className="text-cyan-400">AI Assistant</span>
+              TTRC <span className="text-orange-400">AI Assistant</span>
             </h1>
-            <p className="text-[9px] text-slate-400 font-bold tracking-[0.2em] uppercase opacity-70">
+            <p className="text-[9px] text-orange-400 font-bold tracking-[0.2em] uppercase opacity-90">
               TamizhTech Smart Assistant
             </p>
           </div>
@@ -131,13 +131,13 @@ export function ChatBot() {
                 src={
                   message.sender === "user"
                     ? undefined
-                    : require("@/public/logo/TTRC LOGO.jpg")
+                    : "/logo/TTRC LOGO.jpg"
                 }
                 fallback={message.sender === "user" ? "ME" : "TTRC"}
               />
               <ChatBubbleMessage
                 variant={message.sender === "user" ? "sent" : "received"}
-                className={message.sender === "user" ? "bg-cyan-600/90 shadow-lg shadow-cyan-900/20" : "bg-slate-800/90 border border-white/5"}
+                className={message.sender === "user" ? "bg-orange-500/90 shadow-lg shadow-orange-900/20" : "bg-slate-800/90 border border-white/5"}
               >
                 <div className="prose prose-sm prose-invert max-w-none break-words leading-relaxed">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -152,7 +152,7 @@ export function ChatBot() {
             <ChatBubble variant="received">
               <ChatBubbleAvatar
                 className="h-8 w-8 shrink-0 border border-white/10 overflow-hidden bg-black/20"
-                src={require("@/public/logo/TTRC LOGO.jpg")}
+                src="/logo/TTRC LOGO.jpg"
                 fallback="TTRC"
               />
               <ChatBubbleMessage isLoading className="bg-slate-800/90 border border-white/5" />
@@ -161,10 +161,10 @@ export function ChatBot() {
         </ChatMessageList>
       </ExpandableChatBody>
 
-      <ExpandableChatFooter className="bg-slate-900/50 border-cyan-500/10">
+      <ExpandableChatFooter className="bg-slate-900/50 border-orange-500/10">
         <form
           onSubmit={handleSubmit}
-          className="relative rounded-xl border border-white/10 bg-black/20 focus-within:ring-1 focus-within:ring-cyan-500/50 p-1"
+          className="relative rounded-xl border border-white/10 bg-black/20 focus-within:ring-1 focus-within:ring-orange-500/50 p-1"
         >
           <ChatInput
             value={input}
@@ -176,7 +176,7 @@ export function ChatBot() {
             <div className="flex text-slate-400">
               <span className="text-[10px] ml-2 font-medium uppercase tracking-widest opacity-50">Powered by Gemini</span>
             </div>
-            <Button type="submit" size="sm" className="ml-auto gap-1.5 bg-cyan-600 hover:bg-cyan-700 text-white" disabled={isLoading}>
+            <Button type="submit" size="sm" className="ml-auto gap-1.5 bg-orange-500 hover:bg-orange-600 text-white" disabled={isLoading}>
               {isLoading ? "Thinking..." : "Send"}
               <CornerDownLeft className="size-3.5" />
             </Button>

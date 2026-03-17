@@ -15,7 +15,7 @@ const roleCategories = [
     icon: "⚙️",
     title: "Robotics & Embedded Engineering",
     desc: "Robot design, PCB development, firmware, ROS, actuator systems, and competition robot builds.",
-    color: "neon-cyan",
+    color: "neon-orange",
   },
   {
     icon: "🧠",
@@ -39,7 +39,7 @@ const roleCategories = [
     icon: "🤝",
     title: "Sales & Partnerships",
     desc: "Growing relationships with educational institutions, MSMEs, enterprises, and ecosystem partners.",
-    color: "neon-cyan",
+    color: "neon-orange",
   },
   {
     icon: "🎨",
@@ -50,7 +50,7 @@ const roleCategories = [
 ];
 
 const colorMap: Record<string, string> = {
-  "neon-cyan": "text-neon-cyan border-neon-cyan/30 bg-neon-cyan/5",
+  "neon-orange": "text-neon-orange border-neon-orange/30 bg-neon-orange/5",
   "neon-magenta": "text-neon-magenta border-neon-magenta/30 bg-neon-magenta/5",
   "neon-green": "text-neon-green border-neon-green/30 bg-neon-green/5",
   "neon-violet": "text-neon-violet border-neon-violet/30 bg-neon-violet/5",
@@ -68,12 +68,12 @@ export default function CareersPage() {
       <section className="py-28 relative overflow-hidden text-center">
         <div className="absolute inset-0 bg-cyber-grid opacity-15 pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 mb-6">
-            <span className="text-xs font-bold tracking-widest text-neon-cyan uppercase">Careers at TamizhTech Robotics</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-orange/30 bg-neon-orange/5 mb-6">
+            <span className="text-xs font-bold tracking-widest text-neon-orange uppercase">Careers at TamizhTech Robotics</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
             Join the Team{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-magenta">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">
               Building the Future
             </span>
           </h1>
@@ -100,7 +100,7 @@ export default function CareersPage() {
             <p className="text-slate-300 leading-relaxed max-w-xl mx-auto">
               We don{"'"}t have any open roles at the moment — but we{"'"}re always interested in talented people in
               robotics, embedded systems, AI, IoT, training, operations, and community building. Join our{" "}
-              <span className="text-neon-cyan font-bold">Talent Pool</span> and be the first to know when something opens up.
+              <span className="text-neon-orange font-bold">Talent Pool</span> and be the first to know when something opens up.
             </p>
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function CareersPage() {
       <section className="py-20 container mx-auto px-4">
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4">
-            Future <span className="text-neon-cyan">Opportunities</span>
+            Future <span className="text-neon-orange">Opportunities</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto">
             We{"'"}re not hiring for these categories right now — but we keep a Talent Pool for future roles.
@@ -151,7 +151,7 @@ export default function CareersPage() {
                 <span className={`text-xs font-bold px-3 py-1 rounded-full border w-fit ${colorMap[role.color]}`}>
                   Future Role
                 </span>
-                <h3 className="text-lg font-heading font-bold text-white group-hover:text-neon-cyan transition-colors">
+                <h3 className="text-lg font-heading font-bold text-white group-hover:text-neon-orange transition-colors">
                   {role.title}
                 </h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{role.desc}</p>

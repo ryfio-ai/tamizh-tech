@@ -49,7 +49,7 @@ export function ChatBubbleMessage({
       className={cn(
         "rounded-2xl p-3 max-w-[85%] text-sm",
         variant === "sent" 
-          ? "bg-cyan-600 text-white rounded-tr-none" 
+          ? "bg-orange-600 text-white rounded-tr-none" 
           : "bg-muted text-foreground rounded-tl-none border border-white/5",
         className
       )}
