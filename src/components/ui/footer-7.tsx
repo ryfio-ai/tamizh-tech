@@ -51,18 +51,16 @@ const defaultSections = [
     links: [
       { name: "Courses", href: "/courses" },
       { name: "Gallery", href: "/gallery" },
-      { name: "Join Club", href: "/robotics-club" },
+      { name: "Join Club", href: "/robotics-club/join" },
       { name: "WhatsApp Us", href: "https://wa.me/918148045030" },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
-  { icon: <FaYoutube className="size-5" />, href: "#", label: "YouTube" },
+  { icon: <FaInstagram className="size-5" />, href: "https://www.instagram.com/tamizh_tech_pvt_ltd", label: "Instagram" },
+  { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/company/tamizh-tech-robotics-company", label: "LinkedIn" },
+  { icon: <FaYoutube className="size-5" />, href: "https://www.youtube.com/@covaiscientist", label: "YouTube" },
   { icon: <FaWhatsapp className="size-5" />, href: "https://wa.me/918148045030", label: "WhatsApp" },
 ];
 
