@@ -175,7 +175,7 @@ export default function CareersPage() {
                 Students &amp; <span className="text-neon-violet">Internships</span>
               </h2>
               <p className="text-slate-300 leading-relaxed mb-6">
-                We{"'"}re open to internships and project collaborations in robotics, embedded systems, AI, and IoT — and to students who want to become campus ambassadors or club coordinators for TamizhTech Robotics Club at their college or school.
+                We{"'"}re open to internships and project collaborations in robotics, embedded systems, AI, and IoT — and to students who want to become campus ambassadors or club coordinators for Tamizh Robotics Club at their college or school.
               </p>
               <div className="space-y-3 mb-8 text-slate-400 text-sm">
                 <p>📩 Send us the following via email or WhatsApp:</p>

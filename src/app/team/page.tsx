@@ -13,7 +13,7 @@ const teamMembers: iTestimonial[] = [
   },
   {
     name: "Suraj A",
-    designation: "COO",
+    designation: "Co-founder & COO",
     description: "Operations strategist ensuring seamless delivery of robotics programs, events, and enterprise solutions.",
     profileImage: require("@/public/team/suraj.jpg"),
   },
@@ -51,31 +51,31 @@ const teamMembers: iTestimonial[] = [
     name: "Sukeshan",
     designation: "R&D Head",
     description: "Research pioneer leading cutting-edge robotics and AI development at TamizhTech's innovation lab.",
-    profileImage: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=300&q=80",
+    profileImage: require("@/public/team/sathish.jpg"),
   },
   {
     name: "Dharanish K B",
     designation: "PR Team Head",
     description: "Public relations leader building TamizhTech's media presence and stakeholder relationships.",
-    profileImage: "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=300&q=80",
+    profileImage: require("@/public/team/sathish.jpg"),
   },
   {
     name: "Kumara Dharshini T",
     designation: "HR & Operations",
     description: "Human resources and operations lead ensuring a vibrant, inclusive, and effective team culture at TamizhTech.",
-    profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+    profileImage: require("@/public/team/dharshini.jpeg"),
   },
   {
     name: "Kowsik K",
     designation: "Embedded Systems Engineer",
     description: "Expert in microcontrollers, PCB design, and real-time systems powering TamizhTech's robot platforms.",
-    profileImage: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=300&q=80",
+    profileImage: require("@/public/team/kowsik.jpeg"),
   },
   {
     name: "Yuvaraj K",
     designation: "Robotics Engineer",
     description: "Hands-on robotics engineer contributing to the design, build, and testing of TamizhTech's competition bots.",
-    profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+    profileImage: require("@/public/team/yuvaraj.png"),
   },
 ];
 

@@ -1,6 +1,6 @@
 "use client";
 import { useState, FormEvent } from "react";
-import { Phone, Mail, MapPin, Clock, Linkedin, Instagram, Youtube, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Linkedin, Instagram, Youtube, MessageCircle, Zap, CheckCircle2 } from "lucide-react";
 
 const enquiryTypes = [
   "General Inquiry",
@@ -14,13 +14,34 @@ const enquiryTypes = [
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", enquiry: "General Inquiry", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `Hi TamizhTech, my name is ${form.name}. I'm interested in ${form.enquiry}. Subject: ${form.subject}. Message: ${form.message}. Phone: ${form.phone}. Email: ${form.email}.`
-    );
-    window.open(`https://wa.me/918148045030?text=${msg}`, "_blank");
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message");
+      }
+
+      setIsSuccess(true);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -46,56 +67,89 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-3">
-            <div className="glass-card p-8 md:p-10">
-              <h2 className="text-2xl font-heading font-bold text-white mb-8">Send us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Full Name *</label>
-                    <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
-                      placeholder="Your name" />
+            <div className="glass-card p-8 md:p-10 min-h-[500px] flex flex-col justify-center">
+              {isSuccess ? (
+                <div className="text-center py-10 animate-in fade-in zoom-in duration-500">
+                  <div className="w-20 h-20 bg-neon-cyan/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-neon-cyan/50 shadow-neon-cyan/20">
+                    <Zap className="w-10 h-10 text-neon-cyan animate-pulse" />
                   </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Email *</label>
-                    <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
-                      className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
-                      placeholder="your@email.com" />
-                  </div>
+                  <h2 className="text-3xl font-heading font-black text-white mb-4">Inquiry Received!</h2>
+                  <p className="text-slate-300 text-lg mb-8 max-w-md mx-auto">
+                    Thank you for reaching out, <span className="text-neon-cyan font-bold">{form.name}</span>. We have received your inquiry and will email you back shortly at <span className="text-white/80">{form.email}</span>.
+                  </p>
+                  <button 
+                    onClick={() => setIsSuccess(false)}
+                    className="mt-8 text-sm font-bold text-slate-400 hover:text-white transition-colors underline underline-offset-4"
+                  >
+                    Send another message
+                  </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Phone</label>
-                    <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
-                      className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
-                      placeholder="+91 XXXXX XXXXX" />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Type of Enquiry</label>
-                    <select value={form.enquiry} onChange={e => setForm({ ...form, enquiry: e.target.value })}
-                      className="w-full bg-[#0d1524] border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors">
-                      {enquiryTypes.map(t => <option key={t}>{t}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Subject</label>
-                  <input value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
-                    placeholder="Brief subject" />
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Message</label>
-                  <textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
-                    rows={5}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors resize-none"
-                    placeholder="Tell us about your requirement..." />
-                </div>
-                <button type="submit"
-                  className="w-full py-4 bg-neon-cyan text-black font-bold text-lg rounded-lg hover:bg-white hover:shadow-neon-cyan transition-all flex items-center justify-center gap-2">
-                  <MessageCircle className="w-5 h-5" /> Send Message via WhatsApp
-                </button>
-              </form>
+              ) : (
+                <>
+                  <h2 className="text-2xl font-heading font-bold text-white mb-8">Send us a Message</h2>
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    {error && (
+                      <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-3 text-red-400 text-sm">
+                        <Zap className="w-4 h-4 rotate-180" /> {error}
+                      </div>
+                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Full Name *</label>
+                        <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                          className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
+                          placeholder="Your name" />
+                      </div>
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Email *</label>
+                        <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+                          className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
+                          placeholder="your@email.com" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Phone</label>
+                        <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
+                          className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
+                          placeholder="+91 XXXXX XXXXX" />
+                      </div>
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Type of Enquiry</label>
+                        <select value={form.enquiry} onChange={e => setForm({ ...form, enquiry: e.target.value })}
+                          className="w-full bg-[#0d1524] border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-neon-cyan transition-colors">
+                          {enquiryTypes.map(t => <option key={t}>{t}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Subject</label>
+                      <input value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })}
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors"
+                        placeholder="Brief subject" />
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Message</label>
+                      <textarea required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+                        rows={5}
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-neon-cyan transition-colors resize-none"
+                        placeholder="Tell us about your requirement..." />
+                    </div>
+                    <button type="submit" disabled={isSubmitting}
+                      className="w-full py-4 bg-neon-cyan text-black font-bold text-lg rounded-lg hover:bg-white hover:shadow-neon-cyan disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none transition-all flex items-center justify-center gap-2">
+                      {isSubmitting ? (
+                        <>
+                          <Zap className="w-5 h-5 animate-spin" /> Sending...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-5 h-5" /> Submit Inquiry
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </div>
 

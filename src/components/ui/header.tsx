@@ -46,6 +46,10 @@ function Header1() {
                     title: "Courses",
                     href: "/courses",
                 },
+                {
+                    title: "Gallery",
+                    href: "/gallery",
+                },
             ],
         },
         {
@@ -148,7 +152,7 @@ function Header1() {
                         <Link href="https://wa.me/918148045030" target="_blank">WhatsApp</Link>
                     </Button>
                     <div className="border-r h-8 border-gray-200 hidden md:inline"></div>
-                    <Button variant="outline" className="hidden sm:inline-flex border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 font-semibold" asChild>
+                    <Button variant="ghost" className="hidden sm:inline-flex border border-gray-100 text-gray-700 hover:bg-gray-50 hover:text-gray-900 font-semibold" asChild>
                         <Link href="/team">Team</Link>
                     </Button>
                     <Button className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold shadow-sm" asChild>
@@ -195,7 +199,7 @@ function Header1() {
                             ))}
                             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-gray-100">
                                 <Button className="w-full bg-cyan-600 text-white" asChild onClick={() => setOpen(false)}>
-                                    <Link href="/robotics-club">Join Robotics Club</Link>
+                                    <Link href="/robotics-club">Join Tamizh Robotics Club</Link>
                                 </Button>
                                 <Button variant="outline" className="w-full" asChild onClick={() => setOpen(false)}>
                                     <Link href="https://wa.me/918148045030" target="_blank">WhatsApp Us</Link>

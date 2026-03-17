@@ -50,6 +50,7 @@ const defaultSections = [
     title: "Resources",
     links: [
       { name: "Courses", href: "/courses" },
+      { name: "Gallery", href: "/gallery" },
       { name: "Join Club", href: "/robotics-club" },
       { name: "WhatsApp Us", href: "https://wa.me/918148045030" },
     ],
@@ -103,7 +104,7 @@ export const Footer7 = ({
                   <span className="text-xl font-heading font-bold tracking-wider text-gray-900 group-hover:text-cyan-600 transition-colors">
                     TAMIZH<span className="text-cyan-600">TECH</span>
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">Robotics Company</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">Robotics Club</span>
                 </div>
               </Link>
             </div>

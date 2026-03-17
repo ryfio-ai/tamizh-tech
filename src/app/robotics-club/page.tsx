@@ -29,7 +29,7 @@ export default function RoboticsClubPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 mb-6">
             <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
-            <span className="text-xs font-bold tracking-widest text-neon-cyan uppercase">TamizhTech Robotics Club</span>
+            <span className="text-xs font-bold tracking-widest text-neon-cyan uppercase">Tamizh Robotics Club</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
             Build. Compete. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet">Innovate.</span>
@@ -101,7 +101,7 @@ export default function RoboticsClubPage() {
               Become a <span className="text-neon-cyan">Club Member</span>
             </h2>
             <p className="text-slate-300 text-lg mb-10">
-              Training, event support, facility access, and exclusive benefits at TamizhTech Robotics Club.
+              Training, event support, facility access, and exclusive benefits at Tamizh Robotics Club.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer"
