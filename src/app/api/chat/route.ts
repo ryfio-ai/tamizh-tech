@@ -4,9 +4,6 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || "");
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
-
 const SYSTEM_PROMPT = `
 You are the AI assistant for TamizhTech Robotics Company (TTRC), Coimbatore.
 
@@ -29,6 +26,9 @@ Interaction Guidelines:
 `;
 
 export async function POST(req: Request) {
+  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || "");
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
+
   try {
     const { messages } = await req.json();
 
