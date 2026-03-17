@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MessageCircle, Brain, Trophy, Zap, Users } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+
+export const metadata: Metadata = {
+  title: "Robotics Club | TamizhTech Robotics Company",
+  description: "Join TamizhTech's Robotics Club — hands-on training, national competitions, mentorship, and a vibrant builder community for students across India.",
+};
 
 const events = [
   { name: "Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", icon: "⚽" },

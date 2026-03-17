@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+
+export const metadata: Metadata = {
+  title: "Products | TamizhTech Robotics Company",
+  description: "Explore TamizhTech's robotics hardware — industrial robots, drones, IoT systems, educational kits, AI vision platforms, and more.",
+};
 
 const productCategories = [
   { title: "Industrial Robots", description: "Custom automation and robotics platforms for manufacturing, assembly, and material handling.", badge: "Enterprise", icon: "🦾" },

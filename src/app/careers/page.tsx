@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { Mail, MessageCircle } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Careers | TamizhTech Robotics Company",
+  description: "Join the TamizhTech team — explore career opportunities in robotics, AI, embedded systems, training, and operations from Coimbatore.",
+};
 
 const culturePoints = [
   { icon: "🤖", title: "Hands-On Robotics & Real Projects", desc: "Work in our labs on live competition bots, industrial automation rigs, and student kits — not just mockups." },

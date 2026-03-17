@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+import type { Metadata } from "next";
 import { Carousel, TestimonialCard } from "@/components/ui/retro-testimonial";
 import type { iTestimonial } from "@/components/ui/retro-testimonial";
+
+export const metadata: Metadata = {
+  title: "Our Team | TamizhTech Robotics Company",
+  description: "Meet the passionate engineers, designers, and educators behind TamizhTech — building a robotics revolution from Coimbatore.",
+};
 
 // Members with real local photos (loaded via webpack static import)
 // Members without photos get Unsplash placeholders

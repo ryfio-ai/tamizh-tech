@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { Lightbulb, Globe, GraduationCap, Users, Shield, Cpu } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+
+export const metadata: Metadata = {
+  title: "About Us | TamizhTech Robotics Company",
+  description: "Learn about TamizhTech's mission, vision, and core values. Born in Coimbatore, built for India — driving robotics education and automation innovation across 15+ states.",
+};
 
 const values = [
   { icon: <Lightbulb className="w-7 h-7 text-neon-orange" />, title: "Innovation Leadership", desc: "Pushing the boundaries of what's possible with robotics and AI." },
@@ -37,7 +43,7 @@ export default function AboutPage() {
             style={{ background: "radial-gradient(circle at top right, rgba(176, 38, 255, 0.2), rgba(235, 146, 52, 0.05) 60%, rgba(10, 10, 26, 0.9) 100%)" }}>
             <div className="absolute inset-0 bg-cyber-grid opacity-20" />
             <div className="absolute inset-0 flex flex-col gap-4 items-center justify-center text-center p-8">
-              <div className="text-6xl font-black text-white">2050</div>
+              <div className="text-6xl font-black text-white">2030</div>
               <div className="text-neon-orange text-xl font-bold tracking-widest font-heading">VISION</div>
               <p className="text-slate-400 text-sm max-w-xs">Global robotics innovation hub — from Tamil Nadu to the world.</p>
             </div>

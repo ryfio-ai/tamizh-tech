@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+
+export const metadata: Metadata = {
+  title: "Services | TamizhTech Robotics Company",
+  description: "3D printing, PCB fabrication, laser cutting, CNC machining, welding, and custom robotics & automation services from TamizhTech.",
+};
 
 const services = [
   { icon: "🖨️", title: "3D Printing", desc: "Rapid prototyping for robotics parts, enclosures, and custom mechanisms.", detail: "Ideal for student projects, robot chassis, and PoC builds." },

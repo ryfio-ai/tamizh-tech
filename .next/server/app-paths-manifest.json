@@ -1,8 +1,7 @@
 {
   "/products/page": "app/products/page.js",
-  "/robotics-club/join/page": "app/robotics-club/join/page.js",
-  "/gallery/page": "app/gallery/page.js",
   "/team/page": "app/team/page.js",
+  "/services/page": "app/services/page.js",
   "/clients/page": "app/clients/page.js",
-  "/services/page": "app/services/page.js"
+  "/gallery/page": "app/gallery/page.js"
 }
