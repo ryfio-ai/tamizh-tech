@@ -37,15 +37,15 @@ export function middleware(request: NextRequest) {
   // Simplified CSP for better compatibility with existing components (e.g., Framer Motion, Google Fonts)
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://*;
+    img-src 'self' blob: data: https://* https://www.google-analytics.com;
     font-src 'self' https://fonts.gstatic.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    connect-src 'self' https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com;
+    connect-src 'self' https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com https://www.google-analytics.com;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 
