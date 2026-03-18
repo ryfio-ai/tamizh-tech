@@ -100,7 +100,7 @@ export const Footer7 = ({
                 />
                 <div className="flex flex-col">
                   <span className="text-xl font-heading font-bold tracking-wider text-orange-500 group-hover:text-orange-400 transition-colors">
-                    TAMIZH<span className="text-orange-500">TECH</span>
+                    TAMIZH<span className="text-orange-500"></span>
                   </span>
                   <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400">Robotics Club</span>
                 </div>

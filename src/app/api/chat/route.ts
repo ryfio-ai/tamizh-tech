@@ -53,69 +53,82 @@ export async function POST(req: Request) {
 
     const lastMessage = messages[messages.length - 1].content;
 
-    // --- 1. TRY GROQ FIRST (Fastest) ---
-    try {
-      const groqHistory = messages.map((m: any) => ({
-        role: m.sender === "user" ? "user" : "assistant",
-        content: m.content
-      }));
-
-      const completion = await groq.chat.completions.create({
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...groqHistory
-        ],
-        model: "llama-3.3-70b-versatile",
-      });
-
-      return NextResponse.json({ content: completion.choices[0].message.content });
-
-    } catch (groqError: any) {
-      console.error("Groq failed, falling back to Gemini:", groqError);
-
-      // --- 2. TRY GEMINI SECOND ---
-      try {
-        const history: any[] = [];
-        const chatMessages = messages.slice(0, -1);
-        for (const m of chatMessages) {
-          const role = m.sender === "user" ? "user" : "model";
-          if (history.length === 0 && role !== "user") continue;
-          if (history.length > 0 && history[history.length - 1].role === role) continue;
-          history.push({ role, parts: [{ text: m.content }] });
-        }
-
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-flash-latest",
-            systemInstruction: SYSTEM_PROMPT 
-        });
-
-        const chat = model.startChat({ history });
-        const result = await chat.sendMessage(lastMessage);
-        const response = await result.response;
-        return NextResponse.json({ content: response.text() });
-
-      } catch (geminiError: any) {
-        console.error("Gemini failed, falling back to OpenAI:", geminiError);
-
-        // --- 3. TRY OPENAI THIRD ---
-        if (!process.env.OPENAI_API_KEY) throw geminiError;
-
-        const openaiHistory: any[] = [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...messages.map((m: any) => ({
-            role: m.sender === "user" ? "user" : "assistant",
+    // --- AI Providers in order of preference ---
+    const providers = [
+      {
+        name: "Groq",
+        key: process.env.GROQ_API_KEY,
+        execute: async () => {
+          const groqHistory = messages.map((m: any) => ({
+            role: (m.sender === "user" ? "user" : "assistant") as "user" | "assistant",
             content: m.content
-          }))
-        ];
+          }));
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "system" as "system", content: SYSTEM_PROMPT }, ...groqHistory],
+            model: "llama-3.3-70b-versatile",
+          });
+          return completion.choices[0].message.content;
+        }
+      },
+      {
+        name: "Gemini",
+        key: process.env.GOOGLE_GEMINI_API_KEY,
+        execute: async () => {
+          const history: any[] = [];
+          const chatMessages = messages.slice(0, -1);
+          for (const m of chatMessages) {
+            const role = m.sender === "user" ? "user" : "model";
+            if (history.length === 0 && role !== "user") continue;
+            if (history.length > 0 && history[history.length - 1].role === role) continue;
+            history.push({ role, parts: [{ text: m.content }] });
+          }
+          const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash", 
+            systemInstruction: SYSTEM_PROMPT 
+          });
+          const chat = model.startChat({ history });
+          const result = await chat.sendMessage(lastMessage);
+          const response = await result.response;
+          return response.text();
+        }
+      },
+      {
+        name: "OpenAI",
+        key: process.env.OPENAI_API_KEY,
+        execute: async () => {
+          const openaiHistory = [
+            { role: "system" as "system", content: SYSTEM_PROMPT },
+            ...messages.map((m: any) => ({
+              role: (m.sender === "user" ? "user" : "assistant") as "user" | "assistant",
+              content: m.content
+            }))
+          ];
+          const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: openaiHistory as any,
+          });
+          return completion.choices[0].message.content;
+        }
+      }
+    ];
 
-        const completion = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          messages: openaiHistory,
-        });
-
-        return NextResponse.json({ content: completion.choices[0].message.content });
+    for (const provider of providers) {
+      if (!provider.key) {
+        console.warn(`Skipping ${provider.name}: API key missing.`);
+        continue;
+      }
+      try {
+        console.log(`Attempting chat with ${provider.name}...`);
+        const content = await provider.execute();
+        console.log(`${provider.name} successful.`);
+        return NextResponse.json({ content, provider: provider.name });
+      } catch (error: any) {
+        console.error(`${provider.name} failed:`, error.message || error);
+        // Continue to the next provider
       }
     }
+
+    throw new Error("All AI providers failed. Please check your API keys and quotas.");
 
   } catch (error: any) {
     console.error("Chat API Error:", error);

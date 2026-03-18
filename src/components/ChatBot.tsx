@@ -174,7 +174,7 @@ export function ChatBot() {
           />
           <div className="flex items-center p-2 pt-0 justify-between">
             <div className="flex text-slate-400">
-              <span className="text-[10px] ml-2 font-medium uppercase tracking-widest opacity-50">Powered by Gemini</span>
+              <span className="text-[10px] ml-2 font-medium uppercase tracking-widest opacity-50">Powered by TamizhTech AI</span>
             </div>
             <Button type="submit" size="sm" className="ml-auto gap-1.5 bg-orange-500 hover:bg-orange-600 text-white" disabled={isLoading}>
               {isLoading ? "Thinking..." : "Send"}
