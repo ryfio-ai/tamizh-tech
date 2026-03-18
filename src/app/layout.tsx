@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FlyingDrone } from "@/components/ui/flying-drone";
 import { ChatBot } from "@/components/ChatBot";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -31,6 +32,7 @@ export default function RootLayout({
         <Footer />
         <ChatBot />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
