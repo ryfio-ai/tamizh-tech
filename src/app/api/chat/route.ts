@@ -71,6 +71,32 @@ export async function POST(req: Request) {
         }
       },
       {
+        name: "OpenRouter",
+        key: process.env.OPENROUTER_API_KEY,
+        execute: async () => {
+          const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "google/gemini-2.0-flash-001",
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                ...messages.map((m: any) => ({
+                  role: m.sender === "user" ? "user" : "assistant",
+                  content: m.content
+                }))
+              ]
+            })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error?.message || "OpenRouter failed");
+          return data.choices[0].message.content;
+        }
+      },
+      {
         name: "Gemini",
         key: process.env.GOOGLE_GEMINI_API_KEY,
         execute: async () => {
