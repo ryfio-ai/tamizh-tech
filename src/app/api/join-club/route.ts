@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, mobile, email, status, address, purpose } = body;
+    let { name, mobile, email, status, address, purpose } = body;
 
     if (!name || !mobile || !email || !status || !address || !purpose) {
       return NextResponse.json(
@@ -13,6 +13,21 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
+    }
+
+    if (name.length > 100 || mobile.length > 15 || address.length > 500 || purpose.length > 1000) {
+      return NextResponse.json({ error: "Input exceeds length limits" }, { status: 400 });
+    }
+
+    // Sanitization
+    name = name.replace(/[<>]/g, "");
+    address = address.replace(/[<>]/g, "");
+    purpose = purpose.replace(/[<>]/g, "");
 
     const statusLabel: Record<string, string> = {
       school: "School Student",

@@ -7,14 +7,30 @@ export async function POST(request: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await request.json();
-    const { name, email, phone, subject, enquiry, message } = body;
+    let { name, email, phone, subject, enquiry, message } = body;
 
+    // Basic Input Validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields (name, email, message)" },
         { status: 400 }
       );
     }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
+    }
+
+    // Length constraints
+    if (name.length > 100 || message.length > 5000 || (subject && subject.length > 200)) {
+      return NextResponse.json({ error: "Input exceeds length limits" }, { status: 400 });
+    }
+
+    // Basic sanitization
+    name = name.replace(/[<>]/g, "");
+    subject = subject ? subject.replace(/[<>]/g, "") : "";
 
     const { data, error } = await resend.emails.send({
       from: "TamizhTech <contact@tamizhtech.in>", 

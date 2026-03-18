@@ -47,11 +47,21 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
 
-    if (!messages || !Array.isArray(messages)) {
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json({ error: "Invalid messages format" }, { status: 400 });
     }
 
-    const lastMessage = messages[messages.length - 1].content;
+    // Limit messages history to prevent large payloads
+    if (messages.length > 20) {
+      return NextResponse.json({ error: "Message history too long" }, { status: 400 });
+    }
+
+    const lastMessage = messages[messages.length - 1];
+    if (!lastMessage || typeof lastMessage.content !== 'string' || lastMessage.content.length > 2000) {
+      return NextResponse.json({ error: "Last message content invalid or too long" }, { status: 400 });
+    }
+
+    const lastMessageContent = lastMessage.content;
 
     // --- AI Providers in order of preference ---
     const providers = [
