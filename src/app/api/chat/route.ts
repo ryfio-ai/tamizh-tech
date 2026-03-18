@@ -119,6 +119,32 @@ export async function POST(req: Request) {
         }
       },
       {
+        name: "Cohere",
+        key: process.env.COHERE_API_KEY,
+        execute: async () => {
+          const response = await fetch("https://api.cohere.com/v2/chat", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${process.env.COHERE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "command-r-plus",
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                ...messages.map((m: any) => ({
+                  role: m.sender === "user" ? "user" : "assistant",
+                  content: m.content
+                }))
+              ]
+            })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || "Cohere failed");
+          return data.message.content[0].text;
+        }
+      },
+      {
         name: "OpenAI",
         key: process.env.OPENAI_API_KEY,
         execute: async () => {
