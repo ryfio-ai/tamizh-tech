@@ -1,31 +1,46 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
+import Groq from "groq-sdk";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 const SYSTEM_PROMPT = `
-You are the AI assistant for TamizhTech Robotics Company (TTRC), Coimbatore.
+You are the **TamizhTech Robotics Learning Assistant**, an expert AI tutor and company representative based in Coimbatore.
 
-Core Knowledge:
-- TamizhTech (TTRC) Tagline: "Building the Future with Robotics, AI & Automation."
-- Location: Coimbatore, Tamil Nadu, India.
-- Team: Tamizharasan K. (Founder & CEO), Sathish P. (CIO), Dhanush S. (CTO), Suraj A. (COO).
-- Courses: Robotics Fundamentals, Advanced Line Follower Design, Combat Robot Engineering, Drone Building Workshop. Languages: Tamil, English, Hindi.
-- Product Categories: Industrial Robots, Drones, Corporate/Service Robots, IoT & Embedded Systems, 3D Printing Solutions, Educational Platforms, AI & Vision Systems, Competition Arenas, Custom R&D Projects.
-- Robotics Development Kits: Line Follower Kit, Maze Solver Kit, RC Soccer Kit, RC Race Kit, RC Sumo Kit, Mini RC Soccer Kit, Career Board, 2-in-1 RC Soccer Kit.
-- Services: Industrial Automation, 3D Printing, PCB Design, Laser Cutting, Machining (CNC/Manual), Lathing, Welding, Custom Prototyping.
-- Club: Tamizh Robotics Club (TRC) - Learn, Build, Launch. Members can join via of the internal join form.
-- Contact: WhatsApp/Phone: +91 8148045030, Email: tamizhtechpvtltd@gmail.com.
+**Your Primary Goal**: Assist users in learning robotics, AI, and automation while providing expert information about TamizhTech's services and club.
 
-Interaction Guidelines:
-1. **General & Specific Queries**: You are a fully capable AI assistant. You MUST answer ALL questions from the user. If the question is about TTRC, prioritize the provided core knowledge. If the question is completely unrelated to TTRC, answer it helpfully using your broad knowledge.
-2. **Be Concise**: Answer the user's question directly. Do not repeat your identity or contact info unless it's the primary answer or requested.
-3. **Format**: Use clean Markdown. Use bullet points for lists and bold for emphasis. 
-4. **Tone**: Professional, friendly, and helpful.
+### 1. Robotics Education Expert
+- You have deep knowledge of: 
+  - **Embedded Systems** (Arduino, ESP32, Raspberry Pi, PCB Design).
+  - **Sensors & Actuators** (Ultrasonic, IR, Lidar, Servo/DC/Stepper motors).
+  - **Programming** (C++, Python, MicroPython, ROS).
+  - **Mechanical Design** (3D Printing, CNC, CAD/CAM).
+  - **AI & Computer Vision** (OpenCV, TensorFlow, Mediapipe).
+- If a user asks a technical question, provide clear, educational, and encouraging explanations. Use analogies where helpful.
+
+### 2. TamizhTech (TTRC) Representation
+- **Tagline**: "Building the Future with Robotics, AI & Automation."
+- **Location**: Coimbatore, Tamil Nadu.
+- **Team**: Tamizharasan K. (CEO), Sathish P. (CIO), Dhanush S. (CTO), Suraj A. (COO).
+- **Courses**: 
+  - Robotics Fundamentals, Advanced Line Follower Design, Combat Robot Engineering, Drone Building.
+  - Languages: Tamil, English, Hindi.
+- **Product Categories**: Industrial/Service Robots, Drones, IoT Systems, 3D Printing Solutions, AI Vision Systems, Competition Arenas.
+- **Services**: Industrial Automation, 3D Printing, Laser Cutting, CNC Machining, Welding, Custom Prototyping.
+- **Robotics Club (TRC)**: A community for learning and building. Users can join via our website's internal form.
+
+### 3. Interaction Style
+- **Tone**: Engaging, educational, and professional.
+- **Format**: Use Markdown (bold, lists, headers) to make complex topics easy to read.
+- **Conciseness**: Be thorough when explaining technical concepts but concise for general queries.
+- **Fallback**: If you don't know a specific TamizhTech detail, encourage the user to contact the team via WhatsApp or Email.
+
+**Contact**: WhatsApp: +91 8148045030 | Email: tamizhtechpvtltd@gmail.com
 `;
 
 export async function POST(req: Request) {
+  const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || "");
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
 
@@ -38,53 +53,68 @@ export async function POST(req: Request) {
 
     const lastMessage = messages[messages.length - 1].content;
 
-    // --- TRY GEMINI FIRST ---
+    // --- 1. TRY GROQ FIRST (Fastest) ---
     try {
-      const history: any[] = [];
-      const chatMessages = messages.slice(0, -1);
-      
-      for (const m of chatMessages) {
-        const role = m.sender === "user" ? "user" : "model";
-        if (history.length === 0 && role !== "user") continue;
-        if (history.length > 0 && history[history.length - 1].role === role) continue;
-        history.push({ role, parts: [{ text: m.content }] });
-      }
+      const groqHistory = messages.map((m: any) => ({
+        role: m.sender === "user" ? "user" : "assistant",
+        content: m.content
+      }));
 
-      const model = genAI.getGenerativeModel({ 
-          model: "gemini-flash-latest",
-          systemInstruction: SYSTEM_PROMPT 
-      });
-
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(lastMessage);
-      const response = await result.response;
-      return NextResponse.json({ content: response.text() });
-
-    } catch (geminiError: any) {
-      console.error("Gemini failed, falling back to OpenAI:", geminiError);
-
-      // --- FALLBACK TO OPENAI ---
-      if (!process.env.OPENAI_API_KEY) {
-        throw geminiError; // Rethrow if no fallback available
-      }
-
-      const openaiHistory: any[] = [
-        { role: "system", content: SYSTEM_PROMPT }
-      ];
-
-      for (const m of messages) {
-        openaiHistory.push({
-          role: m.sender === "user" ? "user" : "assistant",
-          content: m.content
-        });
-      }
-
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // Or "gpt-4o" if your key supports it
-        messages: openaiHistory,
+      const completion = await groq.chat.completions.create({
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...groqHistory
+        ],
+        model: "llama-3.3-70b-versatile",
       });
 
       return NextResponse.json({ content: completion.choices[0].message.content });
+
+    } catch (groqError: any) {
+      console.error("Groq failed, falling back to Gemini:", groqError);
+
+      // --- 2. TRY GEMINI SECOND ---
+      try {
+        const history: any[] = [];
+        const chatMessages = messages.slice(0, -1);
+        for (const m of chatMessages) {
+          const role = m.sender === "user" ? "user" : "model";
+          if (history.length === 0 && role !== "user") continue;
+          if (history.length > 0 && history[history.length - 1].role === role) continue;
+          history.push({ role, parts: [{ text: m.content }] });
+        }
+
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-flash-latest",
+            systemInstruction: SYSTEM_PROMPT 
+        });
+
+        const chat = model.startChat({ history });
+        const result = await chat.sendMessage(lastMessage);
+        const response = await result.response;
+        return NextResponse.json({ content: response.text() });
+
+      } catch (geminiError: any) {
+        console.error("Gemini failed, falling back to OpenAI:", geminiError);
+
+        // --- 3. TRY OPENAI THIRD ---
+        if (!process.env.OPENAI_API_KEY) throw geminiError;
+
+        const openaiHistory: any[] = [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...messages.map((m: any) => ({
+            role: m.sender === "user" ? "user" : "assistant",
+            content: m.content
+          }))
+        ];
+
+        const completion = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: openaiHistory,
+        });
+
+        return NextResponse.json({ content: completion.choices[0].message.content });
+      }
     }
 
   } catch (error: any) {

@@ -1,7 +1,5 @@
 {
-  "/products/page": "app/products/page.js",
-  "/team/page": "app/team/page.js",
-  "/services/page": "app/services/page.js",
-  "/clients/page": "app/clients/page.js",
-  "/gallery/page": "app/gallery/page.js"
+  "/robotics-club/page": "app/robotics-club/page.js",
+  "/gallery/page": "app/gallery/page.js",
+  "/page": "app/page.js"
 }

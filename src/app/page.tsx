@@ -3,6 +3,13 @@ import { ArrowRight, MessageCircle, Cpu, Zap, Bot, Users, BookOpen, Wrench } fro
 import { Gravity, MatterBody } from "@/components/ui/gravity";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { MarqueeAnimation } from "@/components/ui/marquee-effect";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TamizhTech - Best Robotics Company in Coimbatore & Tamil Nadu",
+  description: "Premier robotics, AI and automation platform in Coimbatore. Learn, build and innovate with Tamizh Robotics Club and our advanced industrial solutions.",
+  keywords: ["Robotics Coimbatore", "Robotics Tamilnadu", "Best Robots Coimbatore", "Robotics Projects Tamilnadu"],
+};
 
 export default function Home() {
   return (
@@ -47,7 +54,7 @@ export default function Home() {
             Building the Future with <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">Robotics, AI &amp; Automation.</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mb-12 font-medium leading-relaxed">
-            For students, colleges, and enterprises in Coimbatore and beyond.
+            The leading platform for robotics, AI and automation in **Coimbatore, Tamil Nadu**. For students, colleges, and enterprises.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center w-full z-20 relative">
             <Link href="/robotics-club" className="w-full sm:w-auto px-8 py-4 bg-neon-orange text-black font-bold text-lg rounded-md hover:bg-white hover:shadow-neon-orange transition-all flex items-center justify-center gap-2 group">
