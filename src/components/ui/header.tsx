@@ -78,7 +78,7 @@ function Header1() {
 
     const [isOpen, setOpen] = useState(false);
     return (
-        <header className="w-full z-50 fixed top-0 left-0 bg-bg-primary border-b border-border-light shadow-sm text-text-primary">
+        <header className="w-full z-50 fixed top-0 left-0 bg-white border-b border-border-light shadow-md text-text-primary">
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center px-4">
                 <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
                     <NavigationMenu className="flex justify-start items-start">
@@ -164,7 +164,7 @@ function Header1() {
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </Button>
                     {isOpen && (
-                        <div className="absolute top-20 border-t border-border-light flex flex-col w-full left-0 bg-bg-primary shadow-xl py-6 px-4 container gap-6 z-50">
+                        <div className="absolute top-20 border-t border-border-light flex flex-col w-full left-0 bg-white shadow-xl py-6 px-4 container gap-6 z-50">
                             {navigationItems.map((item) => (
                                 <div key={item.title}>
                                     <div className="flex flex-col gap-3">
