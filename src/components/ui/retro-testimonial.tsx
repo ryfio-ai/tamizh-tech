@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Quote, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // ===== Types =====
@@ -12,7 +12,7 @@ export interface iTestimonial {
   designation: string;
   description: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  profileImage: any; // accepts string | StaticImport (local require)
+  profileImage: any;
 }
 
 interface iCarouselProps {
@@ -44,7 +44,7 @@ const useOutsideClick = (
   }, [ref, onOutsideClick]);
 };
 
-// ===== Carousel =====
+// ===== Carousel (MNC Style) =====
 const Carousel = ({ items, initialScroll = 0 }: iCarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
@@ -59,18 +59,10 @@ const Carousel = ({ items, initialScroll = 0 }: iCarouselProps) => {
   };
 
   const handleScrollLeft = () => {
-    if (carouselRef.current) carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    if (carouselRef.current) carouselRef.current.scrollBy({ left: -400, behavior: "smooth" });
   };
   const handleScrollRight = () => {
-    if (carouselRef.current) carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
-  };
-
-  const handleCardClose = (index: number) => {
-    if (carouselRef.current) {
-      const cardWidth = typeof window !== "undefined" && window.innerWidth < 768 ? 230 : 384;
-      const gap = typeof window !== "undefined" && window.innerWidth < 768 ? 4 : 8;
-      carouselRef.current.scrollTo({ left: (cardWidth + gap) * (index + 1), behavior: "smooth" });
-    }
+    if (carouselRef.current) carouselRef.current.scrollBy({ left: 400, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -81,81 +73,65 @@ const Carousel = ({ items, initialScroll = 0 }: iCarouselProps) => {
   }, [initialScroll]);
 
   return (
-    <div className="relative w-full mt-10">
-      <div
-        className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none] py-5"
-        ref={carouselRef}
-        onScroll={checkScrollability}
-      >
-        <div className={cn("flex flex-row justify-start gap-4 pl-3", "max-w-5xl mx-auto")}>
-          {items.map((item, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: "easeOut" } }}
-              key={`card-${index}`}
-              className="last:pr-[5%] md:last:pr-[33%] rounded-3xl"
-            >
-              {React.cloneElement(item, { onCardClose: () => handleCardClose(index) })}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-end gap-2 mt-4 pr-4">
+    <div className="relative w-full">
+      <div className="flex justify-end gap-3 mb-8 pr-4">
         <button
-          className="relative z-40 h-10 w-10 rounded-full bg-[#4b3f33] flex items-center justify-center disabled:opacity-50 hover:bg-[#4b3f33]/80 transition-colors"
+          className="h-10 w-10 rounded-full border border-border-medium flex items-center justify-center disabled:opacity-30 hover:bg-bg-elevated transition-colors"
           onClick={handleScrollLeft}
           disabled={!canScrollLeft}
         >
-          <ArrowLeft className="h-6 w-6 text-[#f2f0eb]" />
+          <ArrowLeft className="h-5 w-5 text-text-primary" />
         </button>
         <button
-          className="relative z-40 h-10 w-10 rounded-full bg-[#4b3f33] flex items-center justify-center disabled:opacity-50 hover:bg-[#4b3f33]/80 transition-colors"
+          className="h-10 w-10 rounded-full border border-border-medium flex items-center justify-center disabled:opacity-30 hover:bg-bg-elevated transition-colors"
           onClick={handleScrollRight}
           disabled={!canScrollRight}
         >
-          <ArrowRight className="h-6 w-6 text-[#f2f0eb]" />
+          <ArrowRight className="h-5 w-5 text-text-primary" />
         </button>
+      </div>
+      
+      <div
+        className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth [scrollbar-width:none] pb-12"
+        ref={carouselRef}
+        onScroll={checkScrollability}
+      >
+        <div className="flex flex-row justify-start gap-8 pl-4 pr-[10%] max-w-7xl mx-auto">
+          {items.map((item, index) => (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 * index } }}
+              viewport={{ once: true }}
+              key={`card-${index}`}
+            >
+              {item}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-// ===== TestimonialCard =====
+// ===== Modern Team Card (MNC Style) =====
 const TestimonialCard = ({
   testimonial,
-  index,
-  layout = false,
-  onCardClose = () => {},
-  backgroundImage = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
 }: {
   testimonial: iTestimonial;
   index: number;
-  layout?: boolean;
-  onCardClose?: () => void;
-  backgroundImage?: string;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleExpand = () => setIsExpanded(true);
-  const handleCollapse = () => { setIsExpanded(false); onCardClose(); };
+  const handleCollapse = () => setIsExpanded(false);
 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => { if (event.key === "Escape") handleCollapse(); };
     if (isExpanded) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
-      document.body.dataset.scrollY = scrollY.toString();
     } else {
-      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo({ top: scrollY, behavior: "instant" });
+      document.body.style.overflow = "auto";
     }
     window.addEventListener("keydown", handleEscapeKey);
     return () => window.removeEventListener("keydown", handleEscapeKey);
@@ -167,79 +143,63 @@ const TestimonialCard = ({
     <>
       <AnimatePresence>
         {isExpanded && (
-          <div className="fixed inset-0 h-screen overflow-hidden z-50">
+          <div className="fixed inset-0 h-screen overflow-hidden z-[100] flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="bg-black/60 backdrop-blur-lg h-full w-full fixed inset-0" />
+              className="bg-text-primary/20 backdrop-blur-md h-full w-full fixed inset-0" onClick={handleCollapse} />
             <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
               ref={containerRef}
-              layoutId={layout ? `card-${testimonial.name}` : undefined}
-              className="max-w-5xl mx-auto bg-gradient-to-b from-[#f2f0eb] to-[#fff9eb] h-full z-[60] p-4 md:p-10 rounded-3xl relative md:mt-10 overflow-y-auto"
+              className="max-w-4xl w-full bg-bg-primary rounded-[2rem] shadow-2xl overflow-hidden relative z-[110]"
             >
-              <button className="sticky top-4 h-8 w-8 right-0 ml-auto rounded-full flex items-center justify-center bg-[#4b3f33]" onClick={handleCollapse}>
-                <X className="h-5 w-5 text-white absolute" />
+              <button className="absolute top-6 right-6 h-10 w-10 rounded-full flex items-center justify-center bg-bg-elevated hover:bg-border-light transition-colors z-20" onClick={handleCollapse}>
+                <X className="h-6 w-6 text-text-primary" />
               </button>
-              <motion.p layoutId={layout ? `category-${testimonial.name}` : undefined}
-                className="px-0 md:px-20 text-[rgba(31,27,29,0.7)] text-lg font-thin underline underline-offset-8 mt-4">
-                {testimonial.designation}
-              </motion.p>
-              <motion.p layoutId={layout ? `title-${testimonial.name}` : undefined}
-                className="px-0 md:px-20 text-2xl md:text-4xl font-normal italic text-[rgba(31,27,29,0.7)] mt-4 lowercase">
-                {testimonial.name}
-              </motion.p>
-              <div className="py-8 text-[rgba(31,27,29,0.7)] px-0 md:px-20 text-2xl lowercase font-thin leading-snug tracking-wide">
-                <Quote className="h-6 w-6 text-[rgba(31,27,29,0.7)] mb-4" />
-                {testimonial.description}
+              
+              <div className="flex flex-col md:flex-row h-full">
+                <div className="md:w-5/12 relative h-80 md:h-auto">
+                  <Image src={testimonial.profileImage} alt={testimonial.name} fill className="object-cover" />
+                </div>
+                <div className="md:w-7/12 p-10 md:p-16 flex flex-col justify-center">
+                  <div className="mb-8">
+                    <h2 className="text-4xl font-extrabold text-text-primary mb-2">{testimonial.name}</h2>
+                    <p className="text-primary-main font-bold uppercase tracking-widest text-[11px] px-3 py-1 bg-primary-light rounded-full w-fit">{testimonial.designation}</p>
+                  </div>
+                  <p className="text-text-tertiary text-xl leading-relaxed mb-10 font-regular italic">
+                    "{testimonial.description}"
+                  </p>
+                  <div className="flex gap-4">
+                    <button className="p-3 rounded-md bg-primary-main text-text-on-primary hover:bg-primary-hover transition-all flex items-center gap-2 font-bold text-sm">
+                      <Linkedin className="w-5 h-5" /> LinkedIn Profile
+                    </button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
 
-      <motion.button
-        layoutId={layout ? `card-${testimonial.name}` : undefined}
+      <motion.div
+        className="mnc-card w-80 md:w-[22rem] flex flex-col h-[520px] overflow-hidden cursor-pointer group"
         onClick={handleExpand}
-        whileHover={{ rotateX: 2, rotateY: 2, rotate: 2, scale: 1.02, transition: { duration: 0.3, ease: "easeOut" } }}
+        whileHover={{ y: -10, transition: { duration: 0.3 } }}
       >
-        <div className="rounded-3xl bg-gradient-to-b from-[#f2f0eb] to-[#fff9eb] h-[500px] md:h-[550px] w-80 md:w-96 overflow-hidden flex flex-col items-center justify-center relative z-10 shadow-md">
-          <div className="absolute opacity-20 inset-0">
-            <Image className="w-full h-full object-cover" src={backgroundImage} alt="Background" fill style={{ objectFit: "cover" }} />
-          </div>
-          <ProfileImage src={testimonial.profileImage} alt={testimonial.name} />
-          <motion.p layoutId={layout ? `title-${testimonial.name}` : undefined}
-            className="text-[rgba(31,27,29,0.7)] text-xl md:text-2xl font-normal text-center italic mt-4 lowercase px-5">
-            {testimonial.description.length > 100 ? `${testimonial.description.slice(0, 100)}...` : testimonial.description}
-          </motion.p>
-          <motion.p className="text-[rgba(31,27,29,0.7)] text-xl md:text-2xl font-thin italic text-center mt-5 lowercase">
-            {testimonial.name}.
-          </motion.p>
-          <motion.p className="text-[rgba(31,27,29,0.7)] text-sm font-thin italic text-center mt-1 lowercase underline underline-offset-4 decoration-1 px-4">
-            {testimonial.designation.length > 30 ? `${testimonial.designation.slice(0, 30)}...` : testimonial.designation}
-          </motion.p>
+        <div className="relative h-2/3 w-full overflow-hidden bg-bg-elevated">
+          <Image src={testimonial.profileImage} alt={testimonial.name} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg-primary to-transparent opacity-80" />
         </div>
-      </motion.button>
+        <div className="p-10 flex flex-col justify-between flex-grow bg-bg-primary">
+          <div>
+            <h3 className="text-2xl font-bold text-text-primary mb-1 group-hover:text-primary-main transition-colors">{testimonial.name}</h3>
+            <p className="text-text-tertiary font-bold uppercase tracking-[0.1em] text-[10px] mb-4">{testimonial.designation}</p>
+          </div>
+          <div className="flex items-center gap-2 text-[11px] font-bold text-primary-main mt-4 group-hover:underline decoration-2 underline-offset-4">
+            Executive Leadership <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+      </motion.div>
     </>
   );
 };
 
-// ===== ProfileImage =====
-const ProfileImage = ({ src, alt, ...rest }: ImageProps) => {
-  const [isLoading, setLoading] = useState(true);
-  return (
-    <div className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] opacity-80 overflow-hidden rounded-full border-[3px] border-solid border-[rgba(59,59,59,0.6)] flex-none saturate-[0.2] sepia-[0.46] relative">
-      <Image
-        className={cn("transition duration-300 absolute inset-0 rounded-full object-cover z-50", isLoading ? "blur-sm" : "blur-0")}
-        onLoad={() => setLoading(false)}
-        src={src}
-        width={130}
-        height={130}
-        loading="lazy"
-        decoding="async"
-        alt={alt || "Profile image"}
-        {...rest}
-      />
-    </div>
-  );
-};
-
-export { Carousel, TestimonialCard, ProfileImage };
+export { Carousel, TestimonialCard };

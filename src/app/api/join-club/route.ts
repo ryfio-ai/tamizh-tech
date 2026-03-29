@@ -5,7 +5,13 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    let { name, mobile, email, status, address, purpose } = body;
+    let { 
+      name, mobile, email, status, 
+      standard, schoolName, schoolLocation,
+      department, yearOfStudy, collegeName, collegeLocation,
+      organizationName, role,
+      address, purpose 
+    } = body;
 
     if (!name || !mobile || !email || !status || !address || !purpose) {
       return NextResponse.json(
@@ -48,10 +54,19 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        sheetName: "Applications",
         name,
         mobile,
         email,
         status: statusLabel[status] || status,
+        // Detailed Data
+        details: status === "school" 
+          ? `Standard: ${standard}, School: ${schoolName}, Loc: ${schoolLocation}`
+          : status === "college"
+          ? `Dept: ${department}, Year: ${yearOfStudy}, College: ${collegeName}, Loc: ${collegeLocation}`
+          : status === "professional"
+          ? `Org: ${organizationName}, Role: ${role}`
+          : "N/A",
         address,
         purpose
       }),

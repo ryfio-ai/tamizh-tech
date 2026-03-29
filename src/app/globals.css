@@ -4,40 +4,46 @@
 
 @layer base {
   :root {
-    --background: 240 60% 5%;
-    --foreground: 210 40% 98%;
+    /* MNC-Style Backgrounds */
+    --background: 210 20% 98.6%; /* #FAFBFC (bg-page) */
+    --foreground: 0 0% 5.1%; /* #0D0D0D (text-primary) */
 
-    --card: 240 50% 8%;
-    --card-foreground: 210 40% 98%;
+    /* Card and surface backgrounds */
+    --card: 0 0% 100%; /* #FFFFFF (bg-primary) */
+    --card-foreground: 0 0% 5.1%; /* #0D0D0D (text-primary) */
 
-    --popover: 240 50% 8%;
-    --popover-foreground: 210 40% 98%;
+    /* Popover backgrounds */
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 0 0% 5.1%; /* #0D0D0D */
 
-    --primary: 184 100% 50%;
-    --primary-foreground: 240 60% 5%;
+    /* MNC-Style Primary Brand (Tech Blue) */
+    --primary: 216 100% 50%; /* #0066FF (primary-main) */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    
+    /* Secondary / Accent (Robotics/Energy Orange) */
+    --secondary: 16 100% 60.6%; /* #FF6B35 (accent-main) */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+    
+    --accent: 16 100% 60.6%; /* #FF6B35 */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --secondary: 300 100% 50%;
-    --secondary-foreground: 210 40% 98%;
+    /* Muted and Dividers */
+    --muted: 210 17% 96.1%; /* #F3F4F6 (gray-100) */
+    --muted-foreground: 215 15% 42%; /* #5A6C7D (text-tertiary) */
 
-    --muted: 240 30% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* MNC-Style Borders */
+    --border: 216 20% 92.5%; /* #E8EBF0 (border-light) */
+    --input: 216 20% 92.5%; /* #E8EBF0 (border-light) */
+    --ring: 216 100% 50%; /* #0066FF */
 
-    --accent: 155 100% 50%;
-    --accent-foreground: 240 60% 5%;
+    /* Border Radius */
+    --radius: 0.5rem; /* 8px corresponding to md */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 240 30% 20%;
-    --input: 240 30% 20%;
-    --ring: 184 100% 50%;
-
-    --radius: 0.75rem;
-
-    --neon-orange: #eb9234;
-    --neon-magenta: #ff00ff;
-    --neon-violet: #b026ff;
-    --neon-green: #00ff66;
+    /* MNC-Style Success/Error */
+    --success: 161 84% 39%; /* #10B981 */
+    --error: 0 84% 60%; /* #EF4444 */
+    --warning: 38 92% 50%; /* #F59E0B */
+    --info: 217 91% 60%; /* #3B82F6 */
   }
 
   * {
@@ -46,42 +52,80 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: #0a0a1a;
-    background-image: radial-gradient(circle at center, rgba(176, 38, 255, 0.15) 0%, rgba(10, 10, 26, 1) 100%);
-    background-attachment: fixed;
-    color: hsl(var(--foreground));
+    background-color: #FAFBFC; /* bg-page */
+    color: #1A1A1A; /* text-secondary */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #0D0D0D; /* text-primary */
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-weight: 700;
   }
 }
 
 @layer utilities {
-  .glass-panel {
-    background: rgba(10, 10, 26, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  /* MNC Premium Hero Gradient */
+  .hero-gradient {
+    background: linear-gradient(180deg, #F8F9FB 0%, #FAFBFC 100%);
   }
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.75rem;
-    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+
+  /* Professional Statistics Card Look */
+  .stat-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 10px rgba(235, 146, 52, 0.2), 0 0 20px rgba(235, 146, 52, 0.1);
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+    background-color: #F8F9FB; /* bg-elevated */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   }
-  .neon-text-orange {
-    text-shadow: 0 0 10px rgba(235, 146, 52, 0.7);
+
+  /* 4-Card Grid Standardized Style */
+  .mnc-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E8EBF0;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .neon-text-magenta {
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+
+  .mnc-card:hover {
+    border-color: #D0D7E0;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Professional Button Unified Styles */
+  .btn-primary {
+    background-color: #0066FF;
+    color: #FFFFFF;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: #0052CC;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid #0066FF;
+    color: #0066FF;
+    padding: 10px 26px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    background-color: #E3F0FF;
+    border-color: #0052CC;
   }
 }
-
-

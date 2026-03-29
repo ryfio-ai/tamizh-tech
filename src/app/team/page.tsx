@@ -2,14 +2,13 @@
 import type { Metadata } from "next";
 import { Carousel, TestimonialCard } from "@/components/ui/retro-testimonial";
 import type { iTestimonial } from "@/components/ui/retro-testimonial";
+import { Globe, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Our Team | TamizhTech Robotics Company",
+  title: "Executive Leadership | TamizhTech Robotics Company",
   description: "Meet the passionate engineers, designers, and educators behind TamizhTech — building a robotics revolution from Coimbatore.",
 };
 
-// Members with real local photos (loaded via webpack static import)
-// Members without photos get Unsplash placeholders
 const teamMembers: iTestimonial[] = [
   {
     name: "Tamizharasan K",
@@ -83,10 +82,7 @@ const teamMembers: iTestimonial[] = [
     description: "Expert in microcontrollers, PCB design, and real-time systems powering TamizhTech's robot platforms.",
     profileImage: "/team/kowsik.jpeg",
   },
-
 ];
-
-const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80";
 
 export default function TeamPage() {
   const cards = teamMembers.map((member, index) => (
@@ -94,31 +90,65 @@ export default function TeamPage() {
       key={member.name}
       testimonial={member}
       index={index}
-      backgroundImage={BG}
     />
   ));
 
   return (
-    <div className="w-full">
-      {/* Hero */}
-      <section className="py-24 relative overflow-hidden text-center">
-        <div className="absolute inset-0 bg-cyber-grid opacity-15 pointer-events-none" />
+    <div className="w-full bg-bg-page min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden text-center hero-gradient border-b border-border-light">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-green/30 bg-neon-green/5 mb-6">
-            <span className="text-xs font-bold tracking-widest text-neon-green uppercase">Our Team</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
+            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Company Leadership</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
-            The Minds <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-neon-orange">Behind TamizhTech</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary mb-8 leading-[1.1] tracking-tight">
+            Our <span className="text-primary-main">Experts.</span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Passionate engineers, designers, and educators building a robotics revolution from Coimbatore. Click a card to read more.
+          <p className="text-xl md:text-2xl text-text-tertiary max-w-4xl mx-auto mb-4 leading-relaxed font-regular">
+            Meet the persistent visionaries and specialized engineers driving the robotics revolution from Coimbatore.
           </p>
         </div>
       </section>
 
-      {/* Retro Team Carousel */}
-      <section className="pb-24 container mx-auto px-4">
+      {/* Leadership Gallery */}
+      <section className="py-24 container mx-auto px-4">
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <h2 className="text-4xl font-heading font-extrabold text-text-primary mb-2">Executive Team</h2>
+            <p className="text-text-tertiary text-lg font-regular">Passionate leaders building the infrastructure for Indian automation.</p>
+          </div>
+        </div>
         <Carousel items={cards} />
+      </section>
+
+      {/* Mission Values (Subtle) */}
+      <section className="py-24 bg-bg-elevated border-y border-border-light">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="flex gap-6">
+              <div className="p-3 bg-primary-light rounded-lg h-fit"><Globe className="w-6 h-6 text-primary-main" /></div>
+              <div>
+                <h3 className="text-xl font-bold text-text-primary mb-2">Global Vision</h3>
+                <p className="text-text-tertiary text-sm leading-relaxed">Scaling technical excellence from local labs to 15+ states and global markets.</p>
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="p-3 bg-primary-light rounded-lg h-fit"><ShieldCheck className="w-6 h-6 text-primary-main" /></div>
+              <div>
+                <h3 className="text-xl font-bold text-text-primary mb-2">Quality Standards</h3>
+                <p className="text-text-tertiary text-sm leading-relaxed">Adhering to MNC-grade precision in every robot built and every student trained.</p>
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="p-3 bg-primary-light rounded-lg h-fit"><Zap className="w-6 h-6 text-primary-main" /></div>
+              <div>
+                <h3 className="text-xl font-bold text-text-primary mb-2">Rapid Innovation</h3>
+                <p className="text-text-tertiary text-sm leading-relaxed">Persistent research and development cycles to keep TamizhTech at the bleeding edge.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

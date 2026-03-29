@@ -110,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
@@ -131,7 +131,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col`}>
+      <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col bg-bg-page`}>
         <FlyingDrone />
         <Navbar />
         <main className="flex-1 pt-16 flex flex-col">
@@ -145,3 +145,4 @@ export default function RootLayout({
     </html>
   );
 }
+

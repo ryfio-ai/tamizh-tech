@@ -63,23 +63,39 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-slate-950">
-      <div className="container mx-auto px-4 text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-heading font-black text-white mb-4">
-          Innovations <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">in Motion</span>
-        </h1>
-        <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-          Explore the projects, competitions, and training sessions that define Tamizh Robotics Club.
-        </p>
-      </div>
+    <div className="w-full bg-bg-page min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden text-center hero-gradient border-b border-border-light">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
+            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Portfolio in Action</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary mb-8 leading-[1.1] tracking-tight">
+            Innovations <span className="text-primary-main">Visualized.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-text-tertiary max-w-4xl mx-auto font-regular leading-relaxed">
+            A visual documentation of specialized robotics projects, nationwide competitions, 
+            and localized technical training delivered across the TamizhTech ecosystem.
+          </p>
+        </div>
+      </section>
+
+      {/* Parallax Gallery Grid */}
+      <section className="py-24 bg-bg-page">
+        <ParallaxScrollSecond images={galleryImages} />
+      </section>
       
-      <ParallaxScrollSecond images={galleryImages} />
-      
-      <div className="container mx-auto px-4 text-center mt-20">
-        <p className="text-slate-500 italic">
-          More updates coming soon. Stay tuned!
-        </p>
-      </div>
+      {/* Footer Disclaimer */}
+      <section className="py-24 container mx-auto px-4 text-center border-t border-border-light">
+        <div className="max-w-2xl mx-auto">
+            <p className="text-text-muted font-bold text-[10px] uppercase tracking-[0.4em] mb-4">Technical Archive</p>
+            <p className="text-text-tertiary italic text-sm">
+                This repository is updated monthly with new technical deployments and training highlights. 
+                Contact our PR team for higher-resolution project specifications.
+            </p>
+        </div>
+      </section>
     </div>
   );
 }

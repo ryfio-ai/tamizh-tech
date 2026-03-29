@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Cpu, Zap, Bot, Users, BookOpen, Wrench } from "lucide-react";
+import { ArrowRight, MessageCircle, Cpu, Zap, Bot, Users, BookOpen, Wrench, Globe } from "lucide-react";
 import { Gravity, MatterBody } from "@/components/ui/gravity";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { MarqueeAnimation } from "@/components/ui/marquee-effect";
@@ -13,33 +13,30 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full relative">
+    <div className="flex flex-col w-full relative bg-bg-page">
       {/* Hero Section */}
-      <section className="relative w-full h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cyber-gradient z-0" />
-        <div className="absolute inset-0 bg-cyber-grid opacity-30 z-0" />
-
+      <section className="relative w-full h-[90vh] min-h-[700px] flex items-center justify-center overflow-hidden hero-gradient border-b border-border-light">
         {/* Gravity Floating Elements */}
-        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none md:pointer-events-auto">
+        <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply pointer-events-none md:pointer-events-auto">
           <Gravity gravity={{ x: 0, y: 0.5 }} className="w-full h-full">
             <MatterBody matterBodyOptions={{ friction: 0.1, restitution: 0.6 }} x="20%" y="10%">
-              <div className="w-24 h-24 rounded-2xl border border-neon-orange/50 shadow-neon-orange flex items-center justify-center bg-neon-dark/80 backdrop-blur-sm cursor-grab active:cursor-grabbing">
-                <span className="text-neon-orange font-bold">AI</span>
+              <div className="w-24 h-24 rounded-2xl border border-primary-light shadow-md flex items-center justify-center bg-bg-primary/90 backdrop-blur-sm cursor-grab active:cursor-grabbing">
+                <span className="text-primary-main font-bold">AI</span>
               </div>
             </MatterBody>
             <MatterBody matterBodyOptions={{ friction: 0.1, restitution: 0.6 }} x="80%" y="20%" angle={15}>
-              <div className="w-32 h-32 rounded-full border border-neon-magenta/50 shadow-neon-magenta flex items-center justify-center bg-neon-dark/80 backdrop-blur-sm cursor-grab active:cursor-grabbing">
-                <span className="text-neon-magenta font-bold">Robotics</span>
+              <div className="w-32 h-32 rounded-full border border-primary-light shadow-md flex items-center justify-center bg-bg-primary/90 backdrop-blur-sm cursor-grab active:cursor-grabbing">
+                <span className="text-primary-main font-bold">Robotics</span>
               </div>
             </MatterBody>
             <MatterBody matterBodyOptions={{ friction: 0.1, restitution: 0.6 }} x="30%" y="60%" angle={-10}>
-              <div className="w-28 h-28 rounded-lg border border-neon-green/50 shadow-neon-green flex items-center justify-center bg-neon-dark/80 backdrop-blur-sm cursor-grab active:cursor-grabbing">
-                <span className="text-neon-green font-bold text-center leading-tight">IoT<br/>Systems</span>
+              <div className="w-28 h-28 rounded-xl border border-primary-light shadow-md flex items-center justify-center bg-bg-primary/90 backdrop-blur-sm cursor-grab active:cursor-grabbing">
+                <span className="text-primary-main font-bold text-center leading-tight">IoT<br/>Systems</span>
               </div>
             </MatterBody>
             <MatterBody matterBodyOptions={{ friction: 0.1, restitution: 0.6 }} x="70%" y="60%" angle={5}>
-              <div className="w-20 h-20 rounded-full border border-neon-orange/50 shadow-neon-orange flex items-center justify-center bg-neon-dark/80 backdrop-blur-sm cursor-grab active:cursor-grabbing">
-                <span className="text-neon-orange font-bold">Auto</span>
+              <div className="w-20 h-20 rounded-full border border-primary-light shadow-md flex items-center justify-center bg-bg-primary/90 backdrop-blur-sm cursor-grab active:cursor-grabbing">
+                <span className="text-primary-main font-bold">Auto</span>
               </div>
             </MatterBody>
           </Gravity>
@@ -47,118 +44,107 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center mt-12">
-          <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-neon-orange/30 bg-neon-orange/10 backdrop-blur-md">
-            <span className="text-xs font-bold tracking-widest text-neon-orange uppercase">Based in Coimbatore, Tamil Nadu</span>
+          <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-border-medium bg-bg-primary shadow-sm">
+            <span className="text-xs font-bold tracking-widest text-text-muted uppercase">BASED IN COIMBATORE, TAMIL NADU</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black text-white leading-tight mb-6 max-w-4xl tracking-tight">
-            Building the Future with <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">Robotics, AI &amp; Automation.</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary leading-[1.1] mb-6 max-w-5xl tracking-tight">
+            Building the Future with <span className="text-primary-main">Robotics, AI &amp; Automation.</span>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mb-12 font-medium leading-relaxed">
-            The leading platform for robotics, AI and automation in **Coimbatore, Tamil Nadu**. For students, colleges, and enterprises.
+          <p className="text-lg sm:text-xl md:text-2xl text-text-tertiary max-w-3xl mb-12 font-regular leading-relaxed">
+            The leading platform for robotics innovation in **Tamil Nadu**. 
+            Empowering students, colleges, and enterprises worldwide with world-class automation.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center w-full z-20 relative">
-            <Link href="/robotics-club" className="w-full sm:w-auto px-8 py-4 bg-neon-orange text-black font-bold text-lg rounded-md hover:bg-white hover:shadow-neon-orange transition-all flex items-center justify-center gap-2 group">
+            <Link href="/robotics-club" className="w-full sm:w-auto px-8 py-4 bg-primary-main text-text-on-primary font-bold text-lg rounded-lg hover:bg-primary-hover shadow-lg transition-all flex items-center justify-center gap-2 group">
               Explore Robotics Club <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link href="/courses" className="w-full sm:w-auto px-8 py-4 border-2 border-neon-magenta text-white font-bold text-lg rounded-md bg-neon-magenta/10 hover:bg-neon-magenta/20 hover:shadow-neon-magenta transition-all flex items-center justify-center gap-2">
-              <BookOpen className="w-5 h-5 text-neon-magenta" /> View Courses
+            <Link href="/courses" className="w-full sm:w-auto px-8 py-4 border-2 border-border-medium text-text-primary font-bold text-lg rounded-lg bg-bg-primary hover:bg-bg-elevated transition-all flex items-center justify-center gap-2">
+              <BookOpen className="w-5 h-5 text-primary-main" /> View Courses
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="relative z-20 container mx-auto px-4 mt-8 md:mt-0">
-        <div className="glass-panel rounded-2xl p-6 md:p-10 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 divide-x-0 divide-y md:divide-y-0 md:divide-x divide-white/10">
-          <div className="flex flex-col items-center justify-center text-center p-4">
-            <h3 className="text-4xl md:text-5xl font-black text-neon-orange mb-2">150+</h3>
-            <p className="text-sm md:text-base text-slate-400 font-medium tracking-wide uppercase">Events in last 3 years</p>
+      {/* Statistics Section */}
+      <section className="relative z-20 container mx-auto px-4 -mt-10">
+        <div className="bg-bg-primary border border-border-light shadow-xl rounded-xl p-6 md:p-12 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 divide-x-0 divide-y md:divide-y-0 md:divide-x divide-border-light">
+          <div className="flex flex-col items-center justify-center text-center p-4 stat-card rounded-lg">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-text-primary mb-2">150+</h3>
+            <p className="text-xs md:text-sm text-text-tertiary font-bold tracking-widest uppercase">Events Conducted</p>
           </div>
-          <div className="flex flex-col items-center justify-center text-center p-4">
-            <h3 className="text-4xl md:text-5xl font-black text-neon-magenta mb-2">50+</h3>
-            <p className="text-sm md:text-base text-slate-400 font-medium tracking-wide uppercase">Enterprise Clients</p>
+          <div className="flex flex-col items-center justify-center text-center p-4 stat-card rounded-lg">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-text-primary mb-2">50+</h3>
+            <p className="text-xs md:text-sm text-text-tertiary font-bold tracking-widest uppercase">Global Clients</p>
           </div>
-          <div className="flex flex-col items-center justify-center text-center p-4">
-            <h3 className="text-4xl md:text-5xl font-black text-neon-green mb-2">100+</h3>
-            <p className="text-sm md:text-base text-slate-400 font-medium tracking-wide uppercase">Solutions Deployed</p>
+          <div className="flex flex-col items-center justify-center text-center p-4 stat-card rounded-lg">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-text-primary mb-2">100+</h3>
+            <p className="text-xs md:text-sm text-text-tertiary font-bold tracking-widest uppercase">Solutions Deployed</p>
           </div>
-          <div className="flex flex-col items-center justify-center text-center p-4">
-            <h3 className="text-4xl md:text-5xl font-black text-neon-violet mb-2">15+</h3>
-            <p className="text-sm md:text-base text-slate-400 font-medium tracking-wide uppercase">States Served</p>
+          <div className="flex flex-col items-center justify-center text-center p-4 stat-card rounded-lg">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-text-primary mb-2">15+</h3>
+            <p className="text-xs md:text-sm text-text-tertiary font-bold tracking-widest uppercase">States Served</p>
           </div>
         </div>
       </section>
 
-      {/* Marquee Effect Kits */}
-      <section className="py-8 md:py-12 border-y border-white/5 bg-black/40 overflow-hidden mt-10">
-        <div className="flex flex-col gap-4 max-w-full">
-          <MarqueeAnimation
-            direction="left"
-            baseVelocity={-2}
-            className="text-white/80 text-2xl md:text-3xl font-bold py-1"
-          >
-            <span>Line Follower Kit</span>
-            <span className="text-neon-orange md:mx-4 mx-2">•</span>
-            <span>RC Soccer Kit</span>
-            <span className="text-neon-magenta md:mx-4 mx-2">•</span>
-            <span>RC Race Kit</span>
-            <span className="text-neon-green md:mx-4 mx-2">•</span>
-            <span>RC Sumo Kit</span>
-            <span className="text-neon-violet md:mx-4 mx-2">•</span>
-            <span>Maze Solver Kit</span>
-            <span className="text-neon-orange md:mx-4 mx-2">•</span>
-          </MarqueeAnimation>
-          
-          <MarqueeAnimation
-            direction="right"
-            baseVelocity={-2}
-            className="text-white/40 text-xl md:text-2xl font-bold py-1"
-          >
-            <span>Maze Solver Kit</span>
-            <span className="text-neon-orange/50 md:mx-4 mx-2">•</span>
-            <span>RC Sumo Kit</span>
-            <span className="text-neon-green/50 md:mx-4 mx-2">•</span>
-            <span>RC Race Kit</span>
-            <span className="text-neon-magenta/50 md:mx-4 mx-2">•</span>
-            <span>RC Soccer Kit</span>
-            <span className="text-neon-violet/50 md:mx-4 mx-2">•</span>
-            <span>Line Follower Kit</span>
-            <span className="text-neon-orange/50 md:mx-4 mx-2">•</span>
-          </MarqueeAnimation>
-        </div>
+      {/* Marquee Navigation Tags */}
+      <section className="py-12 border-y border-border-light bg-bg-primary overflow-hidden mt-16">
+        <MarqueeAnimation direction="left" baseVelocity={-1} className="text-text-tertiary/70 text-2xl md:text-3xl font-semibold py-2">
+          <span>Industrial Automation</span> <span className="text-primary-main mx-6">•</span>
+          <span>Education Kits</span> <span className="text-primary-main mx-6">•</span>
+          <span>Combat Robotics</span> <span className="text-primary-main mx-6">•</span>
+          <span>Custom Prototyping</span> <span className="text-primary-main mx-6">•</span>
+          <span>3D Printing Services</span> <span className="text-primary-main mx-6">•</span>
+          <span>IoT Ecosystems</span> <span className="text-primary-main mx-6">•</span>
+        </MarqueeAnimation>
       </section>
 
-      {/* Quick Links Section with GlowingEffect */}
+      {/* MNC 4-Card Grid Section */}
       <section className="py-24 container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4">
-            Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">TamizhTech</span>
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-text-primary mb-6">
+            World-Class <span className="text-primary-main">Robotics Ecosystem.</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-            A world-class robotics ecosystem — from hands-on student clubs to enterprise automation solutions.
+          <p className="text-text-tertiary max-w-2xl mx-auto text-xl font-regular leading-relaxed">
+            TamizhTech delivers high-end automation across educational and industrial sectors with a focus on precision and global standards.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
-            { icon: <Users className="w-7 h-7 text-neon-orange" />, title: "Robotics Club", desc: "Join TamizhTech's community of builders, compete in national events, and access mentorship.", href: "/robotics-club" },
-            { icon: <Bot className="w-7 h-7 text-neon-magenta" />, title: "Products", desc: "Industrial robots, drones, and educational kits for every level and application.", href: "/products" },
-            { icon: <Wrench className="w-7 h-7 text-neon-green" />, title: "Services", desc: "From 3D printing to custom automation systems — we prototype and manufacture.", href: "/services" },
-            { icon: <Cpu className="w-7 h-7 text-neon-violet" />, title: "Clients", desc: "Trusted by 50+ enterprises and colleges across 15+ Indian states.", href: "/clients" },
-            { icon: <BookOpen className="w-7 h-7 text-neon-orange" />, title: "Courses", desc: "Robotics, Embedded Systems, and IoT courses in Tamil, English & Hindi.", href: "/courses" },
-            { icon: <Zap className="w-7 h-7 text-neon-magenta" />, title: "Team", desc: "Meet the passionate engineers and educators behind TamizhTech.", href: "/team" },
+            { icon: <Users className="w-6 h-6" />, title: "Robotics Club", desc: "India's premier student community building future-ready robotics engineers through hands-on competitions.", href: "/robotics-club" },
+            { icon: <Bot className="w-6 h-6" />, title: "Products", desc: "Cutting-edge robotic kits, industrial drones, and custom hardware modules for complex automation.", href: "/products" },
+            { icon: <Wrench className="w-6 h-6" />, title: "Services", desc: "End-to-end prototyping, industrial automation consulting, and high-precision manufacturing.", href: "/services" },
+            { icon: <Cpu className="w-6 h-6" />, title: "Courses", desc: "Expert-led training in Embedded Systems, AI, and IoT available in Tamil, English, and Hindi.", href: "/courses" },
+            { icon: <Globe className="w-6 h-6" />, title: "Global Reach", desc: "Serving 50+ clients and 15+ states with technical excellence and local language support.", href: "/clients" },
+            { icon: <Zap className="w-6 h-6" />, title: "Careers", desc: "Join an elite team of innovators and engineers redefining the future of Indian automation.", href: "/team" },
           ].map((item) => (
-            <Link key={item.title} href={item.href} className="relative rounded-xl border border-white/10 p-2 group hover:scale-[1.02] transition-transform">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-              <div className="relative flex flex-col gap-4 overflow-hidden rounded-lg bg-white/[0.03] p-7 h-full">
-                <div className="p-3 rounded-xl bg-white/5 w-fit">{item.icon}</div>
-                <h3 className="text-xl font-heading font-bold text-white group-hover:text-neon-orange transition-colors">{item.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                <div className="mt-auto flex items-center gap-2 text-sm font-bold text-neon-orange">
-                  Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+            <Link key={item.title} href={item.href} className="mnc-card flex flex-col p-8 group h-full">
+              <div className="w-12 h-12 bg-primary-light text-primary-main rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-main group-hover:text-text-on-primary transition-all duration-300">
+                {item.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-text-primary mb-3 group-hover:text-primary-main transition-colors">{item.title}</h3>
+              <p className="text-text-tertiary text-sm leading-relaxed mb-6 flex-grow">{item.desc}</p>
+              <div className="mt-auto flex items-center gap-2 text-sm font-bold text-primary-main group-hover:translate-x-2 transition-transform duration-300">
+                Learn more <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Trust Banner */}
+      <section className="py-20 bg-bg-elevated border-y border-border-light text-center">
+        <div className="container mx-auto px-4">
+          <p className="text-sm font-bold text-text-muted uppercase tracking-[0.2em] mb-8">Trusted by Global Enterprises & Institutions</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            {/* Placeholder for Client Logos */}
+            <span className="text-3xl font-black text-text-tertiary">BONIFON</span>
+            <span className="text-3xl font-black text-text-tertiary">NURA ROBOTICS</span>
+            <span className="text-3xl font-black text-text-tertiary">RYFIO</span>
+            <span className="text-3xl font-black text-text-tertiary">ROBOAIQ</span>
+            <span className="text-3xl font-black text-text-tertiary">ADITHYA TECH</span>
+          </div>
         </div>
       </section>
     </div>

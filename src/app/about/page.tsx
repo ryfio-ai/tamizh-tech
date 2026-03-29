@@ -1,113 +1,124 @@
 import type { Metadata } from "next";
-import { Lightbulb, Globe, GraduationCap, Users, Shield, Cpu } from "lucide-react";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Bot, Zap, Globe, Users, Trophy, Lightbulb, GraduationCap, Briefcase, Microscope, Target, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us | TamizhTech Robotics Company",
-  description: "Learn about TamizhTech's mission, vision, and core values. Born in Coimbatore, built for India — driving robotics education and automation innovation across 15+ states.",
+  description: "Learn about TamizhTech's journey from Coimbatore to becoming a national leader in robotics education and industrial automation.",
 };
 
 const values = [
-  { icon: <Lightbulb className="w-7 h-7 text-neon-orange" />, title: "Innovation Leadership", desc: "Pushing the boundaries of what's possible with robotics and AI." },
-  { icon: <GraduationCap className="w-7 h-7 text-neon-magenta" />, title: "Educational Impact", desc: "Making robotics and AI learning accessible to every student in Tamil Nadu and beyond." },
-  { icon: <Shield className="w-7 h-7 text-neon-green" />, title: "Enterprise Excellence", desc: "Delivering high-quality automation and IoT solutions to MSMEs and large enterprises." },
-  { icon: <Globe className="w-7 h-7 text-neon-violet" />, title: "Global Reach", desc: "Operating across 15+ Indian states with ambitions to reach 50+ countries by 2030." },
-  { icon: <Users className="w-7 h-7 text-neon-orange" />, title: "Community & Collaboration", desc: "Building a thriving ecosystem of makers, mentors, and innovators." },
-  { icon: <Cpu className="w-7 h-7 text-neon-magenta" />, title: "Ethics in AI", desc: "Committed to responsible, transparent, and human-centered AI development." },
+  { icon: <Globe className="w-6 h-6" />, title: "National Deployment", desc: "Serving 15+ states across India with accessible, localized robotics technology." },
+  { icon: <Users className="w-6 h-6" />, title: "Elite Community", desc: "Building a supportive, multi-disciplinary ecosystem for students and professionals." },
+  { icon: <Trophy className="w-6 h-6" />, title: "Technical Excellence", desc: "Setting the standard for competition-grade robotics and industrial solutions." },
+  { icon: <Zap className="w-6 h-6" />, title: "Persistent Innovation", desc: "Constantly evolving our hardware and software to match global AI standards." },
+  { icon: <Lightbulb className="w-6 h-6" />, title: "Talent Empowerment", desc: "Giving students the high-end technical tools to engineer their own future." },
+  { icon: <Briefcase className="w-6 h-6" />, title: "Industrial Precision", desc: "Delivering MNC-grade quality in every specialized product and service." },
 ];
-
-const certifications = ["ISO 9001:2015 – Quality Management", "ISO 27001 – Information Security", "IEEE Member", "STEM Certified"];
 
 export default function AboutPage() {
   return (
-    <div className="w-full">
-      {/* Hero */}
+    <div className="w-full bg-bg-page min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden text-center hero-gradient border-b border-border-light">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
+            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Corporate Profile</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary mb-8 leading-[1.1] tracking-tight">
+            Pioneering Precision <span className="text-primary-main">in Coimbatore.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-text-tertiary max-w-4xl mx-auto font-regular leading-relaxed">
+            From a localized technical lab to a nationally-recognized robotics innovation ecosystem. 
+            TamizhTech defines the future of Indian automation.
+          </p>
+        </div>
+      </section>
+
+      {/* Origin Story Section */}
       <section className="py-24 container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-magenta/30 bg-neon-magenta/5 mb-6">
-              <span className="text-xs font-bold tracking-widest text-neon-magenta uppercase">Our Story</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="max-w-xl">
+            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-text-primary mb-8 tracking-tight">Born in Coimbatore. <span className="text-primary-main">Built for India.</span></h2>
+            <div className="space-y-6 text-text-tertiary text-lg leading-relaxed font-regular">
+              <p>
+                TamizhTech was initiated with a persistent vision: to democratize world-class robotics and AI education 
+                across the Indian subcontinent. Starting from a specialized innovation lab in Coimbatore, 
+                we have scaled into a comprehensive hub serving elite institutions and enterprises across 15+ states.
+              </p>
+              <p>
+                Today, TamizhTech drives industrial automation through precise engineering, hands-on technical training, 
+                and a thriving robotics club community. Our mission is to establish a global benchmark for robotics 
+                innovation by 2030, localized for unique technical challenges.
+              </p>
             </div>
-            <h1 className="text-5xl md:text-6xl font-heading font-black text-white mb-6 leading-tight">
-              Born in <span className="text-neon-orange">Coimbatore.</span><br />
-              Built for <span className="text-neon-magenta">India.</span>
-            </h1>
-            <p className="text-slate-300 text-lg leading-relaxed mb-6">
-              TamizhTech started with a simple belief: every student in Tamil Nadu deserves access to world-class robotics and AI education. From a small lab in Coimbatore, we have grown into a robotics innovation hub serving schools, colleges, and enterprises across 15+ states.
-            </p>
-            <p className="text-slate-400 leading-relaxed">
-              Today, TamizhTech drives innovation through hands-on training, custom automation solutions, and a thriving robotics club community, with the vision to become a global benchmark by 2030.
-            </p>
+            <div className="mt-12 group cursor-pointer">
+                <div className="flex items-center gap-3 text-primary-main font-bold">
+                    Learn about our leadership <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </div>
+            </div>
           </div>
-          <div className="relative h-80 lg:h-96 rounded-2xl overflow-hidden border border-neon-orange/20"
-            style={{ background: "radial-gradient(circle at top right, rgba(176, 38, 255, 0.2), rgba(235, 146, 52, 0.05) 60%, rgba(10, 10, 26, 0.9) 100%)" }}>
-            <div className="absolute inset-0 bg-cyber-grid opacity-20" />
-            <div className="absolute inset-0 flex flex-col gap-4 items-center justify-center text-center p-8">
-              <div className="text-6xl font-black text-white">2030</div>
-              <div className="text-neon-orange text-xl font-bold tracking-widest font-heading">VISION</div>
-              <p className="text-slate-400 text-sm max-w-xs">Global robotics innovation hub — from Tamil Nadu to the world.</p>
+          <div className="relative aspect-square lg:aspect-video rounded-[2.5rem] overflow-hidden border border-border-light shadow-2xl bg-bg-primary p-12 flex flex-col items-center justify-center text-center">
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-primary-main/10 to-transparent" />
+            <div className="text-[120px] font-black text-primary-main leading-none mb-4 tracking-tighter shadow-sm">2030</div>
+            <div className="text-text-primary text-2xl font-extrabold tracking-[0.3em] uppercase mb-4">Vision</div>
+            <p className="text-text-tertiary text-lg max-w-xs font-medium">To become the global benchmark for technical innovation — from Tamil Nadu to the world.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Strategic Mission & Vision */}
+      <section className="py-24 bg-bg-elevated border-y border-border-light">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="bg-bg-primary p-12 md:p-16 rounded-[2rem] border border-border-light shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+                <Target className="w-32 h-32 text-primary-main" />
+            </div>
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-primary-light text-primary-main rounded-2xl flex items-center justify-center mb-10 shadow-inner">
+                <Microscope className="w-8 h-8" />
+              </div>
+              <h2 className="text-4xl font-heading font-extrabold text-text-primary mb-6 tracking-tight">Technical <span className="text-primary-main">Mission</span></h2>
+              <p className="text-text-tertiary leading-relaxed text-xl font-regular">
+                To empower global institutions with transformative robotics and automation ecosystems that deliver 
+                measurable technical results and inspire the next generation of engineers.
+              </p>
+            </div>
+          </div>
+          
+          <div className="bg-bg-primary p-12 md:p-16 rounded-[2rem] border border-border-light shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+                <Globe className="w-32 h-32 text-primary-main" />
+            </div>
+            <div className="relative z-10">
+              <div className="w-16 h-16 bg-primary-light text-primary-main rounded-2xl flex items-center justify-center mb-10 shadow-inner">
+                <Zap className="w-8 h-8" />
+              </div>
+              <h2 className="text-4xl font-heading font-extrabold text-text-primary mb-6 tracking-tight">Global <span className="text-primary-main">Vision</span></h2>
+              <p className="text-text-tertiary leading-relaxed text-xl font-regular">
+                To be the core partner for educational technology transformation in 50+ countries, 
+                setting the universal benchmark for localized innovation and specialized technical success.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-white/[0.02]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative rounded-xl border border-white/10 p-2">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-              <div className="relative rounded-lg bg-white/[0.03] p-10 h-full">
-                <h2 className="text-3xl font-heading font-black text-white mb-4 flex items-center gap-3">
-                  <span className="w-2 h-8 rounded-full bg-neon-orange" /> Our Mission
-                </h2>
-                <p className="text-slate-300 leading-relaxed text-lg">
-                  To empower institutions worldwide with transformative robotics, automation, and training solutions that deliver measurable results and inspire the next generation of innovators.
-                </p>
-              </div>
-            </div>
-            <div className="relative rounded-xl border border-white/10 p-2">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-              <div className="relative rounded-lg bg-white/[0.03] p-10 h-full">
-                <h2 className="text-3xl font-heading font-black text-white mb-4 flex items-center gap-3">
-                  <span className="w-2 h-8 rounded-full bg-neon-magenta" /> Vision 2030
-                </h2>
-                <p className="text-slate-300 leading-relaxed text-lg">
-                  To be the most trusted partner for educational technology transformation, operating in 50+ countries and setting the global benchmark for innovation and client success.
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* Core Values Corporate Grid */}
+      <section className="py-24 container mx-auto px-4">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-text-primary mb-6 tracking-tight">Corporate <span className="text-primary-main">Values</span></h2>
+          <p className="text-text-tertiary text-xl max-w-2xl mx-auto">The engineering principles that guide our localized technical operations.</p>
         </div>
-      </section>
-
-      {/* Core Values with GlowingEffect */}
-      <section className="py-20 container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4">Core <span className="text-neon-green">Values</span></h2>
-          <p className="text-slate-400 max-w-xl mx-auto">The principles that guide everything we build and everyone we train.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {values.map((v) => (
-            <div key={v.title} className="relative rounded-xl border border-white/10 p-2">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-              <div className="relative flex flex-col gap-4 overflow-hidden rounded-lg bg-white/[0.03] p-8 h-full">
-                <div className="p-3 bg-white/5 rounded-xl w-fit">{v.icon}</div>
-                <h3 className="text-xl font-heading font-bold text-white">{v.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{v.desc}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {values.map((v, idx) => (
+            <div key={idx} className="mnc-card flex flex-col p-10 group">
+              <div className="w-14 h-14 bg-primary-light text-primary-main rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary-main group-hover:text-text-on-primary transition-all duration-300 shadow-sm border border-primary-light/50">
+                {v.icon}
               </div>
+              <h3 className="text-2xl font-bold text-text-primary mb-4 group-hover:text-primary-main transition-colors">{v.title}</h3>
+              <p className="text-text-tertiary text-sm leading-relaxed">{v.desc}</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="py-16 border-t border-white/10">
-        <div className="container mx-auto px-4 flex flex-wrap justify-center gap-4">
-          {certifications.map((cert) => (
-            <span key={cert} className="px-5 py-2 rounded-full text-sm font-bold text-neon-orange border border-neon-orange/30 bg-neon-orange/5 backdrop-blur">
-              {cert}
-            </span>
           ))}
         </div>
       </section>

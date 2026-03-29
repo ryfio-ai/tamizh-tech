@@ -17,65 +17,141 @@ const config: Config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "var(--neon-orange)",
-          foreground: "#000000",
+        // MNC-Style Backgrounds
+        'bg': {
+          'page': '#FAFBFC',
+          'primary': '#FFFFFF',
+          'elevated': '#F8F9FB',
+          'accent-soft': '#E8F1FF',
         },
+        // Primary Brand (Google-like Blue)
+        'primary': {
+          DEFAULT: '#0066FF',
+          'main': '#0066FF',
+          'hover': '#0052CC',
+          'dark': '#003D99',
+          'light': '#E3F0FF',
+          '50': '#F0F7FF',
+          '100': '#E3F0FF',
+          '500': '#0066FF',
+          '600': '#0052CC',
+          '700': '#003D99',
+          foreground: '#FFFFFF',
+        },
+        // Secondary Accent (Robotics/Energy Orange)
+        'accent': {
+          DEFAULT: '#FF6B35',
+          'main': '#FF6B35',
+          'light': '#FFE4D6',
+          'hover': '#E85A29',
+          foreground: '#FFFFFF',
+        },
+        // Professional Text Hierarchy
+        'text': {
+          'primary': '#0D0D0D',
+          'secondary': '#1A1A1A',
+          'tertiary': '#5A6C7D',
+          'muted': '#8B95A5',
+          'on-primary': '#FFFFFF',
+          'on-accent': '#FFFFFF',
+          // Mappings for older code compat
+          main: '#0D0D0D',
+          body: '#1A1A1A',
+        },
+        // MNC-Style Borders
+        'border': {
+          DEFAULT: '#E8EBF0',
+          'light': '#E8EBF0',
+          'medium': '#D0D7E0',
+          'strong': '#B3BCCF',
+          subtle: '#E8EBF0',
+          stronger: '#D0D7E0',
+        },
+        // Status Colors
+        'success': {
+          DEFAULT: '#10B981',
+          bg: '#ECFDF5',
+        },
+        'warning': {
+          DEFAULT: '#F59E0B',
+          bg: '#FFFBEB',
+        },
+        'error': {
+          DEFAULT: '#EF4444',
+          bg: '#FEE2E2',
+        },
+        'info': {
+          DEFAULT: '#3B82F6',
+          bg: '#EFF6FF',
+        },
+        // Standard Grays
+        'gray': {
+          50: '#F9FAFB',
+          100: '#F3F4F6',
+          200: '#E5E7EB',
+          300: '#D1D5DB',
+          400: '#9CA3AF',
+          500: '#6B7280',
+          600: '#4B5563',
+          700: '#374151',
+          800: '#1F2937',
+          900: '#111827',
+        },
+        // Compatibility for shadcn components
+        background: '#FAFBFC',
+        foreground: '#0D0D0D',
         secondary: {
-          DEFAULT: "var(--neon-magenta)",
-          foreground: "#ffffff",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: '#E3F0FF',
+          foreground: '#0066FF',
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "var(--neon-green)",
-          foreground: "#000000",
+          DEFAULT: '#F3F4F6',
+          foreground: '#5A6C7D',
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: '#FFFFFF',
+          foreground: '#0D0D0D',
         },
         card: {
-          DEFAULT: "rgba(15, 23, 42, 0.6)",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: '#FFFFFF',
+          foreground: '#0D0D0D',
         },
-        neon: {
-          orange: "#eb9234",
-          magenta: "#ff00ff",
-          violet: "#b026ff",
-          green: "#00ff66",
-          dark: "#0a0a1a",
-          panel: "rgba(10, 10, 26, 0.7)",
-        }
       },
-      backgroundImage: {
-        'cyber-grid': 'linear-gradient(rgba(235, 146, 52, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(235, 146, 52, 0.1) 1px, transparent 1px)',
-        'cyber-gradient': 'radial-gradient(circle at center, rgba(176, 38, 255, 0.15) 0%, rgba(10, 10, 26, 1) 100%)',
-      },
-      boxShadow: {
-        'neon-orange': '0 0 10px rgba(235, 146, 52, 0.5), 0 0 20px rgba(235, 146, 52, 0.3)',
-        'neon-magenta': '0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3)',
-        'neon-green': '0 0 10px rgba(0, 255, 102, 0.5), 0 0 20px rgba(0, 255, 102, 0.3)',
+      spacing: {
+        'xs': '8px',
+        'sm': '12px',
+        'md': '16px',
+        'lg': '24px',
+        'xl': '32px',
+        '2xl': '40px',
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        'xs': '4px',
+        'sm': '6px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+      },
+      boxShadow: {
+        'sm': '0 1px 3px rgba(0,0,0,0.08)',
+        'md': '0 2px 6px rgba(0,0,0,0.08)',
+        'lg': '0 4px 12px rgba(0,0,0,0.1)',
+        'xl': '0 8px 16px rgba(0,0,0,0.12)',
+        'hover': '0 8px 16px rgba(0,0,0,0.12)',
+        // Compatibility
+        soft: '0 2px 6px rgba(0,0,0,0.08)',
+        elevated: '0 8px 16px rgba(0,0,0,0.12)',
+      },
+      fontWeight: {
+        'regular': '400',
+        'medium': '500',
+        'semibold': '600',
+        'bold': '700',
+        'extrabold': '800',
       },
       fontFamily: {
-        heading: ["var(--font-outfit)", "sans-serif"],
-        sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["'SF Pro Display'", "-apple-system", "BlinkMacSystemFont", "Inter", "sans-serif"],
+        sans: ["'Inter'", "'Segoe UI'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       }
     },
   },

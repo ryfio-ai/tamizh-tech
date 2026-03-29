@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Brain, Trophy, Zap, Users } from "lucide-react";
+import { ArrowRight, MessageCircle, Brain, Trophy, Zap, Users, ShieldCheck, Target, Rocket, Award } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export const metadata: Metadata = {
@@ -9,114 +9,109 @@ export const metadata: Metadata = {
 };
 
 const events = [
-  { name: "Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", icon: "⚽" },
-  { name: "Robo Sumo", desc: "Push rivals out of the ring using strength and strategy.", icon: "🤼" },
-  { name: "Robo Race", desc: "Time-trial speed racing on custom tracks.", icon: "🏎️" },
-  { name: "Robo War", desc: "Battle bots competition with custom-built combat machines.", icon: "⚔️" },
-  { name: "Line Follower Race", desc: "Automated bots that follow a marked path at high speed.", icon: "〰️" },
-  { name: "Fast LF & Maze Solver", desc: "Advanced autonomous navigation with maze-solving AI.", icon: "🧩" },
-  { name: "Water Rocket", desc: "Design and launch water-powered rockets for altitude.", icon: "🚀" },
-  { name: "Drone Race", desc: "FPV drone piloting through timed obstacle courses.", icon: "🚁" },
+  { name: "Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", icon: <Rocket className="w-6 h-6" /> },
+  { name: "Robo Sumo", desc: "Push rivals out of the ring using strength and strategy.", icon: <Target className="w-6 h-6" /> },
+  { name: "Robo Race", desc: "Time-trial speed racing on custom tracks.", icon: <Zap className="w-6 h-6" /> },
+  { name: "Robo War", desc: "Battle bots competition with custom-built combat machines.", icon: <ShieldCheck className="w-6 h-6" /> },
+  { name: "Line Follower", desc: "Automated bots that follow a marked path at high speed.", icon: <Brain className="w-6 h-6" /> },
+  { name: "Maze Solver", desc: "Advanced autonomous navigation with maze-solving AI.", icon: <Zap className="w-6 h-6" /> },
+  { name: "Water Rocket", desc: "Design and launch water-powered rockets for altitude.", icon: <Rocket className="w-6 h-6" /> },
+  { name: "Drone Race", desc: "FPV drone piloting through timed obstacle courses.", icon: <Zap className="w-6 h-6" /> },
 ];
 
 const benefits = [
-  { icon: <Brain className="w-6 h-6 text-neon-orange" />, title: "Training & Mentorship", desc: "Structured training for all club events with expert mentors." },
-  { icon: <Trophy className="w-6 h-6 text-neon-magenta" />, title: "National & International Events", desc: "150+ events supported over the last 3 years." },
-  { icon: <Zap className="w-6 h-6 text-neon-green" />, title: "Access to Labs & Tools", desc: "Hands-on access to labs, tools, and practice arenas." },
-  { icon: <Users className="w-6 h-6 text-neon-violet" />, title: "Builder Community", desc: "Network of builders, innovators, and mentors across India." },
+  { icon: <Brain className="w-6 h-6 text-primary-main" />, title: "Expert Mentorship", desc: "Weekly structured training sessions for all club navigation events." },
+  { icon: <Award className="w-6 h-6 text-primary-main" />, title: "Global Recognition", desc: "Support for 150+ national and international robotics competitions." },
+  { icon: <Zap className="w-6 h-6 text-primary-main" />, title: "Advanced Labs", desc: "Unlimited hands-on access to top-tier robotics tools and arenas." },
+  { icon: <Users className="w-6 h-6 text-primary-main" />, title: "Elite Network", desc: "Connect with builders, innovators, and industrial mentors across 15+ states." },
 ];
 
 export default function RoboticsClubPage() {
   return (
-    <div className="w-full">
-      {/* Hero */}
-      <section className="relative py-24 overflow-hidden text-center">
-        <div className="absolute inset-0 bg-cyber-grid opacity-20 pointer-events-none" />
+    <div className="w-full bg-bg-page">
+      {/* Hero Section */}
+      <section className="relative py-24 overflow-hidden text-center hero-gradient border-b border-border-light">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-orange/30 bg-neon-orange/5 mb-6">
-            <span className="w-2 h-2 rounded-full bg-neon-orange animate-pulse" />
-            <span className="text-xs font-bold tracking-widest text-neon-orange uppercase">Tamizh Robotics Club</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-6">
+            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
+            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Tamizh Robotics Club</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
-            Build. Compete. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-neon-magenta">Innovate.</span>
+          <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-text-primary mb-6 leading-tight tracking-tight">
+            Build. Compete. <span className="text-primary-main">Innovate.</span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-            Hands-on robotics, competitions, and an innovation hub for school and college students across India.
+          <p className="text-xl md:text-2xl text-text-tertiary max-w-3xl mx-auto mb-10 leading-relaxed font-regular">
+            India's most tech-forward robotics hub for school and college students. Experience hands-on engineering from Coimbatore to the world.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/robotics-club/join"
-              className="px-8 py-4 bg-neon-orange text-black font-bold rounded-md hover:bg-white hover:shadow-neon-orange transition-all flex items-center justify-center gap-2 group">
-              Fill Membership Form <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              className="px-8 py-4 bg-primary-main text-text-on-primary font-bold rounded-lg hover:bg-primary-hover shadow-lg transition-all flex items-center justify-center gap-2 group">
+              Join the Club <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a href="https://wa.me/918148045030?text=Hello%20TamizhTech!%20I%20want%20to%20join%20the%20Robotics%20Club." target="_blank" rel="noopener noreferrer"
-              className="px-8 py-4 border-2 border-neon-magenta text-white font-bold rounded-md bg-neon-magenta/10 hover:bg-neon-magenta/20 hover:shadow-neon-magenta transition-all flex items-center justify-center gap-2">
-              <MessageCircle className="w-5 h-5 text-neon-magenta" /> Talk to a Mentor
+              className="px-8 py-4 border-2 border-border-medium text-text-primary font-bold rounded-lg bg-bg-primary hover:bg-bg-elevated transition-all flex items-center justify-center gap-2">
+              <MessageCircle className="w-5 h-5 text-primary-main" /> Speak with Mentorship Team
             </a>
           </div>
         </div>
       </section>
 
-      {/* Events Grid with GlowingEffect */}
-      <section className="py-20 container mx-auto px-4">
+      {/* Events Grid Section */}
+      <section className="py-24 container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4">Club <span className="text-neon-orange">Events</span></h2>
-          <p className="text-slate-400 max-w-xl mx-auto">Train for and compete in these exciting robotics disciplines.</p>
+          <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-text-primary mb-4">Core <span className="text-primary-main">Events</span></h2>
+          <p className="text-text-tertiary max-w-xl mx-auto text-lg leading-relaxed">Systematic training for precision competitions and innovative hardware building.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {events.map((event) => (
-            <div key={event.name} className="relative rounded-xl border border-white/10 p-2 group">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-              <div className="relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white/[0.03] p-6 h-full">
-                <div className="text-4xl mb-2">{event.icon}</div>
-                <h3 className="text-lg font-heading font-bold text-white group-hover:text-neon-orange transition-colors">{event.name}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{event.desc}</p>
+            <div key={event.name} className="mnc-card flex flex-col p-8 group h-full">
+              <div className="w-12 h-12 bg-primary-light text-primary-main rounded-md flex items-center justify-center mb-4 group-hover:bg-primary-main group-hover:text-text-on-primary transition-all duration-300">
+                {event.icon}
               </div>
+              <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary-main transition-colors">{event.name}</h3>
+              <p className="text-text-tertiary text-sm leading-relaxed">{event.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Benefits with GlowingEffect */}
-      <section className="py-20 bg-white/[0.02]">
+      {/* Benefits Section */}
+      <section className="py-24 bg-bg-elevated border-y border-border-light">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4">Why Join <span className="text-neon-magenta">TTRC?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-text-primary mb-4">Why Join <span className="text-primary-main">TTRC?</span></h2>
+            <p className="text-text-tertiary max-w-xl mx-auto">Experience the professional MNC-standard of robotics innovation.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((b) => (
-              <div key={b.title} className="relative rounded-xl border border-white/10 p-2">
-                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} />
-                <div className="relative flex flex-col gap-4 overflow-hidden rounded-lg bg-white/[0.03] p-8 h-full">
-                  <div className="p-3 rounded-xl bg-white/5 w-fit">{b.icon}</div>
-                  <h3 className="font-heading font-bold text-white text-lg">{b.title}</h3>
-                  <p className="text-slate-400 text-sm">{b.desc}</p>
-                </div>
+              <div key={b.title} className="bg-bg-primary p-10 rounded-xl border border-border-light shadow-sm hover:shadow-lg transition-all duration-300">
+                <div className="p-3 rounded-lg bg-primary-light w-fit mb-6">{b.icon}</div>
+                <h3 className="font-bold text-text-primary text-xl mb-3">{b.title}</h3>
+                <p className="text-text-tertiary text-sm leading-relaxed">{b.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Join Panel */}
+      {/* Membership CTA Section */}
       <section className="py-24 container mx-auto px-4">
-        <div className="relative rounded-3xl overflow-hidden border border-neon-orange/30 p-10 md:p-16 text-center"
-          style={{ background: "radial-gradient(circle at center, rgba(235, 146, 52, 0.08) 0%, rgba(10, 10, 26, 0.9) 100%)" }}>
-          <div className="absolute inset-0 bg-cyber-grid opacity-10 pointer-events-none" />
-          <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-heading font-black text-white mb-4">
-              Become a <span className="text-neon-orange">Club Member</span>
+        <div className="relative rounded-[2rem] overflow-hidden border border-border-light p-12 md:p-20 text-center bg-bg-primary shadow-xl">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none hero-gradient" />
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-heading font-extrabold text-text-primary mb-6">
+              Become a <span className="text-primary-main">Global Member</span>
             </h2>
-            <p className="text-slate-300 text-lg mb-10">
-              Training, event support, facility access, and exclusive benefits at Tamizh Robotics Club.
+            <p className="text-text-tertiary text-xl mb-12 font-regular leading-relaxed">
+              Unlock priority mentorship, complete arena access, and exclusive sponsorship opportunities on our global platform.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link href="/robotics-club/join"
-                className="px-8 py-4 bg-neon-orange text-black font-bold rounded-md hover:bg-white hover:shadow-neon-orange transition-all">
-                Fill Membership Form
+                className="px-10 py-5 bg-primary-main text-text-on-primary font-bold text-lg rounded-lg hover:bg-primary-hover shadow-lg transition-all">
+                Apply for Membership
               </Link>
               <a href="https://wa.me/918148045030?text=Hello%20TamizhTech!%20I%20want%20to%20join%20the%20Robotics%20Club." target="_blank" rel="noopener noreferrer"
-                className="px-8 py-4 border border-neon-magenta text-white bg-neon-magenta/10 hover:bg-neon-magenta/20 hover:shadow-neon-magenta font-bold rounded-md transition-all">
-                Talk on WhatsApp
+                className="px-10 py-5 border-2 border-border-medium text-text-primary bg-bg-primary hover:bg-bg-elevated font-bold text-lg rounded-lg transition-all">
+                Message on WhatsApp
               </a>
             </div>
           </div>
