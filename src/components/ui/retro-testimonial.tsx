@@ -13,6 +13,7 @@ export interface iTestimonial {
   description: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   profileImage: any;
+  linkedinUrl?: string; // Enhanced networking
 }
 
 interface iCarouselProps {
@@ -168,9 +169,14 @@ const TestimonialCard = ({
                     "{testimonial.description}"
                   </p>
                   <div className="flex gap-4">
-                    <button className="p-3 rounded-md bg-primary-main text-text-on-primary hover:bg-primary-hover transition-all flex items-center gap-2 font-bold text-sm">
-                      <Linkedin className="w-5 h-5" /> LinkedIn Profile
-                    </button>
+                    <a 
+                      href={testimonial.linkedinUrl || "https://www.linkedin.com/company/tamizh-tech-robotics-company"} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-3 px-6 rounded-md bg-[#0066FF] text-white hover:bg-[#0052CC] transition-all flex items-center gap-2 font-bold text-sm shadow-md"
+                    >
+                      <Linkedin className="w-5 h-5 fill-white" /> LinkedIn Profile
+                    </a>
                   </div>
                 </div>
               </div>
