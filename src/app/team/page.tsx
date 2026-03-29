@@ -32,7 +32,7 @@ const teamMembers: iTestimonial[] = [
     name: "Sathish P",
     designation: "CIO",
     description: "Information systems leader managing TamizhTech's tech infrastructure, data, and digital operations.",
-    profileImage: "/team/sathish.jpg",
+    profileImage: "/team/sathish.jpeg",
   },
   {
     name: "Chenjitha",
