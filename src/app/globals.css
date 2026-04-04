@@ -4,46 +4,26 @@
 
 @layer base {
   :root {
-    /* MNC-Style Backgrounds */
-    --background: 210 20% 98.6%; /* #FAFBFC (bg-page) */
-    --foreground: 0 0% 5.1%; /* #0D0D0D (text-primary) */
+    --background: 0 0% 97%; /* #F7F7F5 */
+    --foreground: 222 37% 20%; /* #1F2A44 */
 
-    /* Card and surface backgrounds */
-    --card: 0 0% 100%; /* #FFFFFF (bg-primary) */
-    --card-foreground: 0 0% 5.1%; /* #0D0D0D (text-primary) */
+    --card: 0 0% 100%;
+    --card-foreground: 222 37% 20%;
 
-    /* Popover backgrounds */
-    --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 0 0% 5.1%; /* #0D0D0D */
-
-    /* MNC-Style Primary Brand (Tech Blue) */
-    --primary: 216 100% 50%; /* #0066FF (primary-main) */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --primary: 24 90% 54%; /* #F47A20 */
+    --primary-foreground: 0 0% 100%;
     
-    /* Secondary / Accent (Robotics/Energy Orange) */
-    --secondary: 16 100% 60.6%; /* #FF6B35 (accent-main) */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+    --secondary: 222 37% 20%; /* #1F2A44 */
+    --secondary-foreground: 0 0% 100%;
     
-    --accent: 16 100% 60.6%; /* #FF6B35 */
-    --accent-foreground: 0 0% 100%; /* #FFFFFF */
+    --muted: 210 20% 96%; /* #F3F4F6 */
+    --muted-foreground: 217 10% 40%; /* #5B6470 */
 
-    /* Muted and Dividers */
-    --muted: 210 17% 96.1%; /* #F3F4F6 (gray-100) */
-    --muted-foreground: 215 15% 42%; /* #5A6C7D (text-tertiary) */
+    --border: 216 12% 88%; /* #D9DEE5 */
+    --input: 216 12% 88%;
+    --ring: 24 90% 54%;
 
-    /* MNC-Style Borders */
-    --border: 216 20% 92.5%; /* #E8EBF0 (border-light) */
-    --input: 216 20% 92.5%; /* #E8EBF0 (border-light) */
-    --ring: 216 100% 50%; /* #0066FF */
-
-    /* Border Radius */
-    --radius: 0.5rem; /* 8px corresponding to md */
-
-    /* MNC-Style Success/Error */
-    --success: 161 84% 39%; /* #10B981 */
-    --error: 0 84% 60%; /* #EF4444 */
-    --warning: 38 92% 50%; /* #F59E0B */
-    --info: 217 91% 60%; /* #3B82F6 */
+    --radius: 0.125rem;
   }
 
   * {
@@ -57,75 +37,127 @@
   }
 
   body {
-    background-color: #FAFBFC; /* bg-page */
-    color: #1A1A1A; /* text-secondary */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #F7F7F5;
+    color: #1F2A44;
+    font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #0D0D0D; /* text-primary */
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    color: #1F2A44;
+    font-family: 'General Sans', 'Satoshi', sans-serif;
     font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
 }
 
 @layer utilities {
-  /* MNC Premium Hero Gradient */
-  .hero-gradient {
-    background: linear-gradient(180deg, #F8F9FB 0%, #FAFBFC 100%);
+  /* Industrial Swiss Grid System */
+  .hero-grid {
+    background-image: 
+      linear-gradient(to right, #D9DEE5 1px, transparent 1px),
+      linear-gradient(to bottom, #D9DEE5 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-color: #F7F7F5;
   }
 
-  /* Professional Statistics Card Look */
-  .stat-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-2px);
-    background-color: #F8F9FB; /* bg-elevated */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  /* Precision Typography for B2B */
+  .text-suit {
+    font-family: 'Satoshi', 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
   }
 
-  /* 4-Card Grid Standardized Style */
-  .mnc-card {
+  /* Industrial Card: Sharp, Structured, Trusted */
+  .industrial-card {
     background-color: #FFFFFF;
-    border: 1px solid #E8EBF0;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #D9DEE5;
+    border-radius: 0px; /* Swiss Style - Sharp */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .mnc-card:hover {
-    border-color: #D0D7E0;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  .industrial-card:hover {
+    border-color: #F47A20;
     transform: translateY(-2px);
+    box-shadow: 0 12px 24px -10px rgba(31, 42, 68, 0.1);
   }
 
-  /* Professional Button Unified Styles */
+  /* B2B Action Components */
   .btn-primary {
-    background-color: #0066FF;
+    background-color: #F47A20;
     color: #FFFFFF;
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    padding: 12px 32px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #F47A20;
   }
   .btn-primary:hover {
-    background-color: #0052CC;
+    background-color: #D96510;
+    border-color: #D96510;
   }
 
   .btn-secondary {
     background-color: transparent;
-    border: 2px solid #0066FF;
-    color: #0066FF;
-    padding: 10px 26px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    border: 1px solid #1F2A44;
+    color: #1F2A44;
+    padding: 12px 32px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .btn-secondary:hover {
-    background-color: #E3F0FF;
-    border-color: #0052CC;
+    background-color: #1F2A44;
+    color: #FFFFFF;
+  }
+
+  .btn-tertiary {
+    background-color: #FFFFFF;
+    border: 1px solid #D9DEE5;
+    color: #5B6470;
+    padding: 12px 24px;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .btn-tertiary:hover {
+    border-color: #1F2A44;
+    color: #1F2A44;
+  }
+
+  /* Horizontal Engineering Rule */
+  .h-rule {
+    height: 1px;
+    background-color: #D9DEE5;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  /* Software Division Accents */
+  .software-accent {
+    border-left: 4px solid #1F2A44;
+    padding-left: 20px;
+  }
+
+  /* Robotics Division Accents */
+  .robotics-accent {
+    border-left: 4px solid #F47A20;
+    padding-left: 20px;
   }
 }

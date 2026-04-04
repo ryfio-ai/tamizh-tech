@@ -13,16 +13,16 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tamizhtech.in"), // Replace with actual domain if different
+  metadataBase: new URL("https://tamizhtech.in"),
   title: {
-    default: "TamizhTech Robotics Company | Coimbatore, Tamil Nadu",
-    template: "%s | TamizhTech Robotics"
+    default: "Tamizh Tech | Industrial Automation & Robotics Integration Specialist",
+    template: "%s | Tamizh Tech"
   },
-  description: "TamizhTech (TTRC) is Coimbatore's leading robotics company specializing in AI, Automation, IoT, and industrial solutions. Join our Robotics Club or explore our advanced kits.",
-  keywords: ["Robotics Coimbatore", "Robotics Tamilnadu", "Robots Coimbatore", "Industrial Automation Coimbatore", "AI Robotics India", "Robotics Club Tamil Nadu", "3D Printing Coimbatore", "PCB Design Coimbatore"],
-  authors: [{ name: "TamizhTech Team" }],
-  creator: "TamizhTech",
-  publisher: "TamizhTech Robotics",
+  description: "Tamizh Tech is a leading industrial engineering firm in Coimbatore specializing in robotics integration, AI vision systems, and automated manufacturing solutions for global OEMs.",
+  keywords: ["Industrial Automation Coimbatore", "Robotics Integration India", "AI Vision Systems", "Custom Prototyping Services", "Factory Automation Tamil Nadu"],
+  authors: [{ name: "Tamizh Tech Engineering" }],
+  creator: "Tamizh Tech",
+  publisher: "Tamizh Tech Pvt Ltd",
   formatDetection: {
     email: false,
     address: false,
@@ -32,76 +32,50 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://tamizhtech.in",
-    siteName: "TamizhTech Robotics",
-    title: "TamizhTech Robotics Company | Coimbatore's AI & Automation Hub",
-    description: "Building the future with Robotics, AI & Automation in Coimbatore, Tamil Nadu. Join the revolution.",
+    siteName: "Tamizh Tech Industrial",
+    title: "Tamizh Tech | Advanced Industrial Robotics & Automation",
+    description: "Engineering high-performance robotic systems and AI-driven automation for global manufacturers. Based in Coimbatore, deployed Pan-India.",
     images: [
       {
-        url: "/og-image.jpg", // Ensure this image exists in public folder
+        url: "/og-image-b2b.jpg",
         width: 1200,
         height: 630,
-        alt: "TamizhTech Robotics Company",
+        alt: "Tamizh Tech Pvt Ltd Industrial Automation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TamizhTech Robotics | Coimbatore, Tamil Nadu",
-    description: "Leading the robotics and AI revolution in Coimbatore. Kits, Clubs, and Industrial Solutions.",
-    images: ["/og-image.jpg"],
+    title: "Tamizh Tech | Industrial Robotics Specialist",
+    description: "Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Pvt Ltd certification recognized by our 50+ industrial partners across India.",
+    images: ["/og-image-b2b.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "TamizhTech Robotics Company",
-  "image": "https://tamizhtech.in/og-image.jpg",
-  "@id": "https://tamizhtech.in",
+  "@type": "Organization",
+  "name": "Tamizh Tech Pvt Ltd",
+  "alternateName": "Tamizh Tech Robotics",
   "url": "https://tamizhtech.in",
-  "telephone": "+918148045030",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Coimbatore",
-    "addressLocality": "Coimbatore",
-    "addressRegion": "TN",
-    "postalCode": "641001",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 11.0168,
-    "longitude": 76.9558
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "opens": "09:00",
-    "closes": "18:00"
-  },
+  "logo": "https://tamizhtech.in/logo/TTRC LOGO.png",
   "sameAs": [
     "https://www.linkedin.com/company/tamizh-tech-robotics-company",
     "https://www.instagram.com/tamizh_tech_pvt_ltd",
     "https://youtube.com/@covaiscientist"
-  ]
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Coimbatore",
+    "addressLocality": "Coimbatore",
+    "addressRegion": "Tamil Nadu",
+    "postalCode": "641001",
+    "addressCountry": "IN"
+  }
 };
 
 export default function RootLayout({
@@ -116,7 +90,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LZEZV8HPGR"
           strategy="afterInteractive"
@@ -126,15 +99,13 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'G-LZEZV8HPGR');
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} ${outfit.variable} font-sans min-h-screen flex flex-col bg-bg-page`}>
-        <FlyingDrone />
+      <body className="font-sans min-h-screen flex flex-col bg-bg-page selection:bg-primary-main selection:text-white antialiased">
         <Navbar />
-        <main className="flex-1 pt-16 flex flex-col">
+        <main className="flex-1 flex flex-col">
           {children}
         </main>
         <Footer />

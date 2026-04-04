@@ -17,142 +17,70 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // MNC-Style Backgrounds
-        'bg': {
-          'page': '#FAFBFC',
-          'primary': '#FFFFFF',
-          'elevated': '#F8F9FB',
-          'accent-soft': '#E8F1FF',
-        },
-        // Primary Brand (Google-like Blue)
+        // B2B Industrial Palette (Strict adherence to request)
         'primary': {
-          DEFAULT: '#0066FF',
-          'main': '#0066FF',
-          'hover': '#0052CC',
-          'dark': '#003D99',
-          'light': '#E3F0FF',
-          '50': '#F0F7FF',
-          '100': '#E3F0FF',
-          '500': '#0066FF',
-          '600': '#0052CC',
-          '700': '#003D99',
+          DEFAULT: '#F47A20',
+          'main': '#F47A20',
+          'hover': '#D96510',
+          'soft': '#FFF1E6',
           foreground: '#FFFFFF',
         },
-        // Secondary Accent (Robotics/Energy Orange)
-        'accent': {
-          DEFAULT: '#FF6B35',
-          'main': '#FF6B35',
-          'light': '#FFE4D6',
-          'hover': '#E85A29',
+        'secondary': {
+          DEFAULT: '#1F2A44',
+          'main': '#1F2A44',
+          'hover': '#161E31',
           foreground: '#FFFFFF',
         },
-        // Professional Text Hierarchy
+        'bg': {
+          'page': '#F7F7F5', // Warm off-white surface
+          'primary': '#FFFFFF',
+          'secondary': '#F3F4F6',
+          'accent': '#FFF1E6',
+        },
         'text': {
-          'primary': '#0D0D0D',
-          'secondary': '#1A1A1A',
-          'tertiary': '#5A6C7D',
-          'muted': '#8B95A5',
+          'primary': '#1F2A44', // Deep navy-charcoal
+          'secondary': '#5B6470', // Steel gray muted
+          'muted': '#838B98',
           'on-primary': '#FFFFFF',
-          'on-accent': '#FFFFFF',
-          // Mappings for older code compat
-          main: '#0D0D0D',
-          body: '#1A1A1A',
         },
-        // MNC-Style Borders
         'border': {
-          DEFAULT: '#E8EBF0',
-          'light': '#E8EBF0',
-          'medium': '#D0D7E0',
-          'strong': '#B3BCCF',
-          subtle: '#E8EBF0',
-          stronger: '#D0D7E0',
+          DEFAULT: '#D9DEE5', // Industrial border
+          'light': '#E5E9EF',
+          'medium': '#D1D5DB',
         },
-        // Status Colors
-        'success': {
-          DEFAULT: '#10B981',
-          bg: '#ECFDF5',
-        },
-        'warning': {
-          DEFAULT: '#F59E0B',
-          bg: '#FFFBEB',
-        },
-        'error': {
-          DEFAULT: '#EF4444',
-          bg: '#FEE2E2',
-        },
-        'info': {
-          DEFAULT: '#3B82F6',
-          bg: '#EFF6FF',
-        },
-        // Standard Grays
-        'gray': {
-          50: '#F9FAFB',
-          100: '#F3F4F6',
-          200: '#E5E7EB',
-          300: '#D1D5DB',
-          400: '#9CA3AF',
-          500: '#6B7280',
-          600: '#4B5563',
-          700: '#374151',
-          800: '#1F2937',
-          900: '#111827',
-        },
-        // Compatibility for shadcn components
-        background: '#FAFBFC',
-        foreground: '#0D0D0D',
-        secondary: {
-          DEFAULT: '#E3F0FF',
-          foreground: '#0066FF',
-        },
+        // Compatibility with UI components
+        background: '#F7F7F5',
+        foreground: '#1F2A44',
         muted: {
           DEFAULT: '#F3F4F6',
-          foreground: '#5A6C7D',
+          foreground: '#5B6470',
         },
-        popover: {
-          DEFAULT: '#FFFFFF',
-          foreground: '#0D0D0D',
-        },
-        card: {
-          DEFAULT: '#FFFFFF',
-          foreground: '#0D0D0D',
-        },
-      },
-      spacing: {
-        'xs': '8px',
-        'sm': '12px',
-        'md': '16px',
-        'lg': '24px',
-        'xl': '32px',
-        '2xl': '40px',
       },
       borderRadius: {
-        'xs': '4px',
-        'sm': '6px',
-        'md': '8px',
-        'lg': '12px',
-        'xl': '16px',
-      },
-      boxShadow: {
-        'sm': '0 1px 3px rgba(0,0,0,0.08)',
-        'md': '0 2px 6px rgba(0,0,0,0.08)',
-        'lg': '0 4px 12px rgba(0,0,0,0.1)',
-        'xl': '0 8px 16px rgba(0,0,0,0.12)',
-        'hover': '0 8px 16px rgba(0,0,0,0.12)',
-        // Compatibility
-        soft: '0 2px 6px rgba(0,0,0,0.08)',
-        elevated: '0 8px 16px rgba(0,0,0,0.12)',
-      },
-      fontWeight: {
-        'regular': '400',
-        'medium': '500',
-        'semibold': '600',
-        'bold': '700',
-        'extrabold': '800',
+        'none': '0',
+        'xs': '1px',
+        'sm': '2px',
+        'md': '4px',
+        'lg': '8px',
+        'full': '9999px',
       },
       fontFamily: {
-        heading: ["'SF Pro Display'", "-apple-system", "BlinkMacSystemFont", "Inter", "sans-serif"],
-        sans: ["'Inter'", "'Segoe UI'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
-      }
+        // B2B 'Suit Font' System
+        sans: ["'Satoshi'", "'General Sans'", "Inter", "system-ui", "sans-serif"],
+        heading: ["'General Sans'", "'Satoshi'", "sans-serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
+      },
+      letterSpacing: {
+        'tighter': '-0.05em',
+        'tight': '-0.02em',
+        'wide': '0.05em',
+        'widest': '0.1em',
+        'industrial': '0.2em',
+      },
+      lineHeight: {
+        'tight': '1.1',
+        'relaxed': '1.6',
+      },
     },
   },
   plugins: [],

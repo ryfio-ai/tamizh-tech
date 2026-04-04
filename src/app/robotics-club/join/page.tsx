@@ -73,7 +73,7 @@ export default function JoinClubPage() {
             Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Robotics Club</span>
           </h1>
           <p className="text-lg text-text-body max-w-2xl mx-auto">
-            Fill out the form below to apply for TamizhTech Robotics Club membership. Our team will review your application and get back to you shortly.
+            Fill out the form below to apply for Tamil Robotics Club (TRC) membership. Our team will review your application and get back to you shortly.
           </p>
         </div>
       </section>
@@ -92,7 +92,7 @@ export default function JoinClubPage() {
                   </div>
                   <h3 className="text-3xl font-heading font-bold text-text-main mb-2">Application Submitted!</h3>
                   <p className="text-text-body text-lg mb-4 max-w-md mx-auto">
-                    Thank you for applying, <span className="text-primary font-bold">{formData.name}</span>! We&apos;ve received your application and will contact you at <span className="text-text-muted">{formData.email}</span>.
+                    Thank you for applying to the Tamil Robotics Club (TRC), <span className="text-primary font-bold">{formData.name}</span>! We&apos;ve received your application and will contact you at <span className="text-text-muted">{formData.email}</span>.
                   </p>
                   <button
                     onClick={() => {
@@ -112,7 +112,7 @@ export default function JoinClubPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                  <h2 className="text-2xl font-heading font-bold text-text-main">Membership Application</h2>
+                  <h2 className="text-2xl font-heading font-bold text-text-main">TRC Membership Application</h2>
 
                   {error && (
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-3 text-red-500 text-sm">
@@ -271,7 +271,7 @@ export default function JoinClubPage() {
                   {/* Submit Button */}
                   <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-between border-t border-border-subtle mt-2">
                     <p className="text-xs text-text-muted">
-                      By submitting this form, you agree to TamizhTech&apos;s terms and conditions.
+                      By submitting this form, you agree to Tamil Robotics Club (TRC) terms and conditions.
                     </p>
                     <button 
                       type="submit"
@@ -298,7 +298,7 @@ export default function JoinClubPage() {
           {/* Alternative Contact */}
           <div className="mt-12 text-center text-text-muted">
             <p className="mb-4">Need help filling out the form or have questions?</p>
-            <a href="https://wa.me/918148045030?text=Hello%20TamizhTech!%20I%20have%20a%20question%20about%20joining%20the%20club." target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I%20have%20a%20question%20about%20joining%20the%20club." target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors font-bold pb-1 border-b border-primary/30 hover:border-primary">
               <MessageCircle className="w-5 h-5" /> Chat with us on WhatsApp
             </a>

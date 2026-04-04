@@ -1,147 +1,139 @@
 "use client";
 import { useState } from "react";
-import { ArrowRight, Clock, Wifi, Languages, BookText, GraduationCap, ChevronRight } from "lucide-react";
+import { ArrowRight, Clock, Wifi, Languages, BookText, GraduationCap, ChevronRight, CheckCircle2, MoveRight } from "lucide-react";
+import Link from "next/link";
 
 const tabs = ["Robotics", "Embedded Systems", "IoT"];
 
 const courses: Record<string, { title: string; level: string; mode: string; duration: string; languages: string[]; description: string; }[]> = {
   Robotics: [
-    { title: "Robotics Fundamentals", level: "Beginner", mode: "Offline/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Core concepts of robotics, sensors, and basic autonomous logic." },
-    { title: "Advanced Line Follower", level: "Intermediate", mode: "Offline", duration: "2 Weeks", languages: ["Tamil", "English"], description: "Precision PID control and high-speed navigation for competition bots." },
-    { title: "Combat Robot Engineering", level: "Advanced", mode: "Offline", duration: "6 Weeks", languages: ["English"], description: "Armor design, weapon systems, and high-torque drive train engineering." },
-    { title: "Drone Building Workshop", level: "Intermediate", mode: "Offline", duration: "3 Weeks", languages: ["Tamil", "English"], description: "Flight controllers, ESC calibration, and FPV system integration." },
+    { title: "Robotics Fundamentals", level: "Beginner", mode: "Offline/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Core concepts of robotics, sensors, and basic autonomous logic for industrial applications." },
+    { title: "Advanced Line Follower", level: "Intermediate", mode: "Offline", duration: "2 Weeks", languages: ["Tamil", "English"], description: "Precision PID control and high-speed navigation for professional competition-grade bots." },
+    { title: "Combat Robot Engineering", level: "Advanced", mode: "Offline", duration: "6 Weeks", languages: ["English"], description: "Armor design, weapon systems, and high-torque drive train engineering for heavy-duty battle bots." },
+    { title: "Drone Building Workshop", level: "Intermediate", mode: "Offline", duration: "3 Weeks", languages: ["Tamil", "English"], description: "Flight controllers, ESC calibration, and FPV system integration for industrial inspection UAVs." },
   ],
   "Embedded Systems": [
-    { title: "Embedded C Mastery", level: "Beginner", mode: "Online/Offline", duration: "6 Weeks", languages: ["Tamil", "English", "Hindi"], description: "Programming microcontrollers from scratch using professional Embedded C." },
-    { title: "Arduino & ESP32", level: "Beginner", mode: "Online", duration: "3 Weeks", languages: ["Tamil", "English"], description: "Rapid prototyping and wireless communication for modern hardware." },
-    { title: "RTOS Programming", level: "Advanced", mode: "Offline", duration: "8 Weeks", languages: ["English"], description: "Real-time operating systems and bare-metal firmware optimization." },
-    { title: "PCB Design & Fabrication", level: "Intermediate", mode: "Offline/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Schematic design and multi-layer layout for industrial hardware." },
+    { title: "Embedded C Mastery", level: "Beginner", mode: "Online/Offline", duration: "6 Weeks", languages: ["Tamil", "English", "Hindi"], description: "Programming microcontrollers from scratch using professional-grade Embedded C for industrial hardware." },
+    { title: "Arduino & ESP32", level: "Beginner", mode: "Online", duration: "3 Weeks", languages: ["Tamil", "English"], description: "Rapid prototyping and wireless communication modules for modern industrial hardware connectivity." },
+    { title: "RTOS Programming", level: "Advanced", mode: "Offline", duration: "8 Weeks", languages: ["English"], description: "Real-time operating systems and bare-metal firmware optimization for critical industrial nodes." },
+    { title: "PCB Design & Fabrication", level: "Intermediate", mode: "Offline/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Schematic design and multi-layer layout for high-precision industrial hardware prototypes." },
   ],
   IoT: [
-    { title: "IoT Architecture", level: "Beginner", mode: "Online/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Cloud integration, data protocols, and smart sensor connectivity." },
-    { title: "Edge Computing", level: "Intermediate", mode: "Offline", duration: "5 Weeks", languages: ["English"], description: "Processing data locally for low-latency industrial automation." },
-    { title: "Industrial IoT (IIoT)", level: "Advanced", mode: "Offline/Hybrid", duration: "8 Weeks", languages: ["English", "Hindi"], description: "Factory-floor connectivity and enterprise-level automation ecosystems." },
-    { title: "Smart Home Automation", level: "Beginner", mode: "Online", duration: "2 Weeks", languages: ["Tamil", "English"], description: "Custom DIY home automation systems and mobile dashboarding." },
+    { title: "IoT Architecture", level: "Beginner", mode: "Online/Hybrid", duration: "4 Weeks", languages: ["Tamil", "English"], description: "Cloud integration, data protocols, and smart sensor connectivity for large-scale industrial networks." },
+    { title: "Edge Computing", level: "Intermediate", mode: "Offline", duration: "5 Weeks", languages: ["English"], description: "Processing data locally for low-latency industrial automation and real-time decision making." },
+    { title: "Industrial IoT (IIoT)", level: "Advanced", mode: "Offline/Hybrid", duration: "8 Weeks", languages: ["English", "Hindi"], description: "Factory-floor connectivity, enterprise-level automation ecosystems, and data visualization." },
+    { title: "Smart Factory Automation", level: "Beginner", mode: "Online", duration: "2 Weeks", languages: ["Tamil", "English"], description: "Custom DIY automation systems and mobile dashboarding for small-scale industrial units." },
   ],
 };
 
 const levelStyles: Record<string, string> = {
-  Beginner: "text-primary-main bg-primary-light border-primary-light",
-  Intermediate: "text-[#F97316] bg-[#FFEDD5] border-[#FFEDD5]",
-  Advanced: "text-[#DC2626] bg-[#FEE2E2] border-[#FEE2E2]",
+  Beginner: "text-primary-main border-primary-main/20 bg-primary-main/5",
+  Intermediate: "text-secondary-main border-secondary-main/20 bg-secondary-main/5",
+  Advanced: "text-red-700 border-red-700/20 bg-red-700/5",
 };
 
 export default function CoursesPage() {
   const [activeTab, setActiveTab] = useState("Robotics");
   
   return (
-    <div className="w-full bg-bg-page min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden text-center hero-gradient border-b border-border-light">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
-            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Learning Academy</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary mb-8 leading-[1.1] tracking-tight">
-            Learn. Build. <span className="text-primary-main">Launch.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-text-tertiary max-w-4xl mx-auto font-regular leading-relaxed">
-            Professional certifications and hands-on tracks delivered by industry experts 
-            to prepare you for the global robotics and AI workforce.
+    <div className="bg-bg-page pt-32 pb-24">
+      <div className="container mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="max-w-4xl mb-24">
+          <h1 className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-6">Learning Academy</h1>
+          <h2 className="text-5xl md:text-6xl font-black text-text-primary tracking-tighter leading-tight mb-8">
+            Specialized Technical <br className="hidden md:block" /> Certification Tracks.
+          </h2>
+          <p className="text-xl text-text-secondary leading-relaxed max-w-2xl font-medium">
+            Professional certifications and hands-on tracks delivered by industry experts to prepare the next generation of robotics and automation engineers.
           </p>
         </div>
-      </section>
 
-      {/* Course Navigation & Grid */}
-      <section className="container mx-auto px-4 py-24">
-        {/* Modern Tabs */}
-        <div className="flex items-center justify-center gap-4 mb-20 flex-wrap">
+        {/* Course Navigation */}
+        <div className="flex border-b border-border-light mb-16 overflow-x-auto no-scrollbar">
           {tabs.map((tab) => (
-            <button key={tab} onClick={() => setActiveTab(tab)}
-              className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all border-2 ${
+            <button 
+              key={tab} 
+              onClick={() => setActiveTab(tab)}
+              className={`px-8 py-5 text-sm font-black uppercase tracking-widest transition-all relative ${
                 activeTab === tab 
-                  ? "bg-primary-main text-text-on-primary border-primary-main shadow-lg" 
-                  : "bg-bg-primary border-border-light text-text-tertiary hover:border-primary-main hover:text-primary-main"
-              }`}>
+                  ? "text-primary-main" 
+                  : "text-text-muted hover:text-text-primary"
+              }`}
+            >
               {tab}
+              {activeTab === tab && <div className="absolute bottom-0 left-0 w-full h-1 bg-primary-main"></div>}
             </button>
           ))}
         </div>
 
-        {/* Course Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Course Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-32">
           {courses[activeTab].map((course) => (
-            <div key={course.title} className="mnc-card flex flex-col p-10 group relative transition-all duration-500">
-              <div className="flex items-start justify-between gap-4 mb-8">
+            <div key={course.title} className="bg-white border border-border-light p-10 flex flex-col industrial-card group">
+              <div className="flex items-start justify-between mb-8">
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-3xl font-extrabold text-text-primary leading-tight group-hover:text-primary-main transition-colors">{course.title}</h3>
-                  <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full border w-fit uppercase tracking-widest ${levelStyles[course.level]}`}>{course.level}</span>
+                  <h3 className="text-2xl font-black text-text-primary tracking-tighter transition-colors uppercase">{course.title}</h3>
+                  <span className={`text-[10px] font-black px-3 py-1 border w-fit uppercase tracking-widest ${levelStyles[course.level]}`}>{course.level}</span>
                 </div>
-                <div className="p-3 bg-bg-elevated rounded-xl border border-border-light text-text-muted group-hover:text-primary-main transition-all">
-                    <GraduationCap className="w-6 h-6" />
+                <div className="w-12 h-12 bg-bg-page border border-border-light rounded-sm flex items-center justify-center text-text-muted group-hover:text-primary-main transition-all">
+                    <GraduationCap className="w-6 h-6 stroke-[1.5]" />
                 </div>
               </div>
               
-              <p className="text-text-tertiary text-lg mb-10 font-regular leading-relaxed">
+              <p className="text-text-secondary text-sm font-medium leading-relaxed mb-10 flex-grow">
                 {course.description}
               </p>
 
-              <div className="grid grid-cols-3 gap-4 mb-10">
+              <div className="grid grid-cols-3 gap-6 mb-10 pt-8 border-t border-border-light">
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <Clock className="w-3 h-3" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Duration</span>
-                  </div>
-                  <p className="text-sm font-bold text-text-primary">{course.duration}</p>
+                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Duration</span>
+                  <p className="text-xs font-bold text-text-primary uppercase tracking-tight">{course.duration}</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <Wifi className="w-3 h-3" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Mode</span>
-                  </div>
-                  <p className="text-sm font-bold text-text-primary">{course.mode}</p>
+                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Mode</span>
+                  <p className="text-xs font-bold text-text-primary uppercase tracking-tight">{course.mode}</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <Languages className="w-3 h-3" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Languages</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1 mt-1">
+                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Languages</span>
+                  <div className="flex flex-wrap gap-2 mt-1">
                     {course.languages.map(l => (
-                      <span key={l} className="text-[9px] font-extrabold px-1.5 py-0.5 bg-bg-elevated border border-border-light text-text-muted rounded uppercase">{l}</span>
+                      <span key={l} className="text-[9px] font-black px-2 py-0.5 bg-bg-page border border-border-light text-text-secondary rounded uppercase tracking-tighter">{l}</span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-auto flex gap-4 pt-10 border-t border-border-light">
+              <div className="mt-auto flex flex-col sm:flex-row gap-4">
                 <a href={`https://wa.me/918148045030?text=Hello!%20I%20want%20the%20syllabus%20for%20${encodeURIComponent(course.title)}.`} target="_blank" rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-bg-elevated text-text-primary font-bold rounded-xl border border-border-light hover:bg-border-light transition-all text-sm group/btn">
-                  <BookText className="w-4 h-4" /> Syllabus <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  className="flex-1 btn-secondary flex items-center justify-center gap-2 py-4">
+                  SYLLABUS <MoveRight className="w-4 h-4" />
                 </a>
                 <a href="https://wa.me/918148045030?text=I'd%20like%20to%20apply%20for%20the%20${encodeURIComponent(course.title)}%20course." target="_blank" rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-primary-main text-text-on-primary font-bold rounded-xl shadow-md hover:bg-primary-hover transition-all text-sm whitespace-nowrap">
-                  Enroll Now <ArrowRight className="w-4 h-4" />
+                  className="flex-1 btn-primary flex items-center justify-center gap-2 py-4">
+                  ENROLL NOW <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
           ))}
         </div>
-      </section>
 
-      {/* Placement & Certification Footer */}
-      <section className="py-24 bg-bg-elevated border-y border-border-light text-center">
-        <div className="container mx-auto px-4 max-w-4xl">
-           <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-text-primary mb-8 tracking-tight">Professional <span className="text-primary-main">Certification.</span></h2>
-           <p className="text-text-tertiary text-xl mb-12">Every track includes localized training, localized language support, and a verifiable TamizhTech certification recognized by 50+ industrial partners.</p>
-           <div className="flex flex-wrap justify-center gap-12 opacity-40">
-              <span className="text-xl font-black text-text-muted">ISO CERTIFIED</span>
-              <span className="text-xl font-black text-text-muted">MNC RECOGNIZED</span>
-              <span className="text-xl font-black text-text-muted">PLACEMENT SUPPORT</span>
+        {/* Industrial Recognition Footer */}
+        <div className="bg-white border border-border-light p-12 lg:p-20 rounded-sm text-center">
+           <h2 className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-6">Industrial Recognition</h2>
+           <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase mb-6">Verifiable Professional Certifications.</h3>
+           <p className="text-text-secondary text-lg max-w-3xl mx-auto font-medium leading-relaxed mb-12">
+             Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Pvt Ltd certification recognized by our 50+ industrial partners across India.
+           </p>
+           <div className="flex flex-wrap justify-center gap-12 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] border-t border-border-light pt-12">
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-success" /> ISO 9001:2015 CERTIFIED</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-success" /> MNC RECOGNIZED</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-success" /> PLACEMENT SUPPORT</span>
            </div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

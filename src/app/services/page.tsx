@@ -1,82 +1,135 @@
 import type { Metadata } from "next";
-import { ArrowRight, MessageCircle, Printer, Cpu, Scissors, Settings, Wrench, Hammer, Bot, Layers } from "lucide-react";
+import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Settings, Shield, Laptop, Rocket, Globe, Database, Camera, LayoutGrid, Microscope, Smartphone, Layers, Server, Code2, Workflow } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services | TamizhTech Robotics Company",
-  description: "3D printing, PCB fabrication, laser cutting, CNC machining, welding, and custom robotics & automation services from TamizhTech.",
+  title: "Engineering Services | Robotics & Software | Tamizh Tech Pvt Ltd",
+  description: "Specialized B2B engineering services including industrial automation integration, enterprise software development, and precision R&D prototyping.",
 };
 
-const services = [
-  { icon: <Printer className="w-6 h-6" />, title: "3D Printing & Prototyping", desc: "MNC-quality rapid prototyping for robotics chassis, complex enclosures, and custom mechanical parts.", detail: "High-precision FDM and Resin printing for industrial PoC builds." },
-  { icon: <Cpu className="w-6 h-6" />, title: "PCB Fabrication", desc: "Precision multi-layer PCB design, layout, and localized manufacturing for IoT and AI systems.", detail: "Enterprise-grade circuits from schematic to high-density board fabrication." },
-  { icon: <Scissors className="w-6 h-6" />, title: "Laser Cutting", desc: "Industrial-spec precision cutting of technical acrylic, sheet metal, and wood for robotics frames.", detail: "High-accuracy detailing for enclosures, displays, and structural components." },
-  { icon: <Settings className="w-6 h-6" />, title: "Precision Machining", desc: "Advanced CNC machining and turning for drive systems, axles, and high-tolerance robotic mounts.", detail: "Durable metal components machined to exact technical specifications." },
-  { icon: <Hammer className="w-6 h-6" />, title: "Structural Welding", desc: "High-integrity structural welding for heavy-duty robotic rigs and industrial automation frames.", detail: "Certified welding services for large-scale industrial automation solutions." },
-  { icon: <Bot className="w-6 h-6" />, title: "Industrial Automation", desc: "End-to-end integration of specialized custom robotic solutions for factories and supply chains.", detail: "Concept-to-deployment integration according to global safety standards." },
-  { icon: <Layers className="w-6 h-6" />, title: "Rapid Manufacturing", desc: "Fast-track production of custom parts and assemblies for immediate industrial testing.", detail: "Quick-turnaround service for hardware R&D cycles." },
+const roboticsServices = [
+  { 
+    icon: <Bot className="w-10 h-10" />, 
+    title: "Industrial Systems Integration", 
+    desc: "End-to-end deployment of multi-axis robotic cells and synchronized PLC-controlled linear actuators for high-volume manufacturing.", 
+    detail: "Standardizing floor operations with global safety and OEE benchmarks." 
+  },
+  { 
+    icon: <Cpu className="w-10 h-10" />, 
+    title: "Precision R&D & Prototyping", 
+    desc: "Rapid technical prototyping using industrial 3D printing, CNC machining, and multi-layer PCB fabrication for specialized hardware PoCs.", 
+    detail: "From schematic design to high-fidelity mechanical assemblies." 
+  },
+  { 
+    icon: <Workflow className="w-10 h-10" />, 
+    title: "Automation Maintenance & Support", 
+    desc: "Dedicated technical support and preventive maintenance infrastructure across 15+ states to ensure zero downtime for installed systems.", 
+    detail: "Strategic on-ground response for industrial clusters." 
+  },
+];
+
+const softwareServices = [
+  { 
+    icon: <Code2 className="w-10 h-10" />, 
+    title: "Enterprise Software Engineering", 
+    desc: "Full-stack development of mission-critical web applications, operational dashboards, and complex digital ecosystems for manufacturers.", 
+    detail: "Building scalable, secure, and API-first business architectures." 
+  },
+  { 
+    icon: <Smartphone className="w-10 h-10" />, 
+    title: "B2B Mobile Ecosystems", 
+    desc: "Custom iOS and Android application development for shop-floor management, real-time inventory tracking, and remote system control.", 
+    detail: "Extending industrial operations to secure mobile platforms." 
+  },
+  { 
+    icon: <Camera className="w-10 h-10" />, 
+    title: "AI Vision & Monitoring", 
+    desc: "Integration of deep learning vision models for automated quality inspection, defect detection, and real-time safety monitoring.", 
+    detail: "Deploying high-accuracy neural processing to the industrial edge." 
+  },
 ];
 
 export default function ServicesPage() {
   return (
-    <div className="w-full bg-bg-page min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 overflow-hidden text-center hero-gradient border-b border-border-light">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-medium bg-bg-primary shadow-sm mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse" />
-            <span className="text-xs font-bold tracking-widest text-text-tertiary uppercase">Technical Excellence</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-text-primary mb-8 leading-[1.1] tracking-tight">
-            Design & <span className="text-primary-main">Precision.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-text-tertiary max-w-4xl mx-auto mb-12 leading-relaxed font-regular">
-            TamizhTech provides world-class engineering services — from rapid prototyping with 3D printing 
-            to industrial-grade PCB fabrication and full-scale custom automation.
+    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
+      <div className="container mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="max-w-4xl mb-32 border-l-4 border-primary-main pl-10 py-4">
+          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Engineering Services</h1>
+          <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
+            Technical <br /> Capabilities. <br /> Industrial <br /> Outcomes.
+          </h2>
+          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10 uppercase tracking-tight font-bold">
+            Delivering high-precision engineering and digital transformation services for global institutions and industrial leaders.
           </p>
         </div>
-      </section>
 
-      {/* Services Grid Section */}
-      <section className="py-24 container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {services.map((s) => (
-            <div key={s.title} className="mnc-card flex flex-col p-10 group h-full">
-              <div className="w-14 h-14 bg-primary-light text-primary-main rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary-main group-hover:text-text-on-primary transition-all duration-300">
-                {s.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-text-primary mb-4 group-hover:text-primary-main transition-colors">{s.title}</h3>
-              <p className="text-text-tertiary text-sm leading-relaxed mb-10 flex-grow">{s.desc}</p>
-              <div className="mt-auto">
-                <p className="text-xs text-text-muted mb-6 font-medium italic">"{s.detail}"</p>
-                <a href={`https://wa.me/918148045030?text=Hello!%20I'm%20interested%20in%20your%20${encodeURIComponent(s.title)}%20services.`} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary-main text-sm font-bold group/link">
-                  Consultation Request <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform" />
-                </a>
-              </div>
-            </div>
-          ))}
+        {/* Robotics Section */}
+        <div className="mb-40">
+           <div className="flex items-center gap-6 mb-16 border-b border-border-light pb-6">
+              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Robotics & Hardware</h3>
+              <div className="flex-1 h-[2px] bg-primary-main/10"></div>
+           </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {roboticsServices.map((s) => (
+                <div key={s.title} className="bg-white border border-border-light p-10 lg:p-14 flex flex-col industrial-card group shadow-sm hover:shadow-2xl transition-all h-full">
+                   <div className="w-16 h-16 bg-bg-page border border-border-light rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500 mb-10">
+                      {s.icon}
+                   </div>
+                   <h4 className="text-2xl font-black text-text-primary mb-6 tracking-tighter uppercase leading-none">{s.title}</h4>
+                   <p className="text-sm text-text-secondary leading-relaxed mb-10 font-bold uppercase tracking-tight opacity-70 flex-grow">{s.desc}</p>
+                   <div className="pt-8 border-t border-border-light">
+                      <p className="text-[10px] font-black text-primary-main uppercase tracking-widest leading-relaxed">Scope: {s.detail}</p>
+                   </div>
+                </div>
+              ))}
+           </div>
         </div>
-      </section>
 
-      {/* Custom Project CTA Panel */}
-      <section className="py-24 container mx-auto px-4">
-        <div className="relative rounded-[2.5rem] overflow-hidden border border-border-light p-12 md:p-24 text-center bg-bg-primary shadow-2xl">
-          <div className="absolute inset-0 opacity-[0.02] pointer-events-none hero-gradient" />
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-heading font-extrabold text-text-primary mb-8 tracking-tight leading-tight">
-              Enterprise <span className="text-primary-main">Custom Solutions</span>
-            </h2>
-            <p className="text-text-tertiary text-xl mb-12 font-regular leading-relaxed">
-              Whether you are a startup building a proof-of-concept or a global factory scaling industrial automation, 
-              our engineering team is ready to deliver precise, localized technical excellence.
-            </p>
-            <a href="https://wa.me/918148045030?text=Hello!%20I%20have%20a%20project%20idea%20I'd%20like%20to%20discuss." target="_blank" rel="noopener noreferrer"
-              className="px-12 py-6 bg-primary-main text-text-on-primary font-bold text-lg rounded-lg hover:bg-primary-hover shadow-xl transition-all transform hover:-translate-y-1 inline-flex items-center gap-4">
-              <MessageCircle className="w-6 h-6" /> Partner with Our Engineers
-            </a>
-          </div>
+        {/* Software Section */}
+        <div className="mb-40">
+           <div className="flex items-center gap-6 mb-16 border-b border-border-light pb-6">
+              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Software & Digital</h3>
+              <div className="flex-1 h-[2px] bg-secondary-main/10"></div>
+           </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {softwareServices.map((s) => (
+                <div key={s.title} className="bg-secondary-main p-10 lg:p-14 flex flex-col text-white industrial-card group shadow-2xl relative overflow-hidden h-full">
+                   <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
+                   <div className="relative z-10 flex flex-col h-full">
+                     <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500 mb-10">
+                        {s.icon}
+                     </div>
+                     <h4 className="text-2xl font-black text-white mb-6 tracking-tighter uppercase leading-none">{s.title}</h4>
+                     <p className="text-sm text-white/50 leading-relaxed mb-10 font-bold uppercase tracking-tight flex-grow">{s.desc}</p>
+                     <div className="pt-8 border-t border-white/10">
+                        <p className="text-[10px] font-black text-primary-main uppercase tracking-widest leading-relaxed">Vertical: {s.detail}</p>
+                     </div>
+                   </div>
+                </div>
+              ))}
+           </div>
         </div>
-      </section>
+
+        {/* Final CTA */}
+        <div className="bg-bg-page border border-border-light p-20 text-center max-w-5xl mx-auto shadow-sm relative overflow-hidden">
+           <div className="relative z-10">
+             <h4 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Strategic Partnership</h4>
+             <h2 className="text-5xl font-black text-text-primary tracking-tighter mb-10 uppercase leading-[0.95]">Request a <br /> Technical Consultation.</h2>
+             <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Discuss your engineering challenges with our multidisciplinary team of robotics and software architects. We provide comprehensive technical audits and on-ground feasibility studies.</p>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <Link href="/contact" className="btn-primary py-6 px-12 order-1 sm:order-2 shadow-xl">SCHEDULE AUDIT</Link>
+                <Link href="/case-studies" className="text-[10px] font-black text-secondary-main hover:text-primary-main transition-all uppercase tracking-widest flex items-center gap-4 border-b border-secondary-main pb-1 pb-1 order-2 sm:order-1 font-sans">
+                  EXPLORE DEPLOYMENTS <MoveRight className="w-4 h-4" />
+                </Link>
+             </div>
+           </div>
+        </div>
+
+      </div>
     </div>
   );
 }
