@@ -71,7 +71,6 @@
 
   /* Industrial Card: Sharp, Structured, Trusted */
   .industrial-card {
-    background-color: #FFFFFF;
     border: 1px solid #D9DEE5;
     border-radius: 0px; /* Swiss Style - Sharp */
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);

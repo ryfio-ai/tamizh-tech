@@ -19,11 +19,35 @@ export default function ContactPage() {
     requirement: "",
     callbackMode: "Email"
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSubmitting(true);
+    setError("");
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to log technical inquiry.");
+      }
+
+      setIsSuccess(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      setError(err.message || "Network Error: Technical coordination is offline.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -96,7 +120,7 @@ export default function ContactPage() {
 
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-2">
-             {submitted ? (
+             {isSuccess ? (
                <div className="bg-white border-4 border-primary-main p-20 text-center shadow-2xl relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-8 opacity-5">
                     <Send className="w-32 h-32 text-primary-main" />
@@ -108,7 +132,7 @@ export default function ContactPage() {
                       An engineer will contact you via <span className="text-text-primary underline underline-offset-8">{form.callbackMode}</span> within 24 business hours.
                     </p>
                     <button 
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => setIsSuccess(false)}
                       className="btn-secondary py-6 px-12"
                     >
                       LOG ANOTHER REQUEST
@@ -116,7 +140,12 @@ export default function ContactPage() {
                   </div>
                </div>
              ) : (
-               <form onSubmit={handleSubmit} className="bg-white border border-border-light p-10 lg:p-16 shadow-2xl space-y-16">
+                <form onSubmit={handleSubmit} className="bg-white border border-border-light p-10 lg:p-16 shadow-2xl space-y-16">
+                  {error && (
+                    <div className="bg-red-50 border-l-4 border-red-500 p-6 text-red-700 font-bold uppercase text-xs tracking-widest animate-pulse">
+                      Critical Error: {error}
+                    </div>
+                  )}
                   
                   {/* Form Section: Identity */}
                   <div className="space-y-10">
@@ -229,9 +258,13 @@ export default function ContactPage() {
                            ))}
                         </div>
                      </div>
-                     <button type="submit" className="btn-primary py-6 px-12 flex items-center justify-center gap-4 shadow-xl">
-                        REQUEST PROPOSAL <Send className="w-5 h-5" />
-                     </button>
+                      <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="btn-primary py-6 px-12 flex items-center justify-center gap-4 shadow-xl disabled:opacity-50 disabled:grayscale"
+                      >
+                         {isSubmitting ? "TRANSMITTING DATA..." : "REQUEST PROPOSAL"} <Send className={`w-5 h-5 ${isSubmitting ? "animate-ping" : ""}`} />
+                      </button>
                   </div>
                </form>
              )}

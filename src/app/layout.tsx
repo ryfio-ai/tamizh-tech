@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ClubBanner } from "@/components/ClubBanner";
 import { FlyingDrone } from "@/components/ui/flying-drone";
 import { ChatBot } from "@/components/ChatBot";
 import { Analytics } from "@vercel/analytics/react";
@@ -108,6 +109,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">
           {children}
         </main>
+        <ClubBanner />
         <Footer />
         <ChatBot />
         <Analytics />

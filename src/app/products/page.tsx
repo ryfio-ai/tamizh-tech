@@ -13,28 +13,28 @@ const roboticsProducts = [
     category: "Hardware / Automation",
     desc: "MNC-standard 6-axis and 4-axis robotic arms for high-precision assembly, welding, and material handling.",
     specs: ["Sub-millimeter Repeatability", "ISO-9001 Safety Integrated", "Universal PLC Sync"],
-    icon: <Bot />
+    icon: Bot
   },
   {
     title: "Autonomous Fleet AMRs",
     category: "Hardware / Logistics",
     desc: "Heavy-duty autonomous mobile robots with dynamic path planning for warehouse and shop floor transport.",
     specs: ["500kg - 1.5T Payload", "LiDAR-Based SLAM", "10-Hour Continuous Op"],
-    icon: <TruckIcon />
+    icon: TruckIcon
   },
   {
     title: "Edge IoT Gateways v4",
     category: "Hardware / IoT",
     desc: "Robust edge computing gateways for large-scale industrial sensor networks and real-time data ingestion.",
     specs: ["IP67 Rugged Enclosure", "LTE/LoRaWAN/WiFi 6", "Edge-Level ML Processing"],
-    icon: <Database />
+    icon: Database
   },
   {
     title: "Aerial Inspection UAVs",
     category: "Hardware / Aerospace",
     desc: "High-spec specialized drones equipped with thermal and 4K optical sensors for structural and utility audits.",
     specs: ["45-min Flight Endurance", "Autonomous Waypoint Grid", "Omnidirectional Collision Guard"],
-    icon: <Rocket />
+    icon: Rocket
   }
 ];
 
@@ -44,28 +44,28 @@ const softwareProducts = [
     category: "Software / Enterprise",
     desc: "Centralized operational OS for real-time monitoring of robotic fleets and production line KPIs.",
     features: ["Real-time Telemetry", "Predictive Maintenance AI", "ERP/MES Integration"],
-    icon: <LayoutGrid />
+    icon: LayoutGrid
   },
   {
     title: "VisionCloud AI",
     category: "Software / AI",
     desc: "Scalable inspection platform using deep learning models for sub-millimeter defect detection in high-speed lines.",
     features: ["Model Training Sandbox", "Cloud-Edge Sync", "Zero-Latency Inference"],
-    icon: <Camera />
+    icon: Camera
   },
   {
     title: "ProcureSync SaaS",
     category: "Software / Supply Chain",
     desc: "Multi-tenant B2B marketplace for industrial vendor management and procurement workflow tracking.",
     features: ["Vendor Performance Benchmarking", "Automatic Ledger Generation", "Secure API Vault"],
-    icon: <Server />
+    icon: Server
   },
   {
     title: "Nexus Mobile App",
     category: "Software / Mobile",
     desc: "Enterprise-grade mobile application for floor managers to control and monitor systems remotely.",
     features: ["Cross-platform (iOS/Android)", "Secure Biometric Auth", "Push Diagnostic Alerts"],
-    icon: <Smartphone />
+    icon: Smartphone
   }
 ];
 
@@ -97,7 +97,7 @@ export default function ProductsPage() {
                 <div key={p.title} className="bg-white border border-border-light p-10 lg:p-14 flex flex-col industrial-card group shadow-sm hover:shadow-2xl transition-all">
                    <div className="flex items-start justify-between mb-10">
                       <div className="w-16 h-16 bg-bg-page border border-border-light rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500">
-                         {cloneIcon(p.icon, "w-8 h-8 stroke-[1.5]")}
+                         <p.icon className="w-8 h-8 stroke-[1.5]" />
                       </div>
                       <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em] border border-border-light px-4 py-2 bg-bg-page">{p.category}</span>
                    </div>
@@ -136,7 +136,7 @@ export default function ProductsPage() {
                    <div className="relative z-10">
                      <div className="flex items-start justify-between mb-10">
                         <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500">
-                           {cloneIcon(p.icon, "w-8 h-8 stroke-[1.5]")}
+                           <p.icon className="w-8 h-8 stroke-[1.5]" />
                         </div>
                         <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em] border border-white/10 px-4 py-2">{p.category}</span>
                      </div>
@@ -163,7 +163,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Final CTA */}
-        <div className="bg-white border-4 border-primary-main p-20 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+        <div className="bg-white border-4 border-primary-main p-20 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden mb-32">
            <div className="absolute top-0 right-0 p-8 opacity-5">
              <Settings className="w-32 h-32 text-secondary-main" />
            </div>
@@ -171,6 +171,17 @@ export default function ProductsPage() {
              <h4 className="text-4xl font-black text-text-primary tracking-tighter mb-8 uppercase leading-none">Custom Engineering <br /> Deployment.</h4>
              <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest">We specialize in designing and manufacturing specialized robotic hardware and software frameworks tailored to your unique industrial requirements.</p>
              <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">REQUEST SYSTEM AUDIT</Link>
+           </div>
+        </div>
+
+        {/* Join Our Club Section */}
+        <div className="bg-secondary-main p-20 text-center rounded-none relative overflow-hidden">
+           <div className="absolute inset-0 opacity-10 hero-grid pointer-events-none"></div>
+           <div className="relative z-10 max-w-3xl mx-auto">
+              <h3 className="text-primary-main text-sm font-black uppercase tracking-[0.4em] mb-6">Robotics & Tech Community</h3>
+              <h4 className="text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-none">Innovate with <br /> Tamizh Tech Club.</h4>
+              <p className="text-white/60 leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest">Join a community of engineers, innovators, and robotics enthusiasts. Get early access to research, participate in exclusive hackathons, and build the future with us.</p>
+              <Link href="/robotics-club" className="bg-white text-secondary-main py-6 px-12 inline-flex font-black uppercase text-sm tracking-widest hover:bg-primary-main hover:text-white transition-all shadow-2xl">JOIN OUR CLUB</Link>
            </div>
         </div>
 
@@ -199,7 +210,3 @@ function TruckIcon(props: any) {
   );
 }
 
-// Helper to clone icons with custom classes
-function cloneIcon(icon: any, className: string) {
-  return <icon.type {...icon.props} className={className} />;
-}

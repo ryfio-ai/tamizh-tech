@@ -17,10 +17,6 @@ export default function Home() {
       <section className="relative w-full min-h-[90vh] flex items-center pt-24 overflow-hidden hero-grid border-b border-border-light">
         <div className="container mx-auto px-6 z-10 grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col space-y-10 max-w-2xl">
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-xs bg-white border border-border-light shadow-sm w-fit">
-              <span className="w-2 h-2 rounded-full bg-primary-main animate-pulse"></span>
-              <span className="text-[10px] font-black tracking-[0.3em] text-text-primary uppercase">Precision Engineering. Digital Scale.</span>
-            </div>
             
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-text-primary leading-[1.0] tracking-tighter uppercase">
               Robotics & <span className="text-primary-main">Software</span> for Industry.
@@ -98,13 +94,13 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
-              { icon: <Factory />, title: "Industrial Automation", desc: "PLC programming, control systems, and full-line automation for high-volume manufacturing floors." },
-              { icon: <Bot />, title: "Robotics Integration", desc: "Turnkey robot deployment (Cobots, Delta, 6-Axis) with custom end-effectors and safety protocols." },
-              { icon: <Cpu />, title: "AI Vision Systems", desc: "Neural network driven defect detection and quality control with 99.9% inspection accuracy." },
+              { icon: Factory, title: "Industrial Automation", desc: "PLC programming, control systems, and full-line automation for high-volume manufacturing floors." },
+              { icon: Bot, title: "Robotics Integration", desc: "Turnkey robot deployment (Cobots, Delta, 6-Axis) with custom end-effectors and safety protocols." },
+              { icon: Cpu, title: "AI Vision Systems", desc: "Neural network driven defect detection and quality control with 99.9% inspection accuracy." },
             ].map((item, idx) => (
               <div key={idx} className="industrial-card p-10 flex flex-col h-full group">
                 <div className="w-14 h-14 bg-bg-page flex items-center justify-center text-text-primary group-hover:bg-primary-main group-hover:text-white transition-all duration-300 mb-8 border border-border-light">
-                  {cloneIcon(item.icon, "w-7 h-7 stroke-[1.5]")}
+                  <item.icon className="w-7 h-7 stroke-[1.5]" />
                 </div>
                 <h4 className="text-2xl font-black text-text-primary uppercase tracking-tighter mb-4">{item.title}</h4>
                 <p className="text-text-secondary text-sm font-medium leading-relaxed mb-10 flex-grow">{item.desc}</p>
@@ -124,9 +120,9 @@ export default function Home() {
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
-            <div className="max-w-2xl software-accent">
+            <div className="max-w-2xl software-accent border-primary-main">
               <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6">Software Engineering</h2>
-              <h3 className="text-5xl md:text-6xl font-black tracking-tighter leading-[0.95] uppercase">
+              <h3 className="text-5xl md:text-6xl font-black tracking-tighter leading-[0.95] uppercase text-white">
                 Digital Infrastructure <br /> For Enterprise.
               </h3>
             </div>
@@ -137,17 +133,17 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <Layout />, title: "Web Platforms", desc: "High-performance enterprise dashboards and internal management portals." },
-              { icon: <Smartphone />, title: "Mobile Ecosystems", desc: "Cross-platform operational apps for supply chain and field services." },
-              { icon: <Layers />, title: "SaaS Product Dev", desc: "Scalable B2B products from MVP architecture to production deployment." },
-              { icon: <Database />, title: "API & Data", desc: "Robotic-to-Cloud integrations, IoT data lakes, and middleware pipelines." },
+              { icon: Layout, title: "Web Platforms", desc: "High-performance enterprise dashboards and internal management portals." },
+              { icon: Smartphone, title: "Mobile Ecosystems", desc: "Cross-platform operational apps for supply chain and field services." },
+              { icon: Layers, title: "SaaS Product Dev", desc: "Scalable B2B products from MVP architecture to production deployment." },
+              { icon: Database, title: "API & Data", desc: "Robotic-to-Cloud integrations, IoT data lakes, and middleware pipelines." },
             ].map((item, idx) => (
               <div key={idx} className="p-8 border border-white/10 hover:border-primary-main/50 bg-white/5 backdrop-blur-sm transition-all duration-300">
                 <div className="text-primary-main mb-6">
-                  {cloneIcon(item.icon, "w-8 h-8 stroke-[1.5]")}
+                  <item.icon className="w-8 h-8 stroke-[1.5]" />
                 </div>
-                <h4 className="text-lg font-black uppercase tracking-tighter mb-3">{item.title}</h4>
-                <p className="text-white/60 text-xs font-medium leading-relaxed leading-ls">{item.desc}</p>
+                <h4 className="text-lg font-black uppercase tracking-tighter mb-3 text-white">{item.title}</h4>
+                <p className="text-white/60 text-xs font-medium leading-relaxed uppercase leading-ls tracking-tighter">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -244,8 +240,4 @@ export default function Home() {
   );
 }
 
-// Helper to clone icons with custom classes
-function cloneIcon(icon: any, className: string) {
-  return <icon.type {...icon.props} className={className} />;
-}
 
