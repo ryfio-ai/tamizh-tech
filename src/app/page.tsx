@@ -77,6 +77,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Enterprise Trust Section */}
+      <section className="py-12 bg-bg-page border-b border-border-light overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+             <div className="flex items-center gap-4 md:border-r border-border-light md:pr-8 shrink-0">
+                <Shield className="w-8 h-8 text-primary-main" />
+                <div className="flex flex-col">
+                  <span className="text-sm font-black text-text-primary uppercase tracking-tighter">ISO 9001:2015</span>
+                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Certified Engineering</span>
+                </div>
+             </div>
+             <div className="flex-1 flex gap-12 items-center justify-around opacity-50 grayscale hover:grayscale-0 transition-all duration-500 overflow-x-auto no-scrollbar w-full md:w-auto pb-4 md:pb-0">
+                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Tier-1 Auto OEM</span>
+                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Aerospace Hub</span>
+                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Global FMCG Leader</span>
+                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Textile Automation</span>
+                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Defence R&D</span>
+             </div>
+          </div>
+        </div>
+      </section>
+
       {/* Industrial Intelligence Section (Hardware) */}
       <section className="py-32 bg-white border-b border-border-light">
         <div className="container mx-auto px-6">
@@ -187,6 +209,44 @@ export default function Home() {
                   <p className="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-2 relative z-10">Precision Prototyping</p>
                </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Anonymized Case Studies */}
+      <section className="py-32 bg-secondary-main text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03] hero-grid pointer-events-none"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
+            <div className="max-w-2xl border-l-4 border-primary-main pl-8">
+              <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6">Proven ROI</h2>
+              <h3 className="text-5xl md:text-6xl font-black tracking-tighter leading-[0.95] uppercase text-white">
+                Technical Case Studies.
+              </h3>
+            </div>
+            <Link href="/case-studies" className="text-xs font-black text-white hover:text-primary-main transition-all flex items-center gap-4 group uppercase tracking-[0.2em] border-b-2 border-white/20 pb-2">
+                View All Deployments <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+             {[
+               { metric: "45%", metricLabel: "Throughput Increase", title: "Automotive Welding Automation", desc: "Designed and deployed a 6-axis robotic welding cell for a Tier-1 auto ancillary, integrating real-time defect monitoring." },
+               { metric: "99.9%", metricLabel: "Inspection Accuracy", title: "Defect Detection Vision System", desc: "Implemented Modliq AI models for high-speed pharmaceutical packaging, replacing manual QC with sub-millisecond automated vision." },
+               { metric: "30%", metricLabel: "Downtime Reduction", title: "IoT Factory Floor Integration", desc: "Retrofitted legacy CNC machines with custom IoT edge devices, piping live telemetry into a centralized predictive maintenance dashboard." },
+             ].map((study, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/10 p-10 hover:border-primary-main/50 transition-all duration-300 flex flex-col group">
+                   <div className="mb-10 flex items-end gap-4 border-b border-white/10 pb-6">
+                      <span className="text-5xl font-black text-primary-main tracking-tighter leading-none">{study.metric}</span>
+                      <span className="text-[10px] font-black text-white/50 uppercase tracking-[0.2em] mb-1">{study.metricLabel}</span>
+                   </div>
+                   <h4 className="text-xl font-black text-white uppercase tracking-tighter mb-4">{study.title}</h4>
+                   <p className="text-white/60 text-xs font-bold leading-relaxed uppercase tracking-tight mb-8 flex-grow">{study.desc}</p>
+                   <Link href="/contact" className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2 group-hover:text-primary-main transition-colors w-fit border border-white/10 px-4 py-2 rounded-xs">
+                     Request Specs <MoveRight className="w-3 h-3" />
+                   </Link>
+                </div>
+             ))}
           </div>
         </div>
       </section>

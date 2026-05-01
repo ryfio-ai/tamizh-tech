@@ -1,73 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Settings, Shield, Laptop, Rocket, Globe, Database, Camera, LayoutGrid, Microscope, Smartphone, Layers, Server } from "lucide-react";
+import { 
+  MoveRight, Bot, Layers, Microscope, Brain, Activity, Database, Zap
+} from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Product Catalogue | High-Spec Engineering & Software | Tamizh Tech Pvt Ltd",
-  description: "Explore our industrial robotic hardware and enterprise software platforms. Engineered for precision, scalability, and measurable ROI.",
+  title: "Product Catalogue | Tamizh Tech Pvt Ltd",
+  description: "Explore our software platforms and R&D updates.",
 };
-
-const roboticsProducts = [
-  {
-    title: "T-Series Industrial Arms",
-    category: "Hardware / Automation",
-    desc: "MNC-standard 6-axis and 4-axis robotic arms for high-precision assembly, welding, and material handling.",
-    specs: ["Sub-millimeter Repeatability", "ISO-9001 Safety Integrated", "Universal PLC Sync"],
-    icon: Bot
-  },
-  {
-    title: "Autonomous Fleet AMRs",
-    category: "Hardware / Logistics",
-    desc: "Heavy-duty autonomous mobile robots with dynamic path planning for warehouse and shop floor transport.",
-    specs: ["500kg - 1.5T Payload", "LiDAR-Based SLAM", "10-Hour Continuous Op"],
-    icon: TruckIcon
-  },
-  {
-    title: "Edge IoT Gateways v4",
-    category: "Hardware / IoT",
-    desc: "Robust edge computing gateways for large-scale industrial sensor networks and real-time data ingestion.",
-    specs: ["IP67 Rugged Enclosure", "LTE/LoRaWAN/WiFi 6", "Edge-Level ML Processing"],
-    icon: Database
-  },
-  {
-    title: "Aerial Inspection UAVs",
-    category: "Hardware / Aerospace",
-    desc: "High-spec specialized drones equipped with thermal and 4K optical sensors for structural and utility audits.",
-    specs: ["45-min Flight Endurance", "Autonomous Waypoint Grid", "Omnidirectional Collision Guard"],
-    icon: Rocket
-  }
-];
-
-const softwareProducts = [
-  {
-    title: "OpsCore Dashboard",
-    category: "Software / Enterprise",
-    desc: "Centralized operational OS for real-time monitoring of robotic fleets and production line KPIs.",
-    features: ["Real-time Telemetry", "Predictive Maintenance AI", "ERP/MES Integration"],
-    icon: LayoutGrid
-  },
-  {
-    title: "VisionCloud AI",
-    category: "Software / AI",
-    desc: "Scalable inspection platform using deep learning models for sub-millimeter defect detection in high-speed lines.",
-    features: ["Model Training Sandbox", "Cloud-Edge Sync", "Zero-Latency Inference"],
-    icon: Camera
-  },
-  {
-    title: "ProcureSync SaaS",
-    category: "Software / Supply Chain",
-    desc: "Multi-tenant B2B marketplace for industrial vendor management and procurement workflow tracking.",
-    features: ["Vendor Performance Benchmarking", "Automatic Ledger Generation", "Secure API Vault"],
-    icon: Server
-  },
-  {
-    title: "Nexus Mobile App",
-    category: "Software / Mobile",
-    desc: "Enterprise-grade mobile application for floor managers to control and monitor systems remotely.",
-    features: ["Cross-platform (iOS/Android)", "Secure Biometric Auth", "Push Diagnostic Alerts"],
-    icon: Smartphone
-  }
-];
 
 export default function ProductsPage() {
   return (
@@ -76,112 +16,96 @@ export default function ProductsPage() {
         
         {/* Header Section */}
         <div className="max-w-4xl mb-32 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Engineering Inventory</h1>
+          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Product Catalogue</h1>
           <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-            Precision <br /> Hardware. <br /> Scalable <br /> Software.
+            Our <br /> Products
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            Discover our high-specification robotic hardware and enterprise-grade software platforms, engineered to meet the technical demands of modern manufacturing.
+            We are currently in the Research &amp; Development phase for our hardware systems. On the software side, we are proud to introduce our flagship AI platform.
           </p>
         </div>
 
-        {/* Robotics Hardware Section */}
+        {/* Software Platform Section */}
         <div className="mb-40">
            <div className="flex items-center gap-6 mb-16 border-b border-border-light pb-6">
-              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Industrial Robotics</h3>
-              <div className="flex-1 h-[2px] bg-primary-main/10"></div>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {roboticsProducts.map((p) => (
-                <div key={p.title} className="bg-white border border-border-light p-10 lg:p-14 flex flex-col industrial-card group shadow-sm hover:shadow-2xl transition-all">
-                   <div className="flex items-start justify-between mb-10">
-                      <div className="w-16 h-16 bg-bg-page border border-border-light rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500">
-                         <p.icon className="w-8 h-8 stroke-[1.5]" />
-                      </div>
-                      <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em] border border-border-light px-4 py-2 bg-bg-page">{p.category}</span>
-                   </div>
-                   
-                   <h4 className="text-3xl font-black text-text-primary mb-4 tracking-tighter uppercase leading-none">{p.title}</h4>
-                   <p className="text-sm text-text-secondary leading-relaxed mb-10 font-bold uppercase tracking-tight opacity-70">{p.desc}</p>
-                   
-                   <div className="space-y-4 mb-12">
-                      {p.specs.map(spec => (
-                        <div key={spec} className="flex items-center gap-4 text-[10px] font-black text-text-primary uppercase tracking-widest border-l-2 border-primary-main/20 pl-4">
-                           <CheckCircle2 className="w-4 h-4 text-primary-main" /> {spec}
-                        </div>
-                      ))}
-                   </div>
-                   
-                   <Link href="/contact" className="mt-auto pt-8 border-t border-border-light text-[10px] font-black text-secondary-main flex items-center justify-between group-hover:text-primary-main transition-colors uppercase tracking-[0.2em]">
-                      <span>TECHNICAL SPECIFICATIONS</span>
-                      <MoveRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                   </Link>
-                </div>
-              ))}
-           </div>
-        </div>
-
-        {/* Software Platforms Section */}
-        <div className="mb-40">
-           <div className="flex items-center gap-6 mb-16 border-b border-border-light pb-6">
-              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Software Ecosystems</h3>
+              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Software Solutions</h3>
               <div className="flex-1 h-[2px] bg-secondary-main/10"></div>
            </div>
            
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {softwareProducts.map((p) => (
-                <div key={p.title} className="bg-secondary-main p-10 lg:p-14 flex flex-col text-white industrial-card group shadow-2xl relative overflow-hidden">
-                   <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
-                   <div className="relative z-10">
-                     <div className="flex items-start justify-between mb-10">
-                        <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500">
-                           <p.icon className="w-8 h-8 stroke-[1.5]" />
-                        </div>
-                        <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em] border border-white/10 px-4 py-2">{p.category}</span>
-                     </div>
-                     
-                     <h4 className="text-3xl font-black text-white mb-4 tracking-tighter uppercase leading-none">{p.title}</h4>
-                     <p className="text-sm text-white/60 leading-relaxed mb-10 font-bold uppercase tracking-tight">{p.desc}</p>
-                     
-                     <div className="space-y-4 mb-12">
-                        {p.features.map(feature => (
-                          <div key={feature} className="flex items-center gap-4 text-[10px] font-black text-white uppercase tracking-widest border-l-2 border-primary-main/50 pl-4">
-                             <Layers className="w-4 h-4 text-primary-main" /> {feature}
-                          </div>
-                        ))}
-                     </div>
-                     
-                     <Link href="/contact" className="mt-auto pt-8 border-t border-white/10 text-[10px] font-black text-primary-main flex items-center justify-between transition-colors uppercase tracking-[0.2em]">
-                        <span>REQUEST DEMO ACCESS</span>
-                        <MoveRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                     </Link>
+           <div className="bg-secondary-main p-10 lg:p-16 flex flex-col lg:flex-row gap-16 text-white industrial-card shadow-2xl relative overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
+              
+              <div className="relative z-10 flex-1">
+                <div className="flex items-start justify-between mb-8">
+                   <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-primary-main">
+                      <Brain className="w-8 h-8 stroke-[1.5]" />
+                   </div>
+                   <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em] border border-white/10 px-4 py-2">Flagship Product</span>
+                </div>
+                
+                <h4 className="text-5xl font-black text-white mb-6 tracking-tighter uppercase leading-none">MODLIQ</h4>
+                <p className="text-lg text-white/80 leading-relaxed mb-10 font-bold uppercase tracking-tight max-w-2xl">
+                  An all-in-one AI-driven machine learning platform designed for seamless, no-code data analysis, predictive modeling, and real-time operational insights.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                   <div className="flex items-start gap-4 text-sm font-black text-white uppercase tracking-widest border-l-2 border-primary-main/50 pl-4">
+                      <Layers className="w-5 h-5 text-primary-main shrink-0" />
+                      <div>
+                        <span className="block mb-1">No-Code ML Workflow</span>
+                        <span className="text-[10px] text-white/50 block font-normal tracking-normal">Build classification, regression, and clustering models without writing code.</span>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4 text-sm font-black text-white uppercase tracking-widest border-l-2 border-primary-main/50 pl-4">
+                      <Zap className="w-5 h-5 text-primary-main shrink-0" />
+                      <div>
+                        <span className="block mb-1">AI Copilot Suite</span>
+                        <span className="text-[10px] text-white/50 block font-normal tracking-normal">Interactive AI chat, auto-generated insights, and smart recommendations.</span>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4 text-sm font-black text-white uppercase tracking-widest border-l-2 border-primary-main/50 pl-4">
+                      <Activity className="w-5 h-5 text-primary-main shrink-0" />
+                      <div>
+                        <span className="block mb-1">Advanced Analytics</span>
+                        <span className="text-[10px] text-white/50 block font-normal tracking-normal">Time series forecasting, anomaly detection, and real-time monitoring.</span>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4 text-sm font-black text-white uppercase tracking-widest border-l-2 border-primary-main/50 pl-4">
+                      <Database className="w-5 h-5 text-primary-main shrink-0" />
+                      <div>
+                        <span className="block mb-1">Universal Data Upload</span>
+                        <span className="text-[10px] text-white/50 block font-normal tracking-normal">Connect via CSV, JSON, PostgreSQL, AWS S3, REST APIs, and more.</span>
+                      </div>
                    </div>
                 </div>
-              ))}
+                
+                <Link href="/contact" className="btn-primary py-5 px-10 inline-flex items-center gap-3 shadow-xl text-xs uppercase tracking-widest">
+                   REQUEST ACCESS <MoveRight className="w-4 h-4" />
+                </Link>
+              </div>
            </div>
         </div>
 
-        {/* Final CTA */}
-        <div className="bg-white border-4 border-primary-main p-20 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden mb-32">
-           <div className="absolute top-0 right-0 p-8 opacity-5">
-             <Settings className="w-32 h-32 text-secondary-main" />
+        {/* R&D Section */}
+        <div className="mb-40">
+           <div className="flex items-center gap-6 mb-16 border-b border-border-light pb-6">
+              <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase shrink-0">Hardware (R&amp;D Phase)</h3>
+              <div className="flex-1 h-[2px] bg-primary-main/10"></div>
            </div>
-           <div className="relative z-10">
-             <h4 className="text-4xl font-black text-text-primary tracking-tighter mb-8 uppercase leading-none">Custom Engineering <br /> Deployment.</h4>
-             <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest">We specialize in designing and manufacturing specialized robotic hardware and software frameworks tailored to your unique industrial requirements.</p>
-             <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">REQUEST SYSTEM AUDIT</Link>
-           </div>
-        </div>
-
-        {/* Join Our Club Section */}
-        <div className="bg-secondary-main p-20 text-center rounded-none relative overflow-hidden">
-           <div className="absolute inset-0 opacity-10 hero-grid pointer-events-none"></div>
-           <div className="relative z-10 max-w-3xl mx-auto">
-              <h3 className="text-primary-main text-sm font-black uppercase tracking-[0.4em] mb-6">Robotics & Tech Community</h3>
-              <h4 className="text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-none">Innovate with <br /> Tamizh Tech Club.</h4>
-              <p className="text-white/60 leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest">Join a community of engineers, innovators, and robotics enthusiasts. Get early access to research, participate in exclusive hackathons, and build the future with us.</p>
-              <Link href="/robotics-club" className="bg-white text-secondary-main py-6 px-12 inline-flex font-black uppercase text-sm tracking-widest hover:bg-primary-main hover:text-white transition-all shadow-2xl">JOIN OUR CLUB</Link>
+           
+           <div className="bg-white border border-border-light p-10 lg:p-16 flex flex-col items-center text-center industrial-card shadow-sm relative overflow-hidden group">
+              <div className="w-20 h-20 bg-bg-page border border-border-light rounded-full flex items-center justify-center text-primary-main mb-8 group-hover:scale-110 transition-transform duration-500">
+                 <Microscope className="w-10 h-10 stroke-[1.5]" />
+              </div>
+              <h4 className="text-3xl md:text-4xl font-black text-text-primary tracking-tighter uppercase mb-6">
+                Next-Gen Hardware Under Development
+              </h4>
+              <p className="text-text-secondary leading-relaxed max-w-2xl font-bold uppercase text-sm tracking-widest opacity-80 mb-10">
+                Our team of engineers is actively researching and prototyping state-of-the-art robotic hardware, including industrial arms, IoT gateways, and autonomous systems. Stay tuned for our upcoming releases.
+              </p>
+              <div className="flex items-center gap-4 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] border border-border-light px-6 py-3 bg-bg-page rounded-full">
+                 <Bot className="w-4 h-4" /> CURRENTLY IN R&amp;D
+              </div>
            </div>
         </div>
 
@@ -189,24 +113,3 @@ export default function ProductsPage() {
     </div>
   );
 }
-
-// Custom Truck/Logistics Icon
-function TruckIcon(props: any) {
-  return (
-    <svg 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="1.5" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-      {...props}
-    >
-      <rect x="1" y="3" width="15" height="13" />
-      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-      <circle cx="5.5" cy="18.5" r="2.5" />
-      <circle cx="18.5" cy="18.5" r="2.5" />
-    </svg>
-  );
-}
-

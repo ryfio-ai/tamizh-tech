@@ -87,10 +87,10 @@ function Header1() {
                             <span className="font-black text-white text-xl uppercase tracking-tighter">TT</span>
                         </div>
                         <div className="flex flex-col leading-none">
-                            <span className="font-heading font-black text-xl tracking-tighter text-text-primary uppercase">
-                                Tamizh <span className="text-primary-main">Tech</span>
+                            <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
+                                TAMIZH <span className="text-primary-main">TECH</span>
                             </span>
-                            <span className="text-[9px] font-black tracking-[0.3em] text-text-muted uppercase mt-0.5">Pvt Ltd | Engineering & Software</span>
+                            <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Pvt Ltd | Engineering & Software</span>
                         </div>
                     </Link>
 

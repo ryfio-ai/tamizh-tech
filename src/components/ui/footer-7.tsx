@@ -77,9 +77,9 @@ const defaultSocialLinks = [
 ];
 
 const defaultLegalLinks = [
-  { name: "Terms of Service", href: "#" },
-  { name: "Privacy Policy", href: "#" },
-  { name: "Cookie Policy", href: "#" },
+  { name: "Terms of Service", href: "/terms" },
+  { name: "Privacy Policy", href: "/privacy" },
+  { name: "Cookie Policy", href: "/cookies" },
 ];
 
 export const Footer7 = ({
