@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Cpu, Zap, Bot, Shield, Globe, BarChart3, Settings, Lightbulb, CheckCircle2, Factory, Layers, Layout, Smartphone, Database, MoveRight } from "lucide-react";
+import { ArrowRight, Cpu, Zap, Bot, Shield, Globe, BarChart3, Settings, Lightbulb, CheckCircle2, Factory, Layers, Layout, Smartphone, Database, MoveRight, GraduationCap, MessageCircle } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -208,6 +208,68 @@ export default function Home() {
                   <h4 className="text-xl font-black uppercase tracking-tighter relative z-10">Aerospace</h4>
                   <p className="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-2 relative z-10">Precision Prototyping</p>
                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Internship Programs Promotion */}
+      <section className="py-32 bg-bg-page border-b border-border-light relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="relative h-[450px] w-full lg:order-last">
+              <div className="absolute inset-0 bg-white border border-border-light rounded-xs overflow-hidden shadow-2xl p-8 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-4 mb-8">
+                    <GraduationCap className="w-12 h-12 text-primary-main" />
+                    <div className="flex flex-col">
+                      <span className="text-xl font-black text-text-primary uppercase tracking-tighter">Internship Openings</span>
+                      <span className="text-[10px] font-black text-text-muted uppercase tracking-widest mt-0.5">Online & Offline Options</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {[
+                      "Robotics & Electronics Modules",
+                      "Embedded Systems & firmware design",
+                      "Full Stack & Frontend Web Dev",
+                      "C, C++, Java, & Python Programming",
+                    ].map((val) => (
+                      <div key={val} className="flex items-center gap-3 text-text-secondary font-bold text-xs uppercase tracking-tight">
+                        <CheckCircle2 className="w-4 h-4 text-primary-main shrink-0" /> {val}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="border-t border-border-light pt-8 flex flex-col gap-2">
+                  <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em]">📍 Coimbatore Hub or Remote</span>
+                  <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em]">🎓 Verified Industry Certification</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <span className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-8 block">Career Accelerators</span>
+              <h3 className="text-5xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase mb-10">
+                Industry-Focused <br /> Internship Programs.
+              </h3>
+              <p className="text-text-secondary font-medium leading-relaxed mb-12 max-w-lg">
+                Gain hands-on practical training and deploy real-time industry projects. Under expert mentorship, build a professional portfolio that validates your competence.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-5">
+                <Link href="/internship" className="btn-primary group">
+                  Register For Internship <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a 
+                  href="https://wa.me/918148045030?text=Hello!%20I%20want%20to%20register%20for%20the%20Internship%20program." 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn-secondary group flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4 text-text-primary group-hover:text-primary-main transition-colors" /> Apply via WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>

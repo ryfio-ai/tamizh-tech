@@ -60,11 +60,18 @@ function Header1() {
             href: "/products",
         },
         {
+            title: "Gallery",
+            href: "/gallery",
+        },
+        {
+            title: "Internship",
+            href: "/internship",
+        },
+        {
             title: "Company",
             description: "Engineering excellence since inception.",
             items: [
                 { title: "About Us", href: "/about" },
-                { title: "Our Team", href: "/team" },
                 { title: "Case Studies", href: "/case-studies" },
                 { title: "Careers", href: "/careers" },
                 { title: "Contact", href: "/contact" },
@@ -79,34 +86,40 @@ function Header1() {
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-50 fixed top-0 left-0 bg-white border-b border-border-light shadow-sm text-text-primary h-20 flex items-center">
-            <div className="container mx-auto px-6 flex justify-between items-center">
+            <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-8 flex justify-between items-center">
                 {/* Logo Section */}
-                <div className="flex items-center gap-12">
+                <div className="flex items-center lg:gap-4 xl:gap-8">
                     <Link href="/" className="flex items-center gap-3 group shrink-0">
-                        <div className="w-10 h-10 bg-primary-main flex items-center justify-center rounded-xs group-hover:bg-primary-hover transition-colors">
-                            <span className="font-black text-white text-xl uppercase tracking-tighter">TT</span>
+                        <div className="relative w-14 h-14 flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                            <Image
+                                src="/logo/TTRC LOGO.png"
+                                alt="TTRC Logo"
+                                width={56}
+                                height={56}
+                                className="object-contain"
+                            />
                         </div>
                         <div className="flex flex-col leading-none">
                             <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
                                 TAMIZH <span className="text-primary-main">TECH</span>
                             </span>
-                            <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Pvt Ltd | Engineering & Software</span>
+                            <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
                         </div>
                     </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center">
                         <NavigationMenu>
-                            <NavigationMenuList className="gap-2">
+                            <NavigationMenuList className="gap-0.5 xl:gap-1.5">
                                 {navigationItems.map((item) => (
                                     <NavigationMenuItem key={item.title}>
                                         {item.href ? (
-                                            <NavigationMenuLink href={item.href} className="px-4 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main transition-colors">
+                                            <NavigationMenuLink href={item.href} className="px-2 xl:px-3 py-2 text-[11px] xl:text-xs font-black uppercase tracking-wider text-text-secondary hover:text-primary-main transition-colors">
                                                 {item.title}
                                             </NavigationMenuLink>
                                         ) : (
                                             <>
-                                                <NavigationMenuTrigger className="px-4 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main bg-transparent transition-colors">
+                                                <NavigationMenuTrigger className="px-2 xl:px-3 py-2 text-[11px] xl:text-xs font-black uppercase tracking-wider text-text-secondary hover:text-primary-main bg-transparent transition-colors">
                                                     {item.title}
                                                 </NavigationMenuTrigger>
                                                 <NavigationMenuContent className="p-0 border border-border-light shadow-2xl bg-white rounded-xs">

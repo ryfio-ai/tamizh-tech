@@ -52,7 +52,6 @@ const defaultSections = [
     title: "Company",
     links: [
       { name: "About Us", href: "/about" },
-      { name: "Our Team", href: "/team" },
       { name: "Case Studies", href: "/case-studies" },
       { name: "Products", href: "/products" },
       { name: "Contact Us", href: "/contact" },
@@ -64,6 +63,7 @@ const defaultSections = [
       { name: "Tamil Robotics Club (TRC)", href: "/robotics-club" },
       { name: "Courses", href: "/courses" },
       { name: "Gallery", href: "/gallery" },
+      { name: "Internship", href: "/internship" },
       { name: "Careers", href: "/careers" },
     ],
   },
@@ -103,14 +103,20 @@ export const Footer7 = ({
                         {/* Logo */}
                         <div className="flex items-center gap-4 lg:justify-start justify-center group cursor-pointer">
                             <Link href={logo.url} className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-primary-main flex items-center justify-center rounded-xs group-hover:bg-primary-hover transition-colors">
-                                    <span className="font-black text-white text-xl uppercase tracking-tighter">TT</span>
+                                <div className="relative w-14 h-14 flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                                    <Image
+                                        src="/logo/TTRC LOGO.png"
+                                        alt="TTRC Logo"
+                                        width={56}
+                                        height={56}
+                                        className="object-contain"
+                                    />
                                 </div>
                                 <div className="flex flex-col leading-none">
                                     <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
                                         TAMIZH <span className="text-primary-main">TECH</span>
                                     </span>
-                                    <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Pvt Ltd | Engineering & Software</span>
+                                    <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
                                 </div>
                             </Link>
                         </div>
