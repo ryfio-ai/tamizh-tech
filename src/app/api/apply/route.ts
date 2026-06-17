@@ -45,12 +45,12 @@ export async function POST(request: Request) {
         name,
         email,
         phone,
-        linkedin: linkedin || "N/A",
         college: college || "N/A",
         branch: branch || "N/A",
         role,
         category,
         experience: experience || "N/A",
+        linkedin: linkedin || "N/A",
         resume: resume || "N/A",
         timestamp: new Date().toISOString()
       }),
