@@ -64,128 +64,121 @@ function Header1() {
             href: "/gallery",
         },
         {
-            title: "Internship",
-            href: "/internship",
-        },
-        {
             title: "Company",
             description: "Engineering excellence since inception.",
             items: [
                 { title: "About Us", href: "/about" },
+                { title: "Internship Program", href: "/internship" },
+                { title: "Join Robotics Club", href: "/robotics-club" },
                 { title: "Case Studies", href: "/case-studies" },
                 { title: "Careers", href: "/careers" },
                 { title: "Contact", href: "/contact" },
             ],
-        },
-        {
-            title: "Join Club",
-            href: "/robotics-club",
         },
     ];
 
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-50 fixed top-0 left-0 bg-white border-b border-border-light shadow-sm text-text-primary h-20 flex items-center">
-            <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-8 flex justify-between items-center">
-                {/* Logo Section */}
-                <div className="flex items-center lg:gap-4 xl:gap-8">
-                    <Link href="/" className="flex items-center gap-3 group shrink-0">
-                        <div className="relative w-14 h-14 flex items-center justify-center group-hover:opacity-90 transition-opacity">
-                            <Image
-                                src="/logo/TTRC LOGO.png"
-                                alt="TTRC Logo"
-                                width={56}
-                                height={56}
-                                className="object-contain"
-                            />
-                        </div>
-                        <div className="flex flex-col leading-none">
-                            <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
-                                TAMIZH <span className="text-primary-main">TECH</span>
-                            </span>
-                            <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
-                        </div>
-                    </Link>
+            <div className="w-full max-w-[1440px] mx-auto px-4 xl:px-8 flex justify-between items-center h-full">
+                
+                {/* Left: Logo Section */}
+                <Link href="/" className="flex items-center gap-3 group shrink-0">
+                    <div className="relative w-14 h-14 flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                        <Image
+                            src="/logo/TTRC LOGO.png"
+                            alt="TTRC Logo"
+                            width={56}
+                            height={56}
+                            className="object-contain"
+                        />
+                    </div>
+                    <div className="flex flex-col leading-none">
+                        <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
+                            TAMIZH <span className="text-primary-main">TECH</span>
+                        </span>
+                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
+                    </div>
+                </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center">
-                        <NavigationMenu>
-                            <NavigationMenuList className="gap-0.5 xl:gap-1.5">
-                                {navigationItems.map((item) => (
-                                    <NavigationMenuItem key={item.title}>
-                                        {item.href ? (
-                                            <NavigationMenuLink href={item.href} className="px-2 xl:px-3 py-2 text-[11px] xl:text-xs font-black uppercase tracking-wider text-text-secondary hover:text-primary-main transition-colors">
+                {/* Center: Desktop Navigation */}
+                <nav className="hidden xl:flex items-center justify-center flex-grow mx-8">
+                    <NavigationMenu>
+                        <NavigationMenuList className="gap-1 xl:gap-2">
+                            {navigationItems.map((item) => (
+                                <NavigationMenuItem key={item.title}>
+                                    {item.href ? (
+                                        <NavigationMenuLink href={item.href} className="px-3 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main transition-colors">
+                                            {item.title}
+                                        </NavigationMenuLink>
+                                    ) : (
+                                        <>
+                                            <NavigationMenuTrigger className="px-3 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main bg-transparent transition-colors">
                                                 {item.title}
-                                            </NavigationMenuLink>
-                                        ) : (
-                                            <>
-                                                <NavigationMenuTrigger className="px-2 xl:px-3 py-2 text-[11px] xl:text-xs font-black uppercase tracking-wider text-text-secondary hover:text-primary-main bg-transparent transition-colors">
-                                                    {item.title}
-                                                </NavigationMenuTrigger>
-                                                <NavigationMenuContent className="p-0 border border-border-light shadow-2xl bg-white rounded-xs">
-                                                    <div className="w-[600px] grid grid-cols-[1fr_2fr] overflow-hidden">
-                                                        <div className="bg-bg-page p-8 flex flex-col justify-between border-r border-border-light">
-                                                            <div>
-                                                                <h4 className="text-xl font-black tracking-tighter text-text-primary uppercase mb-3">{item.title}</h4>
-                                                                <p className="text-xs text-text-secondary font-medium leading-relaxed italic">{item.description}</p>
-                                                            </div>
-                                                            <div className="flex flex-col gap-3 mt-auto">
-                                                                <Button className="btn-primary w-full py-4 text-[10px] font-black uppercase tracking-widest h-auto" asChild>
-                                                                    <Link href="/contact">Request Proposal</Link>
-                                                                </Button>
-                                                                <Link href="/robotics-club" className="text-[9px] font-black uppercase tracking-widest text-text-muted hover:text-primary-main transition-colors text-center py-2 border border-border-light rounded-xs">
-                                                                    Join Our Club
-                                                                </Link>
-                                                            </div>
+                                            </NavigationMenuTrigger>
+                                            <NavigationMenuContent className="p-0 border border-border-light shadow-2xl bg-white rounded-xs">
+                                                <div className="w-[600px] grid grid-cols-[1fr_2fr] overflow-hidden">
+                                                    <div className="bg-bg-page p-8 flex flex-col justify-between border-r border-border-light">
+                                                        <div>
+                                                            <h4 className="text-xl font-black tracking-tighter text-text-primary uppercase mb-3">{item.title}</h4>
+                                                            <p className="text-xs text-text-secondary font-medium leading-relaxed italic">{item.description}</p>
                                                         </div>
-                                                        <div className="p-6">
-                                                            {item.sections ? (
-                                                                <div className="grid grid-cols-2 gap-8">
-                                                                    {item.sections.map((section) => (
-                                                                        <div key={section.label} className="space-y-4">
-                                                                            <h5 className="text-[10px] font-black text-primary-main uppercase tracking-[0.2em] mb-4">{section.label}</h5>
-                                                                            <div className="space-y-2">
-                                                                                {section.items.map((subItem) => (
-                                                                                    <Link key={subItem.title} href={subItem.href} className="flex items-center gap-3 text-xs font-bold text-text-secondary hover:text-primary-main transition-colors py-1 group">
-                                                                                        <span className="text-text-muted group-hover:text-primary-main transition-colors">{subItem.icon}</span>
-                                                                                        {subItem.title === "Robotics Integration" ? "Tamil Robotics Club (TRC)" : subItem.title}
-                                                                                    </Link>
-                                                                                ))}
-                                                                            </div>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
-                                                            ) : (
-                                                                <div className="grid grid-cols-1 gap-2">
-                                                                    {item.items?.map((subItem) => (
-                                                                        <Link key={subItem.title} href={subItem.href} className="flex justify-between items-center px-4 py-3 hover:bg-bg-page rounded-xs group transition-all">
-                                                                            <span className="text-xs font-bold text-text-secondary group-hover:text-primary-main">{subItem.title}</span>
-                                                                            <MoveRight className="w-4 h-4 text-border-medium group-hover:text-primary-main group-hover:translate-x-1 transition-all" />
-                                                                        </Link>
-                                                                    ))}
-                                                                </div>
-                                                            )}
+                                                        <div className="flex flex-col gap-3 mt-auto">
+                                                            <Button className="btn-primary w-full py-4 text-[10px] font-black uppercase tracking-widest h-auto" asChild>
+                                                                <Link href="/contact">Request Proposal</Link>
+                                                            </Button>
+                                                            <Link href="/robotics-club" className="text-[9px] font-black uppercase tracking-widest text-text-muted hover:text-primary-main transition-colors text-center py-2 border border-border-light rounded-xs">
+                                                                Join Our Club
+                                                            </Link>
                                                         </div>
                                                     </div>
-                                                </NavigationMenuContent>
-                                            </>
-                                        )}
-                                    </NavigationMenuItem>
-                                ))}
-                            </NavigationMenuList>
-                        </NavigationMenu>
-                    </nav>
-                </div>
+                                                    <div className="p-6">
+                                                        {item.sections ? (
+                                                            <div className="grid grid-cols-2 gap-8">
+                                                                {item.sections.map((section) => (
+                                                                    <div key={section.label} className="space-y-4">
+                                                                        <h5 className="text-[10px] font-black text-primary-main uppercase tracking-[0.2em] mb-4">{section.label}</h5>
+                                                                        <div className="space-y-2">
+                                                                            {section.items.map((subItem) => (
+                                                                                <Link key={subItem.title} href={subItem.href} className="flex items-center gap-3 text-xs font-bold text-text-secondary hover:text-primary-main transition-colors py-1 group">
+                                                                                    <span className="text-text-muted group-hover:text-primary-main transition-colors">{subItem.icon}</span>
+                                                                                    {subItem.title === "Robotics Integration" ? "Tamil Robotics Club (TRC)" : subItem.title}
+                                                                                </Link>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="grid grid-cols-1 gap-2">
+                                                                {item.items?.map((subItem) => (
+                                                                    <Link key={subItem.title} href={subItem.href} className="flex justify-between items-center px-4 py-3 hover:bg-bg-page rounded-xs group transition-all">
+                                                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary-main">{subItem.title}</span>
+                                                                        <MoveRight className="w-4 h-4 text-border-medium group-hover:text-primary-main group-hover:translate-x-1 transition-all" />
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </NavigationMenuContent>
+                                        </>
+                                    )}
+                                </NavigationMenuItem>
+                            ))}
+                        </NavigationMenuList>
+                    </NavigationMenu>
+                </nav>
 
-                {/* Desktop Actions */}
-                <div className="hidden lg:flex items-center gap-4">
-                    <Link href="/contact" className="btn-primary shadow-lg scale-90 xl:scale-100">
+                {/* Right: Desktop Actions */}
+                <div className="hidden xl:flex items-center gap-4 shrink-0">
+                    <Link href="/contact" className="btn-primary shadow-lg">
                         Request Proposal <MoveRight className="w-4 h-4 ml-3" />
                     </Link>
                 </div>
 
                 {/* Mobile Toggle */}
-                <div className="lg:hidden">
+                <div className="xl:hidden">
                     <Button variant="ghost" size="icon" onClick={() => setOpen(!isOpen)} className="text-text-primary">
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </Button>
@@ -194,7 +187,7 @@ function Header1() {
 
             {/* Mobile Navigation */}
             {isOpen && (
-                <div className="absolute top-20 left-0 w-full bg-white border-t border-border-light shadow-2xl h-[calc(100vh-80px)] overflow-y-auto p-8 lg:hidden animate-in slide-in-from-top-4">
+                <div className="absolute top-20 left-0 w-full bg-white border-t border-border-light shadow-2xl h-[calc(100vh-80px)] overflow-y-auto p-8 xl:hidden animate-in slide-in-from-top-4">
                     <div className="flex flex-col gap-10">
                         {navigationItems.map((item) => (
                             <div key={item.title}>
