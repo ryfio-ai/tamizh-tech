@@ -25,7 +25,7 @@ export default function CareersPage() {
           </h2>
           <div className="text-lg text-text-secondary leading-relaxed max-w-3xl font-medium mt-10 uppercase tracking-tight font-bold">
             <p className="mb-4">&quot;Lets work Together....</p>
-            <p>We create and build a value for our customers with our innovative Products and Solutions. We offer you the chance to do the kind of work that adds upto something meaningful. The opportunity to challenge yourself and learn new skills. Thats the kind of work you can expect at Tamizh Tech Pvt Ltd. Sounds intersting, do Join us.&quot;</p>
+            <p>We create and build a value for our customers with our innovative Products and Solutions. We offer you the chance to do the kind of work that adds upto something meaningful. The opportunity to challenge yourself and learn new skills. Thats the kind of work you can expect at Tamizh Tech Robotics Company. Sounds intersting, do Join us.&quot;</p>
           </div>
         </div>
 

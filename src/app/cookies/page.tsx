@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MoveRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | Tamizh Tech Pvt Ltd",
+  title: "Cookie Policy | Tamizh Tech Robotics Company",
   description: "Information about how we use cookies on our website.",
 };
 

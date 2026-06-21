@@ -3,7 +3,7 @@ import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Sett
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Case Studies | Engineering & Digital Outcomes | Tamizh Tech Pvt Ltd",
+  title: "Case Studies | Engineering & Digital Outcomes | Tamizh Tech Robotics Company",
   description: "Real-world engineering deployments and digital transformation case studies. High-performance robotics and scalable enterprise software.",
 };
 

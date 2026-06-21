@@ -75,7 +75,7 @@ export default function GalleryPage() {
             Visualizing <br /> Industrial <br /> Excellence.
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10 uppercase tracking-tight font-bold">
-            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Pvt Ltd ecosystem.
+            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Robotics Company ecosystem.
           </p>
         </div>
 

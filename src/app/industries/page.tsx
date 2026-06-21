@@ -3,7 +3,7 @@ import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Sett
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Industries Served | Engineering & Software Integration | Tamizh Tech Pvt Ltd",
+  title: "Industries Served | Engineering & Software Integration | Tamizh Tech Robotics Company",
   description: "Specialized engineering and software solutions for Manufacturing, Logistics, Aerospace, and Enterprise Operations across India.",
 };
 
@@ -98,8 +98,8 @@ export default function IndustriesPage() {
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-primary-main uppercase tracking-widest mb-3 font-sans opacity-70">Our Approach</p>
-                      <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Join a network of global industrial leaders leveraging Tamizh Tech Pvt Ltd&apos;s dual hardware-software ecosystem for operational excellence.</p>
-                      <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">PARTNER WITH TAMIZH TECH PVT LTD</Link>
+                      <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Join a network of global industrial leaders leveraging Tamizh Tech Robotics Company&apos;s dual hardware-software ecosystem for operational excellence.</p>
+                      <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">PARTNER WITH TAMIZH TECH ROBOTICS COMPANY</Link>
                     </div>
                   </div>
                   

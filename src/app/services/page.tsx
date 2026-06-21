@@ -3,7 +3,7 @@ import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Sett
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Engineering Services | Robotics & Software | Tamizh Tech Pvt Ltd",
+  title: "Engineering Services | Robotics & Software | Tamizh Tech Robotics Company",
   description: "Specialized B2B engineering services including industrial automation integration, enterprise software development, and precision R&D prototyping.",
 };
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MoveRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Tamizh Tech Pvt Ltd",
+  title: "Terms of Service | Tamizh Tech Robotics Company",
   description: "Terms and conditions for using Tamizh Tech's platforms and services.",
 };
 
@@ -23,7 +23,7 @@ export default function TermsPage() {
 
         <div className="prose prose-sm md:prose-base max-w-none text-text-secondary font-medium">
           <p className="mb-6">
-            Welcome to Tamizh Tech Pvt Ltd. These Terms of Service govern your use of our website, software platforms, and industrial automation services. By accessing our services, you agree to comply with these terms.
+            Welcome to Tamizh Tech Robotics Company. These Terms of Service govern your use of our website, software platforms, and industrial automation services. By accessing our services, you agree to comply with these terms.
           </p>
 
           <h3 className="text-xl font-black text-text-primary uppercase tracking-tighter mt-12 mb-4">1. Engineering Services & Liability</h3>
@@ -33,7 +33,7 @@ export default function TermsPage() {
 
           <h3 className="text-xl font-black text-text-primary uppercase tracking-tighter mt-12 mb-4">2. Intellectual Property</h3>
           <p className="mb-6">
-            All proprietary software code, AI vision algorithms, mechanical blueprints, and UI/UX designs provided during a project remain the intellectual property of Tamizh Tech Pvt Ltd unless explicitly transferred in writing.
+            All proprietary software code, AI vision algorithms, mechanical blueprints, and UI/UX designs provided during a project remain the intellectual property of Tamizh Tech Robotics Company unless explicitly transferred in writing.
           </p>
 
           <h3 className="text-xl font-black text-text-primary uppercase tracking-tighter mt-12 mb-4">3. Data Usage & Platform Access</h3>

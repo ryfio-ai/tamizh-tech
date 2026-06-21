@@ -56,12 +56,12 @@ export default function ContactPage() {
         
         {/* Header Section */}
         <div className="max-w-4xl mb-24 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-8 font-sans">Contact & Consultation | Tamizh Tech Pvt Ltd</h1>
+          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-8 font-sans">Contact & Consultation | Tamizh Tech Robotics Company</h1>
           <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
             Request a Technical <br /> Proposal.
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            Connect with the engineering coordination team at Tamizh Tech Pvt Ltd to discuss your industrial automation goals or software requirements. We provide on-ground analysis for hardware and technical audits for digital platforms.
+            Connect with the engineering coordination team at Tamizh Tech Robotics Company to discuss your industrial automation goals or software requirements. We provide on-ground analysis for hardware and technical audits for digital platforms.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function ContactPage() {
                  <h4 className="text-2xl font-black mb-6 uppercase tracking-tighter flex items-center gap-3">
                    <ShieldCheck className="w-6 h-6 text-primary-main" /> Regional Support
                  </h4>
-                 <p className="text-xs font-bold text-white/50 leading-relaxed mb-10 uppercase tracking-wider">Tamizh Tech Pvt Ltd handles high-complexity industrial inquiries across 15+ Indian states with on-ground technical specialists and remote software monitoring.</p>
+                 <p className="text-xs font-bold text-white/50 leading-relaxed mb-10 uppercase tracking-wider">Tamizh Tech Robotics Company handles high-complexity industrial inquiries across 15+ Indian states with on-ground technical specialists and remote software monitoring.</p>
                  <Link href="/about" className="text-[10px] font-black text-primary-main uppercase tracking-widest flex items-center gap-4 border-b border-primary-main/20 pb-1 w-fit group">
                    VIEW SERVICE AREA <MoveRight className="w-4 h-4 group-hover:translate-x-1" />
                  </Link>
@@ -128,7 +128,7 @@ export default function ContactPage() {
                   <div className="relative z-10">
                     <h2 className="text-5xl font-black text-text-primary tracking-tighter uppercase mb-6 leading-none">Inquiry Logged.</h2>
                     <p className="text-text-secondary text-lg mb-12 font-bold max-w-xl mx-auto uppercase text-[12px] tracking-widest">
-                      Thank you, <span className="text-primary-main">{form.name}</span>. Technical coordination at Tamizh Tech Pvt Ltd has received your request for <span className="text-text-primary">{form.company}</span>. 
+                      Thank you, <span className="text-primary-main">{form.name}</span>. Technical coordination at Tamizh Tech Robotics Company has received your request for <span className="text-text-primary">{form.company}</span>. 
                       An engineer will contact you via <span className="text-text-primary underline underline-offset-8">{form.callbackMode}</span> within 24 business hours.
                     </p>
                     <button 

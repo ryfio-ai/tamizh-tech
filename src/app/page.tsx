@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Tamizh Tech | Robotics, Software & Industrial Automation Solutions",
-  description: "Tamizh Tech Pvt Ltd delivers high-performance robotic systems, AI vision, and enterprise software solutions for global manufacturers and OEMs. Engineering excellence in Coimbatore, India.",
+  description: "Tamizh Tech Robotics Company delivers high-performance robotic systems, AI vision, and enterprise software solutions for global manufacturers and OEMs. Engineering excellence in Coimbatore, India.",
   keywords: ["Industrial Automation", "Robotics Integration", "B2B Software Development", "SaaS Solutions", "AI Vision Systems"],
 };
 

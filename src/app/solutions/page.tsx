@@ -3,8 +3,8 @@ import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Sett
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Engineering Solutions | Industrial Robotics & Enterprise Software | Tamizh Tech Pvt Ltd",
-  description: "Tamizh Tech Pvt Ltd provides multi-disciplinary engineering solutions across industrial automation, robotics integration, and scalable enterprise software systems.",
+  title: "Engineering Solutions | Industrial Robotics & Enterprise Software | Tamizh Tech Robotics Company",
+  description: "Tamizh Tech Robotics Company provides multi-disciplinary engineering solutions across industrial automation, robotics integration, and scalable enterprise software systems.",
 };
 
 const industrialSolutions = [
@@ -129,7 +129,7 @@ export default function SolutionsPage() {
             Engineering Precision. <br /> Digital Scalability.
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            Tamizh Tech Pvt Ltd operates at the intersection of physical hardware and digital platforms. We build the systems that power modern industry.
+            Tamizh Tech Robotics Company operates at the intersection of physical hardware and digital platforms. We build the systems that power modern industry.
           </p>
         </div>
 

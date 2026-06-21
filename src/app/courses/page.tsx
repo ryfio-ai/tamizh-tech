@@ -124,7 +124,7 @@ export default function CoursesPage() {
            <h2 className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-6">Industrial Recognition</h2>
            <h3 className="text-3xl font-black text-text-primary tracking-tighter uppercase mb-6">Verifiable Professional Certifications.</h3>
            <p className="text-text-secondary text-lg max-w-3xl mx-auto font-medium leading-relaxed mb-12">
-             Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Pvt Ltd certification recognized by our 50+ industrial partners across India.
+             Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Robotics Company certification recognized by our 50+ industrial partners across India.
            </p>
            <div className="flex flex-wrap justify-center gap-12 text-[10px] font-black text-text-muted uppercase tracking-[0.2em] border-t border-border-light pt-12">
               <span className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-success" /> ISO 9001:2015 CERTIFIED</span>

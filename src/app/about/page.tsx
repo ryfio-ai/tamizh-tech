@@ -28,7 +28,7 @@ export default function AboutPage() {
             Engineering <br /> The Industrial <br /> Interface.
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            Tamizh Tech Pvt Ltd is a Coimbatore-based engineering firm delivering high-performance robotic systems integrated with enterprise-grade software for the world&apos;s most complex industrial operations.
+            Tamizh Tech Robotics Company is a Coimbatore-based engineering firm delivering high-performance robotic systems integrated with enterprise-grade software for the world&apos;s most complex industrial operations.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
               <h3 className="text-4xl font-black text-text-primary tracking-tighter uppercase leading-[0.95] mb-8">Integrated Engineering. <br /> Domestic Heritage.</h3>
               <div className="space-y-8 text-text-secondary font-bold text-sm uppercase tracking-tight leading-relaxed">
                  <p className="border-l-2 border-border-light pl-6 italic">
-                    Founded in the heart of Coimbatore—India&apos;s industrial core—Tamizh Tech Pvt Ltd was built to solve the fragmentation between physical hardware and digital control systems.
+                    Founded in the heart of Coimbatore—India&apos;s industrial core—Tamizh Tech Robotics Company was built to solve the fragmentation between physical hardware and digital control systems.
                  </p>
                  <p>
                     What began as a specialized prototyping lab has evolved into a comprehensive industrial partner, serving 120+ active deployments and maintaining a strategic presence across 15+ Indian states.

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MoveRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Tamizh Tech Pvt Ltd",
+  title: "Privacy Policy | Tamizh Tech Robotics Company",
   description: "How Tamizh Tech handles and protects your data.",
 };
 
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
 
         <div className="prose prose-sm md:prose-base max-w-none text-text-secondary font-medium">
           <p className="mb-6">
-            Tamizh Tech Pvt Ltd (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting the privacy and security of our enterprise clients and website visitors. This Privacy Policy outlines how we collect, use, and safeguard your information.
+            Tamizh Tech Robotics Company (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting the privacy and security of our enterprise clients and website visitors. This Privacy Policy outlines how we collect, use, and safeguard your information.
           </p>
 
           <h3 className="text-xl font-black text-text-primary uppercase tracking-tighter mt-12 mb-4">1. Information We Collect</h3>

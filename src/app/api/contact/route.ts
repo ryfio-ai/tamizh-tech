@@ -96,7 +96,7 @@ export async function POST(request: Request) {
           </div>
 
           <p style="font-size: 11px; color: #999; margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
-            This technical proposal request was generated from the Tamizh Tech Pvt Ltd official website.
+            This technical proposal request was generated from the Tamizh Tech Robotics Company official website.
           </p>
         </div>
       `,

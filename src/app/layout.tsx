@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   keywords: ["Industrial Automation Coimbatore", "Robotics Integration India", "AI Vision Systems", "Custom Prototyping Services", "Factory Automation Tamil Nadu"],
   authors: [{ name: "Tamizh Tech Engineering" }],
   creator: "Tamizh Tech",
-  publisher: "Tamizh Tech Pvt Ltd",
+  publisher: "Tamizh Tech Robotics Company",
   formatDetection: {
     email: false,
     address: false,
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
         url: "/og-image-b2b.jpg",
         width: 1200,
         height: 630,
-        alt: "Tamizh Tech Pvt Ltd Industrial Automation",
+        alt: "Tamizh Tech Robotics Company Industrial Automation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tamizh Tech | Industrial Robotics Specialist",
-    description: "Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Pvt Ltd certification recognized by our 50+ industrial partners across India.",
+    description: "Every technical track includes specialized training, localized language support, and a verifiable Tamizh Tech Robotics Company certification recognized by our 50+ industrial partners across India.",
     images: ["/og-image-b2b.jpg"],
   },
   robots: {
@@ -60,13 +60,13 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Tamizh Tech Pvt Ltd",
+  "name": "Tamizh Tech Robotics Company",
   "alternateName": "Tamizh Tech Robotics",
   "url": "https://tamizhtech.in",
   "logo": "https://tamizhtech.in/logo/TTRC LOGO.png",
   "sameAs": [
     "https://www.linkedin.com/company/tamizh-tech-robotics-company",
-    "https://www.instagram.com/tamizh_tech_pvt_ltd",
+    "https://www.instagram.com/tamizh_tech_robotics_company",
     "https://youtube.com/@covaiscientist"
   ],
   "address": {

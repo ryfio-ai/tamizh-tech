@@ -50,7 +50,7 @@ export default function ClientsPage() {
             Trusted by <br /> Industry <br /> Leaders.
           </h2>
           <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10 uppercase tracking-tight font-bold">
-            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Pvt Ltd ecosystem.
+            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Robotics Company ecosystem.
           </p>
         </div>
 
@@ -142,7 +142,7 @@ export default function ClientsPage() {
            </div>
            <div className="relative z-10">
              <h4 className="text-4xl font-black text-text-primary tracking-tighter mb-8 uppercase leading-none">Scale Your <br /> Technical Ambitions.</h4>
-             <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Join a network of global industrial leaders leveraging Tamizh Tech Pvt Ltd&apos;s dual hardware-software ecosystem for operational excellence.</p>
+             <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Join a network of global industrial leaders leveraging Tamizh Tech Robotics Company&apos;s dual hardware-software ecosystem for operational excellence.</p>
              <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">PARTNER WITH TAMIZH TECH</Link>
            </div>
         </div>

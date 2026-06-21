@@ -71,7 +71,7 @@ const defaultSections = [
 
 const defaultSocialLinks = [
   { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/company/tamizh-tech-robotics-company", label: "LinkedIn" },
-  { icon: <FaInstagram className="size-5" />, href: "https://www.instagram.com/tamizh_tech_pvt_ltd", label: "Instagram" },
+  { icon: <FaInstagram className="size-5" />, href: "https://www.instagram.com/tamizh_tech_robotics_company", label: "Instagram" },
   { icon: <FaYoutube className="size-5" />, href: "https://www.youtube.com/@covaiscientist", label: "YouTube" },
   { icon: <FaWhatsapp className="size-5" />, href: "https://wa.me/918148045030", label: "WhatsApp" },
 ];
@@ -92,7 +92,7 @@ export const Footer7 = ({
   sections = defaultSections,
   description = "Tamizh Tech is a multi-disciplinary engineering firm specialized in industrial robotics, AI vision integration, and enterprise software development. We build scalable hardware and software systems for global manufacturers.",
   socialLinks = defaultSocialLinks,
-  copyright = `© ${new Date().getFullYear()} Tamizh Tech Pvt Ltd. All rights reserved.`,
+  copyright = `© ${new Date().getFullYear()} Tamizh Tech Robotics Company. All rights reserved.`,
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
     return (
