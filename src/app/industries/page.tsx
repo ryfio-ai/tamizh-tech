@@ -1,123 +1,203 @@
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Settings, Lightbulb, Package, Warehouse, GraduationCap, Microscope, Globe, ShieldCheck, Database, Layers, Rocket } from "lucide-react";
 import { Metadata } from "next";
+import { 
+  Factory, 
+  Settings, 
+  Layers, 
+  Globe, 
+  ShieldCheck, 
+  Database, 
+  MoveRight, 
+  Send,
+  Cpu,
+  Monitor,
+  HardDrive,
+  Eye,
+  LineChart
+} from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Industries Served | Engineering & Software Integration | Tamizh Tech Robotics Company",
-  description: "Specialized engineering and software solutions for Manufacturing, Logistics, Aerospace, and Enterprise Operations across India.",
+  title: "Industrial Automation & Robotics Solutions | Coimbatore | Tamizh Tech",
+  description: "Specialized B2B industrial engineering solutions including PLC programming, Machine Vision (OpenCV), AGVs/AMRs, and predictive IoT monitoring nodes for factory floors.",
+  keywords: [
+    "industrial automation company coimbatore",
+    "robotics company in tamil nadu",
+    "plc programming coimbatore",
+    "machine vision systems tamil nadu"
+  ],
+  openGraph: {
+    title: "Industrial Automation & Robotics Integration | Tamizh Tech",
+    description: "Empowering factory floors with custom robotics, vision checks, and IoT dashboards. Coimbatore engineering core.",
+    url: "https://tamizhtech.in/industries",
+    type: "website"
+  }
 };
 
-const industries = [
+const solutions = [
   {
-    id: "manufacturing",
-    icon: <Factory />,
-    title: "General Manufacturing",
-    problem: "Inefficient OEE and rising operational downtime.",
-    solution: "Bespoke automation for high-volume assembly lines and neural-vision based QC.",
-    benefits: ["35% Higher Throughput", "Zero-Defect Quality Control", "Real-time Machine Monitoring"]
+    id: "automation",
+    icon: <Factory className="w-10 h-10 stroke-[1.5]" />,
+    title: "Factory Automation",
+    challenge: "Low OEE and high manual labor error rates on assembly lines.",
+    approach: "Deploy custom mechanical pick-and-place nodes, conveyor lines, and pneumatic sorters.",
+    metrics: ["35% Higher Throughput", "Reduced cycle time", "Turnkey line commissioning"]
   },
   {
-    id: "logistics",
-    icon: <Warehouse />,
-    title: "Logistics & E-commerce",
-    problem: "Manual sorting bottlenecks and low warehouse density.",
-    solution: "Intelligent AMR fleets integrated with custom WMS/ERP software ecosystems.",
-    benefits: ["2X Sorting Speed", "Optimized Path Planning", "Live Inventory Visibility"]
+    id: "plc-frameworks",
+    icon: <HardDrive className="w-10 h-10 stroke-[1.5]" />,
+    title: "PLC & SCADA Programming",
+    challenge: "Complex multi-device synchronization and lack of control room visibility.",
+    approach: "Custom logic programming for Siemens, Allen-Bradley, and Delta PLCs with SCADA panels.",
+    metrics: ["Real-time process telemetry", "Fail-safe logic protocols", "Industrial grade cabinet wiring"]
   },
   {
-    id: "aerospace",
-    icon: <Rocket className="w-12 h-12" />,
-    title: "Aerospace & Defense",
-    problem: "Need for ultra-precise prototyping and high-spec validation.",
-    solution: "Modular robotic testing rigs and precision fabrication from Coimbatore R&D hub.",
-    benefits: ["Rapid Tech Iteration", "Sub-mm Precision", "High-Spec Documentation"]
+    id: "machine-vision",
+    icon: <Eye className="w-10 h-10 stroke-[1.5]" />,
+    title: "Machine Vision Systems",
+    challenge: "Manual quality inspection bottlenecks leading to defect escapes.",
+    approach: "High-speed optical inspection rigs powered by custom OpenCV pattern checking software.",
+    metrics: ["Zero-defect inspection escapes", "99.9% check consistency", "Automatic reject sorting triggers"]
   },
   {
-    id: "enterprise",
-    icon: <Database />,
-    title: "Enterprise Operations",
-    problem: "Disconnected data silos and fragmented internal workflows.",
-    solution: "Scalable B2B software tools and custom SaaS platforms for operational oversight.",
-    benefits: ["Unified Data Lakes", "Automated Workflows", "Enterprise-grade Security"]
+    id: "iot-monitoring",
+    icon: <Monitor className="w-10 h-10 stroke-[1.5]" />,
+    title: "IoT Fleet Monitoring",
+    challenge: "Unexpected machinery breakdowns and lack of historical operational logs.",
+    approach: "Install ESP32 environmental sensors and telemetry nodes streaming to secure dashboards.",
+    metrics: ["Predictive failure alerts", "Unified data visualization", "15% reduction in maintenance costs"]
   },
   {
-    id: "textiles",
-    icon: <Layers />,
-    title: "Textile & Apparel Tech",
-    problem: "Traditional process reliance and high material wastage.",
-    solution: "IoT-enabled loom monitoring and AI-vision for fabric defect detection.",
-    benefits: ["15% Waste Reduction", "Predictive Maintenance", "Digital Loom Tracking"]
+    id: "ai-systems",
+    icon: <Cpu className="w-10 h-10 stroke-[1.5]" />,
+    title: "Custom Robotics (AGV/AMR)",
+    challenge: "High cost of warehouse material handling and path planning issues.",
+    approach: "Indigenously manufactured TTRC AGV V1 and AMR V1 logistics platforms mapped to grids.",
+    metrics: ["Optimized path routing", "Double sorting speeds", "Safety lidar obstacle detection"]
   },
   {
-    id: "agriculture",
-    icon: <Globe />,
-    title: "Agri-Tech & Processing",
-    problem: "Lack of automated grading and erratic processing speeds.",
-    solution: "Robotic picking arms and specialized sorting logic for food processing.",
-    benefits: ["Consistent Grading", "Reduced Human Contact", "Scalable Processing Lines"]
+    id: "consultation",
+    icon: <LineChart className="w-10 h-10 stroke-[1.5]" />,
+    title: "Industrial Consultation",
+    challenge: "Uncertain ROI for digital transformation and legacy machinery constraints.",
+    approach: "Comprehensive physical audit of factory workflow, cycle times, and electrical load setup.",
+    metrics: ["Detailed feasibility reports", "Clear ROI projections", "Strategic step-by-step roadmap"]
   }
 ];
 
+const faqItems = [
+  {
+    q: "Do you supply customized AGVs or AMRs?",
+    a: "Yes, we design and build indigenous material handling platforms (TTRC AGV V1, TTRC AMR V1) customized for payload capabilities and sensor integration (lidar, sonar, line array)."
+  },
+  {
+    q: "Can you upgrade legacy manufacturing lines?",
+    a: "Yes, we specialize in retrofitting legacy systems with modern PLC controls, sensors, and SCADA monitoring loops without replacing core mechanical setups."
+  }
+];
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://tamizhtech.in"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Industrial Automation",
+        "item": "https://tamizhtech.in/industries"
+      }
+    ]
+  }
+];
+
+const formInputClass = "w-full bg-white border border-[#E5E5E5] px-4 py-3.5 text-[#111111] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+
 export default function IndustriesPage() {
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
+    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111] text-left">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+      />
+
       <div className="container mx-auto px-6">
         
         {/* Header Section */}
-        <div className="max-w-4xl mb-32 border-l-4 border-secondary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Vertical Expertise</h1>
-          <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-            Sector-Specific <br /> Engineering Excellence.
+        <div className="max-w-4xl mb-20 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4">
+          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-6 font-sans">B2B Industrial Vertical</h1>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase">
+            Sector-Specific <br /> Automation Engineering.
           </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            We understand the regulatory, operational, and technical nuances of diverse sectors, delivering solutions that generate immediate ROI and long-term scalability.
+          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
+            Deploying high-uptime hardware, custom SCADA boards, vision QA check benches, and AMR logistics fleets designed and configured in Coimbatore, Tamil Nadu.
           </p>
         </div>
 
-        {/* Industries List Section */}
-        <div className="space-y-12 mb-32">
-          {industries.map((item) => (
+        {/* Solutions Grid */}
+        <div className="space-y-12 mb-24">
+          {solutions.map((item) => (
             <div 
               key={item.id} 
               id={item.id}
-              className="bg-white border border-border-light flex flex-col lg:flex-row items-stretch industrial-card group overflow-hidden"
+              className="bg-white border border-[#E5E5E5] flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden group hover:border-[#FF6B00] transition-colors duration-300"
             >
-              <div className="w-full lg:w-1/4 bg-bg-page border-r border-border-light flex flex-col items-center justify-center p-12 text-secondary-main group-hover:bg-secondary-main group-hover:text-white transition-all duration-500">
-                <div className="w-24 h-24 border border-border-light flex items-center justify-center rounded-3xl mb-6 bg-white shadow-sm group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500">
-                   {cloneIcon(item.icon, "w-10 h-10 stroke-[1.5]")}
+              {/* Left Column */}
+              <div className="w-full lg:w-1/4 bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col items-center justify-center p-12 text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-500">
+                <div className="w-20 h-20 border border-[#E5E5E5] flex items-center justify-center rounded-2xl mb-6 bg-white shadow-sm transition-all duration-500">
+                   {item.icon}
                 </div>
-                <h3 className="text-xl font-black tracking-tighter uppercase text-center mt-2 font-heading">{item.title}</h3>
+                <h3 className="text-lg font-black tracking-tighter uppercase text-center mt-2 group-hover:text-white text-[#111111] transition-colors">{item.title}</h3>
               </div>
               
-              <div className="flex-1 p-10 lg:p-16 flex flex-col justify-center">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                  <div className="space-y-10">
+              {/* Right Column */}
+              <div className="flex-grow p-8 md:p-12 flex flex-col justify-between">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                  <div className="space-y-6">
                     <div>
-                      <p className="text-[10px] font-black text-primary-main uppercase tracking-widest mb-3 font-sans opacity-70">The Challenge</p>
-                      <h4 className="text-2xl font-black text-text-primary uppercase tracking-tight leading-tight">{item.problem}</h4>
+                      <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest mb-1.5 block">Operational Bottleneck</span>
+                      <h4 className="text-lg font-black text-[#111111] uppercase tracking-tight leading-tight">{item.challenge}</h4>
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-primary-main uppercase tracking-widest mb-3 font-sans opacity-70">Our Approach</p>
-                      <p className="text-text-secondary leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Join a network of global industrial leaders leveraging Tamizh Tech Robotics Company&apos;s dual hardware-software ecosystem for operational excellence.</p>
-                      <Link href="/contact" className="btn-primary py-6 px-12 inline-flex shadow-xl">PARTNER WITH TAMIZH TECH ROBOTICS COMPANY</Link>
+                      <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest mb-1.5 block">Custom Deployment</span>
+                      <p className="text-gray-500 text-xs font-medium leading-relaxed">{item.approach}</p>
                     </div>
                   </div>
                   
-                  <div className="bg-bg-page/50 p-8 border border-border-light/50">
-                    <p className="text-[10px] font-black text-text-muted uppercase tracking-widest mb-8 font-sans text-center border-b border-border-light pb-4">Business Outcomes</p>
-                    <div className="space-y-5">
-                      {item.benefits.map((benefit) => (
-                        <div key={benefit} className="flex items-center gap-4 text-xs font-black text-text-primary uppercase tracking-tight">
-                          <ShieldCheck className="w-5 h-5 text-primary-main flex-shrink-0" /> {benefit}
+                  <div className="bg-[#FAFAFA] p-6 border border-[#E5E5E5] rounded-xl flex flex-col justify-center">
+                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4 block text-center border-b border-[#E5E5E5] pb-2">Technical Deliverables</span>
+                    <div className="space-y-3">
+                      {item.metrics.map((m, idx) => (
+                        <div key={idx} className="flex items-center gap-3 text-[11px] font-bold text-[#111111] uppercase tracking-tight">
+                          <ShieldCheck className="w-4 h-4 text-[#FF6B00] shrink-0" /> {m}
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-12 flex justify-end">
-                   <Link href="/contact" className="text-[10px] font-black text-secondary-main flex items-center gap-4 group-hover:text-primary-main transition-all uppercase tracking-widest border-b-2 border-primary-main pb-1">
-                     Technical Discussion <MoveRight className="w-4 h-4 group-hover:translate-x-1" />
+                <div className="mt-8 pt-6 border-t border-[#F0F0F0] flex justify-end">
+                   <Link href="#consultation-form" className="text-[10px] font-black text-[#FF6B00] flex items-center gap-2 hover:text-[#111111] transition-colors uppercase tracking-widest pb-1 border-b border-[#FF6B00]">
+                     Schedule Technical Feasibility Discussion <MoveRight className="w-4 h-4" />
                    </Link>
                 </div>
               </div>
@@ -125,41 +205,96 @@ export default function IndustriesPage() {
           ))}
         </div>
 
-        {/* Global Strategy */}
-        <div className="bg-secondary-main p-20 text-white grid lg:grid-cols-2 gap-24 items-center mb-32 relative overflow-hidden">
-           <div className="absolute inset-0 opacity-[0.03] hero-grid pointer-events-none"></div>
-           <div className="relative z-10">
-              <h2 className="text-5xl font-black tracking-tighter mb-8 leading-[0.95] uppercase">Coimbatore Core. <br />Pan-India Scale.</h2>
-              <p className="text-white/60 leading-relaxed font-bold text-sm max-w-xl italic uppercase tracking-wider">
+        {/* Global Strategy / Summary */}
+        <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-12 md:p-20 grid lg:grid-cols-2 gap-16 items-center rounded-2xl mb-24">
+           <div>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 leading-tight uppercase text-[#111111]">Coimbatore Core.<br />Pan-India Scale.</h2>
+              <p className="text-gray-500 leading-relaxed font-bold text-xs uppercase tracking-wider">
                 Headquartered in India&apos;s engineering heartland, we leverage the region&apos;s manufacturing heritage to provide on-ground technical support for global brands and domestic leaders.
               </p>
-              <div className="flex gap-6 mt-12">
-                 <Link href="/about" className="btn-primary py-6 px-12">Firm Profile</Link>
+              <div className="flex gap-4 mt-8">
+                 <Link href="/about" className="btn-primary py-4 px-8 text-xs">Firm Profile</Link>
               </div>
            </div>
            
-           <div className="relative z-10 grid grid-cols-2 gap-4">
+           <div className="grid grid-cols-2 gap-4">
               {[
                 { label: "Deployment Centers", val: "15+" },
                 { label: "Active Deployments", val: "120+" },
                 { label: "Engineering Staff", val: "50+" },
                 { label: "Strategic Partners", val: "10+" }
               ].map((stat) => (
-                <div key={stat.label} className="bg-white/5 border border-white/10 p-8 text-center flex flex-col justify-center backdrop-blur-sm">
-                  <span className="text-4xl font-black text-primary-main tracking-tighter">{stat.val}</span>
-                  <span className="text-[10px] font-black text-white/50 uppercase tracking-widest mt-3 leading-tight">{stat.label}</span>
+                <div key={stat.label} className="bg-white border border-[#E5E5E5] p-6 text-center flex flex-col justify-center rounded-xl shadow-xs">
+                  <span className="text-3xl font-black text-[#FF6B00] tracking-tighter">{stat.val}</span>
+                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2 leading-tight">{stat.label}</span>
                 </div>
               ))}
            </div>
         </div>
 
+        {/* Industrial Consultation Form */}
+        <section className="max-w-4xl mx-auto mb-24" id="consultation-form">
+          <div className="border border-[#E5E5E5] rounded-2xl bg-[#FAFAFA] p-8 md:p-12 text-left relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF6B00]" />
+            <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-[0.3em] mb-3 block">B2B Coordination Desk</span>
+            <h3 className="text-2xl md:text-3xl font-black uppercase text-[#111111] tracking-tighter mb-4">Request Automation Consultation</h3>
+            <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
+            
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Corporate Representative Name</label>
+                  <input required type="text" placeholder="John Doe" className={formInputClass} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Official Company Email</label>
+                  <input required type="email" placeholder="john@corporatemail.com" className={formInputClass} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Contact Phone</label>
+                  <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Company Name & Site Location</label>
+                  <input required type="text" placeholder="Auto Corp, Coimbatore" className={formInputClass} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Target Automation Interest</label>
+                  <select className={formInputClass}>
+                    <option>PLC & SCADA logic setup</option>
+                    <option>Machine Vision (OpenCV inspection)</option>
+                    <option>Warehouse AMR/AGV Deployment</option>
+                    <option>IoT Fleet Telemetry Node audit</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Technical Requirement Details</label>
+                <textarea rows={4} placeholder="Describe the current manual process, machinery brand names (Siemens, Mitsubishi, Delta), and target cycle time improvements..." className={formInputClass + " resize-none"} />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button type="submit" className="btn-primary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1">
+                  Schedule Audit & Consult <Send className="w-4 h-4" />
+                </button>
+                <a 
+                  href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20inquiring%20about%20your%20B2B%20Industrial%20Automation%20and%20PLC%2FSCADA%2FMachine%20Vision%20solutions." 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center"
+                >
+                  <FaWhatsapp className="w-4 h-4 text-[#FF6B00]" /> Talk to Automation Expert
+                </a>
+              </div>
+            </form>
+          </div>
+        </section>
+
       </div>
     </div>
   );
 }
-
-// Helper to clone icons with custom classes
-function cloneIcon(icon: any, className: string) {
-  return <icon.type {...icon.props} className={className} />;
-}
-

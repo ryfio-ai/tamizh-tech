@@ -17,43 +17,42 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // B2B Industrial Palette (Strict adherence to request)
         'primary': {
-          DEFAULT: '#F47A20',
-          'main': '#F47A20',
-          'hover': '#D96510',
-          'soft': '#FFF1E6',
+          DEFAULT: '#FF6B00',
+          'main': '#FF6B00',
+          'hover': '#E05E00',
+          'soft': '#FFF2E6',
           foreground: '#FFFFFF',
         },
         'secondary': {
-          DEFAULT: '#1F2A44',
-          'main': '#1F2A44',
-          'hover': '#161E31',
-          foreground: '#FFFFFF',
+          DEFAULT: '#FFFFFF',
+          'main': '#FFFFFF',
+          'hover': '#FAFAFA',
+          foreground: '#111111',
         },
         'bg': {
-          'page': '#F7F7F5', // Warm off-white surface
+          'page': '#FFFFFF',
           'primary': '#FFFFFF',
-          'secondary': '#F3F4F6',
-          'accent': '#FFF1E6',
+          'secondary': '#FAFAFA',
+          'accent': '#FFF2E6',
         },
         'text': {
-          'primary': '#1F2A44', // Deep navy-charcoal
-          'secondary': '#5B6470', // Steel gray muted
-          'muted': '#838B98',
+          'primary': '#111111',
+          'secondary': '#555555',
+          'muted': '#999999',
           'on-primary': '#FFFFFF',
         },
         'border': {
-          DEFAULT: '#D9DEE5', // Industrial border
-          'light': '#E5E9EF',
-          'medium': '#D1D5DB',
+          DEFAULT: '#E5E5E5',
+          'light': '#F0F0F0',
+          'medium': '#D1D1D1',
         },
         // Compatibility with UI components
-        background: '#F7F7F5',
-        foreground: '#1F2A44',
+        background: '#FFFFFF',
+        foreground: '#111111',
         muted: {
-          DEFAULT: '#F3F4F6',
-          foreground: '#5B6470',
+          DEFAULT: '#FAFAFA',
+          foreground: '#555555',
         },
       },
       borderRadius: {

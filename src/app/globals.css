@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 97%; /* #F7F7F5 */
-    --foreground: 222 37% 20%; /* #1F2A44 */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 0 0% 7%; /* #111111 */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 37% 20%;
+    --card-foreground: 0 0% 7%;
 
-    --primary: 24 90% 54%; /* #F47A20 */
+    --primary: 25 100% 50%; /* #FF6B00 */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 222 37% 20%; /* #1F2A44 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%; /* #FAFAFA */
+    --secondary-foreground: 0 0% 7%;
     
-    --muted: 210 20% 96%; /* #F3F4F6 */
-    --muted-foreground: 217 10% 40%; /* #5B6470 */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
 
-    --border: 216 12% 88%; /* #D9DEE5 */
-    --input: 216 12% 88%;
-    --ring: 24 90% 54%;
+    --border: 0 0% 90%; /* #E5E5E5 */
+    --input: 0 0% 90%;
+    --ring: 25 100% 50%;
 
-    --radius: 0.125rem;
+    --radius: 0.5rem;
   }
 
   * {
@@ -37,14 +37,14 @@
   }
 
   body {
-    background-color: #F7F7F5;
-    color: #1F2A44;
+    background-color: #FFFFFF;
+    color: #111111;
     font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #1F2A44;
+    color: #111111;
     font-family: 'General Sans', 'Satoshi', sans-serif;
     font-weight: 700;
     letter-spacing: -0.04em;
@@ -56,10 +56,10 @@
   /* Industrial Swiss Grid System */
   .hero-grid {
     background-image: 
-      linear-gradient(to right, #D9DEE5 1px, transparent 1px),
-      linear-gradient(to bottom, #D9DEE5 1px, transparent 1px);
+      linear-gradient(to right, #E5E5E5 1px, transparent 1px),
+      linear-gradient(to bottom, #E5E5E5 1px, transparent 1px);
     background-size: 60px 60px;
-    background-color: #F7F7F5;
+    background-color: #FFFFFF;
   }
 
   /* Precision Typography for B2B */
@@ -71,73 +71,73 @@
 
   /* Industrial Card: Sharp, Structured, Trusted */
   .industrial-card {
-    border: 1px solid #D9DEE5;
-    border-radius: 0px; /* Swiss Style - Sharp */
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .industrial-card:hover {
-    border-color: #F47A20;
+    border-color: #FF6B00;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px -10px rgba(31, 42, 68, 0.1);
+    box-shadow: 0 12px 24px -10px rgba(17, 17, 17, 0.08);
   }
 
-  /* B2B Action Components */
+  /* B2C Action Components */
   .btn-primary {
-    background-color: #F47A20;
+    background-color: #FF6B00;
     color: #FFFFFF;
     padding: 12px 32px;
-    border-radius: 2px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 14px;
     transition: all 0.25s ease;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #F47A20;
+    border: 1px solid #FF6B00;
   }
   .btn-primary:hover {
-    background-color: #D96510;
-    border-color: #D96510;
+    background-color: #E05E00;
+    border-color: #E05E00;
   }
 
   .btn-secondary {
     background-color: transparent;
-    border: 1px solid #1F2A44;
-    color: #1F2A44;
+    border: 1px solid #111111;
+    color: #111111;
     padding: 12px 32px;
-    border-radius: 2px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 14px;
     transition: all 0.25s ease;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
   .btn-secondary:hover {
-    background-color: #1F2A44;
+    background-color: #111111;
     color: #FFFFFF;
   }
 
   .btn-tertiary {
     background-color: #FFFFFF;
-    border: 1px solid #D9DEE5;
-    color: #5B6470;
+    border: 1px solid #E5E5E5;
+    color: #555555;
     padding: 12px 24px;
-    border-radius: 2px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 13px;
     transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
   }
   .btn-tertiary:hover {
-    border-color: #1F2A44;
-    color: #1F2A44;
+    border-color: #111111;
+    color: #111111;
   }
 
   /* Horizontal Engineering Rule */

@@ -65,28 +65,28 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
+    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111]">
       <div className="container mx-auto px-6">
         
         {/* Header Section */}
-        <div className="max-w-4xl mb-32 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Project Archive</h1>
-          <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-            Visualizing <br /> Industrial <br /> Excellence.
+        <div className="max-w-4xl mb-24 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4 text-left">
+          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-8 font-sans">Project Archive</h1>
+          <h2 className="text-5xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase">
+            Ecosystem <br /> Gallery.
           </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10 uppercase tracking-tight font-bold">
-            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Robotics Company ecosystem.
+          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-10">
+            A visual documentation of specialized robotics deployments, technical R&D milestones, workshops, and student competitive tracks across India.
           </p>
         </div>
 
         {/* Parallax Gallery Grid */}
-        <div className="bg-white border-y border-border-light py-20 relative overflow-hidden mb-40 shadow-sm industrial-card">
-           <div className="absolute top-0 right-0 p-8 opacity-[0.02]">
-             <Camera className="w-64 h-64 text-secondary-main" />
+        <div className="bg-[#FAFAFA] border border-[#E5E5E5] py-20 rounded-2xl relative overflow-hidden mb-40 shadow-sm">
+           <div className="absolute top-0 right-0 p-8 opacity-[0.02] pointer-events-none">
+             <Camera className="w-64 h-64 text-[#111111]" />
            </div>
            <div className="container mx-auto px-6 mb-16 relative z-10 text-center lg:text-left">
-              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-text-muted flex items-center gap-4 justify-center lg:justify-start">
-                <span className="w-8 h-[2px] bg-primary-main"></span> TECHNICAL DEPLOYMENT LOGS
+              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[#FF6B00] flex items-center gap-4 justify-center lg:justify-start">
+                <span className="w-8 h-[2px] bg-[#FF6B00]"></span> TECHNICAL & COMMUNITY DEPLOYMENTS
               </p>
            </div>
            <div className="relative z-10 -mx-6 md:mx-0">
@@ -95,30 +95,29 @@ export default function GalleryPage() {
         </div>
 
         {/* Footer Audit Context */}
-        <div className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-border-light pt-20">
+        <div className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-[#E5E5E5] pt-20 text-left">
            <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Layers className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">Hardware Evolution</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">Visual mapping of robotic chassis development, iterative structural testing, and localized PCB fabrication cycles.</p>
+              <div className="p-4 bg-[#FFF2E6] w-fit rounded-lg"><Layers className="w-6 h-6 text-[#FF6B00]" /></div>
+              <h4 className="text-xl font-black text-[#111111] uppercase tracking-tighter">Hardware Evolution</h4>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-tight leading-relaxed opacity-70">Visual mapping of robotic chassis development, iterative structural testing, and localized prototyping cycles.</p>
            </div>
            <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Zap className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">On-Ground Impact</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.</p>
+              <div className="p-4 bg-[#FFF2E6] w-fit rounded-lg"><Zap className="w-6 h-6 text-[#FF6B00]" /></div>
+              <h4 className="text-xl font-black text-[#111111] uppercase tracking-tighter">On-Ground Impact</h4>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-tight leading-relaxed opacity-70">Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.</p>
            </div>
            <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Globe className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">Research Strategic</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.</p>
+              <div className="p-4 bg-[#FFF2E6] w-fit rounded-lg"><Globe className="w-6 h-6 text-[#FF6B00]" /></div>
+              <h4 className="text-xl font-black text-[#111111] uppercase tracking-tighter">Research Strategy</h4>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-tight leading-relaxed opacity-70">A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.</p>
            </div>
         </div>
 
         {/* Request Specs CTA */}
-        <div className="mt-40 bg-secondary-main p-16 lg:p-24 text-center shadow-2xl relative overflow-hidden">
-           <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
+        <div className="mt-40 bg-[#FAFAFA] border border-[#E5E5E5] p-16 lg:p-24 text-center shadow-2xl rounded-2xl relative overflow-hidden">
            <div className="relative z-10">
-             <h4 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase mb-10 leading-none">Access Technical <br /> Specifications.</h4>
-             <p className="text-white/50 text-sm font-bold uppercase tracking-widest max-w-2xl mx-auto mb-12 leading-relaxed">For higher-resolution project documentation or specific technical SOPs related to these deployments, contact our engineering PR division.</p>
+             <h4 className="text-3xl md:text-4xl font-black text-[#111111] tracking-tighter uppercase mb-10 leading-none">Access Technical <br /> Specifications.</h4>
+             <p className="text-gray-500 text-sm font-bold uppercase tracking-widest max-w-2xl mx-auto mb-12 leading-relaxed">For higher-resolution project documentation or specific technical guides related to these deployments, contact our coordination desk.</p>
              <Link href="/contact" className="btn-primary py-5 px-12 inline-flex items-center gap-4 shadow-xl">
                REQUEST DOCS <MoveRight className="w-4 h-4" />
              </Link>
@@ -129,4 +128,3 @@ export default function GalleryPage() {
     </div>
   );
 }
-

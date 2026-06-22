@@ -1,232 +1,284 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X, Cpu, Globe, Rocket, ShieldCheck, Layers, Layout, Kanban, Smartphone, Database } from "lucide-react";
+import { Menu, MoveRight, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 function Header1() {
-    const navigationItems = [
-        {
-            title: "Home",
-            href: "/",
-        },
-        {
-            title: "Solutions",
-            description: "End-to-end engineering for hardware and software systems.",
-            sections: [
-                {
-                    label: "Industrial & Robotics",
-                    items: [
-                        { title: "Industrial Automation", href: "/solutions#automation", icon: <ShieldCheck className="w-4 h-4" /> },
-                        { title: "Robotics Integration", href: "/solutions#robotics", icon: <Rocket className="w-4 h-4" /> },
-                        { title: "AI Vision Systems", href: "/solutions#ai-vision", icon: <Cpu className="w-4 h-4" /> },
-                        { title: "IoT & Monitoring", href: "/solutions#iot", icon: <Globe className="w-4 h-4" /> },
-                    ]
-                },
-                {
-                    label: "Software & Digital",
-                    items: [
-                        { title: "Web Applications", href: "/solutions#web", icon: <Layout className="w-4 h-4" /> },
-                        { title: "Mobile Platforms", href: "/solutions#mobile", icon: <Smartphone className="w-4 h-4" /> },
-                        { title: "SaaS Product Dev", href: "/solutions#saas", icon: <Layers className="w-4 h-4" /> },
-                        { title: "B2B Software", href: "/solutions#b2b", icon: <Database className="w-4 h-4" /> },
-                    ]
-                }
-            ]
-        },
-        {
-            title: "Industries",
-            description: "Sector-specific implementation and operational tools.",
-            items: [
-                { title: "Manufacturing", href: "/industries#manufacturing" },
-                { title: "OEM & Engineering", href: "/industries#oem" },
-                { title: "Logistics & Warehouse", href: "/industries#logistics" },
-                { title: "R&D Labs", href: "/industries#rd" },
-                { title: "Educational Institutions", href: "/industries#education" },
-            ],
-        },
-        {
-            title: "Products",
-            href: "/products",
-        },
-        {
-            title: "Gallery",
-            href: "/gallery",
-        },
-        {
-            title: "Company",
-            description: "Engineering excellence since inception.",
-            items: [
-                { title: "About Us", href: "/about" },
-                { title: "Internship Program", href: "/internship" },
-                { title: "Join Robotics Club", href: "/robotics-club" },
-                { title: "Case Studies", href: "/case-studies" },
-                { title: "Careers", href: "/careers" },
-                { title: "Contact", href: "/contact" },
-            ],
-        },
-    ];
+  const [isOpen, setOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
-    const [isOpen, setOpen] = useState(false);
-    return (
-        <header className="w-full z-50 fixed top-0 left-0 bg-white border-b border-border-light shadow-sm text-text-primary h-20 flex items-center">
-            <div className="w-full max-w-[1440px] mx-auto px-4 xl:px-8 flex justify-between items-center h-full">
-                
-                {/* Left: Logo Section */}
-                <Link href="/" className="flex items-center gap-3 group shrink-0">
-                    <div className="relative w-14 h-14 flex items-center justify-center group-hover:opacity-90 transition-opacity">
-                        <Image
-                            src="/logo/TTRC LOGO.png"
-                            alt="TTRC Logo"
-                            width={56}
-                            height={56}
-                            className="object-contain"
-                        />
-                    </div>
-                    <div className="flex flex-col leading-none">
-                        <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
-                            TAMIZH <span className="text-primary-main">TECH</span>
-                        </span>
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
-                    </div>
+  const productsDropdown = [
+    { title: "Product Catalog", href: "/products" },
+    { title: "Robo Race Bots", href: "/products?category=Robo%20Race%20Bots" },
+    { title: "Robo Soccer Bots", href: "/products?category=Robo%20Soccer%20Bots" },
+    { title: "Robo Sumo Bots", href: "/products?category=Robo%20Sumo%20Bots" },
+    { title: "Line Follower Robots", href: "/products?category=Line%20Follower%20Robots" },
+    { title: "STEM Kits", href: "/products?category=STEM%20Learning%20Kits" },
+    { title: "Lab Kits", href: "/products?category=School%20Robotics%20Lab%20Kits" },
+  ];
+
+  const solutionsDropdown = [
+    { title: "Schools Setup", href: "/schools" },
+    { title: "Colleges Program", href: "/colleges" },
+    { title: "Industries Served", href: "/industries" },
+  ];
+
+  const companyDropdown = [
+    { title: "About Us", href: "/about" },
+    { title: "Founder Profile", href: "/founder" },
+    { title: "Robotics in Coimbatore", href: "/robotics-company-in-coimbatore" },
+    { title: "Achievements Hub", href: "/#achievements" },
+    { title: "Visual Gallery", href: "/gallery" },
+  ];
+
+  const handleDropdownToggle = (menu: string) => {
+    if (activeDropdown === menu) {
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(menu);
+    }
+  };
+
+  return (
+    <header className="w-full z-50 fixed top-0 left-0 bg-white border-b border-[#E5E5E5] shadow-xs text-[#111111] h-20 flex items-center">
+      <div className="w-full max-w-[1440px] mx-auto px-6 flex justify-between items-center h-full relative">
+        
+        {/* Left: Logo Section */}
+        <Link href="/" className="flex items-center gap-3 group shrink-0">
+          <div className="relative w-12 h-12 flex items-center justify-center group-hover:opacity-90 transition-opacity">
+            <Image
+              src="/logo/TTRC LOGO.png"
+              alt="TTRC Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col leading-none text-left">
+            <span className="text-lg sm:text-xl font-black tracking-tighter text-[#111111] uppercase">
+              TAMIZH <span className="text-[#FF6B00]">TECH</span>
+            </span>
+            <span className="text-[7px] sm:text-[8px] uppercase tracking-[0.25em] font-black text-gray-400 mt-0.5">Robotics Company</span>
+          </div>
+        </Link>
+
+        {/* Center: Desktop Navigation with Hover Dropdowns */}
+        <nav className="hidden xl:flex items-center justify-center gap-8 flex-grow">
+          <Link href="/" className="text-xs font-black uppercase tracking-widest text-gray-500 hover:text-[#FF6B00] transition-colors">
+            Home
+          </Link>
+
+          {/* Products Dropdown */}
+          <div 
+            className="relative py-6 cursor-pointer group"
+            onMouseEnter={() => setActiveDropdown("products")}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <span className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-[#FF6B00] flex items-center gap-1 transition-colors">
+              Products <ChevronDown className="w-3.5 h-3.5" />
+            </span>
+            <div className="absolute top-[72px] left-1/2 -translate-x-1/2 bg-white border border-[#E5E5E5] shadow-xl rounded-xl py-4 w-56 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 text-left">
+              {productsDropdown.map((item) => (
+                <Link 
+                  key={item.title} 
+                  href={item.href}
+                  className="block px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-[#FF6B00] hover:bg-[#FAFAFA] transition-all"
+                >
+                  {item.title}
                 </Link>
+              ))}
+            </div>
+          </div>
 
-                {/* Center: Desktop Navigation */}
-                <nav className="hidden xl:flex items-center justify-center flex-grow mx-8">
-                    <NavigationMenu>
-                        <NavigationMenuList className="gap-1 xl:gap-2">
-                            {navigationItems.map((item) => (
-                                <NavigationMenuItem key={item.title}>
-                                    {item.href ? (
-                                        <NavigationMenuLink href={item.href} className="px-3 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main transition-colors">
-                                            {item.title}
-                                        </NavigationMenuLink>
-                                    ) : (
-                                        <>
-                                            <NavigationMenuTrigger className="px-3 py-2 text-xs font-black uppercase tracking-widest text-text-secondary hover:text-primary-main bg-transparent transition-colors">
-                                                {item.title}
-                                            </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="p-0 border border-border-light shadow-2xl bg-white rounded-xs">
-                                                <div className="w-[600px] grid grid-cols-[1fr_2fr] overflow-hidden">
-                                                    <div className="bg-bg-page p-8 flex flex-col justify-between border-r border-border-light">
-                                                        <div>
-                                                            <h4 className="text-xl font-black tracking-tighter text-text-primary uppercase mb-3">{item.title}</h4>
-                                                            <p className="text-xs text-text-secondary font-medium leading-relaxed italic">{item.description}</p>
-                                                        </div>
-                                                        <div className="flex flex-col gap-3 mt-auto">
-                                                            <Button className="btn-primary w-full py-4 text-[10px] font-black uppercase tracking-widest h-auto" asChild>
-                                                                <Link href="/contact">Request Proposal</Link>
-                                                            </Button>
-                                                            <Link href="/robotics-club" className="text-[9px] font-black uppercase tracking-widest text-text-muted hover:text-primary-main transition-colors text-center py-2 border border-border-light rounded-xs">
-                                                                Join Our Club
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                    <div className="p-6">
-                                                        {item.sections ? (
-                                                            <div className="grid grid-cols-2 gap-8">
-                                                                {item.sections.map((section) => (
-                                                                    <div key={section.label} className="space-y-4">
-                                                                        <h5 className="text-[10px] font-black text-primary-main uppercase tracking-[0.2em] mb-4">{section.label}</h5>
-                                                                        <div className="space-y-2">
-                                                                            {section.items.map((subItem) => (
-                                                                                <Link key={subItem.title} href={subItem.href} className="flex items-center gap-3 text-xs font-bold text-text-secondary hover:text-primary-main transition-colors py-1 group">
-                                                                                    <span className="text-text-muted group-hover:text-primary-main transition-colors">{subItem.icon}</span>
-                                                                                    {subItem.title === "Robotics Integration" ? "Tamil Robotics Club (TRC)" : subItem.title}
-                                                                                </Link>
-                                                                            ))}
-                                                                        </div>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        ) : (
-                                                            <div className="grid grid-cols-1 gap-2">
-                                                                {item.items?.map((subItem) => (
-                                                                    <Link key={subItem.title} href={subItem.href} className="flex justify-between items-center px-4 py-3 hover:bg-bg-page rounded-xs group transition-all">
-                                                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary-main">{subItem.title}</span>
-                                                                        <MoveRight className="w-4 h-4 text-border-medium group-hover:text-primary-main group-hover:translate-x-1 transition-all" />
-                                                                    </Link>
-                                                                ))}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </NavigationMenuContent>
-                                        </>
-                                    )}
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </nav>
+          {/* Solutions Dropdown */}
+          <div 
+            className="relative py-6 cursor-pointer group"
+            onMouseEnter={() => setActiveDropdown("solutions")}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <span className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-[#FF6B00] flex items-center gap-1 transition-colors">
+              Solutions <ChevronDown className="w-3.5 h-3.5" />
+            </span>
+            <div className="absolute top-[72px] left-1/2 -translate-x-1/2 bg-white border border-[#E5E5E5] shadow-xl rounded-xl py-4 w-56 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 text-left">
+              {solutionsDropdown.map((item) => (
+                <Link 
+                  key={item.title} 
+                  href={item.href}
+                  className="block px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-[#FF6B00] hover:bg-[#FAFAFA] transition-all"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-                {/* Right: Desktop Actions */}
-                <div className="hidden xl:flex items-center gap-4 shrink-0">
-                    <Link href="/contact" className="btn-primary shadow-lg">
-                        Request Proposal <MoveRight className="w-4 h-4 ml-3" />
-                    </Link>
-                </div>
+          <Link href="/internship" className="text-xs font-black uppercase tracking-widest text-gray-500 hover:text-[#FF6B00] transition-colors">
+            Training
+          </Link>
 
-                {/* Mobile Toggle */}
-                <div className="xl:hidden">
-                    <Button variant="ghost" size="icon" onClick={() => setOpen(!isOpen)} className="text-text-primary">
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </Button>
-                </div>
+          {/* Company Dropdown */}
+          <div 
+            className="relative py-6 cursor-pointer group"
+            onMouseEnter={() => setActiveDropdown("company")}
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <span className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-[#FF6B00] flex items-center gap-1 transition-colors">
+              Company <ChevronDown className="w-3.5 h-3.5" />
+            </span>
+            <div className="absolute top-[72px] left-1/2 -translate-x-1/2 bg-white border border-[#E5E5E5] shadow-xl rounded-xl py-4 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 text-left">
+              {companyDropdown.map((item) => (
+                <Link 
+                  key={item.title} 
+                  href={item.href}
+                  className="block px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-gray-500 hover:text-[#FF6B00] hover:bg-[#FAFAFA] transition-all"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <Link href="/contact" className="text-xs font-black uppercase tracking-widest text-gray-500 hover:text-[#FF6B00] transition-colors">
+            Contact
+          </Link>
+        </nav>
+
+        {/* Right: Desktop Actions */}
+        <div className="hidden xl:flex items-center gap-4 shrink-0">
+          <Link href="/contact" className="btn-primary shadow-lg py-3 px-6 text-xs font-bold">
+            Get Quote <MoveRight className="w-4 h-4 ml-3" />
+          </Link>
+        </div>
+
+        {/* Mobile Toggle */}
+        <div className="xl:hidden">
+          <button onClick={() => setOpen(!isOpen)} className="text-[#111111] p-2 focus:outline-none" aria-label="Toggle Menu">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Drawer */}
+      {isOpen && (
+        <div className="absolute top-20 left-0 w-full bg-white border-t border-[#E5E5E5] shadow-2xl h-[calc(100vh-80px)] overflow-y-auto p-8 xl:hidden animate-in slide-in-from-top-4 text-left">
+          <div className="flex flex-col gap-6">
+            
+            {/* Home */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <Link href="/" className="text-lg font-black tracking-tighter text-[#111111] uppercase block" onClick={() => setOpen(false)}>
+                Home
+              </Link>
             </div>
 
-            {/* Mobile Navigation */}
-            {isOpen && (
-                <div className="absolute top-20 left-0 w-full bg-white border-t border-border-light shadow-2xl h-[calc(100vh-80px)] overflow-y-auto p-8 xl:hidden animate-in slide-in-from-top-4">
-                    <div className="flex flex-col gap-10">
-                        {navigationItems.map((item) => (
-                            <div key={item.title}>
-                                {item.href ? (
-                                    <Link href={item.href} className="text-3xl font-black tracking-tighter text-text-primary uppercase" onClick={() => setOpen(false)}>
-                                        {item.title}.
-                                    </Link>
-                                ) : (
-                                    <div className="space-y-6">
-                                        <p className="text-[10px] font-black text-primary-main uppercase tracking-[0.4em]">{item.title}</p>
-                                        <div className="grid grid-cols-1 gap-4 pl-4 border-l border-border-light">
-                                            {item.sections ? (
-                                                item.sections.flatMap(s => s.items).map((subItem) => (
-                                                    <Link key={subItem.title} href={subItem.href} className="text-lg font-bold text-text-secondary uppercase tracking-tight" onClick={() => setOpen(false)}>
-                                                        {subItem.title}
-                                                    </Link>
-                                                ))
-                                            ) : (
-                                                item.items?.map((subItem) => (
-                                                    <Link key={subItem.title} href={subItem.href} className="text-lg font-bold text-text-secondary uppercase tracking-tight" onClick={() => setOpen(false)}>
-                                                        {subItem.title}
-                                                    </Link>
-                                                ))
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                        <div className="pt-8 border-t border-border-light flex flex-col gap-4">
-                            <Link href="/contact" className="btn-primary w-full py-6 text-sm flex items-center justify-center" onClick={() => setOpen(false)}>Request Proposal</Link>
-                            <Link href="/robotics-club" className="btn-secondary w-full py-6 text-sm flex items-center justify-center border-border-medium text-text-primary" onClick={() => setOpen(false)}>Join Our Club</Link>
-                        </div>
-                    </div>
+            {/* Products Accordion */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <button 
+                onClick={() => handleDropdownToggle("products")}
+                className="w-full flex justify-between items-center text-lg font-black tracking-tighter text-[#111111] uppercase"
+              >
+                <span>Products</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === "products" ? "rotate-180" : ""}`} />
+              </button>
+              {activeDropdown === "products" && (
+                <div className="pl-4 mt-3 space-y-2 border-l border-[#FF6B00]">
+                  {productsDropdown.map((item) => (
+                    <Link 
+                      key={item.title} 
+                      href={item.href} 
+                      className="block text-[11px] font-black text-gray-400 uppercase tracking-widest py-1.5"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
                 </div>
-            )}
-        </header>
-    );
+              )}
+            </div>
+
+            {/* Solutions Accordion */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <button 
+                onClick={() => handleDropdownToggle("solutions")}
+                className="w-full flex justify-between items-center text-lg font-black tracking-tighter text-[#111111] uppercase"
+              >
+                <span>Solutions</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === "solutions" ? "rotate-180" : ""}`} />
+              </button>
+              {activeDropdown === "solutions" && (
+                <div className="pl-4 mt-3 space-y-2 border-l border-[#FF6B00]">
+                  {solutionsDropdown.map((item) => (
+                    <Link 
+                      key={item.title} 
+                      href={item.href} 
+                      className="block text-[11px] font-black text-gray-400 uppercase tracking-widest py-1.5"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Training */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <Link href="/internship" className="text-lg font-black tracking-tighter text-[#111111] uppercase block" onClick={() => setOpen(false)}>
+                Training
+              </Link>
+            </div>
+
+            {/* Company Accordion */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <button 
+                onClick={() => handleDropdownToggle("company")}
+                className="w-full flex justify-between items-center text-lg font-black tracking-tighter text-[#111111] uppercase"
+              >
+                <span>Company</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === "company" ? "rotate-180" : ""}`} />
+              </button>
+              {activeDropdown === "company" && (
+                <div className="pl-4 mt-3 space-y-2 border-l border-[#FF6B00]">
+                  {companyDropdown.map((item) => (
+                    <Link 
+                      key={item.title} 
+                      href={item.href} 
+                      className="block text-[11px] font-black text-gray-400 uppercase tracking-widest py-1.5"
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Contact */}
+            <div className="border-b border-[#F0F0F0] pb-2">
+              <Link href="/contact" className="text-lg font-black tracking-tighter text-[#111111] uppercase block" onClick={() => setOpen(false)}>
+                Contact
+              </Link>
+            </div>
+
+            <div className="pt-6 flex flex-col gap-4">
+              <Link href="/contact" className="btn-primary w-full py-4 text-xs font-bold flex items-center justify-center" onClick={() => setOpen(false)}>Get Quote</Link>
+              <a 
+                href="https://wa.me/918148045030" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-secondary w-full py-4 text-xs font-bold flex items-center justify-center border-[#D1D1D1] text-[#111111]"
+                onClick={() => setOpen(false)}
+              >
+                Talk To Expert
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }
 
 export { Header1 };
-
