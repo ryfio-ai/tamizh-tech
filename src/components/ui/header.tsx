@@ -97,7 +97,7 @@ function Header1() {
                         <span className="text-2xl font-black tracking-tighter text-text-primary uppercase">
                             TAMIZH <span className="text-primary-main">TECH</span>
                         </span>
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Engineering & Software</span>
+                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-text-muted mt-1">Robotics Company</span>
                     </div>
                 </Link>
 
