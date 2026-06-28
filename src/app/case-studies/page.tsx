@@ -69,7 +69,7 @@ export default function CaseStudiesPage() {
               key={study.title} 
               className="bg-white border border-border-light p-0 flex flex-col lg:flex-row items-stretch industrial-card group overflow-hidden"
             >
-              <div className="w-full lg:w-[400px] bg-secondary-main p-12 text-white flex flex-col justify-between relative overflow-hidden">
+              <div className="w-full lg:w-[400px] bg-[#0A2060] p-12 text-white flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
                    <Layers className="w-24 h-24" />
                 </div>
@@ -110,7 +110,7 @@ export default function CaseStudiesPage() {
                       </div>
                       <p className="text-xs font-black text-text-primary uppercase tracking-tight max-w-xs">{study.result}</p>
                    </div>
-                   <Link href="/contact" className="text-[10px] font-black text-secondary-main hover:text-primary-main transition-all uppercase tracking-widest flex items-center gap-4 border-b-2 border-primary-main pb-1">
+                   <Link href="/contact" className="text-[10px] font-black text-primary-main hover:text-white transition-all uppercase tracking-widest flex items-center gap-4 border-b-2 border-primary-main pb-1">
                       Technical Deep-dive <MoveRight className="w-4 h-4 group-hover:translate-x-1" />
                    </Link>
                 </div>

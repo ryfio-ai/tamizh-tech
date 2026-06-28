@@ -55,9 +55,9 @@ export default function ClientsPage() {
         </div>
 
         {/* Corporate Slider */}
-        <div className="py-20 border-y border-border-light bg-white mb-40 shadow-2xl relative overflow-hidden">
+        <div className="py-20 border-y border-border-light bg-[#0A2060] mb-40 shadow-2xl relative overflow-hidden">
            <div className="absolute top-0 right-0 p-8 opacity-[0.02]">
-             <Building2 className="w-64 h-64 text-secondary-main" />
+             <Building2 className="w-64 h-64 text-white/10" />
            </div>
            <div className="container mx-auto px-6 mb-16 relative z-10 text-center lg:text-left">
               <p className="text-[9px] font-black uppercase tracking-[0.4em] text-text-muted flex items-center gap-4 justify-center lg:justify-start">
@@ -68,7 +68,7 @@ export default function ClientsPage() {
              <InfiniteSlider gap={40} duration={50} durationOnHover={100}>
                {clients.map((c) => (
                  <div key={c.name} className="flex items-center gap-6 px-10 py-8 border border-border-light bg-bg-page shadow-sm hover:shadow-xl transition-all duration-500 industrial-card group">
-                   <div className="w-12 h-12 bg-secondary-main text-primary-main flex items-center justify-center font-black text-xl tracking-tighter group-hover:bg-primary-main group-hover:text-white transition-all">{c.name.charAt(0)}</div>
+                    <div className="w-12 h-12 bg-[#102B75] text-primary-main flex items-center justify-center font-black text-xl tracking-tighter group-hover:bg-primary-main group-hover:text-white transition-all">{c.name.charAt(0)}</div>
                    <div>
                      <p className="font-black text-sm text-text-primary uppercase tracking-tighter whitespace-nowrap">{c.name}</p>
                      <p className="text-[9px] font-bold text-text-muted uppercase tracking-widest mt-1">{c.type}</p>

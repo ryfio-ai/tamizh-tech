@@ -6,7 +6,7 @@ import { ArrowRight, Rocket, Users, Target, Zap } from "lucide-react";
 
 export function ClubBanner() {
   return (
-    <section className="w-full bg-secondary-main py-24 relative overflow-hidden border-t border-white/5">
+    <section className="w-full bg-[#0A2060] py-24 relative overflow-hidden border-t border-white/5">
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-[0.03] hero-grid pointer-events-none"></div>
       
@@ -65,11 +65,11 @@ export function ClubBanner() {
           </div>
 
           <div className="lg:w-[400px] w-full shrink-0">
-            <div className="bg-white p-12 border-4 border-primary-main shadow-[20px_20px_0px_0px_#F47A20] relative">
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary-main flex items-center justify-center border-4 border-primary-main">
+            <div className="bg-white p-12 border-4 border-primary-main shadow-[20px_20px_0px_0px_#FB7115] relative">
+              <div className="absolute -top-6 -right-6 w-16 h-16 bg-[#031549] flex items-center justify-center border-4 border-primary-main">
                 <Rocket className="w-8 h-8 text-primary-main" />
               </div>
-              <h3 className="text-2xl font-black text-secondary-main uppercase tracking-tighter mb-6 leading-none italic">Apply to <br /> TRC Hub.</h3>
+              <h3 className="text-2xl font-black text-[#031549] uppercase tracking-tighter mb-6 leading-none italic">Apply to <br /> TRC Hub.</h3>
               <p className="text-text-secondary text-xs font-bold leading-relaxed mb-10 uppercase tracking-tight">Gain access to professional-grade hardware, specialized training tracks, and industrial certification.</p>
               
               <Link href="/robotics-club" className="w-full btn-primary py-6 flex items-center justify-between group">
