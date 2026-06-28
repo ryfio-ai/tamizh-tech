@@ -430,7 +430,7 @@ export default function HomeClient() {
               
               <div className="w-20 h-20 rounded-full border-2 border-[#FB7115]/40 overflow-hidden relative mb-6">
                 <Image 
-                  src="/founder.jpg" 
+                  src="/team/Tamizharasan K.jpg" 
                   alt="Er. K. Tamizharasan" 
                   fill 
                   className="object-cover object-top"
@@ -704,7 +704,7 @@ export default function HomeClient() {
             {/* Product Card 1 */}
             <div className="bg-[#0A2060] border border-white/12 p-6 rounded-2xl group hover:border-[#FB7115] transition-all">
               <div className="bg-white rounded-xl h-44 w-full flex items-center justify-center p-4 mb-6 relative overflow-hidden">
-                <Image src="/product/agv.png" alt="TTRC AGV V1 BOT" fill className="object-contain p-4" onError={(e) => {}} />
+                <Image src="/product/sumo rc.jpg" alt="TTRC AGV V1 BOT" fill className="object-contain p-4" onError={(e) => {}} />
                 <span className="absolute bottom-2 left-3 bg-[#FB7115] text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">R&D Output</span>
               </div>
               <h4 className="text-base font-heading font-black uppercase text-white mb-2">TTRC AGV V1 BOT</h4>
@@ -719,7 +719,7 @@ export default function HomeClient() {
             {/* Product Card 2 */}
             <div className="bg-[#0A2060] border border-white/12 p-6 rounded-2xl group hover:border-[#FB7115] transition-all">
               <div className="bg-white rounded-xl h-44 w-full flex items-center justify-center p-4 mb-6 relative overflow-hidden">
-                <Image src="/product/amr.png" alt="TTRC AMR V1 BOT" fill className="object-contain p-4" />
+                <Image src="/product/soccer rc.jpg" alt="TTRC AMR V1 BOT" fill className="object-contain p-4" />
                 <span className="absolute bottom-2 left-3 bg-[#FB7115] text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">R&D Output</span>
               </div>
               <h4 className="text-base font-heading font-black uppercase text-white mb-2">TTRC AMR V1 BOT</h4>
