@@ -11,7 +11,7 @@ interface StatCounterProps {
 }
 
 export function StatCounter({ target, label, prefix = "", suffix = "" }: StatCounterProps) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const shouldReduceMotion = useReducedMotion();
