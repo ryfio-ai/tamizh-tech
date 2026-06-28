@@ -1,5 +1,5 @@
 "use client";
-import { useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -13,6 +13,7 @@ export const ParallaxScrollSecond = ({
   className?: string;
 }) => {
   const gridRef = useRef<any>(null);
+  const shouldReduceMotion = useReducedMotion();
   
   // Note: Grid scroll is disabled if container is not fixed height. 
   // We'll use the window scroll for a better full-page experience.
@@ -44,7 +45,7 @@ export const ParallaxScrollSecond = ({
         <div className="grid gap-8 sm:gap-10">
           {firstPart.map((el, idx) => (
             <motion.div
-              style={{
+              style={shouldReduceMotion ? {} : {
                 y: translateYFirst,
                 x: translateXFirst,
                 rotateZ: rotateXFirst,
@@ -67,9 +68,9 @@ export const ParallaxScrollSecond = ({
             <motion.div 
               key={"grid-2" + idx}
               className="relative aspect-[4/5] overflow-hidden rounded-xl border border-white/10 shadow-2xl"
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
             >
               <Image
@@ -85,7 +86,7 @@ export const ParallaxScrollSecond = ({
         <div className="grid gap-8 sm:gap-10">
           {thirdPart.map((el, idx) => (
             <motion.div
-              style={{
+              style={shouldReduceMotion ? {} : {
                 y: translateYThird,
                 x: translateXThird,
                 rotateZ: rotateXThird,

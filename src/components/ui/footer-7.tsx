@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaLinkedin, FaInstagram, FaYoutube, FaWhatsapp } from "react-icons/fa";
 import { Phone, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -73,10 +73,10 @@ const defaultSections = [
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/company/tamizh-tech-robotics-company", label: "LinkedIn" },
-  { icon: <FaInstagram className="size-5" />, href: "https://www.instagram.com/tamizh_tech_robotics_company", label: "Instagram" },
-  { icon: <FaYoutube className="size-5" />, href: "https://www.youtube.com/@covaiscientist", label: "YouTube" },
-  { icon: <FaWhatsapp className="size-5" />, href: "https://wa.me/918148045030", label: "WhatsApp" },
+  { icon: <FaLinkedin className="size-4" />, href: "https://www.linkedin.com/company/tamizh-tech-robotics-company", label: "LinkedIn" },
+  { icon: <FaInstagram className="size-4" />, href: "https://www.instagram.com/tamizh_tech_robotics_company", label: "Instagram" },
+  { icon: <FaYoutube className="size-4" />, href: "https://www.youtube.com/@covaiscientist", label: "YouTube" },
+  { icon: <FaWhatsapp className="size-4" />, href: "https://wa.me/918148045030", label: "WhatsApp" },
 ];
 
 const defaultLegalLinks = [
@@ -99,7 +99,7 @@ export const Footer7 = ({
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
   return (
-    <footer className="py-24 bg-white border-t border-[#E5E5E5] text-[#111111] text-left">
+    <footer className="py-20 bg-[#0A0C10] border-t border-[#232833] text-[#9AA1AC] text-left">
       <div className="container mx-auto px-6">
         <div className="flex w-full flex-col justify-between gap-16 lg:flex-row lg:items-start lg:text-left">
           
@@ -119,38 +119,44 @@ export const Footer7 = ({
                   />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="text-xl font-black tracking-tighter text-[#111111] uppercase">
-                    TAMIZH <span className="text-[#FF6B00]">TECH</span>
+                  <span className="text-xl font-heading font-black tracking-tighter text-[#F5F6F8] uppercase">
+                    TAMIZH <span className="text-[#FF4D2D]">TECH</span>
                   </span>
-                  <span className="text-[8px] uppercase tracking-[0.25em] font-black text-gray-400 mt-0.5">Robotics Company</span>
+                  <span className="text-[8px] uppercase tracking-[0.25em] font-black text-[#858E9B] mt-0.5">Robotics Company</span>
                 </div>
               </Link>
             </div>
             
-            <p className="text-xs text-gray-500 font-bold uppercase leading-relaxed mt-2">
+            <p className="text-xs text-[#858E9B] uppercase font-bold leading-relaxed mt-2">
               {description}
             </p>
 
             {/* Direct Contact Details Block */}
-            <div className="space-y-2 mt-4 text-[10px] font-bold text-gray-600 uppercase tracking-wider w-full text-center lg:text-left">
-              <div className="flex items-center gap-2 lg:justify-start justify-center">
-                <Phone className="w-3.5 h-3.5 text-[#FF6B00]" />
-                <span>+91 81480 45030 / 84386 86030</span>
+            <div className="space-y-2.5 mt-4 text-[10px] font-bold text-[#858E9B] uppercase tracking-wider w-full text-center lg:text-left">
+              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FF4D2D] transition-colors">
+                <Phone className="w-3.5 h-3.5 text-[#FF4D2D]" />
+                <a href="tel:+918148045030">+91 81480 45030 / 84386 86030</a>
+              </div>
+              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FF4D2D] transition-colors">
+                <Mail className="w-3.5 h-3.5 text-[#FF4D2D]" />
+                <a href="mailto:contact@tamizhtech.in" className="lowercase">contact@tamizhtech.in</a>
               </div>
               <div className="flex items-center gap-2 lg:justify-start justify-center">
-                <Mail className="w-3.5 h-3.5 text-[#FF6B00]" />
-                <span className="lowercase">contact@tamizhtech.in</span>
-              </div>
-              <div className="flex items-center gap-2 lg:justify-start justify-center">
-                <MapPin className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <MapPin className="w-3.5 h-3.5 text-[#FF4D2D]" />
                 <span>Coimbatore, Tamil Nadu, India</span>
               </div>
             </div>
 
-            <ul className="flex items-center space-x-6 text-gray-400 justify-center lg:justify-start mt-4">
+            <ul className="flex items-center space-x-4 justify-center lg:justify-start mt-4">
               {socialLinks.map((social, idx) => (
-                <li key={idx} className="hover:text-[#FF6B00] transition-all">
-                  <a href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer">
+                <li key={idx}>
+                  <a 
+                    href={social.href} 
+                    aria-label={social.label} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full border border-[#232833] flex items-center justify-center text-[#9AA1AC] hover:text-[#FF4D2D] hover:border-[#FF4D2D] hover:shadow-[0_0_12px_rgba(255,77,45,0.2)] transition-all"
+                  >
                     {social.icon}
                   </a>
                 </li>
@@ -162,12 +168,12 @@ export const Footer7 = ({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-8 w-full flex-grow">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx} className="text-center sm:text-left">
-                <h3 className="mb-6 font-black text-[#111111] text-[10px] uppercase tracking-[0.25em]">{section.title}</h3>
-                <ul className="space-y-3.5 text-[9px] text-gray-500 font-black uppercase tracking-widest">
+                <h3 className="mb-6 font-heading font-black text-[#F5F6F8] text-[10px] uppercase tracking-[0.25em]">{section.title}</h3>
+                <ul className="space-y-3.5 text-[9px] text-[#9AA1AC] font-black uppercase tracking-widest">
                   {section.links.map((link, linkIdx) => (
                     <li
                       key={linkIdx}
-                      className="hover:text-[#FF6B00] transition-colors w-fit sm:mx-0 mx-auto"
+                      className="hover:text-[#FF4D2D] transition-colors w-fit sm:mx-0 mx-auto"
                     >
                       <Link href={link.href}>{link.name}</Link>
                     </li>
@@ -180,15 +186,23 @@ export const Footer7 = ({
         </div>
 
         {/* Footer bottom */}
-        <div className="mt-20 pt-10 border-t border-[#E5E5E5] flex flex-col justify-between gap-6 text-[9px] font-black text-gray-400 md:flex-row md:items-center items-center text-center uppercase tracking-widest">
+        <div className="mt-20 pt-10 border-t border-[#232833] flex flex-col justify-between gap-6 text-[9px] font-black text-[#858E9B] md:flex-row md:items-center items-center text-center uppercase tracking-widest">
           <p className="order-2 md:order-1">{copyright}</p>
-          <ul className="order-1 flex flex-col gap-6 md:order-2 md:flex-row items-center">
-            {legalLinks.map((link, idx) => (
-              <li key={idx} className="hover:text-[#FF6B00] transition-colors">
-                <Link href={link.href}> {link.name}</Link>
-              </li>
-            ))}
-          </ul>
+          
+          {/* Make in India & Certification Badges */}
+          <div className="order-1 flex flex-col md:flex-row items-center gap-6 md:order-2">
+            <ul className="flex gap-6 items-center">
+              {legalLinks.map((link, idx) => (
+                <li key={idx} className="hover:text-[#FF4D2D] transition-colors">
+                  <Link href={link.href}>{link.name}</Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-2 border border-[#232833] rounded-lg px-3 py-1.5 bg-[#11141A]">
+              <span className="w-2 h-2 rounded-full bg-[#2ECC71] animate-pulse"></span>
+              <span className="text-[8px] font-black tracking-widest text-[#F5F6F8]">MAKE IN INDIA CERTIFIED</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

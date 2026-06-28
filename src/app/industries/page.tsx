@@ -72,7 +72,7 @@ const solutions = [
     id: "ai-systems",
     icon: <Cpu className="w-10 h-10 stroke-[1.5]" />,
     title: "Custom Robotics (AGV/AMR)",
-    challenge: "High cost of warehouse material handling and path planning issues.",
+    challenge: "High cost of warehouse material material handling and path planning issues.",
     approach: "Indigenously manufactured TTRC AGV V1 and AMR V1 logistics platforms mapped to grids.",
     metrics: ["Optimized path routing", "Double sorting speeds", "Safety lidar obstacle detection"]
   },
@@ -130,11 +130,11 @@ const schemas = [
   }
 ];
 
-const formInputClass = "w-full bg-white border border-[#E5E5E5] px-4 py-3.5 text-[#111111] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
 
 export default function IndustriesPage() {
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111] text-left">
+    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
@@ -143,12 +143,12 @@ export default function IndustriesPage() {
       <div className="container mx-auto px-6">
         
         {/* Header Section */}
-        <div className="max-w-4xl mb-20 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4">
-          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-6 font-sans">B2B Industrial Vertical</h1>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase">
+        <div className="max-w-4xl mb-20 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4">
+          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-6 font-sans">B2B Industrial Vertical</h1>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
             Sector-Specific <br /> Automation Engineering.
           </h2>
-          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
+          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
             Deploying high-uptime hardware, custom SCADA boards, vision QA check benches, and AMR logistics fleets designed and configured in Coimbatore, Tamil Nadu.
           </p>
         </div>
@@ -159,44 +159,44 @@ export default function IndustriesPage() {
             <div 
               key={item.id} 
               id={item.id}
-              className="bg-white border border-[#E5E5E5] flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden group hover:border-[#FF6B00] transition-colors duration-300"
+              className="bg-[#11141A] border border-[#232833] flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden group hover:border-[#FF4D2D] transition-colors duration-300"
             >
               {/* Left Column */}
-              <div className="w-full lg:w-1/4 bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col items-center justify-center p-12 text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-500">
-                <div className="w-20 h-20 border border-[#E5E5E5] flex items-center justify-center rounded-2xl mb-6 bg-white shadow-sm transition-all duration-500">
+              <div className="w-full lg:w-1/4 bg-[#181C24] border-r border-[#232833] flex flex-col items-center justify-center p-12 text-[#FF4D2D] group-hover:bg-[#FF4D2D] group-hover:text-white transition-all duration-500">
+                <div className="w-20 h-20 border border-[#232833] flex items-center justify-center rounded-2xl mb-6 bg-[#11141A] shadow-sm transition-all duration-500">
                    {item.icon}
                 </div>
-                <h3 className="text-lg font-black tracking-tighter uppercase text-center mt-2 group-hover:text-white text-[#111111] transition-colors">{item.title}</h3>
+                <h3 className="text-lg font-heading font-black tracking-tighter uppercase text-center mt-2 group-hover:text-white text-[#F5F6F8] transition-colors">{item.title}</h3>
               </div>
               
               {/* Right Column */}
-              <div className="flex-grow p-8 md:p-12 flex flex-col justify-between">
+              <div className="flex-grow p-8 md:p-12 flex flex-col justify-between bg-[#11141A]">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                   <div className="space-y-6">
                     <div>
-                      <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest mb-1.5 block">Operational Bottleneck</span>
-                      <h4 className="text-lg font-black text-[#111111] uppercase tracking-tight leading-tight">{item.challenge}</h4>
+                      <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-widest mb-1.5 block">Operational Bottleneck</span>
+                      <h4 className="text-lg font-black text-[#F5F6F8] uppercase tracking-tight leading-tight">{item.challenge}</h4>
                     </div>
                     <div>
-                      <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-widest mb-1.5 block">Custom Deployment</span>
-                      <p className="text-gray-500 text-xs font-medium leading-relaxed">{item.approach}</p>
+                      <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-widest mb-1.5 block">Custom Deployment</span>
+                      <p className="text-[#9AA1AC] text-xs font-medium leading-relaxed">{item.approach}</p>
                     </div>
                   </div>
                   
-                  <div className="bg-[#FAFAFA] p-6 border border-[#E5E5E5] rounded-xl flex flex-col justify-center">
-                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4 block text-center border-b border-[#E5E5E5] pb-2">Technical Deliverables</span>
+                  <div className="bg-[#181C24] p-6 border border-[#232833] rounded-xl flex flex-col justify-center">
+                    <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest mb-4 block text-center border-b border-[#232833] pb-2 font-mono">Technical Deliverables</span>
                     <div className="space-y-3">
                       {item.metrics.map((m, idx) => (
-                        <div key={idx} className="flex items-center gap-3 text-[11px] font-bold text-[#111111] uppercase tracking-tight">
-                          <ShieldCheck className="w-4 h-4 text-[#FF6B00] shrink-0" /> {m}
+                        <div key={idx} className="flex items-center gap-3 text-[11px] font-bold text-[#F5F6F8] uppercase tracking-tight">
+                          <ShieldCheck className="w-4 h-4 text-[#FF4D2D] shrink-0" /> {m}
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-8 pt-6 border-t border-[#F0F0F0] flex justify-end">
-                   <Link href="#consultation-form" className="text-[10px] font-black text-[#FF6B00] flex items-center gap-2 hover:text-[#111111] transition-colors uppercase tracking-widest pb-1 border-b border-[#FF6B00]">
+                <div className="mt-8 pt-6 border-t border-[#232833] flex justify-end">
+                   <Link href="#consultation-form" className="text-[10px] font-black text-[#FF4D2D] flex items-center gap-2 hover:text-[#F5F6F8] transition-colors uppercase tracking-widest pb-1 border-b border-[#FF4D2D]">
                      Schedule Technical Feasibility Discussion <MoveRight className="w-4 h-4" />
                    </Link>
                 </div>
@@ -206,10 +206,10 @@ export default function IndustriesPage() {
         </div>
 
         {/* Global Strategy / Summary */}
-        <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-12 md:p-20 grid lg:grid-cols-2 gap-16 items-center rounded-2xl mb-24">
+        <div className="bg-[#11141A] border border-[#232833] p-12 md:p-20 grid lg:grid-cols-2 gap-16 items-center rounded-2xl mb-24">
            <div>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 leading-tight uppercase text-[#111111]">Coimbatore Core.<br />Pan-India Scale.</h2>
-              <p className="text-gray-500 leading-relaxed font-bold text-xs uppercase tracking-wider">
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter mb-6 leading-tight uppercase text-[#F5F6F8]">Coimbatore Core.<br />Pan-India Scale.</h2>
+              <p className="text-[#9AA1AC] leading-relaxed font-bold text-xs uppercase tracking-wider">
                 Headquartered in India&apos;s engineering heartland, we leverage the region&apos;s manufacturing heritage to provide on-ground technical support for global brands and domestic leaders.
               </p>
               <div className="flex gap-4 mt-8">
@@ -224,9 +224,9 @@ export default function IndustriesPage() {
                 { label: "Engineering Staff", val: "50+" },
                 { label: "Strategic Partners", val: "10+" }
               ].map((stat) => (
-                <div key={stat.label} className="bg-white border border-[#E5E5E5] p-6 text-center flex flex-col justify-center rounded-xl shadow-xs">
-                  <span className="text-3xl font-black text-[#FF6B00] tracking-tighter">{stat.val}</span>
-                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mt-2 leading-tight">{stat.label}</span>
+                <div key={stat.label} className="bg-[#181C24] border border-[#232833] p-6 text-center flex flex-col justify-center rounded-xl shadow-xs hover:border-[#FF4D2D] transition-colors">
+                  <span className="text-3xl font-black text-[#FF4D2D] tracking-tighter font-mono">{stat.val}</span>
+                  <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest mt-2 leading-tight">{stat.label}</span>
                 </div>
               ))}
            </div>
@@ -234,46 +234,49 @@ export default function IndustriesPage() {
 
         {/* Industrial Consultation Form */}
         <section className="max-w-4xl mx-auto mb-24" id="consultation-form">
-          <div className="border border-[#E5E5E5] rounded-2xl bg-[#FAFAFA] p-8 md:p-12 text-left relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF6B00]" />
-            <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-[0.3em] mb-3 block">B2B Coordination Desk</span>
-            <h3 className="text-2xl md:text-3xl font-black uppercase text-[#111111] tracking-tighter mb-4">Request Automation Consultation</h3>
-            <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
+          <div className="border border-[#232833] rounded-2xl bg-[#11141A] p-8 md:p-12 text-left relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF4D2D]" />
+            <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-[0.3em] mb-3 block">B2B Coordination Desk</span>
+            <h3 className="text-2xl md:text-3xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter mb-4">Request Automation Consultation</h3>
+            <p className="text-xs text-[#858E9B] font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
             
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Corporate Representative Name</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Corporate Representative Name</label>
                   <input required type="text" placeholder="John Doe" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Official Company Email</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Official Company Email</label>
                   <input required type="email" placeholder="john@corporatemail.com" className={formInputClass} />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Contact Phone</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Contact Phone</label>
                   <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Company Name & Site Location</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Company Name & Site Location</label>
                   <input required type="text" placeholder="Auto Corp, Coimbatore" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Target Automation Interest</label>
-                  <select className={formInputClass}>
-                    <option>PLC & SCADA logic setup</option>
-                    <option>Machine Vision (OpenCV inspection)</option>
-                    <option>Warehouse AMR/AGV Deployment</option>
-                    <option>IoT Fleet Telemetry Node audit</option>
-                  </select>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Target Automation Interest</label>
+                  <div className="relative">
+                    <select className={formInputClass + " cursor-pointer"}>
+                      <option>PLC & SCADA logic setup</option>
+                      <option>Machine Vision (OpenCV inspection)</option>
+                      <option>Warehouse AMR/AGV Deployment</option>
+                      <option>IoT Fleet Telemetry Node audit</option>
+                    </select>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Technical Requirement Details</label>
+                <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Technical Requirement Details</label>
                 <textarea rows={4} placeholder="Describe the current manual process, machinery brand names (Siemens, Mitsubishi, Delta), and target cycle time improvements..." className={formInputClass + " resize-none"} />
               </div>
 
@@ -285,9 +288,9 @@ export default function IndustriesPage() {
                   href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20inquiring%20about%20your%20B2B%20Industrial%20Automation%20and%20PLC%2FSCADA%2FMachine%20Vision%20solutions." 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center"
+                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center border-[#232833] hover:border-[#FF4D2D]"
                 >
-                  <FaWhatsapp className="w-4 h-4 text-[#FF6B00]" /> Talk to Automation Expert
+                  <FaWhatsapp className="w-4 h-4 text-[#FF4D2D]" /> Talk to Automation Expert
                 </a>
               </div>
             </form>

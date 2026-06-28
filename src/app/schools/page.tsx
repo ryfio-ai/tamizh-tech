@@ -77,11 +77,11 @@ const schemas = [
   }
 ];
 
-const formInputClass = "w-full bg-white border border-[#E5E5E5] px-4 py-3.5 text-[#111111] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF6B00] focus:ring-1 focus:ring-[#FF6B00] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
 
 export default function SchoolsPage() {
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111] text-left">
+    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
@@ -90,12 +90,12 @@ export default function SchoolsPage() {
       <div className="container mx-auto px-6">
         
         {/* Hero Section */}
-        <div className="max-w-4xl mb-20 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4">
-          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-6 font-sans">K-12 Education Solutions</h1>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase">
+        <div className="max-w-4xl mb-20 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4">
+          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-6 font-sans">K-12 Education Solutions</h1>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
             Empower Schools <br /> With Next-Gen Labs.
           </h2>
-          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
+          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
             Complete turnkey solutions to establish STEM, Robotics, and AI Laboratories. Mapped curriculum, certified teacher training, and domestic hardware supplies.
           </p>
         </div>
@@ -124,24 +124,24 @@ export default function SchoolsPage() {
               desc: "Empowering school faculty with certified training, presentation files, and ready-to-teach templates."
             }
           ].map((pillar, idx) => (
-            <div key={idx} className="bg-[#FAFAFA] border border-[#E5E5E5] p-8 rounded-2xl hover:border-[#FF6B00] transition-colors flex flex-col justify-between">
+            <div key={idx} className="bg-[#11141A] border border-[#232833] p-8 rounded-2xl hover:border-[#FF4D2D] transition-colors flex flex-col justify-between">
               <div>
-                <div className="p-3 bg-[#FFF2E6] text-[#FF6B00] rounded-xl w-fit mb-6">
+                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] border border-[#FF4D2D]/20 rounded-xl w-fit mb-6">
                   {pillar.icon}
                 </div>
-                <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight mb-2">{pillar.title}</h3>
-                <p className="text-xs text-gray-500 font-bold uppercase leading-relaxed">{pillar.desc}</p>
+                <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight mb-2">{pillar.title}</h3>
+                <p className="text-xs text-[#9AA1AC] font-bold uppercase leading-relaxed">{pillar.desc}</p>
               </div>
             </div>
           ))}
         </section>
 
         {/* Grade-Level Mapped Modules */}
-        <section className="bg-[#FAFAFA] border border-[#E5E5E5] p-8 md:p-16 rounded-2xl mb-24">
+        <section className="bg-[#11141A] border border-[#232833] p-8 md:p-16 rounded-2xl mb-24 text-left">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.4em] mb-3 block">Structured Syllabus</span>
-            <h3 className="text-3xl font-black uppercase text-[#111111] tracking-tighter">Academic Grade Divisions</h3>
-            <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mt-2">Meticulously mapped steps to guide children from basic linkages to microchip programming.</p>
+            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-3 block">Structured Syllabus</span>
+            <h3 className="text-3xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter">Academic Grade Divisions</h3>
+            <p className="text-xs text-[#858E9B] font-bold uppercase tracking-wider mt-2">Meticulously mapped steps to guide children from basic linkages to microchip programming.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -165,21 +165,21 @@ export default function SchoolsPage() {
                 kit: "Enterprise Developer Pack"
               }
             ].map((module, idx) => (
-              <div key={idx} className="bg-white border border-[#E5E5E5] p-8 rounded-xl flex flex-col justify-between text-left hover:border-[#FF6B00] hover:shadow-lg transition-all">
+              <div key={idx} className="bg-[#181C24] border border-[#232833] p-8 rounded-xl flex flex-col justify-between text-left hover:border-[#FF4D2D] hover:shadow-lg transition-all">
                 <div>
-                  <span className="text-2xl font-black text-[#FF6B00] tracking-tighter block mb-1">{module.range}</span>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-6">{module.focus}</span>
+                  <span className="text-2xl font-black text-[#FF4D2D] tracking-tighter block mb-1 font-mono">{module.range}</span>
+                  <span className="text-[10px] font-bold text-[#858E9B] uppercase tracking-widest block mb-6">{module.focus}</span>
                   
                   <ul className="space-y-3 mb-8">
                     {module.skills.map((skill, sIdx) => (
-                      <li key={sIdx} className="flex items-center gap-2.5 text-xs text-gray-600 font-bold uppercase tracking-wider">
-                        <Check className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" /> {skill}
+                      <li key={sIdx} className="flex items-center gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
+                        <Check className="w-4 h-4 text-[#FF4D2D] shrink-0 mt-0.5" /> {skill}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="pt-6 border-t border-[#F0F0F0] text-[9px] font-black uppercase tracking-widest text-[#111111]">
-                  Primary Hardware: <span className="text-[#FF6B00]">{module.kit}</span>
+                <div className="pt-6 border-t border-[#232833] text-[9px] font-black uppercase tracking-widest text-[#F5F6F8]">
+                  Primary Hardware: <span className="text-[#FF4D2D] font-bold">{module.kit}</span>
                 </div>
               </div>
             ))}
@@ -188,46 +188,49 @@ export default function SchoolsPage() {
 
         {/* Lead Capture Form */}
         <section className="max-w-4xl mx-auto mb-24" id="demo-form">
-          <div className="border border-[#E5E5E5] rounded-2xl bg-[#FAFAFA] p-8 md:p-12 text-left relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF6B00]" />
-            <span className="text-[9px] font-black text-[#FF6B00] uppercase tracking-[0.3em] mb-3 block">Lab Consultation</span>
-            <h3 className="text-2xl md:text-3xl font-black uppercase text-[#111111] tracking-tighter mb-4">Request School Lab Demo</h3>
-            <p className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-8">Establish a benchmark innovation facility in your school. Fill out your details below to schedule an on-site presentation and kit demo.</p>
+          <div className="border border-[#232833] rounded-2xl bg-[#11141A] p-8 md:p-12 text-left relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF4D2D]" />
+            <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-[0.3em] mb-3 block">Lab Consultation</span>
+            <h3 className="text-2xl md:text-3xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter mb-4">Request School Lab Demo</h3>
+            <p className="text-xs text-[#858E9B] font-bold uppercase tracking-wider mb-8">Establish a benchmark innovation facility in your school. Fill out your details below to schedule an on-site presentation and kit demo.</p>
             
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Principal / Representative Name</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Principal / Representative Name</label>
                   <input required type="text" placeholder="John Doe" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Official Institution Email</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Official Institution Email</label>
                   <input required type="email" placeholder="principal@school.edu.in" className={formInputClass} />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Phone Number</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Phone Number</label>
                   <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">School Name & Location</label>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">School Name & Location</label>
                   <input required type="text" placeholder="XYZ Public School, Coimbatore" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Target Student Count</label>
-                  <select className={formInputClass}>
-                    <option>Under 200 Students</option>
-                    <option>200 - 500 Students</option>
-                    <option>501 - 1000 Students</option>
-                    <option>1000+ Students</option>
-                  </select>
+                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Target Student Count</label>
+                  <div className="relative">
+                    <select className={formInputClass + " cursor-pointer"}>
+                      <option>Under 200 Students</option>
+                      <option>200 - 500 Students</option>
+                      <option>501 - 1000 Students</option>
+                      <option>1000+ Students</option>
+                    </select>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[9px] font-black text-gray-400 uppercase tracking-wider font-sans">Specific Goals / Requirements</label>
+                <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Specific Goals / Requirements</label>
                 <textarea rows={4} placeholder="Describe your expectations (e.g. CBSE lab registration, competition coaching, robotic kits purchase)..." className={formInputClass + " resize-none"} />
               </div>
 
@@ -239,9 +242,9 @@ export default function SchoolsPage() {
                   href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20the%20representative%20of%20a%20school%20and%20interested%20in%20setting%20up%20a%20STEM%2FRobotics%20Lab." 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center"
+                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center border-[#232833] hover:border-[#FF4D2D]"
                 >
-                  <FaWhatsapp className="w-4 h-4 text-[#FF6B00]" /> Talk via WhatsApp
+                  <FaWhatsapp className="w-4 h-4 text-[#FF4D2D]" /> Talk via WhatsApp
                 </a>
               </div>
             </form>
@@ -251,14 +254,14 @@ export default function SchoolsPage() {
         {/* FAQs Accordion */}
         <section className="max-w-4xl mx-auto mb-24">
           <div className="text-center mb-12">
-            <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.4em] mb-2 block">Common Inquiries</span>
-            <h3 className="text-2xl font-black uppercase text-[#111111] tracking-tighter">School Program FAQs</h3>
+            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-2 block">Common Inquiries</span>
+            <h3 className="text-2xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter">School Program FAQs</h3>
           </div>
-          <div className="space-y-4 border-t border-[#E5E5E5] pt-6">
+          <div className="space-y-4 border-t border-[#232833] pt-6">
             {schoolFaqs.map((faq, idx) => (
-              <div key={idx} className="border-b border-[#E5E5E5] pb-4">
-                <h4 className="py-4 text-xs sm:text-sm font-black uppercase tracking-wide text-[#111111]">{faq.q}</h4>
-                <p className="text-xs text-gray-500 font-medium leading-relaxed pb-4 uppercase tracking-tight">{faq.a}</p>
+              <div key={idx} className="border-b border-[#232833] pb-4">
+                <h4 className="py-4 text-xs sm:text-sm font-black uppercase tracking-wide text-[#F5F6F8]">{faq.q}</h4>
+                <p className="text-xs text-[#9AA1AC] font-medium leading-relaxed pb-4 uppercase tracking-tight">{faq.a}</p>
               </div>
             ))}
           </div>

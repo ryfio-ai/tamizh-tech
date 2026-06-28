@@ -42,6 +42,8 @@ const benefits = [
   { title: "Resume & Portfolio Support", desc: "Learn how to document your internship projects on GitHub and design a high-impact resume.", icon: FileCheck }
 ];
 
+const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+
 export default function InternshipPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -99,53 +101,53 @@ export default function InternshipPage() {
   };
 
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111]">
+    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8]">
       <div className="container mx-auto px-6">
         
         {/* Header Hero Section */}
-        <div className="max-w-4xl mb-12 md:mb-24 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4 text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6B00]/30 bg-[#FFF2E6] mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#FF6B00] animate-pulse" />
-            <span className="text-xs font-black tracking-widest text-[#FF6B00] uppercase">Internship Program 2026</span>
+        <div className="max-w-4xl mb-12 md:mb-24 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4 text-left">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF4D2D]/30 bg-[#FF4D2D]/10 mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#FF4D2D] animate-pulse" />
+            <span className="text-xs font-black tracking-widest text-[#FF4D2D] uppercase font-mono">Internship Program 2026</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase mb-8">
             Learn. Build. <br /> Innovate.
           </h1>
-          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight">
+          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight">
             Kickstart your career with Tamizh Tech Robotics Company's Industry-Focused Internship Programs. Designed for school students, college scholars, and job seekers looking for hands-on, project-based training.
           </p>
         </div>
 
         {/* Formats Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32 text-left">
-          <div className="bg-white border border-[#E5E5E5] p-10 rounded-2xl flex flex-col justify-between hover:border-[#FF6B00] transition-colors">
+          <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl flex flex-col justify-between hover:border-[#FF4D2D] transition-colors">
             <div>
-              <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-widest block mb-4">🚀 Track 01</span>
-              <h3 className="text-3xl font-black text-[#111111] tracking-tighter uppercase mb-4">Online Internships</h3>
-              <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+              <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-widest block mb-4 font-mono">🚀 Track 01</span>
+              <h3 className="text-3xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4">Online Internships</h3>
+              <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed mb-6">
                 Learn from anywhere in the world with our interactive online module. Includes live mentorship sessions, digitized code sandboxes, and virtual team check-ins.
               </p>
             </div>
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">🌍 Available Pan-India</span>
+            <span className="text-xs font-bold text-[#858E9B] uppercase tracking-wider block font-mono">🌍 Available Pan-India</span>
           </div>
-          <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-10 rounded-2xl flex flex-col justify-between hover:border-[#FF6B00] transition-colors">
+          <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl flex flex-col justify-between hover:border-[#FF4D2D] transition-colors">
             <div>
-              <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-widest block mb-4">🏫 Track 02</span>
-              <h3 className="text-3xl font-black text-[#111111] tracking-tighter uppercase mb-4">Offline Internships</h3>
-              <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+              <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-widest block mb-4 font-mono">🏫 Track 02</span>
+              <h3 className="text-3xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4">Offline Internships</h3>
+              <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed mb-6">
                 Join our physical classroom and electronics laboratory hub for dedicated hardware access, components kit, oscilloscope diagnostics, and team project building.
               </p>
             </div>
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">📍 Coimbatore R&D Center</span>
+            <span className="text-xs font-bold text-[#858E9B] uppercase tracking-wider block font-mono">📍 Coimbatore R&D Center</span>
           </div>
         </div>
 
         {/* Domains Grid */}
-        <div className="mb-32">
+        <div className="mb-32 text-left">
           <div className="text-center mb-16">
-            <h2 className="text-xs font-black text-[#FF6B00] uppercase tracking-[0.5em] mb-4">Internship Tracks</h2>
-            <h3 className="text-4xl font-black text-[#111111] tracking-tighter uppercase">Choose Your Specialized Domain</h3>
-            <p className="text-gray-500 text-sm font-bold uppercase tracking-tight mt-2">Click on any domain card to select and apply below.</p>
+            <h2 className="text-xs font-black text-[#FF4D2D] uppercase tracking-[0.5em] mb-4">Internship Tracks</h2>
+            <h3 className="text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase">Choose Your Specialized Domain</h3>
+            <p className="text-[#858E9B] text-sm font-bold uppercase tracking-tight mt-2">Click on any domain card to select and apply below.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
@@ -155,16 +157,16 @@ export default function InternshipPage() {
                 <div 
                   key={domain.id} 
                   onClick={() => handleDomainSelect(domain.name)}
-                  className="bg-white border border-[#E5E5E5] p-8 flex flex-col h-full justify-between rounded-2xl group cursor-pointer hover:border-[#FF6B00] hover:shadow-xl transition-all"
+                  className="bg-[#11141A] border border-[#232833] p-8 flex flex-col h-full justify-between rounded-2xl group cursor-pointer hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all"
                 >
                   <div>
-                    <div className="w-12 h-12 bg-[#FAFAFA] rounded-xl flex items-center justify-center text-[#111111] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-300 mb-6 border border-[#E5E5E5]">
+                    <div className="w-12 h-12 bg-[#181C24] rounded-xl flex items-center justify-center text-[#F5F6F8] group-hover:bg-[#FF4D2D] group-hover:text-white transition-all duration-300 mb-6 border border-[#232833]">
                       <Icon className="w-6 h-6 stroke-[1.5]" />
                     </div>
-                    <h4 className="text-xl font-black text-[#111111] uppercase tracking-tighter mb-3 group-hover:text-[#FF6B00] transition-colors">{domain.name}</h4>
-                    <p className="text-gray-500 text-xs font-medium leading-relaxed opacity-70 mb-6">{domain.desc}</p>
+                    <h4 className="text-xl font-heading font-black text-[#F5F6F8] uppercase tracking-tighter mb-3 group-hover:text-[#FF4D2D] transition-colors">{domain.name}</h4>
+                    <p className="text-[#9AA1AC] text-xs font-medium leading-relaxed opacity-70 mb-6">{domain.desc}</p>
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] font-black text-[#FF6B00] uppercase tracking-widest pt-4 border-t border-[#F0F0F0] mt-auto">
+                  <div className="flex items-center gap-2 text-[10px] font-black text-[#FF4D2D] uppercase tracking-widest pt-4 border-t border-[#232833] mt-auto font-mono">
                     Apply for this track <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -174,10 +176,10 @@ export default function InternshipPage() {
         </div>
 
         {/* Benefits Grid */}
-        <div className="mb-32 bg-[#FAFAFA] border border-[#E5E5E5] py-20 px-8 lg:px-16 rounded-2xl text-left">
+        <div className="mb-32 bg-[#11141A] border border-[#232833] py-20 px-8 lg:px-16 rounded-2xl text-left">
           <div className="text-center mb-16">
-            <h2 className="text-xs font-black text-[#FF6B00] uppercase tracking-[0.5em] mb-4">Our Commitment</h2>
-            <h3 className="text-4xl font-black text-[#111111] tracking-tighter uppercase">Why Choose Tamizh Tech Robotics?</h3>
+            <h2 className="text-xs font-black text-[#FF4D2D] uppercase tracking-[0.5em] mb-4">Our Commitment</h2>
+            <h3 className="text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase">Why Choose Tamizh Tech Robotics?</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -185,12 +187,12 @@ export default function InternshipPage() {
               const Icon = benefit.icon;
               return (
                 <div key={idx} className="flex gap-6 items-start">
-                  <div className="p-3 bg-[#FFF2E6] border border-[#FF6B00]/25 text-[#FF6B00] rounded-xl shrink-0">
+                  <div className="p-3 bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 text-[#FF4D2D] rounded-xl shrink-0">
                     <Icon className="w-6 h-6 stroke-[1.5]" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-black text-[#111111] uppercase tracking-tighter mb-2">{benefit.title}</h4>
-                    <p className="text-xs font-medium text-gray-500 leading-relaxed opacity-70 uppercase tracking-tight">{benefit.desc}</p>
+                    <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-tighter mb-2">{benefit.title}</h4>
+                    <p className="text-xs font-medium text-[#9AA1AC] leading-relaxed opacity-70 uppercase tracking-tight">{benefit.desc}</p>
                   </div>
                 </div>
               );
@@ -199,15 +201,15 @@ export default function InternshipPage() {
         </div>
 
         {/* Registration Form */}
-        <div id="registration-form" className="max-w-4xl mx-auto border-2 border-[#FF6B00] p-8 md:p-16 bg-[#FAFAFA] rounded-2xl shadow-2xl text-left">
+        <div id="registration-form" className="max-w-4xl mx-auto border-2 border-[#FF4D2D] p-8 md:p-16 bg-[#11141A] rounded-2xl shadow-2xl text-left relative">
           {isSuccess ? (
             <div className="text-center py-10 animate-in fade-in zoom-in duration-500">
-              <div className="w-20 h-20 bg-[#FFF2E6] rounded-full flex items-center justify-center mx-auto mb-6 border border-[#FF6B00]/20">
-                <CheckCircle2 className="w-10 h-10 text-[#FF6B00] animate-pulse" />
+              <div className="w-20 h-20 bg-[#FF4D2D]/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-[#FF4D2D]/20">
+                <CheckCircle2 className="w-10 h-10 text-[#FF4D2D] animate-pulse" />
               </div>
-              <h3 className="text-3xl font-black text-[#111111] tracking-tighter uppercase mb-4">Registration Received!</h3>
-              <p className="text-gray-500 text-sm font-bold uppercase tracking-tight mb-8 max-w-lg mx-auto leading-relaxed">
-                Thank you for applying to the <span className="text-[#FF6B00]">{formData.role}</span> program, <span className="text-[#111111]">{formData.name}</span>! We've received your credentials and our onboarding team will contact you at <span className="text-[#111111]">{formData.email}</span> within 24 hours.
+              <h3 className="text-3xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4">Registration Received!</h3>
+              <p className="text-[#9AA1AC] text-sm font-bold uppercase tracking-tight mb-8 max-w-lg mx-auto leading-relaxed">
+                Thank you for applying to the <span className="text-[#FF4D2D]">{formData.role}</span> program, <span className="text-[#F5F6F8]">{formData.name}</span>! We've received your credentials and our onboarding team will contact you at <span className="text-[#F5F6F8]">{formData.email}</span> within 24 hours.
               </p>
               <button
                 onClick={() => {
@@ -225,9 +227,9 @@ export default function InternshipPage() {
           ) : (
             <div>
               <div className="text-center mb-12">
-                <span className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.4em] block mb-2">Registration Form</span>
-                <h3 className="text-3xl md:text-4xl font-black text-[#111111] tracking-tighter uppercase leading-none">Register For Internship</h3>
-                <p className="text-gray-500 text-xs font-bold uppercase tracking-wide mt-2">Fill in your details below to archive your application in our industry database.</p>
+                <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] block mb-2">Registration Form</span>
+                <h3 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase leading-none">Register For Internship</h3>
+                <p className="text-[#858E9B] text-xs font-bold uppercase tracking-wide mt-2">Fill in your details below to archive your application in our industry database.</p>
               </div>
 
               {error && (
@@ -241,20 +243,20 @@ export default function InternshipPage() {
                 {/* Name & Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="name" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Full Name *</label>
+                    <label htmlFor="name" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Full Name *</label>
                     <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       required 
-                      value={formData.name} 
+                      value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Tamizharasan K"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="phone" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Mobile Number *</label>
+                    <label htmlFor="phone" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Mobile Number *</label>
                     <input 
                       type="tel" 
                       id="phone" 
@@ -263,7 +265,7 @@ export default function InternshipPage() {
                       value={formData.phone} 
                       onChange={handleChange}
                       placeholder="e.g. 8148045030"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                 </div>
@@ -271,7 +273,7 @@ export default function InternshipPage() {
                 {/* Email & LinkedIn */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Email Address *</label>
+                    <label htmlFor="email" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Email Address *</label>
                     <input 
                       type="email" 
                       id="email" 
@@ -280,11 +282,11 @@ export default function InternshipPage() {
                       value={formData.email} 
                       onChange={handleChange}
                       placeholder="e.g. name@example.com"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="linkedin" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">LinkedIn Profile Link</label>
+                    <label htmlFor="linkedin" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">LinkedIn Profile Link</label>
                     <input 
                       type="url" 
                       id="linkedin" 
@@ -292,7 +294,7 @@ export default function InternshipPage() {
                       value={formData.linkedin} 
                       onChange={handleChange}
                       placeholder="e.g. https://linkedin.com/in/username"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                 </div>
@@ -300,7 +302,7 @@ export default function InternshipPage() {
                 {/* College & Department */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="college" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">College / Institution *</label>
+                    <label htmlFor="college" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">College / Institution *</label>
                     <input 
                       type="text" 
                       id="college" 
@@ -309,11 +311,11 @@ export default function InternshipPage() {
                       value={formData.college} 
                       onChange={handleChange}
                       placeholder="e.g. PSG College of Technology"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="branch" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Branch / Degree *</label>
+                    <label htmlFor="branch" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Branch / Degree *</label>
                     <input 
                       type="text" 
                       id="branch" 
@@ -322,7 +324,7 @@ export default function InternshipPage() {
                       value={formData.branch} 
                       onChange={handleChange}
                       placeholder="e.g. B.E. Robotics & Automation"
-                      className="form-input"
+                      className={formInputClass}
                     />
                   </div>
                 </div>
@@ -330,51 +332,60 @@ export default function InternshipPage() {
                 {/* Domain & Mode & Experience */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="role" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Internship Domain *</label>
-                    <select 
-                      id="role" 
-                      name="role" 
-                      value={formData.role} 
-                      onChange={handleChange}
-                      className="form-input"
-                    >
-                      {domains.map(d => (
-                        <option key={d.id} value={d.name}>{d.name}</option>
-                      ))}
-                    </select>
+                    <label htmlFor="role" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Internship Domain *</label>
+                    <div className="relative">
+                      <select 
+                        id="role" 
+                        name="role" 
+                        value={formData.role} 
+                        onChange={handleChange}
+                        className={formInputClass + " cursor-pointer"}
+                      >
+                        {domains.map(d => (
+                          <option key={d.id} className="bg-[#181C24]" value={d.name}>{d.name}</option>
+                        ))}
+                      </select>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="category" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Format Preference *</label>
-                    <select 
-                      id="category" 
-                      name="category" 
-                      value={formData.category} 
-                      onChange={handleChange}
-                      className="form-input"
-                    >
-                      <option value="Online">Online / Remote</option>
-                      <option value="Offline">Offline / Classroom</option>
-                    </select>
+                    <label htmlFor="category" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Format Preference *</label>
+                    <div className="relative">
+                      <select 
+                        id="category" 
+                        name="category" 
+                        value={formData.category} 
+                        onChange={handleChange}
+                        className={formInputClass + " cursor-pointer"}
+                      >
+                        <option value="Online" className="bg-[#181C24]">Online / Remote</option>
+                        <option value="Offline" className="bg-[#181C24]">Offline / Classroom</option>
+                      </select>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="experience" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Experience level *</label>
-                    <select 
-                      id="experience" 
-                      name="experience" 
-                      value={formData.experience} 
-                      onChange={handleChange}
-                      className="form-input"
-                    >
-                      <option value="Beginner">Beginner (No past experience)</option>
-                      <option value="Intermediate">Intermediate (Done basic projects)</option>
-                      <option value="Advanced">Advanced (Done industrial prototypes)</option>
-                    </select>
+                    <label htmlFor="experience" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Experience level *</label>
+                    <div className="relative">
+                      <select 
+                        id="experience" 
+                        name="experience" 
+                        value={formData.experience} 
+                        onChange={handleChange}
+                        className={formInputClass + " cursor-pointer"}
+                      >
+                        <option value="Beginner" className="bg-[#181C24]">Beginner (No past experience)</option>
+                        <option value="Intermediate" className="bg-[#181C24]">Intermediate (Done basic projects)</option>
+                        <option value="Advanced" className="bg-[#181C24]">Advanced (Done industrial prototypes)</option>
+                      </select>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Resume Link */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="resume" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Resume Link (Google Drive / GitHub / LinkedIn)</label>
+                  <label htmlFor="resume" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Resume Link (Google Drive / GitHub / LinkedIn)</label>
                   <input 
                     type="url" 
                     id="resume" 
@@ -382,13 +393,13 @@ export default function InternshipPage() {
                     value={formData.resume} 
                     onChange={handleChange}
                     placeholder="e.g. https://drive.google.com/.../your-resume.pdf"
-                    className="form-input"
+                    className={formInputClass}
                   />
                 </div>
 
                 {/* Submit Action */}
-                <div className="pt-6 border-t border-[#E5E5E5] flex flex-col sm:flex-row gap-6 items-center justify-between">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide leading-relaxed">
+                <div className="pt-6 border-t border-[#232833] flex flex-col sm:flex-row gap-6 items-center justify-between">
+                  <p className="text-[10px] font-bold text-[#858E9B] uppercase tracking-wide leading-relaxed">
                     Once submitted, details are instantly routed to our review board.
                   </p>
                   <button 
@@ -407,7 +418,7 @@ export default function InternshipPage() {
 
         {/* WhatsApp Callout */}
         <div className="mt-12 text-center max-w-lg mx-auto">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-4">Or Apply directly via WhatsApp</p>
+          <p className="text-[#858E9B] text-xs font-bold uppercase tracking-wider mb-4">Or Apply directly via WhatsApp</p>
           <a 
             href={`https://wa.me/918148045030?text=Hello%20Tamizh%20Tech%20Robotics!%20I%20would%20like%20to%20register%20for%20the%20${encodeURIComponent(formData.role)}%20internship%20program.`} 
             target="_blank" 
@@ -419,33 +430,6 @@ export default function InternshipPage() {
         </div>
 
       </div>
-
-      <style jsx global>{`
-        .form-input {
-          width: 100%;
-          background-color: #FFFFFF;
-          border: 1px solid #E5E5E5;
-          padding: 1rem 1.25rem;
-          color: #111111;
-          font-weight: 700;
-          font-size: 0.825rem;
-          outline: none;
-          transition: all 0.2s ease;
-          border-radius: 8px;
-        }
-        .form-input:focus {
-          border-color: #FF6B00;
-          box-shadow: 0 0 0 1px #FF6B00;
-        }
-        .form-input::placeholder {
-          color: #999999;
-          font-weight: 600;
-          opacity: 0.5;
-        }
-        select.form-input {
-          appearance: none;
-        }
-      `}</style>
     </div>
   );
 }

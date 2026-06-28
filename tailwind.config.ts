@@ -18,41 +18,42 @@ const config: Config = {
     extend: {
       colors: {
         'primary': {
-          DEFAULT: '#FF6B00',
-          'main': '#FF6B00',
-          'hover': '#E05E00',
-          'soft': '#FFF2E6',
-          foreground: '#FFFFFF',
+          DEFAULT: '#FF4D2D',
+          'main': '#FF4D2D',
+          'hover': '#E04020',
+          'soft': 'rgba(255, 77, 45, 0.1)',
+          foreground: '#F5F6F8',
         },
         'secondary': {
-          DEFAULT: '#FFFFFF',
-          'main': '#FFFFFF',
-          'hover': '#FAFAFA',
-          foreground: '#111111',
+          DEFAULT: '#00D1B2',
+          'main': '#00D1B2',
+          'hover': '#00B89C',
+          foreground: '#0A0C10',
         },
         'bg': {
-          'page': '#FFFFFF',
-          'primary': '#FFFFFF',
-          'secondary': '#FAFAFA',
-          'accent': '#FFF2E6',
+          'page': '#0A0C10',
+          'primary': '#0A0C10',
+          'secondary': '#11141A',
+          'elevated': '#181C24',
+          'accent': 'rgba(255, 77, 45, 0.1)',
         },
         'text': {
-          'primary': '#111111',
-          'secondary': '#555555',
-          'muted': '#999999',
-          'on-primary': '#FFFFFF',
+          'primary': '#F5F6F8',
+          'secondary': '#9AA1AC',
+          'muted': '#858E9B',
+          'on-primary': '#F5F6F8',
         },
         'border': {
-          DEFAULT: '#E5E5E5',
-          'light': '#F0F0F0',
-          'medium': '#D1D1D1',
+          DEFAULT: '#232833',
+          'light': '#232833',
+          'medium': '#232833',
         },
         // Compatibility with UI components
-        background: '#FFFFFF',
-        foreground: '#111111',
+        background: '#0A0C10',
+        foreground: '#F5F6F8',
         muted: {
-          DEFAULT: '#FAFAFA',
-          foreground: '#555555',
+          DEFAULT: '#11141A',
+          foreground: '#9AA1AC',
         },
       },
       borderRadius: {
@@ -64,9 +65,8 @@ const config: Config = {
         'full': '9999px',
       },
       fontFamily: {
-        // B2B 'Suit Font' System
-        sans: ["'Satoshi'", "'General Sans'", "Inter", "system-ui", "sans-serif"],
-        heading: ["'General Sans'", "'Satoshi'", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-space-grotesk)", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       letterSpacing: {
