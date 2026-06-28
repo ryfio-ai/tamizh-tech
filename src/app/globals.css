@@ -5,38 +5,38 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --background: 220 23% 5%; /* #0A0C10 */
-    --foreground: 220 20% 95%; /* #F5F6F8 */
+    --background: 225 92% 15%; /* #031549 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
 
-    --card: 220 20% 8%; /* #11141A */
-    --card-foreground: 220 20% 95%; /* #F5F6F8 */
+    --card: 225 81% 21%; /* #0A2060 */
+    --card-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 9 100% 59%; /* #FF4D2D */
+    --primary: 24 97% 53%; /* #FB7115 */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 171 100% 41%; /* #00D1B2 */
-    --secondary-foreground: 220 23% 5%; /* #0A0C10 */
+    --secondary: 0 0% 100%; /* #FFFFFF */
+    --secondary-foreground: 225 92% 15%; /* #031549 */
     
-    --muted: 220 20% 10%; /* #181C24 */
-    --muted-foreground: 220 10% 64%; /* #9AA1AC */
+    --muted: 225 81% 21%; /* #0A2060 */
+    --muted-foreground: 225 24% 83%; /* #C5CCE0 */
 
-    --border: 220 20% 17%; /* #232833 */
-    --input: 220 20% 17%;
-    --ring: 9 100% 59%;
+    --border: 0 0% 100% / 0.12; /* rgba(255, 255, 255, 0.12) */
+    --input: 0 0% 100% / 0.12;
+    --ring: 24 97% 53%;
 
     --radius: 0.5rem;
 
     /* Custom Theme Colors */
-    --bg-primary: #0A0C10;
-    --bg-secondary: #11141A;
-    --bg-elevated: #181C24;
-    --border-subtle: #232833;
-    --accent-primary: #FF4D2D;
-    --accent-secondary: #00D1B2;
-    --accent-glow: rgba(255, 77, 45, 0.35);
-    --text-primary: #F5F6F8;
-    --text-secondary: #9AA1AC;
-    --text-muted: #858E9B; /* 4.5+:1 WCAG AA contrast ratio */
+    --bg-primary: #031549;
+    --bg-secondary: #0A2060;
+    --bg-elevated: #102B75;
+    --border-subtle: rgba(255, 255, 255, 0.12);
+    --accent-primary: #FB7115;
+    --accent-secondary: #FFFFFF;
+    --accent-glow: rgba(251, 113, 21, 0.35);
+    --text-primary: #FFFFFF;
+    --text-secondary: #C5CCE0;
+    --text-muted: #8A99C0;
   }
 
   * {

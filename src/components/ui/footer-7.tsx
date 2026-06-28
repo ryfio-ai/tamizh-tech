@@ -99,7 +99,7 @@ export const Footer7 = ({
   legalLinks = defaultLegalLinks,
 }: Footer7Props) => {
   return (
-    <footer className="py-20 bg-[#0A0C10] border-t border-[#232833] text-[#9AA1AC] text-left">
+    <footer className="py-20 bg-[#031549] border-t border-white/12 text-[#C5CCE0] text-left">
       <div className="container mx-auto px-6">
         <div className="flex w-full flex-col justify-between gap-16 lg:flex-row lg:items-start lg:text-left">
           
@@ -119,32 +119,43 @@ export const Footer7 = ({
                   />
                 </div>
                 <div className="flex flex-col leading-none">
-                  <span className="text-xl font-heading font-black tracking-tighter text-[#F5F6F8] uppercase">
-                    TAMIZH <span className="text-[#FF4D2D]">TECH</span>
+                  <span className="text-xl font-heading font-black tracking-tighter text-white uppercase">
+                    TAMIZH <span className="text-[#FB7115]">TECH</span>
                   </span>
-                  <span className="text-[8px] uppercase tracking-[0.25em] font-black text-[#858E9B] mt-0.5">Robotics Company</span>
+                  <span className="text-[8px] uppercase tracking-[0.25em] font-black text-[#8A99C0] mt-0.5">Robotics Company</span>
                 </div>
               </Link>
             </div>
             
-            <p className="text-xs text-[#858E9B] uppercase font-bold leading-relaxed mt-2">
+            <p className="text-xs text-[#8A99C0] uppercase font-bold leading-relaxed mt-2">
               {description}
             </p>
 
             {/* Direct Contact Details Block */}
-            <div className="space-y-2.5 mt-4 text-[10px] font-bold text-[#858E9B] uppercase tracking-wider w-full text-center lg:text-left">
-              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FF4D2D] transition-colors">
-                <Phone className="w-3.5 h-3.5 text-[#FF4D2D]" />
-                <a href="tel:+918148045030">+91 81480 45030 / 84386 86030</a>
+            <div className="space-y-2.5 mt-4 text-[10px] font-bold text-[#8A99C0] uppercase tracking-wider w-full text-center lg:text-left">
+              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FB7115] transition-colors">
+                <Phone className="w-3.5 h-3.5 text-[#FB7115]" />
+                <a href="tel:+918148045030">+91 81480 45030 / +91 84386 86030</a>
               </div>
-              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FF4D2D] transition-colors">
-                <Mail className="w-3.5 h-3.5 text-[#FF4D2D]" />
+              <div className="flex items-center gap-2 lg:justify-start justify-center hover:text-[#FB7115] transition-colors">
+                <Mail className="w-3.5 h-3.5 text-[#FB7115]" />
                 <a href="mailto:contact@tamizhtech.in" className="lowercase">contact@tamizhtech.in</a>
               </div>
               <div className="flex items-center gap-2 lg:justify-start justify-center">
-                <MapPin className="w-3.5 h-3.5 text-[#FF4D2D]" />
-                <span>Coimbatore, Tamil Nadu, India</span>
+                <MapPin className="w-3.5 h-3.5 text-[#FB7115]" />
+                <span>Coimbatore, Tamil Nadu - 641107</span>
               </div>
+            </div>
+
+            {/* Google Maps Embed */}
+            <div className="w-full h-24 rounded-lg overflow-hidden border border-white/10 mt-2 relative">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.3268884949514!2d76.9535804758364!3d11.013916954763116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859f131a473fb%3A0xe9628045d65427d4!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1719572450302!5m2!1sen!2sin"
+                className="w-full h-full border-0 grayscale invert opacity-60 hover:opacity-100 transition-opacity"
+                allowFullScreen={false}
+                loading="lazy"
+                title="Tamizh Tech HQ Coimbatore"
+              ></iframe>
             </div>
 
             <ul className="flex items-center space-x-4 justify-center lg:justify-start mt-4">
@@ -155,7 +166,7 @@ export const Footer7 = ({
                     aria-label={social.label} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full border border-[#232833] flex items-center justify-center text-[#9AA1AC] hover:text-[#FF4D2D] hover:border-[#FF4D2D] hover:shadow-[0_0_12px_rgba(255,77,45,0.2)] transition-all"
+                    className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-[#C5CCE0] hover:text-[#FB7115] hover:border-[#FB7115] hover:shadow-[0_0_12px_rgba(251,113,21,0.2)] transition-all"
                   >
                     {social.icon}
                   </a>
@@ -168,12 +179,12 @@ export const Footer7 = ({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-8 w-full flex-grow">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx} className="text-center sm:text-left">
-                <h3 className="mb-6 font-heading font-black text-[#F5F6F8] text-[10px] uppercase tracking-[0.25em]">{section.title}</h3>
-                <ul className="space-y-3.5 text-[9px] text-[#9AA1AC] font-black uppercase tracking-widest">
+                <h3 className="mb-6 font-heading font-black text-white text-[10px] uppercase tracking-[0.25em]">{section.title}</h3>
+                <ul className="space-y-3.5 text-[9px] text-[#C5CCE0] font-black uppercase tracking-widest">
                   {section.links.map((link, linkIdx) => (
                     <li
                       key={linkIdx}
-                      className="hover:text-[#FF4D2D] transition-colors w-fit sm:mx-0 mx-auto"
+                      className="hover:text-[#FB7115] transition-colors w-fit sm:mx-0 mx-auto"
                     >
                       <Link href={link.href}>{link.name}</Link>
                     </li>
@@ -186,21 +197,21 @@ export const Footer7 = ({
         </div>
 
         {/* Footer bottom */}
-        <div className="mt-20 pt-10 border-t border-[#232833] flex flex-col justify-between gap-6 text-[9px] font-black text-[#858E9B] md:flex-row md:items-center items-center text-center uppercase tracking-widest">
+        <div className="mt-20 pt-10 border-t border-white/12 flex flex-col justify-between gap-6 text-[9px] font-black text-[#8A99C0] md:flex-row md:items-center items-center text-center uppercase tracking-widest">
           <p className="order-2 md:order-1">{copyright}</p>
           
           {/* Make in India & Certification Badges */}
           <div className="order-1 flex flex-col md:flex-row items-center gap-6 md:order-2">
             <ul className="flex gap-6 items-center">
               {legalLinks.map((link, idx) => (
-                <li key={idx} className="hover:text-[#FF4D2D] transition-colors">
+                <li key={idx} className="hover:text-[#FB7115] transition-colors">
                   <Link href={link.href}>{link.name}</Link>
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-2 border border-[#232833] rounded-lg px-3 py-1.5 bg-[#11141A]">
+            <div className="flex items-center gap-2 border border-white/10 rounded-lg px-3 py-1.5 bg-[#0A2060]">
               <span className="w-2 h-2 rounded-full bg-[#2ECC71] animate-pulse"></span>
-              <span className="text-[8px] font-black tracking-widest text-[#F5F6F8]">MAKE IN INDIA CERTIFIED</span>
+              <span className="text-[8px] font-black tracking-widest text-white">MAKE IN INDIA CERTIFIED</span>
             </div>
           </div>
         </div>

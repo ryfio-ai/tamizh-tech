@@ -3,15 +3,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { 
   ArrowRight, Cpu, Bot, Shield, Globe, Settings, Lightbulb, CheckCircle2, 
   Factory, Layers, MoveRight, GraduationCap, MessageCircle, Trophy, Flag, 
   Award, Sparkles, BookOpen, Users, Compass, Code, Star, Phone, Mail, 
   MapPin, Send, ChevronRight, ShieldCheck, Zap, Laptop, Database, Beaker,
-  TrendingUp, Activity, Check, Landmark, ArrowUpRight, ShoppingBag, Trash2, X, Plus, Minus
+  TrendingUp, Activity, Check, Landmark, ArrowUpRight, ShoppingBag, Trash2, X, Plus, Minus, Calendar, AlertTriangle
 } from "lucide-react";
-import { FaWhatsapp, FaChevronRight } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 import { products, Product } from "@/data/products";
 import { PageLoader } from "@/components/ui/PageLoader";
@@ -22,6 +22,28 @@ interface CartItem {
   product: Product;
   quantity: number;
 }
+
+const WINS_DATA = [
+  { event: "PSG Kriya", year: 2023, category: "Robo Race", placement: "1st Prize", city: "Coimbatore" },
+  { event: "PSG Kriya", year: 2023, category: "Sumo", placement: "1st Prize", city: "Coimbatore" },
+  { event: "Technoxian World Cup 7.0", year: 2023, category: "Robo Race", placement: "3rd Runner", city: "New Delhi" },
+  { event: "KPR Feasta", year: 2023, category: "LFR & Robo Race", placement: "1st Prize", city: "Coimbatore" },
+  { event: "Asimov", year: 2024, category: "Robo Race", placement: "1st Runner", city: "Coimbatore" },
+  { event: "Technoxian World Cup 8.0", year: 2024, category: "Robo Soccer", placement: "1st Runner", city: "New Delhi" },
+  { event: "Yugam", year: 2024, category: "Robo Soccer", placement: "1st Prize", city: "Coimbatore" },
+  { event: "IITM Shaastra", year: 2025, category: "Robo Soccer", placement: "1st Runner", city: "Chennai" },
+  { event: "Quantom-X", year: 2025, category: "Robo Race", placement: "1st Prize", city: "Karnataka" },
+  { event: "Quantom-X", year: 2025, category: "Robo Soccer", placement: "2nd Prize", city: "Karnataka" },
+  { event: "KPR Feasta", year: 2025, category: "Robo Race", placement: "1st Prize", city: "Coimbatore" },
+  { event: "SRM Robo Fest", year: 2025, category: "Robo War", placement: "1st Prize", city: "Chennai" },
+  { event: "IITM Shaastra", year: 2026, category: "Robo Soccer", placement: "3rd Prize", city: "Chennai" },
+  { event: "Utsava@SREC", year: 2026, category: "Robo Race", placement: "1st Prize", city: "Coimbatore" },
+  { event: "Utsava@SREC", year: 2026, category: "Line Follower", placement: "1st Prize", city: "Coimbatore" },
+  { event: "Yugam", year: 2026, category: "Robo Sumo", placement: "2nd Prize", city: "Coimbatore" },
+  { event: "KPR Feasta", year: 2026, category: "Line Follower", placement: "Participation", city: "Coimbatore" },
+  { event: "Quantom-X", year: 2026, category: "Robo Soccer", placement: "2nd Prize", city: "Karnataka" },
+  { event: "Quantom-X", year: 2026, category: "Robo Race", placement: "2nd Prize", city: "Karnataka" },
+];
 
 export default function HomeClient() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -36,8 +58,11 @@ export default function HomeClient() {
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState("All");
   const [showPromo, setShowPromo] = useState(false);
+
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const dismissed = localStorage.getItem("ttrc_promo_dismissed");
@@ -69,14 +94,6 @@ export default function HomeClient() {
         console.error("Failed to load cart data:", e);
       }
     }
-  }, []);
-
-  // Testimonial rotation loop
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % 4);
-    }, 6000);
-    return () => clearInterval(interval);
   }, []);
 
   const addToCart = (product: Product) => {
@@ -160,77 +177,71 @@ export default function HomeClient() {
   };
 
   const TIMELINE_DATA = [
-    { year: "2021", title: "Tamizh Robotics Club Established", desc: "Started as a passionate student robotics club in Coimbatore to explore hands-on engineering." },
-    { year: "2022", title: "National Competitions", desc: "Began actively participating in robotics events across India, building initial competition bots." },
-    { year: "2023", title: "International Recognition", desc: "Expanded footprint to international scale competitions, winning major engineering accolades." },
-    { year: "2024", title: "Tamizh Tech Robotics Company Established", desc: "Transitioned from a student club to a registered engineering and technology solutions startup on 22 October 2024." },
-    { year: "2025", title: "Industrial Supply Scale", desc: "Supplied indigenous competition bots, STEM kits, and automated solutions to schools and colleges across India." },
-    { year: "2026", title: "ThiranOli Academy Launch", desc: "Launched our specialized education and career development division to train the next generation of engineers." },
+    { year: "2021", title: "Tamizh Robotics Club Established", desc: "Tamizh Robotics Club was established as a student-led robotics innovation hub in Coimbatore." },
+    { year: "2022", title: "Regional Competitions", desc: "Started actively participating in competitive robotics challenges across Tamil Nadu." },
+    { year: "2023", title: "National & International Scale", desc: "Expanded participation to national and international robotics championships, winning prestigious engineering awards." },
+    { year: "2024", title: "Company Registration", desc: "Tamizh Tech Robotics Company was officially registered as an engineering and tech startup on 22 October 2024." },
+    { year: "2025", title: "STEM Products Supply", desc: "Supplied indigenous competition bots and STEM kits to schools and colleges all over India." },
+    { year: "2026", title: "ThiranOli Academy Launch", desc: "Launched ThiranOli Academy to bridge the academic engineering gap and train job-ready technical talent." },
+  ];
+
+  const ROADMAP_DATA = [
+    { year: "2027", title: "State-Wide Expansion", desc: "Aiming to build tinkering labs in 100+ schools and train 5,000+ students across Tamil Nadu." },
+    { year: "2028", title: "South India Presence", desc: "Expanding operational footprint across South India, targeting 10,000+ mentored students and advanced R&D hubs." }
   ];
 
   const COMPETITIONS_SHOWCASE = [
-    { name: "Robo Race", desc: "Speed and track agility challenge.", image: "/events/robo-race.png" },
-    { name: "Robo Soccer", desc: "Autonomous and remote strike bots.", image: "/product/soccer rc.jpg" },
-    { name: "Robo War", desc: "Heavyweight battle bots and spinners.", image: "/events/robo-war.png" },
-    { name: "Robo Sumo", desc: "Ring eviction and high traction bots.", image: "/product/sumo rc.jpg" },
-    { name: "Line Follower", desc: "High-speed PID optical path tracking.", image: "/events/line-follower.png" },
-    { name: "Drone", desc: "Quadcopter agility and obstacle flights.", image: "/pic/drone.png" },
-    { name: "RC Boat", desc: "Aquatic speed and hydrodynamics.", image: "/events/water-rocket.png" },
-    { name: "Hovercraft", desc: "Amphibious operations and flight controls.", image: "/events/water-rocket.png" },
+    { name: "RC Robo Race", desc: "High-RPM speed & racetrack obstacle navigation.", icon: Trophy },
+    { name: "RC Robo Soccer", desc: "Kick weapons, high torque drift drives, and ball possession controls.", icon: Bot },
+    { name: "RC Robo War", desc: "Heavy combat battle bots, hard armor, and active spinning weapons.", icon: Shield },
+    { name: "RC Robo Sumo", desc: "Sumo ring push out, magnetic adhesion, and high-traction tires.", icon: Zap },
+    { name: "RC Boat", desc: "Hydrodynamic hull designs and high-speed water propellers.", icon: Activity },
+    { name: "Hovercraft", desc: "Amphibious flight controls and thrust fan systems.", icon: WindIcon },
+    { name: "Line Follower", desc: "High-speed PID algorithms and optical sensor arrays.", icon: MapPin },
+    { name: "Maze Solver", desc: "Micro-mouse maze routing algorithms and ultrasonic sensors.", icon: Compass },
+    { name: "Drone", desc: "Aerial telemetry, quadcopter dynamics, and obstacle course flights.", icon: Send },
+    { name: "Water Rocketry", desc: "Pneumatic pressure launchers and aerodynamic fins.", icon: LaunchIcon },
   ];
 
-  const THIRANOLI_COURSES = [
-    { title: "Learn Robotics", desc: "Hands-on chassis engineering, gear calculations, and controller setups.", duration: "4 Weeks" },
-    { title: "Learn AI", desc: "Python, OpenCV object tracking, and deep learning models for autonomous navigation.", duration: "6 Weeks" },
-    { title: "Learn Programming", desc: "Embedded C, Arduino programming, and STM32 microcontroller firmware.", duration: "4 Weeks" },
-    { title: "Mentorship", desc: "Direct guidance from international winners for competition preparation.", duration: "Ongoing" },
-    { title: "Career Support", desc: "Portfolio reviews, industrial mock interviews, and placements in core firms.", duration: "Lifetime" },
+  const THIRANOLI_PRICING = [
+    { title: "ThiranOli Skill Academy", price: "₹1,000", period: "student/month", desc: "Ongoing core technical skills guide in electronics, coding, and hands-on mechanical designs.", badge: "Popular" },
+    { title: "Weekend Workshops", price: "₹500", period: "participant", desc: "Focused weekend mechatronics bootcamps covering single topics like Arduino, sensors, or soldering.", badge: "Bootcamp" },
+    { title: "Summer & Holiday STEM Camps", price: "₹2,000", period: "student", desc: "Intense school-holiday courses designed to build functional robotic systems from scratch.", badge: "Interactive" },
+    { title: "Advanced Competition Training", price: "₹2,000 - ₹3,000", period: "student/month", desc: "Specialized training for Robo War, Soccer, and Race bots, guided by international winners.", badge: "Elite Class" },
+    { title: "Project-Based Courses", price: "₹4,000", period: "student", desc: "Build functional mechatronics applications in IoT, Smart Home automation, and EV Battery Monitoring.", badge: "Industry Prep" },
+    { title: "Full Stack Development", price: "₹4,000 - ₹8,000", period: "course", desc: "From basic HTML/CSS to advanced backend development, databases, and responsive architectures.", badge: "Complete Career" },
+    { title: "Electronics & Embedded Systems", price: "₹3,000 - ₹6,000", period: "course", desc: "In-depth hardware course covers PCB design, Embedded C programming, and microcontroller setups.", badge: "Hardware Core" }
   ];
 
-  const GALLERY_IMAGES = [
-    { src: "/gallery/1.JPEG", title: "National Level Prize Win" },
-    { src: "/gallery/3.jpg", title: "Robo War Arena Preparation" },
-    { src: "/gallery/6.jpg", title: "Drone Workshop Training" },
-    { src: "/gallery/8.jpg", title: "Robo Soccer Striker Design" },
-    { src: "/gallery/9.jpg", title: "Embedded Systems Lab Work" },
-    { src: "/gallery/10.jpg", title: "Hands-on School Mentorship" }
+  const FAQS = [
+    { q: "What specification standards do your competitive soccer and war bots follow?", a: "All our competition bots are built strictly according to national and international rulebooks, including Technoxian, IIT Shaastra, and regional college criteria. We optimize for weight limits, dimensional parameters, motor RPM constraints, and weapon safety layouts." },
+    { q: "Do you provide custom lab setup and syllabus-mapped packages for schools?", a: "Yes. We configure complete robotics tinkering labs for schools (mapped to STEM standards) complete with curriculum, teacher guidelines, mechatronics chassis kits, and on-site guidance sessions." },
+    { q: "How does the ThiranOli Academy certification and placement support work?", a: "Our programs feature verified technical certifications upon project review. We map students to internships and core hiring firms, offering lifetime career mock sessions and portfolio reviews." },
+    { q: "Can you design and build custom AGVs or AMRs for industrial facilities?", a: "Yes, we build and supply indigenous automated vehicles (TTRC AGV V1, AMR V1, SPC Drone) and mechatronic custom systems. We configure custom path guidance sensors, safety scanners, and payload capacities for warehouses and production lines." },
+    { q: "What warranty and technical support terms come with your mechatronics kits?", a: "All our core products carry standard hardware warranties. We offer direct technical support, custom mechatronics parts replacement, and software updates for all our development kits." },
+    { q: "Can students outside Coimbatore join the Tamizh Robotics Club?", a: "Yes, the Tamizh Robotics Club India community is open to passionate students nationwide. We support remote members with design files, online workshops, and competition alignment." },
+    { q: "How do I request a bulk quote or place a custom mechatronics order?", a: "You can use our enquiry list drawer to compile products and send it via WhatsApp, or submit a callback request using our contact form. Our technical team responds within 24 hours." }
   ];
 
-  const TESTIMONIALS_DATA = [
-    { name: "Suresh Kumar", role: "Robotics Lead, PSG Tech", text: "Tamizh Tech's competition kits helped our college team win consecutive national championships. The build quality and motor specs are outstanding." },
-    { name: "Dr. Anjali Mehta", role: "Principal, Lotus School", text: "The K-12 STEM Lab set up by Tamizh Tech has completely transformed how our students learn engineering concepts. Highly recommended!" },
-    { name: "Karthik R.", role: "Industrial Consultant, TATA Motors", text: "Their machine vision integration solved a major alignment checking issue on our line. Responsive support and prompt delivery." },
-    { name: "Pranav M.", role: "Student Member, Tamizh Robotics Club", text: "ThiranOli Academy bridged the gap between theory and actual coding for me. I managed to build an autonomous maze solver from scratch!" }
-  ];
-
-  const PARTNER_LOGOS = [
-    "PSG COLLEGE OF TECHNOLOGY",
-    "TATA MOTORS INDUSTRIAL",
-    "LOTUS INTERNATIONAL SCHOOL",
-    "COVAI INDUSTRIAL SYSTEMS",
-    "KUMARAGURU TECH HUB",
-    "CIT ROBOTICS FORUM",
-    "THIRANOLI ACADEMY PLACEMENTS"
-  ];
+  const filteredWins = selectedYear === "All"
+    ? WINS_DATA
+    : WINS_DATA.filter(w => w.year.toString() === selectedYear);
 
   return (
-    <div className="flex flex-col w-full bg-[#0A0C10] text-[#F5F6F8] overflow-x-hidden pt-20 selection:bg-[#FF4D2D] selection:text-white">
+    <div className="flex flex-col w-full bg-[#031549] text-white overflow-x-hidden pt-20 selection:bg-[#FB7115] selection:text-white">
       
       {/* Page Loader */}
       <PageLoader />
 
-      {/* 1. Hero Section */}
-      <section className="relative w-full min-h-[85vh] flex items-center bg-[#0A0C10] overflow-hidden py-16 border-b border-[#232833]">
-        {/* Dark PCB layout grid */}
-        <div className="absolute inset-0 opacity-[0.4] hero-grid pointer-events-none" />
-        {/* Circuit Glow Overlay */}
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#FF4D2D]/5 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-[#00D1B2]/3 rounded-full blur-[120px] pointer-events-none" />
-
+      {/* 2. HERO SECTION */}
+      <section className="relative w-full min-h-[85vh] flex items-center bg-[#031549] overflow-hidden py-16 border-b border-white/12">
+        <div className="absolute inset-0 opacity-[0.25] hero-grid pointer-events-none" />
+        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#FB7115]/5 rounded-full blur-[140px] pointer-events-none" />
+        
         <div className="container mx-auto px-6 z-10 grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col space-y-8 max-w-2xl text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF4D2D]/10 border border-[#FF4D2D]/35 rounded-full text-xs font-black tracking-widest text-[#FF4D2D] uppercase w-fit">
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Established 22 Oct 2024
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FB7115]/10 border border-[#FB7115]/35 rounded-full text-xs font-black tracking-widest text-[#FB7115] uppercase w-fit">
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" /> Coimbatore's Leading Robotics & Automation Company
             </div>
             
             <KineticHeading 
@@ -238,931 +249,1131 @@ export default function HomeClient() {
               strikeWord="Ordinary"
               revealWord="Future"
               baseTextPost=" Engineers Through Robotics"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black leading-[1.0] tracking-tighter uppercase text-[#F5F6F8]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black leading-[1.0] tracking-tighter uppercase text-white"
               as="h1"
             />
             
-            <p className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-[#9AA1AC] border-l-2 border-[#FF4D2D] pl-4">
-              Products, Training, Competitions and Industrial Automation.
+            <p className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-[#C5CCE0] border-l-2 border-[#FB7115] pl-4">
+              From a student robotics club to a leading robotics, engineering, and technology solutions company.
             </p>
             
-            <p className="text-[#858E9B] text-base leading-relaxed max-w-xl font-medium">
-              Evolving from Coimbatore's premier robotics hub into a hybrid B2C & B2B ecosystem. We engineer high-performance platforms, empower schools & colleges, and deploy industrial-grade automated solutions.
-            </p>
+            {/* 3 Inline Stat Chips using custom SVGs */}
+            <div className="flex flex-col sm:flex-row gap-4 text-xs font-black uppercase tracking-wider text-[#C5CCE0] border-t border-white/10 pt-6">
+              <div className="flex items-center gap-2">
+                <Trophy className="w-4 h-4 text-[#FB7115]" />
+                <span>180+ Winning Positions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-[#FB7115]" />
+                <span>1000+ Students Mentored</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#FB7115]" />
+                <span>200+ Robotics Events</span>
+              </div>
+            </div>
             
             <div className="flex flex-wrap gap-4 pt-4">
               <Link href="#store" className="btn-primary">
                 Explore Products <ArrowRight className="w-4 h-4 ml-3" />
               </Link>
-              <Link href="#contact" className="btn-secondary">
-                Book Demo
-              </Link>
-              <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2 border-[#232833] hover:border-[#FF4D2D]">
-                <FaWhatsapp className="w-4 h-4 text-[#FF4D2D]" /> Talk To Expert
+              <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2 border-white/12 hover:border-[#FB7115] text-white">
+                <FaWhatsapp className="w-4 h-4 text-[#FB7115]" /> Talk To Expert
               </a>
             </div>
+          </div>
+          
+          {/* Asymmetric 3-image Collage (Left Large, Right Stacked A & B) */}
+          <div className="relative w-full h-[480px] hidden md:flex items-center justify-center">
+            {/* Main Image (Large background, slightly tilted) */}
+            <div className="absolute left-6 w-[280px] h-[360px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-10 rotate-[-3deg] hover:rotate-0 transition-transform duration-500">
+              <Image 
+                src="/gallery/3.jpg" 
+                alt="TTRC Combat Bot workbench" 
+                fill 
+                className="object-cover"
+                sizes="300px"
+              />
+            </div>
+            
+            {/* Stacked Image A (Top right, overlapping) */}
+            <div className="absolute right-12 top-6 w-[200px] h-[220px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-20 rotate-[4deg] hover:rotate-0 transition-transform duration-500">
+              <Image 
+                src="/gallery/8.jpg" 
+                alt="Robo Soccer Striker Chassis design" 
+                fill 
+                className="object-cover"
+                sizes="200px"
+              />
+            </div>
 
-            {/* Certifications strip */}
-            <div className="flex items-center gap-6 pt-4 border-t border-[#232833] w-fit">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#00D1B2]" />
-                <span className="text-[9px] font-black uppercase tracking-widest text-[#9AA1AC]">Make In India</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#00D1B2]" />
-                <span className="text-[9px] font-black uppercase tracking-widest text-[#9AA1AC]">STEM Certified</span>
-              </div>
+            {/* Stacked Image B (Bottom right, overlapping) */}
+            <div className="absolute right-6 bottom-6 w-[210px] h-[200px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-30 rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
+              <Image 
+                src="/gallery/6.jpg" 
+                alt="Drone Workshop training check" 
+                fill 
+                className="object-cover"
+                sizes="200px"
+              />
+            </div>
+          </div>
+
+          {/* Mobile Fallback: Single centered hero image */}
+          <div className="md:hidden block w-full h-[280px] relative border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+            <Image 
+              src="/gallery/3.jpg" 
+              alt="TTRC Combat Bot workbench" 
+              fill 
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. STATS BAND */}
+      <section className="bg-[#0A2060] py-10 border-b border-white/12">
+        <div className="container mx-auto px-6">
+          {/* First Row of 5 Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center max-w-6xl mx-auto">
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={200} label="Events Participated" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={40} label="State-Level Events" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={100} label="National-Level Events" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={15} label="International Events" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4">
+              <StatCounter target={180} label="Winning Positions" suffix="+" />
             </div>
           </div>
           
-          <div className="hidden lg:flex justify-center items-center relative">
-            <div className="w-[500px] h-[500px] border border-[#232833] rounded-full flex items-center justify-center p-8 relative animate-[spin_120s_linear_infinite]">
-              <div className="w-full h-full border border-dashed border-[#FF4D2D]/20 rounded-full flex items-center justify-center p-8">
-                <div className="w-full h-full border border-[#232833] rounded-full flex items-center justify-center">
-                  <Bot className="w-24 h-24 text-[#232833] stroke-[0.5]" />
-                </div>
-              </div>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#FF4D2D] rounded-full shadow-[0_0_15px_#FF4D2D]" />
-              <div className="absolute bottom-1/2 right-0 translate-y-1/2 w-3 h-3 bg-[#00D1B2] rounded-full shadow-[0_0_10px_#00D1B2]" />
-            </div>
+          {/* Hairline Divider */}
+          <div className="w-full h-px bg-white/5 my-8" />
 
-            {/* Float premium product illustration */}
-            <div className="absolute bg-[#181C24] border border-[#232833] p-8 rounded-2xl shadow-[0_24px_48px_rgba(0,0,0,0.8)] max-w-sm flex flex-col space-y-4 text-left">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#FF4D2D]/10 rounded-lg border border-[#FF4D2D]/20">
-                  <Cpu className="w-6 h-6 text-[#FF4D2D]" />
+          {/* Second Row of 4 Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center max-w-5xl mx-auto">
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={8} label="Prize Money Won" prefix="₹" suffix="L+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={20} label="Events Organized" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4 border-r border-white/5 last:border-0">
+              <StatCounter target={200} label="Active Club Members" suffix="+" />
+            </div>
+            <div className="flex flex-col justify-center items-center py-4">
+              <StatCounter target={1000} label="Students Mentored" suffix="+" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. ABOUT / FOUNDER'S MESSAGE BLOCK */}
+      <section className="py-24 bg-[#031549] border-b border-white/12">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid lg:grid-cols-12 gap-16 items-start">
+            
+            {/* Left Content (narrative) */}
+            <div className="lg:col-span-8 text-left space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Message from the Founders</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white leading-none">
+                Bridging Robotics Education & Industrial Engineering
+              </h2>
+              
+              {/* Bold Founder Quote */}
+              <div className="border-l-4 border-[#FB7115] pl-6 py-2 my-8">
+                <blockquote className="text-lg md:text-xl font-heading font-black uppercase text-white tracking-tight leading-snug">
+                  “Engineering is not just about learning theories; it is about transforming ideas into reality.”
+                </blockquote>
+              </div>
+
+              <p className="text-xs sm:text-sm text-[#C5CCE0] leading-relaxed font-bold uppercase tracking-tight opacity-90">
+                Founded as the <strong className="text-white">Tamizh Robotics Club</strong> in 2021 to compete in collegiate robotics, we officially registered as <strong className="text-white">Tamizh Tech Robotics Company</strong> on 22 October 2024 in <strong className="text-white">Coimbatore</strong>. Guided by the principles of <strong className="text-white">Make in India</strong>, we design mechatronics chassis and supply competition bots, educational kits, and custom AMR nodes.
+              </p>
+              <p className="text-xs sm:text-sm text-[#C5CCE0] leading-relaxed font-bold uppercase tracking-tight opacity-90">
+                In 2026, we launched <strong className="text-white">ThiranOli Academy</strong>, our training wing, to equip engineers with core placement skills in mechatronics, embedded programming, and industrial applications.
+              </p>
+
+              {/* 3 Inline Stat Blocks */}
+              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 mt-10">
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-white font-mono block">180+</span>
+                  <span className="text-[8px] uppercase tracking-widest font-black text-[#8A99C0]">Wins</span>
                 </div>
                 <div>
-                  <h3 className="text-xs font-black uppercase text-[#F5F6F8] tracking-wider">Premium Robotics</h3>
-                  <span className="text-[9px] text-[#858E9B] uppercase tracking-widest">Designed In India</span>
+                  <span className="text-2xl sm:text-3xl font-black text-white font-mono block">1000+</span>
+                  <span className="text-[8px] uppercase tracking-widest font-black text-[#8A99C0]">Students</span>
+                </div>
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-white font-mono block">5+ Yrs</span>
+                  <span className="text-[8px] uppercase tracking-widest font-black text-[#8A99C0]">Combined R&D</span>
                 </div>
               </div>
-              <p className="text-xs text-[#9AA1AC] leading-relaxed font-medium">
-                Engineered for maximum reliability in national/international arenas and factory floors.
-              </p>
-              <div className="flex gap-2">
-                <span className="px-2 py-0.5 bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 rounded text-[8px] font-bold text-[#FF4D2D] uppercase">Make In India</span>
-                <span className="px-2 py-0.5 bg-[#00D1B2]/10 border border-[#00D1B2]/20 rounded text-[8px] font-bold text-[#00D1B2] uppercase">STEM CERTIFIED</span>
+
+              <div className="pt-6">
+                <Link href="/about" className="btn-primary">
+                  Learn More About Us <ArrowRight className="w-4 h-4 ml-3" />
+                </Link>
               </div>
             </div>
+
+            {/* Right Profile Block */}
+            <div className="lg:col-span-4 bg-[#0A2060] border border-white/12 p-8 rounded-2xl text-left relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FB7115]/5 rounded-full blur-2xl pointer-events-none" />
+              
+              <div className="w-20 h-20 rounded-full border-2 border-[#FB7115]/40 overflow-hidden relative mb-6">
+                <Image 
+                  src="/founder.jpg" 
+                  alt="Er. K. Tamizharasan" 
+                  fill 
+                  className="object-cover object-top"
+                  sizes="80px"
+                />
+              </div>
+
+              <h4 className="text-lg font-heading font-black text-white uppercase tracking-tight">Er. K. Tamizharasan</h4>
+              <span className="text-[9px] font-black uppercase text-[#FB7115] tracking-widest block mb-4">Founder & Lead Engineer</span>
+              
+              <p className="text-[11px] text-[#C5CCE0] leading-relaxed font-semibold uppercase tracking-tight mb-6">
+                Represented India in international robotics events. Awarded for developing custom industrial-grade automated guides and mechatronic systems.
+              </p>
+
+              <Link href="/founder" className="text-[10px] font-black uppercase tracking-widest text-[#FB7115] hover:text-white transition-colors flex items-center gap-1.5 group/link">
+                Founder Bio <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Partner Marquee Strip */}
-      <div className="w-full bg-[#11141A] py-6 border-b border-[#232833] overflow-hidden select-none">
-        <div className="marquee-container relative w-full flex overflow-x-hidden">
-          <div className="marquee-content flex gap-12 text-[#858E9B] text-[10px] font-black uppercase tracking-[0.25em]">
-            {/* Render list twice to ensure infinite scroll loop */}
-            {PARTNER_LOGOS.map((logo, idx) => (
-              <span key={idx} className="hover:text-[#FF4D2D] transition-colors">{logo}</span>
-            ))}
-            {PARTNER_LOGOS.map((logo, idx) => (
-              <span key={`dup-${idx}`} className="hover:text-[#FF4D2D] transition-colors">{logo}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Trust Section */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="achievements">
+      {/* 5. JOURNEY TIMELINE */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12" id="journey">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Proven Track Record</span>
-            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Ecosystem Trust & Achievements</h2>
+          <div className="text-center mb-20">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Milestone Roadmap</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Our Journey — From Club to Company</h2>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-            <StatCounter target={200} label="Robotics Events" suffix="+" />
-            <StatCounter target={180} label="Awards Won" suffix="+" />
-            <StatCounter target={1000} label="Students Mentored" suffix="+" />
-            <StatCounter target={20} label="Events Organized" suffix="+" />
-            <StatCounter target={8} label="Prize Money Won" prefix="₹" suffix="L+" />
+
+          <div className="relative border-l border-white/10 max-w-4xl mx-auto pl-8 sm:pl-12 space-y-12 text-left">
+            {TIMELINE_DATA.map((milestone, idx) => (
+              <div key={idx} className="relative group">
+                {/* Node marker */}
+                <div className="absolute -left-[41px] sm:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-[#031549] border-4 border-white/10 group-hover:border-[#FB7115] group-hover:scale-110 transition-all shadow-md flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FB7115] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+
+                <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl hover:border-[#FB7115] hover:shadow-[0_12px_32px_rgba(251,113,21,0.06)] transition-all">
+                  <span className="text-2xl font-black text-[#FB7115] font-mono block mb-2">{milestone.year}</span>
+                  <h4 className="text-base font-heading font-black uppercase text-white tracking-wide mb-2">{milestone.title}</h4>
+                  <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-80">{milestone.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Product Store */}
-      <section className="py-24 bg-[#0A0C10] border-b border-[#232833]" id="store">
+      {/* 6. NAMED COMPETITION WINS */}
+      <section className="py-24 bg-[#031549] border-b border-white/12" id="wins">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Robotics Store</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">High-Performance Hardware</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4 mb-10" />
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8 text-left max-w-7xl mx-auto">
+            <div>
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Proven Arenas</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">International & National Wins</h2>
+            </div>
             
-            {/* Category tabs */}
-            <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
-              {categories.map((cat) => (
+            {/* Year Filters */}
+            <div className="flex flex-wrap gap-2">
+              {["All", "2023", "2024", "2025", "2026"].map((yr) => (
                 <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-5 py-2.5 text-[9px] font-black uppercase tracking-widest transition-all rounded-lg border ${
-                    selectedCategory === cat 
-                      ? "bg-[#FF4D2D] text-white border-[#FF4D2D] shadow-sm" 
-                      : "bg-[#11141A] text-[#9AA1AC] border-[#232833] hover:border-[#858E9B] hover:text-[#F5F6F8]"
+                  key={yr}
+                  onClick={() => setSelectedYear(yr)}
+                  className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest border transition-all rounded-lg ${
+                    selectedYear === yr 
+                      ? "bg-[#FB7115] text-white border-[#FB7115]"
+                      : "bg-[#0A2060] text-[#C5CCE0] border-white/10 hover:border-white/20"
                   }`}
                 >
-                  {cat}
+                  {yr === "All" ? "All Years" : yr}
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {filteredProducts.map((product, idx) => (
-              <div 
-                key={idx} 
-                className="bg-[#11141A] border border-[#232833] rounded-xl overflow-hidden flex flex-col justify-between group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.08)] transition-all duration-300 relative text-left"
-              >
-                {/* Badges */}
-                <div className="absolute top-4 left-4 z-10 bg-[#FF4D2D] text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
-                  {product.badge}
-                </div>
-
-                {/* Deliberate Product Image Framing: White/light inset card to showcase JPG layout */}
-                <div className="p-4 bg-[#11141A]">
-                  <div className="w-full h-48 bg-white/95 border border-[#232833] rounded-lg flex items-center justify-center p-6 relative overflow-hidden group-hover:opacity-95 transition-all">
-                    {product.image ? (
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <Cpu className="w-16 h-16 text-[#0A0C10]/20" />
-                    )}
-                    <span className="absolute bottom-3 left-4 text-[9px] font-black text-gray-400 uppercase tracking-widest">
-                      {product.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex-grow flex flex-col justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <AnimatePresence mode="popLayout">
+              {filteredWins.map((win, idx) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  key={`${win.event}-${win.category}-${idx}`}
+                  className="bg-[#0A2060] border border-white/12 p-6 rounded-xl text-left hover:border-[#FB7115] hover:shadow-[0_8px_24px_rgba(251,113,21,0.06)] transition-all flex flex-col justify-between h-[160px]"
+                >
                   <div>
-                    <h4 className="text-sm font-black text-[#F5F6F8] uppercase tracking-tight mb-2">
-                      {product.name}
+                    <div className="flex justify-between items-start mb-2.5">
+                      <span className="px-2 py-0.5 bg-[#FB7115]/10 border border-[#FB7115]/20 text-[#FB7115] text-[8px] font-bold uppercase tracking-wider rounded">
+                        {win.year}
+                      </span>
+                      <span className="text-[8px] font-black text-[#8A99C0] uppercase tracking-wider font-mono">
+                        {win.city}
+                      </span>
+                    </div>
+                    <h4 className="text-xs font-black text-white uppercase tracking-wide leading-tight line-clamp-2">
+                      {win.event}
                     </h4>
-                    <p className="text-[#858E9B] text-xs font-medium leading-relaxed mb-4 line-clamp-2">
-                      {product.specs}
+                    <p className="text-[10px] text-[#C5CCE0] uppercase font-bold tracking-wider mt-1.5">
+                      {win.category}
                     </p>
                   </div>
-
-                  <div className="space-y-2 pt-4 border-t border-[#232833] mt-4">
-                    <button 
-                      onClick={() => addToCart(product)}
-                      className="w-full py-3 bg-[#FF4D2D] hover:bg-[#E04020] text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all flex items-center justify-center gap-2"
-                    >
-                      <ShoppingBag className="w-4 h-4" /> Add to List
-                    </button>
-                    <div className="grid grid-cols-2 gap-2">
-                      <Link 
-                        href={`/products/${product.slug}`}
-                        className="py-2.5 border border-[#232833] hover:border-[#F5F6F8] text-[#9AA1AC] hover:text-[#F5F6F8] text-[9px] font-black uppercase tracking-widest rounded-lg text-center transition-all block"
-                      >
-                        Details
-                      </Link>
-                      <a 
-                        href={getWhatsAppLink(product.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-2.5 border border-[#232833] hover:border-[#FF4D2D] text-[#9AA1AC] hover:text-[#FF4D2D] text-[9px] font-black uppercase tracking-widest rounded-lg text-center transition-all flex items-center justify-center gap-1"
-                      >
-                        <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366]" /> Enquire
-                      </a>
-                    </div>
+                  <div className="text-[10px] font-black text-[#FB7115] uppercase tracking-widest border-t border-white/5 pt-3 flex items-center gap-1.5 mt-2">
+                    <Award className="w-3.5 h-3.5" /> {win.placement}
                   </div>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
-      {/* 4. Solutions Section */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="solutions">
+      {/* 7. ROBOTICS COMPETITION EXCELLENCE */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Targeted Programs</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Integrated Solutions</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Competed Categories</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Robotics Competition Excellence</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Card 1: For Schools */}
-            <div className="bg-[#181C24] border border-[#232833] rounded-2xl p-8 flex flex-col justify-between text-left hover:border-[#FF4D2D] transition-all group">
-              <div>
-                <span className="text-[10px] font-mono text-[#00D1B2] block mb-2">01 // BASIC MODULES</span>
-                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] rounded-xl w-fit mb-6 border border-[#FF4D2D]/20">
-                  <GraduationCap className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-black uppercase tracking-tight text-[#F5F6F8] mb-2">For Schools</h3>
-                <span className="text-[10px] font-bold text-[#FF4D2D] uppercase tracking-widest block mb-6">STEM & LAB SOLUTIONS</span>
-                <p className="text-xs text-[#858E9B] leading-relaxed font-medium mb-6">Empowering K-12 academic spaces with fully modular labs, syllabus training, and hardware kits.</p>
-                <ul className="space-y-3">
-                  {["STEM Labs", "Robotics Labs", "AI Labs"].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                      <Check className="w-4 h-4 text-[#FF4D2D]" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-8">
-                <Link href="#contact" className="text-[10px] font-black uppercase tracking-widest text-[#FF4D2D] hover:text-[#F5F6F8] transition-colors inline-flex items-center gap-1">
-                  Enquire Lab Setup <MoveRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 2: For Colleges */}
-            <div className="bg-[#181C24] border border-[#232833] rounded-2xl p-8 flex flex-col justify-between text-left hover:border-[#FF4D2D] transition-all group">
-              <div>
-                <span className="text-[10px] font-mono text-[#00D1B2] block mb-2">02 // RESEARCH NODES</span>
-                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] rounded-xl w-fit mb-6 border border-[#FF4D2D]/20">
-                  <BookOpen className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-black uppercase tracking-tight text-[#F5F6F8] mb-2">For Colleges</h3>
-                <span className="text-[10px] font-bold text-[#FF4D2D] uppercase tracking-widest block mb-6">ACADEMIC & R&D LABS</span>
-                <p className="text-xs text-[#858E9B] leading-relaxed font-medium mb-6">Incubating student competitive teams, lab setup, and prototyping custom final-year engineering projects.</p>
-                <ul className="space-y-3">
-                  {["Research Projects", "Competition Teams", "Lab Setup"].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                      <Check className="w-4 h-4 text-[#FF4D2D]" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-8">
-                <Link href="#contact" className="text-[10px] font-black uppercase tracking-widest text-[#FF4D2D] hover:text-[#F5F6F8] transition-colors inline-flex items-center gap-1">
-                  Connect With Experts <MoveRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 3: For Industries */}
-            <div className="bg-[#181C24] border border-[#232833] rounded-2xl p-8 flex flex-col justify-between text-left hover:border-[#FF4D2D] transition-all group">
-              <div>
-                <span className="text-[10px] font-mono text-[#00D1B2] block mb-2">03 // INDUSTRIAL CELLS</span>
-                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] rounded-xl w-fit mb-6 border border-[#FF4D2D]/20">
-                  <Factory className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-black uppercase tracking-tight text-[#F5F6F8] mb-2">For Industries</h3>
-                <span className="text-[10px] font-bold text-[#FF4D2D] uppercase tracking-widest block mb-6">AUTOMATION & INTEGRATION</span>
-                <p className="text-xs text-[#858E9B] leading-relaxed font-medium mb-6">Deploying custom automated systems, IoT remote monitors, and machine vision inspection platforms.</p>
-                <ul className="space-y-3">
-                  {["Automation", "AI Vision", "IoT Monitoring", "Custom Robotics"].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                      <Check className="w-4 h-4 text-[#FF4D2D]" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-8">
-                <Link href="#contact" className="text-[10px] font-black uppercase tracking-widest text-[#FF4D2D] hover:text-[#F5F6F8] transition-colors inline-flex items-center gap-1">
-                  Request Automation Audit <MoveRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Made in India Section */}
-      <section className="relative w-full py-24 bg-[#0A0C10] text-[#F5F6F8] overflow-hidden border-b border-[#232833]">
-        <div className="container mx-auto px-6 z-10 max-w-5xl text-center relative">
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#FF4D2D] bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 px-3.5 py-1.5 rounded-full w-fit mx-auto mb-6 block">
-            Indigenous Engineering
-          </span>
-          <h2 className="text-4xl md:text-6xl font-heading font-black tracking-tighter uppercase mb-6 leading-tight">
-            Designed, Developed and <br /> Manufactured in India
-          </h2>
-          <p className="text-base text-[#858E9B] leading-relaxed max-w-2xl mx-auto font-medium">
-            At Tamizh Tech, we engineer robotics hardware locally to bypass expensive component imports. Our competition bots and modular setups are built, debugged, and shipped from our Coimbatore R&D hub.
-          </p>
-
-          {/* Connected SVG circuit graph - B2B architecture node layout */}
-          <div className="relative w-full max-w-4xl mx-auto h-[400px] hidden md:flex items-center justify-center mt-16 bg-[#11141A]/50 border border-[#232833] rounded-3xl overflow-hidden p-8">
-            <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none" />
-
-            <svg className="absolute inset-0 w-full h-full pointer-events-none">
-              <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#232833" strokeWidth="2" />
-              <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#FF4D2D" strokeWidth="2" strokeDasharray="8 8" className="animate-[dash_10s_linear_infinite]" />
-              
-              <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#232833" strokeWidth="2" />
-              <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#00D1B2" strokeWidth="2" strokeDasharray="8 8" className="animate-[dash_10s_linear_infinite]" />
-              
-              <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="#232833" strokeWidth="2" />
-              <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="#00D1B2" strokeWidth="2" strokeDasharray="8 8" className="animate-[dash_10s_linear_infinite]" />
-              
-              <line x1="50%" y1="50%" x2="75%" y2="75%" stroke="#232833" strokeWidth="2" />
-              <line x1="50%" y1="50%" x2="75%" y2="75%" stroke="#FF4D2D" strokeWidth="2" strokeDasharray="8 8" className="animate-[dash_10s_linear_infinite]" />
-            </svg>
-            
-            {/* Center Node */}
-            <div className="absolute z-10 flex flex-col items-center justify-center p-6 rounded-full bg-[#181C24] border-2 border-[#FF4D2D] w-44 h-44 shadow-[0_0_30px_rgba(255,77,45,0.25)] text-center">
-              <Cpu className="w-10 h-10 text-[#FF4D2D] mb-2 animate-pulse" />
-              <span className="text-[10px] font-black tracking-widest text-[#F5F6F8] uppercase">COIMBATORE</span>
-              <span className="text-[9px] font-bold text-[#858E9B] uppercase">R&D HUB</span>
-            </div>
-            
-            {/* Top Left Node */}
-            <div className="absolute top-[15%] left-[12%] flex items-center gap-3 p-4 bg-[#181C24] border border-[#232833] rounded-xl hover:border-[#FF4D2D] transition-colors">
-              <Bot className="w-6 h-6 text-[#FF4D2D]" />
-              <div className="text-left">
-                <h4 className="text-[10px] font-black uppercase text-[#F5F6F8]">Robo Race</h4>
-                <span className="text-[8px] text-[#858E9B]">CARBON CHASSIS</span>
-              </div>
-            </div>
-            
-            {/* Top Right Node */}
-            <div className="absolute top-[15%] right-[12%] flex items-center gap-3 p-4 bg-[#181C24] border border-[#232833] rounded-xl hover:border-[#00D1B2] transition-colors">
-              <Bot className="w-6 h-6 text-[#00D1B2]" />
-              <div className="text-left">
-                <h4 className="text-[10px] font-black uppercase text-[#F5F6F8]">Robo Soccer</h4>
-                <span className="text-[8px] text-[#858E9B]">PNEUMATIC STRIKER</span>
-              </div>
-            </div>
-            
-            {/* Bottom Left Node */}
-            <div className="absolute bottom-[15%] left-[12%] flex items-center gap-3 p-4 bg-[#181C24] border border-[#232833] rounded-xl hover:border-[#00D1B2] transition-colors">
-              <Bot className="w-6 h-6 text-[#00D1B2]" />
-              <div className="text-left">
-                <h4 className="text-[10px] font-black uppercase text-[#F5F6F8]">Robo War</h4>
-                <span className="text-[8px] text-[#858E9B]">SPINNER WEAPONS</span>
-              </div>
-            </div>
-            
-            {/* Bottom Right Node */}
-            <div className="absolute bottom-[15%] right-[12%] flex items-center gap-3 p-4 bg-[#181C24] border border-[#232833] rounded-xl hover:border-[#FF4D2D] transition-colors">
-              <Bot className="w-6 h-6 text-[#FF4D2D]" />
-              <div className="text-left">
-                <h4 className="text-[10px] font-black uppercase text-[#F5F6F8]">Robo Sumo</h4>
-                <span className="text-[8px] text-[#858E9B]">HIGH TORQUE DRIVE</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Fallback Mobile grid */}
-          <div className="grid grid-cols-2 gap-6 mt-16 max-w-4xl mx-auto md:hidden">
-            {COMPETITIONS_SHOWCASE.slice(0, 4).map((bot, idx) => (
-              <div key={idx} className="border border-[#232833] rounded-xl p-4 bg-[#11141A] flex flex-col justify-between h-44 hover:border-[#FF4D2D] transition-colors">
-                <div className="relative w-full h-24 bg-white/95 rounded-lg flex items-center justify-center p-2">
-                  <Image
-                    src={bot.image}
-                    alt={bot.name}
-                    fill
-                    className="object-contain p-2"
-                  />
-                </div>
-                <div className="text-center pt-2">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#F5F6F8]">{bot.name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Robotics Competition Excellence */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="competitions">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Arena Dominance</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Robotics Competition Excellence</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4 mb-6" />
-            <p className="text-[#858E9B] text-sm font-medium leading-relaxed">
-              We design, build, and optimize hardware structures for specific arena rules, achieving a record 180+ winning positions in technical tracks.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {COMPETITIONS_SHOWCASE.map((comp, idx) => (
-              <div 
-                key={idx} 
-                className="bg-[#181C24] border border-[#232833] p-6 rounded-2xl text-left flex flex-col justify-between hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all group"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 flex items-center justify-center mb-5 text-[#FF4D2D] group-hover:bg-[#FF4D2D] group-hover:text-white transition-colors duration-300">
-                    <Trophy className="w-4 h-4" />
-                  </div>
-                  <h4 className="text-sm font-black uppercase text-[#F5F6F8] tracking-wide mb-2">{comp.name}</h4>
-                  <p className="text-xs text-[#858E9B] font-medium leading-relaxed">{comp.desc}</p>
-                </div>
-                <div className="pt-6 border-t border-[#232833] mt-4 flex items-center justify-between">
-                  <a 
-                    href={getWhatsAppLink(comp.name)} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-widest inline-flex items-center gap-1 hover:gap-2 transition-all"
-                  >
-                    Enquire Specs <ChevronRight className="w-3 h-3" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Achievements Wall (Timeline) */}
-      <section className="py-24 bg-[#0A0C10] border-b border-[#232833]" id="journey">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Ecosystem Evolution</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Achievements Wall</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
-          </div>
-          
-          <div className="relative max-w-5xl mx-auto pl-6 md:pl-0">
-            {/* Timeline scroll path line */}
-            <div className="absolute left-[8px] md:left-1/2 top-0 bottom-0 w-[2px] bg-[#232833] transform -translate-x-1/2" />
-
-            {TIMELINE_DATA.map((milestone, idx) => {
-              const isEven = idx % 2 === 0;
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {COMPETITIONS_SHOWCASE.map((cat, idx) => {
+              const Icon = cat.icon;
               return (
-                <TimelineNode key={idx} milestone={milestone} isEven={isEven} />
+                <div 
+                  key={idx}
+                  className="bg-[#031549] border border-white/12 p-8 rounded-xl text-center group hover:border-[#FB7115] hover:shadow-[0_12px_32px_rgba(251,113,21,0.06)] transition-all"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-[#0A2060] border border-white/10 text-[#FB7115] group-hover:bg-[#FB7115] group-hover:text-white flex items-center justify-center mx-auto mb-4 transition-colors">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-[10px] font-black uppercase tracking-wider text-white mb-2 leading-tight">{cat.name}</h4>
+                  <p className="text-[9px] text-[#8A99C0] leading-tight lowercase font-semibold">{cat.desc}</p>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* 8. ThiranOli Academy Section */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="training">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-16 items-center">
-            
-            <div className="lg:col-span-5 flex flex-col space-y-6 text-left border-l-4 border-[#FF4D2D] pl-6 py-2">
-              <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em]">Bridging Academia & Industry</span>
-              <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">
-                ThiranOli Academy
-              </h2>
-              <p className="text-[#858E9B] text-sm font-medium leading-relaxed">
-                Our career and training arm designed to build future-ready engineering leaders. We offer deep hands-on courses, verified certifications, and placement support.
-              </p>
-              
-              <div className="p-6 bg-[#181C24] border border-[#232833] rounded-xl flex items-center gap-4">
-                <GraduationCap className="w-10 h-10 text-[#FF4D2D]" />
-                <div>
-                  <span className="text-2xl font-black text-[#F5F6F8] block tracking-tighter font-mono">1000+</span>
-                  <span className="text-[9px] font-bold text-[#858E9B] uppercase tracking-widest">Students Trained & Guided</span>
-                </div>
-              </div>
+      {/* 8. MADE IN INDIA SECTION */}
+      <section className="py-24 bg-[#031549] border-b border-white/12 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FB7115]/5 rounded-full blur-[160px] pointer-events-none" />
+        
+        <div className="container mx-auto px-6 max-w-4xl z-10 relative">
+          <div className="text-center space-y-6">
+            <div className="inline-flex items-center justify-center p-2 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] mb-4">
+              <ShieldCheck className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white leading-none">
+              At a time when most competition robots used in India were imported, we chose a different path.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#C5CCE0] font-bold uppercase tracking-wider leading-relaxed max-w-2xl mx-auto opacity-80 pt-4">
+              We focus on localized engineering, raw parts design, and local fabrication to keep robotics accessible, cost-effective, and robust.
+            </p>
 
-              <div className="pt-4">
-                <Link href="#contact" className="btn-primary">
-                  Join ThiranOli <ArrowRight className="w-4 h-4 ml-3" />
-                </Link>
+            <div className="grid md:grid-cols-3 gap-8 pt-16 text-left">
+              <div className="bg-[#0A2060] border border-white/12 p-8 rounded-2xl">
+                <span className="text-[9px] font-black text-[#FB7115] uppercase tracking-widest block mb-2 font-mono">Pillar 01</span>
+                <h4 className="text-base font-heading font-black uppercase text-white mb-3">Build in India</h4>
+                <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-70">Indigenous mechatronics design, custom structural laser cuts, and high-RPM gearboxes configured locally in Coimbatore.</p>
+              </div>
+              <div className="bg-[#0A2060] border border-white/12 p-8 rounded-2xl">
+                <span className="text-[9px] font-black text-[#FB7115] uppercase tracking-widest block mb-2 font-mono">Pillar 02</span>
+                <h4 className="text-base font-heading font-black uppercase text-white mb-3">Innovate in India</h4>
+                <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-70">Developing hardware configurations, wireless motor drives, and sensor modules mapped to domestic rules.</p>
+              </div>
+              <div className="bg-[#0A2060] border border-white/12 p-8 rounded-2xl">
+                <span className="text-[9px] font-black text-[#FB7115] uppercase tracking-widest block mb-2 font-mono">Pillar 03</span>
+                <h4 className="text-base font-heading font-black uppercase text-white mb-3">Empower India</h4>
+                <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-70">Training student teams, setting up high school makerspaces, and providing R&D guides for engineering candidates.</p>
               </div>
             </div>
-            
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-              {THIRANOLI_COURSES.map((course, idx) => (
-                <div key={idx} className="p-8 bg-[#181C24] border border-[#232833] rounded-2xl flex flex-col justify-between hover:border-[#FF4D2D] transition-all">
-                  <div>
-                    <div className="text-[#FF4D2D] mb-5">
-                      <BookOpen className="w-6 h-6" />
-                    </div>
-                    <h4 className="text-sm font-black uppercase text-[#F5F6F8] tracking-wide mb-2">{course.title}</h4>
-                    <p className="text-xs text-[#858E9B] font-medium leading-relaxed">{course.desc}</p>
-                  </div>
-                  <div className="pt-6 border-t border-[#232833] mt-6 flex justify-between items-center text-[10px] font-bold text-[#FF4D2D] uppercase tracking-widest">
-                    <span>Duration: {course.duration}</span>
-                    <Link href="#contact" className="inline-flex items-center gap-1 text-[#858E9B] hover:text-[#FF4D2D] transition-colors">
-                      Register <MoveRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-
           </div>
         </div>
       </section>
 
-      {/* 9. Tamil Nadu's Robotics Ecosystem */}
-      <section className="py-24 bg-[#0A0C10] border-b border-[#232833]">
+      {/* 9. PRODUCTS & ROBOTICS SOLUTIONS GRID */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12" id="store">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Unified Pillars</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Tamil Nadu's Robotics Ecosystem</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Product Lines</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Products & Robotics Solutions</h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
-            {/* Ecosystem Node 1 */}
-            <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl text-left hover:border-[#FF4D2D] transition-all">
-              <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] border border-[#FF4D2D]/20 rounded-xl w-fit mb-6">
-                <Factory className="w-6 h-6" />
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+            {/* Box 1 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                  <Bot className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-heading font-black uppercase text-white mb-4">Competition Bots</h4>
+                <p className="text-xs text-[#C5CCE0] font-bold uppercase tracking-tight mb-6">High-performance platforms custom-designed for national and international robotics events.</p>
+                
+                <ul className="space-y-2 text-[10px] font-black uppercase tracking-wider text-[#8A99C0]">
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Robo Race Bots</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Robo Soccer Bots</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Robo War Bots</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Robo Sumo Bots</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Line Followers & Drones</li>
+                </ul>
               </div>
-              <h3 className="text-lg font-black uppercase text-[#F5F6F8] tracking-tight mb-2">Tamizh Tech Robotics</h3>
-              <span className="text-[9px] font-bold text-[#FF4D2D] uppercase tracking-widest block mb-4">Products & Innovation</span>
-              <p className="text-xs text-[#858E9B] font-medium leading-relaxed">Indigenous manufacturing of competition bots, educational boards, and customized warehouse solutions (AGVs, AMRs).</p>
+              <Link href="/products?category=Robo%20Race%20Bots" className="btn-secondary w-full py-3.5 text-xs font-bold mt-8 border-white/10 hover:border-[#FB7115]">
+                View Catalog
+              </Link>
             </div>
 
-            {/* Ecosystem Node 2 */}
-            <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl text-left hover:border-[#FF4D2D] transition-all">
-              <div className="p-3 bg-[#00D1B2]/10 text-[#00D1B2] border border-[#00D1B2]/20 rounded-xl w-fit mb-6">
-                <Users className="w-6 h-6" />
+            {/* Box 2 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                  <Settings className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-heading font-black uppercase text-white mb-4">Custom Robotics</h4>
+                <p className="text-xs text-[#C5CCE0] font-bold uppercase tracking-tight mb-6">Bespoke mechatronics design, prototyping, and layout deployment services for companies.</p>
+                
+                <ul className="space-y-2 text-[10px] font-black uppercase tracking-wider text-[#8A99C0]">
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Research Robots</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Project Development</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Prototype Fabrication</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Sensor Integrations</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Custom Chassis Layout</li>
+                </ul>
               </div>
-              <h3 className="text-lg font-black uppercase text-[#F5F6F8] tracking-tight mb-2">Tamizh Robotics Club</h3>
-              <span className="text-[9px] font-bold text-[#00D1B2] uppercase tracking-widest block mb-4">Competitions & Community</span>
-              <p className="text-xs text-[#858E9B] font-medium leading-relaxed">Vibrant student network designing, building, and racing high-torque models in arenas nationwide.</p>
+              <Link href="/industries" className="btn-secondary w-full py-3.5 text-xs font-bold mt-8 border-white/10 hover:border-[#FB7115]">
+                Custom Query
+              </Link>
             </div>
 
-            {/* Ecosystem Node 3 */}
-            <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl text-left hover:border-white/50 transition-all">
-              <div className="p-3 bg-white/5 text-[#F5F6F8] border border-white/10 rounded-xl w-fit mb-6">
-                <GraduationCap className="w-6 h-6" />
+            {/* Box 3 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                  <Cpu className="w-6 h-6" />
+                </div>
+                <h4 className="text-lg font-heading font-black uppercase text-white mb-4">Educational Kits</h4>
+                <p className="text-xs text-[#C5CCE0] font-bold uppercase tracking-tight mb-6">STEM and embedded trainer kits mapped to syllabus objectives for colleges and schools.</p>
+                
+                <ul className="space-y-2 text-[10px] font-black uppercase tracking-wider text-[#8A99C0]">
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Beginner Robotics Kits</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Sensor Learning Kits</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Embedded Development Kits</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Tinkering Lab Supplies</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-[#FB7115]" /> Arduino Trainer Kits</li>
+                </ul>
               </div>
-              <h3 className="text-lg font-black uppercase text-[#F5F6F8] tracking-tight mb-2">ThiranOli Academy</h3>
-              <span className="text-[9px] font-bold text-[#F5F6F8] uppercase tracking-widest block mb-4">Education & Careers</span>
-              <p className="text-xs text-[#858E9B] font-medium leading-relaxed">Providing training bootcamps, structured industry internships, and career placements in core automation sectors.</p>
+              <Link href="/products?category=STEM%20Learning%20Kits" className="btn-secondary w-full py-3.5 text-xs font-bold mt-8 border-white/10 hover:border-[#FB7115]">
+                View STEM Kits
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 10. Industrial Automation */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="industrial-automation">
+      {/* 10. INDUSTRIAL SOLUTIONS / R&D */}
+      <section className="py-24 bg-[#031549] border-b border-white/12" id="solutions">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Factory Digitalization</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Industrial Automation</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4 mb-6" />
-            <p className="text-[#858E9B] text-sm font-medium leading-relaxed">
-              We design, build, and deploy specialized warehouse and logistics robots configured for high uptime and intelligent navigation.
+          <div className="text-center mb-16">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Indigenous Engineering</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Industrial Solutions & R&D Focus</h2>
+            <p className="text-xs text-[#C5CCE0] font-bold uppercase mt-4 max-w-2xl mx-auto tracking-wide">
+              Innovation is the foundation of Tamizh Tech Robotics. We focus on Robotics, Embedded Systems, Automation, AI Integration, and Industrial Applications.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              { num: "01", title: "Automation Integration", desc: "PLC programming, SCADA installation, and full factory floor digitalization setups." },
-              { num: "02", title: "PLC Frameworks", desc: "Configuration and commissioning of standard commercial PLC devices (Siemens, Delta, Allen-Bradley)." },
-              { num: "03", title: "Robotics Integration", desc: "Deploying multi-axis robotic arms for automated pick-and-place and sorting cells." },
-              { num: "04", title: "Machine Vision", desc: "High-speed camera checking systems powered by custom OpenCV checking software." },
-              { num: "05", title: "AI Solutions", desc: "Predictive maintainence triggers and analytics integration for machinery fleet setups." },
-              { num: "06", title: "Digital Manufacturing", desc: "Custom hardware tooling, 3D printing and CAD modeling for industrial prototyping." }
-            ].map((ind, idx) => (
-              <div key={idx} className="bg-[#181C24] border border-[#232833] p-8 rounded-2xl text-left hover:border-[#FF4D2D] transition-colors relative">
-                <span className="absolute top-6 right-8 text-xs font-mono text-[#858E9B]/30">{ind.num}</span>
-                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] border border-[#FF4D2D]/20 rounded-xl w-fit mb-5">
-                  <Settings className="w-5 h-5" />
-                </div>
-                <h4 className="text-base font-black uppercase text-[#F5F6F8] mb-2">{ind.title}</h4>
-                <p className="text-xs text-[#858E9B] leading-relaxed font-medium">{ind.desc}</p>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+            {/* Product Card 1 */}
+            <div className="bg-[#0A2060] border border-white/12 p-6 rounded-2xl group hover:border-[#FB7115] transition-all">
+              <div className="bg-white rounded-xl h-44 w-full flex items-center justify-center p-4 mb-6 relative overflow-hidden">
+                <Image src="/product/agv.png" alt="TTRC AGV V1 BOT" fill className="object-contain p-4" onError={(e) => {}} />
+                <span className="absolute bottom-2 left-3 bg-[#FB7115] text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">R&D Output</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <h4 className="text-base font-heading font-black uppercase text-white mb-2">TTRC AGV V1 BOT</h4>
+              <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-75 mb-6">
+                Automated Guided Vehicle designed for line-following material transits, magnetic sensor guidance, and high payload capacities.
+              </p>
+              <Link href="/industries" className="text-[10px] font-black uppercase tracking-widest text-[#FB7115] hover:text-white transition-colors flex items-center gap-1">
+                Enquire Scope <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
 
-      {/* 11. Customer Segments */}
-      <section className="py-24 bg-[#0A0C10] border-b border-[#232833]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Customized Focus</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Customer Segments</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {[
-              { segment: "Students", hook: "Competition bot kits and career training courses.", href: "/internship" },
-              { segment: "Schools", hook: "K-12 STEM tinkering labs setups and curriculum plans.", href: "#contact" },
-              { segment: "Colleges", hook: "Prototyping equipment supply and custom lab installations.", href: "#contact" },
-              { segment: "Industries", hook: "Custom machine building, mechatronics vision setups and audits.", href: "#contact" }
-            ].map((seg, idx) => (
-              <div key={idx} className="border border-[#232833] rounded-2xl p-8 bg-[#11141A] text-left flex flex-col justify-between hover:border-[#FF4D2D] transition-all">
-                <div>
-                  <h3 className="text-xl font-black uppercase text-[#F5F6F8] mb-3">{seg.segment}</h3>
-                  <p className="text-xs text-[#858E9B] font-medium leading-relaxed mb-6">{seg.hook}</p>
-                </div>
-                <Link href={seg.href} className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-wider flex items-center gap-1.5 hover:text-[#F5F6F8] transition-colors">
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+            {/* Product Card 2 */}
+            <div className="bg-[#0A2060] border border-white/12 p-6 rounded-2xl group hover:border-[#FB7115] transition-all">
+              <div className="bg-white rounded-xl h-44 w-full flex items-center justify-center p-4 mb-6 relative overflow-hidden">
+                <Image src="/product/amr.png" alt="TTRC AMR V1 BOT" fill className="object-contain p-4" />
+                <span className="absolute bottom-2 left-3 bg-[#FB7115] text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">R&D Output</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <h4 className="text-base font-heading font-black uppercase text-white mb-2">TTRC AMR V1 BOT</h4>
+              <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-75 mb-6">
+                Autonomous Mobile Robot with integrated LIDAR guidance, mapping algorithms, and intelligent obstacle bypass controls.
+              </p>
+              <Link href="/industries" className="text-[10px] font-black uppercase tracking-widest text-[#FB7115] hover:text-white transition-colors flex items-center gap-1">
+                Enquire Scope <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
 
-      {/* 12. Gallery Section */}
-      <section className="py-24 bg-[#11141A] border-b border-[#232833]" id="gallery">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Visual Journey</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">Ecosystem Gallery</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {GALLERY_IMAGES.map((img, idx) => (
-              <div 
-                key={idx} 
-                className="relative h-64 bg-[#181C24] border border-[#232833] rounded-2xl overflow-hidden group hover:border-[#FF4D2D] transition-colors"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.title}
-                  fill
-                  sizes="(max-w-768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <p className="text-xs font-black text-[#F5F6F8] uppercase tracking-wider">{img.title}</p>
-                </div>
+            {/* Product Card 3 */}
+            <div className="bg-[#0A2060] border border-white/12 p-6 rounded-2xl group hover:border-[#FB7115] transition-all">
+              <div className="bg-white rounded-xl h-44 w-full flex items-center justify-center p-4 mb-6 relative overflow-hidden">
+                <Image src="/pic/drone.png" alt="TTRC SPC DRONE" fill className="object-contain p-4" />
+                <span className="absolute bottom-2 left-3 bg-[#FB7115] text-white text-[8px] font-bold px-2 py-0.5 rounded uppercase">R&D Output</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 13. Testimonials */}
-      <section className="py-24 bg-[#0A0C10] border-b border-[#232833]">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-4 block">Feedback</span>
-            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter uppercase text-[#F5F6F8]">What Our Partners Say</h2>
-            <div className="w-20 h-1 bg-[#FF4D2D] mx-auto mt-4" />
-          </div>
-
-          {/* Swipeable Testimonials Carousel - Goat Robotics Quotes style */}
-          <div className="max-w-3xl mx-auto bg-[#11141A] border border-[#232833] p-10 md:p-16 rounded-2xl text-left relative overflow-hidden">
-            <span className="text-8xl font-serif text-[#FF4D2D]/10 absolute -top-4 left-6 select-none pointer-events-none">“</span>
-            
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTestimonial}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="relative z-10"
-              >
-                <div className="flex gap-1 text-[#FF4D2D] mb-6">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-                </div>
-                <p className="text-base md:text-lg text-[#F5F6F8] font-bold leading-relaxed italic mb-8">
-                  "{TESTIMONIALS_DATA[activeTestimonial].text}"
-                </p>
-                <div className="border-t border-[#232833] pt-6 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-xs font-black uppercase tracking-wider text-[#F5F6F8]">{TESTIMONIALS_DATA[activeTestimonial].name}</h4>
-                    <span className="text-[10px] text-[#858E9B] uppercase tracking-widest mt-0.5 block">{TESTIMONIALS_DATA[activeTestimonial].role}</span>
-                  </div>
-                  <span className="text-xs font-mono text-[#FF4D2D]">{activeTestimonial + 1} / 4</span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Slider Dots */}
-            <div className="flex justify-center gap-2 mt-8">
-              {TESTIMONIALS_DATA.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTestimonial(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    activeTestimonial === i ? "bg-[#FF4D2D] w-6" : "bg-[#232833]"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
+              <h4 className="text-base font-heading font-black uppercase text-white mb-2">TTRC SPC DRONE</h4>
+              <p className="text-xs text-[#C5CCE0] font-semibold leading-relaxed uppercase tracking-tight opacity-75 mb-6">
+                Specialized Quadcopter for surveillance and payload drops, featuring altitude lock and real-time telemetry links.
+              </p>
+              <Link href="/industries" className="text-[10px] font-black uppercase tracking-widest text-[#FB7115] hover:text-white transition-colors flex items-center gap-1">
+                Enquire Scope <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 14. Contact Section & WhatsApp */}
-      <section className="py-24 bg-[#0A0C10]" id="contact">
+      {/* 11. EDUCATION & MENTORSHIP */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12" id="training">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             
-            {/* Left coordinate details */}
-            <div className="lg:col-span-5 space-y-12 text-left">
-              <div className="border-l-4 border-[#FF4D2D] pl-6 py-2">
-                <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-2 block">Connect With Us</span>
-                <h2 className="text-3xl md:text-4xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter">Get In Touch</h2>
+            {/* Left Content */}
+            <div className="text-left space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Syllabus Guidance</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white leading-none">
+                Direct Mentorship from Competition Winners
+              </h2>
+              <p className="text-xs sm:text-sm text-[#C5CCE0] leading-relaxed font-bold uppercase tracking-tight opacity-90">
+                “Students who purchased our robots wanted to understand how they worked. This inspired us to start mentorship programs.” We guide candidates step-by-step through embedded systems, chassis layouts, and algorithms.
+              </p>
+              
+              <ul className="space-y-4 text-xs font-black uppercase tracking-wider text-white pt-4">
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#FB7115]" /> Robotics Foundation Training</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#FB7115]" /> Competition Chassis & Gear Design</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#FB7115]" /> Microcontroller Project Mentorship</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-[#FB7115]" /> Technical Workshops & Lab Guides</li>
+              </ul>
+            </div>
+
+            {/* Right Stat Callout */}
+            <div className="bg-[#031549] border border-white/12 p-8 sm:p-12 rounded-2xl text-left relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[#FB7115]/10 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="p-4 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-2xl w-fit mb-6 text-[#FB7115]">
+                <GraduationCap className="w-10 h-10" />
               </div>
-              <p className="text-xs font-bold text-[#858E9B] uppercase tracking-wider leading-relaxed">
-                Connect with our coordination desk to order specific components, request academic lab quotes, or coordinate custom industrial integrations.
+
+              <h3 className="text-3xl sm:text-4xl font-heading font-black text-white uppercase tracking-tighter leading-none mb-4">
+                1000+ Students Mentored
+              </h3>
+              <p className="text-xs text-[#C5CCE0] leading-relaxed font-semibold uppercase tracking-wider mb-6">
+                One of our guided student team candidates went on to win a major international robotics championship, using TTRC platforms and custom firmware guides.
               </p>
 
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 text-[#FF4D2D] rounded-xl shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest block mb-1">Direct Call</span>
-                    <a href="tel:+918148045030" className="text-lg font-black text-[#F5F6F8] hover:text-[#FF4D2D] transition-colors tracking-tight font-mono">+91 81480 45030</a>
-                  </div>
-                </div>
+              <div className="flex gap-2">
+                <span className="px-3 py-1 bg-[#0A2060] border border-white/5 rounded text-[8px] font-bold text-white uppercase tracking-widest font-mono">STEM Certified</span>
+                <span className="px-3 py-1 bg-[#0A2060] border border-white/5 rounded text-[8px] font-bold text-[#FB7115] uppercase tracking-widest font-mono">Expert Led</span>
+              </div>
+            </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 text-[#FF4D2D] rounded-xl shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest block mb-1">Email Coordinates</span>
-                    <a href="mailto:office@tamizhtech.in" className="text-lg font-black text-[#F5F6F8] hover:text-[#FF4D2D] transition-colors tracking-tight break-all font-mono">office@tamizhtech.in</a>
-                  </div>
-                </div>
+          </div>
+        </div>
+      </section>
 
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-[#FF4D2D]/10 border border-[#FF4D2D]/20 text-[#FF4D2D] rounded-xl shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest block mb-1">Engineering HQ</span>
-                    <p className="text-lg font-black text-[#F5F6F8] tracking-tight leading-tight">Coimbatore, Tamil Nadu, India</p>
-                  </div>
+      {/* 12. SCHOOL & COLLEGE COLLABORATIONS */}
+      <section className="py-24 bg-[#031549] border-b border-white/12">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-16 text-left">
+            {/* Left Column: Services */}
+            <div className="space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Academic Services</span>
+              <h3 className="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-tight">Schools & Colleges Collaborations</h3>
+              
+              <div className="space-y-4 pt-4">
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">Robotics Labs Setup</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Configuring tinkering spaces, chassis packages, and software environments mapped to educational goals.</p>
+                </div>
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">Faculty Development Programs</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Training academic staff on coding, sensors integration, and mechatronics workshop curation.</p>
+                </div>
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">Competition Preparation</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Intense bootcamps to guide student teams for Robo Race, Soccer, and combat arenas.</p>
                 </div>
               </div>
             </div>
 
-            {/* Right lead capturing form */}
-            <div className="lg:col-span-7 w-full">
-              <form onSubmit={handleSubmit} className="border border-[#232833] p-8 md:p-12 rounded-2xl bg-[#11141A] space-y-6 text-left">
-                <h3 className="text-xl font-black uppercase text-[#F5F6F8] mb-6 font-heading">Product / Solutions Enquiry</h3>
+            {/* Right Column: Success Stories */}
+            <div className="space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Academic Impact</span>
+              <h3 className="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-tight">Academic Success Stories</h3>
+
+              <div className="space-y-4 pt-4">
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">10+ Robotics Labs Established</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Successfully set up complete mechatronic lab environments across institutions in South India.</p>
+                </div>
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">Weight-Lifting Robot Delivered</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Designed, assembled, and successfully supplied a heavy payload mechatronic robot for custom academic projects.</p>
+                </div>
+                <div className="border border-white/10 p-5 rounded-xl bg-[#0A2060] hover:border-[#FB7115] transition-colors">
+                  <h4 className="text-xs font-black uppercase text-white mb-1.5">Long-Term Guidance Partnerships</h4>
+                  <p className="text-[11px] text-[#C5CCE0] lowercase font-semibold">Ongoing support and curriculum updates for institutions, incubating dozens of prize-winning students.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 13. THIRANOLI ACADEMY & PRICING CARDS */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12" id="training">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">ThiranOli Academy</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Empowering the Next Generation of Engineers</h2>
+            <p className="text-xs text-[#C5CCE0] uppercase font-bold tracking-wider mt-4 leading-relaxed">
+              Domains: Robotics, Embedded Systems, Full Stack Web Development. Programming in C, C++, Java, and Python. We provide industry-oriented internships and career development placement programs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto text-left">
+            {THIRANOLI_PRICING.map((tier, idx) => (
+              <div 
+                key={idx}
+                className="bg-[#031549] border border-white/12 rounded-2xl p-6 flex flex-col justify-between hover:border-[#FB7115] transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 bg-[#FB7115]/10 border-b border-l border-white/10 text-[#FB7115] text-[7px] font-black uppercase tracking-widest px-2.5 py-1 rounded-bl-lg">
+                  {tier.badge}
+                </div>
+                <div>
+                  <h4 className="text-xs font-black uppercase text-white mb-3 tracking-wide">{tier.title}</h4>
+                  <p className="text-[10px] text-[#C5CCE0] font-semibold uppercase leading-relaxed tracking-tight mb-6 line-clamp-3">
+                    {tier.desc}
+                  </p>
+                </div>
+                <div className="border-t border-white/5 pt-4">
+                  <Link href="/internship" className="btn-primary w-full py-2.5 text-[9px] font-black uppercase tracking-widest flex items-center justify-center">
+                    Enrol Program
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 14. WHY CHOOSE US */}
+      <section className="py-24 bg-[#031549] border-b border-white/12">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-8 text-left space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Our Advantages</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white leading-none">
+                Real Competition Experience — Built from 200+ events.
+              </h2>
+              
+              <div className="grid sm:grid-cols-2 gap-6 pt-6 text-left">
+                <div className="space-y-2">
+                  <h4 className="text-xs font-black uppercase text-white flex items-center gap-2"><Check className="w-4 h-4 text-[#FB7115]" /> 180+ Competition Wins</h4>
+                  <p className="text-[10px] text-[#C5CCE0] uppercase font-bold tracking-tight opacity-75">Unrivaled track record guiding students and builders to victory across major robotics events.</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-xs font-black uppercase text-white flex items-center gap-2"><Check className="w-4 h-4 text-[#FB7115]" /> Industry Exposure</h4>
+                  <p className="text-[10px] text-[#C5CCE0] uppercase font-bold tracking-tight opacity-75">Work on real industrial mechatronics automation scopes, machine vision, and custom AMR codebases.</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-xs font-black uppercase text-white flex items-center gap-2"><Check className="w-4 h-4 text-[#FB7115]" /> End-to-End Solutions</h4>
+                  <p className="text-[10px] text-[#C5CCE0] uppercase font-bold tracking-tight opacity-75">We provide hardware products, direct syllabus training, and deployment callback support.</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-xs font-black uppercase text-white flex items-center gap-2"><Check className="w-4 h-4 text-[#FB7115]" /> Indigenous Innovation</h4>
+                  <p className="text-[10px] text-[#C5CCE0] uppercase font-bold tracking-tight opacity-75">Indigenously-designed mechatronics cards, chassis components, and firmware (100% Made in India).</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Shield Logo Illustration */}
+            <div className="lg:col-span-4 flex justify-center">
+              <div className="w-64 h-64 border border-white/10 rounded-full flex items-center justify-center p-8 bg-[#0A2060] relative shadow-2xl">
+                <div className="absolute inset-0 opacity-[0.2] hero-grid rounded-full" />
+                <div className="w-full h-full border border-dashed border-[#FB7115]/30 rounded-full flex items-center justify-center relative">
+                  <Shield className="w-20 h-20 text-[#FB7115] stroke-[1]" />
+                  <span className="absolute bottom-10 text-[7px] font-black text-white uppercase tracking-[0.25em] font-mono">TRC INDIA SHIELD</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 15. OUR ECOSYSTEM — THREE PILLARS */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center mb-16">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Ecosystem Overview</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Our Complete Robotics Ecosystem</h2>
+            <p className="text-xs text-[#C5CCE0] font-bold uppercase mt-4 tracking-wide max-w-2xl mx-auto">
+              These three initiatives create a complete engineering ecosystem, bridging academic robotics learning and industrial-grade development.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 text-left">
+            {/* Panel 1 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl relative overflow-hidden group hover:border-[#FB7115] transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#FB7115]/5 rounded-full blur-xl pointer-events-none" />
+              <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                <Factory className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-heading font-black uppercase text-white mb-3">Tamizh Tech Robotics Company</h4>
+              <p className="text-xs text-[#C5CCE0] font-bold uppercase leading-relaxed tracking-tight opacity-75">
+                Designs high-performance B2C competition bots, educational STEM chassis, and deploys B2B custom mechatronic solutions for industrial facilities.
+              </p>
+            </div>
+
+            {/* Panel 2 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl relative overflow-hidden group hover:border-[#FB7115] transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#FB7115]/5 rounded-full blur-xl pointer-events-none" />
+              <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-heading font-black uppercase text-white mb-3">ThiranOli Academy</h4>
+              <p className="text-xs text-[#C5CCE0] font-bold uppercase leading-relaxed tracking-tight opacity-75">
+                Provides specialized technical mentorship, industrial development training, and career support guides to bridge classroom theory and corporate work.
+              </p>
+            </div>
+
+            {/* Panel 3 */}
+            <div className="bg-[#031549] border border-white/12 p-8 rounded-2xl relative overflow-hidden group hover:border-[#FB7115] transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#FB7115]/5 rounded-full blur-xl pointer-events-none" />
+              <div className="p-3 bg-[#FB7115]/10 border border-[#FB7115]/20 rounded-xl text-[#FB7115] w-fit mb-6">
+                <Users className="w-6 h-6" />
+              </div>
+              <h4 className="text-base font-heading font-black uppercase text-white mb-3">Tamizh Robotics Club India</h4>
+              <p className="text-xs text-[#C5CCE0] font-bold uppercase leading-relaxed tracking-tight opacity-75">
+                The national community wing and collaborative forum for robotics enthusiasts. Access core hardware components and prepare for events.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 16. FUTURE VISION */}
+      <section className="py-24 bg-[#031549] border-b border-white/12">
+        <div className="container mx-auto px-6 max-w-4xl text-left">
+          <div className="mb-16">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block font-mono">Future Roadmap</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Where We're Headed</h2>
+            <p className="text-xs text-[#C5CCE0] font-bold uppercase tracking-wider mt-2 opacity-80">
+              Clear forward-looking objectives and targets to expand the engineering footprint across India:
+            </p>
+          </div>
+
+          <div className="space-y-6 font-heading font-black uppercase tracking-wider text-white">
+            <div className="flex gap-6 items-start border border-white/10 p-6 rounded-2xl bg-[#0A2060]">
+              <span className="text-[#FB7115] font-mono text-lg block">01</span>
+              <div>
+                <h4 className="text-sm font-black mb-1">Create industry-ready engineers</h4>
+                <p className="text-[10px] text-[#C5CCE0] font-semibold tracking-wide uppercase leading-relaxed">Bridging academic theory with practical hardware, electronics designs, and programming certifications.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start border border-white/10 p-6 rounded-2xl bg-[#0A2060]">
+              <span className="text-[#FB7115] font-mono text-lg block">02</span>
+              <div>
+                <h4 className="text-sm font-black mb-1">Train 10,000+ students</h4>
+                <p className="text-[10px] text-[#C5CCE0] font-semibold tracking-wide uppercase leading-relaxed">Expanding hands-on mechatronics mentorships, STEM modules, and competition classes to 10,000+ engineers.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start border border-white/10 p-6 rounded-2xl bg-[#0A2060]">
+              <span className="text-[#FB7115] font-mono text-lg block">03</span>
+              <div>
+                <h4 className="text-sm font-black mb-1">Expand robotics innovation across India</h4>
+                <p className="text-[10px] text-[#C5CCE0] font-semibold tracking-wide uppercase leading-relaxed">Supplying high-performance competition hardware and educational tinkering modules to all academic hubs.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start border border-white/10 p-6 rounded-2xl bg-[#0A2060]">
+              <span className="text-[#FB7115] font-mono text-lg block">04</span>
+              <div>
+                <h4 className="text-sm font-black mb-1">Establish advanced robotics research centers</h4>
+                <p className="text-[10px] text-[#C5CCE0] font-semibold tracking-wide uppercase leading-relaxed">Collaborating with colleges to create dedicated R&D makerspaces and mechatronics incubators.</p>
+              </div>
+            </div>
+            <div className="flex gap-6 items-start border border-white/10 p-6 rounded-2xl bg-[#0A2060]">
+              <span className="text-[#FB7115] font-mono text-lg block">05</span>
+              <div>
+                <h4 className="text-sm font-black mb-1">Develop indigenous robotics technologies</h4>
+                <p className="text-[10px] text-[#C5CCE0] font-semibold tracking-wide uppercase leading-relaxed">Scaling up Made-in-India automated guided vehicles, mobile robot chassis, and optical tracking system designs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 17. FAQ ACCORDION */}
+      <section className="py-24 bg-[#0A2060] border-b border-white/12" id="faq">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="text-center mb-16">
+            <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] mb-4 block">Frequently Asked Questions</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white">Ecosystem Queries & Answers</h2>
+          </div>
+
+          <div className="space-y-4 text-left">
+            {FAQS.map((faq, idx) => (
+              <div 
+                key={idx}
+                className="bg-[#031549] border border-white/12 rounded-xl overflow-hidden transition-all duration-300"
+              >
+                <button
+                  onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
+                  className="w-full p-6 flex justify-between items-center text-xs sm:text-sm font-heading font-black text-white uppercase tracking-wider text-left hover:text-[#FB7115] transition-colors"
+                >
+                  <span>{faq.q}</span>
+                  <motion.div
+                    animate={{ rotate: activeFAQ === idx ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-[#FB7115] shrink-0 ml-4 bg-[#0A2060] border border-white/5 p-1.5 rounded-lg"
+                  >
+                    <Plus className="w-4 h-4" />
+                  </motion.div>
+                </button>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <AnimatePresence initial={false}>
+                  {activeFAQ === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                    >
+                      <div className="px-6 pb-6 pt-1 text-xs text-[#C5CCE0] leading-relaxed uppercase font-semibold tracking-tight border-t border-white/5 opacity-90">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 18. CONTACT / FORM SECTION */}
+      <section className="py-24 bg-[#031549] border-b border-white/12" id="contact">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="grid lg:grid-cols-12 gap-16 items-start">
+            {/* Left Info Column */}
+            <div className="lg:col-span-5 text-left space-y-6">
+              <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] block">Let's Build the Future Together</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter uppercase text-white leading-none">
+                Start Your Robotics Consultation
+              </h2>
+              <p className="text-xs text-[#C5CCE0] leading-relaxed font-bold uppercase tracking-tight opacity-75">
+                Whether setting up school maker-spaces, requesting bulk competition chassis rates, or commissioning automated AGV transits, fill out this callback consultation form.
+              </p>
+
+              <div className="space-y-4 pt-4 text-xs font-black uppercase tracking-wider text-white">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-[#0A2060] border border-white/5 rounded-lg text-[#FB7115]">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <span>+91 81480 45030 / +91 84386 86030</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-[#0A2060] border border-white/5 rounded-lg text-[#FB7115]">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <span className="lowercase">contact@tamizhtech.in</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-[#0A2060] border border-white/5 rounded-lg text-[#FB7115]">
+                    <MapPin className="w-4 h-4" />
+                  </div>
+                  <span>Coimbatore, Tamil Nadu - 641107</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Callback Form Column */}
+            <div className="lg:col-span-7 bg-[#0A2060] border border-white/12 p-8 sm:p-12 rounded-2xl text-left relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#FB7115]/5 rounded-full blur-2xl pointer-events-none" />
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider">Your Name</label>
+                    <label className="text-[9px] font-black text-[#8A99C0] uppercase tracking-wider">Your Name</label>
                     <input 
-                      required type="text" name="name" placeholder="John Doe" 
-                      className="form-input" value={formData.name} onChange={handleInputChange}
+                      type="text" 
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="form-input w-full bg-[#031549] border border-white/10 rounded-lg p-3 text-xs text-white uppercase font-bold focus:border-[#FB7115] focus:outline-none transition-colors"
+                      placeholder="ENTER NAME"
                     />
                   </div>
-                  
                   <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider">Official Email</label>
+                    <label className="text-[9px] font-black text-[#8A99C0] uppercase tracking-wider">Official Email</label>
                     <input 
-                      required type="email" name="email" placeholder="john@company.com" 
-                      className="form-input" value={formData.email} onChange={handleInputChange}
+                      type="email" 
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="form-input w-full bg-[#031549] border border-white/10 rounded-lg p-3 text-xs text-white lowercase font-bold focus:border-[#FB7115] focus:outline-none transition-colors"
+                      placeholder="name@organization.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider">Phone Number</label>
+                    <label className="text-[9px] font-black text-[#8A99C0] uppercase tracking-wider">Phone Number</label>
                     <input 
-                      required type="text" name="phone" placeholder="+91 XXXXX XXXXX" 
-                      className="form-input" value={formData.phone} onChange={handleInputChange}
+                      type="tel" 
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="form-input w-full bg-[#031549] border border-white/10 rounded-lg p-3 text-xs text-white uppercase font-bold focus:border-[#FB7115] focus:outline-none transition-colors"
+                      placeholder="Phone Number"
                     />
                   </div>
-                  
                   <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider">Interest Category</label>
+                    <label className="text-[9px] font-black text-[#8A99C0] uppercase tracking-wider">Primary Interest</label>
                     <div className="relative">
                       <select 
-                        name="interest" className="form-input cursor-pointer" 
-                        value={formData.interest} onChange={handleInputChange}
+                        name="interest"
+                        value={formData.interest}
+                        onChange={handleInputChange}
+                        className="form-input w-full bg-[#031549] border border-white/10 rounded-lg p-3 text-xs text-white uppercase font-bold focus:border-[#FB7115] focus:outline-none transition-colors appearance-none cursor-pointer"
                       >
                         <option value="STEM Lab Setup">STEM Lab Setup</option>
-                        <option value="School Robotics Lab">School Robotics Lab</option>
-                        <option value="College Research Setup">College Research Setup</option>
-                        <option value="Industrial Automation">Industrial Automation</option>
-                        <option value="Robotics Hardware Purchase">Robotics Hardware Purchase</option>
+                        <option value="Competition Bot Purchase">Competition Bot Purchase</option>
+                        <option value="ThiranOli Academy Internship">ThiranOli Academy Internship</option>
+                        <option value="Industrial Automation / AGVs">Industrial Automation / AGVs</option>
+                        <option value="Custom Project Consultation">Custom Project Consultation</option>
                       </select>
-                      <ChevronRight className="w-4 h-4 text-[#858E9B] absolute right-4 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" />
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#8A99C0] w-2 h-2 pointer-events-none" />
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider">Requirement Brief</label>
+                  <label className="text-[9px] font-black text-[#8A99C0] uppercase tracking-wider">Callback Message</label>
                   <textarea 
-                    required name="message" rows={4} placeholder="Tell us about your requirements or student target counts..." 
-                    className="form-input resize-none" value={formData.message} onChange={handleInputChange}
+                    name="message"
+                    required
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="form-input w-full bg-[#031549] border border-white/10 rounded-lg p-3 text-xs text-white uppercase font-bold focus:border-[#FB7115] focus:outline-none transition-colors resize-none"
+                    placeholder="Briefly describe your requirements..."
                   />
                 </div>
 
                 <button 
                   type="submit" 
-                  className="w-full btn-primary py-4 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2"
+                  className="w-full btn-primary py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
                 >
-                  Submit Enquiry <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4" /> Request Callback
                 </button>
               </form>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* Floating Widgets Section — Positioned on opposite corners to prevent collision */}
-      
-      {/* 1. WhatsApp Widget (Bottom Left) */}
-      <a
-        href={getWhatsAppLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 bg-[#25D366] text-white p-4 rounded-full shadow-[0_12px_32px_rgba(37,211,102,0.3)] hover:scale-110 transition-all z-50 flex items-center justify-center group"
-        aria-label="Enquire on WhatsApp"
-      >
-        <FaWhatsapp className="w-7 h-7" />
-        <span className="absolute left-14 bg-[#11141A] border border-[#232833] text-[#F5F6F8] text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-          WhatsApp Enquiry
-        </span>
-      </a>
-
-      {/* Cart Drawer Slide-in Overlay */}
+      {/* Cart Drawer */}
       <AnimatePresence>
         {isCartOpen && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex justify-end">
-            {/* Backdrop close */}
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex justify-end">
             <div className="absolute inset-0" onClick={() => setIsCartOpen(false)} />
-            
             <motion.div 
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="relative w-full max-w-md bg-[#11141A] border-l border-[#232833] h-full flex flex-col justify-between shadow-2xl z-10"
+              className="relative w-full max-w-md bg-[#0A2060] border-l border-white/12 h-full flex flex-col justify-between shadow-2xl z-50 text-left"
             >
-              {/* Header */}
-              <div className="p-6 border-b border-[#232833] flex justify-between items-center bg-[#181C24]">
-                <div className="flex items-center gap-3">
-                  <ShoppingBag className="w-5 h-5 text-[#FF4D2D]" />
-                  <h3 className="text-base font-black uppercase tracking-wider text-[#F5F6F8]">Your Quote Request List</h3>
+              <div>
+                {/* Header */}
+                <div className="p-6 border-b border-white/12 flex justify-between items-center bg-[#031549]">
+                  <h3 className="text-lg font-heading font-black uppercase text-white tracking-tight flex items-center gap-2">
+                    <ShoppingBag className="w-5 h-5 text-[#FB7115]" /> Enquiry List
+                  </h3>
+                  <button onClick={() => setIsCartOpen(false)} className="text-[#8A99C0] hover:text-[#FB7115] transition-colors">
+                    <X className="w-6 h-6" />
+                  </button>
                 </div>
-                <button 
-                  onClick={() => setIsCartOpen(false)}
-                  className="p-2 text-[#9AA1AC] hover:text-[#FF4D2D] transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
 
-              {/* Items List */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                {cart.length > 0 ? (
-                  cart.map((item, idx) => (
-                    <div 
-                      key={idx} 
-                      className="bg-[#181C24] border border-[#232833] p-4 rounded-xl flex justify-between gap-4 text-left"
-                    >
-                      <div className="flex-grow">
-                        <h4 className="text-xs font-black uppercase text-[#F5F6F8] leading-tight">{item.product.name}</h4>
-                        <p className="text-[9px] font-bold text-[#858E9B] uppercase mt-1">{item.product.category}</p>
-                        <div className="flex items-center gap-3 mt-4">
-                          <button 
-                            onClick={() => updateQuantity(item.product.slug, -1)}
-                            className="p-1 border border-[#232833] hover:border-[#F5F6F8] rounded-md text-[#9AA1AC]"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="text-xs font-black font-mono text-[#F5F6F8]">{item.quantity}</span>
-                          <button 
-                            onClick={() => updateQuantity(item.product.slug, 1)}
-                            className="p-1 border border-[#232833] hover:border-[#F5F6F8] rounded-md text-[#9AA1AC]"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
+                {/* Items */}
+                <div className="p-6 overflow-y-auto max-h-[60vh] space-y-4">
+                  {cart.length === 0 ? (
+                    <div className="text-center py-12">
+                      <Bot className="w-12 h-12 text-[#8A99C0] mx-auto mb-4 opacity-50" />
+                      <p className="text-xs text-[#8A99C0] uppercase tracking-wider font-bold">List is empty</p>
+                    </div>
+                  ) : (
+                    cart.map((item, idx) => (
+                      <div key={idx} className="bg-[#031549] border border-white/10 p-4 rounded-xl flex justify-between gap-4">
+                        <div>
+                          <h4 className="text-xs font-black uppercase text-white leading-tight">{item.product.name}</h4>
+                          <span className="text-[9px] text-[#8A99C0] uppercase font-bold tracking-wider block mt-1">{item.product.category}</span>
+                          <div className="flex items-center gap-3 mt-4">
+                            <button 
+                              onClick={() => updateQuantity(item.product.slug, -1)}
+                              className="p-1 border border-white/10 hover:border-[#FB7115] rounded-lg text-white"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="text-xs font-black font-mono">{item.quantity}</span>
+                            <button 
+                              onClick={() => updateQuantity(item.product.slug, 1)}
+                              className="p-1 border border-white/10 hover:border-[#FB7115] rounded-lg text-white"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div className="flex flex-col justify-between items-end">
-                        <button 
-                          onClick={() => removeFromCart(item.product.slug)}
-                          className="text-[#858E9B] hover:text-[#FF4D2D] transition-colors p-1"
-                        >
+                        <button onClick={() => removeFromCart(item.product.slug)} className="text-[#8A99C0] hover:text-red-500 transition-colors self-start p-1">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-20">
-                    <Bot className="w-12 h-12 text-[#232833] mx-auto mb-4" />
-                    <span className="text-xs text-[#858E9B] uppercase font-black tracking-widest block">Your list is empty</span>
-                  </div>
-                )}
+                    ))
+                  )}
+                </div>
               </div>
 
               {/* Footer */}
-              <div className="p-6 bg-[#181C24] border-t border-[#232833]">
-                {cart.length > 0 && (
-                  <>
-                    <button 
-                      onClick={handleCheckout}
-                      className="w-full btn-primary py-4 text-xs font-black uppercase tracking-widest flex items-center justify-center gap-3 shadow-lg"
-                    >
-                      REQUEST QUOTE VIA WHATSAPP <ArrowRight className="w-4 h-4" />
-                    </button>
-                    {cart.length >= 10 && (
-                      <p className="text-[#FF4D2D] text-[9px] font-black uppercase tracking-wide mt-3 text-center">
-                        * List length limit reached to avoid WhatsApp message truncation.
-                      </p>
-                    )}
-                    <p className="text-center text-[9px] font-bold text-[#858E9B] uppercase tracking-wider mt-4">
-                      This triggers a WhatsApp message summarizing your choice to compile pricing/delivery terms.
-                    </p>
-                  </>
+              <div>
+                {/* Warning banner when cart reaches capacity limit */}
+                {getCartCount() >= 10 && (
+                  <div className="mx-6 my-2 p-3.5 bg-[#FB7115]/10 border border-[#FB7115]/25 rounded-xl text-[10px] font-bold text-[#FB7115] uppercase tracking-wider flex items-start gap-2.5">
+                    <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <span>List capacity reached (Max 10). Larger lists may exceed WhatsApp text message bounds and truncate during transmission.</span>
+                  </div>
                 )}
+                
+                <div className="p-6 bg-[#031549] border-t border-white/12 space-y-4">
+                  <button 
+                    onClick={handleCheckout}
+                    disabled={cart.length === 0}
+                    className="w-full btn-primary py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
+                  >
+                    Request Quote Via WhatsApp <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <p className="text-center text-[8px] text-[#8A99C0] font-black uppercase tracking-wider leading-relaxed">
+                    This triggers a pre-filled WhatsApp message summarizing your list to request pricing & delivery terms.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 1. WhatsApp Widget (Bottom Left) */}
+      <a
+        href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I%20have%20an%20enquiry%20regarding%20Robotics%20Kits."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all z-50 flex items-center justify-center group"
+        aria-label="WhatsApp Contact"
+      >
+        <FaWhatsapp className="w-7 h-7" />
+        <span className="absolute left-14 bg-[#0A2060] border border-white/12 text-[#F5F6F8] text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+          WhatsApp Enquiry
+        </span>
+      </a>
+
+      {/* Floating Cart Button (bottom left, offset) */}
+      {cart.length > 0 && (
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className="fixed bottom-6 left-24 bg-[#0A2060] border border-white/12 text-white p-5 rounded-full shadow-2xl hover:scale-105 transition-all z-40 flex items-center justify-center"
+          aria-label="Open Enquiry List"
+        >
+          <div className="relative">
+            <ShoppingBag className="w-6 h-6 text-[#FB7115]" />
+            <span className="absolute -top-2.5 -right-2.5 bg-[#FB7115] text-white text-[9px] font-black px-2 py-0.5 rounded-full border-2 border-[#031549]">
+              {getCartCount()}
+            </span>
+          </div>
+        </button>
+      )}
+
+      {/* TRC Hub Promotional Popup Modal */}
+      <AnimatePresence>
+        {showPromo && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-6 selection:bg-[#FB7115] selection:text-white">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 350 }}
+              className="bg-[#0A2060] border-2 border-[#FB7115] p-8 sm:p-12 rounded-2xl max-w-lg w-full relative shadow-[0_24px_48px_rgba(251,113,21,0.15)] text-left"
+            >
+              <button
+                onClick={handleClosePromo}
+                className="absolute top-4 right-4 p-2 text-[#8A99C0] hover:text-[#FB7115] transition-colors rounded-lg bg-[#031549] border border-white/12"
+                aria-label="Close Promotion"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-3.5 mb-6">
+                <div className="p-3 bg-[#FB7115]/10 rounded-xl border border-[#FB7115]/20 text-[#FB7115]">
+                  <Cpu className="w-6 h-6 animate-pulse" />
+                </div>
+                <span className="text-[10px] font-black text-[#FB7115] uppercase tracking-[0.4em] font-mono">Special Promotion</span>
+              </div>
+
+              <h3 className="text-3xl sm:text-4xl font-heading font-black text-white tracking-tighter uppercase leading-[0.95] mb-4">
+                Apply to <br />
+                <span className="text-[#FB7115]">TRC Hub.</span>
+              </h3>
+              
+              <p className="text-[#C5CCE0] text-sm leading-relaxed mb-8 font-bold uppercase tracking-tight">
+                Gain access to professional-grade hardware, specialized training tracks, and industrial certification.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/robotics-club/join"
+                  onClick={handleClosePromo}
+                  className="btn-primary py-4 px-8 text-xs font-black tracking-widest text-center flex-1"
+                >
+                  JOIN THE CLUB
+                </Link>
+                <button
+                  onClick={handleClosePromo}
+                  className="btn-secondary py-4 px-8 text-xs font-black tracking-widest border-white/12 hover:border-[#FB7115] text-center flex-1"
+                >
+                  DISMISS
+                </button>
               </div>
             </motion.div>
           </div>
@@ -1170,94 +1381,75 @@ export default function HomeClient() {
       </AnimatePresence>
 
       <style jsx global>{`
-        .form-input {
-          width: 100%;
-          background-color: var(--bg-elevated);
-          border: 1px solid var(--border-subtle);
-          padding: 0.875rem 1rem;
-          color: var(--text-primary);
-          font-weight: 700;
-          font-size: 0.825rem;
-          outline: none;
-          transition: all 0.2s ease;
-          border-radius: 8px;
+        .hero-grid {
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 60px 60px;
+          background-color: var(--bg-primary);
         }
-        .form-input:focus {
-          border-color: var(--accent-primary);
-          box-shadow: 0 0 0 1px var(--accent-primary);
-        }
+        
         .form-input::placeholder {
           color: var(--text-muted);
           opacity: 0.6;
         }
-        select.form-input {
-          appearance: none;
-        }
         
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-        .marquee-content {
-          display: flex;
-          width: max-content;
-          animation: marquee 25s linear infinite;
-        }
-        .marquee-container:hover .marquee-content {
-          animation-play-state: paused;
-        }
-        
-        @keyframes dash {
-          to {
-            stroke-dashoffset: -40;
-          }
+        input:-webkit-autofill,
+        textarea:-webkit-autofill,
+        select:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0px 1000px #031549 inset !important;
+          -webkit-text-fill-color: #FFFFFF !important;
+          transition: background-color 5000s ease-in-out 0s;
         }
       `}</style>
     </div>
   );
 }
 
-// TimelineNode component for clean modular highlight behavior on scroll
-function TimelineNode({ milestone, isEven }: { milestone: any, isEven: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-150px" });
-  
+// Dummy wind icon for compilation
+function WindIcon(props: any) {
   return (
-    <div 
-      ref={ref}
-      className={`relative flex flex-col md:flex-row md:justify-between items-start md:items-center mb-16 w-full ${
-        isEven ? "md:flex-row-reverse" : ""
-      }`}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
     >
-      {/* Circle Pin */}
-      <div className={`absolute left-[8px] md:left-1/2 w-5 h-5 rounded-full border-4 transform -translate-x-1/2 z-20 transition-all duration-500 ${
-        isInView ? "bg-[#FF4D2D] border-[#FF4D2D] scale-125 shadow-[0_0_15px_#FF4D2D]" : "bg-[#0A0C10] border-[#232833]"
-      }`} />
+      <path d="M12.8 18a2.2 2.2 0 1 1-2.2 2.2" />
+      <path d="M10.1 12H2" />
+      <path d="M19.4 12a3.2 3.2 0 1 0-3.2-3.2" />
+      <path d="M16.2 8H2" />
+      <path d="M22 16a3 3 0 1 0-3-3" />
+      <path d="M19 13H2" />
+    </svg>
+  );
+}
 
-      {/* Card Container */}
-      <div className="w-full md:w-[45%] pl-8 md:pl-0">
-        <div className={`bg-[#11141A] border p-8 rounded-2xl text-left transition-all duration-500 ${
-          isInView ? "border-[#FF4D2D] shadow-[0_12px_32px_rgba(255,77,45,0.06)]" : "border-[#232833]"
-        }`}>
-          <div className="flex items-center justify-between mb-4">
-            <span className={`text-2xl font-black transition-colors duration-500 ${isInView ? "text-[#FF4D2D]" : "text-[#9AA1AC]"}`}>
-              {milestone.year}
-            </span>
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-500 bg-[#181C24] ${isInView ? "text-[#FF4D2D]" : "text-[#5C636F]"}`}>
-              <Award className="w-4 h-4" />
-            </div>
-          </div>
-          <h4 className="text-base font-black uppercase text-[#F5F6F8] tracking-wide mb-2 font-heading">
-            {milestone.title}
-          </h4>
-          <p className="text-xs text-[#9AA1AC] font-medium leading-relaxed">
-            {milestone.desc}
-          </p>
-        </div>
-      </div>
-
-      {/* Desktop alignment spacer */}
-      <div className="hidden md:block w-[45%]" />
-    </div>
+// Dummy launch/rocket icon for compilation
+function LaunchIcon(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
+      <path d="M12 2C6.5 2 2 6.5 2 12c0 2 1.5 3 3.5 3 .75 0 1.5-.25 2-.5l9-9c.25-.5.5-1.25.5-2 0-2-1-3.5-3-3.5z" />
+      <path d="M9 15l6-6" />
+      <path d="M11.5 19.5c1.5-1.25 2.5-3.5 2.5-3.5s-2.25 1-3.5 2.5" />
+    </svg>
   );
 }
