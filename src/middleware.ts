@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   
   // 1. Rate Limiting for API routes
   if (request.nextUrl.pathname.startsWith('/api')) {
-    const ip = request.ip ?? '127.0.0.1';
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
     const now = Date.now();
     const rateLimit = rateLimitMap.get(ip) ?? { count: 0, lastReset: now };
 
