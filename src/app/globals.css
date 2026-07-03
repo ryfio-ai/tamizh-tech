@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 97%; /* #F7F7F5 */
-    --foreground: 222 37% 20%; /* #1F2A44 */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 224 71.4% 4.1%; /* #0F172A */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 37% 20%;
+    --card-foreground: 224 71.4% 4.1%;
 
-    --primary: 24 90% 54%; /* #F47A20 */
-    --primary-foreground: 0 0% 100%;
+    --primary: 217.2 91.2% 59.8%; /* #0B6EFD */
+    --primary-foreground: 210 40% 98%;
     
-    --secondary: 222 37% 20%; /* #1F2A44 */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 222.2 47.4% 11.2%; /* #111827 */
+    --secondary-foreground: 210 40% 98%;
     
-    --muted: 210 20% 96%; /* #F3F4F6 */
-    --muted-foreground: 217 10% 40%; /* #5B6470 */
+    --muted: 210 40% 96.1%; /* #F8FAFC */
+    --muted-foreground: 215.4 16.3% 46.9%; /* #64748B */
 
-    --border: 216 12% 88%; /* #D9DEE5 */
-    --input: 216 12% 88%;
-    --ring: 24 90% 54%;
+    --border: 214.3 32% 91%; /* #E5E7EB */
+    --input: 214.3 32% 91%;
+    --ring: 217.2 91.2% 59.8%;
 
-    --radius: 0.125rem;
+    --radius: 0.75rem; /* Rounded Vercel style */
   }
 
   * {
@@ -37,126 +37,127 @@
   }
 
   body {
-    background-color: #F7F7F5;
-    color: #1F2A44;
-    font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
+    background-color: #FFFFFF;
+    color: #111827;
+    font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #1F2A44;
-    font-family: 'General Sans', 'Satoshi', sans-serif;
-    font-weight: 700;
+    color: #111827;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.1;
   }
 }
 
 @layer utilities {
-  /* Industrial Swiss Grid System */
+  /* Minimal Clean Grid System */
   .hero-grid {
     background-image: 
-      linear-gradient(to right, #D9DEE5 1px, transparent 1px),
-      linear-gradient(to bottom, #D9DEE5 1px, transparent 1px);
-    background-size: 60px 60px;
-    background-color: #F7F7F5;
+      linear-gradient(to right, #E5E7EB 1px, transparent 1px),
+      linear-gradient(to bottom, #E5E7EB 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-color: #FFFFFF;
+    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
   }
 
-  /* Precision Typography for B2B */
+  /* Typography */
   .text-suit {
-    font-family: 'Satoshi', 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     letter-spacing: -0.01em;
-    line-height: 1.6;
+    line-height: 1.625;
   }
 
-  /* Industrial Card: Sharp, Structured, Trusted */
+  /* Premium Card: Soft shadows, rounded, hover lift */
   .industrial-card {
-    border: 1px solid #D9DEE5;
-    border-radius: 0px; /* Swiss Style - Sharp */
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid #E5E7EB;
+    border-radius: var(--radius);
+    background-color: #FFFFFF;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .industrial-card:hover {
-    border-color: #F47A20;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -10px rgba(31, 42, 68, 0.1);
+    border-color: #0B6EFD;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(11, 110, 253, 0.1);
   }
 
-  /* B2B Action Components */
+  /* Premium Startup Buttons */
   .btn-primary {
-    background-color: #F47A20;
+    background-color: #0B6EFD;
     color: #FFFFFF;
-    padding: 12px 32px;
-    border-radius: 2px;
-    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 14px;
-    transition: all 0.25s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #F47A20;
+    border: 1px solid #0B6EFD;
+    box-shadow: 0 4px 12px rgba(11, 110, 253, 0.15);
   }
   .btn-primary:hover {
-    background-color: #D96510;
-    border-color: #D96510;
+    background-color: #0256D6;
+    border-color: #0256D6;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(11, 110, 253, 0.25);
   }
 
   .btn-secondary {
-    background-color: transparent;
-    border: 1px solid #1F2A44;
-    color: #1F2A44;
-    padding: 12px 32px;
-    border-radius: 2px;
-    font-weight: 700;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    color: #111827;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 14px;
-    transition: all 0.25s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   }
   .btn-secondary:hover {
-    background-color: #1F2A44;
-    color: #FFFFFF;
+    background-color: #F8FAFC;
+    border-color: #D1D5DB;
+    transform: translateY(-1px);
   }
 
   .btn-tertiary {
-    background-color: #FFFFFF;
-    border: 1px solid #D9DEE5;
-    color: #5B6470;
-    padding: 12px 24px;
-    border-radius: 2px;
-    font-weight: 700;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #4B5563;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 13px;
     transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
   }
   .btn-tertiary:hover {
-    border-color: #1F2A44;
-    color: #1F2A44;
+    color: #111827;
+    background-color: #F3F4F6;
   }
 
-  /* Horizontal Engineering Rule */
+  /* Horizontal Divider */
   .h-rule {
     height: 1px;
-    background-color: #D9DEE5;
+    background-color: #E5E7EB;
     width: 100%;
     margin: 24px 0;
   }
 
   /* Software Division Accents */
   .software-accent {
-    border-left: 4px solid #1F2A44;
+    border-left: 4px solid #111827;
     padding-left: 20px;
   }
 
   /* Robotics Division Accents */
   .robotics-accent {
-    border-left: 4px solid #F47A20;
+    border-left: 4px solid #0B6EFD;
     padding-left: 20px;
   }
 }

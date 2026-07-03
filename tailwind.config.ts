@@ -17,57 +17,65 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // B2B Industrial Palette (Strict adherence to request)
+        // Vercel / Apple Startup Style Palette
         'primary': {
-          DEFAULT: '#F47A20',
-          'main': '#F47A20',
-          'hover': '#D96510',
-          'soft': '#FFF1E6',
+          DEFAULT: '#0B6EFD',
+          'main': '#0B6EFD',
+          'hover': '#0256D6',
+          'soft': '#EBF3FF',
           foreground: '#FFFFFF',
         },
         'secondary': {
-          DEFAULT: '#1F2A44',
-          'main': '#1F2A44',
-          'hover': '#161E31',
+          DEFAULT: '#111827',
+          'main': '#111827',
+          'hover': '#1F2937',
+          foreground: '#FFFFFF',
+        },
+        'accent': {
+          DEFAULT: '#14B8A6',
+          'main': '#14B8A6',
+          'hover': '#0F766E',
+          'soft': '#F0FDFA',
           foreground: '#FFFFFF',
         },
         'bg': {
-          'page': '#F7F7F5', // Warm off-white surface
+          'page': '#FFFFFF',
           'primary': '#FFFFFF',
-          'secondary': '#F3F4F6',
-          'accent': '#FFF1E6',
+          'secondary': '#F8FAFC',
+          'accent': '#EBF3FF',
         },
         'text': {
-          'primary': '#1F2A44', // Deep navy-charcoal
-          'secondary': '#5B6470', // Steel gray muted
-          'muted': '#838B98',
+          'primary': '#111827',
+          'secondary': '#4B5563',
+          'muted': '#9CA3AF',
           'on-primary': '#FFFFFF',
         },
         'border': {
-          DEFAULT: '#D9DEE5', // Industrial border
-          'light': '#E5E9EF',
+          DEFAULT: '#E5E7EB',
+          'light': '#F3F4F6',
           'medium': '#D1D5DB',
         },
         // Compatibility with UI components
-        background: '#F7F7F5',
-        foreground: '#1F2A44',
+        background: '#FFFFFF',
+        foreground: '#111827',
         muted: {
-          DEFAULT: '#F3F4F6',
-          foreground: '#5B6470',
+          DEFAULT: '#F8FAFC',
+          foreground: '#4B5563',
         },
       },
       borderRadius: {
         'none': '0',
-        'xs': '1px',
-        'sm': '2px',
-        'md': '4px',
-        'lg': '8px',
+        'xs': '4px',
+        'sm': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
         'full': '9999px',
       },
       fontFamily: {
-        // B2B 'Suit Font' System
-        sans: ["'Satoshi'", "'General Sans'", "Inter", "system-ui", "sans-serif"],
-        heading: ["'General Sans'", "'Satoshi'", "sans-serif"],
+        // Modern Inter & Satoshi System
+        sans: ["Inter", "'Satoshi'", "'General Sans'", "system-ui", "sans-serif"],
+        heading: ["Inter", "'General Sans'", "'Satoshi'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       letterSpacing: {
@@ -75,11 +83,11 @@ const config: Config = {
         'tight': '-0.02em',
         'wide': '0.05em',
         'widest': '0.1em',
-        'industrial': '0.2em',
+        'industrial': '0.15em',
       },
       lineHeight: {
         'tight': '1.1',
-        'relaxed': '1.6',
+        'relaxed': '1.625',
       },
     },
   },

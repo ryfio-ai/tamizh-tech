@@ -1,363 +1,448 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, Cpu, Zap, Bot, Shield, Globe, BarChart3, Settings, Lightbulb, CheckCircle2, Factory, Layers, Layout, Smartphone, Database, MoveRight, GraduationCap, MessageCircle } from "lucide-react";
-import { Metadata } from "next";
+import { motion } from "framer-motion";
+import { ArrowRight, Cpu, Bot, Layers, GraduationCap, ArrowUpRight, Zap, CheckCircle2, Quote } from "lucide-react";
 import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Tamizh Tech | Robotics, Software & Industrial Automation Solutions",
-  description: "Tamizh Tech Robotics Company delivers high-performance robotic systems, AI vision, and enterprise software solutions for global manufacturers and OEMs. Engineering excellence in Coimbatore, India.",
-  keywords: ["Industrial Automation", "Robotics Integration", "B2B Software Development", "SaaS Solutions", "AI Vision Systems"],
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
 };
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full relative bg-bg-page selection:bg-primary-main selection:text-white">
+    <div className="flex flex-col w-full relative bg-white overflow-hidden">
       
-      {/* Hero Section - The Dual Engine Strategy */}
-      <section className="relative w-full min-h-[90vh] flex items-center pt-24 overflow-hidden hero-grid border-b border-border-light">
-        <div className="container mx-auto px-6 z-10 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="flex flex-col space-y-10 max-w-2xl">
-            
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-text-primary leading-[1.0] tracking-tighter uppercase">
-              Robotics & <span className="text-primary-main">Software</span> for Industry.
-            </h1>
-            
-            <p className="text-lg md:text-xl text-text-secondary font-medium leading-relaxed max-w-xl">
-              We design and deploy high-performance robotic systems integrated with enterprise-grade software to automate the world's most complex industrial operations.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-5 pt-4">
-              <Link href="/contact" className="btn-primary group">
-                Request Engineering Proposal <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link href="/solutions" className="btn-secondary group">
-                Explore Solutions
-              </Link>
-            </div>
-            
-            <div className="flex items-center gap-12 pt-12 border-t border-border-light">
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-text-primary tracking-tighter">50+</span>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest mt-1">Enterprise Clients</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-text-primary tracking-tighter">120+</span>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest mt-1">Deployments</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-3xl font-black text-text-primary tracking-tighter">15+</span>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest mt-1">Sectors Served</span>
-                </div>
-            </div>
-          </div>
+      {/* Grid background layer */}
+      <div className="absolute inset-0 h-[1000px] hero-grid z-0 pointer-events-none" />
+
+      {/* Hero Section */}
+      <section className="relative w-full min-h-[95vh] flex items-center pt-32 pb-20 z-10">
+        <div className="container mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-16 items-center">
           
-          <div className="hidden lg:block relative h-[650px] w-full">
-            <div className="absolute inset-0 bg-white border border-border-light rounded-xs overflow-hidden shadow-2xl flex items-center justify-center p-12">
-               <div className="relative w-full h-full border border-border-light/50 bg-bg-page/30 rounded-xs flex flex-col items-center justify-center gap-8 group">
-                  <Bot className="w-32 h-32 text-text-primary/10 stroke-[0.5] group-hover:text-primary-main/20 transition-colors duration-700" />
-                  <div className="flex flex-col items-center gap-2">
-                    <span className="text-[10px] font-black text-primary-main uppercase tracking-[0.4em]">Hardware-Software Synergy</span>
-                    <div className="h-[1px] w-24 bg-primary-main"></div>
-                  </div>
-                  {/* Floating Tech Elements */}
-                  <div className="absolute top-10 left-10 p-4 border border-border-light bg-white shadow-sm flex items-center gap-3">
-                    <Cpu className="w-5 h-5 text-primary-main" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Logic 1.0</span>
-                  </div>
-                  <div className="absolute bottom-10 right-10 p-4 border border-border-light bg-white shadow-sm flex items-center gap-3">
-                    <Layers className="w-5 h-5 text-secondary-main" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">SaaS Stack</span>
-                  </div>
-               </div>
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="flex flex-col space-y-8 max-w-2xl"
+          >
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
+              <Zap className="w-4 h-4 text-primary" />
+              <span className="text-xs font-semibold text-primary tracking-wide">Next-Gen Robotics & AI Solutions</span>
+            </motion.div>
+
+            <motion.h1 
+              variants={fadeInUp} 
+              className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-secondary leading-[1.05]"
+            >
+              Engineering the <br />
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Robotic Future.</span>
+            </motion.h1>
+
+            <motion.p 
+              variants={fadeInUp} 
+              className="text-lg text-text-secondary leading-relaxed max-w-lg font-medium"
+            >
+              TamizhTech designs and deploys high-performance robotic platforms, drone systems, and custom AI layers to solve critical industrial automation challenges.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 pt-2">
+              <Link href="/services" className="btn-primary flex gap-3 group">
+                Explore Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Request Proposal
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Interactive Abstract Visual */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex items-center justify-center h-[550px] w-full"
+          >
+            {/* Soft background glow */}
+            <div className="absolute w-[400px] h-[400px] rounded-full bg-primary/5 blur-3xl -z-10" />
+            <div className="absolute w-[300px] h-[300px] rounded-full bg-accent/5 blur-3xl -z-10 translate-x-20" />
+
+            {/* Premium glassomorphic visual container */}
+            <div className="w-full h-full max-w-[480px] bg-white/60 backdrop-blur-md border border-border p-6 rounded-2xl shadow-xl flex flex-col justify-between relative overflow-hidden group">
+              
+              {/* Decorative top dot matrix */}
+              <div className="flex justify-between items-center border-b border-border/80 pb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-primary/40 animate-pulse" />
+                  <span className="text-xs font-semibold text-text-secondary tracking-widest uppercase">TT-Robotics Node-01</span>
+                </div>
+                <div className="text-[10px] font-mono text-text-muted">SYSTEM: ACTIVE</div>
+              </div>
+
+              {/* Animated Floating Robot SVG Mock */}
+              <div className="flex-1 flex items-center justify-center py-6">
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                  className="relative w-48 h-48 flex items-center justify-center"
+                >
+                  <Bot className="w-36 h-36 text-primary stroke-[1.2]" />
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                    className="absolute inset-0 border border-dashed border-accent/40 rounded-full"
+                  />
+                  <motion.div 
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    className="absolute w-4 h-4 bg-accent rounded-full -top-1 left-24"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Real-time telemetry items */}
+              <div className="grid grid-cols-2 gap-4 border-t border-border/80 pt-4">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">LATENCY</span>
+                  <span className="text-sm font-bold text-secondary">0.4ms</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">ACCURACY</span>
+                  <span className="text-sm font-bold text-secondary">99.98%</span>
+                </div>
+              </div>
             </div>
-            {/* Structural Accents */}
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 border-8 border-bg-page -z-10 bg-primary-main/5"></div>
-            <div className="absolute top-20 -right-10 w-24 h-24 bg-secondary-main/5 border border-secondary-main/10 rounded-full -z-10"></div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-12 border-y border-border bg-bg-secondary overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-16">
+          <div className="flex flex-col md:flex-row items-center gap-8 justify-between opacity-60">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-text-secondary shrink-0 text-center md:text-left">
+              Trusted by Innovative Teams at
+            </span>
+            <div className="flex flex-wrap gap-10 md:gap-16 items-center justify-center grayscale">
+              <span className="text-sm font-extrabold uppercase tracking-widest text-text-secondary">TIER-1 AUTOMOTIVE</span>
+              <span className="text-sm font-extrabold uppercase tracking-widest text-text-secondary">DEFENCE RESEARCH</span>
+              <span className="text-sm font-extrabold uppercase tracking-widest text-text-secondary">AEROSPACE CO.</span>
+              <span className="text-sm font-extrabold uppercase tracking-widest text-text-secondary">STEM FOUNDATIONS</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Enterprise Trust Section */}
-      <section className="py-12 bg-bg-page border-b border-border-light overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-             <div className="flex items-center gap-4 md:border-r border-border-light md:pr-8 shrink-0">
-                <Shield className="w-8 h-8 text-primary-main" />
-                <div className="flex flex-col">
-                  <span className="text-sm font-black text-text-primary uppercase tracking-tighter">ISO 9001:2015</span>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Certified Engineering</span>
-                </div>
-             </div>
-             <div className="flex-1 flex gap-12 items-center justify-around opacity-50 grayscale hover:grayscale-0 transition-all duration-500 overflow-x-auto no-scrollbar w-full md:w-auto pb-4 md:pb-0">
-                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Tier-1 Auto OEM</span>
-                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Aerospace Hub</span>
-                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Global FMCG Leader</span>
-                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Textile Automation</span>
-                <span className="text-sm font-black uppercase tracking-widest shrink-0 text-text-secondary">Defence R&D</span>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industrial Intelligence Section (Hardware) */}
-      <section className="py-32 bg-white border-b border-border-light">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
-            <div className="max-w-2xl robotics-accent">
-              <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6">Robotics & Automation</h2>
-              <h3 className="text-5xl md:text-6xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-                Systems Built for <br /> Industrial Resilience.
-              </h3>
-            </div>
-            <Link href="/solutions#robotics" className="text-xs font-black text-text-primary hover:text-primary-main transition-all flex items-center gap-4 group uppercase tracking-[0.2em] border-b-2 border-primary-main pb-2">
-                Hardware Portfolio <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {[
-              { icon: Factory, title: "Industrial Automation", desc: "PLC programming, control systems, and full-line automation for high-volume manufacturing floors." },
-              { icon: Bot, title: "Robotics Integration", desc: "Turnkey robot deployment (Cobots, Delta, 6-Axis) with custom end-effectors and safety protocols." },
-              { icon: Cpu, title: "AI Vision Systems", desc: "Neural network driven defect detection and quality control with 99.9% inspection accuracy." },
-            ].map((item, idx) => (
-              <div key={idx} className="industrial-card p-10 flex flex-col h-full group">
-                <div className="w-14 h-14 bg-bg-page flex items-center justify-center text-text-primary group-hover:bg-primary-main group-hover:text-white transition-all duration-300 mb-8 border border-border-light">
-                  <item.icon className="w-7 h-7 stroke-[1.5]" />
-                </div>
-                <h4 className="text-2xl font-black text-text-primary uppercase tracking-tighter mb-4">{item.title}</h4>
-                <p className="text-text-secondary text-sm font-medium leading-relaxed mb-10 flex-grow">{item.desc}</p>
-                <Link href="/contact" className="text-[10px] font-black text-primary-main tracking-widest uppercase flex items-center gap-2 group-hover:gap-4 transition-all">
-                  Request Specs <ArrowRight className="w-3 h-3" />
+      {/* About Preview Section */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="space-y-8"
+            >
+              <motion.div variants={fadeInUp} className="w-12 h-1.5 bg-primary" />
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-extrabold text-secondary tracking-tighter uppercase leading-[1.1]">
+                Bridging physical logic with digital intelligence.
+              </motion.h2>
+              <motion.p variants={fadeInUp} className="text-text-secondary leading-relaxed text-base font-medium">
+                TamizhTech Robotics was founded to address the critical gaps between advanced hardware, smart drone telemetry, and cloud control systems. We design bespoke systems that scale seamlessly.
+              </motion.p>
+              <motion.div variants={fadeInUp} className="pt-2">
+                <Link href="/about" className="btn-secondary group flex items-center gap-2 w-fit">
+                  Learn About Our Journey <ArrowUpRight className="w-4 h-4" />
                 </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Premium visual block */}
+            <div className="grid grid-cols-2 gap-6 relative">
+              <div className="absolute -inset-4 bg-accent/5 rounded-2xl blur-2xl -z-10" />
+              <div className="p-8 border border-border bg-white rounded-xl flex flex-col justify-between h-56 shadow-sm">
+                <Cpu className="w-10 h-10 text-primary" />
+                <div>
+                  <h4 className="text-4xl font-extrabold text-secondary tracking-tighter">15+</h4>
+                  <p className="text-xs font-semibold text-text-secondary uppercase tracking-widest mt-1">States Covered</p>
+                </div>
               </div>
-            ))}
+              <div className="p-8 border border-border bg-secondary text-white rounded-xl flex flex-col justify-between h-56 shadow-lg">
+                <Layers className="w-10 h-10 text-accent" />
+                <div>
+                  <h4 className="text-4xl font-extrabold tracking-tighter text-white">120+</h4>
+                  <p className="text-xs font-semibold text-white/70 uppercase tracking-widest mt-1">Robots Deployed</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Digital Transformation Section (Software) */}
-      <section className="py-32 bg-secondary-main text-white relative overflow-hidden">
-        {/* Subtle grid for dark section */}
-        <div className="absolute inset-0 opacity-[0.03] hero-grid pointer-events-none"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
-            <div className="max-w-2xl software-accent border-primary-main">
-              <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6">Software Engineering</h2>
-              <h3 className="text-5xl md:text-6xl font-black tracking-tighter leading-[0.95] uppercase text-white">
-                Digital Infrastructure <br /> For Enterprise.
-              </h3>
+      {/* Services Overview */}
+      <section className="py-24 lg:py-32 bg-bg-secondary border-y border-border">
+        <div className="container mx-auto px-6 lg:px-16">
+          
+          <div className="max-w-3xl mb-20 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Core Competencies</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-secondary uppercase">
+              Transformative Industrial Capabilities.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { 
+                icon: <Bot className="w-8 h-8 text-primary" />, 
+                title: "Robotics & Hardware", 
+                desc: "Turnkey industrial robots, delta manipulators, and custom end-effectors built for precise manufacturing pipelines." 
+              },
+              { 
+                icon: <Cpu className="w-8 h-8 text-accent" />, 
+                title: "Artificial Intelligence", 
+                desc: "Integrated computer vision, defect detection networks, and real-time operational decision algorithms." 
+              },
+              { 
+                icon: <Layers className="w-8 h-8 text-primary" />, 
+                title: "Drone & IoT Systems", 
+                desc: "Autonomous aerial mapping UAVs, telemetry modules, and factory floor sensor networks built on ESP32." 
+              }
+            ].map((srv, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -5 }}
+                className="p-8 border border-border bg-white rounded-xl shadow-sm transition-all duration-300 flex flex-col justify-between min-h-[300px]"
+              >
+                <div className="space-y-6">
+                  <div className="p-3 bg-bg-secondary w-fit rounded-lg">{srv.icon}</div>
+                  <h3 className="text-xl font-bold tracking-tight text-secondary uppercase">{srv.title}</h3>
+                  <p className="text-text-secondary text-sm font-medium leading-relaxed">{srv.desc}</p>
+                </div>
+                <Link href="/services" className="text-xs font-bold text-primary flex items-center gap-2 pt-6 hover:underline">
+                  Discover Capabilities <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* Featured Courses */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="max-w-2xl space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Academy & Training</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-secondary uppercase">
+                Featured Certification Tracks.
+              </h2>
             </div>
-            <Link href="/solutions#software" className="text-xs font-black text-white hover:text-primary-main transition-all flex items-center gap-4 group uppercase tracking-[0.2em] border-b-2 border-white/20 pb-2">
-                Software Stack <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Link href="/courses" className="btn-secondary group flex items-center gap-2 shrink-0">
+              View All Courses <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { icon: Layout, title: "Web Platforms", desc: "High-performance enterprise dashboards and internal management portals." },
-              { icon: Smartphone, title: "Mobile Ecosystems", desc: "Cross-platform operational apps for supply chain and field services." },
-              { icon: Layers, title: "SaaS Product Dev", desc: "Scalable B2B products from MVP architecture to production deployment." },
-              { icon: Database, title: "API & Data", desc: "Robotic-to-Cloud integrations, IoT data lakes, and middleware pipelines." },
-            ].map((item, idx) => (
-              <div key={idx} className="p-8 border border-white/10 hover:border-primary-main/50 bg-white/5 backdrop-blur-sm transition-all duration-300">
-                <div className="text-primary-main mb-6">
-                  <item.icon className="w-8 h-8 stroke-[1.5]" />
+              {
+                category: "College Students",
+                title: "Advanced Autonomous Robotics Integration",
+                desc: "A hands-on engineering track focusing on custom kinematics, hardware integration, and embedded control modules.",
+                duration: "8 Weeks",
+                mode: "Offline/Hybrid"
+              },
+              {
+                category: "School Students",
+                title: "STEM Foundation: Robotics & Sensor Systems",
+                desc: "Basic mechanics, logic structures, and electronic sensor connectivity using Arduino microcontrollers.",
+                duration: "4 Weeks",
+                mode: "Offline"
+              }
+            ].map((course, idx) => (
+              <div key={idx} className="p-8 border border-border bg-white rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+                <div className="space-y-6">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent px-2 py-0.5 border border-accent/20 rounded bg-accent/5 w-fit block">
+                    {course.category}
+                  </span>
+                  <h3 className="text-2xl font-bold tracking-tight text-secondary uppercase leading-tight">{course.title}</h3>
+                  <p className="text-text-secondary text-sm font-medium leading-relaxed">{course.desc}</p>
                 </div>
-                <h4 className="text-lg font-black uppercase tracking-tighter mb-3 text-white">{item.title}</h4>
-                <p className="text-white/60 text-xs font-medium leading-relaxed uppercase leading-ls tracking-tighter">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Industries Served */}
-      <section className="py-32 bg-white border-y border-border-light">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-8">Vertical Expertise</h2>
-              <h3 className="text-5xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase mb-10">
-                Proven Implementation <br /> Across Sectors.
-              </h3>
-              <p className="text-text-secondary font-medium leading-relaxed mb-12 max-w-lg">
-                We deep-dive into sector-specific operational challenges, delivering tailored engineering solutions that maximize ROI and operational uptime.
-              </p>
-              <div className="grid grid-cols-2 gap-y-6">
-                {["Automotive & OEM", "Industrial MSMEs", "R&D Labs", "Process Industries", "Logistics Hubs", "Textile Tech"].map((industry) => (
-                  <div key={industry} className="flex items-center gap-3 text-text-primary font-black text-[10px] uppercase tracking-widest">
-                    <span className="w-1.5 h-1.5 bg-primary-main"></span> {industry}
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-6 h-[500px]">
-               <div className="bg-bg-secondary w-full h-full p-8 flex flex-col justify-end border border-border-light group overflow-hidden relative">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                    <Factory className="w-12 h-12" />
-                  </div>
-                  <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter relative z-10">Manufacturing</h4>
-                  <p className="text-[10px] font-bold text-text-secondary uppercase tracking-widest mt-2 relative z-10">OEE Optimization</p>
-               </div>
-               <div className="bg-primary-main w-full h-full p-8 flex flex-col justify-end border border-border-light text-white group overflow-hidden relative">
-                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                    <Database className="w-12 h-12 text-white" />
-                  </div>
-                  <h4 className="text-xl font-black uppercase tracking-tighter relative z-10">Aerospace</h4>
-                  <p className="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-2 relative z-10">Precision Prototyping</p>
-               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Internship Programs Promotion */}
-      <section className="py-32 bg-bg-page border-b border-border-light relative overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="relative h-[450px] w-full lg:order-last">
-              <div className="absolute inset-0 bg-white border border-border-light rounded-xs overflow-hidden shadow-2xl p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <GraduationCap className="w-12 h-12 text-primary-main" />
+                <div className="flex items-center justify-between border-t border-border mt-8 pt-6">
+                  <div className="flex gap-6">
                     <div className="flex flex-col">
-                      <span className="text-xl font-black text-text-primary uppercase tracking-tighter">Internship Openings</span>
-                      <span className="text-[10px] font-black text-text-muted uppercase tracking-widest mt-0.5">Online & Offline Options</span>
+                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Duration</span>
+                      <span className="text-xs font-semibold text-secondary">{course.duration}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Mode</span>
+                      <span className="text-xs font-semibold text-secondary">{course.mode}</span>
                     </div>
                   </div>
-                  
-                  <div className="space-y-4">
-                    {[
-                      "Robotics & Electronics Modules",
-                      "Embedded Systems & firmware design",
-                      "Full Stack & Frontend Web Dev",
-                      "C, C++, Java, & Python Programming",
-                    ].map((val) => (
-                      <div key={val} className="flex items-center gap-3 text-text-secondary font-bold text-xs uppercase tracking-tight">
-                        <CheckCircle2 className="w-4 h-4 text-primary-main shrink-0" /> {val}
-                      </div>
+                  <Link href="/courses" className="text-xs font-bold text-primary flex items-center gap-2 hover:underline">
+                    Enroll Now <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* Featured Projects */}
+      <section className="py-24 lg:py-32 bg-bg-secondary border-t border-border">
+        <div className="container mx-auto px-6 lg:px-16">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="max-w-2xl space-y-4">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">R&D Showcases</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-secondary uppercase">
+                Featured Implementations.
+              </h2>
+            </div>
+            <Link href="/projects" className="btn-secondary group flex items-center gap-2 shrink-0">
+              View Portfolios <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Autonomous Inspection UAV",
+                desc: "An advanced quadcopter integrating dual companion computing layers and LIDAR nodes for high-altitude thermal structural testing.",
+                tech: ["Drone Tech", "IoT", "C++"],
+                image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "AI Quality Inspection Rig",
+                desc: "A custom vision module identifying surface microscopic fractures in manufacturing sheets at 40 frames-per-second.",
+                tech: ["AI", "Python", "OpenCV"],
+                image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "6-Axis Welding Cell Simulator",
+                desc: "A virtual testing workspace recreating robotic kinematics algorithms to ensure trajectory correctness.",
+                tech: ["Robotics", "MATLAB", "Kinematics"],
+                image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80"
+              }
+            ].map((proj, idx) => (
+              <div key={idx} className="border border-border bg-white rounded-xl shadow-sm overflow-hidden flex flex-col group">
+                <div className="relative h-48 w-full overflow-hidden bg-bg-secondary">
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-bold tracking-tight text-secondary uppercase">{proj.title}</h3>
+                    <p className="text-text-secondary text-xs font-medium leading-relaxed">{proj.desc}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-2 border-t border-border/80">
+                    {proj.tech.map((t, tid) => (
+                      <span key={tid} className="text-[9px] font-bold uppercase tracking-wider text-text-secondary bg-bg-secondary px-2 py-0.5 rounded border border-border">
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
 
-                <div className="border-t border-border-light pt-8 flex flex-col gap-2">
-                  <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em]">📍 Coimbatore Hub or Remote</span>
-                  <span className="text-[9px] font-black text-text-muted uppercase tracking-[0.2em]">🎓 Verified Industry Certification</span>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          
+          <div className="max-w-3xl mb-20 space-y-4 text-center mx-auto">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Success Stories</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-secondary uppercase">
+              Endorsed by Partners.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                text: "The customized drone building program and STEM lab setup provided by TamizhTech transformed our engineering department's R&D capability. Highly practical and expert execution.",
+                author: "Dr. K. Raghavan",
+                role: "Director of Research, Technical University"
+              },
+              {
+                text: "TamizhTech's industrial automation middleware and edge vision systems significantly streamlined our factory floor quality inspection processes. The implementation was seamless.",
+                author: "Anand Krishnan",
+                role: "Operations Head, Precision Components Group"
+              }
+            ].map((test, idx) => (
+              <div key={idx} className="p-8 border border-border bg-white rounded-xl shadow-sm relative flex flex-col justify-between min-h-[220px]">
+                <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
+                <p className="text-text-secondary text-sm italic font-medium leading-relaxed relative z-10">
+                  &quot;{test.text}&quot;
+                </p>
+                <div className="pt-6 border-t border-border mt-6 flex flex-col">
+                  <span className="text-sm font-bold text-secondary">{test.author}</span>
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mt-0.5">{test.role}</span>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
 
-            <div>
-              <span className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-8 block">Career Accelerators</span>
-              <h3 className="text-5xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase mb-10">
-                Industry-Focused <br /> Internship Programs.
-              </h3>
-              <p className="text-text-secondary font-medium leading-relaxed mb-12 max-w-lg">
-                Gain hands-on practical training and deploy real-time industry projects. Under expert mentorship, build a professional portfolio that validates your competence.
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 bg-white relative">
+        <div className="container mx-auto px-6 lg:px-16">
+          <div className="max-w-5xl mx-auto border border-border p-12 lg:p-20 rounded-2xl bg-bg-secondary flex flex-col lg:flex-row items-center gap-12 justify-between relative overflow-hidden">
+            <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
+            <div className="relative z-10 space-y-4 max-w-xl text-center lg:text-left">
+              <h2 className="text-4xl font-extrabold text-secondary tracking-tighter uppercase leading-none">
+                Ready to accelerate <br />
+                your operations?
+              </h2>
+              <p className="text-text-secondary font-medium leading-relaxed text-sm">
+                Discuss your engineering challenges with our multi-disciplinary team. We provide full technical audits and design blueprints.
               </p>
-              <div className="flex flex-col sm:flex-row gap-5">
-                <Link href="/internship" className="btn-primary group">
-                  Register For Internship <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <a 
-                  href="https://wa.me/918148045030?text=Hello!%20I%20want%20to%20register%20for%20the%20Internship%20program." 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn-secondary group flex items-center justify-center gap-2"
-                >
-                  <MessageCircle className="w-4 h-4 text-text-primary group-hover:text-primary-main transition-colors" /> Apply via WhatsApp
-                </a>
-              </div>
+            </div>
+            <div className="relative z-10 flex flex-wrap gap-4 justify-center">
+              <Link href="/contact" className="btn-primary py-4 px-8 text-sm rounded-lg shadow-lg">
+                Schedule Engineering Call
+              </Link>
+              <Link href="/services" className="btn-secondary py-4 px-8 text-sm rounded-lg">
+                Review Service Specs
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Anonymized Case Studies */}
-      <section className="py-32 bg-secondary-main text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] hero-grid pointer-events-none"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12">
-            <div className="max-w-2xl border-l-4 border-primary-main pl-8">
-              <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6">Proven ROI</h2>
-              <h3 className="text-5xl md:text-6xl font-black tracking-tighter leading-[0.95] uppercase text-white">
-                Technical Case Studies.
-              </h3>
-            </div>
-            <Link href="/case-studies" className="text-xs font-black text-white hover:text-primary-main transition-all flex items-center gap-4 group uppercase tracking-[0.2em] border-b-2 border-white/20 pb-2">
-                View All Deployments <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-             {[
-               { metric: "45%", metricLabel: "Throughput Increase", title: "Automotive Welding Automation", desc: "Designed and deployed a 6-axis robotic welding cell for a Tier-1 auto ancillary, integrating real-time defect monitoring." },
-               { metric: "99.9%", metricLabel: "Inspection Accuracy", title: "Defect Detection Vision System", desc: "Implemented Modliq AI models for high-speed pharmaceutical packaging, replacing manual QC with sub-millisecond automated vision." },
-               { metric: "30%", metricLabel: "Downtime Reduction", title: "IoT Factory Floor Integration", desc: "Retrofitted legacy CNC machines with custom IoT edge devices, piping live telemetry into a centralized predictive maintenance dashboard." },
-             ].map((study, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/10 p-10 hover:border-primary-main/50 transition-all duration-300 flex flex-col group">
-                   <div className="mb-10 flex items-end gap-4 border-b border-white/10 pb-6">
-                      <span className="text-5xl font-black text-primary-main tracking-tighter leading-none">{study.metric}</span>
-                      <span className="text-[10px] font-black text-white/50 uppercase tracking-[0.2em] mb-1">{study.metricLabel}</span>
-                   </div>
-                   <h4 className="text-xl font-black text-white uppercase tracking-tighter mb-4">{study.title}</h4>
-                   <p className="text-white/60 text-xs font-bold leading-relaxed uppercase tracking-tight mb-8 flex-grow">{study.desc}</p>
-                   <Link href="/contact" className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2 group-hover:text-primary-main transition-colors w-fit border border-white/10 px-4 py-2 rounded-xs">
-                     Request Specs <MoveRight className="w-3 h-3" />
-                   </Link>
-                </div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industrial Process */}
-      <section className="py-32 bg-bg-page">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-24">
-            <h2 className="text-xs font-black text-primary-main uppercase tracking-[0.5em] mb-6">The Engineering Loop</h2>
-            <h3 className="text-5xl font-black text-text-primary tracking-tighter uppercase">From Concept to Deployment.</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
-             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border-light hidden md:block z-0"></div>
-             {[
-               { step: "01", title: "Discovery", desc: "Requirements gathering and on-site operational feasibility audit." },
-               { step: "02", title: "Simulation", desc: "Detailed hardware-in-the-loop simulation and digital twin validation." },
-               { step: "03", title: "Fabrication", desc: "Hardware assembly and software development at our Coimbatore R&D hub." },
-               { step: "04", title: "Scale", desc: "On-site deployment, staff training, and continuous lifecycle support." },
-             ].map((item, idx) => (
-                <div key={idx} className="bg-white p-10 border border-border-light shadow-sm relative z-10 flex flex-col items-center text-center">
-                  <span className="text-[10px] font-black text-primary-main uppercase tracking-[0.3em] mb-6">{item.step}</span>
-                  <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter mb-4">{item.title}</h4>
-                  <p className="text-text-secondary text-xs font-medium leading-relaxed">{item.desc}</p>
-                </div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* B2B Trust CTA */}
-      <section className="py-40 bg-white">
-        <div className="container mx-auto px-6">
-           <div className="max-w-5xl mx-auto border-4 border-secondary-main p-16 flex flex-col lg:flex-row items-center gap-16">
-              <div className="flex-1 text-center lg:text-left">
-                <h2 className="text-4xl font-black text-text-primary tracking-tighter uppercase mb-6 leading-none">Ready to Automate?</h2>
-                <p className="text-text-secondary font-medium leading-relaxed max-w-md">Schedule a Technical Consultation with our engineers to discuss your project specifications and operational goals.</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                 <Link href="/contact" className="btn-primary py-6 px-10">
-                   Request Proposal <MoveRight className="w-5 h-5 ml-4" />
-                 </Link>
-                 <Link href="/case-studies" className="btn-secondary py-6 px-10">
-                   View Proof points
-                 </Link>
-              </div>
-           </div>
-        </div>
-      </section>
     </div>
   );
 }

@@ -1,121 +1,164 @@
-import Link from "next/link";
-import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Settings, Shield, Globe, Users, Target, Zap, Microscope, Laptop, Database, ShieldCheck } from "lucide-react";
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Firm Profile | Engineering & Software Leadership | TamizhTech",
-  description: "TamizhTech is a multi-disciplinary engineering firm specialized in robotic systems and enterprise software platforms. Discover our mission, technical hub, and 15+ state presence.",
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Bot, Cpu, Target, Zap, Microscope, Globe, ShieldCheck, ArrowRight } from "lucide-react";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
 };
 
-const values = [
-  { icon: <ShieldCheck />, title: "Technical Rigor", desc: "We adhere to international industrial standards across hardware assembly and software architecture." },
-  { icon: <Target />, title: "Precision Outcomes", desc: "Our engineering success is measured by the ROI and operational uptime of our global client base." },
-  { icon: <Zap />, title: "Digital Agility", desc: "Constant evolution of our tech stack ensures we remain at the frontier of industrial digital transformation." },
-  { icon: <Globe />, title: "Pan-India Scale", desc: "Based in Coimbatore with a strategic technical support network spanning 15+ Indian states." },
-  { icon: <Users />, title: "Multidisciplinary", desc: "Robotics, AI, Mechanical, and Full-stack Software specialists working in a unified ecosystem." },
-  { icon: <BarChart3 />, title: "Logic Driven", desc: "Leveraging data-driven insights to optimize both physical floor performance and digital workflows." },
+const timelineData = [
+  { year: "2021", title: "Genesis in Coimbatore", desc: "Started as an advanced prototyping laboratory resolving mechanical and hardware firmware integration." },
+  { year: "2022", title: "STEM & Club Launch", desc: "Established our academic outreach modules and initialized the Tamil Robotics Club (TRC)." },
+  { year: "2023", title: "Enterprise Scaling", desc: "Crossed 50+ enterprise factory deployments, integrating PLC pipelines and analytics systems." },
+  { year: "2024", title: "AI & Drone Integration", desc: "Pioneered neural defect inspection models and long-range autonomous drone platforms." },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
-      <div className="container mx-auto px-6">
+    <div className="bg-white pt-32 pb-24 selection:bg-primary selection:text-white min-h-screen">
+      <div className="container mx-auto px-6 lg:px-16 max-w-[1200px]">
         
-        {/* Header Section */}
-        <div className="max-w-4xl mb-32 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Firm Profile</h1>
-          <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-            Engineering <br /> The Industrial <br /> Interface.
-          </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10">
-            Tamizh Tech Robotics Company is a Coimbatore-based engineering firm delivering high-performance robotic systems integrated with enterprise-grade software for the world&apos;s most complex industrial operations.
-          </p>
-        </div>
+        {/* Hero Section */}
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="max-w-4xl mb-24 space-y-6"
+        >
+          <motion.span variants={fadeInUp} className="text-xs font-bold uppercase tracking-[0.25em] text-primary block">
+            Firm Profile
+          </motion.span>
+          <motion.h1 
+            variants={fadeInUp} 
+            className="text-5xl md:text-7xl font-extrabold tracking-tighter text-secondary leading-tight"
+          >
+            Engineering the physical <br />
+            intelligence of tomorrow.
+          </motion.h1>
+          <motion.p 
+            variants={fadeInUp} 
+            className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium"
+          >
+            TamizhTech Robotics Company designs, simulates, and deploys custom multi-axis robotics, smart telemetry, and custom AI systems from our engineering hub in Coimbatore, India.
+          </motion.p>
+        </motion.div>
 
-        {/* Story Section */}
-        <section className="grid lg:grid-cols-2 gap-24 items-start mb-40">
-           <div className="space-y-12">
-              <h3 className="text-4xl font-black text-text-primary tracking-tighter uppercase leading-[0.95] mb-8">Integrated Engineering. <br /> Domestic Heritage.</h3>
-              <div className="space-y-8 text-text-secondary font-bold text-sm uppercase tracking-tight leading-relaxed">
-                 <p className="border-l-2 border-border-light pl-6 italic">
-                    Founded in the heart of Coimbatore—India&apos;s industrial core—Tamizh Tech Robotics Company was built to solve the fragmentation between physical hardware and digital control systems.
-                 </p>
-                 <p>
-                    What began as a specialized prototyping lab has evolved into a comprehensive industrial partner, serving 120+ active deployments and maintaining a strategic presence across 15+ Indian states.
-                 </p>
-                 <p>
-                    Our approach is defined by 'Hardware-Software Synergy.' We don't just build robots; we build the digital infrastructure that makes them intelligent, scalable, and ROI-positive.
-                 </p>
-              </div>
-              <div className="pt-10">
-                 <Link href="/contact" className="btn-primary py-6 px-12">Consult Leadership</Link>
-              </div>
-           </div>
-           
-           <div className="grid grid-cols-2 gap-6 h-full">
-              <div className="bg-white border border-border-light p-12 flex flex-col justify-center text-center industrial-card">
-                 <span className="text-6xl font-black text-secondary-main tracking-tighter mb-2">120+</span>
-                 <span className="text-[10px] font-black text-text-muted uppercase tracking-[0.3em]">Deployments</span>
-              </div>
-              <div className="bg-secondary-main text-white p-12 flex flex-col justify-center border-none shadow-2xl relative overflow-hidden group">
-                 <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
-                 <Globe className="w-12 h-12 text-primary-main mb-8 relative z-10" />
-                 <p className="text-xs font-black uppercase tracking-widest relative z-10 leading-relaxed text-white/70">Strategic Support <br /> in 15+ States.</p>
-              </div>
-              <div className="col-span-2 bg-white border border-border-light p-16 industrial-card">
-                 <div className="flex items-center gap-8 mb-8">
-                    <div className="w-16 h-16 bg-bg-page border border-border-light rounded-2xl flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500">
-                       <Microscope className="w-8 h-8" />
-                    </div>
-                    <h4 className="text-2xl font-black text-text-primary uppercase tracking-tighter">The R&D Hub</h4>
-                 </div>
-                 <p className="text-sm text-text-secondary font-bold leading-relaxed uppercase tracking-tight">Our multi-disciplinary facility in Coimbatore houses our hardware fabrication lab, AI vision testing rigs, and enterprise software sandbox.</p>
-              </div>
-           </div>
-        </section>
-
-        {/* Mission & Vision */}
-        <section className="grid md:grid-cols-2 gap-10 mb-40">
-           <div className="bg-white border-4 border-secondary-main p-16 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-main opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 transition-all group-hover:opacity-10"></div>
-              <h2 className="text-3xl font-black text-text-primary tracking-tighter uppercase mb-8 border-b border-border-light pb-8">The Mission</h2>
-              <p className="text-xl text-text-secondary leading-relaxed font-black uppercase tracking-tight">To deliver transformative engineering outcomes that prioritize technical reliability and operational scale for the global manufacturing sector.</p>
-           </div>
-           
-           <div className="bg-white border-4 border-primary-main p-16 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary-main opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 transition-all group-hover:opacity-10"></div>
-              <h2 className="text-3xl font-black text-text-primary tracking-tighter uppercase mb-8 border-b border-border-light pb-8">The Vision</h2>
-              <p className="text-xl text-text-secondary leading-relaxed font-black uppercase tracking-tight">To become India&apos;s premier multi-disciplinary engineering firm, setting global benchmarks for hardware-software integration.</p>
-           </div>
-        </section>
-
-        {/* Values Grid */}
-        <section className="bg-white border border-border-light p-12 lg:p-24 shadow-2xl">
-          <div className="text-center mb-24">
-             <h2 className="text-[10px] font-black text-primary-main uppercase tracking-[0.5em] mb-6 font-sans">Engineering Principles</h2>
-             <h3 className="text-5xl font-black text-text-primary tracking-tighter uppercase">The Technical Creed.</h3>
+        {/* Who We Are Section */}
+        <section className="grid lg:grid-cols-2 gap-16 items-start mb-32">
+          <div className="space-y-6">
+            <h3 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase leading-none">
+              A Culture of Rigorous Innovation.
+            </h3>
+            <p className="text-text-secondary leading-relaxed font-medium text-sm">
+              We started TamizhTech to merge advanced computing layers with tangible mechanical units. Rather than selling rigid, off-the-shelf automation packages, we design open, adaptable environments tailored to on-site needs.
+            </p>
+            <p className="text-text-secondary leading-relaxed font-medium text-sm">
+              Today, our active deployments manage factory inventory data, run defect detection vision nodes, and introduce young students to foundational robotics logic.
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-20">
-            {values.map((v, idx) => (
-              <div key={idx} className="flex flex-col group">
-                <div className="w-16 h-16 flex items-center justify-center text-primary-main group-hover:bg-primary-main group-hover:text-white transition-all duration-500 mb-8 border border-border-light bg-bg-page rounded-2xl shadow-sm">
-                  {cloneIcon(v.icon, "w-8 h-8 stroke-[1.5]")}
-                </div>
-                <h4 className="text-xl font-black text-text-primary mb-4 uppercase tracking-tighter">{v.title}</h4>
-                <p className="text-xs text-text-secondary leading-relaxed font-bold uppercase tracking-tight opacity-70">{v.desc}</p>
+          <div className="p-8 border border-border bg-bg-secondary rounded-2xl flex flex-col justify-between h-64 relative overflow-hidden group">
+            <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
+            <div className="relative z-10">
+              <Globe className="w-10 h-10 text-primary mb-6" />
+              <h4 className="text-xl font-bold tracking-tight text-secondary uppercase mb-2">Pan-India Support</h4>
+              <p className="text-xs text-text-secondary leading-relaxed font-medium">
+                Our support architecture reaches operations across 15+ Indian states, ensuring deployment calibrations and remote hardware diagnostics remain active.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Vision & Mission */}
+        <section className="grid md:grid-cols-2 gap-8 mb-32">
+          <div className="p-8 border border-border bg-white rounded-2xl space-y-6 shadow-sm hover:border-primary transition-colors duration-300">
+            <Target className="w-10 h-10 text-primary" />
+            <h3 className="text-2xl font-bold tracking-tight text-secondary uppercase">Our Mission</h3>
+            <p className="text-text-secondary text-sm font-medium leading-relaxed">
+              To build reliable, scalable robotic environments that make hardware intelligence accessible to both large-scale enterprises and academic labs.
+            </p>
+          </div>
+          
+          <div className="p-8 border border-border bg-white rounded-2xl space-y-6 shadow-sm hover:border-accent transition-colors duration-300">
+            <Zap className="w-10 h-10 text-accent" />
+            <h3 className="text-2xl font-bold tracking-tight text-secondary uppercase">Our Vision</h3>
+            <p className="text-text-secondary text-sm font-medium leading-relaxed">
+              To establish a leading engineering collective that defines standard interfaces for hardware-software communication, fostering domestic R&D growth.
+            </p>
+          </div>
+        </section>
+
+        {/* Our Journey Timeline */}
+        <section className="mb-32">
+          <div className="mb-16">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Evolution</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-secondary tracking-tighter uppercase mt-2">
+              Our Journey Timeline
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            {timelineData.map((item, idx) => (
+              <div key={idx} className="p-6 border border-border bg-white rounded-xl relative shadow-sm hover:border-primary transition-colors duration-300">
+                <span className="text-3xl font-extrabold text-primary/30 tracking-tight block mb-4">
+                  {item.year}
+                </span>
+                <h4 className="text-base font-bold text-secondary uppercase mb-2">{item.title}</h4>
+                <p className="text-xs text-text-secondary leading-relaxed font-medium">{item.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Infrastructure Hub */}
+        <section className="p-8 lg:p-12 border border-border rounded-2xl bg-bg-secondary relative overflow-hidden mb-32">
+          <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
+          <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <span className="p-3 bg-white border border-border w-fit rounded-lg inline-flex text-primary">
+                <Microscope className="w-8 h-8" />
+              </span>
+              <h3 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase">
+                The Coimbatore R&D Hub
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                Our multi-disciplinary engineering facility houses structural drone testing platforms, active camera vision rigs, and logic simulators. This unified sandbox ensures each integration is verified before deployment.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {[
+                "Hardware Firmware Sandbox",
+                "Neural Vision Testing Rigs",
+                "STEM Educational Lab Prototyping",
+                "Advanced CNC & 3D Fabrication Setup"
+              ].map((val, idx) => (
+                <div key={idx} className="flex items-center gap-3 text-xs font-semibold text-text-secondary uppercase">
+                  <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
+                  <span>{val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <div className="bg-secondary text-white p-12 lg:p-16 rounded-2xl relative overflow-hidden text-center shadow-lg">
+          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight uppercase mb-4 text-white">
+            Want to learn more about our hardware integrations?
+          </h3>
+          <p className="text-white/70 text-sm font-medium leading-relaxed max-w-xl mx-auto mb-8">
+            Get in touch with our technical directors to arrange an on-site facility audit at Coimbatore.
+          </p>
+          <Link href="/contact" className="btn-primary py-3 px-8 text-xs font-semibold rounded-lg inline-flex gap-2">
+            Contact Technical Team <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
       </div>
     </div>
   );
-}
-
-// Helper to clone icons with custom classes
-function cloneIcon(icon: any, className: string) {
-  return <icon.type {...icon.props} className={className} />;
 }
 

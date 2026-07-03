@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import { ParallaxScrollSecond } from "@/components/ui/parallax-scroll";
 import { MoveRight, Camera, Cpu, Zap, Layers, Globe } from "lucide-react";
 import Link from "next/link";
@@ -63,70 +64,156 @@ const galleryImages = [
   "/gallery/67.jpeg",
 ];
 
+const categories = ["All", "Workshops", "Events", "Competitions", "Robots", "Labs", "Drone"];
+
 export default function GalleryPage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+
+  // Map images to categories based on index
+  const galleryItems = galleryImages.map((src, idx) => {
+    const cats = ["Workshops", "Events", "Competitions", "Robots", "Labs", "Drone"];
+    return {
+      src,
+      category: cats[idx % cats.length]
+    };
+  });
+
+  const filteredItems = activeCategory === "All"
+    ? galleryItems
+    : galleryItems.filter(item => item.category === activeCategory);
+
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
-      <div className="container mx-auto px-6">
+    <div className="bg-white pt-32 pb-24 selection:bg-primary selection:text-white min-h-screen">
+      <div className="container mx-auto px-6 lg:px-16 max-w-[1200px]">
         
         {/* Header Section */}
-        <div className="max-w-4xl mb-32 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-8 font-sans">Project Archive</h1>
-          <h2 className="text-6xl md:text-7xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
-            Visualizing <br /> Industrial <br /> Excellence.
+        <div className="max-w-4xl mb-20 space-y-6">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block">
+            Media Archives
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-secondary leading-tight">
+            Visualizing our <br /> Engineering Progress.
           </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium mt-10 uppercase tracking-tight font-bold">
-            A comprehensive visual documentation of specialized robotics deployments, technical R&D milestones, and localized engineering excellence across the Tamizh Tech Robotics Company ecosystem.
+          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium">
+            Browse snapshots of our interactive workshops, robotic builds, lab environments, and competitions.
           </p>
         </div>
 
-        {/* Parallax Gallery Grid */}
-        <div className="bg-white border-y border-border-light py-20 relative overflow-hidden mb-40 shadow-sm industrial-card">
-           <div className="absolute top-0 right-0 p-8 opacity-[0.02]">
-             <Camera className="w-64 h-64 text-secondary-main" />
-           </div>
-           <div className="container mx-auto px-6 mb-16 relative z-10 text-center lg:text-left">
-              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-text-muted flex items-center gap-4 justify-center lg:justify-start">
-                <span className="w-8 h-[2px] bg-primary-main"></span> TECHNICAL DEPLOYMENT LOGS
-              </p>
-           </div>
-           <div className="relative z-10 -mx-6 md:mx-0">
-             <ParallaxScrollSecond images={galleryImages} />
-           </div>
+        {/* Filter Navigation */}
+        <div className="flex border-b border-border mb-12 overflow-x-auto no-scrollbar gap-2 pb-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
+                activeCategory === cat
+                  ? "bg-primary text-white"
+                  : "text-text-muted hover:text-secondary hover:bg-bg-secondary"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
-        {/* Footer Audit Context */}
-        <div className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-border-light pt-20">
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Layers className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">Hardware Evolution</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">Visual mapping of robotic chassis development, iterative structural testing, and localized PCB fabrication cycles.</p>
-           </div>
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Zap className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">On-Ground Impact</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.</p>
-           </div>
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-primary-light/50 w-fit rounded-lg"><Globe className="w-6 h-6 text-primary-main" /></div>
-              <h4 className="text-xl font-black text-text-primary uppercase tracking-tighter">Research Strategic</h4>
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-tight leading-relaxed opacity-70">A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.</p>
-           </div>
+        {/* Masonry Layout */}
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6 mb-24">
+          <AnimatePresence>
+            {filteredItems.map((item, idx) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                key={item.src}
+                onClick={() => setSelectedImg(item.src)}
+                className="break-inside-avoid relative overflow-hidden rounded-xl border border-border bg-bg-secondary cursor-zoom-in group shadow-sm"
+              >
+                <img
+                  src={item.src}
+                  alt={`Gallery ${item.category}`}
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                
+                {/* Hover overlay detail */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/15 border border-accent/20 px-2 py-0.5 rounded">
+                      {item.category}
+                    </span>
+                    <h4 className="text-white text-xs font-bold uppercase tracking-wider mt-2">View Fullscreen</h4>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
-        {/* Request Specs CTA */}
-        <div className="mt-40 bg-secondary-main p-16 lg:p-24 text-center shadow-2xl relative overflow-hidden">
-           <div className="absolute inset-0 opacity-[0.05] hero-grid pointer-events-none"></div>
-           <div className="relative z-10">
-             <h4 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase mb-10 leading-none">Access Technical <br /> Specifications.</h4>
-             <p className="text-white/50 text-sm font-bold uppercase tracking-widest max-w-2xl mx-auto mb-12 leading-relaxed">For higher-resolution project documentation or specific technical SOPs related to these deployments, contact our engineering PR division.</p>
-             <Link href="/contact" className="btn-primary py-5 px-12 inline-flex items-center gap-4 shadow-xl">
-               REQUEST DOCS <MoveRight className="w-4 h-4" />
-             </Link>
-           </div>
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {selectedImg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImg(null)}
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-6 cursor-zoom-out"
+            >
+              <button 
+                onClick={() => setSelectedImg(null)}
+                className="absolute top-6 right-6 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 text-sm font-bold tracking-wider"
+              >
+                CLOSE [X]
+              </button>
+              <motion.div
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.95 }}
+                className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-lg bg-secondary flex items-center justify-center border border-white/10"
+              >
+                <img 
+                  src={selectedImg} 
+                  alt="Full view image" 
+                  className="max-w-full max-h-[85vh] object-contain"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Info Grid */}
+        <div className="border-t border-border pt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm font-medium text-text-secondary">
+          <div className="space-y-3">
+            <span className="p-2.5 bg-bg-secondary border border-border rounded-lg inline-flex text-primary">
+              <Camera className="w-5 h-5" />
+            </span>
+            <h4 className="text-base font-bold text-secondary uppercase">R&D Documentation</h4>
+            <p className="text-xs leading-relaxed">Continuous visual logs showing physical prototype assembly, sensor integrations, and test calibrating cycles.</p>
+          </div>
+          <div className="space-y-3">
+            <span className="p-2.5 bg-bg-secondary border border-border rounded-lg inline-flex text-accent">
+              <Zap className="w-5 h-5" />
+            </span>
+            <h4 className="text-base font-bold text-secondary uppercase">Academic Impact</h4>
+            <p className="text-xs leading-relaxed">Documenting hands-on workshops, robotics bootcamps, and student prototype evaluations across institutions.</p>
+          </div>
+          <div className="space-y-3">
+            <span className="p-2.5 bg-bg-secondary border border-border rounded-lg inline-flex text-primary">
+              <Globe className="w-5 h-5" />
+            </span>
+            <h4 className="text-base font-bold text-secondary uppercase">Industrial Milestones</h4>
+            <p className="text-xs leading-relaxed">Photographic verification of operational lines, control cabinets, and autonomous setups deployed pan-India.</p>
+          </div>
         </div>
 
       </div>
     </div>
   );
 }
+
+// Add state support imports at the top
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
