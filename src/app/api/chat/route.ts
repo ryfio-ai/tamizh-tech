@@ -66,21 +66,6 @@ export async function POST(req: Request) {
     // --- AI Providers in order of preference ---
     const providers = [
       {
-        name: "Groq",
-        key: process.env.GROQ_API_KEY,
-        execute: async () => {
-          const groqHistory = messages.map((m: any) => ({
-            role: (m.sender === "user" ? "user" : "assistant") as "user" | "assistant",
-            content: m.content
-          }));
-          const completion = await groq.chat.completions.create({
-            messages: [{ role: "system" as "system", content: SYSTEM_PROMPT }, ...groqHistory],
-            model: "llama-3.3-70b-versatile",
-          });
-          return completion.choices[0].message.content;
-        }
-      },
-      {
         name: "OpenRouter",
         key: process.env.OPENROUTER_API_KEY,
         execute: async () => {
@@ -89,9 +74,11 @@ export async function POST(req: Request) {
             headers: {
               "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
               "Content-Type": "application/json",
+              "HTTP-Referer": "https://www.tamizhtech.in",
+              "X-OpenRouter-Title": "Tamizh Tech Robotics",
             },
             body: JSON.stringify({
-              model: "google/gemini-2.0-flash-001",
+              model: "~openai/gpt-latest",
               messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 ...messages.map((m: any) => ({
@@ -104,6 +91,21 @@ export async function POST(req: Request) {
           const data = await response.json();
           if (!response.ok) throw new Error(data.error?.message || "OpenRouter failed");
           return data.choices[0].message.content;
+        }
+      },
+      {
+        name: "Groq",
+        key: process.env.GROQ_API_KEY,
+        execute: async () => {
+          const groqHistory = messages.map((m: any) => ({
+            role: (m.sender === "user" ? "user" : "assistant") as "user" | "assistant",
+            content: m.content
+          }));
+          const completion = await groq.chat.completions.create({
+            messages: [{ role: "system" as "system", content: SYSTEM_PROMPT }, ...groqHistory],
+            model: "llama-3.3-70b-versatile",
+          });
+          return completion.choices[0].message.content;
         }
       },
       {

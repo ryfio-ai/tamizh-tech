@@ -1,193 +1,112 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Zap, Brain, Layers, Globe, Mail, Send, CheckCircle2, UserCircle2, Briefcase, FileText } from "lucide-react";
-
-const openings = [
-  { id: "rob", title: "Robotics Integration Engineer", type: "Full-Time", dept: "Engineering", loc: "Coimbatore" },
-  { id: "cv", title: "Computer Vision / AI Developer", type: "Full-Time", dept: "Research & AI", loc: "Coimbatore / Hybrid" },
-  { id: "stem", title: "STEM Instructor & Coordinator", type: "Full-Time", dept: "Education", loc: "Coimbatore" }
-];
+import React from "react";
+import { 
+  Globe, 
+  Brain, 
+  Layers, 
+  Zap, 
+  Mail, 
+  School, 
+  Settings,
+  Users
+} from "lucide-react";
 
 export default function CareersPage() {
-  const [form, setForm] = useState({ name: "", email: "", position: "rob", note: "", resume: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-primary selection:text-white min-h-screen">
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1200px]">
+    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8]">
+      <div className="container mx-auto px-6">
         
         {/* Header Section */}
-        <div className="max-w-4xl mb-24 space-y-6">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block">
+        <div className="max-w-4xl mb-24 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4 text-left">
+          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-8 font-sans">Join Our Team</h1>
+          <h2 className="text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
             Careers
-          </span>
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-secondary leading-tight">
-            Build the systems <br />
-            of the future.
           </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium">
-            We are always looking for curious, logic-driven developers, designers, and educators to join our multidisciplinary team in Coimbatore.
-          </p>
+          <div className="text-base text-[#9AA1AC] leading-relaxed max-w-3xl font-bold uppercase tracking-tight mt-10">
+            <p className="mb-4">"Let's work Together...</p>
+            <p>We create and build value for our customers with our innovative Products and Solutions. We offer you the chance to do work that adds up to something meaningful. The opportunity to challenge yourself and learn new skills. That's the kind of work you can expect at Tamizh Tech Robotics Company. Join us."</p>
+          </div>
         </div>
 
-        {/* Life at TamizhTech */}
-        <section className="mb-32 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <h3 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase leading-none">Life at TamizhTech</h3>
-            <p className="text-text-secondary text-sm font-medium leading-relaxed">
-              We collaborate in an open sandbox environment, prototyping direct mechanical rigs, adjusting firmware codes, and designing cloud dashboard models side-by-side. 
-            </p>
-            <p className="text-text-secondary text-sm font-medium leading-relaxed">
-              Whether you are optimizing a PID actuator route or lecturing young minds at the Tamil Robotics Club, we value absolute logic, execution speed, and clear communication.
-            </p>
-          </div>
-          
-          <div className="p-8 border border-border bg-bg-secondary rounded-2xl relative overflow-hidden h-64">
-            <div className="absolute inset-0 hero-grid opacity-20 pointer-events-none" />
-            <div className="relative z-10 flex flex-col justify-between h-full">
-              <span className="text-xs font-bold text-primary uppercase tracking-widest">Coimbatore Lab</span>
-              <p className="text-xl font-bold text-secondary uppercase tracking-tight">
-                An open workspace dedicated to physical assembly and system design.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Core Values Section */}
+        <div className="mb-32 text-left">
+           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-6">Our Core Values</h2>
+           <p className="text-[#858E9B] font-bold uppercase tracking-tight mb-12 max-w-2xl opacity-80">
+             The principles that guide our work and define our commitment to excellence in engineering and mentoring.
+           </p>
 
-        {/* Benefits Section */}
-        <section className="mb-32">
-          <h2 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase mb-12">Benefits & Perks</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { icon: <Zap className="w-8 h-8 text-primary" />, title: "Mentorship", desc: "Work directly alongside engineers with deep hardware & firmware experience." },
-              { icon: <Brain className="w-8 h-8 text-accent" />, title: "Growth", desc: "Continuous learning tracks in ROS2, machine learning, and PCB layout." },
-              { icon: <Layers className="w-8 h-8 text-primary" />, title: "Tools", desc: "Access high-spec CNC machines, 3D printers, and digital analysis tools." },
-              { icon: <Globe className="w-8 h-8 text-accent" />, title: "Impact", desc: "Help build STEM educational pathways for school and college students." }
-            ].map((perk, idx) => (
-              <div key={idx} className="p-6 border border-border bg-white rounded-2xl shadow-sm hover:border-primary transition-colors duration-300">
-                <div className="mb-4">{perk.icon}</div>
-                <h4 className="text-base font-bold text-secondary uppercase mb-2">{perk.title}</h4>
-                <p className="text-xs text-text-secondary leading-relaxed font-medium">{perk.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Jobs & Application Grid */}
-        <section className="grid lg:grid-cols-2 gap-16 items-start">
-          
-          {/* Active Openings */}
-          <div className="space-y-8">
-            <h3 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase">Active Openings</h3>
-            <div className="space-y-4">
-              {openings.map((job) => (
-                <div key={job.id} className="p-6 border border-border bg-white rounded-xl shadow-sm hover:border-primary transition-colors duration-300 flex justify-between items-center group">
-                  <div className="space-y-1">
-                    <h4 className="text-base font-bold text-secondary group-hover:text-primary transition-colors uppercase">{job.title}</h4>
-                    <div className="flex gap-4 text-[10px] font-bold text-text-muted uppercase tracking-wider">
-                      <span>{job.dept}</span>
-                      <span>•</span>
-                      <span>{job.loc}</span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-bold bg-bg-secondary px-2.5 py-1 border border-border rounded text-text-secondary">
-                    {job.type}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Application Form */}
-          <div className="border border-border p-8 rounded-2xl bg-white shadow-lg">
-            {submitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-12 space-y-6"
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h4 className="text-2xl font-bold text-secondary uppercase tracking-tight">Application Received</h4>
-                <p className="text-text-secondary text-xs leading-relaxed max-w-sm mx-auto font-medium">
-                  Thank you for applying, <span className="text-primary font-bold">{form.name}</span>. Our coordinators will review your resume and reach out via email.
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Value 1 */}
+              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
+                <Zap className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Excellence</h3>
+                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
+                  We pursue perfection in every aspect of our work, from precision engineering to cost optimization.
                 </p>
-                <button onClick={() => setSubmitted(false)} className="btn-secondary py-2.5 text-xs font-semibold rounded-md">
-                  Submit Another Application
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-1">
-                  <h4 className="text-xl font-extrabold text-secondary uppercase tracking-tight">Quick Application</h4>
-                  <p className="text-xs text-text-secondary font-medium">Submit your details and resume link below.</p>
-                </div>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-wider text-text-muted">Full Name</label>
-                    <input 
-                      type="text" required placeholder="John Doe"
-                      className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-bg-secondary focus:outline-none focus:border-primary font-medium"
-                      value={form.name} onChange={e => setForm({...form, name: e.target.value})}
-                    />
-                  </div>
+              {/* Value 2 */}
+              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
+                <Brain className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Innovation</h3>
+                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
+                  We embrace cutting-edge technology and creative solutions to revolutionize K-12 STEM education.
+                </p>
+              </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-wider text-text-muted">Official Email</label>
-                    <input 
-                      type="email" required placeholder="john@domain.com"
-                      className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-bg-secondary focus:outline-none focus:border-primary font-medium"
-                      value={form.email} onChange={e => setForm({...form, email: e.target.value})}
-                    />
-                  </div>
+              {/* Value 3 */}
+              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
+                <Layers className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Collaboration</h3>
+                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
+                  We believe in the power of teamwork and cross-functional partnerships to build India's largest robotics ecosystem.
+                </p>
+              </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-wider text-text-muted">Applying Position</label>
-                    <select 
-                      className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-bg-secondary focus:outline-none focus:border-primary font-medium cursor-pointer"
-                      value={form.position} onChange={e => setForm({...form, position: e.target.value})}
-                    >
-                      {openings.map(op => (
-                        <option key={op.id} value={op.id}>{op.title}</option>
-                      ))}
-                    </select>
-                  </div>
+              {/* Value 4 */}
+              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
+                <Globe className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Global Impact</h3>
+                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
+                  We build hardware and software solutions that make a meaningful difference globally, representing domestic heritage.
+                </p>
+              </div>
+           </div>
+        </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-wider text-text-muted">Resume/Portfolio Link</label>
-                    <input 
-                      type="url" required placeholder="https://drive.google.com/... or github.com/..."
-                      className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-bg-secondary focus:outline-none focus:border-primary font-medium"
-                      value={form.resume} onChange={e => setForm({...form, resume: e.target.value})}
-                    />
-                  </div>
+        {/* Key Differentiators */}
+        <div className="mb-32 text-center">
+           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-12">Key Differentiators</h2>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
+                 <School className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
+                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Learning Focused</h4>
+              </div>
+              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
+                 <Users className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
+                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Collaborative environment</h4>
+              </div>
+              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
+                 <Settings className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
+                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Active Problem-solvers</h4>
+              </div>
+           </div>
+        </div>
 
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[9px] font-bold uppercase tracking-wider text-text-muted">Brief Cover Note</label>
-                    <textarea 
-                      rows={3} required placeholder="Why do you want to join TamizhTech?"
-                      className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-bg-secondary resize-none focus:outline-none focus:border-primary font-medium"
-                      value={form.note} onChange={e => setForm({...form, note: e.target.value})}
-                    />
-                  </div>
-                </div>
-
-                <button type="submit" className="w-full btn-primary py-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-2">
-                  <Send className="w-4 h-4" /> Submit Application
-                </button>
-              </form>
-            )}
-          </div>
-
-        </section>
+        {/* Contact CTA */}
+        <div className="bg-[#11141A] border border-[#232833] p-16 lg:p-24 rounded-2xl relative overflow-hidden shadow-2xl">
+           <div className="relative z-10 text-center">
+             <h3 className="text-2xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-8 leading-[1.2] max-w-4xl mx-auto">
+                If you're interested in joining our growing team, drop your resume to office@tamizhtech.in
+             </h3>
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
+               <a href="mailto:office@tamizhtech.in" className="btn-primary px-12 py-6 inline-flex items-center gap-4 shadow-xl text-sm font-bold tracking-widest">
+                 <Mail className="w-5 h-5" /> EMAIL RESUME
+               </a>
+             </div>
+           </div>
+        </div>
 
       </div>
     </div>
