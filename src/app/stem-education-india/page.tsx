@@ -1,161 +1,180 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { Metadata } from "next";
-import { Check, ArrowRight } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { Check, ChevronDown } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "STEM Education & Turnkey Robotics Labs Setup India | Tamizh Tech",
-  description: "turnkey mechatronics and STEM lab setup packages in schools and colleges across Tamil Nadu and India. Mapped K-12 mechatronics syllabus and teacher training.",
-  keywords: [
-    "stem education tamil nadu",
-    "robotics lab setup india",
-    "school tinkering lab coimbatore",
-    "k12 robotics curriculum"
-  ],
-  openGraph: {
-    title: "STEM Education India & Lab Setup | Tamizh Tech",
-    description: "Equipping schools with modular mechatronics labs, certified teacher training guides, and mapped mechatronics syllabus packages.",
-    url: "https://tamizhtech.in/stem-education-india",
-    type: "website"
-  }
-};
+export default function StemEducationIndiaPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const faqs = [
-  {
-    q: "Why is STEM education important in primary schools?",
-    a: "STEM education encourages critical thinking and mechanical intelligence by asking students to build, test, and debug physical setups (linkages, simple loops) instead of memorizing theoretical concepts."
-  },
-  {
-    q: "How does Tamizh Tech setup STEM labs in India?",
-    a: "We deliver modular kits (Tinkering STEM Kit, Starter Pack), install battery docks and storage bins, provide CBSE-mapped mechatronics syllabus materials, and train school teachers."
-  }
-];
+  const faqItems = [
+    {
+      q: "Does your STEM curriculum align with national education boards in India?",
+      a: "Yes, our textbooks, practical syllabus guides, and lesson plans are mapped to match standard CBSE, ICSE, and state board science curriculum requirements."
+    },
+    {
+      q: "What age groups does your STEM lab cover?",
+      a: "We offer progressive levels for students aged 6 to 18, ranging from basic mechanics and tinkering to microcontrollers, coding, and AI modeling."
+    }
+  ];
 
-const schemas = [
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://tamizhtech.in"
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Tamizh Tech Robotics Company",
+      "image": "https://tamizhtech.com/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Coimbatore",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "India"
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "STEM Education India",
-        "item": "https://tamizhtech.in/stem-education-india"
-      }
-    ]
-  }
-];
+      "telephone": "+91 81480 45030",
+      "url": "https://tamizhtech.com"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tamizhtech.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "STEM Education India",
+          "item": "https://tamizhtech.com/stem-education-india"
+        }
+      ]
+    }
+  ];
 
-export default function StemEducationIndia() {
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111] text-left">
+    <div className="bg-white min-h-screen text-text-primary text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      <div className="container mx-auto px-6 max-w-4xl">
-        
-        {/* Header */}
-        <div className="mb-16 border-l-4 border-[#FF6B00] pl-6 py-2">
-          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-4 font-sans">AI Search Visibility</h1>
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#111111] tracking-tighter leading-none">STEM Education India</h2>
-          <p className="text-gray-500 font-bold uppercase mt-3 text-xs tracking-wider">Targets: STEM Education Tamil Nadu, Robotics Lab Setup India</p>
-        </div>
+      <PageHero
+        title="STEM Education India"
+        subtitle="Bridging the gap in practical science. Complete K-12 school laboratory packages, mapped curriculum, and trainer certification schemes."
+        breadcrumbActive="STEM India"
+      />
 
-        {/* Answer Engine Answers */}
-        <div className="space-y-12 mb-20">
-          
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Who are we?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We are Tamizh Tech Robotics Company, an indigenous mechatronics product and education startup operating from Coimbatore, Tamil Nadu. Led by Er. K. Tamizharasan, we engineer mechatronic setups to build India's future mechatronics leaders.
-            </p>
-          </section>
+      <section className="section py-16">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <div className="space-y-12">
+            
+            {/* Who are we? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who are we?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Tamizh Tech Robotics is a major provider of K-12 STEM education, practical robotics coaching, and school lab setups in India, aiming to nurture logical thinking and manual design capability.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">What do we do?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We design and set up unified STEM, Robotics, and AI Laboratories in K-12 schools and colleges. We supply physical mechatronic kits, print mechatronics workbooks, compile teacher slideshow decks, and run mechatronics teacher training workshops across India.
-            </p>
-          </section>
+            {/* What do we do? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What do we do?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                We design and distribute age-appropriate robotics learning kits, print structured teacher guides, and deliver interactive onboarding training to school faculty boards.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {["Solderless electronics kits", "Block coding & programming platforms", "Practical syllabus manuals", "Teacher training workshops"].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
+                    <Check className="w-4 h-4 text-accent" /> {item}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Who do we help?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We help K-12 academic institutions wanting to establish a mechatronics lab or tinkering space. Our products are designed for child safety, using breadboards and modular blocks to teach mechatronic logic without high voltage risks.
-            </p>
-          </section>
+            {/* Who do we help? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who do we help?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We assist schools looking to implement modern coding labs, physics teachers looking to demonstrate analog circuits, and student groups preparing for robotics competitions.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Why are we trusted?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We have mentored over 1000+ mechatronics students, leading to trophies in national mechatronics competitions. Our curriculum guidelines are tested and verified in our mechatronics training arm, ThiranOli Academy, to guarantee successful mechatronics learnings.
-            </p>
-          </section>
+            {/* Why are we trusted? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why are we trusted?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Our curriculum has been deployed across multiple CBSE/ICSE schools, giving teachers a complete set of worksheets and structured slides to guide their classrooms.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">What makes us different?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We focus on domestic, indigenous mechatronics mechatronics engineering. By designing our blocks and circuits locally in Coimbatore, we bypass expensive component imports and supply hardware kits at standard rates.
-            </p>
-          </section>
+            {/* What makes us different? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What makes us different?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We combine software coding with physical hardware. Instead of just learning logic on screens, students construct mechanical models and load custom firmware blocks into their microcontrollers.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-sans text-[#FF6B00]">Why Choose Tamizh Tech Robotics?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              Our mechatronics labs program offers schools a complete mechatronics blueprint: turnkey mechatronics lab setup, safety-tested mechatronics kits, teacher mechatronics certification, and student mechatronics competition preparations.
-            </p>
-          </section>
+            {/* Why choose Tamizh Tech Robotics? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why choose Tamizh Tech Robotics?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Choose us to bring certified STEM training packages, robust local hardware supplies, and fully mapped curriculum modules directly to your educational institution.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/schools">
+                  <Button variant="primary">School Solutions</Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="secondary">Request Demo Box</Button>
+                </Link>
+              </div>
+            </div>
 
-        </div>
-
-        {/* B2B Call to Action */}
-        <div className="p-8 bg-[#FFF2E6] border border-[#FF6B00]/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-base font-black uppercase text-[#111111] tracking-tight">Set up a STEM Lab in your School</h4>
-            <p className="text-xs text-gray-500 font-bold uppercase mt-1">Acquire sample mechatronics curriculums and kit pricing details.</p>
           </div>
-          <div className="flex gap-4 shrink-0 w-full md:w-auto">
-            <Link href="/schools" className="btn-primary py-3 px-6 text-xs flex-1 md:flex-none text-center">
-              Request School Quote <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
         </div>
+      </section>
 
-        {/* FAQs */}
-        <section className="mt-20 border-t border-[#E5E5E5] pt-12">
-          <h3 className="text-xl font-black uppercase text-[#111111] mb-8 tracking-tight">Frequently Asked Questions</h3>
-          <div className="space-y-6">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border-b border-[#E5E5E5] pb-4">
-                <h4 className="text-xs font-black uppercase text-[#111111] mb-2">{faq.q}</h4>
-                <p className="text-xs text-gray-500 font-bold uppercase leading-relaxed">{faq.a}</p>
+      {/* FAQs */}
+      <section className="section py-16 bg-subtle border-t border-border">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold uppercase tracking-tight mb-8 text-text-primary text-center">STEM Education FAQ</h2>
+          <div className="space-y-4">
+            {faqItems.map((faq, idx) => (
+              <div key={idx} className="border border-border rounded-xl bg-white overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full px-6 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-subtle transition-all"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${openFaq === idx ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-4 pt-2 text-sm text-text-secondary border-t border-border/50">
+                    {faq.a}
+                  </div>
+                )}
               </div>
             ))}
           </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

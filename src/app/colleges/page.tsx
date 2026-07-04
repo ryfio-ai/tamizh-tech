@@ -1,233 +1,240 @@
-import React from "react";
-import Link from "next/link";
-import { Metadata } from "next";
-import { 
-  BookOpen, 
-  Send, 
-  Trophy, 
-  Microscope, 
-  Truck, 
-  Users, 
-  Share2
-} from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+"use client";
 
-export const metadata: Metadata = {
-  title: "College Robotics Lab Setup & Engineering R&D | Tamizh Tech Robotics Company",
-  description: "Turnkey R&D setups, competition team training, final year engineering project guidance, and department collaborations. Coimbatore core, pan-India scale.",
-  keywords: [
-    "robotics lab setup india", 
-    "college final year projects coimbatore", 
-    "engineering research robots", 
-    "robotics competition training"
-  ],
-  openGraph: {
-    title: "Engineering & College Collaborations | Tamizh Tech",
-    description: "Support for engineering and technology departments. Setup research labs, source high-performance robotics hardware, and sponsor technical competition teams.",
-    url: "https://tamizhtech.in/colleges",
-    type: "website"
-  }
-};
-
-const collegeFaqs = [
-  {
-    q: "How does Tamizh Tech support final year student projects?",
-    a: "We supply core hardware (sensors, motor controllers, STM32 nodes), guide mechanical designs in CAD, and assist in debugging embedded firmware (C/C++ or ROS) at our Coimbatore R&D hub."
-  },
-  {
-    q: "Can you train our college team for national robotics events?",
-    a: "Yes, our team has over 180+ winning positions in arenas like IIT Madras Shaastra, Technoxian, Quantum-X, and PSG Kriya. We offer intense training bootcamps and supply competition-grade bot structures."
-  },
-  {
-    q: "What R&D setups do you provide for departments?",
-    a: "We design and install advanced setups such as autonomous mobile robot (AMR) test grids, drone flight test cells, and multi-axis pick-and-place robotic workcells."
-  }
-];
-
-const schemas = [
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": collegeFaqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://tamizhtech.in"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Colleges Program",
-        "item": "https://tamizhtech.in/colleges"
-      }
-    ]
-  }
-];
-
-const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+import React, { useState } from "react";
+import { Check, Mail, Phone, BookOpen, Settings, Zap, GraduationCap, Award } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 export default function CollegesPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    collegeName: "",
+    dept: "Department of Robotics / Mechatronics",
+    contactPerson: "",
+    email: "",
+    phone: "",
+    notes: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you provide bulk custom PCB prototyping and components for student teams?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we specialize in high-quality hardware supply, custom PCB development, sensor procurement, and frame CNC milling for student competition teams (Robo War, Soccer, UAV, RC Boats)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Department Collaboration work for R&D Labs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer official institutional MOUs that cover R&D laboratory setups, customized research platforms (ROVs, robotic arms, quadcopters), guest lecture packages, and final-year student mentorship."
+        }
+      }
+    ]
+  };
+
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
+    <div className="bg-white min-h-screen text-text-primary">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="container mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-20 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4">
-          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-6 font-sans">Engineering Solutions</h1>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
-            Incubating R&D & <br /> Technical Excellence.
-          </h2>
-          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
-            Support engineering institutions with customized research robot development, competition training bootcamps, final-year project guidance, and structural hardware supply.
-          </p>
-        </div>
+      <PageHero
+        title="College R&D, Projects & Competition Support"
+        subtitle="Establish world-class engineering centers. We supply R&D laboratory hardware, specialized final year project mentorship, and robotic competition team coaching."
+        breadcrumbActive="Colleges"
+      />
 
-        {/* Pillars of Collaboration */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {[
-            {
-              icon: <Microscope className="w-8 h-8" />,
-              title: "R&D Lab Setup",
-              desc: "Deploying advanced test rigs, AMR fleets, CNC training machinery, and computer-vision sandboxes."
-            },
-            {
-              icon: <Trophy className="w-8 h-8" />,
-              title: "Competition Teams",
-              desc: "Technical mentoring, arena simulation setups, and structural components supply for national/international challenges."
-            },
-            {
-              icon: <BookOpen className="w-8 h-8" />,
-              title: "Final Year Projects",
-              desc: "Embedded C coding support, mechanical CAD designs, and hardware validation for engineering departments."
-            },
-            {
-              icon: <Truck className="w-8 h-8" />,
-              title: "Hardware Supply",
-              desc: "High-spec DC gear motors, lithium cells, STM32 MCU boards, and custom CNC cut parts."
-            },
-            {
-              icon: <Users className="w-8 h-8" />,
-              title: "Student Mentorship",
-              desc: "Direct access to international engineering winners, providing workshops, certifications, and portfolio coordinates."
-            },
-            {
-              icon: <Share2 className="w-8 h-8" />,
-              title: "Department Ties",
-              desc: "Conducting university symposium workshops, faculty training, and joint research paper structures."
-            }
-          ].map((item, idx) => (
-            <div key={idx} className="bg-[#11141A] border border-[#232833] p-8 rounded-2xl hover:border-[#FF4D2D] transition-colors flex flex-col justify-between">
+      {/* Solutions Grid */}
+      <section className="section py-16 bg-white text-left">
+        <div className="container px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">College Partnerships</span>
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight">Academic Engineering Solutions</h2>
+            <p className="text-text-secondary text-sm mt-3">We partner with Mechatronics, Mechanical, ECE, EEE, and CS departments to build specialized hands-on centers.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="p-6 border border-border flex flex-col justify-between hover:shadow-lg transition-all duration-300">
               <div>
-                <div className="p-3 bg-[#FF4D2D]/10 text-[#FF4D2D] border border-[#FF4D2D]/20 rounded-xl w-fit mb-6">
-                  {item.icon}
+                <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight mb-2">{item.title}</h3>
-                <p className="text-xs text-[#9AA1AC] font-bold uppercase leading-relaxed">{item.desc}</p>
+                <h3 className="text-base font-bold uppercase mb-2">Project Mentorship</h3>
+                <p className="text-text-secondary text-xs leading-relaxed mb-4">One-on-one expert hardware guides for final-year engineering projects in Robotics, Embedded systems, and AI.</p>
+              </div>
+              <ul className="space-y-1.5 text-[11px] text-text-muted mt-auto pt-4 border-t border-border">
+                <li>• Sourcing custom parts</li>
+                <li>• Controller programming help</li>
+              </ul>
+            </Card>
+
+            <Card className="p-6 border border-border flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+              <div>
+                <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                  <Settings className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold uppercase mb-2">R&D Lab Setup</h3>
+                <p className="text-text-secondary text-xs leading-relaxed mb-4">Turnkey hardware systems (advanced manipulators, micro-drones, jet engines, and motor drivers) to set up academic research facilities.</p>
+              </div>
+              <ul className="space-y-1.5 text-[11px] text-text-muted mt-auto pt-4 border-t border-border">
+                <li>• Industrial PLC units</li>
+                <li>• Custom kinematic controllers</li>
+              </ul>
+            </Card>
+
+            <Card className="p-6 border border-border flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+              <div>
+                <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                  <Award className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold uppercase mb-2">Competition Teams</h3>
+                <p className="text-text-secondary text-xs leading-relaxed mb-4">Custom telemetry setups and hardened steel materials to build national winning Robo War, Soccer, and UAV racing teams.</p>
+              </div>
+              <ul className="space-y-1.5 text-[11px] text-text-muted mt-auto pt-4 border-t border-border">
+                <li>• High-RPM brushless outrunners</li>
+                <li>• Polycarbonate protective panels</li>
+              </ul>
+            </Card>
+
+            <Card className="p-6 border border-border flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+              <div>
+                <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold uppercase mb-2">Custom Fabrication</h3>
+                <p className="text-text-secondary text-xs leading-relaxed mb-4">Provide student teams with custom PCB routing, laser-cut acrylic chassis plates, and CNC-tempered steel weapons.</p>
+              </div>
+              <ul className="space-y-1.5 text-[11px] text-text-muted mt-auto pt-4 border-t border-border">
+                <li>• Rapid local 3D print sweeps</li>
+                <li>• Multi-layered circuit boards</li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Consultation Request Form */}
+      <section className="section py-16 bg-subtle border-t border-border text-left">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">B2B R&D RFP</span>
+              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4">Request R&D Collaboration & Quote</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Are you an HOD, lab coordinator, or member of the purchasing board looking to collaborate with Tamizh Tech Robotics? We provide official quotations, submit custom research proposals, and ship wholesale competition parts. Complete the form and our R&D director will respond to your department within 24 hours.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-accent" />
+                  <span className="text-xs font-bold uppercase text-text-primary">GST Tax Invoices & Corporate Logistics</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-accent" />
+                  <span className="text-xs font-bold uppercase text-text-primary">Institutional MOUs & Student Placements</span>
+                </div>
               </div>
             </div>
-          ))}
-        </section>
 
-        {/* Lead Capture Form */}
-        <section className="max-w-4xl mx-auto mb-24" id="colleges-form">
-          <div className="border border-[#232833] rounded-2xl bg-[#11141A] p-8 md:p-12 text-left relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF4D2D]" />
-            <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-[0.3em] mb-3 block">Research Tie-up</span>
-            <h3 className="text-2xl md:text-3xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter mb-4">Request R&D Collaboration & Quote</h3>
-            <p className="text-xs text-[#858E9B] font-bold uppercase tracking-wider mb-8">Elevate your institution's technical rating. Fill in the details to register your requirement for research setup quotes or workshop sponsorships.</p>
-            
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Representative Name & Title</label>
-                  <input required type="text" placeholder="Dr. Rajkumar (HOD, Mechatronics)" className={formInputClass} />
+            <div className="bg-white border border-border rounded-2xl p-6 lg:p-8 shadow-xs">
+              {submitted ? (
+                <div className="text-center py-12">
+                  <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
+                  <h4 className="text-lg font-bold uppercase text-text-primary">Collaboration Request Sent</h4>
+                  <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Our academic liaison officer will contact your department.</p>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Department Email Coordinate</label>
-                  <input required type="email" placeholder="mechatronics@college.edu" className={formInputClass} />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Mobile / Direct Phone</label>
-                  <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Institution Name & Address</label>
-                  <input required type="text" placeholder="PSG College of Technology, Coimbatore" className={formInputClass} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Interest Category</label>
-                  <div className="relative">
-                    <select className={formInputClass + " cursor-pointer"}>
-                      <option>Research Lab Setup</option>
-                      <option>Competition Bot Supply</option>
-                      <option>Syllabus & Workshop Sponsorship</option>
-                      <option>Final Year Project Kits</option>
-                    </select>
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">College/University Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={form.collegeName}
+                      onChange={(e) => setForm({ ...form, collegeName: e.target.value })}
+                      placeholder="e.g. Coimbatore Institute of Technology"
+                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    />
                   </div>
-                </div>
-              </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Department</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.dept}
+                        onChange={(e) => setForm({ ...form, dept: e.target.value })}
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Name & Designation</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.contactPerson}
+                        onChange={(e) => setForm({ ...form, contactPerson: e.target.value })}
+                        placeholder="Dr. K. Arul / HOD"
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Email Address</label>
+                      <input
+                        type="email"
+                        required
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        placeholder="hod.robotics@college.edu"
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number</label>
+                      <input
+                        type="tel"
+                        required
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="+91 94432 10987"
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Outline Requirements & Target Timeline</label>
+                    <textarea
+                      value={form.notes}
+                      onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                      placeholder="Detail your request (e.g. final year projects hardware supply, competition chassis routing, dynamic lab design)..."
+                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent h-24 resize-none"
+                    />
+                  </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Project Details / Component List</label>
-                <textarea rows={4} placeholder="Briefly detail what you are looking for (e.g. pneumatic components, CNC cut chassis, brushless motor speed controllers, specialized sensor arrays)..." className={formInputClass + " resize-none"} />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button type="submit" className="btn-primary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1">
-                  Request Collaboration & Quote <Send className="w-4 h-4" />
-                </button>
-                <a 
-                  href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20a%20faculty%2Fstudent%20representative%20from%20an%20engineering%20college%20inquiring%20about%20R%26D%20solutions." 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center border-[#232833] hover:border-[#FF4D2D]"
-                >
-                  <FaWhatsapp className="w-4 h-4 text-[#FF4D2D]" /> Fast College WhatsApp Desk
-                </a>
-              </div>
-            </form>
+                  <Button type="submit" variant="primary" className="w-full justify-center py-3.5">
+                    Request R&D Collaboration & Quote
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
-        </section>
-
-        {/* FAQs */}
-        <section className="max-w-4xl mx-auto mb-24">
-          <div className="text-center mb-12">
-            <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-2 block">Institutional Support</span>
-            <h3 className="text-2xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter">Academic Program FAQs</h3>
-          </div>
-          <div className="space-y-4 border-t border-[#232833] pt-6">
-            {collegeFaqs.map((faq, idx) => (
-              <div key={idx} className="border-b border-[#232833] pb-4">
-                <h4 className="py-4 text-xs sm:text-sm font-black uppercase tracking-wide text-[#F5F6F8]">{faq.q}</h4>
-                <p className="text-xs text-[#9AA1AC] font-medium leading-relaxed pb-4 uppercase tracking-tight">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

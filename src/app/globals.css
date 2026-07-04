@@ -5,26 +5,26 @@
   :root {
     color-scheme: light;
     /* ── Backgrounds ──────────────────────────── */
-    --bg-page:       #FCFDFE;
-    --bg-subtle:     #F3F4F6;
-    --bg-muted:      #E5E7EB;
+    --bg-page:       #FFFFFF;
+    --bg-subtle:     #FAFAFA;
+    --bg-muted:      #F5F5F5;
     --bg-surface:    #FFFFFF;
     /* ── Text ─────────────────────────────────── */
-    --text-primary:  #0F172A;
-    --text-secondary:#334155;
-    --text-muted:    #64748B;
-    --text-subtle:   #94A3B8;
+    --text-primary:  #111111;
+    --text-secondary:#333333;
+    --text-muted:    #666666;
+    --text-subtle:   #999999;
     /* ── Accent ───────────────────────────────── */
-    --accent-blue:   #2563EB;
-    --accent-blue-hover: #1D4ED8;
-    --accent-blue-soft:  rgba(37,99,235,0.08);
-    --accent-blue-glow:  rgba(37,99,235,0.2);
-    --accent-teal:   #0D9488;
-    --accent-teal-soft:  rgba(13,148,136,0.08);
+    --accent-blue:   #FF6B00;
+    --accent-blue-hover: #E05E00;
+    --accent-blue-soft:  rgba(255,107,0,0.08);
+    --accent-blue-glow:  rgba(255,107,0,0.2);
+    --accent-teal:   #FF8533;
+    --accent-teal-soft:  rgba(255,133,51,0.08);
     /* ── Borders ──────────────────────────────── */
-    --border:        #E2E8F0;
-    --border-hover:  #CBD5E1;
-    --border-focus:  #2563EB;
+    --border:        #E5E5E5;
+    --border-hover:  #CCCCCC;
+    --border-focus:  #FF6B00;
     /* ── Radius ───────────────────────────────── */
     --radius-sm:  8px;
     --radius-md:  12px;
@@ -32,10 +32,10 @@
     --radius-xl:  24px;
     --radius-2xl: 32px;
     /* ── Shadow ───────────────────────────────── */
-    --shadow-sm:  0 1px 3px rgba(15,23,42,0.05), 0 1px 2px rgba(15,23,42,0.02);
-    --shadow-md:  0 4px 16px rgba(15,23,42,0.05), 0 2px 6px rgba(15,23,42,0.02);
-    --shadow-lg:  0 16px 48px rgba(15,23,42,0.08), 0 4px 12px rgba(15,23,42,0.04);
-    --shadow-xl:  0 32px 80px rgba(15,23,42,0.1);
+    --shadow-sm:  0 1px 3px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.01);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.01);
+    --shadow-lg:  0 16px 48px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.02);
+    --shadow-xl:  0 32px 80px rgba(0,0,0,0.08);
   }
 
   * { box-sizing: border-box; border-color: var(--border); }

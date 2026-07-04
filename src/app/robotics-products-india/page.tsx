@@ -1,161 +1,180 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { Metadata } from "next";
-import { Check, ArrowRight } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { Check, ChevronDown } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Robotics Products India | Competition Bots & Kits | Tamizh Tech",
-  description: "Tamizh Tech is India's leading robotics hardware manufacturer, supplying high-performance line follower bots, robo race chassis, soccer robots, and drone kits.",
-  keywords: [
-    "line follower robot india",
-    "robo race robot india",
-    "robo soccer robot india",
-    "robotics products india"
-  ],
-  openGraph: {
-    title: "Indigenous Robotics Products India | Tamizh Tech",
-    description: "High-spec competition robots and mechatronic learning kits designed and built in Coimbatore, Tamil Nadu.",
-    url: "https://tamizhtech.in/robotics-products-india",
-    type: "website"
-  }
-};
+export default function RoboticsProductsIndiaPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const faqs = [
-  {
-    q: "Do you supply customized line follower robots in India?",
-    a: "Yes, our Aero PID Line Follower features an STM32 ARM Cortex core, a high-precision 8-sensor optical array, and preloaded PID loop software ready for track runs."
-  },
-  {
-    q: "Can we purchase mechatronics kits in bulk for a school robotics club?",
-    a: "Yes, we offer our Tinkering Lab Setup Pack (20 kits) and sensor starter bundles with direct shipping across India."
-  }
-];
+  const faqItems = [
+    {
+      q: "Where do you ship your robotics kits in India?",
+      a: "We ship to all states across India through reliable local logistics partners. Transit times typically range from 2 to 5 business days."
+    },
+    {
+      q: "Do you accept institutional purchase orders (PO) for school setups?",
+      a: "Yes, we accept formal purchase orders from registered educational institutions, offering GST invoice mapping and customized wholesale price quotes."
+    }
+  ];
 
-const schemas = [
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://tamizhtech.in"
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Tamizh Tech Robotics Company",
+      "image": "https://tamizhtech.com/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Coimbatore",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "India"
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Robotics Products India",
-        "item": "https://tamizhtech.in/robotics-products-india"
-      }
-    ]
-  }
-];
+      "telephone": "+91 81480 45030",
+      "url": "https://tamizhtech.com"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tamizhtech.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Robotics Products India",
+          "item": "https://tamizhtech.com/robotics-products-india"
+        }
+      ]
+    }
+  ];
 
-export default function RoboticsProductsIndia() {
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111] text-left">
+    <div className="bg-white min-h-screen text-text-primary text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      <div className="container mx-auto px-6 max-w-4xl">
-        
-        {/* Header */}
-        <div className="mb-16 border-l-4 border-[#FF6B00] pl-6 py-2">
-          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-4 font-sans">Product Technology</h1>
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#111111] tracking-tighter leading-none">Robotics Products India</h2>
-          <p className="text-gray-500 font-bold uppercase mt-3 text-xs tracking-wider">Targets: Line Follower Robot India, Robo Race Robot India, Robo Soccer Robot India</p>
-        </div>
+      <PageHero
+        title="Robotics Products India"
+        subtitle="100% Made in India hardware kits, STEM learning setups, competition-grade wheels, and DIY electronics platforms."
+        breadcrumbActive="Products India"
+      />
 
-        {/* Structured Answers */}
-        <div className="space-y-12 mb-20">
-          
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Who are we?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We are mechatronics mechatronics engineers and developers at Tamizh Tech Robotics Company, based in Coimbatore, Tamil Nadu. We specialize in designing, machining, and debugging mechatronics hardware for student and industrial mechatronics markets.
-            </p>
-          </section>
+      <section className="section py-16">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <div className="space-y-12">
+            
+            {/* Who are we? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who are we?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Tamizh Tech Robotics is a homegrown Indian hardware manufacturer specializing in competition bots (Robo War, Sumo, Soccer, Race), Arduino learning kits, and school lab setups.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">What do we do?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We manufacture high-grade mechatronics kits and mechatronic components. Our catalog contains 12 mechatronics categories, from line tracking sensors to multi-rotor drone sets, and high-impact Robo War battle bots.
-            </p>
-          </section>
+            {/* What do we do? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What do we do?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                We manufacture and distribute pre-assembled track-tested bots, drone packages, RC boat systems, and sensor modules to campuses, labs, and hobbyists nationwide.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {["Robust carbon fiber race bots", "Pneumatic cylinder soccer models", "Outrunner vertical drum battle bots", "ESP32 Wi-Fi smart node controllers"].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
+                    <Check className="w-4 h-4 text-accent" /> {item}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Who do we help?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We supply mechatronics hardware to school lab systems setting up tinkering labs, engineering students preparing final year project mechatronics codes, and competitive robotics teams preparing for events.
-            </p>
-          </section>
+            {/* Who do we help? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who do we help?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We help college students building final-year projects, school directors upgrading tinkering labs, and hobbyists searching for high-traction custom rubber wheels and motor drivers.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">Why are we trusted?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              Our mechatronics designs are tested on actual arenas. We hold a track record of 180+ winning positions in mechatronics events across India, including IIT Madras Shaastra, Yugam, PSG Kriya, and Quantum-X.
-            </p>
-          </section>
+            {/* Why are we trusted? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why are we trusted?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We deliver robust hardware, check every kit on test tracks before dispatching, and provide downloadable user manuals, circuit wiring maps, and clean Arduino C++ source code.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-heading">What makes us different?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We manufacture our mechatronics structures locally. We cut carbon fiber chassis blocks, build pneumatic SOL cylinders, and program STM32 chips in-house. This gives mechatronics teams high-performance gear without high import costs.
-            </p>
-          </section>
+            {/* What makes us different? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What makes us different?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Unlike companies selling imported un-backed modules, we write the firmware, model the chassis shapes, and provide direct technical support through phone or WhatsApp chat lines.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#111111] tracking-tight font-sans text-[#FF6B00]">Why Choose Tamizh Tech Robotics?</h3>
-            <p className="text-gray-600 text-sm font-medium leading-relaxed uppercase tracking-tight">
-              Choosing our mechatronics products connects you with high-precision mechatronics mechatronics engineering. Every kit is supplied with direct mechatronics code access, mechatronics assembly sheets, and mechatronics expert advice.
-            </p>
-          </section>
+            {/* Why choose Tamizh Tech Robotics? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why choose Tamizh Tech Robotics?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Choose us to secure local engineering support, direct factory pricing, robust hardware structures, and full compliance with GST invoicing rules.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/products">
+                  <Button variant="primary">Shop Products</Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="secondary">Request B2B Quote</Button>
+                </Link>
+              </div>
+            </div>
 
-        </div>
-
-        {/* Store CTA */}
-        <div className="p-8 bg-[#FFF2E6] border border-[#FF6B00]/20 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-base font-black uppercase text-[#111111] tracking-tight">Explore our mechatronics catalog</h4>
-            <p className="text-xs text-gray-500 font-bold uppercase mt-1">Get special pricing on line followers, drone parts, and battle bots.</p>
           </div>
-          <div className="flex gap-4 shrink-0 w-full md:w-auto">
-            <Link href="/products" className="btn-primary py-3 px-6 text-xs flex-1 md:flex-none text-center">
-              Go To Store <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
         </div>
+      </section>
 
-        {/* FAQs */}
-        <section className="mt-20 border-t border-[#E5E5E5] pt-12">
-          <h3 className="text-xl font-black uppercase text-[#111111] mb-8 tracking-tight">Frequently Asked Questions</h3>
-          <div className="space-y-6">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border-b border-[#E5E5E5] pb-4">
-                <h4 className="text-xs font-black uppercase text-[#111111] mb-2">{faq.q}</h4>
-                <p className="text-xs text-gray-500 font-bold uppercase leading-relaxed">{faq.a}</p>
+      {/* FAQs */}
+      <section className="section py-16 bg-subtle border-t border-border">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold uppercase tracking-tight mb-8 text-text-primary text-center">Robotics Products India FAQ</h2>
+          <div className="space-y-4">
+            {faqItems.map((faq, idx) => (
+              <div key={idx} className="border border-border rounded-xl bg-white overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full px-6 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-subtle transition-all"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${openFaq === idx ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-4 pt-2 text-sm text-text-secondary border-t border-border/50">
+                    {faq.a}
+                  </div>
+                )}
               </div>
             ))}
           </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

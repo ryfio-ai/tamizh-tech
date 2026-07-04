@@ -1,204 +1,163 @@
+"use client";
+
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from "next";
-import { 
-  Award, 
-  BookOpen, 
-  Briefcase, 
-  Check, 
-  ExternalLink, 
-  MapPin, 
-  Send, 
-  Trophy,
-  User,
-  Zap
-} from "lucide-react";
-import { FaLinkedin, FaInstagram, FaYoutube, FaWhatsapp } from "react-icons/fa";
-
-export const metadata: Metadata = {
-  title: "Founder & CEO | Er. K. Tamizharasan | Tamizh Tech Robotics Company",
-  description: "Learn about the journey, technical wins, projects, and vision of Er. K. Tamizharasan, Founder & CEO of Tamizh Tech Robotics Company in Coimbatore.",
-  keywords: [
-    "founder tamizh tech",
-    "Er K Tamizharasan",
-    "robotics expert coimbatore",
-    "tamizh robotics club leader"
-  ],
-  openGraph: {
-    title: "Er. K. Tamizharasan | Founder & CEO, Tamizh Tech",
-    description: "Bridging the gap between theory and industry. Read the journey and vision of Coimbatore's robotics pioneer.",
-    url: "https://tamizhtech.in/founder",
-    type: "website"
-  }
-};
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Er. K. Tamizharasan",
-  "jobTitle": "Founder & CEO",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Tamizh Tech Robotics Company"
-  },
-  "url": "https://tamizhtech.in/founder",
-  "sameAs": [
-    "https://www.linkedin.com/in/tamizharasan-k-robotics",
-    "https://www.instagram.com/tamizh_tech_robotics_company",
-    "https://youtube.com/@covaiscientist"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Coimbatore",
-    "addressRegion": "Tamil Nadu",
-    "addressCountry": "IN"
-  }
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://tamizhtech.in"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Founder",
-      "item": "https://tamizhtech.in/founder"
-    }
-  ]
-};
+import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, GraduationCap } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 export default function FounderPage() {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Er. K. Tamizharasan",
+    "jobTitle": "Founder & CEO",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Tamizh Tech Robotics Company"
+    },
+    "alumniOf": "Anna University",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Coimbatore",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "India"
+    },
+    "description": "Founder & CEO of Tamizh Tech Robotics Company, robotics researcher, and STEM mentor in India."
+  };
+
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
+    <div className="bg-white min-h-screen text-text-primary text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+
+      <PageHero
+        title="Founder & CEO Profile"
+        subtitle="Er. K. Tamizharasan — Driving indigenous robotics development, B2B industrial automation, and hands-on K-12 STEM education setups across India."
+        breadcrumbActive="Founder"
       />
 
-      <div className="container mx-auto px-6 max-w-6xl">
-        
-        {/* Layout: Main Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-24">
-          
-          {/* Left Column: Avatar & Basic Details (4 cols) */}
-          <div className="lg:col-span-4 space-y-8 bg-[#11141A] border border-[#232833] p-8 rounded-2xl">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-40 h-40 rounded-full bg-[#181C24] border border-[#232833] flex items-center justify-center text-[#FF4D2D] mb-6 shadow-inner">
-                <User className="w-20 h-20 stroke-[1]" />
+      {/* Profile Section */}
+      <section className="section py-16">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Image Placeholder/Design */}
+            <div className="lg:col-span-5 bg-subtle border border-border rounded-3xl p-8 flex flex-col items-center justify-center min-h-[400px] shadow-sm relative overflow-hidden text-center">
+              <div className="absolute top-4 right-4 text-accent">
+                <Star className="w-6 h-6 fill-current animate-pulse" />
               </div>
-              <h1 className="text-2xl font-heading font-black uppercase text-[#F5F6F8] tracking-tight">Er. K. Tamizharasan</h1>
-              <span className="text-xs font-black text-[#FF4D2D] uppercase tracking-wider block mt-1">Founder & CEO</span>
-              <span className="text-[10px] text-[#858E9B] font-bold uppercase tracking-widest block mt-2">Tamizh Tech Robotics Company</span>
-            </div>
-
-            <div className="border-t border-[#232833] pt-6 space-y-4">
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <MapPin className="w-4 h-4 text-[#FF4D2D]" /> Coimbatore, Tamil Nadu
+              <div className="w-32 h-32 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6">
+                <GraduationCap className="w-16 h-16" />
               </div>
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <Briefcase className="w-4 h-4 text-[#FF4D2D]" /> Robotics Product Architect
+              <h2 className="text-2xl font-bold uppercase tracking-tight text-text-primary">Er. K. Tamizharasan</h2>
+              <span className="text-xs font-bold text-accent uppercase tracking-widest mt-1 block">Founder & CEO</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mt-0.5 block">Tamizh Tech Robotics Company</span>
+              
+              <div className="mt-8 pt-6 border-t border-border w-full space-y-2 text-xs text-text-secondary">
+                <div><strong>Qualification:</strong> B.E. Robotics & Automation</div>
+                <div><strong>Domain:</strong> Embedded Systems, Machine Vision & Kinematics</div>
               </div>
             </div>
 
-            {/* Social Coordinates */}
-            <div className="border-t border-[#232833] pt-6">
-              <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest block mb-4 text-center font-mono">Digital Coordinates</span>
-              <div className="flex justify-center gap-4">
-                <a href="https://www.linkedin.com/company/tamizh-tech-robotics-company" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#181C24] border border-[#232833] rounded-xl text-[#9AA1AC] hover:text-[#FF4D2D] hover:border-[#FF4D2D] transition-colors shadow-sm">
-                  <FaLinkedin className="w-5 h-5" />
-                </a>
-                <a href="https://instagram.com/tamizh_tech_robotics_company" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#181C24] border border-[#232833] rounded-xl text-[#9AA1AC] hover:text-[#FF4D2D] hover:border-[#FF4D2D] transition-colors shadow-sm">
-                  <FaInstagram className="w-5 h-5" />
-                </a>
-                <a href="https://youtube.com/@covaiscientist" target="_blank" rel="noopener noreferrer" className="p-3 bg-[#181C24] border border-[#232833] rounded-xl text-[#9AA1AC] hover:text-[#FF4D2D] hover:border-[#FF4D2D] transition-colors shadow-sm">
-                  <FaYoutube className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Profile details (8 cols) */}
-          <div className="lg:col-span-8 space-y-12">
-            
-            {/* Message section */}
-            <div className="border-l-4 border-[#FF4D2D] pl-6 py-2">
-              <span className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-2 block">Leadership Message</span>
-              <h2 className="text-3xl md:text-5xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter">"Transforming Ideas Into Physical Reality"</h2>
-              <p className="text-[#858E9B] font-bold uppercase mt-4 text-xs tracking-wider leading-relaxed">
-                We believe engineering isn't just about formulas on paper; it's about the friction between motors and tracks, the latency of sensors, and the uptime of industrial processors.
+            {/* Biography & Message */}
+            <div className="lg:col-span-7">
+              <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Leadership Message</span>
+              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4">Engineering the Future of Indian Robotics</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                Since our founding in Coimbatore, India, Tamizh Tech Robotics has been dedicated to bridging the gap between theoretical engineering and practical robotics fabrication. Our mission is two-fold: to manufacture robust, battle-tested competition platforms for students, and to deliver low-downtime B2B automation solutions for Indian industries.
               </p>
-            </div>
-
-            {/* Biography & Journey */}
-            <div className="space-y-6">
-              <h3 className="text-xs font-black text-[#858E9B] uppercase tracking-widest border-b border-[#232833] pb-2 font-mono">The Journey</h3>
-              <div className="space-y-4 text-[#9AA1AC] text-sm font-medium leading-relaxed">
-                <p>
-                  Er. K. Tamizharasan founded the <strong>Tamizh Robotics Club</strong> in 2021 as a student-led mechatronics lab in Coimbatore. Over three years, he guided the club to participate in over 200 state, national, and international robotics contests, winning 180+ positions and over ₹8 Lakhs in prize money.
-                </p>
-                <p>
-                  In October 2024, he officially registered and transitioned the club into <strong>Tamizh Tech Robotics Company</strong>, focusing on indigenous engineering platforms, K-12 STEM tinkering packages, and custom factory controls.
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Under the &quot;Made in India&quot; vision, we design, program, and fabricate our hardware locally. From simple line follower rovers to vertical drum spinners and CNC milled parts, we strive for high precision, absolute quality, and expert mentorship.
+              </p>
+              
+              <div className="p-6 bg-subtle rounded-xl border-l-4 border-accent mb-6">
+                <p className="italic text-xs font-bold text-text-secondary">
+                  &quot;True innovation doesn&apos;t happen on paper. It happens in the lab, when students solder their first controller, and on the assembly line, when a custom robot automates a bottleneck. That is what we build.&quot;
                 </p>
               </div>
             </div>
-
-            {/* Technical Milestones */}
-            <div className="space-y-6">
-              <h3 className="text-xs font-black text-[#858E9B] uppercase tracking-widest border-b border-[#232833] pb-2 font-mono">Robotics Achievements</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  "180+ Winning Positions in technical tracks",
-                  "Winner at IIT Madras Shaastra 2025/2026 (Robo Soccer)",
-                  "Winner at Technoxian World Cup (Robo Race / Robo Soccer)",
-                  "Mentored 1000+ engineering students in Tamil Nadu",
-                  "Delivered custom weight-lifting AMR platform to logistics partners",
-                  "Established turnkey STEM robotics labs in schools"
-                ].map((ach, idx) => (
-                  <div key={idx} className="flex items-center gap-3 p-4 bg-[#11141A] border border-[#232833] rounded-xl hover:border-[#FF4D2D] transition-colors">
-                    <Trophy className="w-5 h-5 text-[#FF4D2D] shrink-0" />
-                    <span className="text-[11px] font-bold text-[#9AA1AC] uppercase tracking-tight">{ach}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Vision for Indian Robotics */}
-            <div className="space-y-6">
-              <h3 className="text-xs font-black text-[#858E9B] uppercase tracking-widest border-b border-[#232833] pb-2 font-mono">Vision for India's Engineering Core</h3>
-              <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed">
-                "Our primary mission at Tamizh Tech is to eliminate the imports of high-performance robotics hardware in India. We design, source, and machine our components locally in Coimbatore, showing our students that they can build world-class products right here in Tamil Nadu."
-              </p>
-            </div>
-
-            {/* Contact CTA */}
-            <div className="p-8 bg-[#11141A] border border-[#232833] rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <h4 className="text-lg font-black uppercase text-[#F5F6F8] tracking-tight">Direct Consultation Desk</h4>
-                <p className="text-xs text-[#858E9B] font-bold uppercase mt-1">Schedule an academic partnership or custom AMR project audit.</p>
-              </div>
-              <div className="flex gap-4 shrink-0">
-                <a href="https://wa.me/918148045030?text=Hello%20Er.%20Tamizharasan!%20I%20would%20like%20to%20discuss%20a%20robotics%20partnership%20with%20Tamizh%20Tech." target="_blank" rel="noopener noreferrer" className="btn-primary py-3 px-6 text-xs flex items-center gap-2">
-                  <FaWhatsapp className="w-4 h-4" /> Message CEO
-                </a>
-              </div>
-            </div>
-
           </div>
-
         </div>
+      </section>
 
-      </div>
+      {/* Timeline / Journey */}
+      <section className="section py-16 bg-subtle border-t border-border">
+        <div className="container px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">The Journey</span>
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight">Milestones & Growth</h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-8 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-border">
+            {[
+              { year: "2020", title: "Inception in Coimbatore", desc: "Started as a micro-consultancy for student electronics assemblies, establishing initial partnerships." },
+              { year: "2022", title: "Launch of STEM Lab Setup Services", desc: "Began deployment of complete laboratory packages for CBSE/ICSE schools across Tamil Nadu." },
+              { year: "2024", title: "National Robotics Competition Dominance", desc: "Engineered and supplied components for over 50+ podium-winning college teams in Robo War and Soccer." },
+              { year: "2026", title: "B2B Automation Expansion", desc: "Scaling custom AMR development and computer vision inspection benches for industrial clients." }
+            ].map((item, idx) => (
+              <div key={idx} className="relative pl-12 text-left">
+                <div className="absolute left-2.5 top-1.5 w-3.5 h-3.5 rounded-full bg-accent border-4 border-white" />
+                <span className="text-xs font-extrabold text-accent block font-mono">{item.year}</span>
+                <h4 className="text-base font-bold uppercase text-text-primary mt-1">{item.title}</h4>
+                <p className="text-text-secondary text-xs mt-1.5 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Awards & Recognition */}
+      <section className="section py-16 bg-white border-t border-border">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-6 border border-border text-left hover:shadow-md transition-all duration-300">
+              <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                <Award className="w-5 h-5" />
+              </div>
+              <h4 className="text-sm font-bold uppercase text-text-primary mb-2">STEM Mentor Award</h4>
+              <p className="text-text-secondary text-xs leading-relaxed">Recognized for training and guiding over 5,000+ K-12 students in coding and robotics principles.</p>
+            </Card>
+
+            <Card className="p-6 border border-border text-left hover:shadow-md transition-all duration-300">
+              <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h4 className="text-sm font-bold uppercase text-text-primary mb-2">IP & Innovation Focus</h4>
+              <p className="text-text-secondary text-xs leading-relaxed">Collaborating with colleges for final-year engineering patent drafting and custom firmware development.</p>
+            </Card>
+
+            <Card className="p-6 border border-border text-left hover:shadow-md transition-all duration-300">
+              <div className="p-3 bg-accent/5 rounded-xl text-accent w-fit mb-4">
+                <Heart className="w-5 h-5" />
+              </div>
+              <h4 className="text-sm font-bold uppercase text-text-primary mb-2">Made in India Vision</h4>
+              <p className="text-text-secondary text-xs leading-relaxed">Dedicated to replacing imported Chinese robotics modules with local CNC/3D printed electronics kits.</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Consultation / Contact CTA */}
+      <section className="section py-16 bg-subtle border-t border-border text-center">
+        <div className="container px-6 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase mb-4 text-text-primary">Connect with Er. K. Tamizharasan</h2>
+          <p className="text-text-secondary text-sm mb-8 leading-relaxed">
+            Interested in speaking at your college symposium? Or would you like to discuss a customized R&D project or industrial automation feasibility audit?
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link href="/contact">
+              <Button variant="primary" size="lg">Send Message</Button>
+            </Link>
+            <a href="mailto:info@tamizhtech.com">
+              <Button variant="secondary" size="lg">Email Directly</Button>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

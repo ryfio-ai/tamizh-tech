@@ -12,28 +12,28 @@ const config: Config = {
     extend: {
       colors: {
         /* backgrounds */
-        page:    "#FCFDFE",
-        subtle:  "#F3F4F6",
-        muted:   "#E5E7EB",
+        page:    "#FFFFFF",
+        subtle:  "#FAFAFA",
+        muted:   "#F5F5F5",
         /* text */
-        "text-primary":   "#0F172A",
-        "text-secondary": "#334155",
-        "text-muted":     "#64748B",
+        "text-primary":   "#111111",
+        "text-secondary": "#333333",
+        "text-muted":     "#666666",
         /* accents */
         accent: {
-          DEFAULT: "#2563EB",
-          hover:   "#1D4ED8",
-          teal:    "#0D9488",
-          soft:    "rgba(37,99,235,0.08)",
+          DEFAULT: "#FF6B00",
+          hover:   "#E05E00",
+          teal:    "#FF8533",
+          soft:    "rgba(255,107,0,0.08)",
         },
         /* border */
-        border: "#E2E8F0",
+        border: "#E5E5E5",
         /* shadcn compat */
-        background: "#FCFDFE",
-        foreground: "#0F172A",
-        primary: { DEFAULT: "#2563EB", foreground: "#FFFFFF" },
-        secondary: { DEFAULT: "#F3F4F6", foreground: "#0F172A" },
-        ring: "#2563EB",
+        background: "#FFFFFF",
+        foreground: "#111111",
+        primary: { DEFAULT: "#FF6B00", foreground: "#FFFFFF" },
+        secondary: { DEFAULT: "#FAFAFA", foreground: "#111111" },
+        ring: "#FF6B00",
       },
       borderRadius: {
         sm: "8px", md: "12px", lg: "16px",

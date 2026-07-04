@@ -1,235 +1,180 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { Metadata } from "next";
-import { Check, ArrowRight, MapPin, Phone, Mail, Clock } from "lucide-react";
-import { FaWhatsapp, FaMapMarkedAlt } from "react-icons/fa";
+import { Check, ChevronDown } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Robotics Company in Coimbatore | Training & Labs | Tamizh Tech",
-  description: "Tamizh Tech is the premier robotics company in Coimbatore, Tamil Nadu, supplying mechatronic parts, custom competition kits, and student internship training.",
-  keywords: [
-    "robotics company in coimbatore",
-    "robotics training coimbatore",
-    "mechatronics engineering coimbatore",
-    "coimbatore robotics club"
-  ],
-  openGraph: {
-    title: "Tamizh Tech Robotics Company | Coimbatore",
-    description: "Coimbatore's premium mechatronics startup. Training bootcamps, school lab installations, and industrial PLC solutions.",
-    url: "https://tamizhtech.in/robotics-company-in-coimbatore",
-    type: "website"
-  }
-};
+export default function RoboticsCompanyCoimbatorePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-const faqs = [
-  {
-    q: "Where is Tamizh Tech Robotics located in Coimbatore?",
-    a: "Our R&D engineering hub is located in Coimbatore, Tamil Nadu - 641107. We welcome school and college representatives to schedule on-site lab previews and hardware audits."
-  },
-  {
-    q: "Do you offer mechatronics internship training in Coimbatore?",
-    a: "Yes, our training division, ThiranOli Academy, offers structured mechatronics and AI training, python programming, and mechatronic design internships at our Coimbatore facility."
-  }
-];
-
-const schemas = [
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Tamizh Tech Robotics Company",
-    "image": "https://tamizhtech.in/logo/TTRC LOGO.png",
-    "@id": "https://tamizhtech.in/#localbusiness",
-    "url": "https://tamizhtech.in",
-    "telephone": "+918148045030",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Coimbatore",
-      "addressLocality": "Coimbatore",
-      "addressRegion": "Tamil Nadu",
-      "postalCode": "641107",
-      "addressCountry": "IN"
+  const faqItems = [
+    {
+      q: "Why is Coimbatore a hub for robotics manufacturing?",
+      a: "Coimbatore, often called the Manchester of South India, is famous for its foundry clusters, motor manufacturing, high-precision machining workshops, and engineering colleges, making it the perfect ecosystem to build and assemble robust robotic systems."
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 11.0168,
-      "longitude": 76.9558
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "09:00",
-      "closes": "18:00"
+    {
+      q: "Can I visit the Tamizh Tech fabrication facility in Coimbatore?",
+      a: "Yes, we encourage school coordinators, university faculties, and industrial clients to visit our lab to see active demonstrations of line followers, race bots, AGVs, and modular kits."
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://tamizhtech.in"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Robotics Company Coimbatore",
-        "item": "https://tamizhtech.in/robotics-company-in-coimbatore"
-      }
-    ]
-  }
-];
+  ];
 
-export default function RoboticsCompanyCoimbatore() {
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Tamizh Tech Robotics Company",
+      "image": "https://tamizhtech.com/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Coimbatore",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "India"
+      },
+      "telephone": "+91 81480 45030",
+      "url": "https://tamizhtech.com"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://tamizhtech.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Robotics Company in Coimbatore",
+          "item": "https://tamizhtech.com/robotics-company-in-coimbatore"
+        }
+      ]
+    }
+  ];
+
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
+    <div className="bg-white min-h-screen text-text-primary text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      <div className="container mx-auto px-6 max-w-4xl">
-        
-        {/* Header */}
-        <div className="mb-16 border-l-4 border-[#FF4D2D] pl-6 py-2">
-          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-4 font-sans">Local SEO Hub</h1>
-          <h2 className="text-3xl md:text-5xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter leading-none">Robotics Company in Coimbatore</h2>
-          <p className="text-[#858E9B] font-bold uppercase mt-3 text-xs tracking-wider">Targets: Robotics Company Coimbatore, Robotics Training Coimbatore</p>
-        </div>
+      <PageHero
+        title="Robotics Company in Coimbatore"
+        subtitle="Turnkey robotics design, custom fabrication, and educational lab setup services from India's engineering heartland."
+        breadcrumbActive="Coimbatore Hub"
+      />
 
-        {/* NAP details block */}
-        <div className="grid md:grid-cols-2 gap-8 bg-[#11141A] border border-[#232833] p-8 rounded-2xl mb-16">
-          <div className="space-y-6">
-            <h3 className="text-md font-heading font-black uppercase text-[#F5F6F8] tracking-tight">Location Coordinates</h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <MapPin className="w-5 h-5 text-[#FF4D2D]" /> Coimbatore, Tamil Nadu, India - 641107
-              </div>
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <Phone className="w-5 h-5 text-[#FF4D2D]" /> +91 81480 45030 / +91 84386 86030
-              </div>
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <Mail className="w-5 h-5 text-[#FF4D2D]" /> contact@tamizhtech.in
-              </div>
-              <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-[#9AA1AC]">
-                <Clock className="w-5 h-5 text-[#FF4D2D]" /> 09:00 AM - 06:00 PM (Mon - Sat)
+      <section className="section py-16">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <div className="space-y-12">
+            
+            {/* Who are we? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who are we?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Tamizh Tech Robotics is a homegrown engineering firm in Coimbatore, specializing in custom robotics integration, school lab setup, and high-performance DIY STEM kit fabrication.
+              </p>
+            </div>
+
+            {/* What do we do? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What do we do?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                We leverage Coimbatore&apos;s local manufacturing networks to construct high-strength carbon fiber chassis, CNC milled battlebot weapons, high-RPM motors, and custom PCBs.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {["Local CNC & laser-cutting services", "Robo War and Robo Soccer hardware builds", "Turnkey school tinkering lab packages", "IoT sensor network cabinets"].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
+                    <Check className="w-4 h-4 text-accent" /> {item}
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          <div className="bg-[#181C24] border border-[#232833] rounded-xl p-6 flex flex-col justify-between items-center text-center">
-            <FaMapMarkedAlt className="w-12 h-12 text-[#FF4D2D] mb-4" />
-            <span className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest block font-mono">Google Maps Placement</span>
-            <p className="text-[11px] text-[#9AA1AC] font-bold uppercase mt-2">Map pin verified and indexed for local mechatronics engineering searches.</p>
-            <a 
-              href="https://maps.google.com/?q=Coimbatore+Tamil+Nadu" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#FF4D2D] hover:text-[#F5F6F8] transition-colors flex items-center gap-1 font-mono"
-            >
-              Open Live Route Map <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </div>
+            {/* Who do we help? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who do we help?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We support engineering colleges setting up robotics centers, school admins planning STEM labs, and local manufacturers in Coimbatore looking to implement PLC logic and machine vision QC checks.
+              </p>
+            </div>
 
-        {/* Structured Answers */}
-        <div className="space-y-12 mb-20">
-          
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight">Who are we?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We are Er. K. Tamizharasan and the core engineering coordinators of Tamizh Tech Robotics Company. Born from the successful mechatronics student circle "Tamizh Robotics Club" (established in 2021), we operate Coimbatore's leading mechatronics design, prototyping, and assembly house.
-            </p>
-          </section>
+            {/* Why are we trusted? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why are we trusted?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We are recognized for providing direct on-site calibration, certified teacher training programs, and customized spare parts lists, preventing long import delays.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight">What do we do?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We serve three engineering areas from our Coimbatore base:
-            </p>
-            <ul className="space-y-3 pl-4">
-              <li className="flex items-start gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                <Check className="w-4 h-4 text-[#FF4D2D] shrink-0 mt-0.5" /> <strong>Robotics Hardware Prototyping:</strong> Sourcing high-performance motors, ESCs, carbon chassis, and assembling line array sensors and custom competitive bots.
-              </li>
-              <li className="flex items-start gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                <Check className="w-4 h-4 text-[#FF4D2D] shrink-0 mt-0.5" /> <strong>STEM Lab Configurations:</strong> Setting up turnkey tinkering labs and school STEM boxes.
-              </li>
-              <li className="flex items-start gap-2.5 text-xs text-[#9AA1AC] font-bold uppercase tracking-wider">
-                <Check className="w-4 h-4 text-[#FF4D2D] shrink-0 mt-0.5" /> <strong>Robotics Training:</strong> Mentoring students, sponsoring college teams, and conducting workshops on microcontroller programming (STM32, Arduino) and computer vision.
-              </li>
-            </ul>
-          </section>
+            {/* What makes us different? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">What makes us different?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                We design and program all our hardware in-house. That means we don&apos;t just sell boxes — we share schematic drawings, C++ coding blocks, and provide free technical mentorship.
+              </p>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight">Who do we help?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We help local school students looking for hands-on mechatronics classes, college student teams preparing for technical tracks (Robo Soccer, Robo Race, Sumo, War), and local manufacturers requesting mechatronic integration.
-            </p>
-          </section>
+            {/* Why choose Tamizh Tech Robotics? */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Why choose Tamizh Tech Robotics?</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                Choose us to secure local engineering support, direct factory pricing, robust hardware structures, and full compliance with GST invoicing rules.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/products">
+                  <Button variant="primary">Shop Products</Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="secondary">Book Campus Demo</Button>
+                </Link>
+              </div>
+            </div>
 
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight">Why are we trusted?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              Our mechatronics models have competed in over 200 events, winning 180+ positions and ₹8 Lakhs+ in cash prizes. When school and college teams buy from us, they acquire mechatronic advice proven to win trophies.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#F5F6F8] tracking-tight">What makes us different?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              We are mechatronics engineers, not general resellers. We cut our own chassis templates, calibrate PID loops for speed, and build custom solenoid cylinders locally, allowing us to supply hardware at competitive rates.
-            </p>
-          </section>
-
-          <section className="space-y-4">
-            <h3 className="text-lg font-heading font-black uppercase text-[#FF4D2D] tracking-tight font-sans">Why Choose Tamizh Tech Robotics?</h3>
-            <p className="text-[#9AA1AC] text-sm font-medium leading-relaxed uppercase tracking-tight">
-              Choosing us connects you with Coimbatore's mechatronics heritage. We provide direct on-site support, specialized mechatronics training, and modular lab kits with verified safety standards.
-            </p>
-          </section>
-
-        </div>
-
-        {/* Lead Form CTA */}
-        <div className="p-8 bg-[#11141A] border border-[#232833] rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-base font-black uppercase text-[#F5F6F8] tracking-tight">Consult Coimbatore's Robotics Team</h4>
-            <p className="text-xs text-[#858E9B] font-bold uppercase mt-1">Book a lab setup demo or mechatronics training audit.</p>
-          </div>
-          <div className="flex gap-4 shrink-0 w-full md:w-auto">
-            <Link href="/contact" className="btn-primary py-3 px-6 text-xs flex-1 md:flex-none text-center">
-              Connect With Us <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
           </div>
         </div>
+      </section>
 
-        {/* FAQs */}
-        <section className="mt-20 border-t border-[#232833] pt-12">
-          <h3 className="text-xl font-heading font-black uppercase text-[#F5F6F8] mb-8 tracking-tight">Frequently Asked Questions</h3>
-          <div className="space-y-6">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border-b border-[#232833] pb-4">
-                <h4 className="text-xs font-black uppercase text-[#F5F6F8] mb-2">{faq.q}</h4>
-                <p className="text-xs text-[#858E9B] font-bold uppercase leading-relaxed">{faq.a}</p>
+      {/* FAQs */}
+      <section className="section py-16 bg-subtle border-t border-border">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold uppercase tracking-tight mb-8 text-text-primary text-center">Coimbatore Robotics FAQ</h2>
+          <div className="space-y-4">
+            {faqItems.map((faq, idx) => (
+              <div key={idx} className="border border-border rounded-xl bg-white overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full px-6 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-subtle transition-all"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${openFaq === idx ? "rotate-180" : ""}`} />
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-4 pt-2 text-sm text-text-secondary border-t border-border/50">
+                    {faq.a}
+                  </div>
+                )}
               </div>
             ))}
           </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { products } from '@/data/products'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tamizhtech.in'
+  const baseUrl = 'https://tamizhtech.com'
   
   const staticPages = [
     '',

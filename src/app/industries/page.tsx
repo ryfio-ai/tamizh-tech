@@ -17,6 +17,9 @@ import {
   LineChart
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Industrial Automation & Robotics Solutions | Coimbatore | Tamizh Tech",
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Industrial Automation & Robotics Integration | Tamizh Tech",
     description: "Empowering factory floors with custom robotics, vision checks, and IoT dashboards. Coimbatore engineering core.",
-    url: "https://tamizhtech.in/industries",
+    url: "https://tamizhtech.com/industries",
     type: "website"
   }
 };
@@ -118,85 +121,80 @@ const schemas = [
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://tamizhtech.in"
+        "item": "https://tamizhtech.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Industrial Automation",
-        "item": "https://tamizhtech.in/industries"
+        "item": "https://tamizhtech.com/industries"
       }
     ]
   }
 ];
 
-const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
+const formInputClass = "w-full bg-subtle border border-border px-4 py-3.5 text-text-primary font-bold text-xs rounded-lg outline-none transition-all focus:border-accent focus:ring-1 focus:ring-accent placeholder-text-muted";
 
 export default function IndustriesPage() {
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8] text-left">
+    <div className="bg-white min-h-screen text-text-primary text-left">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      <div className="container mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-20 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4">
-          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-6 font-sans">B2B Industrial Vertical</h1>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
-            Sector-Specific <br /> Automation Engineering.
-          </h2>
-          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-6 md:mt-8">
-            Deploying high-uptime hardware, custom SCADA boards, vision QA check benches, and AMR logistics fleets designed and configured in Coimbatore, Tamil Nadu.
-          </p>
-        </div>
+      <PageHero
+        title="Industrial Automation & Robotics"
+        subtitle="Custom B2B engineering integrations. Scale your manufacturing floor with indigenously designed AGVs, PLC/SCADA logic wiring, and computer vision QC benches."
+        breadcrumbActive="Industries"
+      />
 
+      <div className="container mx-auto px-6 py-16">
+        
         {/* Solutions Grid */}
-        <div className="space-y-12 mb-24">
+        <div className="space-y-8 mb-24">
           {solutions.map((item) => (
             <div 
               key={item.id} 
               id={item.id}
-              className="bg-[#11141A] border border-[#232833] flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden group hover:border-[#FF4D2D] transition-colors duration-300"
+              className="bg-white border border-border flex flex-col lg:flex-row items-stretch rounded-2xl overflow-hidden group hover:border-accent/40 hover:shadow-md transition-all duration-300"
             >
               {/* Left Column */}
-              <div className="w-full lg:w-1/4 bg-[#181C24] border-r border-[#232833] flex flex-col items-center justify-center p-12 text-[#FF4D2D] group-hover:bg-[#FF4D2D] group-hover:text-white transition-all duration-500">
-                <div className="w-20 h-20 border border-[#232833] flex items-center justify-center rounded-2xl mb-6 bg-[#11141A] shadow-sm transition-all duration-500">
+              <div className="w-full lg:w-1/4 bg-subtle border-r border-border flex flex-col items-center justify-center p-10 text-accent group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                <div className="w-16 h-16 border border-border flex items-center justify-center rounded-2xl mb-4 bg-white shadow-sm transition-all duration-300">
                    {item.icon}
                 </div>
-                <h3 className="text-lg font-heading font-black tracking-tighter uppercase text-center mt-2 group-hover:text-white text-[#F5F6F8] transition-colors">{item.title}</h3>
+                <h3 className="text-base font-bold tracking-tight uppercase text-center mt-2 group-hover:text-white text-text-primary transition-colors">{item.title}</h3>
               </div>
               
               {/* Right Column */}
-              <div className="flex-grow p-8 md:p-12 flex flex-col justify-between bg-[#11141A]">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                  <div className="space-y-6">
+              <div className="flex-grow p-8 md:p-10 flex flex-col justify-between bg-white">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="space-y-4">
                     <div>
-                      <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-widest mb-1.5 block">Operational Bottleneck</span>
-                      <h4 className="text-lg font-black text-[#F5F6F8] uppercase tracking-tight leading-tight">{item.challenge}</h4>
+                      <span className="text-[9px] font-bold text-accent uppercase tracking-widest mb-1.5 block">Operational Bottleneck</span>
+                      <h4 className="text-base font-bold text-text-primary uppercase tracking-tight leading-tight">{item.challenge}</h4>
                     </div>
                     <div>
-                      <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-widest mb-1.5 block">Custom Deployment</span>
-                      <p className="text-[#9AA1AC] text-xs font-medium leading-relaxed">{item.approach}</p>
+                      <span className="text-[9px] font-bold text-accent uppercase tracking-widest mb-1.5 block">Custom Deployment</span>
+                      <p className="text-text-secondary text-xs font-medium leading-relaxed">{item.approach}</p>
                     </div>
                   </div>
                   
-                  <div className="bg-[#181C24] p-6 border border-[#232833] rounded-xl flex flex-col justify-center">
-                    <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest mb-4 block text-center border-b border-[#232833] pb-2 font-mono">Technical Deliverables</span>
-                    <div className="space-y-3">
+                  <div className="bg-subtle p-6 border border-border rounded-xl flex flex-col justify-center">
+                    <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest mb-4 block text-center border-b border-border pb-2">Technical Deliverables</span>
+                    <div className="space-y-2">
                       {item.metrics.map((m, idx) => (
-                        <div key={idx} className="flex items-center gap-3 text-[11px] font-bold text-[#F5F6F8] uppercase tracking-tight">
-                          <ShieldCheck className="w-4 h-4 text-[#FF4D2D] shrink-0" /> {m}
+                        <div key={idx} className="flex items-center gap-3 text-[11px] font-bold text-text-primary uppercase tracking-tight">
+                          <ShieldCheck className="w-4 h-4 text-accent shrink-0" /> {m}
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-8 pt-6 border-t border-[#232833] flex justify-end">
-                   <Link href="#consultation-form" className="text-[10px] font-black text-[#FF4D2D] flex items-center gap-2 hover:text-[#F5F6F8] transition-colors uppercase tracking-widest pb-1 border-b border-[#FF4D2D]">
+                <div className="mt-6 pt-6 border-t border-border flex justify-end">
+                   <Link href="#consultation-form" className="text-[10px] font-bold text-accent flex items-center gap-2 hover:text-text-primary transition-colors uppercase tracking-widest pb-1 border-b border-accent">
                      Schedule Technical Feasibility Discussion <MoveRight className="w-4 h-4" />
                    </Link>
                 </div>
@@ -206,14 +204,16 @@ export default function IndustriesPage() {
         </div>
 
         {/* Global Strategy / Summary */}
-        <div className="bg-[#11141A] border border-[#232833] p-12 md:p-20 grid lg:grid-cols-2 gap-16 items-center rounded-2xl mb-24">
+        <div className="bg-subtle border border-border p-10 md:p-16 grid lg:grid-cols-2 gap-12 items-center rounded-3xl mb-24">
            <div>
-              <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tighter mb-6 leading-tight uppercase text-[#F5F6F8]">Coimbatore Core.<br />Pan-India Scale.</h2>
-              <p className="text-[#9AA1AC] leading-relaxed font-bold text-xs uppercase tracking-wider">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 leading-tight uppercase text-text-primary">Coimbatore Core.<br />Pan-India Scale.</h2>
+              <p className="text-text-secondary leading-relaxed font-bold text-xs uppercase tracking-wider">
                 Headquartered in India&apos;s engineering heartland, we leverage the region&apos;s manufacturing heritage to provide on-ground technical support for global brands and domestic leaders.
               </p>
               <div className="flex gap-4 mt-8">
-                 <Link href="/about" className="btn-primary py-4 px-8 text-xs">Firm Profile</Link>
+                 <Link href="/about">
+                   <Button variant="primary">Firm Profile</Button>
+                 </Link>
               </div>
            </div>
            
@@ -224,9 +224,9 @@ export default function IndustriesPage() {
                 { label: "Engineering Staff", val: "50+" },
                 { label: "Strategic Partners", val: "10+" }
               ].map((stat) => (
-                <div key={stat.label} className="bg-[#181C24] border border-[#232833] p-6 text-center flex flex-col justify-center rounded-xl shadow-xs hover:border-[#FF4D2D] transition-colors">
-                  <span className="text-3xl font-black text-[#FF4D2D] tracking-tighter font-mono">{stat.val}</span>
-                  <span className="text-[9px] font-black text-[#858E9B] uppercase tracking-widest mt-2 leading-tight">{stat.label}</span>
+                <div key={stat.label} className="bg-white border border-border p-6 text-center flex flex-col justify-center rounded-xl shadow-sm hover:border-accent transition-colors">
+                  <span className="text-3xl font-extrabold text-accent tracking-tighter">{stat.val}</span>
+                  <span className="text-[9px] font-bold text-text-muted uppercase tracking-widest mt-2 leading-tight">{stat.label}</span>
                 </div>
               ))}
            </div>
@@ -234,63 +234,64 @@ export default function IndustriesPage() {
 
         {/* Industrial Consultation Form */}
         <section className="max-w-4xl mx-auto mb-24" id="consultation-form">
-          <div className="border border-[#232833] rounded-2xl bg-[#11141A] p-8 md:p-12 text-left relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#FF4D2D]" />
-            <span className="text-[9px] font-black text-[#FF4D2D] uppercase tracking-[0.3em] mb-3 block">B2B Coordination Desk</span>
-            <h3 className="text-2xl md:text-3xl font-heading font-black uppercase text-[#F5F6F8] tracking-tighter mb-4">Request Automation Consultation</h3>
-            <p className="text-xs text-[#858E9B] font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
+          <div className="border border-border rounded-2xl bg-white p-8 md:p-12 text-left relative overflow-hidden shadow-sm">
+            <div className="absolute top-0 left-0 w-2 h-full bg-accent" />
+            <span className="text-[9px] font-bold text-accent uppercase tracking-widest mb-3 block">B2B Coordination Desk</span>
+            <h3 className="text-2xl md:text-3xl font-bold uppercase text-text-primary tracking-tight mb-4">Request Automation Consultation</h3>
+            <p className="text-xs text-text-muted font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
             
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Corporate Representative Name</label>
+                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Corporate Representative Name</label>
                   <input required type="text" placeholder="John Doe" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Official Company Email</label>
+                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Official Company Email</label>
                   <input required type="email" placeholder="john@corporatemail.com" className={formInputClass} />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Contact Phone</label>
+                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Contact Phone</label>
                   <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Company Name & Site Location</label>
+                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Company Name & Site Location</label>
                   <input required type="text" placeholder="Auto Corp, Coimbatore" className={formInputClass} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Target Automation Interest</label>
+                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Target Automation Interest</label>
                   <div className="relative">
-                    <select className={formInputClass + " cursor-pointer"}>
+                    <select className={formInputClass + " cursor-pointer appearance-none"}>
                       <option>PLC & SCADA logic setup</option>
                       <option>Machine Vision (OpenCV inspection)</option>
                       <option>Warehouse AMR/AGV Deployment</option>
                       <option>IoT Fleet Telemetry Node audit</option>
                     </select>
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 border-l border-t border-[#858E9B] w-2 h-2 pointer-events-none"></span>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[9px] font-black text-[#858E9B] uppercase tracking-wider font-sans">Technical Requirement Details</label>
+                <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Technical Requirement Details</label>
                 <textarea rows={4} placeholder="Describe the current manual process, machinery brand names (Siemens, Mitsubishi, Delta), and target cycle time improvements..." className={formInputClass + " resize-none"} />
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button type="submit" className="btn-primary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1">
-                  Schedule Audit & Consult <Send className="w-4 h-4" />
-                </button>
+                <Button type="submit" variant="primary" className="flex-1 justify-center py-4">
+                  Schedule Audit & Consult <Send className="w-4 h-4 ml-1.5" />
+                </Button>
                 <a 
                   href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20inquiring%20about%20your%20B2B%20Industrial%20Automation%20and%20PLC%2FSCADA%2FMachine%20Vision%20solutions." 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn-secondary py-4 px-8 rounded-xl font-bold uppercase text-xs tracking-wider flex items-center justify-center gap-2 flex-1 text-center border-[#232833] hover:border-[#FF4D2D]"
+                  className="flex-1 block"
                 >
-                  <FaWhatsapp className="w-4 h-4 text-[#FF4D2D]" /> Talk to Automation Expert
+                  <Button variant="secondary" className="w-full justify-center py-4 gap-2 border-border hover:border-accent">
+                    <FaWhatsapp className="w-4 h-4 text-accent" /> Talk to Automation Expert
+                  </Button>
                 </a>
               </div>
             </form>

@@ -9,25 +9,41 @@ import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   {
-    label: "Services",
-    href: "/services",
+    label: "Products",
+    href: "/products",
     children: [
-      { label: "Robotics",             href: "/services#robotics",           desc: "Custom bots & automation systems" },
-      { label: "Artificial Intelligence", href: "/services#ai",              desc: "Machine learning & vision AI" },
-      { label: "Drone Technology",     href: "/services#drone",              desc: "UAV design & aerial solutions" },
-      { label: "IoT",                  href: "/services#iot",                desc: "Connected sensor ecosystems" },
-      { label: "Embedded Systems",     href: "/services#embedded",           desc: "Microcontroller & firmware dev" },
-      { label: "Industrial Automation",href: "/services#automation",         desc: "Factory & process automation" },
-    ],
+      { label: "Product Catalog", href: "/products", desc: "All 12 robotics categories" },
+      { label: "Robo Race Bots", href: "/products?category=Robo%20Race%20Bots", desc: "High speed drift & race" },
+      { label: "Robo Soccer Bots", href: "/products?category=Robo%20Soccer%20Bots", desc: "Solenoid & pneumatic pushers" },
+      { label: "Robo Sumo Bots", href: "/products?category=Robo%20Sumo%20Bots", desc: "Heavy magnetic platforms" },
+      { label: "Line Follower Robots", href: "/products?category=Line%20Follower%20Robots", desc: "PID sensor arrays" },
+      { label: "STEM Kits", href: "/products?category=STEM%20Learning%20Kits", desc: "Solderless tinkering kits" },
+      { label: "Lab Kits", href: "/products?category=School%20Robotics%20Lab%20Kits", desc: "Complete school packages" }
+    ]
   },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Projects",  href: "/projects" },
-  { label: "Courses",   href: "/courses" },
-  { label: "Gallery",   href: "/gallery" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Careers",   href: "/careers" },
+  {
+    label: "Solutions",
+    href: "/schools",
+    children: [
+      { label: "Schools", href: "/schools", desc: "STEM, AI, and Robotics Labs" },
+      { label: "Colleges", href: "/colleges", desc: "R&D lab setup & project mentoring" },
+      { label: "Industries", href: "/industries", desc: "PLC/SCADA & OpenCV vision" }
+    ]
+  },
+  { label: "Training", href: "/courses" },
+  {
+    label: "Company",
+    href: "/about",
+    children: [
+      { label: "About Us", href: "/about", desc: "Company journey & vision" },
+      { label: "Founder Profile", href: "/founder", desc: "Er. K. Tamizharasan" },
+      { label: "Robotics in Coimbatore", href: "/robotics-company-in-coimbatore", desc: "Regional engineering core" },
+      { label: "Achievements", href: "/about#achievements", desc: "National awards & records" },
+      { label: "Gallery", href: "/gallery", desc: "Photos and videos from labs" }
+    ]
+  },
+  { label: "Contact", href: "/contact" }
 ];
 
 export function Navbar() {
