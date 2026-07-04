@@ -34,10 +34,10 @@ const services = [
 ];
 
 const stats = [
-  { value: "500+",  label: "Projects Completed" },
-  { value: "50+",   label: "Industry Partners" },
-  { value: "10K+",  label: "Students Trained" },
-  { value: "8+",    label: "Years Experience" },
+  { value: "150+",  label: "Events Conducted" },
+  { value: "50+",   label: "Enterprise Clients" },
+  { value: "100+",  label: "Solutions Delivered" },
+  { value: "15+",   label: "States Served" },
 ];
 
 const industries = [
@@ -54,7 +54,7 @@ const industries = [
 const whyUs = [
   { icon: CheckCircle, title: "End-to-End Solutions", desc: "From ideation and prototyping to deployment and training." },
   { icon: Users,       title: "Expert Team",          desc: "Engineers, researchers, and educators with deep domain expertise." },
-  { icon: Award,       title: "Proven Track Record",  desc: "180+ competition wins and 500+ successful industry projects." },
+  { icon: Award,       title: "Proven Track Record",  desc: "Podium finishes in national design and engineering contests." },
   { icon: Globe,       title: "Pan-India Presence",   desc: "Serving clients across industries from Coimbatore nationwide." },
 ];
 
@@ -62,12 +62,6 @@ const projects = [
   { title: "Autonomous Navigation Robot",  category: "Robotics",   image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", href: "/projects" },
   { title: "AI Vision Quality Inspection", category: "AI",          image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=600&h=400&fit=crop", href: "/projects" },
   { title: "Agricultural Drone System",    category: "Drone",       image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop", href: "/projects" },
-];
-
-const testimonials = [
-  { name: "Rajesh Kumar",   role: "Head of Engineering, AutoCorp",    quote: "TamizhTech delivered our factory automation project on time with exceptional quality. Their robotics team is world-class.", avatar: "R" },
-  { name: "Dr. Priya S.",   role: "Principal, STEM Academy",           quote: "The robotics lab setup transformed how our students approach engineering. The curriculum and support are outstanding.", avatar: "P" },
-  { name: "Arun Vijay",     role: "CTO, AgriSense Technologies",       quote: "Their drone technology team built our precision agriculture system that now operates across 200+ acres.", avatar: "A" },
 ];
 
 const galleryImages = [
@@ -81,7 +75,7 @@ const galleryImages = [
 
 const faqs = [
   { q: "What industries do you build automation solutions for?", a: "We primarily work with manufacturing, automotive, agriculture, defense, and education industries, designing custom autonomous machinery, robotic arms, IoT systems, and quality control vision AI models." },
-  { q: "Do you design custom competition robots?", a: "Yes, TamizhTech has a dedicated division that engineers custom combat robots, RC race cars, and student competition bots with a track record of over 180+ competitive wins." },
+  { q: "Do you design custom competition robots?", a: "Yes, TamizhTech has a dedicated division that engineers custom combat robots, RC race cars, and student competition platforms." },
   { q: "How can schools set up STEM tinkering labs?", a: "We provide complete turnkey STEM and robotics tinkering labs. This includes structural hardware setup, procurement of learning kits, curriculum alignment, and comprehensive teacher training." },
 ];
 
@@ -384,31 +378,7 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* ── 8. TESTIMONIALS SECTION ──────────────────────────── */}
-      <section className="section bg-subtle py-24 border-t border-border/30">
-        <div className="container px-6">
-          <AnimatedSection className="mb-16">
-            <SectionHeader
-              tag="Testimonials"
-              title="What our clients"
-              highlight="say"
-            />
-          </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <StaggerItem key={t.name}>
-                <TestimonialCard
-                  name={t.name}
-                  role={t.role}
-                  quote={t.quote}
-                  avatar={t.avatar}
-                />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
 
       {/* ── 9. FAQ SECTION (SECTION 9) ───────────────────────── */}
       <section className="section bg-white py-24 border-t border-border/30">

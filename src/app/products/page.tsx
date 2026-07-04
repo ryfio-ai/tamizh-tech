@@ -232,8 +232,8 @@ function ProductsContent() {
                       <h4 className="text-base font-bold text-text-primary uppercase tracking-tight mb-1 leading-snug">
                         {product.name}
                       </h4>
-                      <div className="text-accent font-extrabold text-sm mb-3">
-                        ₹{product.price.toLocaleString("en-IN")}
+                      <div className="text-accent font-bold text-xs uppercase tracking-wider mb-3">
+                        Pricing: Upon Request
                       </div>
                       <p className="text-text-muted text-[11px] font-medium leading-relaxed mb-4">
                         {product.specs}

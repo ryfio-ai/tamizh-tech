@@ -3,18 +3,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, notFound } from "next/navigation";
+import { useParams, notFound, useSearchParams } from "next/navigation";
 import { 
   Check, 
   Cpu, 
   FileText, 
-  Code, 
   Download, 
   ArrowLeft, 
   ChevronDown, 
-  Share2, 
-  Mail,
-  Copy,
   ChevronRight
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
@@ -27,7 +23,7 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const product = getProductBySlug(slug);
 
-  const [activeTab, setActiveTab] = useState<"specs" | "applications" | "manual" | "code">("specs");
+  const [activeTab, setActiveTab] = useState<"specs" | "applications">("specs");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [rfqForm, setRfqForm] = useState({
     name: "",
@@ -36,7 +32,6 @@ export default function ProductDetailPage() {
     qty: 1,
     notes: ""
   });
-  const [copied, setCopied] = useState(false);
   const [rfqSubmitted, setRfqSubmitted] = useState(false);
 
   if (!product) {
@@ -48,92 +43,15 @@ export default function ProductDetailPage() {
     .filter(p => p.category === product.category && p.slug !== product.slug)
     .slice(0, 3);
 
-  // Generate Arduino Code Sample based on category
-  const getArduinoCode = (category: string) => {
-    if (category.includes("Line")) {
-      return `/*
- * Tamizh Tech Robotics - Line Follower Arduino Sketch
- * PID-controlled line sensor feedback loop
- */
-int sensorPins[] = {A0, A1, A2, A3, A4, A5, A6, A7};
-int motorLeft = 9;
-int motorRight = 10;
-
-void setup() {
-  for(int i=0; i<8; i++) pinMode(sensorPins[i], INPUT);
-  pinMode(motorLeft, OUTPUT);
-  pinMode(motorRight, OUTPUT);
-}
-
-void loop() {
-  int error = 0;
-  for(int i=0; i<8; i++) {
-    error += analogRead(sensorPins[i]) * (i - 3.5);
-  }
-  // Basic proportional correction
-  int speedDiff = error * 0.15;
-  analogWrite(motorLeft, 150 + speedDiff);
-  analogWrite(motorRight, 150 - speedDiff);
-  delay(10);
-}`;
-    }
-    if (category.includes("Race") || category.includes("Soccer") || category.includes("War")) {
-      return `/*
- * Tamizh Tech Robotics - RC Control Arduino Sketch
- * Read Bluetooth/RF receiver PWM signals and drive motors
- */
-#define CH1 2
-#define CH2 3
-#define MOTOR_L_PWM 5
-#define MOTOR_R_PWM 6
-
-void setup() {
-  pinMode(CH1, INPUT);
-  pinMode(CH2, INPUT);
-  pinMode(MOTOR_L_PWM, OUTPUT);
-  pinMode(MOTOR_R_PWM, OUTPUT);
-}
-
-void loop() {
-  int ch1_val = pulseIn(CH1, HIGH);
-  int ch2_val = pulseIn(CH2, HIGH);
-  
-  int speed = map(ch2_val, 1000, 2000, -255, 255);
-  int turn = map(ch1_val, 1000, 2000, -127, 127);
-  
-  analogWrite(MOTOR_L_PWM, constrain(speed + turn, 0, 255));
-  analogWrite(MOTOR_R_PWM, constrain(speed - turn, 0, 255));
-  delay(20);
-}`;
-    }
-    return `/*
- * Tamizh Tech Robotics - Basic Hardware Driver
- * General purpose I/O and telemetry loop
- */
-void setup() {
-  Serial.begin(115200);
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.println("Tamizh Tech Hardware Initialization Success!");
-}
-
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(500);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
-  Serial.println("Telemetry status: OK");
-}`;
-  };
-
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(getArduinoCode(product.category));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const handleRfqSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setRfqSubmitted(true);
+  };
+
+  const handleDownloadRequest = (label: string) => {
+    const message = `Hello Tamizh Tech! I am requesting the ${label} for the product: ${product.name}. Please share the files.`;
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/918148045030?text=${encoded}`, "_blank");
   };
 
   // Structured schemas
@@ -236,8 +154,8 @@ void loop() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold uppercase tracking-tight text-text-primary mb-2 leading-none">
               {product.name}
             </h1>
-            <div className="text-2xl font-extrabold text-accent mb-6">
-              ₹{product.price.toLocaleString("en-IN")}
+            <div className="text-lg font-extrabold text-accent mb-6 uppercase tracking-wider">
+              Pricing: Upon Request
             </div>
             <p className="text-text-secondary text-base leading-relaxed mb-8">
               {product.description}
@@ -245,17 +163,17 @@ void loop() {
 
             <div className="flex flex-wrap gap-4 mb-8">
               <a
-                href={`https://wa.me/918148045030?text=Hi!%20I'm%20interested%20in%20purchasing%20the%20${encodeURIComponent(product.name)}.%20Please%20send%20payment%20and%20shipping%20info.`}
+                href={`https://wa.me/918148045030?text=Hi!%20I'm%20interested%20in%20purchasing%20the%20${encodeURIComponent(product.name)}.%20Please%20send%20commercial%20pricing%20info.`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Button variant="primary" size="lg" className="gap-2">
-                  <FaWhatsapp className="w-5 h-5" /> Buy via WhatsApp
+                  <FaWhatsapp className="w-5 h-5" /> Get Quote via WhatsApp
                 </Button>
               </a>
               <a href="#rfq-section">
                 <Button variant="secondary" size="lg">
-                  Request RFQ Quote
+                  Submit B2B RFQ
                 </Button>
               </a>
             </div>
@@ -268,7 +186,7 @@ void loop() {
               </div>
               <div>
                 <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Support</span>
-                <span className="text-sm font-bold text-text-primary">Free Technical Mentorship</span>
+                <span className="text-sm font-bold text-text-primary">Direct Technical Mentorship</span>
               </div>
             </div>
           </div>
@@ -276,7 +194,7 @@ void loop() {
 
         {/* Tabbed In-Depth Information */}
         <div className="border-b border-border mb-10 flex gap-6 overflow-x-auto no-scrollbar">
-          {(["specs", "applications", "manual", "code"] as const).map((tab) => (
+          {(["specs", "applications"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -287,9 +205,7 @@ void loop() {
               }`}
             >
               {tab === "specs" && "Technical Specifications"}
-              {tab === "applications" && "Applications & Use"}
-              {tab === "manual" && "Mock User Manual"}
-              {tab === "code" && "Arduino Code Block"}
+              {tab === "applications" && "Applications & Use Cases"}
             </button>
           ))}
         </div>
@@ -298,7 +214,7 @@ void loop() {
         <div className="mb-20 text-left">
           {activeTab === "specs" && (
             <div className="max-w-3xl">
-              <h3 className="text-xl font-bold uppercase mb-4 text-text-primary">Chassis & Power Specifications</h3>
+              <h3 className="text-xl font-bold uppercase mb-4 text-text-primary">Factual Product Specifications</h3>
               <ul className="space-y-3">
                 {product.detailedSpecs.map((spec, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-sm text-text-secondary leading-normal">
@@ -312,7 +228,7 @@ void loop() {
 
           {activeTab === "applications" && (
             <div className="max-w-3xl">
-              <h3 className="text-xl font-bold uppercase mb-4 text-text-primary">Industrial & Competition Uses</h3>
+              <h3 className="text-xl font-bold uppercase mb-4 text-text-primary">Industrial & Classroom Integration</h3>
               <ul className="space-y-3">
                 {product.applications.map((app, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-sm text-text-secondary leading-normal">
@@ -323,82 +239,48 @@ void loop() {
               </ul>
             </div>
           )}
-
-          {activeTab === "manual" && (
-            <div className="max-w-4xl p-6 bg-subtle border border-border rounded-xl">
-              <h3 className="text-lg font-bold uppercase mb-3 text-text-primary flex items-center gap-2">
-                <FileText className="w-5 h-5 text-accent" /> Tamizh Tech Instruction Manual (Mockup)
-              </h3>
-              <div className="prose prose-sm text-text-secondary">
-                <p className="mb-2"><strong>1. Power Warnings:</strong> Check battery polarization before plugging in. Always use correct voltage thresholds (e.g. 11.1V for race bots).</p>
-                <p className="mb-2"><strong>2. Receiver Mapping:</strong> Ensure receiver pins match microcontroller signals. Channel 1 directs steering, Channel 2 directs forward/reverse.</p>
-                <p><strong>3. Calibration:</strong> Reset sensors prior to operation on lines or arena tracks. Use auto-calibration routines where provided.</p>
-              </div>
-            </div>
-          )}
-
-          {activeTab === "code" && (
-            <div className="relative">
-              <button 
-                onClick={handleCopyCode}
-                className="absolute right-4 top-4 bg-white/90 hover:bg-white text-text-primary p-2 rounded-lg border border-border transition-colors flex items-center gap-1.5 text-xs font-bold cursor-pointer"
-              >
-                <Copy className="w-3.5 h-3.5" /> {copied ? "Copied!" : "Copy"}
-              </button>
-              <pre className="p-6 bg-text-primary text-subtle rounded-xl overflow-x-auto text-xs font-mono text-left max-h-[400px]">
-                {getArduinoCode(product.category)}
-              </pre>
-            </div>
-          )}
         </div>
 
-        {/* Download Resources (STEP, User manual placeholders) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          {product.downloads.map((dl, idx) => (
-            <a 
-              key={idx} 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); alert(`Downloading resource: ${dl.label}`); }}
-              className="p-5 bg-subtle border border-border rounded-xl hover:border-accent transition-all duration-300 flex items-center justify-between text-left group"
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-white rounded-lg border border-border text-accent">
-                  {dl.type === "pdf" && <FileText className="w-5 h-5" />}
-                  {dl.type === "code" && <Code className="w-5 h-5" />}
-                  {dl.type === "cad" && <Cpu className="w-5 h-5" />}
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-text-primary block uppercase">{dl.label}</span>
-                  <span className="text-[10px] font-bold text-text-muted uppercase">{dl.type.toUpperCase()} File Format</span>
-                </div>
+        {/* Download Resources Form Triggers */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          <button 
+            onClick={() => handleDownloadRequest("Assembly & User Manual")}
+            className="p-5 bg-subtle border border-border rounded-xl hover:border-accent transition-all duration-300 flex items-center justify-between text-left group cursor-pointer"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-white rounded-lg border border-border text-accent">
+                <FileText className="w-5 h-5" />
               </div>
-              <Download className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
-            </a>
-          ))}
-          {/* STEP file placeholder if not explicitly defined */}
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); alert("STEP File package downloaded."); }}
-            className="p-5 bg-subtle border border-border rounded-xl hover:border-accent transition-all duration-300 flex items-center justify-between text-left group"
+              <div>
+                <span className="text-xs font-bold text-text-primary block uppercase">Request User Manual</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase">PDF Document (Upon Request)</span>
+              </div>
+            </div>
+            <Download className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
+          </button>
+
+          <button 
+            onClick={() => handleDownloadRequest("3D CAD STEP Chassis File")}
+            className="p-5 bg-subtle border border-border rounded-xl hover:border-accent transition-all duration-300 flex items-center justify-between text-left group cursor-pointer"
           >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-white rounded-lg border border-border text-accent">
                 <Cpu className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs font-bold text-text-primary block uppercase">3D CAD Model (STEP)</span>
-                <span className="text-[10px] font-bold text-text-muted uppercase">CAD STEP File</span>
+                <span className="text-xs font-bold text-text-primary block uppercase">Request 3D CAD STEP File</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase">STEP CAD File (Upon Request)</span>
               </div>
             </div>
             <Download className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
-          </a>
+          </button>
         </div>
 
         {/* RFQ Section / Request Quote Form */}
         <div id="rfq-section" className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 bg-subtle border border-border rounded-3xl p-8 lg:p-12 text-left">
           <div>
-            <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">B2B Solutions</span>
-            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4 text-text-primary">Request B2B Quote & Custom Integration</h2>
+            <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">B2B Integration</span>
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4 text-text-primary">Request B2B Quote & Custom Pricing</h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-6">
               Setting up a robotics laboratory in your school, college, or university? Or do you need bulk supply for competition teams? Complete the request form and our logistics team will share customized pricing lists and tax invoices within 12 hours.
             </p>
@@ -422,7 +304,7 @@ void loop() {
             {rfqSubmitted ? (
               <div className="text-center py-12">
                 <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h4 className="text-lg font-bold uppercase text-text-primary">Quote Request Submitted</h4>
+                <h4 className="text-lg font-bold uppercase text-text-primary">RFQ Submitted Successfully</h4>
                 <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Our sales consultants will reach out shortly.</p>
               </div>
             ) : (
@@ -494,7 +376,7 @@ void loop() {
                   />
                 </div>
                 <Button type="submit" variant="primary" className="w-full justify-center py-3.5">
-                  Request RFQ Quote
+                  Submit RFQ Request
                 </Button>
               </form>
             )}
@@ -503,19 +385,19 @@ void loop() {
 
         {/* FAQs Section */}
         <div className="mb-20 text-left">
-          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight mb-8 text-text-primary">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight mb-8 text-text-primary">Product FAQ</h2>
           <div className="space-y-4 max-w-3xl">
             {product.faqs.map((faq, idx) => (
               <div key={idx} className="border border-border rounded-xl bg-subtle overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full px-6 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-border/20 transition-all animate-none"
+                  className="w-full px-6 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-border/20 transition-all"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform ${openFaq === idx ? "rotate-180" : ""}`} />
                 </button>
                 {openFaq === idx && (
-                  <div className="px-6 pb-4 pt-2 text-sm text-text-secondary border-t border-border/50 animate-none">
+                  <div className="px-6 pb-4 pt-2 text-sm text-text-secondary border-t border-border/50">
                     {faq.answer}
                   </div>
                 )}
@@ -561,8 +443,8 @@ void loop() {
       {/* Sticky Bottom WhatsApp CTA for Mobile */}
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-border p-4 flex md:hidden items-center justify-between z-40">
         <div>
-          <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Price</span>
-          <span className="text-sm font-extrabold text-accent">₹{product.price.toLocaleString("en-IN")}</span>
+          <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Pricing</span>
+          <span className="text-sm font-extrabold text-accent">Upon Request</span>
         </div>
         <a
           href={`https://wa.me/918148045030?text=Hello!%20I'm%20interested%20in%20${encodeURIComponent(product.name)}`}
