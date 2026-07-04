@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Search, Clock, User, Tag } from "lucide-react";
+import { ArrowRight, Search, Clock, User } from "lucide-react";
 import Link from "next/link";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 interface Article {
   slug: string;
@@ -75,176 +78,169 @@ export default function BlogPage() {
   const featuredArticle = articlesData[0];
 
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-primary selection:text-white min-h-screen">
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1200px]">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-20 space-y-6">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block">
-            Research & Insights
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-secondary leading-tight">
-            The Technical Logbook.
-          </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium">
-            Read engineering briefs, project writeups, and technical tutorials from our systems architects in Coimbatore.
-          </p>
-        </div>
+    <div>
+      {/* Hero */}
+      <PageHero
+        title="The Technical Logbook"
+        subtitle="Read engineering briefs, project writeups, and technical tutorials from our systems architects in Coimbatore."
+        breadcrumbActive="Blog"
+      />
 
-        {/* Featured Post */}
-        {featuredArticle && activeCategory === "All" && search === "" && (
-          <div className="mb-24 border border-border bg-bg-secondary rounded-2xl overflow-hidden grid lg:grid-cols-2 group hover:border-primary transition-colors duration-300">
-            {/* Image Banner */}
-            <div className="relative h-64 lg:h-full min-h-[300px] overflow-hidden bg-white">
-              <img 
-                src={featuredArticle.img} 
-                alt={featuredArticle.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            </div>
-
-            {/* Content Details */}
-            <div className="p-8 lg:p-12 flex flex-col justify-between space-y-8">
-              <div className="space-y-4">
-                <span className="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/10 border border-primary/15 px-2.5 py-1 rounded">
-                  Featured: {featuredArticle.category}
-                </span>
-                <h3 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-secondary uppercase leading-none pt-2">
-                  {featuredArticle.title}
-                </h3>
-                <p className="text-text-secondary text-sm font-medium leading-relaxed">
-                  {featuredArticle.summary}
-                </p>
+      <section className="section bg-white py-24">
+        <div className="container px-6">
+          {/* Featured Post */}
+          {featuredArticle && activeCategory === "All" && search === "" && (
+            <div className="mb-24 border border-border bg-subtle rounded-3xl overflow-hidden grid lg:grid-cols-2 group hover:border-accent/20 transition-all duration-300">
+              {/* Image Banner */}
+              <div className="relative h-64 lg:h-full min-h-[300px] overflow-hidden bg-subtle">
+                <img 
+                  src={featuredArticle.img} 
+                  alt={featuredArticle.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-101"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
 
-              <div className="flex items-center justify-between pt-6 border-t border-border/80">
-                <div className="flex gap-4 text-xs font-bold text-text-muted uppercase tracking-wider">
-                  <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {featuredArticle.author}</span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredArticle.readTime}</span>
-                </div>
-                
-                <Link href={`/blog/${featuredArticle.slug}`} className="text-xs font-bold text-primary flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                  Read Article <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Filter and Search Bar */}
-        <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-b border-border pb-8 mb-12">
-          
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 overflow-x-auto no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
-                  activeCategory === cat
-                    ? "bg-primary text-white"
-                    : "text-text-muted hover:text-secondary hover:bg-bg-secondary"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Search Input */}
-          <div className="relative w-full md:w-64">
-            <span className="absolute inset-y-0 left-3 flex items-center text-text-muted">
-              <Search className="w-4 h-4" />
-            </span>
-            <input 
-              type="text" placeholder="Search articles..."
-              className="w-full pl-9 pr-4 py-2 text-xs border border-border rounded-lg bg-bg-secondary focus:outline-none focus:border-primary font-medium"
-              value={search} onChange={e => setSearch(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          <AnimatePresence mode="popLayout">
-            {filteredArticles.map((art) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                key={art.slug}
-                className="border border-border bg-white rounded-2xl overflow-hidden flex flex-col justify-between group hover:border-primary transition-all duration-300"
-              >
-                {/* Visual Header */}
-                <div className="relative h-48 w-full overflow-hidden bg-bg-secondary">
-                  <img 
-                    src={art.img} 
-                    alt={art.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  <span className="absolute top-4 left-4 text-[9px] font-bold text-accent uppercase tracking-widest bg-accent/20 border border-accent/30 px-2 py-0.5 rounded">
-                    {art.category}
+              {/* Content Details */}
+              <div className="p-8 lg:p-12 flex flex-col justify-between space-y-8">
+                <div className="space-y-4">
+                  <span className="bg-accent/5 text-accent px-3 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase">
+                    Featured: {featuredArticle.category}
                   </span>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold text-text-primary uppercase leading-tight pt-2">
+                    {featuredArticle.title}
+                  </h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    {featuredArticle.summary}
+                  </p>
                 </div>
 
-                {/* Details */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
-                  <div className="space-y-3">
-                    <h4 className="text-lg font-bold tracking-tight text-secondary group-hover:text-primary transition-colors uppercase leading-tight">
-                      {art.title}
-                    </h4>
-                    <p className="text-text-secondary text-xs font-medium leading-relaxed">
-                      {art.summary}
-                    </p>
+                <div className="flex items-center justify-between pt-6 border-t border-border/80">
+                  <div className="flex gap-4 text-xs font-bold text-text-muted uppercase tracking-wider">
+                    <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5 text-accent" /> {featuredArticle.author}</span>
+                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-accent" /> {featuredArticle.readTime}</span>
                   </div>
+                  
+                  <Link href={`/blog/${featuredArticle.slug}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent group-hover:translate-x-1 transition-transform">
+                    Read Article <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
 
-                  <div className="flex items-center justify-between pt-6 border-t border-border/80">
-                    <div className="flex gap-3 text-[10px] font-bold text-text-muted uppercase tracking-wider">
-                      <span>{art.author}</span>
-                      <span>•</span>
-                      <span>{art.readTime}</span>
+          {/* Filter and Search Bar */}
+          <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center border-b border-border pb-8 mb-12">
+            {/* Categories */}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+                    activeCategory === cat
+                      ? "bg-accent text-white shadow-md shadow-accent/20"
+                      : "bg-subtle text-text-secondary hover:text-accent border border-border hover:border-accent"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full md:w-64">
+              <span className="absolute inset-y-0 left-3 flex items-center text-text-muted">
+                <Search className="w-4 h-4" />
+              </span>
+              <input 
+                type="text" placeholder="Search articles..."
+                className="w-full pl-9 pr-4 py-2.5 text-xs border border-border rounded-full bg-subtle focus:outline-none focus:border-accent font-medium transition-colors"
+                value={search} onChange={e => setSearch(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Articles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+            <AnimatePresence mode="popLayout">
+              {filteredArticles.map((art) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  key={art.slug}
+                >
+                  <Card className="p-0 overflow-hidden h-full flex flex-col justify-between hover:border-accent/20 hover:shadow-[0_12px_30px_rgba(37,99,235,0.08)]">
+                    <div>
+                      {/* Visual Header */}
+                      <div className="relative h-48 w-full overflow-hidden bg-subtle">
+                        <img 
+                          src={art.img} 
+                          alt={art.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                        <span className="absolute top-4 left-4 bg-white/95 px-3 py-1 rounded-full text-[10px] font-bold text-accent tracking-wide uppercase shadow-sm">
+                          {art.category}
+                        </span>
+                      </div>
+
+                      {/* Details */}
+                      <div className="p-6">
+                        <h4 className="text-lg font-bold text-text-primary uppercase leading-tight mb-2">
+                          {art.title}
+                        </h4>
+                        <p className="text-text-muted text-sm leading-relaxed mb-4">
+                          {art.summary}
+                        </p>
+                      </div>
                     </div>
 
-                    <Link href={`/blog/${art.slug}`} className="text-xs font-bold text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                      Read <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
+                    <div className="px-6 pb-6 pt-4 border-t border-border/60 flex items-center justify-between">
+                      <div className="flex gap-3 text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                        <span>{art.author}</span>
+                        <span>•</span>
+                        <span>{art.readTime}</span>
+                      </div>
 
-        {/* Newsletter Signup Panel */}
-        <div className="bg-bg-secondary border border-border p-12 lg:p-16 rounded-2xl flex flex-col lg:flex-row items-center gap-8 justify-between relative overflow-hidden">
-          <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
-          <div className="relative z-10 space-y-4 max-w-xl text-center lg:text-left">
-            <h3 className="text-3xl font-extrabold text-secondary tracking-tighter uppercase leading-none">
-              Stay calibrated.
-            </h3>
-            <p className="text-text-secondary font-medium leading-relaxed text-sm">
-              Get technical logs, new microcontroller syllabus guidelines, and prototype walkthroughs straight to your inbox monthly.
-            </p>
+                      <Link href={`/blog/${art.slug}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:translate-x-1 transition-transform">
+                        Read <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
-          <div className="relative z-10 w-full lg:w-fit shrink-0">
-            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
-              <input 
-                type="email" required placeholder="name@domain.com"
-                className="px-3.5 py-2.5 text-xs border border-border rounded-lg bg-white focus:outline-none focus:border-primary font-medium w-full lg:w-64"
-              />
-              <button type="submit" className="btn-primary py-2.5 px-6 text-xs font-semibold rounded-lg shrink-0">
-                Subscribe
-              </button>
-            </form>
+
+          {/* Newsletter Signup Panel */}
+          <div className="bg-subtle border border-border p-12 lg:p-16 rounded-3xl flex flex-col lg:flex-row items-center gap-8 justify-between relative overflow-hidden">
+            <div className="absolute inset-0 hero-grid opacity-30 pointer-events-none" />
+            <div className="relative z-10 space-y-4 max-w-xl text-center lg:text-left">
+              <h3 className="text-3xl font-extrabold text-text-primary tracking-tight leading-none">
+                Stay calibrated.
+              </h3>
+              <p className="text-text-muted leading-relaxed text-sm">
+                Get technical logs, new microcontroller syllabus guidelines, and prototype walkthroughs straight to your inbox monthly.
+              </p>
+            </div>
+            <div className="relative z-10 w-full lg:w-fit shrink-0">
+              <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+                <input 
+                  type="email" required placeholder="name@domain.com"
+                  className="px-4 py-2.5 text-xs border border-border rounded-full bg-white focus:outline-none focus:border-accent font-medium w-full lg:w-64 transition-colors"
+                />
+                <Button type="submit" variant="primary" size="sm" className="shrink-0">
+                  Subscribe
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
-
-      </div>
+      </section>
     </div>
   );
 }

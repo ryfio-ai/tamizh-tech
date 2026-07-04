@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Bot, Cpu, Zap, Globe, Microscope, ShieldCheck, MoveRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 const categories = ["All", "Student Projects", "Industrial Projects", "Research", "AI", "Robotics", "Drone", "IoT"];
 
@@ -87,116 +91,116 @@ export default function ProjectsPage() {
     : projectsData.filter(proj => proj.category.includes(activeCategory));
 
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-primary selection:text-white min-h-screen">
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1200px]">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-20 space-y-6">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block">
-            R&D Archives
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-secondary leading-tight">
-            Advanced Hardware & <br /> AI Deployments.
-          </h2>
-          <p className="text-lg text-text-secondary leading-relaxed max-w-2xl font-medium">
-            Discover our catalog of on-site industrial setups, laboratory research models, and creative student prototype builds.
-          </p>
-        </div>
+    <div>
+      {/* Hero */}
+      <PageHero
+        title="Advanced Hardware & AI Deployments"
+        subtitle="Discover our catalog of on-site industrial setups, laboratory research models, and creative student prototype builds."
+        breadcrumbActive="Projects"
+      />
 
-        {/* Filter Navigation */}
-        <div className="flex border-b border-border mb-12 overflow-x-auto no-scrollbar gap-2 pb-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all ${
-                activeCategory === cat
-                  ? "bg-primary text-white"
-                  : "text-text-muted hover:text-secondary hover:bg-bg-secondary"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Projects Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((proj) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                key={proj.title}
-                className="border border-border bg-white rounded-2xl overflow-hidden flex flex-col group hover:border-primary transition-all duration-300 shadow-sm"
+      <div className="section bg-white py-24">
+        <div className="container px-6">
+          {/* Filter Navigation */}
+          <div className="flex justify-center flex-wrap gap-2 mb-12 border-b border-border/65 pb-6">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer ${
+                  activeCategory === cat
+                    ? "bg-accent text-white shadow-md shadow-accent/20"
+                    : "bg-subtle text-text-secondary hover:text-accent border border-border hover:border-accent"
+                }`}
               >
-                {/* Visual Banner */}
-                <div className="relative h-48 w-full overflow-hidden bg-bg-secondary">
-                  <img
-                    src={proj.img}
-                    alt={proj.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
+                {cat}
+              </button>
+            ))}
+          </div>
 
-                {/* Details */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-bold tracking-tight text-secondary uppercase leading-tight">
-                      {proj.title}
-                    </h3>
-                    <p className="text-text-secondary text-xs font-medium leading-relaxed">
-                      {proj.desc}
-                    </p>
-                  </div>
-
-                  {/* Tech stack tags */}
-                  <div className="space-y-4 pt-4 border-t border-border/80">
-                    <div className="flex flex-wrap gap-1.5">
-                      {proj.tech.map((t, ti) => (
-                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider text-text-secondary bg-bg-secondary px-2 py-0.5 rounded border border-border">
-                          {t}
+          {/* Projects Grid */}
+          <motion.div 
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((proj) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  key={proj.title}
+                >
+                  <Card className="p-0 overflow-hidden h-full flex flex-col justify-between hover:border-accent/20 hover:shadow-[0_12px_30px_rgba(37,99,235,0.08)]">
+                    <div>
+                      {/* Visual Banner */}
+                      <div className="relative h-48 w-full overflow-hidden bg-subtle">
+                        <img
+                          src={proj.img}
+                          alt={proj.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                        <span className="absolute top-4 left-4 bg-white/95 px-3 py-1 rounded-full text-[10px] font-bold text-accent tracking-wide uppercase shadow-sm">
+                          {proj.category[0]}
                         </span>
-                      ))}
+                      </div>
+
+                      {/* Details */}
+                      <div className="p-6">
+                        <h3 className="text-lg font-bold text-text-primary mb-2 leading-tight uppercase">
+                          {proj.title}
+                        </h3>
+                        <p className="text-text-muted text-sm leading-relaxed mb-4">
+                          {proj.desc}
+                        </p>
+                      </div>
                     </div>
 
-                    {/* Small Gallery Images */}
-                    {proj.gallery && proj.gallery.length > 0 && (
-                      <div className="flex gap-2">
-                        {proj.gallery.map((g, gi) => (
-                          <div key={gi} className="w-10 h-10 rounded border border-border overflow-hidden bg-bg-secondary">
-                            <img src={g} alt="Gallery thumbnail" className="w-full h-full object-cover" />
-                          </div>
+                    <div className="px-6 pb-6 pt-4 border-t border-border/60">
+                      {/* Tech stack tags */}
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {proj.tech.map((t, ti) => (
+                          <span key={ti} className="text-[9px] font-bold uppercase tracking-wider text-text-secondary bg-subtle px-2 py-0.5 rounded border border-border">
+                            {t}
+                          </span>
                         ))}
                       </div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
 
-        {/* Custom Project Callout */}
-        <div className="bg-bg-secondary border border-border p-12 lg:p-16 rounded-2xl text-center max-w-4xl mx-auto">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-secondary tracking-tighter uppercase mb-4">
-            Have a custom automation outline?
-          </h3>
-          <p className="text-text-secondary text-sm max-w-xl mx-auto font-medium leading-relaxed mb-8">
-            Collaborate with our R&D hub in Coimbatore. We fabricate custom mechanical setups and design dedicated embedded controllers under NDA.
-          </p>
-          <a href="/contact" className="btn-primary py-3 px-8 text-xs font-semibold rounded-lg inline-flex gap-2">
-            Schedule Integration Audit <ArrowRight className="w-4 h-4" />
-          </a>
+                      {/* Small Gallery Images */}
+                      {proj.gallery && proj.gallery.length > 0 && (
+                        <div className="flex gap-2">
+                          {proj.gallery.map((g, gi) => (
+                            <div key={gi} className="w-10 h-10 rounded border border-border overflow-hidden bg-subtle">
+                              <img src={g} alt="Gallery thumbnail" className="w-full h-full object-cover" />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Custom Project Callout */}
+          <div className="bg-subtle border border-border p-12 lg:p-16 rounded-3xl text-center max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight mb-4">
+              Have a custom automation outline?
+            </h3>
+            <p className="text-text-muted text-sm max-w-xl mx-auto leading-relaxed mb-8">
+              Collaborate with our R&D hub in Coimbatore. We fabricate custom mechanical setups and design dedicated embedded controllers under NDA.
+            </p>
+            <Link href="/contact">
+              <Button variant="primary">
+                Schedule Integration Audit <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
+          </div>
         </div>
-
       </div>
     </div>
   );

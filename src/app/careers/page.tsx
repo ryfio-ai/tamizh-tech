@@ -11,104 +11,130 @@ import {
   Settings,
   Users
 } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 export default function CareersPage() {
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8]">
-      <div className="container mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-24 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4 text-left">
-          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-8 font-sans">Join Our Team</h1>
-          <h2 className="text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
-            Careers
-          </h2>
-          <div className="text-base text-[#9AA1AC] leading-relaxed max-w-3xl font-bold uppercase tracking-tight mt-10">
-            <p className="mb-4">"Let's work Together...</p>
-            <p>We create and build value for our customers with our innovative Products and Solutions. We offer you the chance to do work that adds up to something meaningful. The opportunity to challenge yourself and learn new skills. That's the kind of work you can expect at Tamizh Tech Robotics Company. Join us."</p>
-          </div>
-        </div>
+    <div>
+      {/* Hero */}
+      <PageHero
+        title="Careers at TamizhTech"
+        subtitle="We create and build value for our customers with our innovative products and solutions. We offer you the chance to do work that adds up to something meaningful."
+        breadcrumbActive="Careers"
+      />
 
-        {/* Core Values Section */}
-        <div className="mb-32 text-left">
-           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-6">Our Core Values</h2>
-           <p className="text-[#858E9B] font-bold uppercase tracking-tight mb-12 max-w-2xl opacity-80">
-             The principles that guide our work and define our commitment to excellence in engineering and mentoring.
-           </p>
+      <section className="section bg-white py-24">
+        <div className="container px-6">
+          
+          {/* Core Values Section */}
+          <div className="mb-32">
+            <AnimatedSection className="mb-12">
+              <SectionHeader
+                tag="Our Culture"
+                title="Our Core"
+                highlight="Values"
+                subtitle="The principles that guide our work and define our commitment to excellence in engineering and mentoring."
+              />
+            </AnimatedSection>
 
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Value 1 */}
-              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
-                <Zap className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Excellence</h3>
-                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
-                  We pursue perfection in every aspect of our work, from precision engineering to cost optimization.
-                </p>
-              </div>
+              <AnimatedSection>
+                <Card className="p-10 lg:p-12 hover:border-accent/20">
+                  <Zap className="w-12 h-12 text-accent mb-6" />
+                  <h3 className="text-xl font-bold text-text-primary uppercase mb-4">Excellence</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    We pursue perfection in every aspect of our work, from precision engineering to cost optimization.
+                  </p>
+                </Card>
+              </AnimatedSection>
 
               {/* Value 2 */}
-              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
-                <Brain className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Innovation</h3>
-                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
-                  We embrace cutting-edge technology and creative solutions to revolutionize K-12 STEM education.
-                </p>
-              </div>
+              <AnimatedSection delay={0.1}>
+                <Card className="p-10 lg:p-12 hover:border-accent/20">
+                  <Brain className="w-12 h-12 text-accent mb-6" />
+                  <h3 className="text-xl font-bold text-text-primary uppercase mb-4">Innovation</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    We embrace cutting-edge technology and creative solutions to revolutionize K-12 STEM education.
+                  </p>
+                </Card>
+              </AnimatedSection>
 
               {/* Value 3 */}
-              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
-                <Layers className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Collaboration</h3>
-                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
-                  We believe in the power of teamwork and cross-functional partnerships to build India's largest robotics ecosystem.
-                </p>
-              </div>
+              <AnimatedSection delay={0.2}>
+                <Card className="p-10 lg:p-12 hover:border-accent/20">
+                  <Layers className="w-12 h-12 text-accent mb-6" />
+                  <h3 className="text-xl font-bold text-text-primary uppercase mb-4">Collaboration</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    We believe in the power of teamwork and cross-functional partnerships to build India's largest robotics ecosystem.
+                  </p>
+                </Card>
+              </AnimatedSection>
 
               {/* Value 4 */}
-              <div className="bg-[#11141A] border border-[#232833] p-10 lg:p-12 rounded-2xl group hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.06)] transition-all">
-                <Globe className="w-12 h-12 text-[#FF4D2D] mb-8 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4 group-hover:text-[#FF4D2D] transition-colors">Global Impact</h3>
-                <p className="text-[#9AA1AC] font-bold uppercase tracking-tight text-sm leading-relaxed opacity-70">
-                  We build hardware and software solutions that make a meaningful difference globally, representing domestic heritage.
-                </p>
-              </div>
-           </div>
-        </div>
+              <AnimatedSection delay={0.3}>
+                <Card className="p-10 lg:p-12 hover:border-accent/20">
+                  <Globe className="w-12 h-12 text-accent mb-6" />
+                  <h3 className="text-xl font-bold text-text-primary uppercase mb-4">Global Impact</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    We build hardware and software solutions that make a meaningful difference globally, representing domestic heritage.
+                  </p>
+                </Card>
+              </AnimatedSection>
+            </div>
+          </div>
 
-        {/* Key Differentiators */}
-        <div className="mb-32 text-center">
-           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-12">Key Differentiators</h2>
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
-                 <School className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
-                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Learning Focused</h4>
-              </div>
-              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
-                 <Users className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
-                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Collaborative environment</h4>
-              </div>
-              <div className="bg-[#11141A] border border-[#232833] p-10 rounded-2xl hover:border-[#FF4D2D] transition-all">
-                 <Settings className="w-12 h-12 text-[#FF4D2D] mx-auto mb-6" />
-                 <h4 className="text-lg font-heading font-black text-[#F5F6F8] uppercase tracking-widest">Active Problem-solvers</h4>
-              </div>
-           </div>
-        </div>
+          {/* Key Differentiators */}
+          <div className="mb-32 text-center">
+            <AnimatedSection className="mb-12">
+              <SectionHeader
+                tag="Why Us"
+                title="Key"
+                highlight="Differentiators"
+              />
+            </AnimatedSection>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <AnimatedSection>
+                <Card className="p-10 hover:border-accent/15">
+                  <School className="w-12 h-12 text-accent mx-auto mb-6" />
+                  <h4 className="text-base font-bold text-text-primary uppercase tracking-wide">Learning Focused</h4>
+                </Card>
+              </AnimatedSection>
+              <AnimatedSection delay={0.1}>
+                <Card className="p-10 hover:border-accent/15">
+                  <Users className="w-12 h-12 text-accent mx-auto mb-6" />
+                  <h4 className="text-base font-bold text-text-primary uppercase tracking-wide">Collaborative environment</h4>
+                </Card>
+              </AnimatedSection>
+              <AnimatedSection delay={0.2}>
+                <Card className="p-10 hover:border-accent/15">
+                  <Settings className="w-12 h-12 text-accent mx-auto mb-6" />
+                  <h4 className="text-base font-bold text-text-primary uppercase tracking-wide">Active Problem-solvers</h4>
+                </Card>
+              </AnimatedSection>
+            </div>
+          </div>
 
-        {/* Contact CTA */}
-        <div className="bg-[#11141A] border border-[#232833] p-16 lg:p-24 rounded-2xl relative overflow-hidden shadow-2xl">
-           <div className="relative z-10 text-center">
-             <h3 className="text-2xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-8 leading-[1.2] max-w-4xl mx-auto">
-                If you're interested in joining our growing team, drop your resume to office@tamizhtech.in
-             </h3>
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
-               <a href="mailto:office@tamizhtech.in" className="btn-primary px-12 py-6 inline-flex items-center gap-4 shadow-xl text-sm font-bold tracking-widest">
-                 <Mail className="w-5 h-5" /> EMAIL RESUME
-               </a>
-             </div>
-           </div>
-        </div>
+          {/* Contact CTA */}
+          <div className="bg-subtle border border-border p-12 lg:p-20 rounded-3xl text-center max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-6 leading-tight max-w-2xl mx-auto">
+              If you're interested in joining our growing team, drop your resume to office@tamizhtech.in
+            </h3>
+            <div className="flex justify-center mt-8">
+              <a href="mailto:office@tamizhtech.in">
+                <Button variant="primary" size="lg" className="gap-2.5">
+                  <Mail className="w-5 h-5" /> Email Resume
+                </Button>
+              </a>
+            </div>
+          </div>
 
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

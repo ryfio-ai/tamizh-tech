@@ -1,139 +1,181 @@
-import type { Metadata } from "next";
-import { ArrowRight, MoveRight, CheckCircle2, Factory, Bot, Cpu, BarChart3, Settings, Shield, Laptop, Rocket, Globe, Database, Camera, LayoutGrid, Microscope, Smartphone, Layers, Server, Code2, Workflow } from "lucide-react";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Bot, Brain, Cpu, Network, Factory, Zap, FlaskConical, GraduationCap, Briefcase, Settings } from "lucide-react";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { PageHero } from "@/components/ui/PageHero";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Engineering Services | Robotics & Software | Tamizh Tech Robotics Company",
-  description: "Specialized B2B engineering services including industrial automation integration, enterprise software development, and precision R&D prototyping.",
+const services = [
+  {
+    id: "robotics",
+    icon: Bot,
+    title: "Robotics",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
+    desc: "We design and build custom robotic systems for industrial, educational, and research applications.",
+    features: ["Custom robot design & fabrication", "Autonomous navigation systems", "Competition bots", "Robotic arms & manipulators"],
+    color: "blue",
+  },
+  {
+    id: "ai",
+    icon: Brain,
+    title: "Artificial Intelligence",
+    image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=600&h=400&fit=crop",
+    desc: "From machine learning models to computer vision — we build intelligent systems that see and think.",
+    features: ["Computer vision & image processing", "Machine learning & deep learning", "Natural language processing", "Predictive analytics"],
+    color: "purple",
+  },
+  {
+    id: "drone",
+    icon: Zap,
+    title: "Drone Technology",
+    image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop",
+    desc: "UAV design, control systems, and payload integration for agriculture, surveillance, and industrial use.",
+    features: ["Custom UAV design & fabrication", "Autonomous flight control", "Agricultural & inspection drones", "Payload integration"],
+    color: "sky",
+  },
+  {
+    id: "iot",
+    icon: Network,
+    title: "IoT Solutions",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+    desc: "Connected ecosystems that bridge the physical and digital world through smart sensor networks.",
+    features: ["Sensor network design", "Cloud connectivity & dashboards", "Real-time monitoring", "Smart environment solutions"],
+    color: "teal",
+  },
+  {
+    id: "embedded",
+    icon: Cpu,
+    title: "Embedded Systems",
+    image: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=600&h=400&fit=crop",
+    desc: "Low-level firmware and hardware design for microcontrollers, FPGAs, and real-time systems.",
+    features: ["Microcontroller programming", "PCB design & hardware", "Firmware & RTOS development", "Protocol integration (CAN, SPI, I2C)"],
+    color: "orange",
+  },
+  {
+    id: "automation",
+    icon: Factory,
+    title: "Industrial Automation",
+    image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=400&fit=crop",
+    desc: "End-to-end factory automation solutions — from PLCs and SCADA to fully autonomous production lines.",
+    features: ["PLC & SCADA programming", "Conveyor & material handling", "Vision-based quality control", "Process optimization"],
+    color: "red",
+  },
+  {
+    id: "stem",
+    icon: FlaskConical,
+    title: "STEM Labs",
+    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
+    desc: "Turnkey STEM, Robotics, and AI laboratory setup for schools and colleges — hardware, curriculum, and training.",
+    features: ["Lab design & equipment supply", "Curriculum & teaching guides", "Teacher training programs", "Ongoing support & maintenance"],
+    color: "green",
+  },
+  {
+    id: "research",
+    icon: Settings,
+    title: "Research & Development",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+    desc: "Collaborative R&D for product innovation, patent development, and applied engineering research.",
+    features: ["Product ideation & prototyping", "Technology feasibility studies", "Patent support", "Academic research collaboration"],
+    color: "indigo",
+  },
+  {
+    id: "training",
+    icon: GraduationCap,
+    title: "Corporate Training",
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop",
+    desc: "Customized technology training programs for engineering teams and corporate professionals.",
+    features: ["Robotics & automation workshops", "AI & ML bootcamps", "Hands-on project-based learning", "Certification programs"],
+    color: "yellow",
+  },
+  {
+    id: "consulting",
+    icon: Briefcase,
+    title: "Consulting",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
+    desc: "Expert technology consulting for startups, enterprises, and research organizations.",
+    features: ["Technology strategy", "System architecture design", "Vendor evaluation", "Project management support"],
+    color: "pink",
+  },
+];
+
+const colorBadge: Record<string, string> = {
+  blue: "bg-accent/5 text-accent", purple: "bg-accent/5 text-accent",
+  sky: "bg-accent/5 text-accent", teal: "bg-accent/5 text-accent",
+  orange: "bg-accent/5 text-accent", red: "bg-accent/5 text-accent",
+  green: "bg-accent/5 text-accent", indigo: "bg-accent/5 text-accent",
+  yellow: "bg-accent/5 text-accent", pink: "bg-accent/5 text-accent",
 };
-
-const roboticsServices = [
-  { 
-    icon: <Bot className="w-10 h-10" />, 
-    title: "Industrial Systems Integration", 
-    desc: "End-to-end deployment of multi-axis robotic cells and synchronized PLC-controlled linear actuators for high-volume manufacturing.", 
-    detail: "Standardizing floor operations with global safety and OEE benchmarks." 
-  },
-  { 
-    icon: <Cpu className="w-10 h-10" />, 
-    title: "Precision R&D & Prototyping", 
-    desc: "Rapid technical prototyping using industrial 3D printing, CNC machining, and multi-layer PCB fabrication for specialized hardware PoCs.", 
-    detail: "From schematic design to high-fidelity mechanical assemblies." 
-  },
-  { 
-    icon: <Workflow className="w-10 h-10" />, 
-    title: "Automation Maintenance & Support", 
-    desc: "Dedicated technical support and preventive maintenance infrastructure across 15+ states to ensure zero downtime for installed systems.", 
-    detail: "Strategic on-ground response for industrial clusters." 
-  },
-];
-
-const softwareServices = [
-  { 
-    icon: <Code2 className="w-10 h-10" />, 
-    title: "Enterprise Software Engineering", 
-    desc: "Full-stack development of mission-critical web applications, operational dashboards, and complex digital ecosystems for manufacturers.", 
-    detail: "Building scalable, secure, and API-first business architectures." 
-  },
-  { 
-    icon: <Smartphone className="w-10 h-10" />, 
-    title: "B2B Mobile Ecosystems", 
-    desc: "Custom iOS and Android application development for shop-floor management, real-time inventory tracking, and remote system control.", 
-    detail: "Extending industrial operations to secure mobile platforms." 
-  },
-  { 
-    icon: <Camera className="w-10 h-10" />, 
-    title: "AI Vision & Monitoring", 
-    desc: "Integration of deep learning vision models for automated quality inspection, defect detection, and real-time safety monitoring.", 
-    detail: "Deploying high-accuracy neural processing to the industrial edge." 
-  },
-];
 
 export default function ServicesPage() {
   return (
-    <div className="bg-white pt-32 pb-24 selection:bg-[#FF6B00] selection:text-white min-h-screen text-[#111111]">
-      <div className="container mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-32 border-l-4 border-[#FF6B00] pl-6 md:pl-10 py-4 text-left">
-          <h1 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-8 font-sans">Engineering Services</h1>
-          <h2 className="text-6xl md:text-7xl font-black text-[#111111] tracking-tighter leading-[0.95] uppercase">
-            Technical <br /> Capabilities. <br /> Industrial <br /> Outcomes.
-          </h2>
-          <p className="text-base sm:text-lg text-gray-500 leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-10">
-            Delivering high-precision engineering and digital transformation services for global institutions and industrial leaders.
-          </p>
-        </div>
+    <div>
+      {/* Hero */}
+      <PageHero
+        title="Complete technology solutions"
+        subtitle="10 specialized service areas covering every dimension of modern robotics and AI technology."
+        breadcrumbActive="Services"
+      />
 
-        {/* Robotics Section */}
-        <div className="mb-40 text-left">
-           <div className="flex items-center gap-6 mb-16 border-b border-[#E5E5E5] pb-6">
-              <h3 className="text-3xl font-black text-[#111111] tracking-tighter uppercase shrink-0">Robotics & Hardware</h3>
-              <div className="flex-1 h-[2px] bg-[#FF6B00]/10"></div>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {roboticsServices.map((s) => (
-                <div key={s.title} className="bg-white border border-[#E5E5E5] p-10 lg:p-14 flex flex-col rounded-2xl group hover:border-[#FF6B00] hover:shadow-2xl transition-all h-full">
-                   <div className="w-16 h-16 bg-[#FAFAFA] border border-[#E5E5E5] rounded-2xl flex items-center justify-center text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-500 mb-10">
-                      {s.icon}
-                   </div>
-                   <h4 className="text-2xl font-black text-[#111111] mb-6 tracking-tighter uppercase leading-none">{s.title}</h4>
-                   <p className="text-sm text-gray-500 leading-relaxed mb-10 font-bold uppercase tracking-tight opacity-70 flex-grow">{s.desc}</p>
-                   <div className="pt-8 border-t border-[#F0F0F0] mt-auto">
-                      <p className="text-[10px] font-black text-[#FF6B00] uppercase tracking-widest leading-relaxed">Scope: {s.detail}</p>
-                   </div>
-                </div>
-              ))}
-           </div>
+      {/* Services Grid */}
+      <section className="section bg-white py-24">
+        <div className="container px-6">
+          <div className="space-y-12">
+            {services.map((svc, i) => {
+              const Icon = svc.icon;
+              return (
+                <AnimatedSection key={svc.id} delay={i * 0.05}>
+                  <div id={svc.id}>
+                    <Card className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0 overflow-hidden p-0 hover:border-accent/10 hover:shadow-[0_12px_30px_rgba(37,99,235,0.06)]`}>
+                      <div className="relative lg:w-2/5 aspect-video lg:aspect-auto bg-subtle">
+                        <Image src={svc.image} alt={svc.title} fill className="object-cover" />
+                      </div>
+                      <div className="flex-1 p-8 lg:p-12">
+                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${colorBadge[svc.color]} mb-4`}>
+                          <Icon className="w-4 h-4" />
+                          <span className="text-xs font-bold uppercase tracking-wide">{svc.title}</span>
+                        </div>
+                        <h2 className="text-2xl font-bold text-text-primary mb-3">{svc.title}</h2>
+                        <p className="text-text-muted mb-6 leading-relaxed">{svc.desc}</p>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                          {svc.features.map((f) => (
+                            <li key={f} className="flex items-center gap-2 text-sm text-text-secondary">
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                        <Link href="/contact">
+                          <Button variant="primary" size="sm">
+                            Get Started <ArrowRight className="w-4 h-4 ml-1.5" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </Card>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
+      </section>
 
-        {/* Software Section */}
-        <div className="mb-40 text-left">
-           <div className="flex items-center gap-6 mb-16 border-b border-[#E5E5E5] pb-6">
-              <h3 className="text-3xl font-black text-[#111111] tracking-tighter uppercase shrink-0">Software & Digital</h3>
-              <div className="flex-1 h-[2px] bg-[#FF6B00]/10"></div>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {softwareServices.map((s) => (
-                <div key={s.title} className="bg-[#FAFAFA] border border-[#E5E5E5] p-10 lg:p-14 flex flex-col rounded-2xl group hover:border-[#FF6B00] hover:shadow-2xl transition-all h-full">
-                   <div className="flex flex-col h-full">
-                     <div className="w-16 h-16 bg-white border border-[#E5E5E5] rounded-2xl flex items-center justify-center text-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:text-white transition-all duration-500 mb-10">
-                        {s.icon}
-                     </div>
-                     <h4 className="text-2xl font-black text-[#111111] mb-6 tracking-tighter uppercase leading-none">{s.title}</h4>
-                     <p className="text-sm text-gray-500 leading-relaxed mb-10 font-bold uppercase tracking-tight flex-grow">{s.desc}</p>
-                     <div className="pt-8 border-t border-[#E5E5E5] mt-auto">
-                        <p className="text-[10px] font-black text-[#FF6B00] uppercase tracking-widest leading-relaxed">Vertical: {s.detail}</p>
-                     </div>
-                   </div>
-                </div>
-              ))}
-           </div>
+      {/* CTA */}
+      <section className="section bg-subtle py-20 border-t border-border/30">
+        <div className="container px-6 text-center">
+          <AnimatedSection className="max-w-md mx-auto">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-4">Need a custom solution?</h2>
+            <p className="text-text-muted mb-8 leading-relaxed">Every project is unique. Let&apos;s discuss your requirements.</p>
+            <Link href="/contact">
+              <Button variant="primary">
+                Contact Our Team <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
+          </AnimatedSection>
         </div>
-
-        {/* Final CTA */}
-        <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-20 text-center max-w-5xl mx-auto rounded-2xl shadow-sm relative overflow-hidden">
-           <div className="relative z-10">
-             <h4 className="text-[10px] font-black text-[#FF6B00] uppercase tracking-[0.6em] mb-8 font-sans">Strategic Partnership</h4>
-             <h2 className="text-5xl font-black text-[#111111] tracking-tighter mb-10 uppercase leading-[0.95]">Request a <br /> Technical Consultation.</h2>
-             <p className="text-gray-500 leading-relaxed font-bold mb-12 uppercase text-xs tracking-widest max-w-2xl mx-auto">Discuss your engineering challenges with our multidisciplinary team of robotics and software architects. We provide comprehensive technical audits and on-ground feasibility studies.</p>
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Link href="/contact" className="btn-primary py-6 px-12 order-1 sm:order-2 shadow-xl">SCHEDULE AUDIT</Link>
-                <Link href="/contact" className="text-[10px] font-black text-[#FF6B00] hover:text-[#111111] transition-all uppercase tracking-widest flex items-center gap-4 pb-1 order-2 sm:order-1 font-sans">
-                  EXPLORE DEPLOYMENTS <MoveRight className="w-4 h-4" />
-                </Link>
-             </div>
-           </div>
-        </div>
-
-      </div>
+      </section>
     </div>
   );
-}
-
-// Helper to clone icons with custom classes
-function cloneIcon(icon: any, className: string) {
-  return <icon.type {...icon.props} className={className} />;
 }

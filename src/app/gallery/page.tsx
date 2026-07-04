@@ -1,9 +1,12 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 "use client";
+
 import React from "react";
-import { ParallaxScrollSecond } from "@/components/ui/parallax-scroll";
-import { MoveRight, Camera, Cpu, Zap, Layers, Globe } from "lucide-react";
+import { Layers, Zap, Globe, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { PageHero } from "@/components/ui/PageHero";
+import { GalleryGrid } from "@/components/ui/GalleryGrid";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/button";
 
 const galleryImages = [
   "/gallery/1.JPEG",
@@ -65,66 +68,70 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <div className="bg-[#0A0C10] pt-32 pb-24 selection:bg-[#FF4D2D] selection:text-white min-h-screen text-[#F5F6F8]">
-      <div className="container mx-auto px-6">
-        
-        {/* Header Section */}
-        <div className="max-w-4xl mb-24 border-l-4 border-[#FF4D2D] pl-6 md:pl-10 py-4 text-left">
-          <h1 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.6em] mb-8 font-sans">Project Archive</h1>
-          <h2 className="text-5xl md:text-7xl font-heading font-black text-[#F5F6F8] tracking-tighter leading-[0.95] uppercase">
-            Ecosystem <br /> Gallery.
-          </h2>
-          <p className="text-base sm:text-lg text-[#9AA1AC] leading-relaxed max-w-2xl font-bold uppercase tracking-tight mt-10">
-            A visual documentation of specialized robotics deployments, technical R&D milestones, workshops, and student competitive tracks across India.
-          </p>
-        </div>
+    <div>
+      {/* Hero */}
+      <PageHero
+        title="Ecosystem Gallery"
+        subtitle="A visual documentation of specialized robotics deployments, technical R&D milestones, workshops, and student competitive tracks across India."
+        breadcrumbActive="Gallery"
+      />
 
-        {/* Parallax Gallery Grid */}
-        <div className="bg-[#11141A] border border-[#232833] py-20 rounded-2xl relative overflow-hidden mb-40 shadow-sm">
-           <div className="absolute top-0 right-0 p-8 opacity-[0.01] pointer-events-none">
-             <Camera className="w-64 h-64 text-[#F5F6F8]" />
-           </div>
-           <div className="container mx-auto px-6 mb-16 relative z-10 text-center lg:text-left">
-              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[#FF4D2D] flex items-center gap-4 justify-center lg:justify-start">
-                <span className="w-8 h-[2px] bg-[#FF4D2D]"></span> TECHNICAL & COMMUNITY DEPLOYMENTS
+      <section className="section bg-white py-24">
+        <div className="container px-6">
+          {/* Gallery Grid */}
+          <div className="mb-24">
+            <GalleryGrid images={galleryImages} />
+          </div>
+
+          {/* Cards section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-border pt-20">
+            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
+              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+                <Layers className="w-6 h-6" />
+              </div>
+              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">Hardware Evolution</h4>
+              <p className="text-sm text-text-muted leading-relaxed">
+                Visual mapping of robotic chassis development, iterative structural testing, and localized prototyping cycles.
               </p>
-           </div>
-           <div className="relative z-10 -mx-6 md:mx-0">
-             <ParallaxScrollSecond images={galleryImages} />
-           </div>
-        </div>
+            </Card>
 
-        {/* Footer Audit Context */}
-        <div className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-[#232833] pt-20 text-left">
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-[#181C24] border border-[#232833] w-fit rounded-lg text-[#FF4D2D]"><Layers className="w-6 h-6" /></div>
-              <h4 className="text-xl font-heading font-black text-[#F5F6F8] uppercase tracking-tighter">Hardware Evolution</h4>
-              <p className="text-xs font-bold text-[#9AA1AC] uppercase tracking-tight leading-relaxed opacity-70">Visual mapping of robotic chassis development, iterative structural testing, and localized prototyping cycles.</p>
-           </div>
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-[#181C24] border border-[#232833] w-fit rounded-lg text-[#FF4D2D]"><Zap className="w-6 h-6" /></div>
-              <h4 className="text-xl font-heading font-black text-[#F5F6F8] uppercase tracking-tighter">On-Ground Impact</h4>
-              <p className="text-xs font-bold text-[#9AA1AC] uppercase tracking-tight leading-relaxed opacity-70">Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.</p>
-           </div>
-           <div className="flex flex-col gap-6">
-              <div className="p-4 bg-[#181C24] border border-[#232833] w-fit rounded-lg text-[#FF4D2D]"><Globe className="w-6 h-6" /></div>
-              <h4 className="text-xl font-heading font-black text-[#F5F6F8] uppercase tracking-tighter">Research Strategy</h4>
-              <p className="text-xs font-bold text-[#9AA1AC] uppercase tracking-tight leading-relaxed opacity-70">A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.</p>
-           </div>
-        </div>
+            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
+              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+                <Zap className="w-6 h-6" />
+              </div>
+              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">On-Ground Impact</h4>
+              <p className="text-sm text-text-muted leading-relaxed">
+                Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.
+              </p>
+            </Card>
 
-        {/* Request Specs CTA */}
-        <div className="mt-40 bg-[#11141A] border border-[#232833] p-16 lg:p-24 text-center shadow-2xl rounded-2xl relative overflow-hidden">
-           <div className="relative z-10">
-             <h4 className="text-3xl md:text-4xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-10 leading-none">Access Technical <br /> Specifications.</h4>
-             <p className="text-[#9AA1AC] text-sm font-bold uppercase tracking-widest max-w-2xl mx-auto mb-12 leading-relaxed">For higher-resolution project documentation or specific technical guides related to these deployments, contact our coordination desk.</p>
-             <Link href="/contact" className="btn-primary py-5 px-12 inline-flex items-center gap-4 shadow-xl">
-               REQUEST DOCS <MoveRight className="w-4 h-4" />
-             </Link>
-           </div>
-        </div>
+            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
+              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">Research Strategy</h4>
+              <p className="text-sm text-text-muted leading-relaxed">
+                A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.
+              </p>
+            </Card>
+          </div>
 
-      </div>
+          {/* Request Specs CTA */}
+          <div className="mt-24 bg-subtle border border-border p-12 lg:p-20 text-center rounded-3xl max-w-4xl mx-auto">
+            <h4 className="text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight mb-4">
+              Access Technical Specifications
+            </h4>
+            <p className="text-text-muted text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+              For higher-resolution project documentation or specific technical guides related to these deployments, contact our coordination desk.
+            </p>
+            <Link href="/contact">
+              <Button variant="primary">
+                Request Docs <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
