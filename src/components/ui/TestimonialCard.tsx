@@ -21,7 +21,7 @@ export function TestimonialCard({
   className,
 }: TestimonialCardProps) {
   return (
-    <Card className={cn("flex flex-col justify-between h-full hover:shadow-[0_12px_30px_rgba(15,23,42,0.06)] border-border/80", className)}>
+    <Card className={cn("flex flex-col justify-between h-full p-8 hover:shadow-[0_12px_30px_rgba(15,23,42,0.06)] border-border/80", className)}>
       <div>
         <div className="flex gap-1 mb-5">
           {Array.from({ length: rating }).map((_, i) => (

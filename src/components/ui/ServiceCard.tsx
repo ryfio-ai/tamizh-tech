@@ -23,13 +23,10 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <Link href={href} className={cn("block group h-full", className)}>
-      <Card className="flex flex-col justify-between h-full hover:border-accent/30 hover:shadow-[0_12px_30px_rgba(37,99,235,0.06)]">
+      <Card className="flex flex-col justify-between h-full p-8 hover:border-accent/40 hover:shadow-[0_12px_30px_rgba(251,113,21,0.15)]">
         <div>
-          <div className={cn(
-            "w-12 h-12 rounded-xl flex items-center justify-center bg-accent/5 ring-4 ring-accent/5 mb-5 transition-transform duration-300 group-hover:scale-110",
-            iconColorClass
-          )}>
-            <Icon className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center bg-accent/10 text-accent mb-5 transition-transform duration-300 group-hover:scale-110">
+            <Icon className="w-5 h-5" />
           </div>
           <h3 className="text-lg font-bold text-text-primary mb-2 group-hover:text-accent transition-colors">
             {title}

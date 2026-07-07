@@ -47,11 +47,17 @@ export default function FounderPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Image Placeholder/Design */}
             <div className="lg:col-span-5 bg-subtle border border-border rounded-3xl p-8 flex flex-col items-center justify-center min-h-[400px] shadow-sm relative overflow-hidden text-center">
-              <div className="absolute top-4 right-4 text-accent">
+              <div className="absolute top-4 right-4 text-accent z-10">
                 <Star className="w-6 h-6 fill-current animate-pulse" />
               </div>
-              <div className="w-32 h-32 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-6">
-                <GraduationCap className="w-16 h-16" />
+              <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-accent shadow-lg mb-6 shrink-0 bg-white">
+                <Image
+                  src="/team/Tamizharasan K.jpg"
+                  alt="Er. K. Tamizharasan"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
               <h2 className="text-2xl font-bold uppercase tracking-tight text-text-primary">Er. K. Tamizharasan</h2>
               <span className="text-xs font-bold text-accent uppercase tracking-widest mt-1 block">Founder & CEO</span>
@@ -65,20 +71,17 @@ export default function FounderPage() {
 
             {/* Biography & Message */}
             <div className="lg:col-span-7">
-              <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Leadership Message</span>
-              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4">Engineering the Future of Indian Robotics</h2>
+              <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Message from the Founders</span>
+              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4">Engineering the Future Starts Here</h2>
+              <p className="text-text-secondary text-sm leading-relaxed mb-4 font-semibold italic">
+                "Engineering is not just about learning theories; it is about transforming ideas into reality."
+              </p>
               <p className="text-text-secondary text-sm leading-relaxed mb-4">
-                Since our founding in Coimbatore, India, Tamizh Tech Robotics has been dedicated to bridging the gap between theoretical engineering and practical robotics fabrication. Our mission is two-fold: to manufacture robust, battle-tested competition platforms for students, and to deliver low-downtime B2B automation solutions for Indian industries.
+                Tamizh Tech Robotics was born from a passion for innovation, robotics, and hands-on engineering. What began as a student robotics club has now evolved into a technology company committed to developing future engineers, creating indigenous robotics solutions, and bridging the gap between education and industry.
               </p>
               <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                Under the &quot;Made in India&quot; vision, we design, program, and fabricate our hardware locally. From simple line follower rovers to vertical drum spinners and CNC milled parts, we strive for high precision, absolute quality, and expert mentorship.
+                Today, we proudly serve students, industries, and institutions through robotics products, mentorship programs, industrial automation solutions, and technology education.
               </p>
-              
-              <div className="p-6 bg-subtle rounded-xl border-l-4 border-accent mb-6">
-                <p className="italic text-xs font-bold text-text-secondary">
-                  &quot;True innovation doesn&apos;t happen on paper. It happens in the lab, when students solder their first controller, and on the assembly line, when a custom robot automates a bottleneck. That is what we build.&quot;
-                </p>
-              </div>
             </div>
           </div>
         </div>

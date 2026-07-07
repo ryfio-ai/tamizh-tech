@@ -80,7 +80,7 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <Image
               src="/logo/TTRC LOGO.png"
-              alt="TamizhTech Robotics"
+              alt="TamizhTech Robotics Company"
               width={40}
               height={40}
               className="object-contain"
@@ -106,7 +106,7 @@ export function Navbar() {
                   onMouseEnter={() => setActiveMenu(link.label)}
                   onMouseLeave={() => setActiveMenu(null)}
                 >
-                  <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-subtle">
+                  <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-lg hover:bg-subtle">
                     {link.label}
                     <ChevronDown
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -152,7 +152,7 @@ export function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-subtle"
+                  className="px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-lg hover:bg-subtle"
                 >
                   {link.label}
                 </Link>
@@ -163,12 +163,12 @@ export function Navbar() {
           {/* CTA */}
           <div className="hidden xl:flex items-center gap-3">
             <Link href="/contact">
-              <Button variant="secondary" size="sm">
+              <Button variant="primary" size="sm">
                 Get Quote
               </Button>
             </Link>
             <Link href="/courses">
-              <Button variant="primary" size="sm">
+              <Button variant="outline" size="sm">
                 Enroll Now
               </Button>
             </Link>
@@ -244,12 +244,12 @@ export function Navbar() {
 
               <div className="p-5 border-t border-border space-y-2">
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="block w-full">
-                  <Button variant="secondary" size="sm" className="w-full justify-center">
+                  <Button variant="primary" size="sm" className="w-full justify-center">
                     Get a Quote
                   </Button>
                 </Link>
                 <Link href="/courses" onClick={() => setIsOpen(false)} className="block w-full">
-                  <Button variant="primary" size="sm" className="w-full justify-center">
+                  <Button variant="outline" size="sm" className="w-full justify-center">
                     Enroll Now
                   </Button>
                 </Link>

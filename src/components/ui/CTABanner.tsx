@@ -25,18 +25,18 @@ export function CTABanner({
 }: CTABannerProps) {
   return (
     <div className={cn(
-      "relative rounded-3xl bg-gray-950 p-8 md:p-16 overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8",
+      "relative rounded-3xl bg-gradient-to-br from-white to-orange-50/40 border border-accent/20 p-8 md:p-16 overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg",
       className
     )}>
       {/* background glows */}
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent/20 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-accent.teal/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent/10 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-accent/5 blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-2xl">
-        <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
+        <h2 className="text-2xl md:text-4xl font-extrabold text-text-primary tracking-tight leading-tight mb-4">
           {title}
         </h2>
-        <p className="text-base text-gray-400 leading-relaxed max-w-xl">
+        <p className="text-base text-text-muted leading-relaxed max-w-xl">
           {subtitle}
         </p>
       </div>
@@ -49,7 +49,7 @@ export function CTABanner({
         </Link>
         {secondaryCtaText && secondaryCtaHref && (
           <Link href={secondaryCtaHref} className="w-full sm:w-auto">
-            <Button variant="secondary" className="w-full justify-center bg-white/10 text-white border-white/10 hover:bg-white/15">
+            <Button variant="outline" className="w-full justify-center">
               {secondaryCtaText}
             </Button>
           </Link>

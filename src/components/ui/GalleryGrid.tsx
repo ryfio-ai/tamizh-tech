@@ -42,8 +42,8 @@ export function GalleryGrid({ images, className }: GalleryGridProps) {
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gray-950/0 group-hover:bg-gray-950/30 transition-all duration-300 flex items-center justify-center">
-              <span className="opacity-0 group-hover:opacity-100 bg-white/90 text-text-primary text-xs font-bold px-4 py-2 rounded-full transition-opacity shadow-sm">
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+              <span className="bg-accent text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm">
                 View Image
               </span>
             </div>

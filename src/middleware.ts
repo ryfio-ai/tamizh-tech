@@ -45,7 +45,8 @@ export function middleware(request: NextRequest) {
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
-    connect-src 'self' https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com https://www.google-analytics.com;
+    frame-src 'self' https://lottie.host;
+    connect-src 'self' https://prod.spline.design https://*.spline.design https://www.gstatic.com https://lottie.host https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com https://www.google-analytics.com;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 

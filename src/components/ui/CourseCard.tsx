@@ -25,7 +25,7 @@ export function CourseCard({
   className,
 }: CourseCardProps) {
   return (
-    <Card className={cn("flex flex-col justify-between h-full hover:border-accent/20 hover:shadow-[0_12px_30px_rgba(37,99,235,0.08)]", className)}>
+    <Card className={cn("flex flex-col justify-between h-full p-8 hover:border-accent/20 hover:shadow-[0_12px_30px_rgba(37,99,235,0.08)]", className)}>
       <div>
         <div className="flex items-center justify-between gap-2 mb-4">
           <span className="bg-accent/5 px-3 py-1 rounded-full text-xs font-bold text-accent tracking-wide uppercase">

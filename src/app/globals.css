@@ -6,25 +6,25 @@
     color-scheme: light;
     /* ── Backgrounds ──────────────────────────── */
     --bg-page:       #FFFFFF;
-    --bg-subtle:     #FAFAFA;
+    --bg-subtle:     #F5F5F5;
     --bg-muted:      #F5F5F5;
     --bg-surface:    #FFFFFF;
     /* ── Text ─────────────────────────────────── */
-    --text-primary:  #111111;
-    --text-secondary:#333333;
-    --text-muted:    #666666;
-    --text-subtle:   #999999;
+    --text-primary:  #0A0A0A;
+    --text-secondary:#4A4A4A;
+    --text-muted:    #4A4A4A;
+    --text-subtle:   #4A4A4A;
     /* ── Accent ───────────────────────────────── */
-    --accent-blue:   #FF6B00;
-    --accent-blue-hover: #E05E00;
-    --accent-blue-soft:  rgba(255,107,0,0.08);
-    --accent-blue-glow:  rgba(255,107,0,0.2);
-    --accent-teal:   #FF8533;
-    --accent-teal-soft:  rgba(255,133,51,0.08);
+    --accent-blue:   #FB7115;
+    --accent-blue-hover: #E35E00;
+    --accent-blue-soft:  rgba(251,113,21,0.08);
+    --accent-blue-glow:  rgba(251,113,21,0.2);
+    --accent-teal:   #FB7115;
+    --accent-teal-soft:  rgba(251,113,21,0.08);
     /* ── Borders ──────────────────────────────── */
     --border:        #E5E5E5;
     --border-hover:  #CCCCCC;
-    --border-focus:  #FF6B00;
+    --border-focus:  #FB7115;
     /* ── Radius ───────────────────────────────── */
     --radius-sm:  8px;
     --radius-md:  12px;
@@ -50,7 +50,7 @@
   body {
     background-color: var(--bg-page);
     color: var(--text-primary);
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-karla), 'Karla', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
@@ -58,7 +58,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
-    font-family: var(--font-inter), 'Inter', sans-serif;
+    font-family: var(--font-montserrat), 'Montserrat', sans-serif;
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.15;
@@ -84,32 +84,32 @@
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--accent-blue-soft);
     color: var(--accent-blue);
-    border: 1px solid rgba(11,110,253,0.2);
+    border: 1px solid rgba(251,113,21,0.2);
     padding: 5px 14px; border-radius: 100px;
     font-size: 11px; font-weight: 700;
     letter-spacing: 0.06em; text-transform: uppercase;
   }
   .tag-teal {
-    background: var(--accent-teal-soft);
-    color: var(--accent-teal);
-    border-color: rgba(20,184,166,0.25);
+    background: var(--accent-blue-soft);
+    color: var(--accent-blue);
+    border-color: rgba(251,113,21,0.2);
   }
 
   /* ── Gradient text ───────────────────────────── */
   .gradient-text {
-    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    background: linear-gradient(135deg, #0A0A0A 0%, #4A4A4A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .gradient-text-blue {
-    background: linear-gradient(135deg, #0B6EFD 0%, #06B6D4 100%);
+    background: linear-gradient(135deg, #FB7115 0%, #E35E00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .gradient-text-teal {
-    background: linear-gradient(135deg, #14B8A6 0%, #0B6EFD 100%);
+    background: linear-gradient(135deg, #FB7115 0%, #E35E00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -127,8 +127,8 @@
     box-shadow: var(--shadow-lg);
     transform: translateY(-4px);
   }
-  .card-blue:hover { border-color: rgba(11,110,253,0.3); box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-blue-soft); }
-  .card-teal:hover { border-color: rgba(20,184,166,0.3); box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-teal-soft); }
+  .card-blue:hover { border-color: rgba(251,113,21,0.3); box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-blue-soft); }
+  .card-teal:hover { border-color: rgba(251,113,21,0.3); box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-blue-soft); }
 
   /* Glass card (for dark sections) */
   .glass-card {
@@ -175,13 +175,13 @@
     transform: translateY(-1px);
   }
   .btn-teal {
-    background: var(--accent-teal); color: #fff;
-    border-color: var(--accent-teal);
-    box-shadow: 0 4px 14px rgba(20,184,166,0.3);
+    background: var(--accent-blue); color: #fff;
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 14px var(--accent-blue-glow);
   }
   .btn-teal:hover {
-    background: #0d9488;
-    box-shadow: 0 8px 24px rgba(20,184,166,0.4);
+    background: var(--accent-blue-hover);
+    box-shadow: 0 8px 24px var(--accent-blue-glow);
     transform: translateY(-1px);
   }
   .btn-sm  { padding: 9px 20px; font-size: 13px; }
@@ -198,8 +198,8 @@
 
   /* ── Gradient hero bg ──────────────────────────── */
   .hero-gradient {
-    background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(11,110,253,0.06) 0%, transparent 65%),
-                radial-gradient(ellipse 60% 40% at 90% 80%, rgba(20,184,166,0.05) 0%, transparent 50%);
+    background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(251,113,21,0.06) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 40% at 90% 80%, rgba(251,113,21,0.05) 0%, transparent 50%);
   }
 
   /* ── Feature icon circle ─────────────────────── */
@@ -209,7 +209,7 @@
     background: var(--accent-blue-soft); color: var(--accent-blue);
     transition: all 0.2s ease;
   }
-  .icon-circle-teal { background: var(--accent-teal-soft); color: var(--accent-teal); }
+  .icon-circle-teal { background: var(--accent-blue-soft); color: var(--accent-blue); }
 
   /* ── Divider ─────────────────────────────────── */
   .divider { height: 1px; background: var(--border); width: 100%; }
@@ -217,8 +217,8 @@
   /* ── Glow dot ────────────────────────────────── */
   .glow-dot {
     width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent-teal);
-    box-shadow: 0 0 10px var(--accent-teal);
+    background: var(--accent-blue);
+    box-shadow: 0 0 10px var(--accent-blue);
     animation: pulse-dot 2s ease-in-out infinite;
   }
 
@@ -226,7 +226,7 @@
   .stat-number {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800; letter-spacing: -0.04em; line-height: 1;
-    background: linear-gradient(135deg, #0B6EFD, #14B8A6);
+    background: linear-gradient(135deg, #FB7115, #E35E00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

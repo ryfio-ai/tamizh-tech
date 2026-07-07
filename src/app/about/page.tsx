@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle, Users, Award, Target, Heart } from "lucide-react";
+import { ArrowRight, CheckCircle, Users, Award, Target, Heart, Zap, Cpu } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PageHero } from "@/components/ui/PageHero";
@@ -25,10 +25,23 @@ const values = [
 ];
 
 const team = [
-  { name: "Er. K. Tamizharasan", role: "Founder & CEO", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" },
+  { name: "Er. K. Tamizharasan", role: "Founder & CEO", image: "/team/Tamizharasan K.jpg" },
   { name: "Priya Krishnan",       role: "Head of R&D",   image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face" },
   { name: "Arun Selvaraj",        role: "Lead Engineer",  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" },
   { name: "Meera Nair",           role: "AI Specialist",  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" },
+];
+
+const competitions = [
+  { name: "RC Robo Race", desc: "Drift-tuned chassis and high-torque motors engineered for race track agility." },
+  { name: "RC Robo Soccer", desc: "Dual solenoid active kicker bots designed for precision and power on the soccer field." },
+  { name: "RC Robo War", desc: "High-impact combat robots with active spinners, lifters, and steel armor plating." },
+  { name: "RC Robo Sumo", desc: "Heavy steel frame and magnetic drive bases designed to push opponents out of the ring." },
+  { name: "RC Boat", desc: "Brushless water-cooled aquatic speedboats designed for stability and speed." },
+  { name: "Hovercraft", desc: "Dual-propeller air cushion vehicles for friction-free terrain navigation." },
+  { name: "Line Follower", desc: "PID-tuned microcontroller speedsters utilizing multi-sensor arrays." },
+  { name: "Maze Solver", desc: "Micromouse platforms featuring real-time autonomous flood-fill algorithms." },
+  { name: "Drone", desc: "Custom-configured multi-rotor systems, FPV racing quadcopters, and drone kits." },
+  { name: "Water Rocketry", desc: "Pressurized launch setups with aerodynamic recovery and fins." },
 ];
 
 export default function AboutPage() {
@@ -48,15 +61,34 @@ export default function AboutPage() {
             <AnimatedSection direction="left">
               <SectionHeader tag="Who We Are" title="A technology company" highlight="with purpose" align="left" />
               <p className="mt-6 text-text-muted text-base md:text-lg leading-relaxed">
-                TamizhTech Robotics is a Coimbatore-based technology company specializing in Robotics, AI, Drone Technology, IoT, and Embedded Systems. We serve industries ranging from manufacturing to healthcare while empowering thousands of students with hands-on STEM education.
+                TamizhTech Robotics Company is a Coimbatore-based technology company specializing in Robotics, AI, Drone Technology, IoT, and Embedded Systems. We serve industries ranging from manufacturing to healthcare while empowering thousands of students with hands-on STEM education.
               </p>
               <div className="mt-8 space-y-3">
-                {["Founded in Coimbatore, Tamil Nadu", "8+ years of engineering excellence", "Serving 50+ industry partners nationally", "10,000+ students trained across India"].map(pt => (
+                {["Founded in Coimbatore, Tamil Nadu", "8+ years of engineering excellence", "Serving 15+ industry partners nationally", "1000+ students trained across India"].map(pt => (
                   <div key={pt} className="flex items-center gap-3 text-text-secondary">
                     <CheckCircle className="w-5 h-5 text-accent shrink-0" />
                     <span className="text-sm font-semibold">{pt}</span>
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-2xl">
+                <h4 className="font-bold text-text-primary text-sm tracking-wide uppercase mb-1">TamizhTech Robotics Company</h4>
+                <p className="text-xs text-accent font-bold mb-4">The Future of Engineering Starts Here</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-text-secondary">
+                  <div>
+                    <span className="text-text-muted text-xs block">Established</span>
+                    22 October 2024
+                  </div>
+                  <div>
+                    <span className="text-text-muted text-xs block">Location</span>
+                    Coimbatore, Tamil Nadu
+                  </div>
+                  <div className="sm:col-span-2">
+                    <span className="text-text-muted text-xs block">Evolution</span>
+                    From a student robotics club to a leading robotics, engineering, and technology solutions company.
+                  </div>
+                </div>
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>
@@ -89,23 +121,23 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="section bg-gray-950 text-white py-24">
+      <section className="section bg-white text-text-primary py-24 border-t border-border/30">
         <div className="container px-6">
           <AnimatedSection className="mb-16">
-            <SectionHeader tag="Our Journey" title="The" highlight="TamizhTech story" light />
+            <SectionHeader tag="Our Journey" title="The" highlight="TamizhTech story" />
           </AnimatedSection>
           <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-gray-800" />
+            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-zinc-200" />
             {timeline.map((item, i) => (
               <AnimatedSection key={item.year} delay={i * 0.1} className={`relative flex gap-8 mb-12 ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
                 <div className="flex-1">
-                  <div className={`bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl ${i % 2 === 0 ? "text-right" : "text-left"}`}>
+                  <div className={`bg-white border border-border p-6 rounded-2xl shadow-sm ${i % 2 === 0 ? "text-right" : "text-left"}`}>
                     <span className="text-accent text-sm font-bold">{item.year}</span>
-                    <h3 className="text-white font-bold mt-1 mb-2">{item.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                    <h3 className="text-text-primary font-bold mt-1 mb-2">{item.title}</h3>
+                    <p className="text-text-muted text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 rounded-full bg-accent border-4 border-gray-950 z-10" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 rounded-full bg-accent border-4 border-white shadow-sm z-10" />
                 <div className="flex-1" />
               </AnimatedSection>
             ))}
@@ -113,27 +145,73 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="section bg-white py-24">
+      {/* Achievements */}
+      <section className="section bg-subtle py-24 border-y border-border/30">
         <div className="container px-6">
           <AnimatedSection className="mb-16">
-            <SectionHeader tag="Our Team" title="The people behind" highlight="the innovation" />
+            <SectionHeader
+              tag="Achievements"
+              title="Numbers That Define"
+              highlight="Our Journey"
+              subtitle="A summary of our impact, wins, and community engagement over the years."
+            />
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <StaggerItem key={member.name}>
-                <Card className="text-center group hover:border-accent/20">
-                  <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-accent/5 group-hover:ring-accent/10 transition-all">
-                    <Image src={member.image} alt={member.name} fill className="object-cover" />
-                  </div>
-                  <h3 className="font-bold text-text-primary text-sm">{member.name}</h3>
-                  <p className="text-xs text-text-muted mt-1">{member.role}</p>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { val: "200+", label: "Robotics Events Participated" },
+              { val: "40+", label: "State-Level Events" },
+              { val: "100+", label: "National-Level Events" },
+              { val: "15+", label: "International Events" },
+              { val: "180+", label: "Winning Positions" },
+              { val: "₹8 Lakhs+", label: "Prize Money Won" },
+              { val: "20+", label: "Robotics Events Organized" },
+              { val: "200+", label: "Active Club Members" },
+              { val: "1000+", label: "Students Mentored" },
+            ].map((ach, idx) => (
+              <StaggerItem key={idx}>
+                <Card className="flex flex-col items-center text-center p-8 bg-white border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
+                  <span className="text-3xl font-extrabold text-accent mb-2 font-mono">{ach.val}</span>
+                  <span className="text-sm font-bold text-text-secondary tracking-wide">{ach.label}</span>
                 </Card>
               </StaggerItem>
             ))}
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Robotics Competition Excellence */}
+      <section className="section bg-white py-24 border-b border-border/30">
+        <div className="container px-6">
+          <AnimatedSection className="mb-16">
+            <SectionHeader
+              tag="Competition Excellence"
+              title="Robotics Competition"
+              highlight="Excellence"
+              subtitle="Our team designs, builds, and competes with world-class robotics systems. All 10 categories of competition platforms are engineered in-house and are commercially available in our company for colleges, schools, and teams."
+            />
+          </AnimatedSection>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {competitions.map((comp, idx) => (
+              <StaggerItem key={idx}>
+                <Card className="flex flex-col justify-between h-full p-6 bg-white border border-border/60 hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent mb-4">
+                      <Cpu className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-bold text-text-primary text-base mb-2">{comp.name}</h3>
+                    <p className="text-xs text-text-muted leading-relaxed">{comp.desc}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-border/50 text-[10px] font-bold text-accent tracking-wider uppercase">
+                    In-House Available
+                  </div>
+                </Card>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+
 
       {/* CTA */}
       <section className="section bg-subtle py-20 border-t border-border/30">

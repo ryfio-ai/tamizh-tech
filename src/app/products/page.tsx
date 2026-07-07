@@ -158,6 +158,35 @@ function ProductsContent() {
         breadcrumbActive="Products"
       />
 
+      {/* Robotics Competition Excellence Section */}
+      <section className="bg-subtle py-12 border-b border-border text-left">
+        <div className="container px-6 max-w-4xl mx-auto">
+          <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Robotics Competition Excellence</span>
+          <h2 className="text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-text-primary mb-3">Event-Ready Robotics Systems</h2>
+          <p className="text-sm text-text-secondary leading-relaxed mb-6">
+            We have designed, developed, and competed with a wide range of robotics systems. All of these battle-tested, competition-ready robots are designed, engineered, and available directly from our company.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {[
+              "RC Robo Race",
+              "RC Robo Soccer",
+              "RC Robo War",
+              "RC Robo Sumo",
+              "RC Boat",
+              "Hovercraft",
+              "Line Follower",
+              "Maze Solver",
+              "Drone",
+              "Water Rocketry"
+            ].map((cat) => (
+              <span key={cat} className="bg-white border border-border/80 px-4 py-2 rounded-xl text-xs font-bold text-text-secondary shadow-xs hover:border-accent hover:text-accent transition-colors">
+                {cat}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section bg-white py-16">
         <div className="container px-6">
           

@@ -33,7 +33,13 @@ export function ProjectCard({
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-accent tracking-wide uppercase shadow-sm">
+          {/* Black overlay on hover */}
+          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white text-xs font-bold tracking-wider uppercase border border-white/20 px-4 py-2 bg-black/40 backdrop-blur-sm rounded-full">
+              View Case Study
+            </span>
+          </div>
+          <span className="absolute top-4 left-4 bg-accent px-3 py-1 rounded-full text-[10px] font-bold text-white tracking-wide uppercase shadow-sm z-10">
             {category}
           </span>
         </div>
@@ -46,7 +52,7 @@ export function ProjectCard({
               {description}
             </p>
           )}
-          <div className="flex items-center gap-1.5 text-sm font-semibold text-text-primary group-hover:text-accent transition-colors mt-auto">
+          <div className="flex items-center gap-1.5 text-sm font-semibold text-accent group-hover:underline transition-all mt-auto">
             <span>View Case Study</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>

@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+// @ts-ignore
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
 
 const config: Config = {
   darkMode: "class",
@@ -13,27 +15,28 @@ const config: Config = {
       colors: {
         /* backgrounds */
         page:    "#FFFFFF",
-        subtle:  "#FAFAFA",
+        subtle:  "#F5F5F5",
         muted:   "#F5F5F5",
         /* text */
-        "text-primary":   "#111111",
-        "text-secondary": "#333333",
-        "text-muted":     "#666666",
+        "text-primary":   "#0A0A0A",
+        "text-secondary": "#4A4A4A",
+        "text-muted":     "#4A4A4A",
         /* accents */
         accent: {
-          DEFAULT: "#FF6B00",
-          hover:   "#E05E00",
-          teal:    "#FF8533",
-          soft:    "rgba(255,107,0,0.08)",
+          DEFAULT: "#FB7115",
+          hover:   "#E35E00",
+          teal:    "#FB7115",
+          soft:    "rgba(251,113,21,0.08)",
         },
         /* border */
         border: "#E5E5E5",
         /* shadcn compat */
         background: "#FFFFFF",
-        foreground: "#111111",
-        primary: { DEFAULT: "#FF6B00", foreground: "#FFFFFF" },
-        secondary: { DEFAULT: "#FAFAFA", foreground: "#111111" },
-        ring: "#FF6B00",
+        foreground: "#0A0A0A",
+        primary: { DEFAULT: "#FB7115", foreground: "#FFFFFF", main: "#FB7115" },
+        secondary: { DEFAULT: "#F5F5F5", foreground: "#0A0A0A" },
+        ring: "#FB7115",
+        blacksect: "#0A0A0A",
       },
       borderRadius: {
         sm: "8px", md: "12px", lg: "16px",
@@ -54,22 +57,45 @@ const config: Config = {
         md:  "0 4px 16px rgba(0,0,0,0.08)",
         lg:  "0 16px 48px rgba(0,0,0,0.1)",
         xl:  "0 32px 80px rgba(0,0,0,0.12)",
-        blue: "0 8px 32px rgba(11,110,253,0.2)",
-        teal: "0 8px 32px rgba(20,184,166,0.2)",
+        blue: "0 8px 32px rgba(251,113,21,0.1)",
+        teal: "0 8px 32px rgba(251,113,21,0.1)",
       },
       animation: {
         float:        "float 4s ease-in-out infinite",
         "pulse-slow": "pulse 3s ease-in-out infinite",
         shimmer:      "shimmer 2.5s linear infinite",
         "spin-slow":  "spin 8s linear infinite",
+        aurora:       "aurora 60s linear infinite",
+      },
+      keyframes: {
+        aurora: {
+          from: {
+            backgroundPosition: "50% 50%, 50% 50%",
+          },
+          to: {
+            backgroundPosition: "350% 50%, 350% 50%",
+          },
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-glow":
-          "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(11,110,253,0.06) 0%, transparent 65%)",
+          "radial-gradient(ellipse 90% 60% at 50% 0%, rgba(251,113,21,0.06) 0%, transparent 65%)",
       },
     },
   },
-  plugins: [],
+  plugins: [addVariablesForColors],
 };
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+
 export default config;

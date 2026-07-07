@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat, Karla } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -7,22 +7,28 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+const karla = Karla({
+  subsets: ["latin"],
+  variable: "--font-karla",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tamizhtech.in"),
   title: {
-    default: "TamizhTech Robotics — AI, Robotics & Engineering Innovation",
-    template: "%s | TamizhTech Robotics",
+    default: "TamizhTech Robotics Company — AI, Robotics & Engineering Innovation",
+    template: "%s | TamizhTech Robotics Company",
   },
   description:
-    "TamizhTech Robotics is a premier technology company in Coimbatore specializing in AI, Robotics, Drone Technology, IoT, Industrial Automation, and STEM Education.",
+    "TamizhTech Robotics Company is a premier technology company in Coimbatore specializing in AI, Robotics, Drone Technology, IoT, Industrial Automation, and STEM Education.",
   keywords: [
-    "TamizhTech Robotics",
+    "TamizhTech Robotics Company",
     "Robotics Company Coimbatore",
     "AI Machine Learning India",
     "Drone Technology",
@@ -32,22 +38,22 @@ export const metadata: Metadata = {
     "Embedded Systems",
     "Corporate Training",
   ],
-  authors: [{ name: "TamizhTech Robotics" }],
-  creator: "TamizhTech Robotics",
+  authors: [{ name: "TamizhTech Robotics Company" }],
+  creator: "TamizhTech Robotics Company",
   publisher: "TamizhTech Robotics Company",
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://tamizhtech.in",
-    siteName: "TamizhTech Robotics",
-    title: "TamizhTech Robotics — AI, Robotics & Engineering Innovation",
+    siteName: "TamizhTech Robotics Company",
+    title: "TamizhTech Robotics Company — AI, Robotics & Engineering Innovation",
     description:
       "Premier robotics and AI technology company based in Coimbatore. We build the future through engineering innovation.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "TamizhTech Robotics" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "TamizhTech Robotics Company" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TamizhTech Robotics",
+    title: "TamizhTech Robotics Company",
     description: "AI · Robotics · Drone · IoT · Industrial Automation · STEM",
     images: ["/og-image.jpg"],
   },
@@ -111,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config','G-LZEZV8HPGR');
         `}</Script>
       </head>
-      <body className={`${inter.variable} font-sans bg-page text-text-primary antialiased`}>
+      <body className={`${montserrat.variable} ${karla.variable} font-sans bg-page text-text-primary antialiased`}>
         <Navbar />
         <main className="flex flex-col min-h-screen">
           {children}

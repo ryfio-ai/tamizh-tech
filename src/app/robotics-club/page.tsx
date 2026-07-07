@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Brain, Trophy, Zap, Users, ShieldCheck, Target, Rocket, Award, MoveRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Brain, Trophy, Zap, Users, ShieldCheck, Target, Rocket, Award, MoveRight, CheckCircle2, Ship, Wind, Swords } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Tamil Robotics Club | TRC | Premier Robotics Hub",
@@ -9,14 +9,16 @@ export const metadata: Metadata = {
 };
 
 const events = [
-  { name: "Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", image: "/product/soccer rc.jpg", icon: <Rocket /> },
-  { name: "Robo Sumo", desc: "Push rivals out of the ring using strength and strategy.", image: "/product/sumo rc.jpg", icon: <Target /> },
-  { name: "Robo Race", desc: "Time-trial speed racing on custom tracks.", image: "/events/robo-race.png", icon: <Zap /> },
-  { name: "Robo War", desc: "Battle bots competition with custom-built combat machines.", image: "/events/robo-war.png", icon: <ShieldCheck /> },
-  { name: "Line Follower", desc: "Automated bots that follow a marked path at high speed.", image: "/events/line-follower.png", icon: <Brain /> },
-  { name: "Maze Solver", desc: "Advanced autonomous navigation with maze-solving AI.", image: "/events/maze-solver.png", icon: <Zap /> },
-  { name: "Water Rocket", desc: "Design and launch water-powered rockets for altitude.", image: "/events/water-rocket.png", icon: <Rocket /> },
-  { name: "Drone Race", desc: "FPV drone piloting through timed obstacle courses.", image: "/events/drone-race.png", icon: <Zap /> },
+  { name: "RC Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", image: "/product/soccer rc.jpg", icon: <Trophy /> },
+  { name: "RC Robo Sumo", desc: "Push rivals out of the ring using strength, weight, and strategy.", image: "/product/sumo rc.jpg", icon: <Target /> },
+  { name: "RC Robo Race", desc: "Time-trial high-speed racing on custom drift-tuned tracks.", image: "/events/robo-race.png", icon: <Zap /> },
+  { name: "RC Robo War", desc: "Battle bots competition with custom-built high-impact combat machines.", image: "/events/robo-war.png", icon: <ShieldCheck /> },
+  { name: "RC Boat", desc: "Water-cooled brushless motor speedboats racing on aquatic courses.", image: "", icon: <Ship /> },
+  { name: "Hovercraft", desc: "Aerodynamic dual-propeller air cushion vehicles gliding on land/water.", image: "", icon: <Wind /> },
+  { name: "Line Follower", desc: "Automated bots following path markings at extreme speeds using PID tuning.", image: "/events/line-follower.png", icon: <Brain /> },
+  { name: "Maze Solver", desc: "Advanced autonomous navigation and real-time maze-solving floodfill AI.", image: "/events/maze-solver.png", icon: <Zap /> },
+  { name: "Drone", desc: "FPV drone piloting and multi-rotor flight through timed obstacle courses.", image: "/events/drone-race.png", icon: <Zap /> },
+  { name: "Water Rocketry", desc: "Designing and launching aerodynamic pressurized water-powered rockets.", image: "/events/water-rocket.png", icon: <Rocket /> },
 ];
 
 const benefits = [
@@ -66,7 +68,7 @@ export default function RoboticsClubPage() {
           <div className="max-w-2xl mb-20">
              <h3 className="text-[10px] font-black text-[#FF4D2D] uppercase tracking-[0.4em] mb-6">Core Events</h3>
              <h4 className="text-4xl font-heading font-black text-[#F5F6F8] uppercase tracking-tighter mb-6 leading-none">Competition Domain Expertise.</h4>
-             <p className="text-[#858E9B] font-bold uppercase text-xs tracking-widest leading-relaxed">Systematic training for precision competitions and innovative hardware building.</p>
+             <p className="text-[#858E9B] font-bold uppercase text-xs tracking-widest leading-relaxed">Systematic training for precision competitions. All competition robots are designed, developed, and available in-house.</p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
