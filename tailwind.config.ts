@@ -59,7 +59,7 @@ const config: Config = {
         full: "9999px",
       },
       fontFamily: {
-        sans:    ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        sans:    ["var(--font-jakarta)", "Plus Jakarta Sans", "var(--font-tamil)", "Noto Sans Tamil", "system-ui", "sans-serif"],
         heading: ["var(--font-space-grotesk)", "Space Grotesk", "sans-serif"],
       },
       fontSize: {

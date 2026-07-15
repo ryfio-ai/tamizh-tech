@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Tamizh Tech Robotics Company",
-  description: "Get in touch with Tamizh Tech Robotics Company for robotics training, automation solutions, club membership, or partnership inquiries. Based in Coimbatore, Tamil Nadu.",
+  title: "Contact TamizhTech | Request a Technical Proposal",
+  description: "Get in touch with the technical coordination team at TamizhTech to request school STEM tinkering lab setups, custom automation quotes, or product builds.",
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

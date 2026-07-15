@@ -1,5 +1,4 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle, Zap, Cpu } from "lucide-react";
@@ -10,12 +9,18 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { TargetIcon, HeartIcon, AwardIcon, UsersIcon } from "@/components/ui/CustomIcons";
 
+export const metadata: Metadata = {
+  title: "About TamizhTech | Story, Vision & Team Coimbatore",
+  description: "Learn about the journey, values, and engineering team of TamizhTech Robotics Company in Coimbatore.",
+};
+
 const timeline = [
-  { year: "2016", title: "Founded", desc: "Started as a student robotics club in Coimbatore." },
-  { year: "2018", title: "First Industry Project", desc: "Delivered our first industrial automation project for a local manufacturer." },
-  { year: "2020", title: "Education Wing", desc: "Launched structured robotics courses for schools and colleges." },
-  { year: "2022", title: "AI & Drone Division", desc: "Expanded into AI, machine learning, and drone technology services." },
-  { year: "2024", title: "Pan-India Reach", desc: "Serving clients across 15+ states with 500+ projects delivered." },
+  { year: "2021", title: "Club Founded", desc: "Tamizh Robotics Club was established as a student tinkering hub in Coimbatore." },
+  { year: "2022", title: "Competition Era", desc: "Began dominant participation in state-level robotics engineering tournaments." },
+  { year: "2023", title: "National Expansion", desc: "Expanded components supply and technical project mentorship to national level." },
+  { year: "2024", title: "Company Inception", desc: "Tamizh Tech Robotics Company was officially incorporated as an LLC on 22 October 2024." },
+  { year: "2025", title: "STEM Setup Dominance", desc: "Began deploying complete robotics tinkering laboratories to schools and colleges across India." },
+  { year: "2026", title: "Academy & Advanced R&D", desc: "Launched ThiranOli Academy to scale technical training, and expanded B2B automation." },
 ];
 
 const values = [

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gallery | Tamizh Tech Robotics Company",
-  description: "Explore photos from Tamizh Tech Robotics Company's robotics competitions, workshops, training sessions, and innovation projects.",
+  title: "Engineering Gallery & Lab Photos | TamizhTech Coimbatore",
+  description: "Photos, video logs, and memories from our robotics tinkering labs, competition wins, and B2B industrial automation setups.",
 };
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {

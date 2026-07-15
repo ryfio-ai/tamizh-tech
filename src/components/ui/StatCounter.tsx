@@ -41,7 +41,7 @@ export function StatCounter({
     const startTime = performance.now();
 
     const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
+      const elapsed = Math.max(0, currentTime - startTime);
       const progress = Math.min(elapsed / duration, 1);
       
       const easeProgress = progress * (2 - progress);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -10,13 +10,22 @@ import Script from "next/script";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  weight: ["500", "700"],
   variable: "--font-space-grotesk",
   display: "swap",
 });
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "600", "700"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+const notoTamil = Noto_Sans_Tamil({
+  subsets: ["tamil"],
+  weight: ["400", "500", "700"],
+  variable: "--font-tamil",
   display: "swap",
 });
 
@@ -147,7 +156,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config','G-LZEZV8HPGR');
         `}</Script>
       </head>
-      <body className={`${spaceGrotesk.variable} ${inter.variable} font-sans bg-page text-text-primary antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${jakarta.variable} ${notoTamil.variable} font-sans bg-page text-text-primary antialiased`}>
         <Navbar />
         <main className="flex flex-col min-h-screen">
           {children}

@@ -112,16 +112,9 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { title: "RC Robo Race",     spec: "High-RPM metal gear motors, drift chassis", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "apex-race-bot-v2" },
-  { title: "RC Robo Soccer",   spec: "Solenoid active kicker, pneumatic cylinder", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop", slug: "striker-pneumatic-soccer-bot" },
-  { title: "RC Robo War",      spec: "Hardened steel spinner, 15kg weight class", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop", slug: "titan-combat-bot-15kg" },
-  { title: "RC Robo Sumo",     spec: "Rare-earth magnets, high-traction tires", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop", slug: "shogun-sumo-bot" },
-  { title: "RC Boat",          spec: "Brushless water-cooled motor, fiberglass hull", image: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=600&h=400&fit=crop", slug: "aquajet-rc-speedboat" },
-  { title: "Hovercraft",       spec: "Dual-motor air cushion, lightweight shroud", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop", slug: "aquajet-rc-speedboat" },
-  { title: "Line Follower",    spec: "PID sensor arrays, high-speed micro-metal gear", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "tracker-pid-line-follower" },
-  { title: "Maze Solver",      spec: "Micromouse mapping algorithms, encoder motors", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "micromouse-maze-solver" },
-  { title: "Drone Kit",        spec: "Pixhawk Cube Orange flight avionics, carbon fiber", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop", slug: "falcon-quadcopter-build-kit" },
-  { title: "Water Rocketry",   spec: "Aerodynamic launcher, pressurized nozzles", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop", slug: "falcon-quadcopter-build-kit" },
+  { title: "RC Robo Race",     spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race bot.jpg", slug: "rc-robo-race" },
+  { title: "RC Robo Soccer",   spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer bot.jpg", slug: "rc-robo-soccer" },
+  { title: "RC Robo Sumo",     spec: "Rare-earth magnets, high-traction tires, heavy armored steel base.", image: "/product/sumo bot.jpg", slug: "rc-robo-sumo" },
 ];
 
 export default function HomeClient() {
@@ -384,9 +377,9 @@ export default function HomeClient() {
             />
           </AnimatedSection>
 
-          {/* Horizontal Infinite Marquee Slider */}
-          <div className="relative w-full overflow-hidden py-4">
-            <InfiniteSlider gap={24} duration={35} durationOnHover={100} className="w-full">
+          {/* Horizontal Timeline Grid/Scroller */}
+          <div className="relative w-full py-4">
+            <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0">
               {[
                 { year: "2021", text: "Tamizh Robotics Club was established." },
                 { year: "2022", text: "Started participating in robotics competitions across Tamil Nadu." },
@@ -397,21 +390,21 @@ export default function HomeClient() {
               ].map((step, idx) => (
                 <div 
                   key={idx} 
-                  className="shrink-0 w-[280px] sm:w-[320px] relative pt-6"
+                  className="snap-start shrink-0 w-[280px] sm:w-auto relative pt-6"
                 >
                   {/* Dot indicator aligned to the card top */}
                   <div className="absolute top-[18px] left-6 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-white shadow-sm z-20" />
 
                   {/* Card container */}
-                  <Card className="relative z-10 flex flex-col p-6 bg-white border border-border/80 hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
+                  <Card className="h-full flex flex-col p-6 bg-white border border-border/80 hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="text-2xl font-black text-accent mb-2 font-heading tracking-tight">{step.year}</div>
-                    <p className="text-sm text-text-secondary leading-relaxed flex-grow">
+                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed flex-grow">
                       {step.text}
                     </p>
                   </Card>
                 </div>
               ))}
-            </InfiniteSlider>
+            </div>
           </div>
         </div>
       </section>
@@ -479,39 +472,6 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* 9. STATS BAND (REPEAT) */}
-      <section className="bg-subtle border-y border-border py-10">
-        <div className="container px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
-            {[
-              { target: 180, suffix: "+", label: "Competition Wins", icon: Award },
-              { target: 15,  suffix: "+", label: "Industry Partners", icon: Users },
-              { target: 300, suffix: "+", label: "Events Participated", icon: Globe },
-              { target: 1,   suffix: "K+", label: "Students Trained", icon: GraduationCap },
-            ].map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <div
-                  key={s.label}
-                  className="flex flex-col items-center text-center p-4 md:p-0"
-                >
-                  <div className="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent mb-3">
-                    <Icon className="w-5 h-5 stroke-[2]" />
-                  </div>
-                  <StatCounter
-                    target={s.target}
-                    suffix={s.suffix}
-                    label={s.label}
-                    customCard={true}
-                    numberClassName="text-3xl md:text-4xl font-black text-text-primary tracking-tight font-heading"
-                    labelClassName="mt-1 text-xs font-bold text-text-muted uppercase tracking-wider block"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* 5.5 ROBOTICS COMPETITION EXCELLENCE SECTION */}
       <section className="section bg-white py-24 border-t border-border/30 overflow-hidden">
@@ -526,7 +486,7 @@ export default function HomeClient() {
           </AnimatedSection>
 
           {/* Horizontal scroll snap on mobile, Grid on desktop */}
-          <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-5 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0">
+          <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-3 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0">
             {competitions.map((comp) => {
               return (
                 <div key={comp.title} className="snap-start shrink-0 w-[260px] sm:w-auto h-full">

@@ -1,5 +1,4 @@
-"use client";
-
+import type { Metadata } from "next";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +7,11 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+
+export const metadata: Metadata = {
+  title: "Er. K. Tamizharasan — Founder & CEO of TamizhTech",
+  description: "Explore the journey, background, and vision of Er. K. Tamizharasan, the Founder & CEO of TamizhTech Robotics Company.",
+};
 
 export default function FounderPage() {
   const personSchema = {
@@ -93,7 +97,7 @@ export default function FounderPage() {
 
           <div className="max-w-3xl mx-auto space-y-8 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-border">
             {[
-              { year: "2020", title: "Inception in Coimbatore", desc: "Started as a micro-consultancy for student electronics assemblies, establishing initial partnerships." },
+              { year: "2021", title: "Inception in Coimbatore", desc: "Started as a micro-consultancy for student electronics assemblies and established the Tamizh Robotics Club (TRC)." },
               { year: "2022", title: "Launch of STEM Lab Setup Services", desc: "Began deployment of complete laboratory packages for CBSE/ICSE schools across Tamil Nadu." },
               { year: "2024", title: "National Robotics Competition Dominance", desc: "Engineered and supplied components for over 50+ podium-winning college teams in Robo War and Soccer." },
               { year: "2026", title: "B2B Automation Expansion", desc: "Scaling custom AMR development and computer vision inspection benches for industrial clients." }
