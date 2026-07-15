@@ -49,6 +49,10 @@ export const metadata: Metadata = {
     "TamizhTech Robotics Company",
     "ThiranOli Academy",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo/TTRC LOGO.png",
+  },
   authors: [{ name: "TamizhTech Robotics Company" }],
   creator: "TamizhTech Robotics Company",
   publisher: "TamizhTech Robotics Company",
