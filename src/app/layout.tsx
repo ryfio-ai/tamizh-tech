@@ -51,13 +51,13 @@ export const metadata: Metadata = {
     title: "TamizhTech Robotics Company — AI, Robotics & Engineering Innovation",
     description:
       "Premier robotics and AI technology company based in Coimbatore. We build the future through engineering innovation.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "TamizhTech Robotics Company" }],
+    images: [{ url: "/logo/banner.png", width: 1200, height: 630, alt: "TamizhTech Robotics Company Logo" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TamizhTech Robotics Company",
     description: "AI · Robotics · Drone · IoT · Industrial Automation · STEM",
-    images: ["/og-image.jpg"],
+    images: ["/logo/banner.png"],
   },
   robots: { index: true, follow: true },
 };
