@@ -1,6 +1,8 @@
 import { products, getProductBySlug } from "@/data/products";
 import { notFound } from "next/navigation";
 import ProductDetailClient from "./ProductDetailClient";
+import { ProductSchema } from "@/components/JsonLd";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   return products.map((p) => ({
@@ -11,6 +13,15 @@ export async function generateStaticParams() {
 interface PageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const product = getProductBySlug(params.slug);
+  if (!product) return {};
+  return {
+    title: `${product.name} | Custom Robotics Kits Coimbatore`,
+    description: product.description,
   };
 }
 
@@ -26,5 +37,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
     .filter(p => p.category === product.category && p.slug !== product.slug)
     .slice(0, 3);
 
-  return <ProductDetailClient product={product} related={related} />;
+  return (
+    <>
+      <ProductSchema product={product} />
+      <ProductDetailClient product={product} related={related} />
+    </>
+  );
 }

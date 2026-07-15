@@ -1,0 +1,21 @@
+{
+  "name": "TamizhTech Robotics Company",
+  "short_name": "TamizhTech",
+  "description": "Coimbatore's premier robotics company building competition robot kits, school STEM Tinkering labs, and industrial automation solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FB7115",
+  "icons": [
+    {
+      "src": "/logo/TTRC LOGO.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo/TTRC LOGO.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

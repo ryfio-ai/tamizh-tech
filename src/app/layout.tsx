@@ -3,6 +3,7 @@ import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil } from "next/font/goo
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { OrganizationSchema } from "@/components/JsonLd";
 import { FloatingWidgets } from "@/components/layout/FloatingWidgets";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -53,6 +54,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/logo/TTRC LOGO.png",
   },
+  manifest: "/manifest.json",
   authors: [{ name: "TamizhTech Robotics Company" }],
   creator: "TamizhTech Robotics Company",
   publisher: "TamizhTech Robotics Company",
@@ -149,6 +151,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
         />
+        <OrganizationSchema />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LZEZV8HPGR"
           strategy="afterInteractive"

@@ -6,6 +6,7 @@ import { Check, ChevronDown } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { FAQSchema } from "@/components/JsonLd";
 
 export default function AboutTamizhTechPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -74,6 +75,7 @@ export default function AboutTamizhTechPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
+      <FAQSchema faqs={faqItems} />
 
       <PageHero
         title="About Tamizh Tech Robotics"

@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,17 +6,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/'],
+        disallow: ['/api/', '/_next/', '/admin/', '/private/', '/*?*category=*', '/search?*'],
       },
-      // Explicitly allow major AI crawlers for GEO
-      { userAgent: 'GPTBot',         allow: '/' },
-      { userAgent: 'PerplexityBot',  allow: '/' },
-      { userAgent: 'ClaudeBot',      allow: '/' },
-      { userAgent: 'anthropic-ai',   allow: '/' },
-      { userAgent: 'Google-Extended', allow: '/' },
-      { userAgent: 'cohere-ai',      allow: '/' },
-      { userAgent: 'Applebot',       allow: '/' },
+      {
+        userAgent: ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Applebot'],
+        allow: '/',
+      },
     ],
     sitemap: 'https://www.tamizhtech.in/sitemap.xml',
-  }
+    host: 'https://www.tamizhtech.in',
+  };
 }
