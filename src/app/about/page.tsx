@@ -130,24 +130,29 @@ export default function AboutPage() {
             <SectionHeader tag="Our Journey" title="The" highlight="TamizhTech story" />
           </AnimatedSection>
           <div className="relative max-w-3xl mx-auto">
-            {/* Center line with gradient glow */}
-            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-zinc-200" />
+            {/* Center line with gradient glow (pushed to left on mobile) */}
+            <div className="absolute left-4 md:left-1/2 -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-zinc-200" />
             
             {timeline.map((item, i) => (
-              <AnimatedSection key={item.year} delay={i * 0.15} direction={i % 2 === 0 ? "left" : "right"} className={`relative flex gap-8 mb-16 ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
-                <div className="flex-1">
-                  <div className={`bg-white border border-border p-6 rounded-2xl shadow-sm hover:border-accent/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${i % 2 === 0 ? "text-right" : "text-left"}`}>
+              <AnimatedSection 
+                key={item.year} 
+                delay={i * 0.15} 
+                direction={i % 2 === 0 ? "left" : "right"} 
+                className={`relative pl-10 md:pl-0 flex flex-col md:flex-row md:gap-8 mb-16 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+              >
+                <div className="w-full md:flex-1">
+                  <div className={`bg-white border border-border p-6 rounded-2xl shadow-sm hover:border-accent/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${i % 2 === 0 ? "md:text-right" : "text-left"}`}>
                     <span className="text-accent text-sm font-extrabold font-mono px-3 py-1 rounded-full bg-accent/5 border border-accent/10">{item.year}</span>
                     <h3 className="text-text-primary font-bold mt-3 mb-2 uppercase text-base tracking-tight">{item.title}</h3>
                     <p className="text-text-muted text-xs leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
-                {/* Pulsing indicator */}
-                <div className="absolute left-1/2 -translate-x-1/2 top-6 w-5 h-5 rounded-full bg-white border-4 border-accent shadow-md z-10 flex items-center justify-center">
+                {/* Pulsing indicator (pushed to left on mobile) */}
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-6 w-5 h-5 rounded-full bg-white border-4 border-accent shadow-md z-10 flex items-center justify-center">
                   <span className="absolute w-2 h-2 rounded-full bg-accent animate-ping" />
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 </div>
-                <div className="flex-1" />
+                <div className="hidden md:block md:flex-1" />
               </AnimatedSection>
             ))}
           </div>
