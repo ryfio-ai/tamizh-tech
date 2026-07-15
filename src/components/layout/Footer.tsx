@@ -121,8 +121,8 @@ export function Footer() {
       <footer style={{ background: "#fff", borderTop: "1px solid #f1f5f9", fontFamily: "inherit" }}>
 
         {/* ── Main Content ── */}
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "64px 32px 48px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1.4fr", gap: "48px", alignItems: "start" }}>
+        <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-start">
 
             {/* Col 1 — Brand */}
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -287,26 +287,23 @@ export function Footer() {
 
         {/* ── Bottom Bar ── */}
         <div style={{ borderTop: "1px solid #f1f5f9", background: "#f8fafc" }}>
-          <div style={{
-            maxWidth: "1200px", margin: "0 auto",
-            padding: "18px 32px",
-            display: "flex", flexWrap: "wrap", alignItems: "center",
-            justifyContent: "space-between", gap: "12px",
-          }}>
+          <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
             <p style={{ fontSize: "12px", color: "#94a3b8", margin: 0 }}>
               © {new Date().getFullYear()} Tamizh Tech Robotics Company. All rights reserved. | Coimbatore, Tamil Nadu, India
             </p>
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <Link href="/privacy" style={{ fontSize: "12px", color: "#94a3b8", textDecoration: "none" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#FB7115")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#94a3b8")}>
-                Privacy Policy
-              </Link>
-              <Link href="/terms" style={{ fontSize: "12px", color: "#94a3b8", textDecoration: "none" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#FB7115")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#94a3b8")}>
-                Terms of Service
-              </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <div className="flex items-center gap-6">
+                <Link href="/privacy" style={{ fontSize: "12px", color: "#94a3b8", textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FB7115")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#94a3b8")}>
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" style={{ fontSize: "12px", color: "#94a3b8", textDecoration: "none" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FB7115")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#94a3b8")}>
+                  Terms of Service
+                </Link>
+              </div>
               {/* Made in India Badge */}
               <div style={{
                 display: "flex", alignItems: "center", gap: "7px",
