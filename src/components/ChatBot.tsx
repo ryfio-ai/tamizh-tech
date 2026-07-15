@@ -101,7 +101,7 @@ export function ChatBot() {
           <div className="relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
             <Image
-              src="/logo/TTRC LOGO.jpg"
+              src="/logo/TTRC LOGO.png"
               alt="TTRC Logo"
               width={60}
               height={60}
@@ -131,7 +131,7 @@ export function ChatBot() {
                 src={
                   message.sender === "user"
                     ? undefined
-                    : "/logo/TTRC LOGO.jpg"
+                    : "/logo/TTRC LOGO.png"
                 }
                 fallback={message.sender === "user" ? "ME" : "TTRC"}
               />
@@ -152,7 +152,7 @@ export function ChatBot() {
             <ChatBubble variant="received">
               <ChatBubbleAvatar
                 className="h-8 w-8 shrink-0 border border-white/10 overflow-hidden bg-black/20"
-                src="/logo/TTRC LOGO.jpg"
+                src="/logo/TTRC LOGO.png"
                 fallback="TTRC"
               />
               <ChatBubbleMessage isLoading className="bg-slate-800/90 border border-white/5" />

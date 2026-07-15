@@ -8,10 +8,23 @@ interface StatCounterProps {
   label: string;
   prefix?: string;
   suffix?: string;
+  className?: string;
+  customCard?: boolean;
+  numberClassName?: string;
+  labelClassName?: string;
 }
 
-export function StatCounter({ target, label, prefix = "", suffix = "" }: StatCounterProps) {
-  const [count, setCount] = useState(target);
+export function StatCounter({
+  target,
+  label,
+  prefix = "",
+  suffix = "",
+  className = "",
+  customCard = false,
+  numberClassName = "",
+  labelClassName = "",
+}: StatCounterProps) {
+  const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const shouldReduceMotion = useReducedMotion();
@@ -46,18 +59,34 @@ export function StatCounter({ target, label, prefix = "", suffix = "" }: StatCou
     requestAnimationFrame(animate);
   }, [isInView, target, shouldReduceMotion]);
 
+  if (customCard) {
+    return (
+      <div ref={ref} className={className}>
+        <span 
+          className={`text-4xl md:text-5xl font-black text-accent tracking-tight block mb-2 font-mono ${numberClassName}`}
+          style={{ fontVariantNumeric: "tabular-nums" }}
+        >
+          {prefix}{count}{suffix}
+        </span>
+        <span className={`text-[10px] font-black text-text-muted uppercase tracking-widest leading-snug ${labelClassName}`}>
+          {label}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div 
       ref={ref} 
-      className="bg-[#11141A] border border-[#232833] rounded-xl p-8 text-center transition-all duration-300 hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.08)] flex flex-col justify-center items-center h-full min-h-[140px]"
+      className={`bg-[#11141A] border border-[#232833] rounded-xl p-8 text-center transition-all duration-300 hover:border-[#FF4D2D] hover:shadow-[0_12px_32px_rgba(255,77,45,0.08)] flex flex-col justify-center items-center h-full min-h-[140px] ${className}`}
     >
       <span 
-        className="text-4xl md:text-5xl font-black text-[#F5F6F8] tracking-tight block mb-2 font-mono"
+        className={`text-4xl md:text-5xl font-black text-[#F5F6F8] tracking-tight block mb-2 font-mono ${numberClassName}`}
         style={{ fontVariantNumeric: "tabular-nums" }}
       >
         {prefix}{count}{suffix}
       </span>
-      <span className="text-[10px] font-black text-[#9AA1AC] uppercase tracking-widest leading-snug">
+      <span className={`text-[10px] font-black text-[#9AA1AC] uppercase tracking-widest leading-snug ${labelClassName}`}>
         {label}
       </span>
     </div>

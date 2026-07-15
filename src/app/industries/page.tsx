@@ -20,6 +20,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { RoboticsIcon, AIIcon, IoTIcon, EmbeddedIcon, AutomationIcon, MfgIcon } from "@/components/ui/CustomIcons";
 
 export const metadata: Metadata = {
   title: "Industrial Automation & Robotics Solutions | Coimbatore | Tamizh Tech",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Industrial Automation & Robotics Integration | Tamizh Tech",
     description: "Empowering factory floors with custom robotics, vision checks, and IoT dashboards. Coimbatore engineering core.",
-    url: "https://tamizhtech.com/industries",
+    url: "https://tamizhtech.in/industries",
     type: "website"
   }
 };
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
 const solutions = [
   {
     id: "automation",
-    icon: <Factory className="w-10 h-10 stroke-[1.5]" />,
+    icon: <AutomationIcon size={40} />,
     title: "Factory Automation",
     challenge: "Low OEE and high manual labor error rates on assembly lines.",
     approach: "Deploy custom mechanical pick-and-place nodes, conveyor lines, and pneumatic sorters.",
@@ -49,7 +50,7 @@ const solutions = [
   },
   {
     id: "plc-frameworks",
-    icon: <HardDrive className="w-10 h-10 stroke-[1.5]" />,
+    icon: <EmbeddedIcon size={40} />,
     title: "PLC & SCADA Programming",
     challenge: "Complex multi-device synchronization and lack of control room visibility.",
     approach: "Custom logic programming for Siemens, Allen-Bradley, and Delta PLCs with SCADA panels.",
@@ -57,7 +58,7 @@ const solutions = [
   },
   {
     id: "machine-vision",
-    icon: <Eye className="w-10 h-10 stroke-[1.5]" />,
+    icon: <AIIcon size={40} />,
     title: "Machine Vision Systems",
     challenge: "Manual quality inspection bottlenecks leading to defect escapes.",
     approach: "High-speed optical inspection rigs powered by custom OpenCV pattern checking software.",
@@ -65,7 +66,7 @@ const solutions = [
   },
   {
     id: "iot-monitoring",
-    icon: <Monitor className="w-10 h-10 stroke-[1.5]" />,
+    icon: <IoTIcon size={40} />,
     title: "IoT Fleet Monitoring",
     challenge: "Unexpected machinery breakdowns and lack of historical operational logs.",
     approach: "Install ESP32 environmental sensors and telemetry nodes streaming to secure dashboards.",
@@ -73,7 +74,7 @@ const solutions = [
   },
   {
     id: "ai-systems",
-    icon: <Cpu className="w-10 h-10 stroke-[1.5]" />,
+    icon: <RoboticsIcon size={40} />,
     title: "Custom Robotics (AGV/AMR)",
     challenge: "High cost of warehouse material material handling and path planning issues.",
     approach: "Indigenously manufactured TTRC AGV V1 and AMR V1 logistics platforms mapped to grids.",
@@ -81,7 +82,7 @@ const solutions = [
   },
   {
     id: "consultation",
-    icon: <LineChart className="w-10 h-10 stroke-[1.5]" />,
+    icon: <MfgIcon size={40} />,
     title: "Industrial Consultation",
     challenge: "Uncertain ROI for digital transformation and legacy machinery constraints.",
     approach: "Comprehensive physical audit of factory workflow, cycle times, and electrical load setup.",
@@ -121,13 +122,13 @@ const schemas = [
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://tamizhtech.com"
+        "item": "https://tamizhtech.in"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Industrial Automation",
-        "item": "https://tamizhtech.com/industries"
+        "item": "https://tamizhtech.in/industries"
       }
     ]
   }

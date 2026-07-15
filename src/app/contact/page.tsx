@@ -85,7 +85,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1.5">Official Inquiry</p>
-                    <a href="mailto:office@tamizhtech.in" className="text-lg font-bold text-text-primary hover:text-accent transition-colors break-all">office@tamizhtech.in</a>
+                    <a href="mailto:info@tamizhtech.in" className="text-lg font-bold text-text-primary hover:text-accent transition-colors break-all">info@tamizhtech.in</a>
                   </div>
                 </div>
 
@@ -95,7 +95,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1.5">Engineering HQ</p>
-                    <p className="text-lg font-bold text-text-primary leading-tight">Coimbatore, Tamil Nadu, India</p>
+                    <p className="text-lg font-bold text-text-primary leading-tight">Thiruchendur Gdn Rd, Kurumbapalayam SSKulam,<br />Coimbatore, Tamil Nadu 641107</p>
                   </div>
                 </div>
               </div>
@@ -256,29 +256,33 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <style jsx global>{`
-        .form-input-custom {
-          width: 100%;
-          background-color: var(--bg-page);
-          border: 1px solid var(--border);
-          padding: 0.75rem 1rem;
-          color: var(--text-primary);
-          font-weight: 600;
-          font-size: 0.875rem;
-          outline: none;
-          transition: all 0.2s ease;
-          border-radius: 9999px;
-        }
-        .form-input-custom:focus {
-          border-color: var(--accent-blue);
-        }
-        select.form-input-custom {
-          padding-right: 2.5rem;
-        }
-        textarea.form-input-custom {
-          border-radius: 16px;
-        }
-      `}</style>
+      {/* Google Maps Embed */}
+      <section className="bg-subtle border-t border-border py-16">
+        <div className="container px-6">
+          <div className="mb-8">
+            <span className="text-[10px] font-black text-accent uppercase tracking-widest block mb-2">Find Us</span>
+            <h2 className="text-2xl md:text-3xl font-black text-text-primary uppercase tracking-tight font-heading">
+              Our Engineering HQ
+            </h2>
+            <p className="text-sm text-text-secondary mt-2">
+              Thiruchendur Gdn Rd, Kurumbapalayam SSKulam, Coimbatore, Tamil Nadu 641107
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-border shadow-md w-full" style={{ height: '420px' }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7829.994713601236!2d77.02676977955934!3d11.11357428711481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1784045884865!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="TamizhTech Robotics Company — Coimbatore Location"
+            />
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

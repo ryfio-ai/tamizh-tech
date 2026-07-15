@@ -25,7 +25,7 @@ export default function RoboticsProductsIndiaPage() {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Tamizh Tech Robotics Company",
-      "image": "https://tamizhtech.com/logo.png",
+      "image": "https://www.tamizhtech.in/logo/TTRC LOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Coimbatore",
@@ -33,7 +33,7 @@ export default function RoboticsProductsIndiaPage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.com"
+      "url": "https://tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -55,13 +55,13 @@ export default function RoboticsProductsIndiaPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.com"
+          "item": "https://tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Robotics Products India",
-          "item": "https://tamizhtech.com/robotics-products-india"
+          "item": "https://tamizhtech.in/robotics-products-india"
         }
       ]
     }

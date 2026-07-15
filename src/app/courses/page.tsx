@@ -7,25 +7,13 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { courses } from "@/data/courses";
 
-const categories = ["All", "School", "College", "Professionals", "Faculty", "Summer Camp"];
-
-const courses = [
-  { cat: "School",        title: "Robotics for Schools",         duration: "3 months", mode: "Offline", students: 30, desc: "Hands-on robotics program for school students (Grade 6–12). Build, program, and compete." },
-  { cat: "School",        title: "STEM Basics",                  duration: "1 month",  mode: "Online",  students: 50, desc: "Introduction to STEM concepts through fun activities and mini-projects." },
-  { cat: "College",       title: "Embedded Systems",             duration: "2 months", mode: "Offline", students: 25, desc: "Deep dive into microcontrollers, RTOS, and firmware development for engineering students." },
-  { cat: "College",       title: "AI & Machine Learning",        duration: "3 months", mode: "Hybrid",  students: 30, desc: "From Python basics to deploying ML models — complete AI course for college students." },
-  { cat: "College",       title: "Drone Engineering",            duration: "6 weeks",  mode: "Offline", students: 20, desc: "Design, build, and fly a custom UAV. Covers aerodynamics, electronics, and flight control." },
-  { cat: "Professionals", title: "Industrial Automation (PLC)",  duration: "45 days",  mode: "Offline", students: 15, desc: "Industry-grade PLC, SCADA, and industrial automation for working professionals." },
-  { cat: "Professionals", title: "Computer Vision with Python",  duration: "30 days",  mode: "Online",  students: 40, desc: "OpenCV, object detection, and deep learning-based vision systems for engineers." },
-  { cat: "Faculty",       title: "Faculty Development Program",  duration: "5 days",   mode: "Offline", students: 20, desc: "Upskill faculty with modern robotics and AI pedagogy, tools, and lab practices." },
-  { cat: "Summer Camp",   title: "Robotics Summer Camp",         duration: "2 weeks",  mode: "Offline", students: 40, desc: "Intensive summer camp where students design, build, and compete with their own robots." },
-  { cat: "Summer Camp",   title: "AI Explorer Camp",             duration: "2 weeks",  mode: "Hybrid",  students: 35, desc: "Explore AI, chatbots, computer vision, and ML through hands-on summer projects." },
-];
+const categories = ["All", "School", "College", "Professionals"];
 
 export default function CoursesPage() {
-  const [active, setActive] = useState("All");
-  const filtered = active === "All" ? courses : courses.filter((c) => c.cat === active);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const filtered = activeCategory === "All" ? courses : courses.filter((c) => c.cat === activeCategory);
 
   return (
     <div>
@@ -37,18 +25,18 @@ export default function CoursesPage() {
       />
 
       {/* Filter tabs */}
-      <section className="section bg-white py-24">
+      <section className="section bg-white py-24 text-left">
         <div className="container px-6">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-12 text-center">
             <div className="flex flex-wrap justify-center gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setActive(cat)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all cursor-pointer ${
-                    active === cat
-                      ? "bg-accent text-white shadow-md shadow-accent/20"
-                      : "bg-subtle border border-border text-text-secondary hover:border-accent hover:text-accent"
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                    activeCategory === cat
+                      ? "bg-accent text-white border border-accent shadow-sm"
+                      : "bg-subtle border border-border text-text-secondary hover:text-accent hover:border-accent"
                   }`}
                 >
                   {cat}
@@ -57,42 +45,42 @@ export default function CoursesPage() {
             </div>
           </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" key={active}>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" key={activeCategory}>
             {filtered.map((course) => (
-              <StaggerItem key={course.title}>
-                <Card className="flex flex-col justify-between h-full hover:border-accent/20 hover:shadow-[0_12px_30px_rgba(37,99,235,0.08)]">
+              <StaggerItem key={course.id}>
+                <Card className="flex flex-col justify-between h-full border border-border bg-white rounded-lg hover:border-accent/40 hover:shadow-lg transition-all duration-300 p-8">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="bg-accent/5 px-3 py-1 rounded-full text-xs font-bold text-accent tracking-wide uppercase">
+                      <span className="bg-accent-soft px-3 py-1 rounded-full text-[10px] font-bold text-accent tracking-wide uppercase">
                         {course.cat}
                       </span>
-                      <div className="flex items-center gap-1.5 text-xs text-text-muted">
-                        <Clock className="w-3.5 h-3.5" />
+                      <div className="flex items-center gap-1.5 text-xs text-text-secondary font-semibold uppercase tracking-wider">
+                        <Clock className="w-3.5 h-3.5 text-accent" />
                         <span>{course.duration}</span>
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-text-primary mb-3">
+                    <h3 className="text-xl font-bold font-heading text-text-primary mb-3">
                       {course.title}
                     </h3>
-                    <p className="text-sm text-text-muted leading-relaxed mb-6">
+                    <p className="text-sm text-text-secondary leading-relaxed mb-6 font-sans">
                       {course.desc}
                     </p>
                   </div>
 
                   <div>
-                    <div className="flex items-center gap-4 py-4 border-t border-border/60 text-xs text-text-muted mb-6">
+                    <div className="flex items-center gap-4 py-4 border-t border-border text-xs text-text-secondary mb-6 uppercase tracking-wider font-bold">
                       <div className="flex items-center gap-1.5">
                         <Monitor className="w-4 h-4 text-accent" />
                         <span>{course.mode}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Users className="w-4 h-4 text-accent" />
-                        <span>{course.students} Seats</span>
+                        <span>{course.seatsLeft} Seats Left</span>
                       </div>
                     </div>
-                    <Link href="/contact" className="block w-full">
-                      <Button variant="primary" className="w-full justify-center">
-                        Register Now <ArrowRight className="w-4 h-4 ml-1.5" />
+                    <Link href={`/courses/${course.id}`} className="block w-full">
+                      <Button variant="primary" className="w-full justify-center font-bold text-white">
+                        Explore Syllabus <ArrowRight className="w-4 h-4 ml-1.5" />
                       </Button>
                     </Link>
                   </div>
@@ -100,21 +88,6 @@ export default function CoursesPage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section bg-subtle py-20 border-t border-border/30">
-        <div className="container px-6 text-center">
-          <AnimatedSection className="max-w-md mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-4">Custom training for your team?</h2>
-            <p className="text-text-muted mb-8 leading-relaxed">We design corporate training programs tailored to your team&apos;s needs.</p>
-            <Link href="/contact">
-              <Button variant="primary">
-                Talk to Us <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </Link>
-          </AnimatedSection>
         </div>
       </section>
     </div>

@@ -7,11 +7,12 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { RoboticsIcon, AIIcon, DroneIcon, IoTIcon, EmbeddedIcon, AutomationIcon } from "@/components/ui/CustomIcons";
 
 const services = [
   {
     id: "robotics",
-    icon: Bot,
+    icon: RoboticsIcon,
     title: "Robotics",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
     desc: "We design and build custom robotic systems for industrial, educational, and research applications.",
@@ -20,7 +21,7 @@ const services = [
   },
   {
     id: "ai",
-    icon: Brain,
+    icon: AIIcon,
     title: "Artificial Intelligence",
     image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=600&h=400&fit=crop",
     desc: "From machine learning models to computer vision — we build intelligent systems that see and think.",
@@ -29,7 +30,7 @@ const services = [
   },
   {
     id: "drone",
-    icon: Zap,
+    icon: DroneIcon,
     title: "Drone Technology",
     image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop",
     desc: "UAV design, control systems, and payload integration for agriculture, surveillance, and industrial use.",
@@ -38,7 +39,7 @@ const services = [
   },
   {
     id: "iot",
-    icon: Network,
+    icon: IoTIcon,
     title: "IoT Solutions",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
     desc: "Connected ecosystems that bridge the physical and digital world through smart sensor networks.",
@@ -47,7 +48,7 @@ const services = [
   },
   {
     id: "embedded",
-    icon: Cpu,
+    icon: EmbeddedIcon,
     title: "Embedded Systems",
     image: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?w=600&h=400&fit=crop",
     desc: "Low-level firmware and hardware design for microcontrollers, FPGAs, and real-time systems.",
@@ -56,7 +57,7 @@ const services = [
   },
   {
     id: "automation",
-    icon: Factory,
+    icon: AutomationIcon,
     title: "Industrial Automation",
     image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=400&fit=crop",
     desc: "End-to-end factory automation solutions — from PLCs and SCADA to fully autonomous production lines.",
@@ -162,17 +163,96 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* 3D Printing Service Showcase Section */}
+      <section className="section bg-subtle py-24 border-t border-border/30">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left side: Video */}
+            <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-lg">
+              <video
+                src="/3d printing.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </AnimatedSection>
+
+            {/* Right side: Copy & WhatsApp Button */}
+            <AnimatedSection className="lg:col-span-6 flex flex-col justify-center text-left" direction="right" delay={0.1}>
+              <span className="text-xs font-bold tracking-[0.15em] text-accent uppercase mb-4 block">
+                Additive Manufacturing
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
+                Professional 3D Printing <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Services</span>
+              </h2>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
+                Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish at an <span className="text-accent font-semibold">affordable price</span>.
+              </p>
+              
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {[
+                  "FDM & SLA Printing",
+                  "Rapid Prototyping",
+                  "PLA, ABS, PETG, TPU Materials",
+                  "Custom Drone & Robot Parts",
+                  "Industrial Design Fitment",
+                  "Commercial Batch Production"
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://wa.me/918148045030?text=Hi%20TamizhTech,%20I%20am%20interested%20in%20your%203D%20Printing%20Services.%20Can%20you%20share%20pricing%20details?"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button variant="primary" size="lg" className="w-full justify-center bg-accent hover:bg-accent-hover text-white font-bold rounded-lg border-none px-8 py-3">
+                    Order via WhatsApp
+                  </Button>
+                </a>
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full justify-center border-border hover:bg-white hover:text-black font-bold rounded-lg px-8 py-3">
+                    Get a Quote
+                  </Button>
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="section bg-subtle py-20 border-t border-border/30">
-        <div className="container px-6 text-center">
-          <AnimatedSection className="max-w-md mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-4">Need a custom solution?</h2>
-            <p className="text-text-muted mb-8 leading-relaxed">Every project is unique. Let&apos;s discuss your requirements.</p>
-            <Link href="/contact">
-              <Button variant="primary">
-                Contact Our Team <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </Link>
+      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+        <div className="container relative z-10 px-6 max-w-4xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight mb-4 text-white uppercase">
+              Need a custom solution?
+            </h2>
+            <p className="text-gray-400 mb-10 max-w-md mx-auto leading-relaxed font-sans text-sm">
+              Every project is unique. Let&apos;s discuss your requirements and build something extraordinary.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full justify-center text-sm font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                  Contact Our Team <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
+              </Link>
+              <Link href="/products" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full justify-center text-sm font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                  Explore Products
+                </Button>
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>

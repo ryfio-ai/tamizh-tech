@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
+import { StatCounter } from "@/components/ui/StatCounter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
@@ -24,15 +25,19 @@ import { CTABanner } from "@/components/ui/CTABanner";
 import { Card } from "@/components/ui/Card";
 import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
 import { Spotlight } from "@/components/ui/spotlight";
+import {
+  RoboticsIcon, AIIcon, DroneIcon, IoTIcon, EmbeddedIcon, AutomationIcon,
+  MfgIcon, EduIcon, DefIcon, CityIcon, LabIcon, HealthIcon, AgriIcon, AutoIcon
+} from "@/components/ui/CustomIcons";
 
 // Data
 const services = [
-  { icon: Bot,          title: "Robotics",             desc: "Custom robotic systems from concept to deployment.",  color: "blue", href: "/services#robotics" },
-  { icon: Brain,        title: "Artificial Intelligence", desc: "ML models, vision AI, and intelligent automation.", color: "purple", href: "/services#ai" },
-  { icon: Plane,        title: "Drone Technology",     desc: "UAV design, control systems, and aerial solutions.",   color: "sky", href: "/services#drone" },
-  { icon: Network,      title: "IoT",                  desc: "Connected ecosystems for smart environments.",         color: "teal", href: "/services#iot" },
-  { icon: Cpu,          title: "Embedded Systems",     desc: "Firmware, microcontrollers, and embedded dev.",        color: "orange", href: "/services#embedded" },
-  { icon: Factory,      title: "Industrial Automation",desc: "Process automation for modern manufacturing.",         color: "red", href: "/services#automation" },
+  { icon: RoboticsIcon,   title: "Robotics",             desc: "Custom robotic systems from concept to deployment.",  color: "blue", href: "/services#robotics" },
+  { icon: AIIcon,         title: "Artificial Intelligence", desc: "ML models, vision AI, and intelligent automation.", color: "purple", href: "/services#ai" },
+  { icon: DroneIcon,      title: "Drone Technology",     desc: "UAV design, control systems, and aerial solutions.",   color: "sky", href: "/services#drone" },
+  { icon: IoTIcon,        title: "IoT",                  desc: "Connected ecosystems for smart environments.",         color: "teal", href: "/services#iot" },
+  { icon: EmbeddedIcon,   title: "Embedded Systems",     desc: "Firmware, microcontrollers, and embedded dev.",        color: "orange", href: "/services#embedded" },
+  { icon: AutomationIcon, title: "Industrial Automation",desc: "Process automation for modern manufacturing.",         color: "red", href: "/services#automation" },
   { icon: Zap,          title: "STEM Labs",            desc: "Turnkey tinkering labs for schools and colleges.",     color: "yellow", href: "/courses#school" },
   { icon: FlaskConical, title: "R&D Projects",         desc: "Research-grade engineering and product prototyping.",  color: "green", href: "/projects" },
   { icon: GraduationCap,title: "Courses",              desc: "Structured programs for students & professionals.",    color: "indigo", href: "/courses" },
@@ -47,14 +52,14 @@ const stats = [
 ];
 
 const industries = [
-  { icon: Factory,      label: "Manufacturing" },
-  { icon: GraduationCap,label: "Education" },
-  { icon: Shield,       label: "Defense" },
-  { icon: Globe,        label: "Smart Cities" },
-  { icon: TrendingUp,   label: "Research Labs" },
-  { icon: Users,        label: "Healthcare" },
-  { icon: Briefcase,    label: "Agriculture" },
-  { icon: Award,        label: "Automotive" },
+  { icon: MfgIcon,      label: "Manufacturing" },
+  { icon: EduIcon,      label: "Education" },
+  { icon: DefIcon,      label: "Defense" },
+  { icon: CityIcon,     label: "Smart Cities" },
+  { icon: LabIcon,      label: "Research Labs" },
+  { icon: HealthIcon,   label: "Healthcare" },
+  { icon: AgriIcon,     label: "Agriculture" },
+  { icon: AutoIcon,     label: "Automotive" },
 ];
 
 const whyUs = [
@@ -71,6 +76,13 @@ const projects = [
 ];
 
 const galleryImages = [
+  "/gallery/j14.jpg",
+  "/gallery/j15.jpg",
+  "/gallery/j16.jpg",
+  "/gallery/j17.jpg",
+  "/gallery/j18.jpg",
+  "/gallery/j19.jpg",
+  "/gallery/j20.jpg",
   "/gallery/1.JPEG",
   "/gallery/3.jpg",
   "/gallery/6.jpg",
@@ -100,95 +112,203 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { icon: Zap,          title: "RC Robo Race",     desc: "High-speed custom race bots designed for track drift, control, and agility." },
-  { icon: Award,        title: "RC Robo Soccer",   desc: "Solenoid and pneumatic kicker-driven robots engineered for active sports play." },
-  { icon: Swords,       title: "RC Robo War",      desc: "Heavy-armored battle bots built to withstand impacts and defeat opponents." },
-  { icon: Target,       title: "RC Robo Sumo",     desc: "Magnetic high-traction pushers optimized for arena dominance and strength." },
-  { icon: Ship,         title: "RC Boat",          desc: "Water-cooled brushless motor aquatic speedsters engineered for speed." },
-  { icon: Wind,         title: "Hovercraft",       desc: "Dual-motor air-cushion platforms designed for multi-terrain gliding." },
-  { icon: Route,        title: "Line Follower",    desc: "Autonomous PID-tuned vehicles utilizing advanced sensor arrays for speed." },
-  { icon: Grid,         title: "Maze Solver",      desc: "Smart pathfinding robots running custom mapping algorithms in real time." },
-  { icon: Plane,        title: "Drone",            desc: "Multi-rotor UAV kits, FPV quadcopters, and custom autonomous aerial flight." },
-  { icon: Rocket,       title: "Water Rocketry",   desc: "Aerodynamic pressurized launch models engineered for maximum altitude." },
+  { title: "RC Robo Race",     spec: "High-RPM metal gear motors, drift chassis", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "apex-race-bot-v2" },
+  { title: "RC Robo Soccer",   spec: "Solenoid active kicker, pneumatic cylinder", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop", slug: "striker-pneumatic-soccer-bot" },
+  { title: "RC Robo War",      spec: "Hardened steel spinner, 15kg weight class", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop", slug: "titan-combat-bot-15kg" },
+  { title: "RC Robo Sumo",     spec: "Rare-earth magnets, high-traction tires", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop", slug: "shogun-sumo-bot" },
+  { title: "RC Boat",          spec: "Brushless water-cooled motor, fiberglass hull", image: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=600&h=400&fit=crop", slug: "aquajet-rc-speedboat" },
+  { title: "Hovercraft",       spec: "Dual-motor air cushion, lightweight shroud", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop", slug: "aquajet-rc-speedboat" },
+  { title: "Line Follower",    spec: "PID sensor arrays, high-speed micro-metal gear", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "tracker-pid-line-follower" },
+  { title: "Maze Solver",      spec: "Micromouse mapping algorithms, encoder motors", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", slug: "micromouse-maze-solver" },
+  { title: "Drone Kit",        spec: "Pixhawk Cube Orange flight avionics, carbon fiber", image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop", slug: "falcon-quadcopter-build-kit" },
+  { title: "Water Rocketry",   spec: "Aerodynamic launcher, pressurized nozzles", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop", slug: "falcon-quadcopter-build-kit" },
 ];
 
 export default function HomeClient() {
   const [activeImageIdx, setActiveImageIdx] = useState<number | null>(null);
+  const [activeFaqIdx, setActiveFaqIdx] = useState<number | null>(null);
   return (
     <div className="flex flex-col bg-white">
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-20">
-        {/* Aceternity Spotlight for high-end aesthetic */}
-        <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="rgba(251, 113, 21, 0.12)" />
-
-        {/* floating orbs */}
-        <div className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-accent/5 blur-[120px] pointer-events-none animate-pulse-slow" />
-        <div className="absolute bottom-1/4 -left-40 w-80 h-80 rounded-full bg-accent/5 blur-[120px] pointer-events-none animate-pulse-slow" />
-
-        <div className="container relative z-10 pt-24 pb-4 px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-24 pb-12 border-b border-border/40">
+        
+        <div className="container relative z-10 px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left side: Interactive 3D Robot */}
+            {/* Left side: Hero Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 h-[280px] sm:h-[350px] lg:h-[400px] relative w-full"
+              className="lg:col-span-7 flex flex-col justify-center text-left relative z-10"
             >
-              <InteractiveRobotSpline
-                className="absolute inset-0 w-full h-full"
-              />
-            </motion.div>
+              {/* Glowing Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent mb-6 w-fit shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-[10px] tracking-[0.08em] font-extrabold uppercase">
+                  Coimbatore's Premier Robotics Core
+                </span>
+              </div>
 
-            {/* Right side: Hero Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 flex flex-col justify-center text-left"
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text-primary mb-4 tracking-tight leading-[1.05]">
-                Engineering the <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent to-orange-600">Future</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary mb-6 tracking-tight leading-[1.05] font-heading">
+                Engineering the <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
                 <br />
-                of Robotics & AI
+                of <span style={{ color: '#FF6A00' }}>Robotics & AI</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-text-muted mb-6 leading-relaxed">
-                TamizhTech Robotics Company - a premier technology company in Coimbatore
-                delivering cutting-edge automation, AI, and engineering innovation
-                across industries.
+              {/* Slogan */}
+              <div className="mb-6 border-l-2 border-accent pl-4 py-1">
+                <p className="text-base sm:text-lg font-black text-text-primary font-heading leading-tight mb-1">
+                  தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
+                </p>
+                <p className="text-[10px] sm:text-xs font-bold text-accent tracking-wider uppercase leading-none">
+                  Tamizh Technology for Tomorrow’s World
+                </p>
+              </div>
+
+              <p className="text-base md:text-lg text-text-secondary mb-5 leading-relaxed font-sans max-w-xl">
+                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech Robotics Company</span> is a premier indigenously-focused automation firm headquartered in Tamil Nadu, delivering cutting-edge automation, AI models, and custom machinery across industries.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-start gap-4">
-                <Link href="/services">
-                  <Button variant="primary" size="lg" className="w-full sm:w-auto justify-center">
+              {/* Technical Value Highlights Deck */}
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-left max-w-md">
+                {[
+                  "Competition Robotics Platforms",
+                  "B2B Automation & PLCs",
+                  "Rapid 3D Prototyping Services",
+                  "School & College STEM Labs"
+                ].map((feat) => (
+                  <div key={feat} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    {feat}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-start gap-4 flex-wrap">
+                <Link href="/services" className="w-full sm:w-auto">
+                  <Button className="w-full justify-center text-base font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
                     Explore Services <ArrowRight className="w-5 h-5 ml-1.5" />
                   </Button>
                 </Link>
-                <Link href="/products">
-                  <Button variant="secondary" size="lg" className="w-full sm:w-auto justify-center">
+                <Link href="/products" className="w-full sm:w-auto">
+                  <Button className="w-full justify-center text-base font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange">
                     Buy Products
                   </Button>
                 </Link>
               </div>
             </motion.div>
-          </div>
 
-          {/* stats row */}
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center"
-              >
-                <div className="stat-number">{s.value}</div>
-                <div className="mt-1.5 text-xs font-bold text-text-muted uppercase tracking-wider">{s.label}</div>
-              </motion.div>
-            ))}
+            {/* Right side: Premium Humanoid Robot Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 h-[320px] sm:h-[400px] lg:h-[500px] relative w-full group flex items-center justify-center"
+            >
+              {/* Radial Halo Glow Behind Robot */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.08)_0%,transparent_70%)] pointer-events-none z-0" />
+              
+              <Image
+                src="/hero-robot.png"
+                alt="TamizhTech Humanoid Robot"
+                fill
+                className="object-contain transition-transform duration-700 group-hover:scale-[1.02] z-10"
+                priority
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 1.2 FESTFIND LIVE SHOWCASE */}
+      <section className="bg-white py-16 border-b border-border/40 text-left relative overflow-hidden">
+        <div className="container px-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Column: FestFind Map Image */}
+            <div className="lg:col-span-5 relative h-[300px] sm:h-[360px] w-full rounded-2xl border border-border/80 bg-zinc-950 overflow-hidden shadow-lg group">
+              <Image
+                src="/find fest.png"
+                alt="FestFind Live Map"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+            </div>
+
+            {/* Right Column: Copy & Actions */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="text-[10px] font-bold text-accent uppercase tracking-widest block">
+                Technical Event Tracker
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black font-heading text-text-primary uppercase tracking-tight leading-none">
+                Track Live College <br />
+                <span style={{ color: '#FF6A00' }}>Symposiums & Hackathons</span>
+              </h2>
+              <p className="text-sm text-text-secondary leading-relaxed font-sans max-w-xl">
+                Explore FestFind — our dedicated event discovery network. Track robotics tournaments, academic seminars, coding hackathons, and design championships across top institutions in Tamil Nadu in real-time.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <a 
+                  href="https://festfind.live/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button size="lg" className="w-full justify-center text-base font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
+                    Open FestFind Map ↗
+                  </Button>
+                </a>
+                <Link href="/festfind" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full justify-center text-base font-bold hover:-translate-y-px transition-all rounded-full btn-outline-orange">
+                    About FestFind
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5 STATS BAND */}
+      <section className="bg-subtle border-y border-border py-10">
+        <div className="container px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
+            {[
+              { target: 180, suffix: "+", label: "Competition Wins", icon: Award },
+              { target: 15,  suffix: "+", label: "Industry Partners", icon: Users },
+              { target: 300, suffix: "+", label: "Events Participated", icon: Globe },
+              { target: 1,   suffix: "K+", label: "Students Trained", icon: GraduationCap },
+            ].map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05, duration: 0.5 }}
+                  className="flex flex-col items-center text-center p-4 md:p-0"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent mb-3">
+                    <Icon className="w-5 h-5 stroke-[2]" />
+                  </div>
+                  <StatCounter
+                    target={s.target}
+                    suffix={s.suffix}
+                    label={s.label}
+                    customCard={true}
+                    numberClassName="text-3xl md:text-4xl font-black text-text-primary tracking-tight font-heading"
+                    labelClassName="mt-1 text-xs font-bold text-text-muted uppercase tracking-wider block"
+                  />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -197,49 +317,55 @@ export default function HomeClient() {
       <section className="section bg-white text-text-primary py-24 border-t border-border/30">
         <div className="container px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left side: Image */}
             <AnimatedSection direction="left">
-              <span className="tag mb-6">Who We Are</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary mb-6 leading-tight">
-                A new kind of<br />
-                <span className="text-accent">engineering company</span>
-              </h2>
-              <p className="text-text-muted text-base md:text-lg leading-relaxed mb-8">
-                TamizhTech Robotics Company bridges the gap between education and industry.
-                We design, build, and deploy advanced robotic and AI systems while
-                educating the next generation of engineers.
-              </p>
-              <div className="space-y-4">
-                {["Founded in Coimbatore, Tamil Nadu", "Serving 15+ industry partners", "1000+ students trained nationwide"].map(pt => (
-                  <div key={pt} className="flex items-center gap-3 text-text-primary">
-                    <CheckCircle className="w-5 h-5 text-accent shrink-0" />
-                    <span className="text-sm font-semibold">{pt}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-10">
-                <Link href="/about">
-                  <Button variant="primary">
-                    About TamizhTech <ArrowRight className="w-4 h-4 ml-1.5" />
-                  </Button>
-                </Link>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg border border-border/20">
+              <div className="relative rounded-xl overflow-hidden aspect-[4/3] shadow-md border border-border">
                 <Image
                   src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop"
                   alt="TamizhTech engineering lab"
                   fill className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md border border-border/20 p-4 rounded-xl">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md border border-border p-4 rounded-lg">
                   <div className="flex items-center gap-3">
-                    <div className="w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_10px_#FB7115]" />
-                    <span className="text-text-primary text-xs font-semibold">Active R&D Lab * Coimbatore</span>
+                    <div className="w-2.5 h-2.5 rounded-full bg-accent shadow-[0_0_10px_rgba(255,106,0,0.4)]" />
+                    <span className="text-text-primary text-xs font-bold tracking-wide uppercase">Active R&D Lab • Coimbatore</span>
                   </div>
                 </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Right side: Text */}
+            <AnimatedSection direction="right" delay={0.1}>
+              <span className="text-xs font-bold tracking-wider text-accent uppercase mb-4 block">Who We Are</span>
+              <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
+                A new kind of<br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">engineering company</span>
+              </h2>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-8">
+                <span className="text-accent font-semibold">TamizhTech Robotics Company</span> bridges the gap between education and industry.
+                We design, build, and deploy advanced <span className="text-accent font-semibold">robotic and AI systems</span> while
+                educating the next generation of engineers.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Founded in Coimbatore, Tamil Nadu",
+                  "Serving 15+ industry partners",
+                  "1000+ students trained nationwide"
+                ].map(pt => (
+                  <div key={pt} className="flex items-center gap-3 text-text-primary">
+                    <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                    <span className="text-sm font-semibold">{pt}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <Link href="/about">
+                  <Button variant="outline" className="font-bold">
+                    About TamizhTech <ArrowRight className="w-4 h-4 ml-1.5" />
+                  </Button>
+                </Link>
               </div>
             </AnimatedSection>
           </div>
@@ -247,7 +373,7 @@ export default function HomeClient() {
       </section>
 
       {/* 2.5 OUR JOURNEY SECTION */}
-      <section className="section bg-subtle py-24 border-t border-border/30">
+      <section className="section bg-subtle py-24 border-t border-border/30 overflow-hidden">
         <div className="container px-6">
           <AnimatedSection className="mb-16">
             <SectionHeader
@@ -258,24 +384,34 @@ export default function HomeClient() {
             />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
-            {[
-              { year: "2021", text: "Tamizh Robotics Club was established." },
-              { year: "2022", text: "Started participating in robotics competitions across Tamil Nadu." },
-              { year: "2023", text: "Expanded participation to national and international competitions." },
-              { year: "2024", text: "Tamizh Tech Robotics Company was officially established." },
-              { year: "2025", text: "Robotics products supplied to schools and colleges across India." },
-              { year: "2026", text: "Launch of ThiranOli Academy." },
-            ].map((step, idx) => (
-              <AnimatedSection key={idx} delay={idx * 0.05} className="h-full">
-                <Card className="h-full flex flex-col p-6 bg-white border border-border hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
-                  <div className="text-2xl font-extrabold text-accent mb-2 font-mono">{step.year}</div>
-                  <p className="text-xs text-text-secondary leading-relaxed flex-grow">
-                    {step.text}
-                  </p>
-                </Card>
-              </AnimatedSection>
-            ))}
+          {/* Horizontal Infinite Marquee Slider */}
+          <div className="relative w-full overflow-hidden py-4">
+            <InfiniteSlider gap={24} duration={35} durationOnHover={100} className="w-full">
+              {[
+                { year: "2021", text: "Tamizh Robotics Club was established." },
+                { year: "2022", text: "Started participating in robotics competitions across Tamil Nadu." },
+                { year: "2023", text: "Expanded participation to national and international competitions." },
+                { year: "2024", text: "Tamizh Tech Robotics Company was officially established." },
+                { year: "2025", text: "Robotics products supplied to schools and colleges across India." },
+                { year: "2026", text: "Launch of ThiranOli Academy." },
+              ].map((step, idx) => (
+                <div 
+                  key={idx} 
+                  className="shrink-0 w-[280px] sm:w-[320px] relative pt-6"
+                >
+                  {/* Dot indicator aligned to the card top */}
+                  <div className="absolute top-[18px] left-6 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-white shadow-sm z-20" />
+
+                  {/* Card container */}
+                  <Card className="relative z-10 flex flex-col p-6 bg-white border border-border/80 hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="text-2xl font-black text-accent mb-2 font-heading tracking-tight">{step.year}</div>
+                    <p className="text-sm text-text-secondary leading-relaxed flex-grow">
+                      {step.text}
+                    </p>
+                  </Card>
+                </div>
+              ))}
+            </InfiniteSlider>
           </div>
         </div>
       </section>
@@ -315,130 +451,128 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* 4. INDUSTRIES SECTION */}
-      <section className="section bg-subtle py-20 border-y border-border/40">
+
+
+      {/* 5. WHY TAMIZHTECH SECTION */}
+      <section className="section bg-subtle py-24 border-t border-border/30">
         <div className="container px-6">
-          <AnimatedSection className="mb-12">
+          <AnimatedSection className="mb-16 text-center">
             <SectionHeader
-              tag="Industries"
-              title="Built for every"
-              highlight="industry"
-              subtitle="Our solutions are deployed across manufacturing, defense, agriculture, and more."
+              tag="Why Choose Us"
+              title="The TamizhTech"
+              highlight="difference"
+              subtitle="What sets us apart in custom engineering and robotics solutions."
             />
           </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {industries.map(({ icon: Icon, label }) => (
-              <StaggerItem key={label}>
-                <Card className="flex flex-col items-center gap-3 p-6 text-center group cursor-default h-full justify-center bg-white border border-border hover:bg-accent/10 hover:border-accent transition-all duration-300">
-                  <Icon className="w-6 h-6 text-text-primary group-hover:text-accent group-hover:scale-110 transition-all duration-300" />
-                  <span className="text-xs font-bold text-text-primary tracking-wide transition-colors duration-300">{label}</span>
-                </Card>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            {whyUs.map(({ icon: Icon, title, desc }) => (
+              <StaggerItem key={title} className="text-left flex flex-col items-start space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-accent-soft flex items-center justify-center text-accent">
+                  <Icon className="w-6 h-6 stroke-[2]" />
+                </div>
+                <h3 className="text-lg font-bold font-heading text-text-primary">{title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
               </StaggerItem>
             ))}
           </StaggerContainer>
         </div>
       </section>
 
-      {/* 5. WHY TAMIZHTECH SECTION */}
-      <section className="section bg-white py-24">
+      {/* 9. STATS BAND (REPEAT) */}
+      <section className="bg-subtle border-y border-border py-10">
         <div className="container px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection direction="left">
-              <SectionHeader
-                tag="Why Choose Us"
-                title="The TamizhTech"
-                highlight="difference"
-                align="left"
-              />
-              <div className="mt-10 space-y-6">
-                {whyUs.map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="flex gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent shrink-0">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-text-primary text-base mb-1">{title}</h3>
-                      <p className="text-sm text-text-muted leading-relaxed">{desc}</p>
-                    </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
+            {[
+              { target: 180, suffix: "+", label: "Competition Wins", icon: Award },
+              { target: 15,  suffix: "+", label: "Industry Partners", icon: Users },
+              { target: 300, suffix: "+", label: "Events Participated", icon: Globe },
+              { target: 1,   suffix: "K+", label: "Students Trained", icon: GraduationCap },
+            ].map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div
+                  key={s.label}
+                  className="flex flex-col items-center text-center p-4 md:p-0"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent mb-3">
+                    <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
-                ))}
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { n: "180+", l: "Competition Wins", c: "bg-blue-500" },
-                  { n: "15+",  l: "Industry Partners", c: "bg-teal-500" },
-                  { n: "300+", l: "Events Participated", c: "bg-purple-500" },
-                  { n: "1K+",  l: "Students Trained", c: "bg-orange-500" },
-                ].map(({ n, l, c }) => (
-                  <Card key={l} className="flex flex-col justify-between h-36 p-6 bg-white border border-accent/20 text-text-primary shadow-lg">
-                    <div className={`w-8 h-1 rounded-full ${c}`} />
-                    <div>
-                      <div className="text-3xl font-extrabold text-accent tracking-tight">{n}</div>
-                      <div className="text-xs font-bold text-text-muted uppercase tracking-wider mt-1">{l}</div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </AnimatedSection>
+                  <StatCounter
+                    target={s.target}
+                    suffix={s.suffix}
+                    label={s.label}
+                    customCard={true}
+                    numberClassName="text-3xl md:text-4xl font-black text-text-primary tracking-tight font-heading"
+                    labelClassName="mt-1 text-xs font-bold text-text-muted uppercase tracking-wider block"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 5.5 ROBOTICS COMPETITION EXCELLENCE SECTION */}
-      <section className="section bg-slate-950 text-white py-24 relative overflow-hidden">
-        {/* Glow effects */}
-        <div className="absolute top-1/4 -right-40 w-96 h-96 rounded-full bg-accent/10 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-blue-500/10 blur-[120px] pointer-events-none" />
-
-        <div className="container relative z-10 px-6">
+      <section className="section bg-white py-24 border-t border-border/30 overflow-hidden">
+        <div className="container px-6">
           <AnimatedSection className="mb-16">
             <SectionHeader
               tag="Competition Excellence"
               title="Robotics Competition"
               highlight="Excellence"
               subtitle="We have designed, developed, and competed with a wide range of robotics systems. All of these competition-ready, battle-tested platforms are built in-house and are available at our company for custom fabrication, training, and events."
-              light={true}
             />
           </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {/* Horizontal scroll snap on mobile, Grid on desktop */}
+          <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-5 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0">
             {competitions.map((comp) => {
-              const Icon = comp.icon;
               return (
-                <StaggerItem key={comp.title}>
-                  <Card className="h-full bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-accent/50 p-6 flex flex-col justify-between group transition-all duration-300">
-                    <div>
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all duration-300">
-                        <Icon className="w-6 h-6 stroke-[1.5]" />
+                <div key={comp.title} className="snap-start shrink-0 w-[260px] sm:w-auto h-full">
+                  <Card className="h-full bg-white border border-border hover:border-accent/40 p-0 flex flex-col justify-between group overflow-hidden transition-all duration-300">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-subtle">
+                      <Image
+                        src={comp.image}
+                        alt={comp.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 280px, 200px"
+                      />
+                      <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        Available Now
                       </div>
-                      <h3 className="font-extrabold text-white text-base mb-3 tracking-tight group-hover:text-accent transition-colors duration-300">
-                        {comp.title}
-                      </h3>
-                      <p className="text-xs text-gray-400 leading-relaxed">
-                        {comp.desc}
-                      </p>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-1.5 text-[10px] font-bold text-accent tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span>Available Now</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                    <div className="p-5 flex flex-col justify-between flex-grow">
+                      <div>
+                        <h3 className="font-bold font-heading text-text-primary text-base mb-2 group-hover:text-accent transition-colors">
+                          {comp.title}
+                        </h3>
+                        <p className="text-xs text-text-secondary leading-relaxed mb-4">
+                          {comp.spec}
+                        </p>
+                      </div>
+                      <Link 
+                        href={`/products/${comp.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent tracking-wider uppercase"
+                      >
+                        <span>View Details</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
                   </Card>
-                </StaggerItem>
+                </div>
               );
             })}
-          </StaggerContainer>
+          </div>
 
           <AnimatedSection className="mt-16 text-center">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-900/80 border border-slate-800 px-8 py-5 rounded-2xl max-w-2xl mx-auto shadow-2xl backdrop-blur-xs">
-              <span className="text-sm font-semibold text-gray-300">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-subtle border border-border px-8 py-5 rounded-lg max-w-2xl mx-auto shadow-sm">
+              <span className="text-sm font-semibold text-text-secondary font-sans">
                 Need a custom-built competition robot or team mentoring?
               </span>
-              <Link href="/products?category=All">
-                <Button variant="primary" size="sm">
+              <Link href="/products">
+                <Button variant="primary" size="sm" className="font-bold">
                   View Competition Kits <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
               </Link>
@@ -447,38 +581,124 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* 6. FEATURED PROJECTS */}
+      {/* 3D Printing Service Section */}
       <section className="section bg-white py-24 border-t border-border/30">
         <div className="container px-6">
-          <AnimatedSection className="mb-16">
-            <SectionHeader
-              tag="Our Work"
-              title="Featured"
-              highlight="projects"
-              subtitle="A snapshot of our most impactful engineering and research projects."
-            />
-          </AnimatedSection>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left side: Video */}
+            <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-lg">
+              <video
+                src="/3d printing.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((proj) => (
-              <StaggerItem key={proj.title}>
-                <ProjectCard
-                  title={proj.title}
-                  category={proj.category}
-                  image={proj.image}
-                  href={proj.href}
-                />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+            {/* Right side: Copy & WhatsApp Button */}
+            <AnimatedSection className="lg:col-span-6 flex flex-col justify-center text-left" direction="right" delay={0.1}>
+              <span className="text-xs font-bold tracking-[0.15em] text-accent uppercase mb-4 block">
+                Additive Manufacturing
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
+                Professional 3D Printing <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Services</span>
+              </h2>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
+                Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish at an <span className="text-accent font-semibold">affordable price</span>.
+              </p>
+              
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {[
+                  "FDM & SLA Printing",
+                  "Rapid Prototyping",
+                  "PLA, ABS, PETG, TPU Materials",
+                  "Custom Drone & Robot Parts",
+                  "Industrial Design Fitment",
+                  "Commercial Batch Production"
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
-          <AnimatedSection className="mt-12 text-center">
-            <Link href="/projects">
-              <Button variant="secondary">
-                See All Projects <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </Link>
-          </AnimatedSection>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://wa.me/918148045030?text=Hi%20TamizhTech,%20I%20am%20interested%20in%20your%203D%20Printing%20Services.%20Can%20you%20share%20pricing%20details?"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button variant="primary" size="lg" className="w-full justify-center bg-accent hover:bg-accent-hover text-white font-bold rounded-lg border-none px-8 py-3">
+                    Order via WhatsApp
+                  </Button>
+                </a>
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full justify-center border-border hover:bg-subtle text-text-primary font-bold rounded-lg px-8 py-3">
+                    Get a Quote
+                  </Button>
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* 6. JOIN OUR EXCLUSIVE ROBOTICS CLUB */}
+      <section className="section bg-subtle py-24 border-t border-border/30 overflow-hidden text-left">
+        <div className="container px-6 max-w-5xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-md border border-border/80 rounded-2xl shadow-xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.06)_0%,transparent_70%)] pointer-events-none z-0" />
+            
+            <div className="relative z-10 flex-1 space-y-6">
+              <span className="text-[10px] font-bold text-accent uppercase tracking-widest block">
+                Exclusive Club Membership
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black font-heading text-text-primary uppercase tracking-tight leading-none">
+                Join our exclusively <br />
+                <span style={{ color: '#FF6A00' }}>Robotics Club</span>
+              </h2>
+              <p className="text-sm text-text-secondary leading-relaxed max-w-xl font-sans">
+                Unlock direct access to advanced robotics kits, professional R&D testing labs, student competitions training, and expert mentoring. Connect with Coimbatore's largest community of young makers and engineering minds.
+              </p>
+              
+              {/* Perks Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                {[
+                  "Hands-on Arena Tournaments",
+                  "Advanced R&D Testing Tools",
+                  "Expert Project Mentorship",
+                  "National-Level Certifications"
+                ].map((perk) => (
+                  <div key={perk} className="flex items-center gap-3 text-xs font-semibold text-text-secondary">
+                    <CheckCircle className="w-5 h-5 text-accent shrink-0" />
+                    <span>{perk}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="relative z-10 shrink-0 w-full md:w-auto flex flex-col gap-3">
+              <Link href="/robotics-club/join" className="w-full">
+                <Button size="lg" className="w-full justify-center text-base font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
+                  Join Club Now
+                </Button>
+              </Link>
+              <Link href="/robotics-club" className="w-full">
+                <Button size="lg" className="w-full justify-center text-base font-bold hover:-translate-y-px transition-all rounded-full btn-outline-orange">
+                  Learn More
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -494,11 +714,11 @@ export default function HomeClient() {
             />
           </AnimatedSection>
 
-          <InfiniteSlider gap={24} duration={35} className="py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {galleryImages.map((src, idx) => (
               <div
                 key={idx}
-                className="relative overflow-hidden rounded-2xl aspect-[4/3] w-72 sm:w-96 shrink-0 group cursor-pointer border border-border/40 shadow-sm"
+                className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer border border-border bg-subtle"
                 onClick={() => setActiveImageIdx(idx)}
               >
                 <Image
@@ -506,20 +726,21 @@ export default function HomeClient() {
                   alt={`Gallery image ${idx + 1}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 300px, 400px"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                  <span className="bg-accent text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm">
-                    View Image
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                  <span className="bg-accent text-white text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full shadow-sm">
+                    View
                   </span>
                 </div>
               </div>
             ))}
-          </InfiniteSlider>
+          </div>
 
-          <AnimatedSection className="mt-10 text-center">
+          <AnimatedSection className="mt-12 text-center">
             <Link href="/gallery">
-              <Button variant="secondary">
+              <Button variant="outline" className="font-bold">
                 View Full Gallery <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </Link>
@@ -532,45 +753,78 @@ export default function HomeClient() {
         <div className="container px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <AnimatedSection className="lg:col-span-1">
-              <span className="tag mb-4">FAQ</span>
-              <h2 className="text-3xl font-extrabold text-text-primary tracking-tight leading-tight mb-4">
-                Frequently Asked <span className="gradient-text-blue">Questions</span>
+              <span className="text-xs font-bold tracking-wider text-accent uppercase mb-4 block">FAQ</span>
+              <h2 className="text-3xl font-black text-text-primary tracking-tight leading-tight mb-4 font-heading">
+                Frequently Asked<br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Questions</span>
               </h2>
-              <p className="text-sm text-text-muted leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed font-sans">
                 Can't find the answer you're looking for? Reach out to our technical support desk on our contact page.
               </p>
             </AnimatedSection>
-            <div className="lg:col-span-2 space-y-6">
-              {faqs.map((faq, i) => (
-                <AnimatedSection key={i} delay={i * 0.1}>
-                  <Card className="flex gap-4 items-start p-6 hover:-translate-y-0.5">
-                    <HelpCircle className="w-6 h-6 text-accent shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="font-bold text-text-primary text-base mb-2">{faq.q}</h4>
-                      <p className="text-sm text-text-muted leading-relaxed">{faq.a}</p>
+            
+            <div className="lg:col-span-2 divide-y divide-border border-y border-border">
+              {faqs.map((faq, i) => {
+                const isOpen = activeFaqIdx === i;
+                return (
+                  <div key={i} className="py-5">
+                    <button
+                      onClick={() => setActiveFaqIdx(isOpen ? null : i)}
+                      className="flex items-center justify-between w-full text-left font-bold font-heading text-lg text-text-primary hover:text-accent transition-colors focus:outline-none"
+                    >
+                      <span className={isOpen ? "text-accent" : "text-text-primary"}>
+                        {faq.q}
+                      </span>
+                      {/* Plus icon rotates to X on open */}
+                      <span className="ml-4 shrink-0 flex items-center justify-center w-6 h-6 rounded-full border border-border text-text-secondary hover:border-accent">
+                        <span className={`transform transition-transform duration-300 font-normal text-sm ${isOpen ? "rotate-45" : "rotate-0"}`}>
+                          ＋
+                        </span>
+                      </span>
+                    </button>
+                    {/* Collapsible Answer */}
+                    <div 
+                      className={`overflow-hidden transition-all duration-300 ${
+                        isOpen ? "max-h-[200px] mt-4 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <p className="text-sm text-text-secondary leading-relaxed font-sans">
+                        {faq.a}
+                      </p>
                     </div>
-                  </Card>
-                </AnimatedSection>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 10. PARTNERS & START BUILDING (CTA BANNER) */}
-      <section className="section bg-subtle py-24 border-t border-border/30">
-        <div className="container px-6">
-
-
-          <AnimatedSection className="mt-16">
-            <CTABanner
-              title="Ready to build something extraordinary?"
-              subtitle="Whether you need a custom robotic system, AI camera models, STEM Tinkering labs, or advanced certification courses, we are here to support your team."
-              primaryCtaText="Contact Us"
-              primaryCtaHref="/contact"
-              secondaryCtaText="Browse Courses"
-              secondaryCtaHref="/courses"
-            />
+      {/* 10. START BUILDING (FINAL CTA BAND) */}
+      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
+        {/* Subtle orange accent glow behind */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+        
+        <div className="container relative z-10 px-6 max-w-5xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-black mb-4 font-heading tracking-tight text-white uppercase">
+              Ready to build something <span className="text-accent">extraordinary</span>?
+            </h2>
+            <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+              Whether you need a custom <span className="text-accent font-semibold text-orange-500">robotic system</span>, <span className="text-accent font-semibold text-orange-500">AI camera models</span>, <span className="text-accent font-semibold text-orange-500">STEM Tinkering labs</span>, or advanced <span className="text-accent font-semibold text-orange-500">certification courses</span>, we are here to support your team.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full justify-center text-base font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                  Contact Us <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
+              </Link>
+              <Link href="/courses" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full justify-center text-base font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                  Browse Courses
+                </Button>
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>

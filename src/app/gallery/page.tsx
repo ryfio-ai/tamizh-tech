@@ -9,6 +9,13 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 
 const galleryImages = [
+  "/gallery/j14.jpg",
+  "/gallery/j15.jpg",
+  "/gallery/j16.jpg",
+  "/gallery/j17.jpg",
+  "/gallery/j18.jpg",
+  "/gallery/j19.jpg",
+  "/gallery/j20.jpg",
   "/gallery/1.JPEG",
   "/gallery/3.jpg",
   "/gallery/6.jpg",
@@ -85,47 +92,47 @@ export default function GalleryPage() {
 
           {/* Cards section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-border pt-20">
-            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
-              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+            <Card className="flex flex-col gap-5 h-full border border-border bg-white rounded-lg hover:border-accent/40 hover:shadow-lg transition-all duration-300 p-8">
+              <div className="p-3 bg-accent-soft w-fit rounded-lg text-accent">
                 <Layers className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">Hardware Evolution</h4>
-              <p className="text-sm text-text-muted leading-relaxed">
+              <h4 className="text-xl font-bold font-heading text-text-primary uppercase tracking-tight">Hardware Evolution</h4>
+              <p className="text-sm text-text-secondary leading-relaxed font-sans">
                 Visual mapping of robotic chassis development, iterative structural testing, and localized prototyping cycles.
               </p>
             </Card>
 
-            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
-              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+            <Card className="flex flex-col gap-5 h-full border border-border bg-white rounded-lg hover:border-accent/40 hover:shadow-lg transition-all duration-300 p-8">
+              <div className="p-3 bg-accent-soft w-fit rounded-lg text-accent">
                 <Zap className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">On-Ground Impact</h4>
-              <p className="text-sm text-text-muted leading-relaxed">
+              <h4 className="text-xl font-bold font-heading text-text-primary uppercase tracking-tight">On-Ground Impact</h4>
+              <p className="text-sm text-text-secondary leading-relaxed font-sans">
                 Documenting live industrial installations and large-scale technical training programs across 15+ Indian states.
               </p>
             </Card>
 
-            <Card className="flex flex-col gap-5 h-full hover:border-accent/15">
-              <div className="p-3 bg-accent/5 w-fit rounded-xl text-accent">
+            <Card className="flex flex-col gap-5 h-full border border-border bg-white rounded-lg hover:border-accent/40 hover:shadow-lg transition-all duration-300 p-8">
+              <div className="p-3 bg-accent-soft w-fit rounded-lg text-accent">
                 <Globe className="w-6 h-6" />
               </div>
-              <h4 className="text-lg font-bold text-text-primary uppercase tracking-tight">Research Strategy</h4>
-              <p className="text-sm text-text-muted leading-relaxed">
+              <h4 className="text-xl font-bold font-heading text-text-primary uppercase tracking-tight">Research Strategy</h4>
+              <p className="text-sm text-text-secondary leading-relaxed font-sans">
                 A repository of high-spec laboratory setups and strategic R&D collaborations with premier technical institutions.
               </p>
             </Card>
           </div>
 
           {/* Request Specs CTA */}
-          <div className="mt-24 bg-subtle border border-border p-12 lg:p-20 text-center rounded-3xl max-w-4xl mx-auto">
-            <h4 className="text-2xl md:text-3xl font-extrabold text-text-primary tracking-tight mb-4">
+          <div className="mt-24 bg-subtle border border-border p-12 lg:p-16 text-center rounded-lg max-w-4xl mx-auto shadow-sm">
+            <h4 className="text-2xl md:text-3xl font-black font-heading text-text-primary tracking-tight mb-4 uppercase">
               Access Technical Specifications
             </h4>
-            <p className="text-text-muted text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="text-text-secondary text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-sans">
               For higher-resolution project documentation or specific technical guides related to these deployments, contact our coordination desk.
             </p>
             <Link href="/contact">
-              <Button variant="primary">
+              <Button variant="primary" className="font-bold text-white">
                 Request Docs <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </Link>

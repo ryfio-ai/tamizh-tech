@@ -13,13 +13,10 @@ const navLinks = [
     label: "Products",
     href: "/products",
     children: [
-      { label: "Product Catalog", href: "/products", desc: "All 12 robotics categories" },
-      { label: "Robo Race Bots", href: "/products?category=Robo%20Race%20Bots", desc: "High speed drift & race" },
-      { label: "Robo Soccer Bots", href: "/products?category=Robo%20Soccer%20Bots", desc: "Solenoid & pneumatic pushers" },
-      { label: "Robo Sumo Bots", href: "/products?category=Robo%20Sumo%20Bots", desc: "Heavy magnetic platforms" },
-      { label: "Line Follower Robots", href: "/products?category=Line%20Follower%20Robots", desc: "PID sensor arrays" },
-      { label: "STEM Kits", href: "/products?category=STEM%20Learning%20Kits", desc: "Solderless tinkering kits" },
-      { label: "Lab Kits", href: "/products?category=School%20Robotics%20Lab%20Kits", desc: "Complete school packages" }
+      { label: "All Products", href: "/products", desc: "Our unified robotics catalog" },
+      { label: "RC Robo Race", href: "/products", desc: "High-RPM drift & racing bot" },
+      { label: "RC Robo Soccer", href: "/products", desc: "Pneumatic active striker bot" },
+      { label: "RC Robo Sumo", href: "/products", desc: "Heavy magnetic pusher bot" }
     ]
   },
   {
@@ -28,7 +25,9 @@ const navLinks = [
     children: [
       { label: "Schools", href: "/schools", desc: "STEM, AI, and Robotics Labs" },
       { label: "Colleges", href: "/colleges", desc: "R&D lab setup & project mentoring" },
-      { label: "Industries", href: "/industries", desc: "PLC/SCADA & OpenCV vision" }
+      { label: "Industries", href: "/industries", desc: "PLC/SCADA & OpenCV vision" },
+      { label: "Robotics Club", href: "/robotics-club/join", desc: "Join our exclusive student club" },
+      { label: "FestFind Live Map", href: "/festfind", desc: "Live college technical event map" }
     ]
   },
   { label: "Training", href: "/courses" },
@@ -69,29 +68,27 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/80 backdrop-blur-md border-b border-border shadow-sm"
-            : "bg-transparent"
-        }`}
+        className="fixed top-4 left-0 right-0 z-50 transition-all duration-300 w-full flex justify-center px-4 pointer-events-none"
       >
-        <div className="container flex items-center justify-between h-16 md:h-20 px-6">
+        <div 
+          className="w-full max-w-6xl flex items-center justify-between h-14 md:h-16 px-6 rounded-full border border-border/80 bg-white/95 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300 pointer-events-auto"
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <Image
               src="/logo/TTRC LOGO.png"
               alt="TamizhTech Robotics Company"
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               className="object-contain"
               priority
             />
             <div className="flex flex-col leading-none">
-              <span className="text-base font-bold tracking-tight text-text-primary">
+              <span className="text-sm font-bold tracking-tight text-text-primary">
                 TAMIZH<span className="text-accent">TECH</span>
               </span>
-              <span className="text-[9px] tracking-[0.18em] text-text-muted font-bold uppercase">
-                Robotics
+              <span className="text-[7px] tracking-[0.06em] text-text-muted font-bold uppercase mt-0.5">
+                Robotics Company
               </span>
             </div>
           </Link>
@@ -106,7 +103,7 @@ export function Navbar() {
                   onMouseEnter={() => setActiveMenu(link.label)}
                   onMouseLeave={() => setActiveMenu(null)}
                 >
-                  <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-lg hover:bg-subtle">
+                  <button className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-full hover:bg-subtle">
                     {link.label}
                     <ChevronDown
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -122,7 +119,7 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.97 }}
                         transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[420px] bg-white border border-border rounded-2xl shadow-xl p-3 grid grid-cols-2 gap-1"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[420px] bg-white/90 backdrop-blur-lg border border-border/80 rounded-2xl shadow-xl p-3 grid grid-cols-2 gap-1 z-50"
                       >
                         {link.children.map((child) => (
                           <Link
@@ -152,7 +149,7 @@ export function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-lg hover:bg-subtle"
+                  className="px-4 py-2 text-sm font-semibold text-text-primary hover:text-accent transition-colors rounded-full hover:bg-subtle"
                 >
                   {link.label}
                 </Link>
@@ -163,12 +160,12 @@ export function Navbar() {
           {/* CTA */}
           <div className="hidden xl:flex items-center gap-3">
             <Link href="/contact">
-              <Button variant="primary" size="sm">
+              <Button variant="outline" size="sm" className="rounded-full">
                 Get Quote
               </Button>
             </Link>
             <Link href="/courses">
-              <Button variant="outline" size="sm">
+              <Button variant="primary" size="sm" className="rounded-full">
                 Enroll Now
               </Button>
             </Link>
@@ -176,7 +173,7 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="xl:hidden p-2 rounded-lg text-text-primary hover:bg-subtle transition-colors"
+            className="xl:hidden p-2 rounded-full text-text-primary hover:bg-subtle transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -201,7 +198,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-[320px] bg-white shadow-2xl z-50 xl:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-[320px] bg-white/80 backdrop-blur-lg border-l border-border/80 shadow-2xl z-50 xl:hidden flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-border">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
@@ -244,12 +241,12 @@ export function Navbar() {
 
               <div className="p-5 border-t border-border space-y-2">
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="block w-full">
-                  <Button variant="primary" size="sm" className="w-full justify-center">
+                  <Button variant="outline" size="sm" className="w-full justify-center">
                     Get a Quote
                   </Button>
                 </Link>
                 <Link href="/courses" onClick={() => setIsOpen(false)} className="block w-full">
-                  <Button variant="outline" size="sm" className="w-full justify-center">
+                  <Button variant="primary" size="sm" className="w-full justify-center">
                     Enroll Now
                   </Button>
                 </Link>

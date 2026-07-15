@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Mail, Phone, MapPin, ChevronUp } from "lucide-react";
 import { FaLinkedin, FaInstagram, FaYoutube, FaWhatsapp, FaFacebook } from "react-icons/fa";
 
@@ -71,11 +71,29 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 
 export function Footer() {
   const [showTop, setShowTop] = useState(false);
+  const [loadMap, setLoadMap] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 400);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    if (mapRef.current) {
+      observer.observe(mapRef.current);
+    }
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -182,7 +200,7 @@ export function Footer() {
                   {[
                     { icon: <Phone size={13} />, content: "+91 81480 45030", href: "tel:+918148045030" },
                     { icon: <FaWhatsapp size={13} />, content: "+91 81480 45030", href: "https://wa.me/918148045030" },
-                    { icon: <Mail size={13} />, content: "info@tamizhtech.com", href: "mailto:info@tamizhtech.com" },
+                    { icon: <Mail size={13} />, content: "info@tamizhtech.in", href: "mailto:info@tamizhtech.in" },
                   ].map(({ icon, content, href }) => (
                     <a
                       key={href}
@@ -221,35 +239,46 @@ export function Footer() {
               </div>
 
               {/* Map Container */}
-              <div style={{ position: "relative", borderRadius: "14px", overflow: "hidden", border: "1.5px solid #e2e8f0", boxShadow: "0 2px 12px rgba(0,0,0,0.07)", height: "210px" }}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15660.000209940392!2d77.02221234726562!3d11.113373452742518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3ba8f9b076667f27%3A0x3d053c8d4eb3cd29!2sTamizh%20Tech%20Pvt%20Ltd%2C%20Thiruchendur%20Gdn%20Rd%2C%20Kurumbapalayam%20SSKulam%2C%20Coimbatore%2C%20Tamil%20Nadu%20641107!3m2!1d11.112564299999999!2d77.0236498!5e0!3m2!1sen!2sin!4v1783424997274!5m2!1sen!2sin"
-                  width="100%"
-                  height="210"
-                  style={{ border: 0, display: "block" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="TamizhTech Pvt Ltd – Coimbatore"
-                />
-                <a
-                  href="https://maps.google.com/?q=Tamizh+Tech+Pvt+Ltd,+Kurumbapalayam,+Coimbatore"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    position: "absolute", top: "10px", left: "10px",
-                    background: "rgba(255,255,255,0.92)", backdropFilter: "blur(6px)",
-                    border: "1px solid #e2e8f0", borderRadius: "8px",
-                    padding: "5px 10px", fontSize: "11px", fontWeight: 700,
-                    color: "#1e293b", display: "flex", alignItems: "center", gap: "5px",
-                    textDecoration: "none", boxShadow: "0 1px 6px rgba(0,0,0,0.1)",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#FB7115"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#FB7115"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.color = "#1e293b"; e.currentTarget.style.borderColor = "#e2e8f0"; }}
-                >
-                  <MapPin size={11} /> Open in Maps ↗
-                </a>
+              <div 
+                ref={mapRef}
+                style={{ position: "relative", borderRadius: "14px", overflow: "hidden", border: "1.5px solid #e2e8f0", boxShadow: "0 2px 12px rgba(0,0,0,0.07)", height: "210px" }}
+              >
+                {loadMap ? (
+                  <>
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15660.000209940392!2d77.02221234726562!3d11.113373452742518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3ba8f9b076667f27%3A0x3d053c8d4eb3cd29!2sTamizh%20Tech%20Pvt%20Ltd%2C%20Thiruchendur%20Gdn%20Rd%2C%20Kurumbapalayam%20SSKulam%2C%20Coimbatore%2C%20Tamil%20Nadu%20641107!3m2!1d11.112564299999999!2d77.0236498!5e0!3m2!1sen!2sin!4v1783424997274!5m2!1sen!2sin"
+                      width="100%"
+                      height="210"
+                      style={{ border: 0, display: "block" }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      title="TamizhTech Pvt Ltd – Coimbatore"
+                    />
+                    <a
+                      href="https://maps.google.com/?q=Tamizh+Tech+Pvt+Ltd,+Kurumbapalayam,+Coimbatore"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        position: "absolute", top: "10px", left: "10px",
+                        background: "rgba(255,255,255,0.92)", backdropFilter: "blur(6px)",
+                        border: "1px solid #e2e8f0", borderRadius: "8px",
+                        padding: "5px 10px", fontSize: "11px", fontWeight: 700,
+                        color: "#1e293b", display: "flex", alignItems: "center", gap: "5px",
+                        textDecoration: "none", boxShadow: "0 1px 6px rgba(0,0,0,0.1)",
+                        transition: "all 0.2s",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "#FB7115"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#FB7115"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.color = "#1e293b"; e.currentTarget.style.borderColor = "#e2e8f0"; }}
+                    >
+                      <MapPin size={11} /> Open in Maps ↗
+                    </a>
+                  </>
+                ) : (
+                  <div className="w-full h-full bg-gray-50 flex items-center justify-center text-xs font-bold text-slate-400 animate-pulse uppercase tracking-wider">
+                    Loading Map...
+                  </div>
+                )}
               </div>
             </div>
 

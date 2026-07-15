@@ -1,8 +1,10 @@
 import { MetadataRoute } from 'next'
 import { products } from '@/data/products'
+import { courses } from '@/data/courses'
+import { blogPosts } from '@/data/blogPosts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tamizhtech.com'
+  const baseUrl = 'https://www.tamizhtech.in'
   
   const staticPages = [
     '',
@@ -10,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/products',
     '/schools',
     '/colleges',
-    '/industries',
     '/founder',
     '/about-tamizh-tech',
     '/robotics-company-in-coimbatore',
@@ -20,25 +21,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/gallery',
     '/careers',
-    '/internship', // Training
+    '/internship',
     '/services',
     '/robotics-club',
-    '/courses'
+    '/robotics-club/join',
+    '/courses',
+    '/events',
+    '/projects',
+    '/blog',
+    '/clients',
+    '/case-studies',
+    '/festfind',
   ];
 
   const staticEntries = staticPages.map(page => ({
     url: `${baseUrl}${page}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: page === '' ? 1.0 : 0.8
+    priority: page === '' ? 1.0 : page.startsWith('/blog') ? 0.9 : 0.8
   }));
 
   const productEntries = products.map(product => ({
     url: `${baseUrl}/products/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: 0.7
+    priority: 0.75
   }));
 
-  return [...staticEntries, ...productEntries];
+  const courseEntries = courses.map(course => ({
+    url: `${baseUrl}/courses/${course.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8
+  }));
+
+  const blogEntries = blogPosts.map(post => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.85
+  }));
+
+  return [...staticEntries, ...productEntries, ...courseEntries, ...blogEntries];
 }

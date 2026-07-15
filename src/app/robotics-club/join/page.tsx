@@ -295,32 +295,6 @@ export default function JoinClubPage() {
         </div>
       </section>
 
-      <style jsx global>{`
-        .form-input {
-          width: 100%;
-          background-color: #FFFFFF;
-          border: 1px solid #E5E5E5;
-          padding: 1rem 1.25rem;
-          color: #111111;
-          font-weight: 700;
-          font-size: 0.825rem;
-          outline: none;
-          transition: all 0.2s ease;
-          border-radius: 8px;
-        }
-        .form-input:focus {
-          border-color: #FF6B00;
-          box-shadow: 0 0 0 1px #FF6B00;
-        }
-        .form-input::placeholder {
-          color: #999999;
-          font-weight: 600;
-          opacity: 0.5;
-        }
-        select.form-input {
-          appearance: none;
-        }
-      `}</style>
     </div>
   );
 }

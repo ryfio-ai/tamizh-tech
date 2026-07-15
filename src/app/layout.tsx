@@ -1,42 +1,44 @@
 import type { Metadata } from "next";
-import { Montserrat, Karla } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingWidgets } from "@/components/layout/FloatingWidgets";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
-const montserrat = Montserrat({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
-const karla = Karla({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-karla",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tamizhtech.in"),
+  metadataBase: new URL("https://www.tamizhtech.in"),
   title: {
-    default: "TamizhTech Robotics Company — AI, Robotics & Engineering Innovation",
+    default: "Robotics Company Coimbatore — TamizhTech | AI & Automation",
     template: "%s | TamizhTech Robotics Company",
   },
   description:
-    "TamizhTech Robotics Company is a premier technology company in Coimbatore specializing in AI, Robotics, Drone Technology, IoT, Industrial Automation, and STEM Education.",
+    "TamizhTech Robotics Company builds AI, robotics & automation systems in Coimbatore. Competition robots, industrial AGVs, STEM labs & robotics courses across India.",
   keywords: [
+    "robotics company Coimbatore",
+    "AI robotics solutions India",
+    "competition robot kits India",
+    "robotics course Coimbatore",
+    "embedded systems course Tamil",
+    "industrial automation Coimbatore",
+    "STEM tinkering lab setup",
+    "robotics internship Coimbatore",
     "TamizhTech Robotics Company",
-    "Robotics Company Coimbatore",
-    "AI Machine Learning India",
-    "Drone Technology",
-    "IoT Solutions",
-    "Industrial Automation",
-    "STEM Education",
-    "Embedded Systems",
-    "Corporate Training",
+    "ThiranOli Academy",
   ],
   authors: [{ name: "TamizhTech Robotics Company" }],
   creator: "TamizhTech Robotics Company",
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://tamizhtech.in",
+    url: "https://www.tamizhtech.in",
     siteName: "TamizhTech Robotics Company",
     title: "TamizhTech Robotics Company — AI, Robotics & Engineering Innovation",
     description:
@@ -65,8 +67,11 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "TamizhTech Robotics Company",
-    url: "https://tamizhtech.in",
-    logo: "https://tamizhtech.in/logo/TTRC LOGO.png",
+    url: "https://www.tamizhtech.in",
+    logo: "https://www.tamizhtech.in/logo/TTRC LOGO.png",
+    foundingYear: "2024",
+    description: "TamizhTech Robotics Company is a Coimbatore-based engineering company founded in 2024, specializing in robotics, AI, drone technology, IoT, industrial automation, and STEM education through ThiranOli Academy. Evolved from Tamizh Robotics Club (established 2021).",
+    areaServed: "IN",
     sameAs: [
       "https://www.linkedin.com/company/tamizh-tech-robotics-company",
       "https://www.instagram.com/tamizh_tech_robotics_company",
@@ -78,22 +83,47 @@ const schemas = [
       contactType: "customer service",
       email: "office@tamizhtech.in",
       areaServed: "IN",
+      availableLanguage: ["English", "Tamil", "Hindi"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Thiruchendur Gdn Rd, Kurumbapalayam SSKulam",
+      addressLocality: "Coimbatore",
+      addressRegion: "Tamil Nadu",
+      postalCode: "641107",
+      addressCountry: "IN",
     },
   },
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://www.tamizhtech.in/#localbusiness",
     name: "TamizhTech Robotics Company",
     telephone: "+918148045030",
+    email: "office@tamizhtech.in",
+    url: "https://www.tamizhtech.in",
+    priceRange: "₹₹",
+    openingHours: "Mo-Sa 09:00-18:00",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Coimbatore",
+      streetAddress: "Thiruchendur Gdn Rd, Kurumbapalayam SSKulam",
       addressLocality: "Coimbatore",
       addressRegion: "Tamil Nadu",
       postalCode: "641107",
       addressCountry: "IN",
     },
     geo: { "@type": "GeoCoordinates", latitude: 11.0168, longitude: 76.9558 },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "TamizhTech Robotics Company",
+    url: "https://www.tamizhtech.in",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.tamizhtech.in/blog?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
   },
 ];
 
@@ -117,12 +147,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config','G-LZEZV8HPGR');
         `}</Script>
       </head>
-      <body className={`${montserrat.variable} ${karla.variable} font-sans bg-page text-text-primary antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} font-sans bg-page text-text-primary antialiased`}>
         <Navbar />
         <main className="flex flex-col min-h-screen">
           {children}
         </main>
         <Footer />
+        <FloatingWidgets />
         <Analytics />
         <SpeedInsights />
       </body>

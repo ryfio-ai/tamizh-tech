@@ -5,32 +5,42 @@
   :root {
     color-scheme: light;
     /* ── Backgrounds ──────────────────────────── */
-    --bg-page:       #FFFFFF;
-    --bg-subtle:     #F5F5F5;
-    --bg-muted:      #F5F5F5;
-    --bg-surface:    #FFFFFF;
+    --bg-page:           #FFFFFF;
+    --bg-subtle:         #F8F9FA;
+    --bg-muted:          #F8F9FA;
+    --bg-surface:        #FFFFFF;
+    --bg-card:           rgba(255, 255, 255, 0.65);
+    --bg-dark-contrast:  #0F1115;
     /* ── Text ─────────────────────────────────── */
-    --text-primary:  #0A0A0A;
-    --text-secondary:#4A4A4A;
-    --text-muted:    #4A4A4A;
-    --text-subtle:   #4A4A4A;
+    --text-primary:      #0A0A0A;
+    --text-secondary:    #404040;
+    --text-muted:        #737373;
+    --text-subtle:       #737373;
+    --text-contrast:     #FFFFFF;
     /* ── Accent ───────────────────────────────── */
-    --accent-blue:   #FB7115;
-    --accent-blue-hover: #E35E00;
-    --accent-blue-soft:  rgba(251,113,21,0.08);
-    --accent-blue-glow:  rgba(251,113,21,0.2);
-    --accent-teal:   #FB7115;
-    --accent-teal-soft:  rgba(251,113,21,0.08);
+    --accent:            #FF6A00;
+    --accent-hover:      #E05300;
+    --accent-soft:       rgba(255, 106, 0, 0.06);
+    --accent-glow:       rgba(255, 106, 0, 0.15);
+    /* Deprecated but kept for code compatibility */
+    --accent-blue:       #FF6A00;
+    --accent-blue-hover: #E05300;
+    --accent-blue-soft:  rgba(255, 106, 0, 0.06);
+    --accent-blue-glow:  rgba(255, 106, 0, 0.15);
+    --accent-teal:       #FF6A00;
+    --accent-teal-soft:  rgba(255, 106, 0, 0.06);
     /* ── Borders ──────────────────────────────── */
-    --border:        #E5E5E5;
-    --border-hover:  #CCCCCC;
-    --border-focus:  #FB7115;
+    --border:            #E5E5E5;
+    --border-hover:      #B3B3B3;
+    --border-accent:     rgba(255, 106, 0, 0.3);
+    --border-focus:      #FF6A00;
+    --border-glass:      rgba(255, 255, 255, 0.45);
     /* ── Radius ───────────────────────────────── */
-    --radius-sm:  8px;
-    --radius-md:  12px;
-    --radius-lg:  16px;
-    --radius-xl:  24px;
-    --radius-2xl: 32px;
+    --radius-sm:  4px;
+    --radius-md:  8px;
+    --radius-lg:  12px;
+    --radius-xl:  16px;
+    --radius-2xl: 24px;
     /* ── Shadow ───────────────────────────────── */
     --shadow-sm:  0 1px 3px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.01);
     --shadow-md:  0 4px 16px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.01);
@@ -50,18 +60,18 @@
   body {
     background-color: var(--bg-page);
     color: var(--text-primary);
-    font-family: var(--font-karla), 'Karla', sans-serif;
+    font-family: var(--font-inter), 'Inter', sans-serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
-    font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+    font-family: var(--font-space-grotesk), 'Space Grotesk', 'Inter', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
   ::selection {
@@ -117,9 +127,12 @@
 
   /* ── Cards ───────────────────────────────────── */
   .card {
-    background: #fff; border: 1px solid var(--border);
+    background: var(--bg-card);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: var(--radius-xl); padding: 32px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
     transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
   }
   .card:hover {
@@ -264,6 +277,48 @@ textarea:-webkit-autofill {
   -webkit-text-fill-color: var(--text-primary) !important;
 }
 
+/* ── Custom Utilities for Reliable Coloring ── */
+.text-accent {
+  color: var(--accent) !important;
+}
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+.border-accent {
+  border-color: var(--accent) !important;
+}
+.decoration-accent {
+  text-decoration-color: var(--accent) !important;
+}
+.btn-primary-orange {
+  background-color: #FF6A00 !important;
+  color: #FFFFFF !important;
+  border-color: #FF6A00 !important;
+}
+.btn-primary-orange:hover {
+  background-color: #E05300 !important;
+  border-color: #E05300 !important;
+}
+.btn-outline-orange {
+  background-color: transparent !important;
+  color: #FF6A00 !important;
+  border-color: #FF6A00 !important;
+}
+.btn-outline-orange:hover {
+  background-color: #FF6A00 !important;
+  color: #FFFFFF !important;
+  border-color: #FF6A00 !important;
+}
+.text-text-primary {
+  color: var(--text-primary) !important;
+}
+.text-text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-text-muted {
+  color: var(--text-muted) !important;
+}
+
 /* ── Reduced motion ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -271,4 +326,30 @@ textarea:-webkit-autofill {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Form Input ──────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  padding: 1rem 1.25rem;
+  color: #111111;
+  font-weight: 700;
+  font-size: 0.825rem;
+  outline: none;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+.form-input:focus {
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 1px #FF6B00;
+}
+.form-input::placeholder {
+  color: #999999;
+  font-weight: 600;
+  opacity: 0.5;
+}
+select.form-input {
+  appearance: none;
 }

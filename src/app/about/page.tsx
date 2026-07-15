@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle, Users, Award, Target, Heart, Zap, Cpu } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap, Cpu } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { TargetIcon, HeartIcon, AwardIcon, UsersIcon } from "@/components/ui/CustomIcons";
 
 const timeline = [
   { year: "2016", title: "Founded", desc: "Started as a student robotics club in Coimbatore." },
@@ -18,10 +19,10 @@ const timeline = [
 ];
 
 const values = [
-  { icon: Target,      title: "Vision",    desc: "To be India's most trusted robotics and AI engineering company." },
-  { icon: Heart,       title: "Mission",   desc: "Building technology that empowers industries and educates the next generation." },
-  { icon: Award,       title: "Excellence",desc: "Every project is built to the highest standards of engineering quality." },
-  { icon: Users,       title: "Community", desc: "Creating a thriving ecosystem of engineers, innovators, and educators." },
+  { icon: TargetIcon,      title: "Vision",    desc: "To be India's most trusted robotics and AI engineering company." },
+  { icon: HeartIcon,       title: "Mission",   desc: "Building technology that empowers industries and educates the next generation." },
+  { icon: AwardIcon,       title: "Excellence",desc: "Every project is built to the highest standards of engineering quality." },
+  { icon: UsersIcon,       title: "Community", desc: "Creating a thriving ecosystem of engineers, innovators, and educators." },
 ];
 
 const team = [
@@ -109,10 +110,12 @@ export default function AboutPage() {
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map(({ icon: Icon, title, desc }) => (
               <StaggerItem key={title}>
-                <Card className="h-full">
-                  <div className="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent mb-5"><Icon className="w-5 h-5" /></div>
-                  <h3 className="font-bold text-text-primary text-lg mb-2">{title}</h3>
-                  <p className="text-sm text-text-muted leading-relaxed">{desc}</p>
+                <Card className="h-full p-8 flex flex-col items-start hover:border-accent/40 shadow-sm hover:shadow-lg transition-all duration-300 bg-white">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 border border-accent/20 shadow-xs">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-bold text-text-primary text-base mb-2 font-heading uppercase tracking-tight">{title}</h3>
+                  <p className="text-xs text-text-secondary leading-relaxed font-sans">{desc}</p>
                 </Card>
               </StaggerItem>
             ))}
@@ -127,17 +130,23 @@ export default function AboutPage() {
             <SectionHeader tag="Our Journey" title="The" highlight="TamizhTech story" />
           </AnimatedSection>
           <div className="relative max-w-3xl mx-auto">
-            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-px bg-zinc-200" />
+            {/* Center line with gradient glow */}
+            <div className="absolute left-1/2 -translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-zinc-200" />
+            
             {timeline.map((item, i) => (
-              <AnimatedSection key={item.year} delay={i * 0.1} className={`relative flex gap-8 mb-12 ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
+              <AnimatedSection key={item.year} delay={i * 0.15} direction={i % 2 === 0 ? "left" : "right"} className={`relative flex gap-8 mb-16 ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
                 <div className="flex-1">
-                  <div className={`bg-white border border-border p-6 rounded-2xl shadow-sm ${i % 2 === 0 ? "text-right" : "text-left"}`}>
-                    <span className="text-accent text-sm font-bold">{item.year}</span>
-                    <h3 className="text-text-primary font-bold mt-1 mb-2">{item.title}</h3>
-                    <p className="text-text-muted text-sm leading-relaxed">{item.desc}</p>
+                  <div className={`bg-white border border-border p-6 rounded-2xl shadow-sm hover:border-accent/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${i % 2 === 0 ? "text-right" : "text-left"}`}>
+                    <span className="text-accent text-sm font-extrabold font-mono px-3 py-1 rounded-full bg-accent/5 border border-accent/10">{item.year}</span>
+                    <h3 className="text-text-primary font-bold mt-3 mb-2 uppercase text-base tracking-tight">{item.title}</h3>
+                    <p className="text-text-muted text-xs leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 rounded-full bg-accent border-4 border-white shadow-sm z-10" />
+                {/* Pulsing indicator */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-6 w-5 h-5 rounded-full bg-white border-4 border-accent shadow-md z-10 flex items-center justify-center">
+                  <span className="absolute w-2 h-2 rounded-full bg-accent animate-ping" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                </div>
                 <div className="flex-1" />
               </AnimatedSection>
             ))}
@@ -214,17 +223,26 @@ export default function AboutPage() {
 
 
       {/* CTA */}
-      <section className="section bg-subtle py-20 border-t border-border/30">
-        <div className="container px-6">
-          <AnimatedSection className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-extrabold text-text-primary mb-4">Join the TamizhTech movement</h2>
-            <p className="text-text-muted mb-8 max-w-md mx-auto">Collaborate with us on cutting-edge projects or start your engineering journey today.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button variant="primary">Contact Us <ArrowRight className="w-4 h-4 ml-1.5" /></Button>
+      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+        <div className="container relative z-10 px-6 max-w-4xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight mb-4 text-white uppercase">
+              Join the TamizhTech movement
+            </h2>
+            <p className="text-gray-400 mb-10 max-w-md mx-auto leading-relaxed font-sans text-sm">
+              Collaborate with us on cutting-edge projects or start your engineering journey today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full justify-center text-sm font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                  Contact Us <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Button>
               </Link>
-              <Link href="/courses">
-                <Button variant="secondary">Browse Courses</Button>
+              <Link href="/courses" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full justify-center text-sm font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                  Browse Courses
+                </Button>
               </Link>
             </div>
           </AnimatedSection>

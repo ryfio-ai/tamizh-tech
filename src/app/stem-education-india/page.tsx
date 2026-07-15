@@ -25,7 +25,7 @@ export default function StemEducationIndiaPage() {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Tamizh Tech Robotics Company",
-      "image": "https://tamizhtech.com/logo.png",
+      "image": "https://www.tamizhtech.in/logo/TTRC LOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Coimbatore",
@@ -33,7 +33,7 @@ export default function StemEducationIndiaPage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.com"
+      "url": "https://tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -55,13 +55,13 @@ export default function StemEducationIndiaPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.com"
+          "item": "https://tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "STEM Education India",
-          "item": "https://tamizhtech.com/stem-education-india"
+          "item": "https://tamizhtech.in/stem-education-india"
         }
       ]
     }

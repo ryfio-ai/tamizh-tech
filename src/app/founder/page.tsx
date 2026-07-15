@@ -7,6 +7,7 @@ import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, Gradu
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 export default function FounderPage() {
   const personSchema = {
@@ -62,11 +63,6 @@ export default function FounderPage() {
               <h2 className="text-2xl font-bold uppercase tracking-tight text-text-primary">Er. K. Tamizharasan</h2>
               <span className="text-xs font-bold text-accent uppercase tracking-widest mt-1 block">Founder & CEO</span>
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mt-0.5 block">Tamizh Tech Robotics Company</span>
-              
-              <div className="mt-8 pt-6 border-t border-border w-full space-y-2 text-xs text-text-secondary">
-                <div><strong>Qualification:</strong> B.E. Robotics & Automation</div>
-                <div><strong>Domain:</strong> Embedded Systems, Machine Vision & Kinematics</div>
-              </div>
             </div>
 
             {/* Biography & Message */}
@@ -145,20 +141,29 @@ export default function FounderPage() {
       </section>
 
       {/* Consultation / Contact CTA */}
-      <section className="section py-16 bg-subtle border-t border-border text-center">
-        <div className="container px-6 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold uppercase mb-4 text-text-primary">Connect with Er. K. Tamizharasan</h2>
-          <p className="text-text-secondary text-sm mb-8 leading-relaxed">
-            Interested in speaking at your college symposium? Or would you like to discuss a customized R&D project or industrial automation feasibility audit?
-          </p>
-          <div className="flex justify-center gap-4">
-            <Link href="/contact">
-              <Button variant="primary" size="lg">Send Message</Button>
-            </Link>
-            <a href="mailto:info@tamizhtech.com">
-              <Button variant="secondary" size="lg">Email Directly</Button>
-            </a>
-          </div>
+      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+        <div className="container relative z-10 px-6 max-w-3xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight mb-4 text-white uppercase">
+              Connect with Er. K. Tamizharasan
+            </h2>
+            <p className="text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed font-sans text-sm md:text-base">
+              Interested in speaking at your college symposium? Or would you like to discuss a customized R&D project or industrial automation feasibility audit?
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full justify-center text-sm font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                  Send Message
+                </Button>
+              </Link>
+              <a href="mailto:info@tamizhtech.in" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full justify-center text-sm font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                  Email Directly
+                </Button>
+              </a>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>
