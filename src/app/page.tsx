@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 
 export const metadata: Metadata = {
-  title: "Tamizh Tech Robotics Company | The Future of Engineering Starts Here",
-  description: "Tamizh Tech Robotics Company, based in Coimbatore, Tamil Nadu, is a premier technology solutions provider specializing in educational robotics kits, custom competition bots, industrial automation (AGVs, AMRs), and technology education.",
+  title: "TamizhTech Robotics | Future of Engineering Coimbatore",
+  description: "Coimbatore's premier robotics company building competition robot kits, school STEM Tinkering labs, and industrial automation solutions across India.",
   keywords: [
     "Tamizh Tech Robotics Company", 
     "Robotics Company Coimbatore", 
