@@ -87,6 +87,11 @@ We have completed a comprehensive overhaul of the TamizhTech platform, aligning 
 *   **Legal Page Compliance Styling**: Patched class variables on `/privacy` and `/terms` pages to reference current theme colors (`bg-background` and `text-accent`) in place of outdated classes (`bg-bg-page`, `text-primary-main`).
 *   **Infinite Slider Pause Controls (WCAG 2.2.2)**: Integrated state-based animation toggling and a visible Play/Pause control button to the [InfiniteSlider](file:///c:/Users/ELCOT/Desktop/ryfio/tamizh-tech/src/components/ui/infinite-slider.tsx) component. This provides a user control mechanism for moving/scrolling content.
 *   **Descriptive Alt Tags**: Created a lookup helper in [GalleryGrid](file:///c:/Users/ELCOT/Desktop/ryfio/tamizh-tech/src/components/ui/GalleryGrid.tsx) supplying unique, keyword-optimized alt texts for all 62 gallery images (e.g. referencing student training, Coimbatore locations, and specific robotics platforms), maximizing SEO and Screen Reader compliance.
+*   **Prefers-Reduced-Motion Support**: Patched the [InfiniteSlider](file:///c:/Users/ELCOT/Desktop/ryfio/tamizh-tech/src/components/ui/infinite-slider.tsx) component to check for user OS motion preferences on mount, automatically freezing the marquee track for optimal accessibility.
+*   **Additional Schema Markup**: Appended Course, Event, and HowTo structured JSON-LD schemas in `JsonLd.tsx`. Deployed `CourseSchema` across the courses catalog (`courses/page.tsx`), `HowToSchema` for STEM lab setup guidelines in the schools overview (`schools/page.tsx`), and rendered the homepage `FAQSchema` (`src/app/page.tsx`).
+*   **Alternates and OpenGraph Metadata**: Added a global alternates configuration mapping reciprocal language URLs to the root [layout.tsx](file:///c:/Users/ELCOT/Desktop/ryfio/tamizh-tech/src/app/layout.tsx), and added layout-level `openGraph` properties to `products/layout.tsx` and `services/layout.tsx` to provide distinct social sharing cards.
+*   **Security Trust File**: Created the compliance standard `public/.well-known/security.txt` specifying developer contacts and security guidelines.
+
 
 
 ---
