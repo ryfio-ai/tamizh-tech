@@ -127,9 +127,13 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
 
       <div className="container px-6">
         {/* Breadcrumb & Navigation back link */}
-        <div className="flex items-center gap-2 mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider">
-          <Link href="/products" className="hover:text-accent transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Products
+        <div className="flex items-center flex-wrap gap-2 mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider">
+          <Link href="/" className="hover:text-accent transition-colors">
+            Home
+          </Link>
+          <ChevronRight className="w-3 h-3" />
+          <Link href="/products" className="hover:text-accent transition-colors">
+            Products
           </Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-text-muted">{product.category}</span>

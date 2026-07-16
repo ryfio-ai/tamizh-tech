@@ -55,7 +55,7 @@ export default function AboutPage() {
     <div>
       {/* Hero */}
       <PageHero
-        title="Engineering the future, one innovation at a time"
+        title="A technology company with purpose"
         subtitle="From a student robotics club to a premier AI & engineering company — the TamizhTech story is built on passion, innovation, and impact."
         breadcrumbActive="About"
       />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { 
   Search, 
@@ -243,28 +244,39 @@ function ProductsContent() {
 
                       {/* Direct contact actions */}
                       <div className="space-y-2.5 pt-5 border-t border-border mt-auto">
-                        <Button 
-                          variant="primary" 
-                          size="sm" 
-                          onClick={() => openQuoteModal(product)}
-                          className="w-full justify-center font-bold text-white bg-accent hover:bg-accent-hover text-xs py-2.5"
-                        >
-                          Contact for Pricing
-                        </Button>
-                        <a 
-                          href={`https://wa.me/918148045030?text=Hello!%20I%20want%20to%20enquire%20about%20the%20${encodeURIComponent(product.name)}.%20Please%20guide%20me%20on%20pricing%20and%20shipping.`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block w-full"
-                        >
+                        <Link href={`/products/${product.slug}`} className="block w-full">
                           <Button 
-                            variant="primary"
-                            size="sm"
-                            className="w-full justify-center gap-1.5 bg-[#25D366] hover:bg-[#20ba56] border-[#25D366] hover:border-[#20ba56] text-white font-bold text-xs py-2.5"
+                            variant="outline" 
+                            size="sm" 
+                            className="w-full justify-center font-bold text-accent border-accent hover:bg-accent/5 text-xs py-2.5"
                           >
-                            <FaWhatsapp className="w-4 h-4" /> Inquiry via WhatsApp
+                            View Technical Details
                           </Button>
-                        </a>
+                        </Link>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button 
+                            variant="primary" 
+                            size="sm" 
+                            onClick={() => openQuoteModal(product)}
+                            className="w-full justify-center font-bold text-white bg-accent hover:bg-accent-hover text-xs py-2.5"
+                          >
+                            Get Quote
+                          </Button>
+                          <a 
+                            href={`https://wa.me/918148045030?text=Hello!%20I%20want%20to%20enquire%20about%20the%20${encodeURIComponent(product.name)}.%20Please%20guide%20me%20on%20pricing%20and%20shipping.`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block w-full"
+                          >
+                            <Button 
+                              variant="primary"
+                              size="sm"
+                              className="w-full justify-center gap-1.5 bg-[#25D366] hover:bg-[#20ba56] border-[#25D366] hover:border-[#20ba56] text-white font-bold text-xs py-2.5"
+                            >
+                              <FaWhatsapp className="w-4 h-4 shrink-0" /> WhatsApp
+                            </Button>
+                          </a>
+                        </div>
                       </div>
                     </div>
 

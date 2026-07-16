@@ -204,7 +204,7 @@ export default function HomeClient() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.08)_0%,transparent_70%)] pointer-events-none z-0" />
               
               <Image
-                src="/hero-robot.png"
+                src="/hero-robot.webp"
                 alt="TamizhTech Humanoid Robot"
                 fill
                 className="object-contain transition-transform duration-700 group-hover:scale-[1.02] z-10"

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
+    <div className="bg-background pt-32 pb-24 selection:bg-accent selection:text-white min-h-screen">
       <div className="container mx-auto px-6 max-w-4xl">
-        <div className="mb-16 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-6 font-sans">Legal & Compliance</h1>
+        <div className="mb-16 border-l-4 border-accent pl-10 py-4">
+          <h1 className="text-[10px] font-black text-accent uppercase tracking-[0.6em] mb-6 font-sans">Legal & Compliance</h1>
           <h2 className="text-4xl md:text-5xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
             Privacy Policy
           </h2>
@@ -46,9 +46,9 @@ export default function PrivacyPage() {
             We implement enterprise-grade security measures to protect your data. All communication with our servers is encrypted via SSL, and access to client operational data is strictly role-based.
           </p>
 
-          <div className="mt-20 p-8 border border-border-light bg-white text-center">
+          <div className="mt-20 p-8 border border-border bg-white text-center rounded-2xl">
             <p className="text-xs font-black uppercase tracking-widest mb-4">Need clarification?</p>
-            <Link href="/contact" className="text-primary-main hover:text-primary-hover inline-flex items-center gap-2 text-sm font-bold transition-colors">
+            <Link href="/contact" className="text-accent hover:text-accent-hover inline-flex items-center gap-2 text-sm font-bold transition-colors">
               Contact our Privacy Officer <MoveRight className="w-4 h-4" />
             </Link>
           </div>

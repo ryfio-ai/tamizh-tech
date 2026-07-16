@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="bg-bg-page pt-32 pb-24 selection:bg-primary-main selection:text-white min-h-screen">
+    <div className="bg-background pt-32 pb-24 selection:bg-accent selection:text-white min-h-screen">
       <div className="container mx-auto px-6 max-w-4xl">
-        <div className="mb-16 border-l-4 border-primary-main pl-10 py-4">
-          <h1 className="text-[10px] font-black text-primary-main uppercase tracking-[0.6em] mb-6 font-sans">Legal & Compliance</h1>
+        <div className="mb-16 border-l-4 border-accent pl-10 py-4">
+          <h1 className="text-[10px] font-black text-accent uppercase tracking-[0.6em] mb-6 font-sans">Legal & Compliance</h1>
           <h2 className="text-4xl md:text-5xl font-black text-text-primary tracking-tighter leading-[0.95] uppercase">
             Terms of Service
           </h2>
@@ -41,9 +41,9 @@ export default function TermsPage() {
             Access to our enterprise SaaS products (like Modliq) is granted on a subscription basis. Misuse of the platform, including unauthorized data scraping or reverse engineering of ML models, will result in immediate termination of access.
           </p>
 
-          <div className="mt-20 p-8 border border-border-light bg-white text-center">
+          <div className="mt-20 p-8 border border-border bg-white text-center rounded-2xl">
             <p className="text-xs font-black uppercase tracking-widest mb-4">Questions about these terms?</p>
-            <Link href="/contact" className="text-primary-main hover:text-primary-hover inline-flex items-center gap-2 text-sm font-bold transition-colors">
+            <Link href="/contact" className="text-accent hover:text-accent-hover inline-flex items-center gap-2 text-sm font-bold transition-colors">
               Contact our Legal Team <MoveRight className="w-4 h-4" />
             </Link>
           </div>
