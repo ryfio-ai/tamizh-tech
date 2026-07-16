@@ -122,10 +122,10 @@ export default function CareersPage() {
           {/* Contact CTA */}
           <div className="bg-subtle border border-border p-12 lg:p-20 rounded-3xl text-center max-w-4xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-6 leading-tight max-w-2xl mx-auto">
-              If you're interested in joining our growing team, drop your resume to office@tamizhtech.in
+              If you're interested in joining our growing team, drop your resume to career@tamizhtech.in
             </h3>
             <div className="flex justify-center mt-8">
-              <a href="mailto:office@tamizhtech.in">
+              <a href="mailto:career@tamizhtech.in">
                 <Button variant="primary" size="lg" className="gap-2.5">
                   <Mail className="w-5 h-5" /> Email Resume
                 </Button>

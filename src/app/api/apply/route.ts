@@ -85,7 +85,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: "TamizhTech <contact@tamizhtech.in>", 
-      to: ["info@tamizhtech.com", "tamizhtechpvtltd@gmail.com"], 
+      to: ["career@tamizhtech.in", "tamizhtechpvtltd@gmail.com"], 
       subject: emailSubject,
       html: emailHtml,
     });

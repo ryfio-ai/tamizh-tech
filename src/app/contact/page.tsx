@@ -85,7 +85,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1.5">Official Inquiry</p>
-                    <a href="mailto:info@tamizhtech.in" className="text-lg font-bold text-text-primary hover:text-accent transition-colors break-all">info@tamizhtech.in</a>
+                    <a href="mailto:contact@tamizhtech.in" className="text-lg font-bold text-text-primary hover:text-accent transition-colors break-all">contact@tamizhtech.in</a>
                   </div>
                 </div>
 
