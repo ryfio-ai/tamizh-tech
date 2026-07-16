@@ -134,7 +134,7 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="md:col-span-7 lg:col-span-6 flex flex-col justify-center text-left relative z-10"
+              className="md:col-span-7 lg:col-span-5 flex flex-col justify-center text-left relative z-10"
             >
               {/* Glowing Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent mb-6 w-fit shadow-xs">
@@ -198,7 +198,7 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="md:col-span-5 lg:col-span-6 flex items-center justify-center md:justify-start w-full pl-0 md:pl-4 lg:pl-10 mt-12 md:mt-0 relative z-10"
+              className="md:col-span-5 lg:col-span-7 flex items-center justify-center md:justify-start w-full pl-0 md:pl-2 lg:pl-6 mt-12 md:mt-0 relative z-10"
             >
               {/* Floating animation wrapper */}
               <motion.div
@@ -210,42 +210,42 @@ export default function HomeClient() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="relative w-full aspect-[3/2] max-w-[450px] sm:max-w-[580px] lg:max-w-[720px] z-10"
+                className="relative w-full aspect-[3/2] max-w-[450px] sm:max-w-[580px] lg:max-w-[640px] xl:max-w-[680px] 2xl:max-w-[800px] z-10"
               >
                 {/* Subtle soft shadow / radial glow behind the robot group */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.18)_0%,transparent_70%)] pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.22)_0%,transparent_70%)] pointer-events-none z-0" />
                 
                 {/* 1. hero-amr (Left) */}
-                <div className="absolute left-[0%] bottom-[4%] w-[33%] h-[80%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                <div className="absolute left-[0%] bottom-[4%] w-[38%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
                   <Image
                     src="/hero-amr.png"
                     alt="TamizhTech AMR Autonomous Mobile Robot"
                     fill
-                    sizes="(max-width: 768px) 30vw, 15vw"
+                    sizes="(max-width: 768px) 35vw, 20vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
                 </div>
 
                 {/* 2. hero-hero (Center - slightly taller/larger) */}
-                <div className="absolute left-[31%] bottom-[0%] w-[38%] h-[100%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
+                <div className="absolute left-[28%] bottom-[0%] w-[44%] h-[100%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
                   <Image
                     src="/hero-hero.png"
                     alt="TamizhTech Hero Humanoid Platform"
                     fill
-                    sizes="(max-width: 768px) 40vw, 20vw"
+                    sizes="(max-width: 768px) 45vw, 25vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
                 </div>
 
                 {/* 3. hero-human (Right) */}
-                <div className="absolute left-[67%] bottom-[4%] w-[33%] h-[80%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                <div className="absolute left-[62%] bottom-[4%] w-[38%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
                   <Image
                     src="/hero-human.png"
                     alt="TamizhTech Advanced Humanoid Robot"
                     fill
-                    sizes="(max-width: 768px) 30vw, 15vw"
+                    sizes="(max-width: 768px) 35vw, 20vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
