@@ -124,7 +124,7 @@ export default function HomeClient() {
     <div className="flex flex-col bg-white">
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-24 pb-12 border-b border-border/40">
+      <section className="relative min-h-[85vh] md:min-h-0 md:h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-20 md:pt-24 pb-6 md:pb-8 border-b border-border/40">
         
         <div className="container relative z-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
@@ -136,22 +136,14 @@ export default function HomeClient() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="md:col-span-7 lg:col-span-5 flex flex-col justify-center text-left relative z-10"
             >
-              {/* Glowing Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent mb-6 w-fit shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[10px] tracking-[0.08em] font-extrabold uppercase">
-                  Coimbatore's Premier Robotics Core
-                </span>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary mb-6 tracking-tight leading-[1.05] font-heading">
+              <h1 className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[48px] font-black text-text-primary mb-3.5 tracking-tight leading-[1.08] font-heading">
                 Engineering the <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
                 <br />
                 of <span style={{ color: '#FF6A00' }}>Robotics & AI</span>
               </h1>
 
               {/* Slogan */}
-              <div className="mb-6 border-l-2 border-accent pl-4 py-1">
+              <div className="mb-4 border-l-2 border-accent pl-4 py-0.5">
                 <p className="text-base sm:text-lg font-black text-text-primary font-heading leading-tight mb-1">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
                 </p>
@@ -160,12 +152,12 @@ export default function HomeClient() {
                 </p>
               </div>
 
-              <p className="text-base md:text-lg text-text-secondary mb-5 leading-relaxed font-sans max-w-xl">
+              <p className="text-sm md:text-base text-text-secondary mb-4 leading-relaxed font-sans max-w-xl">
                 <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech Robotics Company</span> is a premier indigenously-focused automation firm headquartered in Tamil Nadu, delivering cutting-edge automation, AI models, and custom machinery across industries.
               </p>
 
               {/* Technical Value Highlights Deck */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-left max-w-md">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 text-left max-w-md">
                 {[
                   "Competition Robotics Platforms",
                   "B2B Automation & PLCs",
@@ -198,7 +190,7 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="md:col-span-5 lg:col-span-7 flex items-center justify-center md:justify-start w-full pl-0 md:pl-2 lg:pl-6 mt-12 md:mt-0 relative z-10"
+              className="md:col-span-5 lg:col-span-7 flex items-center justify-center md:justify-start w-full pl-0 md:pl-2 lg:pl-0 lg:-ml-10 xl:-ml-16 mt-12 md:mt-0 relative z-10"
             >
               {/* Floating animation wrapper */}
               <motion.div
@@ -210,42 +202,42 @@ export default function HomeClient() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="relative w-full aspect-[3/2] max-w-[450px] sm:max-w-[580px] lg:max-w-[640px] xl:max-w-[680px] 2xl:max-w-[800px] z-10"
+                className="relative w-full aspect-[3/2] max-w-[450px] sm:max-w-[580px] lg:max-w-[620px] xl:max-w-[660px] 2xl:max-w-[760px] z-10"
               >
                 {/* Subtle soft shadow / radial glow behind the robot group */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.22)_0%,transparent_70%)] pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.22)_0%,transparent_75%)] pointer-events-none z-0" />
                 
                 {/* 1. hero-amr (Left) */}
-                <div className="absolute left-[0%] bottom-[4%] w-[38%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                <div className="absolute left-[0%] bottom-[4%] w-[40%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
                   <Image
                     src="/hero-amr.png"
                     alt="TamizhTech AMR Autonomous Mobile Robot"
                     fill
-                    sizes="(max-width: 768px) 35vw, 20vw"
+                    sizes="(max-width: 768px) 40vw, 25vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
                 </div>
 
                 {/* 2. hero-hero (Center - slightly taller/larger) */}
-                <div className="absolute left-[28%] bottom-[0%] w-[44%] h-[100%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
+                <div className="absolute left-[26%] bottom-[0%] w-[48%] h-[100%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
                   <Image
                     src="/hero-hero.png"
                     alt="TamizhTech Hero Humanoid Platform"
                     fill
-                    sizes="(max-width: 768px) 45vw, 25vw"
+                    sizes="(max-width: 768px) 50vw, 30vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
                 </div>
 
                 {/* 3. hero-human (Right) */}
-                <div className="absolute left-[62%] bottom-[4%] w-[38%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                <div className="absolute left-[60%] bottom-[4%] w-[40%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
                   <Image
                     src="/hero-human.png"
                     alt="TamizhTech Advanced Humanoid Robot"
                     fill
-                    sizes="(max-width: 768px) 35vw, 20vw"
+                    sizes="(max-width: 768px) 40vw, 25vw"
                     className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
                     priority
                   />
