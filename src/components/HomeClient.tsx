@@ -198,44 +198,44 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 h-[350px] sm:h-[420px] lg:h-[500px] relative w-full flex items-center justify-center"
+              className="lg:col-span-5 h-[380px] sm:h-[480px] lg:h-[550px] relative w-full flex items-center justify-center"
             >
               {/* Radial Halo Glow Behind Robots */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.08)_0%,transparent_70%)] pointer-events-none z-0" />
               
-              <div className="relative w-full h-full flex items-end justify-center gap-3 sm:gap-5 z-10 pb-4">
+              <div className="relative w-full h-full flex items-end justify-center gap-2 sm:gap-4 z-10 pb-2">
                 {/* 1. hero-amr (Left) */}
-                <div className="relative w-[30%] h-[75%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer">
+                <div className="relative w-[34%] h-[82%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-10">
                   <picture className="w-full h-full block">
                     <source srcSet="/hero-amr.webp" type="image/webp" />
                     <img
                       src="/hero-amr.png"
                       alt="TamizhTech AMR Autonomous Mobile Robot"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain object-bottom"
                     />
                   </picture>
                 </div>
 
                 {/* 2. hero-hero (Center - slightly taller/larger) */}
-                <div className="relative w-[36%] h-[90%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-20 -mx-1 sm:-mx-3">
+                <div className="relative w-[40%] h-[98%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-20 -mx-3 sm:-mx-6">
                   <picture className="w-full h-full block">
                     <source srcSet="/hero-hero.webp" type="image/webp" />
                     <img
                       src="/hero-hero.png"
                       alt="TamizhTech Hero Humanoid Platform"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain object-bottom"
                     />
                   </picture>
                 </div>
 
                 {/* 3. hero-human (Right) */}
-                <div className="relative w-[30%] h-[75%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer">
+                <div className="relative w-[34%] h-[82%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-10">
                   <picture className="w-full h-full block">
                     <source srcSet="/hero-human.webp" type="image/webp" />
                     <img
                       src="/hero-human.png"
                       alt="TamizhTech Advanced Humanoid Robot"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain object-bottom"
                     />
                   </picture>
                 </div>
