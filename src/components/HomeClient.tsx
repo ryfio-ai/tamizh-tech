@@ -127,14 +127,14 @@ export default function HomeClient() {
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-24 pb-12 border-b border-border/40">
         
         <div className="container relative z-10 px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             
             {/* Left side: Hero Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 flex flex-col justify-center text-left relative z-10"
+              className="md:col-span-7 lg:col-span-6 flex flex-col justify-center text-left relative z-10"
             >
               {/* Glowing Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent mb-6 w-fit shadow-xs">
@@ -198,48 +198,59 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 h-[380px] sm:h-[480px] lg:h-[550px] relative w-full flex items-center justify-center"
+              className="md:col-span-5 lg:col-span-6 flex items-center justify-center md:justify-end w-full pr-0 md:pr-16 lg:pr-24 mt-12 md:mt-0 relative z-10"
             >
-              {/* Radial Halo Glow Behind Robots */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.08)_0%,transparent_70%)] pointer-events-none z-0" />
-              
-              <div className="relative w-full h-full flex items-end justify-center gap-2 sm:gap-4 z-10 pb-2">
+              {/* Floating animation wrapper */}
+              <motion.div
+                animate={{
+                  y: [0, -8, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="relative w-full aspect-[4/3] max-w-[420px] sm:max-w-[480px] lg:max-w-[560px] z-10"
+              >
+                {/* Subtle soft shadow / radial glow behind the robot group */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.15)_0%,transparent_70%)] pointer-events-none z-0" />
+                
                 {/* 1. hero-amr (Left) */}
-                <div className="relative w-[34%] h-[82%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-10">
-                  <picture className="w-full h-full block">
-                    <source srcSet="/hero-amr.webp" type="image/webp" />
-                    <img
-                      src="/hero-amr.png"
-                      alt="TamizhTech AMR Autonomous Mobile Robot"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </picture>
+                <div className="absolute left-[0%] bottom-[4%] w-[33%] h-[76%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                  <Image
+                    src="/hero-amr.png"
+                    alt="TamizhTech AMR Autonomous Mobile Robot"
+                    fill
+                    sizes="(max-width: 768px) 30vw, 15vw"
+                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    priority
+                  />
                 </div>
 
                 {/* 2. hero-hero (Center - slightly taller/larger) */}
-                <div className="relative w-[40%] h-[98%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-20 -mx-3 sm:-mx-6">
-                  <picture className="w-full h-full block">
-                    <source srcSet="/hero-hero.webp" type="image/webp" />
-                    <img
-                      src="/hero-hero.png"
-                      alt="TamizhTech Hero Humanoid Platform"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </picture>
+                <div className="absolute left-[31%] bottom-[0%] w-[38%] h-[96%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
+                  <Image
+                    src="/hero-hero.png"
+                    alt="TamizhTech Hero Humanoid Platform"
+                    fill
+                    sizes="(max-width: 768px) 40vw, 20vw"
+                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    priority
+                  />
                 </div>
 
                 {/* 3. hero-human (Right) */}
-                <div className="relative w-[34%] h-[82%] hover:-translate-y-3 transition-transform duration-500 cursor-pointer z-10">
-                  <picture className="w-full h-full block">
-                    <source srcSet="/hero-human.webp" type="image/webp" />
-                    <img
-                      src="/hero-human.png"
-                      alt="TamizhTech Advanced Humanoid Robot"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </picture>
+                <div className="absolute left-[67%] bottom-[4%] w-[33%] h-[76%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                  <Image
+                    src="/hero-human.png"
+                    alt="TamizhTech Advanced Humanoid Robot"
+                    fill
+                    sizes="(max-width: 768px) 30vw, 15vw"
+                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    priority
+                  />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
