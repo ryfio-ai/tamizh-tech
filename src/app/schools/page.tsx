@@ -5,6 +5,7 @@ import { Check, Mail, Phone, MapPin, Sparkles, BookOpen, Users, Cpu, Award } fro
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { HowToSchema } from "@/components/JsonLd";
 
 export default function SchoolsPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -51,6 +52,7 @@ export default function SchoolsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <HowToSchema />
 
       <PageHero
         title="School Robotics, STEM & AI Labs"

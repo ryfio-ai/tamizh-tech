@@ -74,6 +74,15 @@ export const metadata: Metadata = {
     description: "AI · Robotics · Drone · IoT · Industrial Automation · STEM",
     images: ["/logo/banner.png"],
   },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": "/",
+      "en-US": "/en-us",
+      "ta-IN": "/ta",
+      "x-default": "/",
+    },
+  },
   robots: { index: true, follow: true },
 };
 

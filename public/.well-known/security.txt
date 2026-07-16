@@ -1,0 +1,6 @@
+Contact: mailto:info@tamizhtech.in
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, ta
+Canonical: https://www.tamizhtech.in/.well-known/security.txt
+Acknowledgement: https://www.tamizhtech.in/about
+Policy: https://www.tamizhtech.in/privacy

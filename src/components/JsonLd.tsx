@@ -113,3 +113,104 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
     />
   );
 }
+
+export function CourseSchema({ course }: { course: any }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": course.title,
+    "description": course.desc,
+    "provider": {
+      "@type": "Organization",
+      "name": "TamizhTech Robotics Company",
+      "sameAs": "https://www.tamizhtech.in"
+    },
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": course.mode,
+      "courseWorkload": course.duration,
+      "inLanguage": course.language
+    }
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function EventSchema({ event }: { event: any }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.title,
+    "description": event.desc,
+    "startDate": event.startDate || new Date().toISOString(),
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": event.location || "TamizhTech HQ, Coimbatore",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
+        "addressLocality": "Coimbatore",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "641107",
+        "addressCountry": "IN"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "TamizhTech Robotics Company"
+    }
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function HowToSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Setup a STEM Tinkering Lab in Indian Schools",
+    "description": "Step-by-step guide for school administrators to establish a standard robotics and tinkering lab under Atal Tinkering Lab guidelines.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Establish Dedicated Lab Space",
+        "text": "Allocate a room of at least 800-1000 sq ft with electrical layout benches and safety setups."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Procure Hardware & Kits",
+        "text": "Acquire STEM kits, microcontrollers (Arduino, ESP32), 3D printers, and mechanical chassis kits."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Design & Align Curriculum",
+        "text": "Map Grade 1 to 12 STEM curriculum to local board standards (CBSE/ICSE/State Board)."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Execute Teacher Training",
+        "text": "Conduct structured 3-day training programs for computer science and science faculty."
+      }
+    ]
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}

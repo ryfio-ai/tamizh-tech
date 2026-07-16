@@ -32,6 +32,16 @@ export function InfiniteSlider({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [key, setKey] = useState(0);
 
+  // Check for prefers-reduced-motion to respect accessibility preference
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (mediaQuery.matches) {
+        setIsPaused(true);
+      }
+    }
+  }, []);
+
   // Replace react-use-measure with native ResizeObserver
   useEffect(() => {
     if (!ref.current) return;

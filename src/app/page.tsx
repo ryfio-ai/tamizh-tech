@@ -1,5 +1,12 @@
 import { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
+import { FAQSchema } from "@/components/JsonLd";
+
+const faqs = [
+  { q: "What industries do you build automation solutions for?", a: "We primarily work with manufacturing, automotive, agriculture, defense, and education industries, designing custom autonomous machinery, robotic arms, IoT systems, and quality control vision AI models." },
+  { q: "Do you design custom competition robots?", a: "Yes, TamizhTech has a dedicated division that engineers custom combat robots, RC race cars, and student competition platforms." },
+  { q: "How can schools set up STEM tinkering labs?", a: "We provide complete turnkey STEM and robotics tinkering labs. This includes structural hardware setup, procurement of learning kits, curriculum alignment, and comprehensive teacher training." },
+];
 
 export const metadata: Metadata = {
   title: "TamizhTech Robotics | Future of Engineering Coimbatore",
@@ -27,5 +34,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeClient />;
+  return (
+    <>
+      <FAQSchema faqs={faqs} />
+      <HomeClient />
+    </>
+  );
 }

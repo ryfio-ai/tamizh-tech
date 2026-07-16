@@ -8,6 +8,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { courses } from "@/data/courses";
+import { CourseSchema } from "@/components/JsonLd";
 
 const categories = ["All", "School", "College", "Professionals"];
 
@@ -17,6 +18,9 @@ export default function CoursesPage() {
 
   return (
     <div>
+      {courses.map((course) => (
+        <CourseSchema key={course.id} course={course} />
+      ))}
       {/* Hero */}
       <PageHero
         title="Courses built for every learner"
