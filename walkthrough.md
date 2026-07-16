@@ -80,10 +80,11 @@ We have completed a comprehensive overhaul of the TamizhTech platform, aligning 
 *   **Borderless Hero Image**: Removed the card background box, shadows, and radial glow classes from the humanoid robot container on the Homepage. Set it to `object-contain` so it blends directly on the white canvas.
 *   **Global Orange Utility Override**: Appended explicit `.text-accent`, `.bg-accent`, and `.border-accent` styles to `globals.css` using `!important` declarations. This guarantees that orange highlights display properly across all page elements.
 
-### 15. Values Cards UI Optimization
-*   **Card Spacing & Padding**: Fixed the missing padding in the "Our Values" card layout inside `about/page.tsx` by setting the class to `p-8` (32px padding).
-*   **Icon Containers**: Upgraded the small icons to carry custom `w-12 h-12` rounded borders and soft orange background tints (`bg-accent/10`, `border-accent/20`).
-*   **Typography Upgrades**: Mapped value card titles to technical Space Grotesk heading styling (`font-heading text-base uppercase tracking-tight`) and refined descriptions to use spacious `text-xs text-text-secondary`.
+### 16. 100/100 SEO & Layout Optimizations
+*   **LCP Hero Image Compression**: Converted the 66KB PNG `hero-robot.png` to a highly optimized 11KB WebP file (`hero-robot.webp`) and updated the homepage `Image` component. This reduces bandwidth consumption and accelerates Largest Contentful Paint (LCP) time.
+*   **Local Image Replacements**: Replaced all stock Unsplash photos in `services/page.tsx` with actual local photos from the `/gallery/` assets directory (e.g., `/gallery/10.jpg`, `/gallery/12.jpg`, etc.).
+*   **Product Details Navigation & Breadcrumbs**: Added a dedicated `View Technical Details` CTA link on product cards (`products/page.tsx`) mapping to `/products/[slug]`. Also structured the inner breadcrumbs to include the `Home` and `Products` page links.
+*   **Legal Page Compliance Styling**: Patched class variables on `/privacy` and `/terms` pages to reference current theme colors (`bg-background` and `text-accent`) in place of outdated classes (`bg-bg-page`, `text-primary-main`).
 
 ---
 
