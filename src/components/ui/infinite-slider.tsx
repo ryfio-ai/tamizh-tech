@@ -11,6 +11,7 @@ type InfiniteSliderProps = {
   direction?: 'horizontal' | 'vertical';
   reverse?: boolean;
   className?: string;
+  showControls?: boolean;
 };
 
 export function InfiniteSlider({
@@ -21,8 +22,10 @@ export function InfiniteSlider({
   direction = 'horizontal',
   reverse = false,
   className,
+  showControls = true,
 }: InfiniteSliderProps) {
   const [currentDuration, setCurrentDuration] = useState(duration);
+  const [isPaused, setIsPaused] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const translation = useMotionValue(0);
@@ -42,6 +45,8 @@ export function InfiniteSlider({
   }, []);
 
   useEffect(() => {
+    if (isPaused) return;
+
     let controls: ReturnType<typeof animate> | undefined;
     const measuredSize = direction === 'horizontal' ? size.width : size.height;
     const contentSize = measuredSize + gap;
@@ -69,9 +74,9 @@ export function InfiniteSlider({
     }
 
     return controls?.stop;
-  }, [key, translation, currentDuration, size.width, size.height, gap, isTransitioning, direction, reverse]);
+  }, [key, translation, currentDuration, size.width, size.height, gap, isTransitioning, direction, reverse, isPaused]);
 
-  const hoverProps = durationOnHover
+  const hoverProps = durationOnHover && !isPaused
     ? {
         onHoverStart: () => { setIsTransitioning(true); setCurrentDuration(durationOnHover); },
         onHoverEnd: () => { setIsTransitioning(true); setCurrentDuration(duration); },
@@ -79,7 +84,7 @@ export function InfiniteSlider({
     : {};
 
   return (
-    <div className={cn('overflow-hidden', className)}>
+    <div className={cn('overflow-hidden relative group/slider-container', className)}>
       <motion.div
         className='flex w-max'
         style={{
@@ -93,6 +98,24 @@ export function InfiniteSlider({
         {children}
         {children}
       </motion.div>
+
+      {showControls && (
+        <button
+          onClick={() => setIsPaused(!isPaused)}
+          className="absolute bottom-2 right-2 px-2.5 py-1 rounded-full bg-white/90 hover:bg-white border border-border shadow-xs text-text-secondary hover:text-accent z-30 transition-all text-[10px] font-bold flex items-center gap-1 cursor-pointer"
+          aria-label={isPaused ? "Play animation" : "Pause animation"}
+        >
+          {isPaused ? (
+            <>
+              <span className="text-[8px]">▶</span> Play
+            </>
+          ) : (
+            <>
+              <span className="text-[8px]">❚❚</span> Pause
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 }
