@@ -91,6 +91,8 @@ We have completed a comprehensive overhaul of the TamizhTech platform, aligning 
 *   **Additional Schema Markup**: Appended Course, Event, and HowTo structured JSON-LD schemas in `JsonLd.tsx`. Deployed `CourseSchema` across the courses catalog (`courses/page.tsx`), `HowToSchema` for STEM lab setup guidelines in the schools overview (`schools/page.tsx`), and rendered the homepage `FAQSchema` (`src/app/page.tsx`).
 *   **Alternates and OpenGraph Metadata**: Added a global alternates configuration mapping reciprocal language URLs to the root [layout.tsx](file:///c:/Users/ELCOT/Desktop/ryfio/tamizh-tech/src/app/layout.tsx), and added layout-level `openGraph` properties to `products/layout.tsx` and `services/layout.tsx` to provide distinct social sharing cards.
 *   **Security Trust File**: Created the compliance standard `public/.well-known/security.txt` specifying developer contacts and security guidelines.
+*   **Three-Robot Hero Layout Overhaul**: Replaced the single hero image with a unified side-by-side aligned cluster of three robots (amr, hero, and human) using Next.js `Image` components inside a floating `aspect-[3/2]` container. Configured responsive splits (md:50/50, lg:45/55, xl:42/58) and shifted the container left (`lg:-ml-10 xl:-ml-16`) to tighten the horizontal gap with the text column and guarantee a safe 100px+ right edge clearance from the floating buttons on tablet and desktop screens. On mobile, the robot group stacks gracefully below the text at full width.
+
 
 
 
