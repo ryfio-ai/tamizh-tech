@@ -1,0 +1,42 @@
+name: TamizhTech Pre-Launch CI Suite
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository Source
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Runtime Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Install Playwright System Binaries & Browsers
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright Integrated Test Matrix
+      run: npx playwright test
+      env:
+        NEXT_TELEMETRY_DISABLED: 1 
+        CI: true
+
+    - name: Archive Test Failure Evidence Artifacts
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 7

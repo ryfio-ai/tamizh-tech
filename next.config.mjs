@@ -13,6 +13,21 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'tamizhtech.in',
+          },
+        ],
+        destination: 'https://www.tamizhtech.in/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

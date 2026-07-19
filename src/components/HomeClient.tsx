@@ -32,47 +32,47 @@ import {
 
 // Data
 const services = [
-  { icon: RoboticsIcon,   title: "Robotics",             desc: "Custom robotic systems from concept to deployment.",  color: "blue", href: "/services#robotics" },
-  { icon: AIIcon,         title: "Artificial Intelligence", desc: "ML models, vision AI, and intelligent automation.", color: "purple", href: "/services#ai" },
-  { icon: DroneIcon,      title: "Drone Technology",     desc: "UAV design, control systems, and aerial solutions.",   color: "sky", href: "/services#drone" },
-  { icon: IoTIcon,        title: "IoT",                  desc: "Connected ecosystems for smart environments.",         color: "teal", href: "/services#iot" },
-  { icon: EmbeddedIcon,   title: "Embedded Systems",     desc: "Firmware, microcontrollers, and embedded dev.",        color: "orange", href: "/services#embedded" },
-  { icon: AutomationIcon, title: "Industrial Automation",desc: "Process automation for modern manufacturing.",         color: "red", href: "/services#automation" },
-  { icon: Zap,          title: "STEM Labs",            desc: "Turnkey tinkering labs for schools and colleges.",     color: "yellow", href: "/courses#school" },
-  { icon: FlaskConical, title: "R&D Projects",         desc: "Research-grade engineering and product prototyping.",  color: "green", href: "/projects" },
-  { icon: GraduationCap,title: "Courses",              desc: "Structured programs for students & professionals.",    color: "indigo", href: "/courses" },
-  { icon: Briefcase,    title: "Consulting",           desc: "Expert guidance for tech projects and innovation.",    color: "pink", href: "/contact" },
+  { icon: RoboticsIcon, title: "Robotics", desc: "Custom robotic systems from concept to deployment.", color: "blue", href: "/services#robotics" },
+  { icon: AIIcon, title: "Artificial Intelligence", desc: "ML models, vision AI, and intelligent automation.", color: "purple", href: "/services#ai" },
+  { icon: DroneIcon, title: "Drone Technology", desc: "UAV design, control systems, and aerial solutions.", color: "sky", href: "/services#drone" },
+  { icon: IoTIcon, title: "IoT", desc: "Connected ecosystems for smart environments.", color: "teal", href: "/services#iot" },
+  { icon: EmbeddedIcon, title: "Embedded Systems", desc: "Firmware, microcontrollers, and embedded dev.", color: "orange", href: "/services#embedded" },
+  { icon: AutomationIcon, title: "Industrial Automation", desc: "Process automation for modern manufacturing.", color: "red", href: "/services#automation" },
+  { icon: Zap, title: "STEM Labs", desc: "Turnkey tinkering labs for schools and colleges.", color: "yellow", href: "/courses#school" },
+  { icon: FlaskConical, title: "R&D Projects", desc: "Research-grade engineering and product prototyping.", color: "green", href: "/projects" },
+  { icon: GraduationCap, title: "Courses", desc: "Structured programs for students & professionals.", color: "indigo", href: "/courses" },
+  { icon: Briefcase, title: "Consulting", desc: "Expert guidance for tech projects and innovation.", color: "pink", href: "/contact" },
 ];
 
 const stats = [
-  { value: "180+",  label: "Competition Wins" },
-  { value: "15+",   label: "Industry Partners" },
-  { value: "300+",  label: "Events Participated" },
-  { value: "1K+",   label: "Students Trained" },
+  { value: "180+", label: "Competition Wins" },
+  { value: "15+", label: "Industry Partners" },
+  { value: "300+", label: "Events Participated" },
+  { value: "1K+", label: "Students Trained" },
 ];
 
 const industries = [
-  { icon: MfgIcon,      label: "Manufacturing" },
-  { icon: EduIcon,      label: "Education" },
-  { icon: DefIcon,      label: "Defense" },
-  { icon: CityIcon,     label: "Smart Cities" },
-  { icon: LabIcon,      label: "Research Labs" },
-  { icon: HealthIcon,   label: "Healthcare" },
-  { icon: AgriIcon,     label: "Agriculture" },
-  { icon: AutoIcon,     label: "Automotive" },
+  { icon: MfgIcon, label: "Manufacturing" },
+  { icon: EduIcon, label: "Education" },
+  { icon: DefIcon, label: "Defense" },
+  { icon: CityIcon, label: "Smart Cities" },
+  { icon: LabIcon, label: "Research Labs" },
+  { icon: HealthIcon, label: "Healthcare" },
+  { icon: AgriIcon, label: "Agriculture" },
+  { icon: AutoIcon, label: "Automotive" },
 ];
 
 const whyUs = [
   { icon: CheckCircle, title: "End-to-End Solutions", desc: "From ideation and prototyping to deployment and training." },
-  { icon: Users,       title: "Expert Team",          desc: "Engineers, researchers, and educators with deep domain expertise." },
-  { icon: Award,       title: "Proven Track Record",  desc: "Podium finishes in national design and engineering contests." },
-  { icon: Globe,       title: "Pan-India Presence",   desc: "Serving clients across industries from Coimbatore nationwide." },
+  { icon: Users, title: "Expert Team", desc: "Engineers, researchers, and educators with deep domain expertise." },
+  { icon: Award, title: "Proven Track Record", desc: "Podium finishes in national design and engineering contests." },
+  { icon: Globe, title: "Pan-India Presence", desc: "Serving clients across industries from Coimbatore nationwide." },
 ];
 
 const projects = [
-  { title: "Autonomous Navigation Robot",  category: "Robotics",   image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", href: "/projects" },
-  { title: "AI Vision Quality Inspection", category: "AI",          image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=600&h=400&fit=crop", href: "/projects" },
-  { title: "Agricultural Drone System",    category: "Drone",       image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop", href: "/projects" },
+  { title: "Autonomous Navigation Robot", category: "Robotics", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop", href: "/projects" },
+  { title: "AI Vision Quality Inspection", category: "AI", image: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=600&h=400&fit=crop", href: "/projects" },
+  { title: "Agricultural Drone System", category: "Drone", image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop", href: "/projects" },
 ];
 
 const galleryImages = [
@@ -112,9 +112,9 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { title: "RC Robo Race",     spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race bot.jpg", slug: "rc-robo-race" },
-  { title: "RC Robo Soccer",   spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer bot.jpg", slug: "rc-robo-soccer" },
-  { title: "RC Robo Sumo",     spec: "Rare-earth magnets, high-traction tires, heavy armored steel base.", image: "/product/sumo bot.jpg", slug: "rc-robo-sumo" },
+  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race bot.jpg", slug: "rc-robo-race" },
+  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer bot.jpg", slug: "rc-robo-soccer" },
+  { title: "RC Robo Sumo", spec: "Rare-earth magnets, high-traction tires, heavy armored steel base.", image: "/product/sumo bot.jpg", slug: "rc-robo-sumo" },
 ];
 
 export default function HomeClient() {
@@ -123,135 +123,170 @@ export default function HomeClient() {
   return (
     <div className="flex flex-col bg-white">
 
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] md:min-h-[800px] flex items-center justify-center overflow-hidden bg-white hero-grid hero-gradient pt-32 md:pt-40 pb-28 md:pb-36 border-b border-border/40">
-        
-        <div className="container relative z-10 px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[45%_55%] xl:grid-cols-[42%_58%] gap-8 md:gap-10 lg:gap-12 xl:gap-16 2xl:gap-20 items-center">
-            
-            {/* Left side: Hero Content */}
+      {/* 1. HERO SECTION — fits exactly within one viewport */}
+      <section
+        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40"
+        style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)' }}
+      >
+        {/* Global radial glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
+
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 md:px-14 lg:px-16">
+          <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-0">
+
+            {/* ── LEFT COLUMN ── */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-center text-left relative z-10 w-full"
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col justify-center text-left relative z-10 py-10 md:py-0 pr-0 md:pr-8 lg:pr-12"
+              style={{ gap: '18px' }}
             >
-              {/* Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent mb-6 w-fit shadow-xs">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[10px] tracking-[0.08em] font-extrabold uppercase">
-                  Robotics & Automation Core
-                </span>
+                <span className="text-[10px] tracking-[0.1em] font-extrabold uppercase">Robotics & Automation</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-text-primary mb-6 tracking-tight leading-[1.05] font-heading">
-                Engineering the <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
+              {/* Heading */}
+              <h1
+                className="font-black text-text-primary font-heading tracking-tight leading-none"
+                style={{ fontSize: 'clamp(42px, 5vw, 72px)', lineHeight: 1.02 }}
+              >
+                Engineering the{' '}
+                <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
                 <br />
-                of <span style={{ color: '#FF6A00' }}>Robotics & AI</span>
+                of{' '}
+                <span style={{ color: '#FF6A00' }}>Robotics & AI</span>
               </h1>
 
-              {/* Slogan */}
-              <div className="mb-6 border-l-2 border-accent pl-4 py-1">
-                <p className="text-base sm:text-lg font-black text-text-primary font-heading leading-tight mb-1">
+              {/* Tamil tagline — one line only */}
+              <div className="border-l-2 border-accent pl-4 py-0.5">
+                <p className="text-sm sm:text-base font-black text-text-primary font-heading leading-snug whitespace-nowrap">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
-                </p>
-                <p className="text-[10px] sm:text-xs font-bold text-accent tracking-wider uppercase leading-none">
-                  Tamizh Technology for Tomorrow’s World
                 </p>
               </div>
 
-              <p className="text-base md:text-lg text-text-secondary mb-5 leading-relaxed font-sans max-w-[480px] lg:max-w-[520px]">
-                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech Robotics Company</span> is a premier indigenously-focused automation firm headquartered in Tamil Nadu, delivering cutting-edge automation, AI models, and custom machinery across industries.
+              {/* Short description — max 3 lines */}
+              <p className="text-sm md:text-base text-text-secondary leading-relaxed font-sans" style={{ maxWidth: '440px' }}>
+                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech</span> develops autonomous robots, AI automation solutions and industrial robotics for modern manufacturing and education.
               </p>
 
-              {/* Technical Value Highlights Deck */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 text-left max-w-md">
+              {/* Features — 2 columns, tight */}
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 {[
-                  "Competition Robotics Platforms",
-                  "B2B Automation & PLCs",
-                  "Rapid 3D Prototyping Services",
-                  "School & College STEM Labs"
+                  "Autonomous Mobile Robots",
+                  "AI Automation",
+                  "Industrial Robotics",
+                  "STEM Labs",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                     {feat}
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center justify-start gap-4 flex-wrap">
+              {/* CTAs */}
+              <div className="flex items-center gap-4 flex-wrap">
                 <Link href="/services" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-base font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
-                    Explore Services <ArrowRight className="w-5 h-5 ml-1.5" />
+                  <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
+                    Explore Services <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
                 </Link>
                 <Link href="/products" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-base font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange">
+                  <Button className="w-full justify-center text-sm font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange">
                     Buy Products
                   </Button>
                 </Link>
               </div>
             </motion.div>
 
-            {/* Right side: Premium Aligned Robotics Showcase */}
+            {/* ── RIGHT COLUMN — Premium Triangular Hero Composition ── */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center justify-center md:justify-start w-full lg:-ml-10 xl:-ml-16 mt-14 md:mt-0 relative z-10"
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex items-center justify-center w-full mt-6 md:-mt-8"
             >
-              {/* Floating animation wrapper */}
-              <motion.div
-                animate={{
-                  y: [0, -8, 0]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="relative w-full aspect-[3/2] max-w-[450px] sm:max-w-[580px] lg:max-w-[660px] xl:max-w-[700px] 2xl:max-w-[880px] z-10"
-              >
-                {/* Subtle soft shadow / radial glow behind the robot group */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.25)_0%,transparent_65%)] scale-110 pointer-events-none z-0" />
-                
-                {/* 1. hero-amr (Left) */}
-                <div className="absolute left-[0%] bottom-[4%] w-[40%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+              {/* Image Container — height 520px/560px container stage */}
+              <div className="relative w-full h-[440px] sm:h-[500px] lg:h-[540px] max-w-[620px]">
+
+                {/* Centered Background Glow */}
+                <div 
+                  className="absolute inset-0 pointer-events-none z-0"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(255,115,0,.20) 0%, rgba(255,115,0,.08) 38%, transparent 75%)'
+                  }}
+                />
+
+                {/* Floating Glass Badges */}
+                <motion.div 
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute top-4 left-2 sm:left-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
+                >
+                  <span className="text-sm">⚡</span> Autonomous
+                </motion.div>
+
+                <motion.div 
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                  className="absolute top-2 right-2 sm:right-6 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
+                >
+                  <span className="text-sm">🤖</span> AI Powered
+                </motion.div>
+
+                <motion.div 
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                  className="absolute bottom-6 right-0 sm:-right-2 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
+                >
+                  <span className="text-sm">📦</span> Smart Logistics
+                </motion.div>
+
+                {/* 1. AMR — Left (Lower, width ~290px/44%, bottom 20px, z-10) */}
+                <div className="absolute left-0 bottom-[20px] w-[46%] sm:w-[44%] h-[70%] z-10">
                   <Image
                     src="/hero-amr.png"
                     alt="TamizhTech AMR Autonomous Mobile Robot"
                     fill
-                    sizes="(max-width: 768px) 35vw, 20vw"
-                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 46vw, 260px"
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
+                    style={{ filter: 'drop-shadow(0 25px 50px rgba(0,0,0,.15))' }}
                     priority
                   />
                 </div>
 
-                {/* 2. hero-hero (Center - slightly taller/larger) */}
-                <div className="absolute left-[26%] bottom-[0%] w-[48%] h-[100%] z-20 filter drop-shadow-[0_12px_24px_rgba(255,106,0,0.06)]">
+                {/* 2. ROBOT ARM — Center (Hero Product, Tallest, width ~420px/58%, bottom 0, z-30) */}
+                <div className="absolute left-[22%] sm:left-[23%] bottom-0 w-[58%] h-[98%] z-30">
                   <Image
                     src="/hero-hero.png"
-                    alt="TamizhTech Hero Humanoid Platform"
+                    alt="TamizhTech Robotic Arm Platform — Hero Product"
                     fill
-                    sizes="(max-width: 768px) 45vw, 25vw"
-                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 58vw, 360px"
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
+                    style={{ filter: 'drop-shadow(0 35px 70px rgba(0,0,0,.22))' }}
                     priority
                   />
                 </div>
 
-                {/* 3. hero-human (Right) */}
-                <div className="absolute left-[60%] bottom-[4%] w-[40%] h-[88%] z-10 filter drop-shadow-[0_8px_16px_rgba(255,106,0,0.04)]">
+                {/* 3. SERVICE ROBOT — Right (Slightly behind Arm, width ~330px/48%, bottom 15px, z-20) */}
+                <div className="absolute right-0 bottom-[15px] w-[48%] sm:w-[46%] h-[82%] z-20">
                   <Image
                     src="/hero-human.png"
-                    alt="TamizhTech Advanced Humanoid Robot"
+                    alt="TamizhTech Advanced Service Robot"
                     fill
-                    sizes="(max-width: 768px) 35vw, 20vw"
-                    className="object-contain object-bottom transition-transform duration-500 hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 48vw, 290px"
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
+                    style={{ filter: 'drop-shadow(0 28px 55px rgba(0,0,0,.18))' }}
                     priority
                   />
                 </div>
-              </motion.div>
+
+              </div>
             </motion.div>
+
           </div>
         </div>
       </section>
@@ -260,7 +295,7 @@ export default function HomeClient() {
       <section className="bg-white py-16 border-b border-border/40 text-left relative overflow-hidden">
         <div className="container px-6 max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Column: FestFind Map Image */}
             <div className="lg:col-span-5 relative h-[300px] sm:h-[360px] w-full rounded-2xl border border-border/80 bg-zinc-950 overflow-hidden shadow-lg group">
               <Image
@@ -284,11 +319,11 @@ export default function HomeClient() {
               <p className="text-sm text-text-secondary leading-relaxed font-sans max-w-xl">
                 Explore FestFind — our dedicated event discovery network. Track robotics tournaments, academic seminars, coding hackathons, and design championships across top institutions in Tamil Nadu in real-time.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a 
-                  href="https://festfind.live/" 
-                  target="_blank" 
+                <a
+                  href="https://festfind.live/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
@@ -314,9 +349,9 @@ export default function HomeClient() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
             {[
               { target: 180, suffix: "+", label: "Competition Wins", icon: Award },
-              { target: 15,  suffix: "+", label: "Industry Partners", icon: Users },
+              { target: 15, suffix: "+", label: "Industry Partners", icon: Users },
               { target: 300, suffix: "+", label: "Events Participated", icon: Globe },
-              { target: 1,   suffix: "K+", label: "Students Trained", icon: GraduationCap },
+              { target: 1, suffix: "K+", label: "Students Trained", icon: GraduationCap },
             ].map((s, i) => {
               const Icon = s.icon;
               return (
@@ -428,8 +463,8 @@ export default function HomeClient() {
                 { year: "2025", text: "Robotics products supplied to schools and colleges across India." },
                 { year: "2026", text: "Launch of ThiranOli Academy." },
               ].map((step, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="snap-start shrink-0 w-[280px] sm:w-auto relative pt-6"
                 >
                   {/* Dot indicator aligned to the card top */}
@@ -552,7 +587,7 @@ export default function HomeClient() {
                           {comp.spec}
                         </p>
                       </div>
-                      <Link 
+                      <Link
                         href={`/products/${comp.slug}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-accent tracking-wider uppercase"
                       >
@@ -609,7 +644,7 @@ export default function HomeClient() {
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
                 Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish at an <span className="text-accent font-semibold">affordable price</span>.
               </p>
-              
+
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {[
                   "FDM & SLA Printing",
@@ -656,7 +691,7 @@ export default function HomeClient() {
           <div className="bg-white/70 backdrop-blur-md border border-border/80 rounded-2xl shadow-xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.06)_0%,transparent_70%)] pointer-events-none z-0" />
-            
+
             <div className="relative z-10 flex-1 space-y-6">
               <span className="text-[10px] font-bold text-accent uppercase tracking-widest block">
                 Exclusive Club Membership
@@ -668,7 +703,7 @@ export default function HomeClient() {
               <p className="text-sm text-text-secondary leading-relaxed max-w-xl font-sans">
                 Unlock direct access to advanced robotics kits, professional R&D testing labs, student competitions training, and expert mentoring. Connect with Coimbatore's largest community of young makers and engineering minds.
               </p>
-              
+
               {/* Perks Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {[
@@ -762,7 +797,7 @@ export default function HomeClient() {
                 Can't find the answer you're looking for? Reach out to our technical support desk on our contact page.
               </p>
             </AnimatedSection>
-            
+
             <div className="lg:col-span-2 divide-y divide-border border-y border-border">
               {faqs.map((faq, i) => {
                 const isOpen = activeFaqIdx === i;
@@ -783,10 +818,9 @@ export default function HomeClient() {
                       </span>
                     </button>
                     {/* Collapsible Answer */}
-                    <div 
-                      className={`overflow-hidden transition-all duration-300 ${
-                        isOpen ? "max-h-[200px] mt-4 opacity-100" : "max-h-0 opacity-0"
-                      }`}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] mt-4 opacity-100" : "max-h-0 opacity-0"
+                        }`}
                     >
                       <p className="text-sm text-text-secondary leading-relaxed font-sans">
                         {faq.a}
@@ -804,7 +838,7 @@ export default function HomeClient() {
       <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
         {/* Subtle orange accent glow behind */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
-        
+
         <div className="container relative z-10 px-6 max-w-5xl mx-auto text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-black mb-4 font-heading tracking-tight text-white uppercase">
