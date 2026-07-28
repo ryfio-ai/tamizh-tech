@@ -373,11 +373,17 @@ void loop() {
                 <span className="text-[10px] font-black text-accent uppercase tracking-widest block mb-1">
                   Brand: {product.brand || brand}
                 </span>
-                {product.sku && (
-                  <span className="text-[10px] font-bold text-text-muted uppercase font-mono bg-subtle px-2 py-0.5 rounded border border-border">
-                    SKU: {product.sku}
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    In Stock
                   </span>
-                )}
+                  {product.sku && (
+                    <span className="text-[10px] font-bold text-text-muted uppercase font-mono bg-subtle px-2 py-0.5 rounded border border-border">
+                      SKU: {product.sku}
+                    </span>
+                  )}
+                </div>
               </div>
               <h1 className="text-2xl md:text-3xl font-black font-heading tracking-tight text-text-primary leading-tight uppercase">
                 {product.name}
