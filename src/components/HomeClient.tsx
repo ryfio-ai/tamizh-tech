@@ -112,9 +112,9 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race bot.jpg", slug: "rc-robo-race" },
-  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer bot.jpg", slug: "rc-robo-soccer" },
-  { title: "RC Robo Sumo", spec: "Rare-earth magnets, high-traction tires, heavy armored steel base.", image: "/product/sumo bot.jpg", slug: "rc-robo-sumo" },
+  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race/race1.png", slug: "rc-robo-race" },
+  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer/soccer 1.0.png", slug: "rc-robo-soccer" },
+  { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
 ];
 
 export default function HomeClient() {
@@ -292,57 +292,6 @@ export default function HomeClient() {
       </section>
 
       {/* 1.2 FESTFIND LIVE SHOWCASE */}
-      <section className="bg-white py-16 border-b border-border/40 text-left relative overflow-hidden">
-        <div className="container px-6 max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            {/* Left Column: FestFind Map Image */}
-            <div className="lg:col-span-5 relative h-[300px] sm:h-[360px] w-full rounded-2xl border border-border/80 bg-zinc-950 overflow-hidden shadow-lg group">
-              <Image
-                src="/find fest.png"
-                alt="FestFind Live Map"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-            </div>
-
-            {/* Right Column: Copy & Actions */}
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-[10px] font-bold text-accent uppercase tracking-widest block">
-                Technical Event Tracker
-              </span>
-              <h2 className="text-3xl md:text-4xl font-black font-heading text-text-primary uppercase tracking-tight leading-none">
-                Track Live College <br />
-                <span style={{ color: '#FF6A00' }}>Symposiums & Hackathons</span>
-              </h2>
-              <p className="text-sm text-text-secondary leading-relaxed font-sans max-w-xl">
-                Explore FestFind — our dedicated event discovery network. Track robotics tournaments, academic seminars, coding hackathons, and design championships across top institutions in Tamil Nadu in real-time.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a
-                  href="https://festfind.live/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
-                >
-                  <Button size="lg" className="w-full justify-center text-base font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
-                    Open FestFind Map ↗
-                  </Button>
-                </a>
-                <Link href="/festfind" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full justify-center text-base font-bold hover:-translate-y-px transition-all rounded-full btn-outline-orange">
-                    About FestFind
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
       {/* 1.5 STATS BAND */}
       <section className="bg-subtle border-y border-border py-10">
         <div className="container px-6">

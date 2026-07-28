@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/products', priority: 0.9, changeFreq: 'weekly' as const },
     { url: '/products/rc-robo-race', priority: 0.8, changeFreq: 'monthly' as const },
     { url: '/products/rc-robo-soccer', priority: 0.8, changeFreq: 'monthly' as const },
-    { url: '/products/rc-robo-sumo', priority: 0.8, changeFreq: 'monthly' as const },
     { url: '/robotics-club', priority: 0.8, changeFreq: 'weekly' as const },
     { url: '/courses', priority: 0.8, changeFreq: 'weekly' as const },
     { url: '/contact', priority: 0.9, changeFreq: 'monthly' as const },

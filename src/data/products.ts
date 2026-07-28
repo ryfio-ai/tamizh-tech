@@ -1,3 +1,8 @@
+export interface TierPrice {
+  qty: string;
+  price: number;
+}
+
 export interface ProductFAQ {
   question: string;
   answer: string;
@@ -12,9 +17,17 @@ export interface ProductDownload {
 export interface Product {
   slug: string;
   category: string;
+  brand?: string;
+  sku?: string;
   name: string;
   price?: number;
+  originalPrice?: number;
+  cashback?: string;
+  rating?: number;
+  reviewCount?: number;
+  inStock?: boolean;
   badge?: string;
+  tierPricing?: TierPrice[];
   image: string; // single image fallback
   images: string[]; // slideshow images
   specs: string;
@@ -28,62 +41,375 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: "rc-robo-race",
-    category: "Competition Platforms",
+    category: "Competition Robots",
+    brand: "Tamizh Tech",
+    sku: "TT-RACE-01",
     name: "RC Robo Race",
-    image: "/product/race bot.jpg",
+    price: 12499,
+    originalPrice: 15999,
+    rating: 4.8,
+    reviewCount: 34,
+    inStock: true,
+    badge: "Best Seller",
+    image: "/product/race/race1.png",
     images: [
-      "/product/race bot.jpg",
-      "/product/race bot 1.jpg",
-      "/product/race bot 2.jpg",
-      "/product/race bot 3.jpg",
-      "/product/race bot 4.jpg"
+      "/product/race/race1.png"
     ],
     specs: "High-RPM motors, high-traction rubber wheels, lightweight carbon fiber chassis.",
     description: "Engineered for maximum speed and structural durability in national and international Robo Race arenas. Built with an aerospace-grade carbon fiber chassis and driven by high-RPM metal gear motors, this platform delivers unmatched cornering precision.",
-    detailedSpecs: [],
-    applications: [],
-    faqs: [],
-    downloads: []
+    detailedSpecs: [
+      "Dimensions: 280 x 240 x 120 mm",
+      "Chassis: 3mm Carbon Fiber Composite",
+      "Motors: 4x 12V 1000 RPM Metal Gear Motors",
+      "Wheels: High-traction Silicon Rubber (80mm)",
+      "Power System: 11.1V 2200mAh LiPo Battery Compatible",
+      "Control: Dual-channel high-current motor drivers"
+    ],
+    applications: [
+      "National and International Robo Race competitions",
+      "STEM robotics training labs for advanced students",
+      "Testing and evaluation of custom speed control algorithms"
+    ],
+    faqs: [
+      {
+        question: "Is the battery included in the package?",
+        answer: "No, standard packages do not include LiPo batteries due to shipping regulations. You can order compatible 11.1V batteries separately from our accessories catalog."
+      },
+      {
+        question: "Does it support autonomous upgrades?",
+        answer: "Yes! The carbon fiber chassis has pre-drilled mounting holes for Arduino, Raspberry Pi, LIDAR, and ultrasonic sensors for autonomous racing tasks."
+      }
+    ],
+    downloads: [
+      { label: "Assembly Guide PDF", href: "#assembly", type: "pdf" },
+      { label: "CAD Chassis STEP File", href: "#cad", type: "cad" }
+    ]
   },
   {
     slug: "rc-robo-soccer",
-    category: "Competition Platforms",
+    category: "Competition Robots",
+    brand: "Tamizh Tech",
+    sku: "TT-SOCCER-02",
     name: "RC Robo Soccer",
-    image: "/product/soccer bot.jpg",
+    price: 14999,
+    originalPrice: 18999,
+    rating: 4.9,
+    reviewCount: 48,
+    inStock: true,
+    badge: "Deal of the Day",
+    image: "/product/soccer/soccer 1.0.png",
     images: [
-      "/product/soccer bot.jpg",
-      "/product/soccer rc.jpg",
-      "/product/soccer.jpg",
-      "/product/soccerbot.jpg",
-      "/product/soccor bot.jpg"
+      "/product/soccer/soccer 1.0.png",
+      "/product/soccer/soccer1.1.png",
+      "/product/soccer/soccer1.2.png"
     ],
     specs: "Pneumatic striker mechanism, omni-directional wheels, customized RC remote.",
     description: "The ultimate offensive platform in student Robo Soccer arenas. Utilizing high-torque drive systems and a fast-actuating pneumatic kicking cylinder, this bot allows you to pass, dribble, and strike with force and accuracy.",
-    detailedSpecs: [],
-    applications: [],
-    faqs: [],
-    downloads: []
+    detailedSpecs: [
+      "Striker: Fast-actuating pneumatic cylinder (up to 8 bar)",
+      "Drive: 4x Omni-directional wheels for 360° motion",
+      "Motors: 4x High-torque planetary gear motors",
+      "Body: 2mm Armored Aluminum Alloy",
+      "Frequency: 2.4GHz 6-channel control",
+      "Weight: 4.8 kg"
+    ],
+    applications: [
+      "Robo Soccer college championships and school tournaments",
+      "Kinematics and multi-directional motion planning research",
+      "Pneumatic systems and high-pressure actuator experiments"
+    ],
+    faqs: [
+      {
+        question: "What type of compressor is needed?",
+        answer: "The soccer bot includes an onboard pressure tank. You can refill it using any standard foot-pump or mini 12V air compressor."
+      },
+      {
+        question: "Can it move sideways without turning?",
+        answer: "Yes, the omni-directional wheel drive system enables complete holonomic movement, including direct sideways crabbing."
+      }
+    ],
+    downloads: [
+      { label: "Pneumatics Schematic", href: "#pneumatic", type: "pdf" },
+      { label: "STEP CAD Model", href: "#cad", type: "cad" }
+    ]
   },
   {
-    slug: "rc-robo-sumo",
-    category: "Competition Platforms",
-    name: "RC Robo Sumo",
-    image: "/product/sumo bot.jpg",
-    images: [
-      "/product/sumo bot.jpg",
-      "/product/sumo rc.jpg"
+    slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
+    category: "Radio Controllers",
+    brand: "FlySky",
+    sku: "653",
+    name: "Flysky FS-i6X 2.4GHz 10CH AFHDS 2A RC Transmitter With FS-iA10B 2.4GHz 10CH Receiver",
+    price: 6398,
+    originalPrice: 6548,
+    cashback: "₹63 FlyRobo Cashback",
+    rating: 4.8,
+    reviewCount: 13,
+    inStock: true,
+    badge: "Best Seller",
+    tierPricing: [
+      { qty: "1–2", price: 6398 },
+      { qty: "3–9", price: 6119 },
+      { qty: "10+", price: 5963 }
     ],
-    specs: "Rare-earth magnets, high-traction tires, heavy armored steel base.",
-    description: "A heavy, armored pushing platform designed to stand firm, block attacks, and push opponents out of the sumo ring. Equipped with rare-earth magnets and high-traction tires.",
-    detailedSpecs: [],
-    applications: [],
-    faqs: [],
-    downloads: []
+    image: "/product/flysky/flysky-fs-i6x-10ch.jpg",
+    images: [
+      "/product/flysky/flysky-fs-i6x-10ch.jpg"
+    ],
+    specs: "Bidirectional Communication, 135-channel Hopping, Omni-directional gain antenna, Unique ID recognition system, Low power consumption.",
+    description: "The Flysky FS-i6X 2.4GHz 10CH AFHDS 2A RC Transmitter With FS-iA10B 2.4GHz 10CH Receiver is specially developed for all radio control models. Offering superior protection against interference while maintaining lower power consumption and high reliable receiver sensitivity.",
+    detailedSpecs: [
+      "Item: FS-i6X RC Transmitter",
+      "Tx Channels: 6-10 (6 Default)",
+      "Model Types: Fixed-Wing / Glider / Helicopter",
+      "RF Range: 2.408 - 2.475 GHz",
+      "RF Power: < 20dBm",
+      "RF Channel: 135 Channels",
+      "Bandwidth: 500 KHz",
+      "System Type: AFHDS 2A / AFDHS",
+      "Modulation: GFSK",
+      "Stick Resolution: 4096 Levels",
+      "Low Voltage Warning: < 4.2V",
+      "DSC Port: PS/2 Port PPM",
+      "Antenna Length: 26mm (Dual Antenna)",
+      "Transmitter Weight: 392g",
+      "Power Input: 6V DC 1.5A",
+      "Display: STN Transflective Display, LCD 128x64 Lattice, VA 73x39mm with white backlight",
+      "Transmitter Dimensions: 174 x 89 x 190 mm",
+      "Online Update: Yes",
+      "Certificates: CE0678, FCC",
+      "Rx Channels (FS-iA10B): 10 Channels",
+      "Rx Frequency Range: 2.4 - 2.48 GHz",
+      "Rx Sensitivity: -105dBm",
+      "Rx Antenna Length: 26mm x 2 (Dual Antenna)",
+      "Rx Weight: 19.3g",
+      "Rx Input Power: 4.0 - 6.5V DC",
+      "Rx Dimensions: 47 x 33.1 x 14.7 mm",
+      "i-BUS Interface: Yes",
+      "Data Acquisition Interface: Yes"
+    ],
+    applications: [
+      "Fixed-Wing, Glider & Helicopter RC Aircraft Control",
+      "Multirotor & Quadcopter Telemetry Command Systems",
+      "Custom Competition Combat Bots & Rovers Remote Control",
+      "Classroom RF System Communication & Telemetry Labs"
+    ],
+    faqs: [
+      {
+        question: "How do I bind the FS-i6X transmitter with the FS-iA10B receiver?",
+        answer: "Insert the binding cable into the B/VCC port of the receiver. Power the receiver (4.0-6.5V DC) - the LED will flash rapidly. Press and hold the BIND key on the transmitter and switch it on. The receiver LED will flash slowly, indicating a successful bind. Remove the binding cable, restart both devices, and test."
+      },
+      {
+        question: "Can I configure this transmitter for 10 channels?",
+        answer: "Yes, the FS-i6X is configured as a 6-channel transmitter by default. You can change this to 10 channels inside the transmitter's system menu: System -> Aux Channels, and change the channel settings to use up to 10 channels."
+      },
+      {
+        question: "Does the FS-iA10B receiver support i-BUS telemetry?",
+        answer: "Yes, it has dedicated i-BUS and data acquisition interfaces, allowing you to connect telemetry sensors like temperature, voltage, and altitude modules."
+      }
+    ],
+    downloads: [
+      { label: "FS-i6X User Manual", href: "#manual", type: "pdf" },
+      { label: "FS-iA10B Pinout Datasheet", href: "#datasheet", type: "pdf" }
+    ]
+  },
+  {
+    slug: "flysky-fs-i6-2.4g-6ch",
+    category: "Radio Controllers",
+    brand: "FlySky",
+    sku: "78",
+    name: "FlySky FS-i6 2.4G 6CH AFHDS RC Transmitter With FS-iA6 Receiver",
+    price: 5459,
+    originalPrice: 6499,
+    rating: 4.9,
+    reviewCount: 15,
+    inStock: true,
+    badge: "Top Value",
+    tierPricing: [
+      { qty: "1–2", price: 5459 },
+      { qty: "3–9", price: 5229 },
+      { qty: "10+", price: 4999 }
+    ],
+    image: "/product/flysky/flysky-fs-i6-2.4g-6ch.jpg",
+    images: [
+      "/product/flysky/flysky-fs-i6-2.4g-6ch.jpg"
+    ],
+    specs: "6 Channels, AFHDS 2A system, 142 channels, 16 channel hopping, High gain omni-directional antenna, Low power consumption.",
+    description: "The FlySky FS-i6 2.4G 6CH AFHDS RC Transmitter With FS-iA6 Receiver works in the frequency range of 2.405 to 2.475GHz. Uses a high gain and high-quality multi-directional antenna, covering the whole frequency band for jamming-free long-range transmission.",
+    detailedSpecs: [
+      "Item: FS-i6 RC Transmitter",
+      "Channels: 6 Channels",
+      "Model Types: Glider / Heli / Airplane",
+      "RF Range: 2.40 - 2.48 GHz",
+      "Bandwidth: 500 KHz",
+      "Bands: 142 Independent Channels",
+      "RF Power: < 20dBm",
+      "2.4GHz System: AFHDS 2A and AFHDS",
+      "Code Type: GFSK",
+      "Sensitivity: 1024 Levels",
+      "Low Voltage Warning: < 4.2V",
+      "DSC Port: PS2 PPM Output",
+      "ANT Length: 26mm * 2 (Dual Antenna)",
+      "Transmitter Weight: 392g",
+      "Power Input: 6V (1.5V AA * 4)",
+      "Display: Transflective STN positive type, 128*64 dot-matrix, VA 73*39mm with white backlight",
+      "Transmitter Dimensions: 174 x 89 x 190 mm",
+      "On-line Update: Yes",
+      "Model Memories: 20 Models",
+      "Channel Order: Aileron-CH1, Elevator-CH2, Throttle-CH3, Rudder-CH4, CH5 & CH6 open",
+      "Certificates: CE0678, FCC",
+      "Rx Model: FS-iA6 (6 Channels)",
+      "Rx RF Range: 2.40 - 2.48 GHz",
+      "Rx Sensitivity: -105dBm",
+      "Rx Weight: 6.4g",
+      "Rx Power: 4.0 - 6.5V",
+      "Rx Dimensions: 40.4 x 21.1 x 7.35 mm"
+    ],
+    applications: [
+      "RC Airplane, Glider & Helicopter remote control setups",
+      "Entry-level competition robotics & RC cars",
+      "Classroom wireless telemetry experiments"
+    ],
+    faqs: [
+      {
+        question: "How many model memories does the FS-i6 support?",
+        answer: "The FS-i6 transmitter supports up to 20 distinct model memories, allowing you to configure and store profiles for multiple aircraft or robots."
+      },
+      {
+        question: "What is the operating range?",
+        answer: "The AFHDS 2A system provides a reliable, jamming-free range of up to 500m to 1km in open line-of-sight environments."
+      }
+    ],
+    downloads: [
+      { label: "FS-i6 User Manual", href: "#manual", type: "pdf" }
+    ]
+  },
+  {
+    slug: "flysky-fs-i6s-2.4g-10ch-afhds-transmitter-with-fs-ia10b-10ch-receiver",
+    category: "Radio Controllers",
+    brand: "FlySky",
+    sku: "79",
+    name: "Flysky FS-i6S 2.4G 10CH AFHDS Transmitter With FS-iA10B 10CH Receiver",
+    price: 7398,
+    originalPrice: 8499,
+    cashback: "₹73 FlyRobo Cashback",
+    rating: 4.9,
+    reviewCount: 12,
+    inStock: true,
+    badge: "Touchscreen 10CH",
+    tierPricing: [
+      { qty: "1–2", price: 7398 },
+      { qty: "3–9", price: 7139 },
+      { qty: "10+", price: 6995 }
+    ],
+    image: "/product/flysky/FS-i6S with FS-iA10B 10CH.jpg",
+    images: [
+      "/product/flysky/FS-i6S with FS-iA10B 10CH.jpg"
+    ],
+    specs: "10 Channels, Touchscreen interface, AFHDS 2A system, 140 channels, Bidirectional communication, USB charging port.",
+    description: "The FS-i6S transmitter and FS-iA10B Receiver constitute a 10 channel 2.4GHz AFHDS 2A digital proportional computerized RC system with a full capacitive touchscreen interface. Supports quadcopters, multirotors, fixed-wing aircraft, and advanced competition robotics.",
+    detailedSpecs: [
+      "Item: FS-i6S RC Transmitter",
+      "Channels: 10 Channels",
+      "Display: Full Capacitive Touchscreen Interface",
+      "Frequency Range: 2.4055 - 2.475 GHz",
+      "Bandwidth: 500 KHz",
+      "Band Number: 140 Independent Channels",
+      "Transmitting Power: < 20dBm",
+      "2.4G Mode: AFHDS 2A System",
+      "Modulation: GFSK",
+      "Joystick Resolution: 4096 Levels",
+      "Low-Voltage Alarm: < 4.2V",
+      "Charging Port: Yes (USB Port)",
+      "Input Voltage: 4.2V - 6.0V",
+      "Transmitter Weight: 410g",
+      "Dimensions: 179 x 81 x 161 mm",
+      "New Firmware Features: Trims, Rate/Exp, Throttle curve, Throttle mode, 5 model groups, Context-aware reset, Low signal alarm",
+      "Rx Model: FS-iA10B (10 Channels)",
+      "Rx Sensitivity: -105dBm",
+      "Rx Input Power: 4.0 - 6.5V DC",
+      "Certifications: CE0678, FCC"
+    ],
+    applications: [
+      "Multirotors, Quadcopters & Drone Control Systems",
+      "Fixed-Wing Airplanes, Gliders & RC Helicopters",
+      "Touchscreen Wireless Telemetry Robotics Setup"
+    ],
+    faqs: [
+      {
+        question: "Does the FS-i6S feature a touchscreen?",
+        answer: "Yes! The FS-i6S features a full capacitive touchscreen interface for intuitive channel setup, trims, rate adjustments, and throttle curve configurations."
+      },
+      {
+        question: "Can I charge the transmitter via USB?",
+        answer: "Yes, the FS-i6S has an integrated USB charging and data port for firmware updates and charging."
+      }
+    ],
+    downloads: [
+      { label: "FS-i6S English User Manual", href: "#manual", type: "pdf" }
+    ]
+  },
+  {
+    slug: "flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver",
+    category: "Radio Controllers",
+    brand: "FlySky",
+    sku: "160",
+    name: "FlySky FS-CT6B 2.4G 6CH Radio Set System with RX FS-R6B receiver",
+    price: 3548,
+    originalPrice: 3999,
+    cashback: "₹35 FlyRobo Cashback",
+    rating: 4.8,
+    reviewCount: 9,
+    inStock: true,
+    badge: "Entry Budget 6CH",
+    tierPricing: [
+      { qty: "1–2", price: 3548 },
+      { qty: "3–9", price: 3390 },
+      { qty: "10+", price: 3302 }
+    ],
+    image: "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg",
+    images: [
+      "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg"
+    ],
+    specs: "6 Channels, 2.4GHz GFSK modulation, 1024 sensitivity, LED Low voltage warning, DSC Port for PC programming.",
+    description: "The FlySky FS-CT6B is a 6-channel 2.4GHz radio control system that includes the FS-R6B receiver. Designed for beginner to intermediate RC hobbyists and student robotics developers building helicopters, airplanes, and gliders.",
+    detailedSpecs: [
+      "Item: FS-CT6B Radio Transmitter",
+      "Channels: 6 Channels",
+      "Model Types: Helicopter / Airplane / Glider",
+      "RF Power: Less than 20dBm",
+      "Modulation: GFSK",
+      "Code Type: 2.4GHz No Interference",
+      "Sensitivity: 1024 Levels",
+      "Low Voltage Warning: LED Indicator",
+      "DSC Port: Yes (PC computer programming cable interface)",
+      "Rx Model: FS-R6B (6 Channels)",
+      "Certifications: CE, FCC"
+    ],
+    applications: [
+      "RC Helicopters, Airplanes & Gliders Control",
+      "Student Robotics & RC Vehicle Projects",
+      "PC-configurable 6-channel radio transmitter labs"
+    ],
+    faqs: [
+      {
+        question: "How is the FS-CT6B programmed?",
+        answer: "The FS-CT6B is programmed via a PC connection cable through its DSC port, allowing you to configure channel mixing, pitch curves, and dual rates using T6Config software."
+      }
+    ],
+    downloads: [
+      { label: "FS-CT6B T6Config Software & Manual", href: "#manual", type: "pdf" }
+    ]
   }
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
-  return products.find(p => p.slug === slug);
+  if (!slug || typeof slug !== "string") return undefined;
+  const normalized = slug.replace(/[.-]/g, "").toLowerCase();
+  return products.find(p => {
+    const pNormalized = p.slug.replace(/[.-]/g, "").toLowerCase();
+    return p.slug === slug || pNormalized === normalized || 
+      (p.slug.includes("flysky") && slug.includes("flysky") && ((p.slug.includes("10ch") && slug.includes("10ch")) || (p.slug.includes("6ch") && slug.includes("6ch"))));
+  });
 }
 
 export function getProductsByCategory(category: string): Product[] {

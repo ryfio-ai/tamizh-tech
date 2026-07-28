@@ -12,10 +12,12 @@
     --bg-card:           rgba(255, 255, 255, 0.65);
     --bg-dark-contrast:  #0F1115;
     /* ── Text ─────────────────────────────────── */
-    --text-primary:      #0A0A0A;
-    --text-secondary:    #404040;
-    --text-muted:        #737373;
-    --text-subtle:       #737373;
+    --text-heading:      #0A2540; /* Dark Blue for Headings */
+    --text-subheading:   #FF6A00; /* Orange for Sub Headings */
+    --text-primary:      #000000; /* Pure Black for Body Content */
+    --text-secondary:    #111111; /* Rich Black */
+    --text-muted:        #222222; /* Dark Neutral */
+    --text-subtle:       #333333;
     --text-contrast:     #FFFFFF;
     /* ── Accent ───────────────────────────────── */
     --accent:            #FF6A00;
@@ -59,19 +61,31 @@
 
   body {
     background-color: var(--bg-page);
-    color: var(--text-primary);
+    color: #000000 !important;
     font-family: var(--font-jakarta), 'Plus Jakarta Sans', var(--font-tamil), 'Noto Sans Tamil', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
+  /* 1. All Headings -> Dark Blue */
+  h1, h2, h3, h4, h5, h6, .font-heading, .heading-blue {
+    color: #002B66 !important; /* Dark Blue for Headings */
     font-family: var(--font-space-grotesk), 'Space Grotesk', var(--font-tamil), 'Noto Sans Tamil', sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
+  }
+
+  /* 2. All Subheadings / Eyebrows / Subtitles / Badges -> Orange */
+  .subheading, .sub-heading, .eyebrow, .subtitle, .tag, .text-accent, .text-subheading {
+    color: #FF6A00 !important; /* Orange for Sub Headings */
+    font-weight: 700;
+  }
+
+  /* 3. All Body & General Content -> Pure Black */
+  p, li, td, th, label, input, textarea, select, code, pre {
+    color: #000000;
   }
 
   ::selection {
@@ -309,14 +323,20 @@ textarea:-webkit-autofill {
   color: #FFFFFF !important;
   border-color: #FF6A00 !important;
 }
+.text-heading {
+  color: #002B66 !important;
+}
+.text-subheading {
+  color: #FF6A00 !important;
+}
 .text-text-primary {
-  color: var(--text-primary) !important;
+  color: #000000 !important;
 }
 .text-text-secondary {
-  color: var(--text-secondary) !important;
+  color: #111111 !important;
 }
 .text-text-muted {
-  color: var(--text-muted) !important;
+  color: #333333 !important;
 }
 
 /* ── Reduced motion ──────────────────────────────── */
