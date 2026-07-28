@@ -31,7 +31,7 @@ const values = [
 ];
 
 const team = [
-  { name: "Er. K. Tamizharasan", role: "Founder & CEO", image: "/team/Tamizharasan K.jpg" },
+  { name: "Er. K. Tamizharasan", role: "Founder & CEO", image: "/team/Tamizharasan K.PNG" },
   { name: "Priya Krishnan",       role: "Head of R&D",   image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face" },
   { name: "Arun Selvaraj",        role: "Lead Engineer",  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" },
   { name: "Meera Nair",           role: "AI Specialist",  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" },

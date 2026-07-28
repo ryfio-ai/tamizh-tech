@@ -57,7 +57,7 @@ export default function FounderPage() {
               </div>
               <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-accent shadow-lg mb-6 shrink-0 bg-white">
                 <Image
-                  src="/team/Tamizharasan K.jpg"
+                  src="/team/Tamizharasan K.PNG"
                   alt="Er. K. Tamizharasan"
                   fill
                   className="object-cover"
