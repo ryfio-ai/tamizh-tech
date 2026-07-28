@@ -26,8 +26,7 @@ const navLinks = [
       { label: "Schools", href: "/schools", desc: "STEM, AI, and Robotics Labs" },
       { label: "Colleges", href: "/colleges", desc: "R&D lab setup & project mentoring" },
       { label: "Industries", href: "/industries", desc: "PLC/SCADA & OpenCV vision" },
-      { label: "Robotics Club", href: "/robotics-club/join", desc: "Join our exclusive student club" },
-      { label: "FestFind Live Map", href: "/festfind", desc: "Live college technical event map" }
+      { label: "Robotics Club", href: "/robotics-club/join", desc: "Join our exclusive student club" }
     ]
   },
   { label: "Training", href: "/courses" },
