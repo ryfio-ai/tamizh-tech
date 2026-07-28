@@ -169,14 +169,14 @@ export default function HomeClient() {
 
               {/* Short description — max 3 lines */}
               <p className="text-sm md:text-base text-text-secondary leading-relaxed font-sans" style={{ maxWidth: '440px' }}>
-                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech</span> develops autonomous robots, AI automation solutions and industrial robotics for modern manufacturing and education.
+                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech</span> develops cutting-edge robots, custom automation solutions and industrial systems for modern manufacturing and education.
               </p>
 
               {/* Features — 2 columns, tight */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                 {[
-                  "Autonomous Mobile Robots",
-                  "AI Automation",
+                  "Mobile Robotics",
+                  "Industrial Automation",
                   "Industrial Robotics",
                   "STEM Labs",
                 ].map((feat) => (
@@ -219,31 +219,6 @@ export default function HomeClient() {
                     background: 'radial-gradient(circle, rgba(255,115,0,.20) 0%, rgba(255,115,0,.08) 38%, transparent 75%)'
                   }}
                 />
-
-                {/* Floating Glass Badges */}
-                <motion.div 
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute top-4 left-2 sm:left-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
-                >
-                  <span className="text-sm">⚡</span> Autonomous
-                </motion.div>
-
-                <motion.div 
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                  className="absolute top-2 right-2 sm:right-6 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
-                >
-                  <span className="text-sm">🤖</span> AI Powered
-                </motion.div>
-
-                <motion.div 
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                  className="absolute bottom-6 right-0 sm:-right-2 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.08)] text-xs font-bold text-text-primary"
-                >
-                  <span className="text-sm">📦</span> Smart Logistics
-                </motion.div>
 
                 {/* 1. AMR — Left (Lower, width ~290px/44%, bottom 20px, z-10) */}
                 <div className="absolute left-0 bottom-[20px] w-[46%] sm:w-[44%] h-[70%] z-10">
