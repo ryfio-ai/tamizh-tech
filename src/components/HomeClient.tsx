@@ -123,24 +123,24 @@ export default function HomeClient() {
   return (
     <div className="flex flex-col bg-white">
 
-      {/* 1. HERO SECTION — fits exactly within one viewport */}
+      {/* 1. HERO SECTION — compact on mobile, fits viewport on desktop */}
       <section
-        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40"
-        style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)' }}
+        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)]"
+        style={{ marginTop: '80px' }}
       >
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
 
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 md:px-14 lg:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-0">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 md:px-14 lg:px-16">
+          <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-6 md:gap-0">
 
             {/* ── LEFT COLUMN ── */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-center text-left relative z-10 py-10 md:py-0 pr-0 md:pr-8 lg:pr-12"
-              style={{ gap: '18px' }}
+              className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-8 lg:pr-12"
+              style={{ gap: '16px' }}
             >
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent w-fit">
@@ -151,7 +151,7 @@ export default function HomeClient() {
               {/* Heading */}
               <h1
                 className="font-black text-text-primary font-heading tracking-tight leading-none"
-                style={{ fontSize: 'clamp(42px, 5vw, 72px)', lineHeight: 1.02 }}
+                style={{ fontSize: 'clamp(36px, 5vw, 72px)', lineHeight: 1.02 }}
               >
                 Engineering the{' '}
                 <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
@@ -162,13 +162,13 @@ export default function HomeClient() {
 
               {/* Tamil tagline — one line only */}
               <div className="border-l-2 border-accent pl-4 py-0.5">
-                <p className="text-sm sm:text-base font-black text-text-primary font-heading leading-snug whitespace-nowrap">
+                <p className="text-xs sm:text-base font-black text-text-primary font-heading leading-snug whitespace-nowrap">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
                 </p>
               </div>
 
               {/* Short description — max 3 lines */}
-              <p className="text-sm md:text-base text-text-secondary leading-relaxed font-sans" style={{ maxWidth: '440px' }}>
+              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans" style={{ maxWidth: '440px' }}>
                 <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech</span> develops cutting-edge robots, custom automation solutions and industrial systems for modern manufacturing and education.
               </p>
 
@@ -188,7 +188,7 @@ export default function HomeClient() {
               </div>
 
               {/* CTAs */}
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-3 flex-wrap pt-1">
                 <Link href="/services" className="w-full sm:w-auto">
                   <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
                     Explore Services <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -207,10 +207,10 @@ export default function HomeClient() {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="relative flex items-center justify-center w-full mt-6 md:-mt-8"
+              className="relative flex items-center justify-center w-full mt-2 md:-mt-8"
             >
-              {/* Image Container — height 520px/560px container stage */}
-              <div className="relative w-full h-[440px] sm:h-[500px] lg:h-[540px] max-w-[620px]">
+              {/* Image Container — height 280px on mobile, 540px on desktop */}
+              <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[540px] max-w-[620px]">
 
                 {/* Centered Background Glow */}
                 <div 
