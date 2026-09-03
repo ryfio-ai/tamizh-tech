@@ -84,6 +84,9 @@ export const metadata: Metadata = {
     },
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "7g5KeZcS4nwoVQGUS7gpb2JqM1nOLUtq9SQPvxolQNE",
+  },
 };
 
 const schemas = [
