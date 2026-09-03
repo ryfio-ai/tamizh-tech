@@ -78,8 +78,6 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "en-IN": "/",
-      "en-US": "/en-us",
-      "ta-IN": "/ta",
       "x-default": "/",
     },
   },

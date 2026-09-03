@@ -12,11 +12,10 @@ const robotLinks = [
   { label: "Competition Robots", href: "/products/competition" },
   { label: "RC Robo Race", href: "/products/competition/rc-robo-race" },
   { label: "RC Robo Soccer", href: "/products/competition/rc-robo-soccer" },
-  { label: "RC Robo War", href: "/products/competition/rc-robo-war" },
-  { label: "RC Robo Sumo", href: "/products/competition/rc-robo-sumo" },
   { label: "Radio Controllers", href: "/products/radio-controllers" },
-  { label: "FlySky FS-i6 Transmitter", href: "/products/radio-controllers/flysky-fs-i6-transmitter" },
-  { label: "FlySky FS-i6X Transmitter", href: "/products/radio-controllers/flysky-fs-i6x-transmitter" },
+  { label: "FlySky FS-i6X 10CH", href: "/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
+  { label: "FlySky FS-i6 6CH", href: "/products/radio-controllers/flysky-fs-i6-2.4g-6ch" },
+  { label: "FlySky FS-i6S Touchscreen", href: "/products/radio-controllers/flysky-fs-i6s-2.4g-10ch-afhds-transmitter-with-fs-ia10b-10ch-receiver" },
 ];
 
 const companyLinks = [

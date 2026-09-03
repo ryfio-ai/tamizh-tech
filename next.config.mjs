@@ -26,6 +26,17 @@ const nextConfig = {
         destination: 'https://www.tamizhtech.in/:path*',
         permanent: true,
       },
+      // ── Language Alternate Aliases ──
+      {
+        source: '/en-us',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/ta',
+        destination: '/',
+        permanent: true,
+      },
       // ── Legacy Flat Product URLs → Canonical Hierarchical URLs (HTTP 308) ──
       {
         source: '/products/rc-robo-race',
@@ -35,6 +46,26 @@ const nextConfig = {
       {
         source: '/products/rc-robo-soccer',
         destination: '/products/competition/rc-robo-soccer',
+        permanent: true,
+      },
+      {
+        source: '/products/competition/rc-robo-war',
+        destination: '/products/competition',
+        permanent: true,
+      },
+      {
+        source: '/products/competition/rc-robo-sumo',
+        destination: '/products/competition',
+        permanent: true,
+      },
+      {
+        source: '/products/radio-controllers/flysky-fs-i6-transmitter',
+        destination: '/products/radio-controllers/flysky-fs-i6-2.4g-6ch',
+        permanent: true,
+      },
+      {
+        source: '/products/radio-controllers/flysky-fs-i6x-transmitter',
+        destination: '/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver',
         permanent: true,
       },
       {
