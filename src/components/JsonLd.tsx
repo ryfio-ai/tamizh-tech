@@ -5,8 +5,8 @@ export function OrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://www.tamizhtech.in/#organization",
-    "name": "TamizhTech Robotics Company",
-    "alternateName": ["Tamizh Tech", "TTRC"],
+    "name": "Tamizh Tech Robotics Company",
+    "alternateName": ["TamizhTech", "TTRC"],
     "url": "https://www.tamizhtech.in",
     "logo": {
       "@type": "ImageObject",
@@ -16,25 +16,72 @@ export function OrganizationSchema() {
     },
     "foundingDate": "2024-10-22",
     "founders": [{ "@type": "Person", "name": "Er. K. Tamizharasan" }],
-    "description": "Coimbatore-based robotics company specializing in B2B industrial automation (AGVs, AMRs, PLCs), custom competition bots, STEM Tinkering labs, and technology education. Evolved from Tamizh Robotics Club (2021).",
+    "description": "Coimbatore-based robotics engineering company specializing in custom competition combat bots, B2B industrial automation, STEM Tinkering labs, and engineering robotics education.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
+      "addressLocality": "Coimbatore",
+      "addressRegion": "Tamil Nadu",
+      "postalCode": "641107",
+      "addressCountry": "IN"
+    },
     "areaServed": [
-      { "@type": "Country", "name": "India" },
-      { "@type": "Country", "name": "United States" },
-      { "@type": "Country", "name": "United Arab Emirates" }
+      { "@type": "Country", "name": "India" }
     ],
     "sameAs": [
       "https://www.linkedin.com/company/tamizh-tech-robotics-company",
       "https://www.instagram.com/tamizh_tech_robotics_company",
-      "https://youtube.com/@covaiscientist"
+      "https://www.youtube.com/@covaiscientist"
     ],
     "contactPoint": [{
       "@type": "ContactPoint",
-      "telephone": "+91-8148045030",
-      "contactType": "customer service",
-      "email": "info@tamizhtech.in",
+      "telephone": "+91 8148045030",
+      "contactType": "customer support",
+      "email": "contact@tamizhtech.in",
       "areaServed": "IN",
-      "availableLanguage": ["en", "ta", "hi"]
+      "availableLanguage": ["en", "ta"]
     }]
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function LocalBusinessSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.tamizhtech.in/#localbusiness",
+    "name": "Tamizh Tech Robotics Company",
+    "image": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png",
+    "telephone": "+91 8148045030",
+    "email": "contact@tamizhtech.in",
+    "url": "https://www.tamizhtech.in",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
+      "addressLocality": "Coimbatore",
+      "addressRegion": "Tamil Nadu",
+      "postalCode": "641107",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 11.0967,
+      "longitude": 77.0146
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "18:30"
+      }
+    ]
   };
   return (
     <script
@@ -49,29 +96,26 @@ export function ProductSchema({ product }: any) {
     ? `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
     : `https://www.tamizhtech.in/products/${product.slug}`;
 
-  const schema = {
+  const schema: any = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
     "image": product.images || [product.image],
     "description": product.shortDescription || product.description,
-    "brand": { "@type": "Brand", "name": "TamizhTech" },
+    "brand": { "@type": "Brand", "name": "Tamizh Tech Robotics" },
     "sku": product.slug || product.id,
     "offers": {
       "@type": "Offer",
       "url": canonicalUrl,
       "priceCurrency": "INR",
-      "price": product.price || "0",
-      "availability": "https://schema.org/InStock",
-      "seller": { "@type": "Organization", "name": "TamizhTech Robotics Company" }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "27"
+      "price": product.price ? String(product.price).replace(/[^0-9.]/g, "") : "0",
+      "availability": "https://schema.org/PreOrder",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": { "@type": "Organization", "name": "Tamizh Tech Robotics Company" }
     },
     "inLanguage": "en-IN"
   };
+
   return (
     <script
       type="application/ld+json"
@@ -127,11 +171,11 @@ export function CourseSchema({ course }: { course: any }) {
     "@context": "https://schema.org",
     "@type": "Course",
     "name": course.title,
-    "description": course.desc,
+    "description": course.desc || course.description,
     "url": canonicalUrl,
     "provider": {
       "@type": "Organization",
-      "name": "TamizhTech Robotics Company",
+      "name": "Tamizh Tech Robotics Company",
       "sameAs": "https://www.tamizhtech.in"
     },
     "hasCourseInstance": {
@@ -141,6 +185,42 @@ export function CourseSchema({ course }: { course: any }) {
       "inLanguage": course.language
     }
   };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function ArticleSchema({ post }: { post: any }) {
+  const canonicalUrl = post.categorySlug
+    ? `https://www.tamizhtech.in/blog/${post.categorySlug}/${post.slug}`
+    : `https://www.tamizhtech.in/blog/${post.slug}`;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt || post.desc,
+    "url": canonicalUrl,
+    "datePublished": post.date || "2026-01-01",
+    "dateModified": post.updatedAt || post.date || "2026-03-01",
+    "author": {
+      "@type": "Person",
+      "name": post.author?.name || "Er. K. Tamizharasan",
+      "jobTitle": post.author?.role || "Founder & Robotics Engineer"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tamizh Tech Robotics Company",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png"
+      }
+    }
+  };
+
   return (
     <script
       type="application/ld+json"
@@ -165,7 +245,7 @@ export function EventSchema({ event }: { event: any }) {
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
       "@type": "Place",
-      "name": event.location || "TamizhTech HQ, Coimbatore",
+      "name": event.location || "Tamizh Tech HQ, Coimbatore",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
@@ -177,7 +257,7 @@ export function EventSchema({ event }: { event: any }) {
     },
     "organizer": {
       "@type": "Organization",
-      "name": "TamizhTech Robotics Company"
+      "name": "Tamizh Tech Robotics Company"
     }
   };
   return (

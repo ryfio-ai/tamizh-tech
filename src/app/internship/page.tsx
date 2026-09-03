@@ -281,7 +281,7 @@ export default function InternshipPage() {
                       required 
                       value={formData.email} 
                       onChange={handleChange}
-                      placeholder="e.g. name@example.com"
+                      placeholder="e.g. yourname@email.com"
                       className={formInputClass}
                     />
                   </div>

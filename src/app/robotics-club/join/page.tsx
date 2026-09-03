@@ -159,7 +159,7 @@ export default function JoinClubPage() {
                     value={formData.email}
                     onChange={handleChange}
                     className="form-input"
-                    placeholder="you@example.com"
+                    placeholder="name@email.com"
                   />
                 </div>
 
