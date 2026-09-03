@@ -16,6 +16,9 @@ import { Course } from "@/data/courses";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/Card";
 
+import { getCourseCategoryUrl } from "@/lib/routing";
+import { ChevronRight } from "lucide-react";
+
 interface CourseDetailClientProps {
   course: Course;
 }
@@ -30,25 +33,37 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
     notes: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [leadId, setLeadId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const courseUrl = `https://www.tamizhtech.in/courses/${course.categorySlug}/${course.slug}`;
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "course_enroll",
-          courseTitle: course.title,
-          ...enrollForm
+          leadType: "Course Enquiry",
+          source: "Course Detail Page",
+          pageUrl: courseUrl,
+          customerName: enrollForm.name,
+          email: enrollForm.email,
+          phone: enrollForm.phone,
+          courseName: course.title,
+          courseCategory: course.cat,
+          courseUrl: courseUrl,
+          requirement: `Preferred Mode: ${enrollForm.mode}`,
+          message: enrollForm.notes,
         }),
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (res.ok && data.success) {
         setSubmitted(true);
+        setLeadId(data.leadId || "");
       } else {
-        alert("Failed to submit enrollment request. Please try again.");
+        alert(data.error || "Failed to submit enrollment request. Please try again.");
       }
     } catch (err) {
       console.error(err);
@@ -60,11 +75,22 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
 
   return (
     <div className="bg-white min-h-screen pt-28 pb-20 text-text-primary">
-      <div className="container px-6">
+      <div className="container px-6 max-w-7xl mx-auto">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-2 mb-6 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
+          <Link href="/" className="hover:text-accent transition-colors">Home</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href="/courses" className="hover:text-accent transition-colors">Courses</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href={getCourseCategoryUrl(course.categorySlug)} className="hover:text-accent transition-colors">{course.cat}</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <span className="text-accent truncate max-w-[200px]">{course.title}</span>
+        </nav>
+
         {/* Back Link */}
         <div className="mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
-          <Link href="/courses" className="hover:text-accent transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Courses
+          <Link href={getCourseCategoryUrl(course.categorySlug)} className="hover:text-accent transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to {course.cat} Programs
           </Link>
         </div>
 
@@ -113,12 +139,20 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
           <div className="lg:col-span-4">
             <Card className="border border-border bg-subtle p-6 rounded-lg sticky top-32 shadow-sm">
               {submitted ? (
-                <div className="text-center py-10">
-                  <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Application Received</h3>
-                  <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                    Thank you for your interest! A counselor from TamizhTech will call or email you with batch timetables within 24 hours.
-                  </p>
+                <div className="text-center py-10 space-y-4">
+                  <Check className="w-12 h-12 text-emerald-600 mx-auto" />
+                  <div>
+                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Application Received</h3>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Thank you for your interest! A counselor from TamizhTech will call or email you with batch timetables within 24 hours.
+                    </p>
+                  </div>
+                  {leadId && (
+                    <div className="bg-white p-3 rounded-xl border border-border inline-block">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Reference ID</span>
+                      <span className="text-sm font-black font-mono text-accent">{leadId}</span>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form onSubmit={handleEnrollSubmit} className="space-y-4">

@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { generateLeadId } from "@/lib/leadId";
+import { appendLeadToGoogleSheet } from "@/lib/googleSheets";
+import { sendLeadNotifications } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -78,24 +81,44 @@ export async function POST(request: Request) {
       </div>
     `;
 
-    if (!process.env.RESEND_API_KEY) {
-      console.warn("RESEND_API_KEY is not set. Simulating internship submission locally.");
-      return NextResponse.json({ success: true, simulated: true });
-    }
+    const leadId = generateLeadId();
+    const submittedAt = new Date().toISOString();
 
-    const { data, error } = await resend.emails.send({
-      from: "TamizhTech <contact@tamizhtech.in>", 
-      to: ["career@tamizhtech.in", "tamizhtechpvtltd@gmail.com"], 
-      subject: emailSubject,
-      html: emailHtml,
+    const leadPayload = {
+      leadId,
+      submittedAt,
+      leadType: "Career Application" as const,
+      source: "Internship & Careers Page",
+      pageUrl: "https://www.tamizhtech.in/internship",
+      customerName: name,
+      email,
+      phone,
+      organization: college || "Individual",
+      institution: college || "Individual",
+      department: branch || "N/A",
+      graduationYear: body.graduationYear || body.yearOfStudy || body.year || "N/A",
+      areaOfInterest: role || category || "General Application",
+      customerType: "Student / Job Seeker",
+      jobTitle: role,
+      careerCategory: category || "Internship",
+      city: branch || "N/A",
+      requirement: `${role} (${category || "Online"})`,
+      message: `Branch: ${branch || "N/A"}, Exp: ${experience || "N/A"}, LinkedIn: ${linkedin || "N/A"}, Resume: ${resume || "Not provided"}`,
+    };
+
+    // Store in Google Sheets CRM
+    await appendLeadToGoogleSheet(leadPayload);
+
+    // Dispatch Admin Notification (6 team mailboxes) & User Thank You Confirmation
+    sendLeadNotifications(leadPayload).catch((emailErr) => {
+      console.warn("Resend email warning in /api/apply:", emailErr);
     });
 
-    if (error) {
-      console.error("Resend API Error:", error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
-
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({
+      success: true,
+      leadId,
+      message: "Application submitted successfully.",
+    });
   } catch (error: any) {
     console.error("Internal Server Error:", error);
     return NextResponse.json(

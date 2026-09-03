@@ -24,6 +24,8 @@ import { FaWhatsapp, FaStar } from "react-icons/fa";
 import { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/Card";
+import { getProductUrl, getProductCategoryUrl } from "@/lib/routing";
+import ProductEnquiryModal from "@/components/forms/ProductEnquiryModal";
 
 interface ProductDetailClientProps {
   product: Product;
@@ -127,34 +129,50 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   const [rfqForm, setRfqForm] = useState({
     name: "",
     email: "",
+    phone: "",
     org: "",
     qty: 1,
     notes: ""
   });
   const [rfqSubmitted, setRfqSubmitted] = useState(false);
+  const [rfqLeadId, setRfqLeadId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRfqSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "product_rfq",
+          leadType: "Product Quote",
+          source: "Product Page RFQ Form",
+          pageUrl: `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`,
+          customerName: rfqForm.name,
+          email: rfqForm.email,
+          phone: rfqForm.phone,
+          organization: rfqForm.org,
+          quantity: rfqForm.qty,
+          message: rfqForm.notes,
+          productId: product.id,
           productName: product.name,
-          ...rfqForm,
+          productCategory: product.category,
+          productCategorySlug: product.categorySlug,
+          productSlug: product.slug,
         }),
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (res.ok && data.success) {
         setRfqSubmitted(true);
+        setRfqLeadId(data.leadId || "");
       } else {
-        alert("Failed to submit inquiry. Please try again or message us directly via WhatsApp.");
+        alert(data.error || "Failed to submit inquiry. Please try again.");
       }
     } catch (err) {
       console.error(err);
-      alert("Failed to submit inquiry. Please try again or message us directly via WhatsApp.");
+      alert("Failed to submit inquiry. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -175,9 +193,9 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   const getWhatsAppMessage = (isBundle = false) => {
     let msg = "";
     if (isBundle) {
-      msg = `Hello Tamizh Tech! I want to order the e-commerce bundle deal for "${product.name}" which includes: ${bundle.items.map(i => i.name).join(", ")}. Bundle Offer Price: ₹${bundle.bundlePrice.toLocaleString("en-IN")}. Please confirm order details.`;
+      msg = `Hello Tamizh Tech! I want to order the e-commerce bundle deal for "${product.name}" which includes: ${bundle.items.map(i => i.name).join(", ")}. Bundle Offer Price: Γé╣${bundle.bundlePrice.toLocaleString("en-IN")}. Please confirm order details.`;
     } else {
-      msg = `Hello! I would like to buy the "${product.name}" (Qty: ${qty}) at the deal price of ₹${((product.price || 0) * qty).toLocaleString("en-IN")}. Please share shipping and payment options.`;
+      msg = `Hello! I would like to buy the "${product.name}" (Qty: ${qty}) at the deal price of Γé╣${((product.price || 0) * qty).toLocaleString("en-IN")}. Please share shipping and payment options.`;
     }
     return `https://wa.me/918148045030?text=${encodeURIComponent(msg)}`;
   };
@@ -199,7 +217,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       "price": product.price,
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "https://schema.org/InStock",
-      "url": `https://www.tamizhtech.in/products/${product.slug}`
+      "url": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
     }
   };
 
@@ -222,8 +240,14 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       {
         "@type": "ListItem",
         "position": 3,
+        "name": product.category,
+        "item": `https://www.tamizhtech.in/products/${product.categorySlug}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
         "name": product.name,
-        "item": `https://www.tamizhtech.in/products/${product.slug}`
+        "item": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
       }
     ]
   };
@@ -289,23 +313,25 @@ void loop() {
           <Link href="/" className="hover:text-accent transition-colors">
             Home
           </Link>
-          <ChevronRight className="w-3 h-3" />
+          <ChevronRight className="w-3 h-3 shrink-0" />
           <Link href="/products" className="hover:text-accent transition-colors">
             Products
           </Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-text-muted">{product.category}</span>
-          <ChevronRight className="w-3 h-3" />
+          <ChevronRight className="w-3 h-3 shrink-0" />
+          <Link href={getProductCategoryUrl(product.categorySlug)} className="hover:text-accent transition-colors">
+            {product.category}
+          </Link>
+          <ChevronRight className="w-3 h-3 shrink-0" />
           <span className="text-accent truncate max-w-[200px]">{product.name}</span>
         </div>
 
         {/* Back Link */}
         <div className="text-left mb-6">
           <Link 
-            href="/products" 
+            href={getProductCategoryUrl(product.categorySlug)} 
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-text-muted hover:text-accent transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to store catalog
+            <ArrowLeft className="w-4 h-4" /> Back to {product.category}
           </Link>
         </div>
 
@@ -374,9 +400,9 @@ void loop() {
                   Brand: {product.brand || brand}
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    In Stock
+                  <span className="inline-flex items-center gap-1.5 bg-accent/10 text-accent text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-accent/20 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    Built to Order / RFQ
                   </span>
                   {product.sku && (
                     <span className="text-[10px] font-bold text-text-muted uppercase font-mono bg-subtle px-2 py-0.5 rounded border border-border">
@@ -389,22 +415,15 @@ void loop() {
                 {product.name}
               </h1>
 
-              {/* Review Stars */}
-              <div className="flex items-center gap-2 border-b border-border pb-3">
-                <div className="flex text-amber-400 gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <FaStar 
-                      key={i} 
-                      className={`w-4 h-4 ${i < Math.floor(product.rating || 4.5) ? "text-amber-400" : "text-gray-200"}`} 
-                    />
-                  ))}
-                </div>
-                <span className="text-xs font-bold text-accent hover:underline cursor-pointer">
-                  {product.rating} ratings
+              {/* Engineering Heritage Badge */}
+              <div className="flex items-center gap-3 border-b border-border pb-3">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-text-secondary">
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  Engineered in Coimbatore, India
                 </span>
                 <span className="text-text-muted text-xs">|</span>
-                <span className="text-text-secondary text-xs font-bold hover:text-accent cursor-pointer">
-                  {product.reviewCount} verified reviews
+                <span className="text-text-secondary text-xs font-semibold">
+                  Official Hardware &amp; Custom Assembly
                 </span>
               </div>
 
@@ -416,7 +435,7 @@ void loop() {
                   </span>
                   {product.cashback && (
                     <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 uppercase font-mono">
-                      🎁 {product.cashback}
+                      ≡ƒÄü {product.cashback}
                     </span>
                   )}
                 </div>
@@ -424,20 +443,20 @@ void loop() {
                   <div className="space-y-1">
                     <div className="flex items-baseline gap-3">
                       <span className="text-3xl font-black text-text-primary tracking-tight font-sans">
-                        ₹{product.price.toLocaleString("en-IN")}
+                        Γé╣{product.price.toLocaleString("en-IN")}
                       </span>
                       <span className="text-xs font-bold text-text-muted uppercase font-mono">
                         (inc GST)
                       </span>
                       {product.originalPrice && (
                         <span className="text-sm text-text-muted line-through font-bold">
-                          M.R.P: ₹{product.originalPrice.toLocaleString("en-IN")}
+                          M.R.P: Γé╣{product.originalPrice.toLocaleString("en-IN")}
                         </span>
                       )}
                     </div>
                     {product.originalPrice && (
                       <div className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
-                        You Save: ₹{(product.originalPrice - product.price).toLocaleString("en-IN")} ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off)
+                        You Save: Γé╣{(product.originalPrice - product.price).toLocaleString("en-IN")} ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off)
                       </div>
                     )}
                     <span className="text-[10px] text-text-muted font-bold block uppercase tracking-wider mt-1.5 leading-snug">
@@ -459,7 +478,7 @@ void loop() {
                       {product.tierPricing.map((tier, tidx) => (
                         <div key={tidx} className="px-3 py-2 flex justify-between font-mono font-bold text-text-secondary hover:bg-subtle/40 transition-colors">
                           <span>{tier.qty} units</span>
-                          <span className="text-accent font-black">₹{tier.price.toLocaleString("en-IN")}</span>
+                          <span className="text-accent font-black">Γé╣{tier.price.toLocaleString("en-IN")}</span>
                         </div>
                       ))}
                     </div>
@@ -512,19 +531,19 @@ void loop() {
             {/* Buy Sidebar Checkout Box (4 cols) */}
             <div className="md:col-span-4 bg-white border border-border shadow-md rounded-xl p-5 space-y-4">
               <div>
-                <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block mb-0.5">
-                  ● In Stock
+                <span className="text-[10px] font-black text-accent uppercase tracking-widest block mb-0.5">
+                  • Custom Engineered to Order
                 </span>
                 <span className="text-[10px] font-bold text-text-secondary block font-mono">
-                  Ships from Coimbatore
+                  Direct from Tamizh Tech Labs, Coimbatore
                 </span>
               </div>
 
               {/* Delivery ETA */}
               <div className="text-xs text-text-secondary font-bold space-y-1">
-                <span className="block">Estimated Delivery by:</span>
+                <span className="block">Delivery / Lead Timeline:</span>
                 <span className="text-text-primary font-black flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-accent" /> {getDeliveryDate()}
+                  <Calendar className="w-4 h-4 text-accent" /> 3–7 Business Days Across India
                 </span>
               </div>
 
@@ -546,12 +565,20 @@ void loop() {
               <div className="flex justify-between items-baseline py-1">
                 <span className="text-xs font-bold text-text-secondary">Subtotal:</span>
                 <span className="text-lg font-black text-text-primary font-sans">
-                  ₹{((product.price || 0) * qty).toLocaleString("en-IN")}
+                  Γé╣{((product.price || 0) * qty).toLocaleString("en-IN")}
                 </span>
               </div>
 
               {/* CTAs */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-2">
+                <Button 
+                  variant="primary" 
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full justify-center gap-2 bg-[#002B66] hover:bg-[#001D47] text-white font-black text-xs py-3.5 uppercase tracking-wider rounded-xl shadow-md cursor-pointer"
+                >
+                  Request Official Quote
+                </Button>
+
                 <a
                   href={getWhatsAppMessage(false)}
                   target="_blank"
@@ -559,19 +586,10 @@ void loop() {
                   className="block w-full"
                 >
                   <Button 
-                    variant="primary" 
-                    className="w-full justify-center gap-2 bg-[#25D366] hover:bg-[#20ba56] border-[#25D366] text-white font-black text-xs py-3 uppercase tracking-wider"
-                  >
-                    <FaWhatsapp className="w-5 h-5 shrink-0" /> Buy on WhatsApp
-                  </Button>
-                </a>
-                
-                <a href="#rfq-section" className="block w-full">
-                  <Button 
                     variant="outline" 
-                    className="w-full justify-center font-black text-xs py-3 uppercase tracking-wider"
+                    className="w-full justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 border-emerald-300 text-emerald-700 font-black text-xs py-3 uppercase tracking-wider rounded-xl"
                   >
-                    B2B Quote Request
+                    <FaWhatsapp className="w-4 h-4 text-emerald-600 shrink-0" /> Chat on WhatsApp
                   </Button>
                 </a>
               </div>
@@ -760,7 +778,7 @@ void loop() {
                           {item.name}
                         </span>
                         <span className="text-xs font-black text-accent font-sans">
-                          ₹{item.price.toLocaleString("en-IN")}
+                          Γé╣{item.price.toLocaleString("en-IN")}
                         </span>
                       </div>
                     </div>
@@ -774,14 +792,14 @@ void loop() {
                   <span className="text-[10px] font-black text-text-muted uppercase tracking-wider block">Bundle Price:</span>
                   <div className="flex items-baseline justify-center xl:justify-start gap-2">
                     <span className="text-2xl font-black text-text-primary font-sans">
-                      ₹{bundle.bundlePrice.toLocaleString("en-IN")}
+                      Γé╣{bundle.bundlePrice.toLocaleString("en-IN")}
                     </span>
                     <span className="text-xs text-text-muted line-through font-bold">
-                      ₹{bundle.originalTotal.toLocaleString("en-IN")}
+                      Γé╣{bundle.originalTotal.toLocaleString("en-IN")}
                     </span>
                   </div>
                   <span className="text-[9px] font-bold text-emerald-600 block uppercase tracking-wider mt-1">
-                    Save ₹{(bundle.originalTotal - bundle.bundlePrice).toLocaleString("en-IN")} on this bundle deal!
+                    Save Γé╣{(bundle.originalTotal - bundle.bundlePrice).toLocaleString("en-IN")} on this bundle deal!
                   </span>
                 </div>
                 <a
@@ -874,7 +892,7 @@ void loop() {
                     <div>
                       <span className="text-xs font-black text-text-primary block">{rev.name}</span>
                       <span className="text-[9px] text-text-muted font-bold block uppercase tracking-wider">
-                        {rev.date} {rev.verified && "• Verified Purchase"}
+                        {rev.date} {rev.verified && "ΓÇó Verified Purchase"}
                       </span>
                     </div>
                   </div>
@@ -932,20 +950,20 @@ void loop() {
               </div>
             ) : (
               <form onSubmit={handleRfqSubmit} className="space-y-4">
-                <div>
-                  <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={rfqForm.name}
-                    onChange={(e) => setRfqForm({ ...rfqForm, name: e.target.value })}
-                    className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                    placeholder="Enter name"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Email Address</label>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={rfqForm.name}
+                      onChange={(e) => setRfqForm({ ...rfqForm, name: e.target.value })}
+                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      placeholder="e.g. Anand Kumar"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Email Address *</label>
                     <input
                       type="email"
                       required
@@ -956,14 +974,14 @@ void loop() {
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Institution/Company</label>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number *</label>
                     <input
-                      type="text"
+                      type="tel"
                       required
-                      value={rfqForm.org}
-                      onChange={(e) => setRfqForm({ ...rfqForm, org: e.target.value })}
+                      value={rfqForm.phone}
+                      onChange={(e) => setRfqForm({ ...rfqForm, phone: e.target.value })}
                       className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                      placeholder="School / College / Co."
+                      placeholder="+91 98765 43210"
                     />
                   </div>
                 </div>
@@ -1078,7 +1096,7 @@ void loop() {
                         {p.name}
                       </h4>
                     </div>
-                    <Link href={`/products/${p.slug}`}>
+                    <Link href={getProductUrl(p.categorySlug, p.slug)}>
                       <Button variant="outline" size="sm" className="w-full justify-center font-bold text-xs uppercase tracking-wider">
                         View Product
                       </Button>
@@ -1100,16 +1118,33 @@ void loop() {
             ₹{(product.price || 0).toLocaleString("en-IN")}
           </span>
         </div>
-        <a
-          href={getWhatsAppMessage(false)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button variant="primary" size="sm" className="gap-1.5 bg-[#25D366] hover:bg-[#20ba56] border-[#25D366] text-white font-black py-3 uppercase tracking-wider">
-            <FaWhatsapp className="w-4 h-4" /> Message Us
+        <div className="flex gap-2">
+          <Button
+            size="sm"
+            onClick={() => setIsModalOpen(true)}
+            className="bg-[#002B66] text-white font-bold text-xs uppercase px-4 py-2"
+          >
+            Quote
           </Button>
-        </a>
+          <a
+            href={getWhatsAppMessage(false)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-emerald-600 text-white font-black text-xs uppercase tracking-wider px-4 py-2.5 rounded-lg flex items-center gap-1.5"
+          >
+            <FaWhatsapp className="w-4 h-4" /> WhatsApp
+          </a>
+        </div>
       </div>
+
+      {/* Centralized Product Enquiry Modal */}
+      <ProductEnquiryModal
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialQuantity={qty}
+        mode="quote"
+      />
     </div>
   );
 }

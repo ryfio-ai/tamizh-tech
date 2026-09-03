@@ -1,5 +1,7 @@
 export interface EventItem {
-  id: string; // slug
+  id: string;
+  slug: string;
+  categorySlug: string;
   title: string;
   type: "Workshop" | "Webinar" | "Competition" | "Bootcamp";
   date: string;
@@ -8,11 +10,17 @@ export interface EventItem {
   price: string;
   description: string;
   banner: string;
+  images?: string[];
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export const events: EventItem[] = [
   {
     id: "national-robotics-championship-2026",
+    slug: "national-robotics-championship-2026",
+    categorySlug: "competition",
     title: "National Robotics Championship 2026",
     type: "Competition",
     date: "2026-09-12",
@@ -20,10 +28,16 @@ export const events: EventItem[] = [
     capacity: 200,
     price: "₹1,500 per team",
     description: "The ultimate showdown of autonomous line-followers, robo-soccer, and custom combat bots. Showcase your innovation and win cash prizes up to ₹1,00,000.",
-    banner: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=450&fit=crop"
+    banner: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=450&fit=crop",
+    images: ["https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=450&fit=crop"],
+    published: true,
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
     id: "autonomous-drones-workshop",
+    slug: "autonomous-drones-workshop",
+    categorySlug: "workshop",
     title: "Autonomous Drones & ROS Workshop",
     type: "Workshop",
     date: "2026-07-28",
@@ -31,10 +45,16 @@ export const events: EventItem[] = [
     capacity: 30,
     price: "₹2,500",
     description: "Learn to interface Pixhawk flight controllers with ROS (Robot Operating System). Design custom mission paths and perform hardware-in-the-loop autonomous flights.",
-    banner: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=450&fit=crop"
+    banner: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=450&fit=crop",
+    images: ["https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=450&fit=crop"],
+    published: true,
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
     id: "industrial-iot-edge-ai-bootcamp",
+    slug: "industrial-iot-edge-ai-bootcamp",
+    categorySlug: "bootcamp",
     title: "Industrial IoT & Edge AI Bootcamp",
     type: "Bootcamp",
     date: "2026-08-15",
@@ -42,10 +62,16 @@ export const events: EventItem[] = [
     capacity: 50,
     price: "₹4,000",
     description: "A comprehensive hands-on bootcamp on deploying machine learning models to microcontrollers (TinyML) and connecting factory sensors to cloud databases via MQTT.",
-    banner: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop"
+    banner: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop",
+    images: ["https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop"],
+    published: true,
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
     id: "future-of-industrial-automation",
+    slug: "future-of-industrial-automation",
+    categorySlug: "webinar",
     title: "The Future of Industrial Automation & SCADA",
     type: "Webinar",
     date: "2026-07-20",
@@ -53,6 +79,24 @@ export const events: EventItem[] = [
     capacity: 500,
     price: "Free",
     description: "Join our industry experts to discuss the integration of cloud databases and PLC networks. Ideal for engineering students and entry-level industrial professionals.",
-    banner: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=450&fit=crop"
+    banner: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=450&fit=crop",
+    images: ["https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=450&fit=crop"],
+    published: true,
+    createdAt: "2024-06-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   }
 ];
+
+export function getEventBySlug(slug: string): EventItem | undefined {
+  return events.find((e) => (e.id === slug || e.slug === slug) && e.published);
+}
+
+export function getEventByCategoryAndSlug(categorySlug: string, slug: string): EventItem | undefined {
+  return events.find(
+    (e) => (e.id === slug || e.slug === slug) && e.categorySlug === categorySlug && e.published
+  );
+}
+
+export function getEventsByCategorySlug(categorySlug: string): EventItem[] {
+  return events.filter((e) => e.categorySlug === categorySlug && e.published);
+}

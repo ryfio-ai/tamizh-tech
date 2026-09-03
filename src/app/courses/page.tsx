@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { courses } from "@/data/courses";
 import { CourseSchema } from "@/components/JsonLd";
+import { getCourseUrl, getCourseCategoryUrl } from "@/lib/routing";
 
 const categories = ["All", "School", "College", "Professionals"];
 
@@ -82,7 +83,7 @@ export default function CoursesPage() {
                         <span>{course.seatsLeft} Seats Left</span>
                       </div>
                     </div>
-                    <Link href={`/courses/${course.id}`} className="block w-full">
+                    <Link href={getCourseUrl(course.categorySlug, course.slug)} className="block w-full">
                       <Button variant="primary" className="w-full justify-center font-bold text-white">
                         Explore Syllabus <ArrowRight className="w-4 h-4 ml-1.5" />
                       </Button>

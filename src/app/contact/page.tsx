@@ -12,6 +12,10 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
     company: "",
+    institution: "",
+    department: "",
+    graduationYear: "",
+    areaOfInterest: "",
     designation: "",
     email: "",
     phone: "",
@@ -25,6 +29,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [leadId, setLeadId] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,18 +37,37 @@ export default function ContactPage() {
     setError("");
     
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          leadType: "Contact",
+          source: "Contact Page",
+          pageUrl: "https://www.tamizhtech.in/contact",
+          customerName: form.name,
+          organization: form.company || form.institution,
+          institution: form.institution || form.company,
+          department: form.department,
+          graduationYear: form.graduationYear,
+          areaOfInterest: form.areaOfInterest || form.projectType,
+          customerType: form.designation,
+          email: form.email,
+          phone: form.phone,
+          subject: `${form.projectType} — ${form.industry}`,
+          requirement: `${form.areaOfInterest || form.projectType} (${form.timeline})`,
+          budget: form.budget,
+          message: form.requirement,
+          preferredContactMethod: form.callbackMode,
+        }),
       });
 
       const result = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || !result.success) {
         throw new Error(result.error || "Failed to log technical inquiry.");
       }
 
+      setLeadId(result.leadId || "");
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
@@ -118,14 +142,22 @@ export default function ContactPage() {
             {/* Right Column: Lead Form */}
             <div className="lg:col-span-2">
               {isSuccess ? (
-                <Card className="border-2 border-accent p-12 text-center shadow-md rounded-2xl">
-                  <h2 className="text-3xl font-extrabold text-text-primary mb-4">Inquiry Logged successfully</h2>
-                  <p className="text-text-muted text-sm mb-8 leading-relaxed max-w-xl mx-auto">
+                <Card className="border-2 border-accent p-12 text-center shadow-md rounded-2xl space-y-4">
+                  <h2 className="text-3xl font-extrabold text-text-primary">Inquiry Logged successfully</h2>
+                  <p className="text-text-muted text-sm leading-relaxed max-w-xl mx-auto">
                     Thank you, <span className="text-accent font-bold">{form.name}</span>. Technical coordination at Tamizh Tech Robotics Company has received your request for <span className="text-text-primary font-bold">{form.company}</span>. An engineer will contact you via <span className="text-accent underline underline-offset-4">{form.callbackMode}</span> within 24 business hours.
                   </p>
-                  <Button variant="secondary" onClick={() => setIsSuccess(false)}>
-                    Log Another Request
-                  </Button>
+                  {leadId && (
+                    <div className="bg-white p-3 rounded-xl border border-border inline-block">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Reference ID</span>
+                      <span className="text-sm font-black font-mono text-accent">{leadId}</span>
+                    </div>
+                  )}
+                  <div>
+                    <Button variant="secondary" onClick={() => setIsSuccess(false)}>
+                      Log Another Request
+                    </Button>
+                  </div>
                 </Card>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-subtle border border-border/70 p-8 lg:p-12 rounded-3xl space-y-10">
@@ -147,18 +179,32 @@ export default function ContactPage() {
                           onChange={e => setForm({...form, name: e.target.value})}
                         />
                       </FormField>
-                      <FormField label="Enterprise / Institute Name" icon={<Building2 className="w-4 h-4" />}>
+                      <FormField label="Enterprise / Institution Name" icon={<Building2 className="w-4 h-4" />}>
                         <input 
-                          required type="text" placeholder="PSG College / Acme Corp" 
+                          required type="text" placeholder="PSG College / Acme Corp / School" 
                           className="form-input-custom" value={form.company}
-                          onChange={e => setForm({...form, company: e.target.value})}
+                          onChange={e => setForm({...form, company: e.target.value, institution: e.target.value})}
                         />
                       </FormField>
-                      <FormField label="Corporate Designation" icon={<Briefcase className="w-4 h-4" />}>
+                      <FormField label="Department / Branch" icon={<Briefcase className="w-4 h-4" />}>
                         <input 
-                          required type="text" placeholder="Director / HOD / Student" 
-                          className="form-input-custom" value={form.designation}
-                          onChange={e => setForm({...form, designation: e.target.value})}
+                          type="text" placeholder="ECE / Robotics / Mechanical / R&D" 
+                          className="form-input-custom" value={form.department}
+                          onChange={e => setForm({...form, department: e.target.value})}
+                        />
+                      </FormField>
+                      <FormField label="Graduation Year / Designation" icon={<UserCircle2 className="w-4 h-4" />}>
+                        <input 
+                          type="text" placeholder="2026 / Student / Professor / Manager" 
+                          className="form-input-custom" value={form.graduationYear}
+                          onChange={e => setForm({...form, graduationYear: e.target.value, designation: e.target.value})}
+                        />
+                      </FormField>
+                      <FormField label="Area of Interest / Role" icon={<Settings className="w-4 h-4" />}>
+                        <input 
+                          type="text" placeholder="Robotics / PLC / STEM Lab / Competition" 
+                          className="form-input-custom" value={form.areaOfInterest}
+                          onChange={e => setForm({...form, areaOfInterest: e.target.value})}
                         />
                       </FormField>
                       <FormField label="Official Email" icon={<Mail className="w-4 h-4" />}>

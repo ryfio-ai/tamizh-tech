@@ -14,9 +14,9 @@ const navLinks = [
     href: "/products",
     children: [
       { label: "All Products", href: "/products", desc: "Our unified robotics catalog" },
-      { label: "RC Robo Race", href: "/products", desc: "High-RPM drift & racing bot" },
-      { label: "RC Robo Soccer", href: "/products", desc: "Pneumatic active striker bot" },
-      { label: "RC Robo Sumo", href: "/products", desc: "Heavy magnetic pusher bot" }
+      { label: "Competition Bots", href: "/products/competition", desc: "National event combat & race bots" },
+      { label: "Radio Controllers", href: "/products/radio-controllers", desc: "FlySky & precision transmitters" },
+      { label: "RC Robo Race", href: "/products/competition/rc-robo-race", desc: "High-RPM drift & racing bot" }
     ]
   },
   {

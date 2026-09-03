@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { projects } from "@/data/projects";
+import { getProjectUrl } from "@/lib/routing";
 
 const categories = ["All", "Robotics", "Artificial Intelligence", "Drone Technology"];
 
@@ -53,7 +54,7 @@ export default function ProjectsPage() {
                   title={project.title}
                   category={project.category}
                   image={project.coverImage}
-                  href={`/projects/${project.id}`}
+                  href={getProjectUrl(project.categorySlug, project.slug)}
                   description={project.description}
                 />
               </StaggerItem>

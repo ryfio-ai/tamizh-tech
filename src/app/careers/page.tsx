@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import CareerApplicationForm from "@/components/forms/CareerApplicationForm";
 
 export default function CareersPage() {
   return (
@@ -119,15 +120,20 @@ export default function CareersPage() {
             </div>
           </div>
 
+          {/* Application Form Section */}
+          <div className="mb-24 max-w-4xl mx-auto">
+            <CareerApplicationForm />
+          </div>
+
           {/* Contact CTA */}
-          <div className="bg-subtle border border-border p-12 lg:p-20 rounded-3xl text-center max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-6 leading-tight max-w-2xl mx-auto">
-              If you're interested in joining our growing team, drop your resume to career@tamizhtech.in
+          <div className="bg-subtle border border-border p-12 lg:p-16 rounded-3xl text-center max-w-4xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-extrabold text-text-primary mb-4 leading-tight max-w-xl mx-auto">
+              Prefer direct outreach? You can also email your resume to our talent team
             </h3>
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-6">
               <a href="mailto:career@tamizhtech.in">
-                <Button variant="primary" size="lg" className="gap-2.5">
-                  <Mail className="w-5 h-5" /> Email Resume
+                <Button variant="secondary" size="lg" className="gap-2.5">
+                  <Mail className="w-5 h-5 text-accent" /> career@tamizhtech.in
                 </Button>
               </a>
             </div>

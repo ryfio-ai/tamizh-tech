@@ -22,15 +22,15 @@ import {
 
 const domains = [
   { id: "robotics", name: "Robotics Internship", icon: Cpu, desc: "Hands-on experience in robot kinematics, sensor integration, autonomous logic, and motor controller interfacing." },
-  { id: "electronics", name: "Basic Electronics Internship", icon: Zap, desc: "Master circuit design, soldering, component diagnosis, oscilloscope operation, and hardware prototyping fundamentals." },
+  { id: "iot", name: "IoT & Smart Connected Systems Internship", icon: Cpu, desc: "Architect IoT edge nodes, sensor telemetry, MQTT/HTTP protocols, and cloud monitoring dashboards." },
   { id: "embedded", name: "Embedded Systems Internship", icon: Terminal, desc: "Firmware development using Embedded C, microcontroller programming (Arduino, ESP32, STM32), and sensor interfacing." },
+  { id: "ai-vision", name: "AI Computer Vision & OpenCV Internship", icon: Code, desc: "Deep learning object detection, YOLO pipelines, image preprocessing, and industrial edge inferencing." },
   { id: "fullstack", name: "Full Stack Web Development Internship", icon: Layers, desc: "End-to-end web architecture using modern stacks (React, Next.js, Node.js, Express, and SQL/NoSQL databases)." },
   { id: "frontend", name: "Frontend Development Internship", icon: Code, desc: "Build responsive, premium user interfaces using React, Next.js, HTML5, CSS3, and modern UI/UX design concepts." },
   { id: "backend", name: "Backend Development Internship", icon: Globe, desc: "Architect APIs, optimize server logic, handle user authentication, database normalization, and secure cloud endpoints." },
-  { id: "c-prog", name: "C Programming Internship", icon: Terminal, desc: "Strengthen computational logic, data structures, pointer mechanics, and memory allocation frameworks from the ground up." },
-  { id: "cpp-prog", name: "C++ Programming Internship", icon: Terminal, desc: "Master Object-Oriented Programming (OOP), templates, Standard Template Library (STL), and hardware-level performance controls." },
-  { id: "java-dev", name: "Java Development Internship", icon: BookOpen, desc: "Learn object-oriented backend application architecture, design patterns, enterprise database integrations, and multithreading." },
-  { id: "python-dev", name: "Python Development Internship", icon: Code, desc: "Dive into scripting automation, data scraping, API building, machine learning fundamentals, and core programming paradigms." }
+  { id: "electronics", name: "Basic Electronics Internship", icon: Zap, desc: "Master circuit design, soldering, component diagnosis, oscilloscope operation, and hardware prototyping fundamentals." },
+  { id: "python-dev", name: "Python Development Internship", icon: Code, desc: "Dive into scripting automation, data scraping, API building, machine learning fundamentals, and core programming paradigms." },
+  { id: "cpp-prog", name: "C++ Programming Internship", icon: Terminal, desc: "Master Object-Oriented Programming (OOP), templates, Standard Template Library (STL), and hardware-level performance controls." }
 ];
 
 const benefits = [
@@ -385,14 +385,20 @@ export default function InternshipPage() {
 
                 {/* Resume Link */}
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="resume" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Resume Link (Google Drive / GitHub / LinkedIn)</label>
+                  <label htmlFor="resume" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">
+                    Resume Drive Link (Upload in Drive & Paste Link) *
+                  </label>
+                  <span className="text-[9px] text-[#858E9B] font-semibold">
+                    Upload your resume to Google Drive or OneDrive &rarr; Set sharing to &ldquo;Anyone with link can view&rdquo; &rarr; Paste shareable URL.
+                  </span>
                   <input 
                     type="url" 
                     id="resume" 
                     name="resume" 
+                    required
                     value={formData.resume} 
                     onChange={handleChange}
-                    placeholder="e.g. https://drive.google.com/.../your-resume.pdf"
+                    placeholder="https://drive.google.com/file/d/... or LinkedIn profile"
                     className={formInputClass}
                   />
                 </div>

@@ -8,6 +8,8 @@ import { Project } from "@/data/projects";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 
+import { getProjectCategoryUrl } from "@/lib/routing";
+
 interface ProjectDetailClientProps {
   project: Project;
 }
@@ -17,11 +19,22 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
 
   return (
     <div className="bg-white min-h-screen pt-28 pb-20 text-text-primary">
-      <div className="container px-6">
+      <div className="container px-6 max-w-7xl mx-auto">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-2 mb-6 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
+          <Link href="/" className="hover:text-accent transition-colors">Home</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href="/projects" className="hover:text-accent transition-colors">Projects</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href={getProjectCategoryUrl(project.categorySlug)} className="hover:text-accent transition-colors">{project.category}</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <span className="text-accent truncate max-w-[200px]">{project.title}</span>
+        </nav>
+
         {/* Back Link */}
         <div className="mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
-          <Link href="/projects" className="hover:text-accent transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Projects
+          <Link href={getProjectCategoryUrl(project.categorySlug)} className="hover:text-accent transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to {project.category} Projects
           </Link>
         </div>
 

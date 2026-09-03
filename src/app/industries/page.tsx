@@ -21,6 +21,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { RoboticsIcon, AIIcon, IoTIcon, EmbeddedIcon, AutomationIcon, MfgIcon } from "@/components/ui/CustomIcons";
+import IndustrialConsultationForm from "@/components/forms/IndustrialConsultationForm";
 
 export const metadata: Metadata = {
   title: "Industrial Automation & Robotics Solutions | Coimbatore | Tamizh Tech",
@@ -241,61 +242,7 @@ export default function IndustriesPage() {
             <h3 className="text-2xl md:text-3xl font-bold uppercase text-text-primary tracking-tight mb-4">Request Automation Consultation</h3>
             <p className="text-xs text-text-muted font-bold uppercase tracking-wider mb-8">Discuss cycle times, PLC specs, SCADA layouts, or OpenCV checks with our senior R&D engineers. Fill out this audit request loop.</p>
             
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Corporate Representative Name</label>
-                  <input required type="text" placeholder="John Doe" className={formInputClass} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Official Company Email</label>
-                  <input required type="email" placeholder="john@corporatemail.com" className={formInputClass} />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Contact Phone</label>
-                  <input required type="text" placeholder="+91 XXXXX XXXXX" className={formInputClass} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Company Name & Site Location</label>
-                  <input required type="text" placeholder="Auto Corp, Coimbatore" className={formInputClass} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Target Automation Interest</label>
-                  <div className="relative">
-                    <select className={formInputClass + " cursor-pointer appearance-none"}>
-                      <option>PLC & SCADA logic setup</option>
-                      <option>Machine Vision (OpenCV inspection)</option>
-                      <option>Warehouse AMR/AGV Deployment</option>
-                      <option>IoT Fleet Telemetry Node audit</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Technical Requirement Details</label>
-                <textarea rows={4} placeholder="Describe the current manual process, machinery brand names (Siemens, Mitsubishi, Delta), and target cycle time improvements..." className={formInputClass + " resize-none"} />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button type="submit" variant="primary" className="flex-1 justify-center py-4">
-                  Schedule Audit & Consult <Send className="w-4 h-4 ml-1.5" />
-                </Button>
-                <a 
-                  href="https://wa.me/918148045030?text=Hello%20Tamizh%20Tech!%20I'm%20inquiring%20about%20your%20B2B%20Industrial%20Automation%20and%20PLC%2FSCADA%2FMachine%20Vision%20solutions." 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 block"
-                >
-                  <Button variant="secondary" className="w-full justify-center py-4 gap-2 border-border hover:border-accent">
-                    <FaWhatsapp className="w-4 h-4 text-accent" /> Talk to Automation Expert
-                  </Button>
-                </a>
-              </div>
-            </form>
+            <IndustrialConsultationForm />
           </div>
         </section>
 

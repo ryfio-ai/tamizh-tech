@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { generateLeadId } from "@/lib/leadId";
+import { appendLeadToGoogleSheet } from "@/lib/googleSheets";
+import { sendLeadNotifications } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -42,43 +45,50 @@ export async function POST(request: Request) {
       other: "Other",
     };
 
-    const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-    
-    if (!webhookUrl) {
-      throw new Error("Missing Google Sheet Webhook URL configurations");
-    }
+    const leadId = generateLeadId();
+    const submittedAt = new Date().toISOString();
 
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sheetName: "Applications",
-        name,
-        mobile,
-        email,
-        status: statusLabel[status] || status,
-        // Detailed Data
-        details: status === "school" 
-          ? `Standard: ${standard}, School: ${schoolName}, Loc: ${schoolLocation}`
-          : status === "college"
-          ? `Dept: ${department}, Year: ${yearOfStudy}, College: ${collegeName}, Loc: ${collegeLocation}`
-          : status === "professional"
-          ? `Org: ${organizationName}, Role: ${role}`
-          : "N/A",
-        address,
-        purpose
-      }),
+    const detailsText = status === "school" 
+      ? `Standard: ${standard}, School: ${schoolName}, Loc: ${schoolLocation}`
+      : status === "college"
+      ? `Dept: ${department}, Year: ${yearOfStudy}, College: ${collegeName}, Loc: ${collegeLocation}`
+      : status === "professional"
+      ? `Org: ${organizationName}, Role: ${role}`
+      : "N/A";
+
+    const leadPayload = {
+      leadId,
+      submittedAt,
+      leadType: "Robotics Club" as const,
+      source: "Robotics Club Membership Application",
+      pageUrl: "https://www.tamizhtech.in/robotics-club/join",
+      customerName: name,
+      email,
+      phone: mobile,
+      organization: schoolName || collegeName || organizationName || "Individual",
+      institution: collegeName || schoolName || organizationName || "Individual",
+      department: department || standard || role || "",
+      graduationYear: yearOfStudy || "",
+      areaOfInterest: role || purpose || "Robotics Club Membership",
+      customerType: statusLabel[status] || status,
+      city: schoolLocation || collegeLocation || address,
+      requirement: "Robotics Club Membership",
+      message: `Address: ${address}. Purpose: ${purpose}. Details: ${detailsText}`,
+    };
+
+    // 1. Centralized Google Sheets append (Stores in dedicated 'Robotics Club Applications' sheet)
+    await appendLeadToGoogleSheet(leadPayload);
+
+    // 2. Dispatch Admin Notification (6 team mailboxes) & User Thank You Confirmation
+    sendLeadNotifications(leadPayload).catch((emailErr) => {
+      console.warn("Resend email warning in /api/join-club:", emailErr);
     });
 
-    if (!response.ok) {
-      const resultText = await response.text();
-      console.error("Google Sheets Webhook Error:", resultText);
-      return NextResponse.json({ error: "Failed to submit application to Google Sheets" }, { status: 400 });
-    }
-
-    return NextResponse.json({ success: true, message: "Application submitted successfully" });
+    return NextResponse.json({ 
+      success: true, 
+      leadId, 
+      message: "Thank you! Your Robotics Club application has been received. Our team will reach out to you soon." 
+    });
   } catch (error: any) {
     console.error("Internal Server Error:", error);
     return NextResponse.json(

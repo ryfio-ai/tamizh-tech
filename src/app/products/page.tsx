@@ -16,9 +16,11 @@ import {
 } from "lucide-react";
 import { FaWhatsapp, FaStar } from "react-icons/fa";
 import { products, Product } from "@/data/products";
+import { getProductUrl } from "@/lib/routing";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import ProductEnquiryModal from "@/components/forms/ProductEnquiryModal";
 
 const ProductImageSlider = ({ images, name }: { images: string[]; name: string }) => {
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -627,7 +629,7 @@ function ProductsContent() {
 
                           {/* Action Buttons */}
                           <div className="space-y-2 pt-3 border-t border-border/60 mt-auto">
-                            <Link href={`/products/${product.slug}`} className="block w-full">
+                            <Link href={getProductUrl(product.categorySlug, product.slug)} className="block w-full">
                               <Button 
                                 variant="primary" 
                                 size="sm" 
@@ -685,119 +687,14 @@ function ProductsContent() {
         </div>
       </section>
 
-      {/* Quote Modal */}
+      {/* Centralized Product Enquiry Modal */}
       {quoteProduct && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-border rounded-lg shadow-2xl max-w-lg w-full overflow-hidden text-left relative flex flex-col">
-            
-            {/* Modal Header */}
-            <div className="p-6 border-b border-border flex justify-between items-center bg-subtle">
-              <div>
-                <span className="text-[10px] font-bold text-accent uppercase tracking-wider block mb-1">Commercial RFP</span>
-                <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Request Custom Quote</h3>
-              </div>
-              <button 
-                onClick={() => setQuoteProduct(null)}
-                className="p-2 text-text-muted hover:text-accent transition-colors focus:outline-none"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 overflow-y-auto max-h-[70vh]">
-              {quoteSubmitted ? (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-8 h-8" />
-                  </div>
-                  <h4 className="text-xl font-bold uppercase text-text-primary mb-2">Quote Request Logged</h4>
-                  <p className="text-xs text-text-secondary leading-relaxed mb-6">
-                    Our technical coordinator will review your requirements for <strong>{quoteProduct.name}</strong> and reach out shortly.
-                  </p>
-                  <Button variant="primary" onClick={() => setQuoteProduct(null)} className="font-bold text-white">
-                    Close Window
-                  </Button>
-                </div>
-              ) : (
-                <form onSubmit={handleQuoteSubmit} className="space-y-4">
-                  <div className="p-4 bg-subtle rounded-lg border border-border/60">
-                    <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Target Product</span>
-                    <span className="text-sm font-extrabold text-text-primary uppercase">{quoteProduct.name}</span>
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Your Name *</label>
-                    <input 
-                      type="text" 
-                      required
-                      value={quoteForm.name}
-                      onChange={(e) => setQuoteForm({...quoteForm, name: e.target.value})}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
-                      placeholder="Er. Ramesh Kumar"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Your Email *</label>
-                    <input 
-                      type="email" 
-                      required
-                      value={quoteForm.email}
-                      onChange={(e) => setQuoteForm({...quoteForm, email: e.target.value})}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
-                      placeholder="ramesh@college.edu"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Institution / Company *</label>
-                    <input 
-                      type="text" 
-                      required
-                      value={quoteForm.org}
-                      onChange={(e) => setQuoteForm({...quoteForm, org: e.target.value})}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
-                      placeholder="PSG College of Technology"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Required Quantity</label>
-                    <input 
-                      type="number" 
-                      min="1"
-                      value={quoteForm.qty}
-                      onChange={(e) => setQuoteForm({...quoteForm, qty: parseInt(e.target.value) || 1})}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest block mb-1">Customization Requirements</label>
-                    <textarea 
-                      rows={3}
-                      value={quoteForm.notes}
-                      onChange={(e) => setQuoteForm({...quoteForm, notes: e.target.value})}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
-                      placeholder="Need custom logo engraving / extra batteries."
-                    />
-                  </div>
-
-                  <div className="pt-4 border-t border-border flex justify-end gap-3">
-                    <Button type="button" variant="outline" onClick={() => setQuoteProduct(null)} className="font-bold">
-                      Cancel
-                    </Button>
-                    <Button type="submit" variant="primary" disabled={isSubmitting} className="font-bold text-white bg-accent hover:bg-accent-hover">
-                      {isSubmitting ? "Submitting..." : "Send RFQ Request"}
-                    </Button>
-                  </div>
-                </form>
-              )}
-            </div>
-
-          </div>
-        </div>
+        <ProductEnquiryModal
+          product={quoteProduct}
+          isOpen={!!quoteProduct}
+          onClose={() => setQuoteProduct(null)}
+          mode="quote"
+        />
       )}
     </div>
   );

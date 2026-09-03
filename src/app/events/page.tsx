@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Calendar, MapPin, Tag, ArrowRight } from "lucide-react";
 import { events } from "@/data/events";
+import { getEventUrl } from "@/lib/routing";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
@@ -91,7 +92,7 @@ export default function EventsPage() {
                     </div>
 
                     <div className="flex gap-3">
-                      <Link href={`/events/${event.id}`} className="block w-full">
+                      <Link href={getEventUrl(event.categorySlug, event.slug)} className="block w-full">
                         <Button variant="primary" className="w-full justify-center font-bold text-white">
                           Register Now <ArrowRight className="w-4 h-4 ml-1.5" />
                         </Button>

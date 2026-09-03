@@ -230,25 +230,25 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+      {/* CTA - Clean Orange + White Brand Theme */}
+      <section className="bg-white py-24 text-text-primary border-t border-border/40 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.06)_0%,transparent_70%)] pointer-events-none" />
         <div className="container relative z-10 px-6 max-w-4xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight mb-4 text-white uppercase">
+            <h2 className="text-3xl md:text-4xl font-black font-heading tracking-tight mb-4 text-text-primary uppercase">
               Need a custom solution?
             </h2>
-            <p className="text-gray-400 mb-10 max-w-md mx-auto leading-relaxed font-sans text-sm">
+            <p className="text-text-secondary mb-10 max-w-md mx-auto leading-relaxed font-sans text-sm">
               Every project is unique. Let&apos;s discuss your requirements and build something extraordinary.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" className="w-full sm:w-auto">
-                <Button variant="primary" size="lg" className="w-full justify-center text-sm font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                <Button variant="primary" size="lg" className="w-full justify-center text-sm font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none shadow-md">
                   Contact Our Team <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
               </Link>
               <Link href="/products" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full justify-center text-sm font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                <Button variant="outline" size="lg" className="w-full justify-center text-sm font-bold text-text-primary border-border hover:bg-subtle px-8 py-3 rounded-lg">
                   Explore Products
                 </Button>
               </Link>

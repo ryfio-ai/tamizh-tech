@@ -9,16 +9,14 @@ import { FaLinkedin, FaInstagram, FaYoutube, FaWhatsapp, FaFacebook } from "reac
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const robotLinks = [
-  { label: "RC Robo Race",   href: "/products?category=Robo%20Race%20Bots" },
-  { label: "RC Robo Soccer", href: "/products?category=Robo%20Soccer%20Bots" },
-  { label: "RC Robo War",    href: "/products?category=Robo%20War%20Bots" },
-  { label: "RC Robo Sumo",   href: "/products?category=Robo%20Sumo%20Bots" },
-  { label: "RC Boat",        href: "/products?category=RC%20Boat%20Kits" },
-  { label: "Hovercraft",     href: "/products" },
-  { label: "Line Follower",  href: "/products?category=Line%20Follower%20Robots" },
-  { label: "Maze Solver",    href: "/products?category=Maze%20Solver%20Robots" },
-  { label: "Drone",          href: "/products?category=Drone%20Kits" },
-  { label: "Water Rocketry", href: "/products" },
+  { label: "Competition Robots", href: "/products/competition" },
+  { label: "RC Robo Race", href: "/products/competition/rc-robo-race" },
+  { label: "RC Robo Soccer", href: "/products/competition/rc-robo-soccer" },
+  { label: "RC Robo War", href: "/products/competition/rc-robo-war" },
+  { label: "RC Robo Sumo", href: "/products/competition/rc-robo-sumo" },
+  { label: "Radio Controllers", href: "/products/radio-controllers" },
+  { label: "FlySky FS-i6 Transmitter", href: "/products/radio-controllers/flysky-fs-i6-transmitter" },
+  { label: "FlySky FS-i6X Transmitter", href: "/products/radio-controllers/flysky-fs-i6x-transmitter" },
 ];
 
 const companyLinks = [

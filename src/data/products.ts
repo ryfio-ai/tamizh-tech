@@ -15,11 +15,14 @@ export interface ProductDownload {
 }
 
 export interface Product {
+  id: string;
   slug: string;
   category: string;
+  categorySlug: string;
   brand?: string;
   sku?: string;
   name: string;
+  shortDescription?: string;
   price?: number;
   originalPrice?: number;
   cashback?: string;
@@ -31,26 +34,32 @@ export interface Product {
   image: string; // single image fallback
   images: string[]; // slideshow images
   specs: string;
+  specifications?: string[];
   description: string;
   detailedSpecs: string[];
   applications: string[];
   faqs: ProductFAQ[];
   downloads: ProductDownload[];
+  documents?: ProductDownload[];
+  status?: "published" | "draft";
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export const products: Product[] = [
   {
+    id: "rc-robo-race",
     slug: "rc-robo-race",
     category: "Competition Robots",
+    categorySlug: "competition",
     brand: "Tamizh Tech",
     sku: "TT-RACE-01",
     name: "RC Robo Race",
+    shortDescription: "Engineered for maximum speed, drift control, and structural durability in national and international Robo Race arenas.",
     price: 12499,
-    originalPrice: 15999,
-    rating: 4.8,
-    reviewCount: 34,
-    inStock: true,
-    badge: "Best Seller",
+    inStock: false,
+    badge: "National Arena Ready",
     image: "/product/race/race1.png",
     images: [
       "/product/race/race1.png"
@@ -58,6 +67,14 @@ export const products: Product[] = [
     specs: "High-RPM motors, high-traction rubber wheels, lightweight carbon fiber chassis.",
     description: "Engineered for maximum speed and structural durability in national and international Robo Race arenas. Built with an aerospace-grade carbon fiber chassis and driven by high-RPM metal gear motors, this platform delivers unmatched cornering precision.",
     detailedSpecs: [
+      "Dimensions: 280 x 240 x 120 mm",
+      "Chassis: 3mm Carbon Fiber Composite",
+      "Motors: 4x 12V 1000 RPM Metal Gear Motors",
+      "Wheels: High-traction Silicon Rubber (80mm)",
+      "Power System: 11.1V 2200mAh LiPo Battery Compatible",
+      "Control: Dual-channel high-current motor drivers"
+    ],
+    specifications: [
       "Dimensions: 280 x 240 x 120 mm",
       "Chassis: 3mm Carbon Fiber Composite",
       "Motors: 4x 12V 1000 RPM Metal Gear Motors",
@@ -83,20 +100,28 @@ export const products: Product[] = [
     downloads: [
       { label: "Assembly Guide PDF", href: "#assembly", type: "pdf" },
       { label: "CAD Chassis STEP File", href: "#cad", type: "cad" }
-    ]
+    ],
+    documents: [
+      { label: "Assembly Guide PDF", href: "#assembly", type: "pdf" },
+      { label: "CAD Chassis STEP File", href: "#cad", type: "cad" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-01-15T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
+    id: "rc-robo-soccer",
     slug: "rc-robo-soccer",
     category: "Competition Robots",
+    categorySlug: "competition",
     brand: "Tamizh Tech",
     sku: "TT-SOCCER-02",
     name: "RC Robo Soccer",
+    shortDescription: "Offensive holonomic soccer platform with omni-directional drive wheels and high-pressure pneumatic kicking mechanism.",
     price: 14999,
-    originalPrice: 18999,
-    rating: 4.9,
-    reviewCount: 48,
-    inStock: true,
-    badge: "Deal of the Day",
+    inStock: false,
+    badge: "Pneumatic Striker Ready",
     image: "/product/soccer/soccer 1.0.png",
     images: [
       "/product/soccer/soccer 1.0.png",
@@ -106,6 +131,14 @@ export const products: Product[] = [
     specs: "Pneumatic striker mechanism, omni-directional wheels, customized RC remote.",
     description: "The ultimate offensive platform in student Robo Soccer arenas. Utilizing high-torque drive systems and a fast-actuating pneumatic kicking cylinder, this bot allows you to pass, dribble, and strike with force and accuracy.",
     detailedSpecs: [
+      "Striker: Fast-actuating pneumatic cylinder (up to 8 bar)",
+      "Drive: 4x Omni-directional wheels for 360° motion",
+      "Motors: 4x High-torque planetary gear motors",
+      "Body: 2mm Armored Aluminum Alloy",
+      "Frequency: 2.4GHz 6-channel control",
+      "Weight: 4.8 kg"
+    ],
+    specifications: [
       "Striker: Fast-actuating pneumatic cylinder (up to 8 bar)",
       "Drive: 4x Omni-directional wheels for 360° motion",
       "Motors: 4x High-torque planetary gear motors",
@@ -131,21 +164,28 @@ export const products: Product[] = [
     downloads: [
       { label: "Pneumatics Schematic", href: "#pneumatic", type: "pdf" },
       { label: "STEP CAD Model", href: "#cad", type: "cad" }
-    ]
+    ],
+    documents: [
+      { label: "Pneumatics Schematic", href: "#pneumatic", type: "pdf" },
+      { label: "STEP CAD Model", href: "#cad", type: "cad" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-01-15T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
+    id: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
     slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
     category: "Radio Controllers",
+    categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "653",
     name: "Flysky FS-i6X 2.4GHz 10CH AFHDS 2A RC Transmitter With FS-iA10B 2.4GHz 10CH Receiver",
+    shortDescription: "10-channel AFHDS 2A digital proportional computerized RC system with high-gain dual antennas and bidirectional telemetry.",
     price: 6398,
-    originalPrice: 6548,
-    cashback: "₹63 FlyRobo Cashback",
-    rating: 4.8,
-    reviewCount: 13,
-    inStock: true,
-    badge: "Best Seller",
+    inStock: false,
+    badge: "10CH Dual Antenna",
     tierPricing: [
       { qty: "1–2", price: 6398 },
       { qty: "3–9", price: 6119 },
@@ -187,6 +227,14 @@ export const products: Product[] = [
       "i-BUS Interface: Yes",
       "Data Acquisition Interface: Yes"
     ],
+    specifications: [
+      "Item: FS-i6X RC Transmitter",
+      "Tx Channels: 6-10 (6 Default)",
+      "RF Range: 2.408 - 2.475 GHz",
+      "System Type: AFHDS 2A / AFDHS",
+      "Rx Channels: 10 Channels (FS-iA10B)",
+      "Telemetry & i-BUS: Supported"
+    ],
     applications: [
       "Fixed-Wing, Glider & Helicopter RC Aircraft Control",
       "Multirotor & Quadcopter Telemetry Command Systems",
@@ -210,20 +258,28 @@ export const products: Product[] = [
     downloads: [
       { label: "FS-i6X User Manual", href: "#manual", type: "pdf" },
       { label: "FS-iA10B Pinout Datasheet", href: "#datasheet", type: "pdf" }
-    ]
+    ],
+    documents: [
+      { label: "FS-i6X User Manual", href: "#manual", type: "pdf" },
+      { label: "FS-iA10B Pinout Datasheet", href: "#datasheet", type: "pdf" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-02-10T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
+    id: "flysky-fs-i6-2.4g-6ch",
     slug: "flysky-fs-i6-2.4g-6ch",
     category: "Radio Controllers",
+    categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "78",
     name: "FlySky FS-i6 2.4G 6CH AFHDS RC Transmitter With FS-iA6 Receiver",
+    shortDescription: "Reliable 6-channel 2.4GHz AFHDS 2A remote control system with 20-model memory and jamming-free range.",
     price: 5459,
-    originalPrice: 6499,
-    rating: 4.9,
-    reviewCount: 15,
-    inStock: true,
-    badge: "Top Value",
+    inStock: false,
+    badge: "6CH AFHDS 2A",
     tierPricing: [
       { qty: "1–2", price: 5459 },
       { qty: "3–9", price: 5229 },
@@ -264,6 +320,14 @@ export const products: Product[] = [
       "Rx Power: 4.0 - 6.5V",
       "Rx Dimensions: 40.4 x 21.1 x 7.35 mm"
     ],
+    specifications: [
+      "Item: FS-i6 RC Transmitter",
+      "Channels: 6 Channels",
+      "RF Range: 2.40 - 2.48 GHz",
+      "Modulation: AFHDS 2A and AFHDS",
+      "Rx Included: FS-iA6 (6CH)",
+      "Model Memories: 20"
+    ],
     applications: [
       "RC Airplane, Glider & Helicopter remote control setups",
       "Entry-level competition robotics & RC cars",
@@ -281,20 +345,26 @@ export const products: Product[] = [
     ],
     downloads: [
       { label: "FS-i6 User Manual", href: "#manual", type: "pdf" }
-    ]
+    ],
+    documents: [
+      { label: "FS-i6 User Manual", href: "#manual", type: "pdf" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-02-10T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
+    id: "flysky-fs-i6s-2.4g-10ch-afhds-transmitter-with-fs-ia10b-10ch-receiver",
     slug: "flysky-fs-i6s-2.4g-10ch-afhds-transmitter-with-fs-ia10b-10ch-receiver",
     category: "Radio Controllers",
+    categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "79",
     name: "Flysky FS-i6S 2.4G 10CH AFHDS Transmitter With FS-iA10B 10CH Receiver",
+    shortDescription: "10-channel 2.4GHz transmitter featuring a full capacitive touchscreen interface, USB charging, and low-latency response.",
     price: 7398,
-    originalPrice: 8499,
-    cashback: "₹73 FlyRobo Cashback",
-    rating: 4.9,
-    reviewCount: 12,
-    inStock: true,
+    inStock: false,
     badge: "Touchscreen 10CH",
     tierPricing: [
       { qty: "1–2", price: 7398 },
@@ -329,6 +399,13 @@ export const products: Product[] = [
       "Rx Input Power: 4.0 - 6.5V DC",
       "Certifications: CE0678, FCC"
     ],
+    specifications: [
+      "Display: Full Capacitive Touchscreen",
+      "Channels: 10 Channels",
+      "RF Range: 2.4055 - 2.475 GHz",
+      "Interface: USB Port & Low-voltage alert",
+      "Rx Included: FS-iA10B (10CH)"
+    ],
     applications: [
       "Multirotors, Quadcopters & Drone Control Systems",
       "Fixed-Wing Airplanes, Gliders & RC Helicopters",
@@ -346,21 +423,27 @@ export const products: Product[] = [
     ],
     downloads: [
       { label: "FS-i6S English User Manual", href: "#manual", type: "pdf" }
-    ]
+    ],
+    documents: [
+      { label: "FS-i6S English User Manual", href: "#manual", type: "pdf" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-02-10T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   },
   {
+    id: "flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver",
     slug: "flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver",
     category: "Radio Controllers",
+    categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "160",
     name: "FlySky FS-CT6B 2.4G 6CH Radio Set System with RX FS-R6B receiver",
+    shortDescription: "Cost-effective 6-channel 2.4GHz radio control system with PC computer programming interface and FS-R6B receiver.",
     price: 3548,
-    originalPrice: 3999,
-    cashback: "₹35 FlyRobo Cashback",
-    rating: 4.8,
-    reviewCount: 9,
-    inStock: true,
-    badge: "Entry Budget 6CH",
+    inStock: false,
+    badge: "PC Programmable 6CH",
     tierPricing: [
       { qty: "1–2", price: 3548 },
       { qty: "3–9", price: 3390 },
@@ -385,6 +468,12 @@ export const products: Product[] = [
       "Rx Model: FS-R6B (6 Channels)",
       "Certifications: CE, FCC"
     ],
+    specifications: [
+      "Item: FS-CT6B Radio Transmitter",
+      "Channels: 6 Channels",
+      "Programming: PC Software via DSC Port",
+      "Rx Included: FS-R6B (6CH)"
+    ],
     applications: [
       "RC Helicopters, Airplanes & Gliders Control",
       "Student Robotics & RC Vehicle Projects",
@@ -398,7 +487,14 @@ export const products: Product[] = [
     ],
     downloads: [
       { label: "FS-CT6B T6Config Software & Manual", href: "#manual", type: "pdf" }
-    ]
+    ],
+    documents: [
+      { label: "FS-CT6B T6Config Software & Manual", href: "#manual", type: "pdf" }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2024-02-10T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
   }
 ];
 
@@ -412,6 +508,19 @@ export function getProductBySlug(slug: string): Product | undefined {
   });
 }
 
+export function getProductByCategoryAndSlug(categorySlug: string, slug: string): Product | undefined {
+  if (!categorySlug || !slug) return undefined;
+  const product = getProductBySlug(slug);
+  if (!product || product.categorySlug !== categorySlug || !product.published) {
+    return undefined;
+  }
+  return product;
+}
+
+export function getProductsByCategorySlug(categorySlug: string): Product[] {
+  return products.filter(p => p.categorySlug === categorySlug && p.published);
+}
+
 export function getProductsByCategory(category: string): Product[] {
-  return products.filter(p => p.category === category);
+  return products.filter(p => (p.category === category || p.categorySlug === category) && p.published);
 }

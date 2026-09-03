@@ -1,7 +1,14 @@
 export interface BlogPost {
+  id?: string;
   slug: string;
   title: string;
   category: string;
+  categorySlug?: string;
+  excerpt?: string;
+  featuredImage?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  published?: boolean;
   img: string;
   date: string;
   author: string;
@@ -289,3 +296,31 @@ export const blogPosts: BlogPost[] = [
     internalLinks: [{ text: 'Browse ThiranOli Academy Courses', href: '/courses' }, { text: 'About TamizhTech & ThiranOli Academy', href: '/about' }, { text: 'Contact for Course Enrollment', href: '/contact' }],
   },
 ];
+
+export const blogCategorySlugMap: Record<string, string> = {
+  'Robotics': 'robotics',
+  'Industrial Automation': 'industrial-automation',
+  'Education': 'education',
+  'Artificial Intelligence': 'artificial-intelligence',
+};
+
+export function getBlogCategorySlug(categoryName: string): string {
+  return blogCategorySlugMap[categoryName] || categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  return blogPosts.find((p) => p.slug === slug);
+}
+
+export function getBlogPostByCategoryAndSlug(categorySlug: string, slug: string): BlogPost | undefined {
+  const post = getBlogPostBySlug(slug);
+  if (!post) return undefined;
+  const postCatSlug = post.categorySlug || getBlogCategorySlug(post.category);
+  if (postCatSlug !== categorySlug) return undefined;
+  return post;
+}
+
+export function getBlogPostsByCategorySlug(categorySlug: string): BlogPost[] {
+  return blogPosts.filter((p) => (p.categorySlug || getBlogCategorySlug(p.category)) === categorySlug);
+}
+

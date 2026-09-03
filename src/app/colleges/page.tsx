@@ -8,18 +8,60 @@ import { Button } from "@/components/ui/button";
 
 export default function CollegesPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [leadId, setLeadId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     collegeName: "",
-    dept: "Department of Robotics / Mechatronics",
+    dept: "Robotics / Mechatronics",
     contactPerson: "",
     email: "",
     phone: "",
+    city: "",
+    state: "Tamil Nadu",
+    numStudents: "",
+    requirement: "Robotics Lab",
+    preferredContactMethod: "Phone",
     notes: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadType: "College Enquiry",
+          source: "Colleges Page",
+          pageUrl: "https://www.tamizhtech.in/colleges",
+          customerName: form.contactPerson,
+          organization: form.collegeName,
+          customerType: "College",
+          email: form.email,
+          phone: form.phone,
+          city: form.city,
+          state: form.state,
+          subject: `${form.requirement} — ${form.dept}`,
+          requirement: `${form.requirement} (${form.dept})`,
+          message: `Department: ${form.dept}, Approx Students: ${form.numStudents || "N/A"}. Notes: ${form.notes}`,
+          preferredContactMethod: form.preferredContactMethod,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        setLeadId(data.leadId || "");
+      } else {
+        alert(data.error || "Failed to submit request. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to submit request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const faqSchema = {
@@ -151,10 +193,18 @@ export default function CollegesPage() {
 
             <div className="bg-white border border-border rounded-2xl p-6 lg:p-8 shadow-xs">
               {submitted ? (
-                <div className="text-center py-12">
-                  <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                  <h4 className="text-lg font-bold uppercase text-text-primary">Collaboration Request Sent</h4>
-                  <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Our academic liaison officer will contact your department.</p>
+                <div className="text-center py-12 space-y-4">
+                  <Check className="w-12 h-12 text-emerald-600 mx-auto" />
+                  <div>
+                    <h4 className="text-lg font-bold uppercase text-text-primary">Collaboration Request Sent</h4>
+                    <p className="text-xs text-text-muted mt-1">Our academic liaison officer will contact your department.</p>
+                  </div>
+                  {leadId && (
+                    <div className="bg-subtle p-3 rounded-xl border border-border inline-block">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Reference ID</span>
+                      <span className="text-sm font-black font-mono text-accent">{leadId}</span>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -216,18 +266,86 @@ export default function CollegesPage() {
                       />
                     </div>
                   </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">City</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.city}
+                        onChange={(e) => setForm({ ...form, city: e.target.value })}
+                        placeholder="e.g. Coimbatore"
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">State</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.state}
+                        onChange={(e) => setForm({ ...form, state: e.target.value })}
+                        placeholder="e.g. Tamil Nadu"
+                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Requirement</label>
+                      <select
+                        value={form.requirement}
+                        onChange={(e) => setForm({ ...form, requirement: e.target.value })}
+                        className="w-full bg-subtle border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      >
+                        <option>Robotics Lab</option>
+                        <option>Final Year Project</option>
+                        <option>R&D Collaboration</option>
+                        <option>Competition Training</option>
+                        <option>Workshop</option>
+                        <option>Embedded Systems</option>
+                        <option>AI / ML</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Approx. Students</label>
+                      <input
+                        type="text"
+                        value={form.numStudents}
+                        onChange={(e) => setForm({ ...form, numStudents: e.target.value })}
+                        placeholder="e.g. 120"
+                        className="w-full bg-subtle border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Mode</label>
+                      <select
+                        value={form.preferredContactMethod}
+                        onChange={(e) => setForm({ ...form, preferredContactMethod: e.target.value })}
+                        className="w-full bg-subtle border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      >
+                        <option>Phone</option>
+                        <option>WhatsApp</option>
+                        <option>Email</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Outline Requirements & Target Timeline</label>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Requirements & Objectives</label>
                     <textarea
+                      rows={3}
                       value={form.notes}
                       onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                      placeholder="Detail your request (e.g. final year projects hardware supply, competition chassis routing, dynamic lab design)..."
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent h-24 resize-none"
+                      placeholder="Share details on equipment needs, student batch strength, or intended project focus..."
+                      className="w-full bg-subtle border border-border rounded-lg p-3 text-xs text-text-primary focus:outline-none focus:border-accent resize-none"
                     />
                   </div>
 
-                  <Button type="submit" variant="primary" className="w-full justify-center py-3.5">
-                    Request R&D Collaboration & Quote
+                  <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 mt-2">
+                    {isSubmitting ? "Submitting..." : "Submit Department Collaboration Request"}
                   </Button>
                 </form>
               )}

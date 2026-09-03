@@ -45,17 +45,21 @@ export function OrganizationSchema() {
 }
 
 export function ProductSchema({ product }: any) {
+  const canonicalUrl = product.categorySlug
+    ? `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
+    : `https://www.tamizhtech.in/products/${product.slug}`;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
     "image": product.images || [product.image],
-    "description": product.description,
+    "description": product.shortDescription || product.description,
     "brand": { "@type": "Brand", "name": "TamizhTech" },
     "sku": product.slug || product.id,
     "offers": {
       "@type": "Offer",
-      "url": `https://www.tamizhtech.in/products/${product.slug}`,
+      "url": canonicalUrl,
       "priceCurrency": "INR",
       "price": product.price || "0",
       "availability": "https://schema.org/InStock",
@@ -115,11 +119,16 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
 }
 
 export function CourseSchema({ course }: { course: any }) {
+  const canonicalUrl = course.categorySlug
+    ? `https://www.tamizhtech.in/courses/${course.categorySlug}/${course.slug || course.id}`
+    : `https://www.tamizhtech.in/courses/${course.id}`;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Course",
     "name": course.title,
     "description": course.desc,
+    "url": canonicalUrl,
     "provider": {
       "@type": "Organization",
       "name": "TamizhTech Robotics Company",
@@ -141,12 +150,17 @@ export function CourseSchema({ course }: { course: any }) {
 }
 
 export function EventSchema({ event }: { event: any }) {
+  const canonicalUrl = event.categorySlug
+    ? `https://www.tamizhtech.in/events/${event.categorySlug}/${event.slug || event.id}`
+    : `https://www.tamizhtech.in/events/${event.id}`;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Event",
     "name": event.title,
-    "description": event.desc,
-    "startDate": event.startDate || new Date().toISOString(),
+    "description": event.description || event.desc,
+    "url": canonicalUrl,
+    "startDate": event.date || event.startDate || "2026-09-12",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {

@@ -9,18 +9,58 @@ import { HowToSchema } from "@/components/JsonLd";
 
 export default function SchoolsPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [leadId, setLeadId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     schoolName: "",
     contactPerson: "",
     email: "",
     phone: "",
     city: "",
-    labInterest: "STEM Lab Setup"
+    state: "Tamil Nadu",
+    numStudents: "",
+    gradeRange: "Grades 1-12",
+    labInterest: "STEM Lab",
+    preferredContactMethod: "Phone"
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadType: "School Enquiry",
+          source: "Schools Page",
+          pageUrl: "https://www.tamizhtech.in/schools",
+          customerName: form.contactPerson,
+          organization: form.schoolName,
+          customerType: "School",
+          email: form.email,
+          phone: form.phone,
+          city: form.city,
+          state: form.state,
+          requirement: form.labInterest,
+          message: `Grade Range: ${form.gradeRange}, Expected Students: ${form.numStudents || "Not specified"}`,
+          preferredContactMethod: form.preferredContactMethod,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        setLeadId(data.leadId || "");
+      } else {
+        alert(data.error || "Failed to submit request. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to submit request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const faqSchema = {
@@ -191,10 +231,18 @@ export default function SchoolsPage() {
 
             <div className="bg-subtle border border-border rounded-2xl p-6 lg:p-8">
               {submitted ? (
-                <div className="text-center py-12 bg-white rounded-xl border border-border">
-                  <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                  <h4 className="text-lg font-bold uppercase text-text-primary">Request Submitted</h4>
-                  <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Our academic coordinators will contact your board.</p>
+                <div className="text-center py-12 bg-white rounded-xl border border-border space-y-4">
+                  <Check className="w-12 h-12 text-emerald-600 mx-auto" />
+                  <div>
+                    <h4 className="text-lg font-bold uppercase text-text-primary">Demo Request Received</h4>
+                    <p className="text-xs text-text-muted mt-1">Our academic coordinators will contact your school administration.</p>
+                  </div>
+                  {leadId && (
+                    <div className="bg-subtle p-3 rounded-xl border border-border inline-block">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Reference ID</span>
+                      <span className="text-sm font-black font-mono text-accent">{leadId}</span>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -259,20 +307,71 @@ export default function SchoolsPage() {
                       />
                     </div>
                   </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">City & State</label>
-                    <input
-                      type="text"
-                      required
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                      placeholder="Coimbatore, Tamil Nadu"
-                      className="w-full bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">City</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.city}
+                        onChange={(e) => setForm({ ...form, city: e.target.value })}
+                        placeholder="e.g. Coimbatore"
+                        className="w-full bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">State</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.state}
+                        onChange={(e) => setForm({ ...form, state: e.target.value })}
+                        placeholder="e.g. Tamil Nadu"
+                        className="w-full bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
                   </div>
 
-                  <Button type="submit" variant="primary" className="w-full justify-center py-3.5 mt-2">
-                    Request School Lab Demo
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Grade Range</label>
+                      <select
+                        value={form.gradeRange}
+                        onChange={(e) => setForm({ ...form, gradeRange: e.target.value })}
+                        className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      >
+                        <option>Grades 1-5</option>
+                        <option>Grades 6-8</option>
+                        <option>Grades 9-12</option>
+                        <option>Grades 1-12 (All)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Approx. Students</label>
+                      <input
+                        type="text"
+                        value={form.numStudents}
+                        onChange={(e) => setForm({ ...form, numStudents: e.target.value })}
+                        placeholder="e.g. 250"
+                        className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Mode</label>
+                      <select
+                        value={form.preferredContactMethod}
+                        onChange={(e) => setForm({ ...form, preferredContactMethod: e.target.value })}
+                        className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      >
+                        <option>Phone</option>
+                        <option>WhatsApp</option>
+                        <option>Email</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 mt-2">
+                    {isSubmitting ? "Submitting..." : "Request School Lab Demo"}
                   </Button>
                 </form>
               )}

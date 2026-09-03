@@ -112,9 +112,9 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race/race1.png", slug: "rc-robo-race" },
-  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer/soccer 1.0.png", slug: "rc-robo-soccer" },
-  { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
+  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race/race1.png", categorySlug: "competition", slug: "rc-robo-race" },
+  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer/soccer 1.0.png", categorySlug: "competition", slug: "rc-robo-soccer" },
+  { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", categorySlug: "radio-controllers", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
 ];
 
 export default function HomeClient() {
@@ -498,8 +498,8 @@ export default function HomeClient() {
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 280px, 200px"
                       />
-                      <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                        Available Now
+                      <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                        Enquire Now
                       </div>
                     </div>
                     <div className="p-5 flex flex-col justify-between flex-grow">
@@ -512,7 +512,7 @@ export default function HomeClient() {
                         </p>
                       </div>
                       <Link
-                        href={`/products/${comp.slug}`}
+                        href={`/products/${comp.categorySlug}/${comp.slug}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold text-accent tracking-wider uppercase"
                       >
                         <span>View Details</span>
@@ -758,27 +758,27 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* 10. START BUILDING (FINAL CTA BAND) */}
-      <section className="bg-dark-contrast py-24 text-text-contrast relative overflow-hidden">
-        {/* Subtle orange accent glow behind */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+      {/* 10. START BUILDING (FINAL CTA BAND) - Pure Orange & White Brand Identity */}
+      <section className="bg-white py-24 text-text-primary border-t border-border/40 relative overflow-hidden">
+        {/* Subtle orange accent glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.06)_0%,transparent_70%)] pointer-events-none" />
 
         <div className="container relative z-10 px-6 max-w-5xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-black mb-4 font-heading tracking-tight text-white uppercase">
+            <h2 className="text-3xl md:text-4xl font-black mb-4 font-heading tracking-tight text-text-primary uppercase">
               Ready to build something <span className="text-accent">extraordinary</span>?
             </h2>
-            <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-              Whether you need a custom <span className="text-accent font-semibold text-orange-500">robotic system</span>, <span className="text-accent font-semibold text-orange-500">AI camera models</span>, <span className="text-accent font-semibold text-orange-500">STEM Tinkering labs</span>, or advanced <span className="text-accent font-semibold text-orange-500">certification courses</span>, we are here to support your team.
+            <p className="text-sm md:text-base text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+              Whether you need a custom <span className="text-accent font-semibold">robotic system</span>, <span className="text-accent font-semibold">AI camera models</span>, <span className="text-accent font-semibold">STEM Tinkering labs</span>, or advanced <span className="text-accent font-semibold">certification courses</span>, we are here to support your team.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" className="w-full sm:w-auto">
-                <Button variant="primary" size="lg" className="w-full justify-center text-base font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none">
+                <Button variant="primary" size="lg" className="w-full justify-center text-base font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none shadow-md">
                   Contact Us <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
               </Link>
               <Link href="/courses" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full justify-center text-base font-bold text-white border-white hover:bg-white hover:text-black px-8 py-3 rounded-lg">
+                <Button variant="outline" size="lg" className="w-full justify-center text-base font-bold text-text-primary border-border hover:bg-subtle px-8 py-3 rounded-lg">
                   Browse Courses
                 </Button>
               </Link>

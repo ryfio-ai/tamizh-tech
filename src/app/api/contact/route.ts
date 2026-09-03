@@ -157,9 +157,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, simulated: true });
     }
 
+    const TEAM_EMAILS = [
+      "contact@tamizhtech.in",
+      "ryfioai@gmail.com",
+      "sathishpandiyan126@gmail.com",
+      "purchase.tamizhtech@gmail.com",
+      "design.ttrc@gmail.com",
+      "tamizhtechpvtltd@gmail.com",
+    ];
+
     const { data, error } = await resend.emails.send({
       from: "TamizhTech <contact@tamizhtech.in>", 
-      to: ["contact@tamizhtech.in", "tamizhtechpvtltd@gmail.com"], 
+      to: TEAM_EMAILS, 
       subject: emailSubject,
       html: emailHtml,
     });
@@ -167,6 +176,52 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend API Error:", error);
       return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    // Customer Side Formal Thank You Email
+    const customerEmail = body.email;
+    const customerName = body.name || body.contactPerson || "Valued Customer";
+    if (customerEmail) {
+      const customerSubject = "Thank you for contacting Tamizh Tech Robotics Company";
+      const customerHtml = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
+          <div style="background: #FF6B00; padding: 24px; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 0.5px;">
+              TAMIZH TECH ROBOTICS
+            </h1>
+            <p style="color: #fff3eb; margin: 4px 0 0; font-size: 13px;">Future of Engineering & Robotics Coimbatore</p>
+          </div>
+
+          <div style="padding: 30px;">
+            <p style="font-size: 15px; color: #0f172a; margin-top: 0;">
+              Dear <strong>${customerName}</strong>,
+            </p>
+
+            <p style="font-size: 14px; color: #334155; line-height: 1.7;">
+              Thank you for submitting your enquiry. Our team will review your requirements and reach out to you soon.
+            </p>
+
+            <p style="font-size: 13px; color: #475569; margin-bottom: 24px;">
+              If you have any urgent queries or custom hardware requirements, feel free to reach out directly via phone or WhatsApp.
+            </p>
+
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 18px; font-size: 13px; color: #0f172a; line-height: 1.6;">
+              <p style="margin: 0 0 4px 0;"><strong>Team Tamizh Tech Robotics Company</strong></p>
+              <p style="margin: 0 0 4px 0;">📞 <a href="tel:+918148045030" style="color: #FF6B00; text-decoration: none; font-weight: 600;">+91 8148045030</a></p>
+              <p style="margin: 0 0 4px 0;">✉️ <a href="mailto:contact@tamizhtech.in" style="color: #FF6B00; text-decoration: none;">contact@tamizhtech.in</a></p>
+              <p style="margin: 0 0 4px 0;">🌐 <a href="https://www.tamizhtech.in" style="color: #FF6B00; text-decoration: none;">www.tamizhtech.in</a></p>
+              <p style="margin: 0;">📍 Coimbatore, Tamil Nadu, India</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      resend.emails.send({
+        from: "TamizhTech <contact@tamizhtech.in>",
+        to: [customerEmail],
+        subject: customerSubject,
+        html: customerHtml,
+      }).catch((cErr) => console.warn("Customer confirmation email warning:", cErr));
     }
 
     return NextResponse.json({ success: true, data });

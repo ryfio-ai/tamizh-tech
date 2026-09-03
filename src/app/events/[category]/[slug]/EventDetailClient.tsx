@@ -16,6 +16,8 @@ import { EventItem } from "@/data/events";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/Card";
 
+import { getEventCategoryUrl } from "@/lib/routing";
+
 interface EventDetailClientProps {
   event: EventItem;
 }
@@ -30,25 +32,37 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
     notes: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [leadId, setLeadId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const eventUrl = `https://www.tamizhtech.in/events/${event.categorySlug}/${event.slug}`;
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "event_register",
-          eventTitle: event.title,
-          ...registerForm
+          leadType: "Contact",
+          source: "Event Registration Page",
+          pageUrl: eventUrl,
+          customerName: registerForm.name,
+          email: registerForm.email,
+          phone: registerForm.phone,
+          organization: registerForm.org,
+          quantity: registerForm.teamSize,
+          subject: `Registration: ${event.title}`,
+          requirement: `Event: ${event.title} (${event.type}), Team Size: ${registerForm.teamSize}`,
+          message: registerForm.notes,
         }),
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (res.ok && data.success) {
         setSubmitted(true);
+        setLeadId(data.leadId || "");
       } else {
-        alert("Failed to submit registration. Please try again.");
+        alert(data.error || "Failed to submit registration. Please try again.");
       }
     } catch (err) {
       console.error(err);
@@ -60,11 +74,22 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
 
   return (
     <div className="bg-white min-h-screen pt-28 pb-20 text-text-primary">
-      <div className="container px-6">
+      <div className="container px-6 max-w-7xl mx-auto">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-2 mb-6 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
+          <Link href="/" className="hover:text-accent transition-colors">Home</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href="/events" className="hover:text-accent transition-colors">Events</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <Link href={getEventCategoryUrl(event.categorySlug)} className="hover:text-accent transition-colors">{event.type}</Link>
+          <ChevronRight className="w-3 h-3 text-text-muted shrink-0" />
+          <span className="text-accent truncate max-w-[200px]">{event.title}</span>
+        </nav>
+
         {/* Back navigation */}
         <div className="mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
-          <Link href="/events" className="hover:text-accent transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Events
+          <Link href={getEventCategoryUrl(event.categorySlug)} className="hover:text-accent transition-colors flex items-center gap-1">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to {event.type}s
           </Link>
         </div>
 
@@ -133,12 +158,20 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
           <div className="lg:col-span-4">
             <Card className="border border-border bg-subtle p-6 rounded-lg sticky top-32 shadow-sm">
               {submitted ? (
-                <div className="text-center py-10">
-                  <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Registration Received</h3>
-                  <p className="text-xs text-text-secondary mt-2 leading-relaxed">
-                    Thank you! Your registration for {event.title} is successful. Our event coordination desk will email you confirmation tickets and venue details shortly.
-                  </p>
+                <div className="text-center py-10 space-y-4">
+                  <Check className="w-12 h-12 text-emerald-600 mx-auto" />
+                  <div>
+                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Registration Received</h3>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Thank you! Your registration for {event.title} is successful. Our event coordination desk will email you confirmation tickets and venue details shortly.
+                    </p>
+                  </div>
+                  {leadId && (
+                    <div className="bg-white p-3 rounded-xl border border-border inline-block">
+                      <span className="text-[10px] font-bold text-text-muted uppercase block">Reference ID</span>
+                      <span className="text-sm font-black font-mono text-accent">{leadId}</span>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form onSubmit={handleRegisterSubmit} className="space-y-4">
