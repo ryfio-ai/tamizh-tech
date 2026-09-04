@@ -14,13 +14,12 @@ import {
   ShieldCheck,
   Truck,
   RotateCcw,
-  Star,
   Copy,
   CheckCheck,
   Calendar,
   Info
 } from "lucide-react";
-import { FaWhatsapp, FaStar } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/Card";
@@ -77,54 +76,6 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   };
 
   const bundle = getBundleConfig();
-
-  // Mock Reviews Setup
-  const getMockReviews = () => {
-    const defaultReviews = [
-      {
-        name: "Dr. Anand Kumar",
-        title: "Exceptional build quality for engineering labs!",
-        rating: 5,
-        date: "July 12, 2026",
-        verified: true,
-        text: "Ordered 12 units of these platforms for our university robotics lab. The tolerances on the chassis are spot-on, and the electronics are fully protected. Our students had them configured and racing within hours. Highly recommended for institutions!"
-      },
-      {
-        name: "Sanjay R.",
-        title: "Highly reliable under competition pressure",
-        rating: 5,
-        date: "June 28, 2026",
-        verified: true,
-        text: "Used this platform in the national robo combat tournament. It survived heavy impacts without any structural deformation. The response time and high traction wheels give you great control."
-      },
-      {
-        name: "Keerthana M.",
-        title: "Perfect controller, very easy calibration",
-        rating: 4,
-        date: "May 19, 2026",
-        verified: true,
-        text: "The telemetry functions are very useful. Set it up with our custom combat bot and was able to monitor battery voltage in real time. The binding is secure and doesn't get interrupted in busy arenas."
-      }
-    ];
-
-    if (product.slug.includes("flysky")) {
-      return [
-        {
-          name: "Rajeshwaran S.",
-          title: "The standard for RC robotics in India",
-          rating: 5,
-          date: "July 24, 2026",
-          verified: true,
-          text: "If you are building custom vehicles, airplanes, or combat robots, this is the absolute best budget-friendly controller. Upgrading to 10 channels was seamless. Signal range reaches up to 1km easily without lag."
-        },
-        defaultReviews[0],
-        defaultReviews[2]
-      ];
-    }
-    return defaultReviews;
-  };
-
-  const reviews = getMockReviews();
 
   const [rfqForm, setRfqForm] = useState({
     name: "",
@@ -819,103 +770,6 @@ void loop() {
             </div>
           </div>
         )}
-
-        {/* 4. Customer reviews & rating breakdown */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 text-left border-t border-border pt-12">
-          {/* Rating breakdown */}
-          <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-lg font-black font-heading uppercase text-text-primary">
-              Customer Reviews
-            </h3>
-            
-            <div className="flex items-center gap-3">
-              <span className="text-4xl font-black font-sans">{product.rating}</span>
-              <div>
-                <div className="flex text-amber-400 gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <FaStar key={i} className={`w-3.5 h-3.5 ${i < Math.floor(product.rating || 4.5) ? "text-amber-400" : "text-gray-200"}`} />
-                  ))}
-                </div>
-                <span className="text-[10px] font-bold text-text-muted uppercase">out of 5 stars</span>
-              </div>
-            </div>
-
-            {/* Distribution bars */}
-            <div className="space-y-2 border-t border-border pt-4 text-xs font-bold text-text-secondary uppercase font-mono">
-              <div className="flex items-center gap-3">
-                <span className="w-10">5 Star</span>
-                <div className="flex-grow bg-gray-100 h-3 rounded-full overflow-hidden">
-                  <div className="bg-amber-400 h-full w-[85%]" />
-                </div>
-                <span className="w-8 text-right font-mono">85%</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-10">4 Star</span>
-                <div className="flex-grow bg-gray-100 h-3 rounded-full overflow-hidden">
-                  <div className="bg-amber-400 h-full w-[10%]" />
-                </div>
-                <span className="w-8 text-right font-mono">10%</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-10">3 Star</span>
-                <div className="flex-grow bg-gray-100 h-3 rounded-full overflow-hidden">
-                  <div className="bg-amber-400 h-full w-[5%]" />
-                </div>
-                <span className="w-8 text-right font-mono">5%</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <span className="w-10">2 Star</span>
-                <div className="flex-grow bg-gray-100 h-3 rounded-full" />
-                <span className="w-8 text-right font-mono">0%</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <span className="w-10">1 Star</span>
-                <div className="flex-grow bg-gray-100 h-3 rounded-full" />
-                <span className="w-8 text-right font-mono">0%</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonial List */}
-          <div className="lg:col-span-8 space-y-6">
-            <h4 className="text-sm font-black uppercase text-text-muted tracking-wider font-mono">
-              Top Customer Testimonials
-            </h4>
-
-            <div className="space-y-6 divide-y divide-border/60">
-              {reviews.map((rev, idx) => (
-                <div key={idx} className={`pt-6 ${idx === 0 ? "pt-0" : ""}`}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-7 h-7 rounded-full bg-accent/15 text-accent flex items-center justify-center text-[10px] font-black font-mono">
-                      {rev.name.charAt(0)}
-                    </div>
-                    <div>
-                      <span className="text-xs font-black text-text-primary block">{rev.name}</span>
-                      <span className="text-[9px] text-text-muted font-bold block uppercase tracking-wider">
-                        {rev.date} {rev.verified && "ΓÇó Verified Purchase"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <div className="flex text-amber-400 gap-0.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <FaStar key={i} className={`w-3 h-3 ${i < rev.rating ? "text-amber-400" : "text-gray-200"}`} />
-                      ))}
-                    </div>
-                    <span className="text-xs font-extrabold text-text-primary uppercase tracking-tight">
-                      {rev.title}
-                    </span>
-                  </div>
-
-                  <p className="text-xs text-text-secondary leading-relaxed font-semibold uppercase tracking-tight">
-                    {rev.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* 5. Institutional RFQ form */}
         <div id="rfq-section" className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 bg-subtle border border-border rounded-lg p-8 lg:p-12 text-left">

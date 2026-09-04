@@ -19,7 +19,6 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { TestimonialCard } from "@/components/ui/TestimonialCard";
 import { GalleryGrid } from "@/components/ui/GalleryGrid";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { Card } from "@/components/ui/Card";
