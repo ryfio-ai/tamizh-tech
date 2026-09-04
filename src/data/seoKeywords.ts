@@ -78,6 +78,24 @@ export const seoKeywords: SEOKeywordTarget[] = [
     businessValue: "PRIMARY_REVENUE",
     notes: "Factory automation, AGVs, AMRs, and custom conveyor sensor automation."
   },
+  {
+    keyword: "3d printing service coimbatore",
+    intent: "COMMERCIAL",
+    contentType: "service",
+    targetPage: "/services",
+    priority: "HIGH",
+    businessValue: "PRIMARY_REVENUE",
+    notes: "High quality 3D printing services at affordable price. Prototypes, custom parts, robotic components, and miniatures in PLA, PETG, TPU."
+  },
+  {
+    keyword: "stainless steel laser cutting coimbatore",
+    intent: "B2B",
+    contentType: "service",
+    targetPage: "/services",
+    priority: "HIGH",
+    businessValue: "PRIMARY_REVENUE",
+    notes: "High-precision laser cutting for stainless steel (SS 304, SS 316) sheet metal and robotic chassis panels (not wood)."
+  },
 
   // ── 3. B2B Educational Labs (Schools & Colleges) ──
   {

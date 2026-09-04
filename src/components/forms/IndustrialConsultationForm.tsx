@@ -106,7 +106,7 @@ export default function IndustrialConsultationForm() {
   );
 
   const formInputClass =
-    "w-full bg-subtle border border-border rounded-xl px-4 py-3 text-xs text-text-primary focus:outline-none focus:border-accent";
+    "w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs transition-all";
 
   if (status === "success") {
     return (
@@ -350,11 +350,10 @@ export default function IndustrialConsultationForm() {
 
       {/* Row 6: Submit Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 pt-4">
-        <Button
+        <button
           type="submit"
-          variant="primary"
           disabled={status === "submitting"}
-          className="flex-1 justify-center py-4 bg-[#002B66] hover:bg-[#001D47] text-white font-black uppercase tracking-wider"
+          className="flex-1 justify-center py-4 px-6 bg-[#FF6A00] hover:bg-[#E05300] text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-orange-500/25 transition-all inline-flex items-center disabled:opacity-50 cursor-pointer"
         >
           {status === "submitting" ? (
             <>
@@ -365,7 +364,7 @@ export default function IndustrialConsultationForm() {
               Schedule Audit & Consult <Send className="w-4 h-4 ml-1.5" />
             </>
           )}
-        </Button>
+        </button>
         <a
           href={`https://wa.me/918148045030?text=${whatsappMessage}`}
           target="_blank"

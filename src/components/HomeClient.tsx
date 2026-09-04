@@ -591,7 +591,7 @@ export default function HomeClient() {
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
-                  <Button variant="primary" size="lg" className="w-full justify-center bg-accent hover:bg-accent-hover text-white font-bold rounded-lg border-none px-8 py-3">
+                  <Button variant="primary" size="lg" className="w-full justify-center !bg-[#FF6A00] hover:!bg-[#E05300] text-white font-bold rounded-lg border-none px-8 py-3.5 shadow-md shadow-orange-500/20">
                     Order via WhatsApp
                   </Button>
                 </a>
@@ -772,12 +772,12 @@ export default function HomeClient() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" className="w-full sm:w-auto">
-                <Button variant="primary" size="lg" className="w-full justify-center text-base font-bold text-white bg-accent hover:bg-accent-hover px-8 py-3 rounded-lg border-none shadow-md">
+                <Button variant="primary" size="lg" className="w-full justify-center text-base font-bold text-white !bg-[#FF6A00] hover:!bg-[#E05300] px-8 py-3.5 rounded-lg border-none shadow-lg shadow-orange-500/25 transition-all">
                   Contact Us <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
               </Link>
               <Link href="/courses" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full justify-center text-base font-bold text-text-primary border-border hover:bg-subtle px-8 py-3 rounded-lg">
+                <Button variant="outline" size="lg" className="w-full justify-center text-base font-bold text-text-primary border-border hover:bg-subtle px-8 py-3.5 rounded-lg">
                   Browse Courses
                 </Button>
               </Link>

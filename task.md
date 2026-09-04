@@ -3,4 +3,4 @@
 - [x] Apply find fest.png image inside FestFind showcase section
 - [x] Remove Industries section completely
 - [x] Position WhatsApp floating circle and Robotics Club floating vertical tab on left middle viewport edge
-- [/] Verify build and compile state
+- [x] Verify build and compile state

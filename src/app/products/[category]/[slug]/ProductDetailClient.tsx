@@ -806,73 +806,77 @@ void loop() {
               <form onSubmit={handleRfqSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Contact Name *</label>
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Contact Name *</label>
                     <input
                       type="text"
                       required
                       value={rfqForm.name}
                       onChange={(e) => setRfqForm({ ...rfqForm, name: e.target.value })}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                       placeholder="e.g. Anand Kumar"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Email Address *</label>
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Email Address *</label>
                     <input
                       type="email"
                       required
                       value={rfqForm.email}
                       onChange={(e) => setRfqForm({ ...rfqForm, email: e.target.value })}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                       placeholder="email@institution.edu"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number *</label>
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Phone Number *</label>
                     <input
                       type="tel"
                       required
                       value={rfqForm.phone}
                       onChange={(e) => setRfqForm({ ...rfqForm, phone: e.target.value })}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                       placeholder="+91 98765 43210"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Required Quantity</label>
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Required Quantity</label>
                     <input
                       type="number"
                       required
                       min={1}
                       value={rfqForm.qty}
                       onChange={(e) => setRfqForm({ ...rfqForm, qty: parseInt(e.target.value) || 1 })}
-                      className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Platform Category</label>
+                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Platform Category</label>
                     <input
                       type="text"
                       disabled
                       value={product.category}
-                      className="w-full bg-gray-100 border border-border rounded-lg px-4 py-2.5 text-xs text-text-muted"
+                      className="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-600 font-semibold"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Requirements & Notes</label>
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Delivery Address / Requirements & Notes</label>
                   <textarea
                     value={rfqForm.notes}
                     onChange={(e) => setRfqForm({ ...rfqForm, notes: e.target.value })}
-                    className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent h-24 resize-none"
-                    placeholder="Enter any customization requests..."
+                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs h-24 resize-none"
+                    placeholder="Enter delivery city / address and any custom component or battery requirements..."
                   />
                 </div>
-                <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 font-bold text-white uppercase tracking-wider">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full justify-center py-3.5 px-6 font-bold text-white uppercase tracking-wider bg-[#FF6A00] hover:bg-[#E05300] rounded-xl shadow-lg shadow-orange-500/25 transition-all disabled:opacity-50 cursor-pointer"
+                >
                   {isSubmitting ? "Submitting..." : "Submit RFQ Request"}
-                </Button>
+                </button>
               </form>
             )}
           </div>

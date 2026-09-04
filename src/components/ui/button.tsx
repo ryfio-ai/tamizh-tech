@@ -8,13 +8,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent text-white hover:bg-accent-hover hover:-translate-y-0.5",
-        secondary: "bg-accent/10 text-accent hover:bg-accent hover:text-white hover:-translate-y-0.5",
-        ghost: "text-text-primary hover:text-accent hover:bg-subtle",
-        default: "bg-accent text-white hover:bg-accent-hover",
+        primary: "bg-[#FF6A00] text-white hover:bg-[#E05300] hover:-translate-y-0.5 shadow-sm shadow-orange-500/20",
+        secondary: "bg-[#FF6A00]/10 text-[#FF6A00] hover:bg-[#FF6A00] hover:text-white hover:-translate-y-0.5",
+        ghost: "text-text-primary hover:text-[#FF6A00] hover:bg-subtle",
+        default: "bg-[#FF6A00] text-white hover:bg-[#E05300]",
         destructive: "bg-red-600 text-white hover:bg-red-700",
-        outline: "bg-transparent text-accent border border-accent hover:bg-accent hover:text-white hover:-translate-y-0.5",
-        link: "text-accent underline-offset-4 hover:underline",
+        outline: "bg-transparent text-[#FF6A00] border border-[#FF6A00] hover:bg-[#FF6A00] hover:text-white hover:-translate-y-0.5",
+        link: "text-[#FF6A00] underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2.5",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { ArrowRight, MessageCircle, Zap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MessageCircle, Zap, CheckCircle2, Send } from "lucide-react";
 
 export default function JoinClubPage() {
   const [formData, setFormData] = useState({
@@ -81,7 +81,7 @@ export default function JoinClubPage() {
       {/* Form Section */}
       <section className="relative pb-24 z-10 container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-[#FAFAFA] border border-[#E5E5E5] rounded-2xl p-8 md:p-12 shadow-2xl">
+          <div className="bg-white border-2 border-slate-200 rounded-3xl p-8 md:p-12 shadow-xl">
             
             {isSuccess ? (
               <div className="text-center py-10 animate-in fade-in zoom-in duration-500">
@@ -267,16 +267,16 @@ export default function JoinClubPage() {
                 </div>
 
                 {/* Submit Button */}
-                <div className="pt-6 flex flex-col sm:flex-row gap-6 items-center justify-between border-t border-[#E5E5E5] mt-2">
-                  <p className="text-xs text-gray-400 uppercase tracking-wider font-bold">
-                    By submitting, you agree to TRC terms and conditions.
+                <div className="pt-6 flex flex-col sm:flex-row gap-6 items-center justify-between border-t border-slate-200 mt-2">
+                  <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">
+                    By submitting, you agree to TRC community guidelines.
                   </p>
                   <button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-primary py-4 px-8 w-full sm:w-auto"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF6A00] hover:bg-[#E05300] text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-orange-500/25 transition-all duration-200 cursor-pointer disabled:opacity-50"
                   >
-                    {isSubmitting ? "Submitting..." : "Submit Application"}
+                    {isSubmitting ? "Submitting..." : "Submit Application"} <Send className="w-4 h-4 ml-1" />
                   </button>
                 </div>
                 

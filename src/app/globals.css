@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
 
+@theme {
+  --color-accent: #FF6A00;
+  --color-accent-hover: #E05300;
+  --color-accent-soft: rgba(255, 106, 0, 0.06);
+  --color-accent-glow: rgba(255, 106, 0, 0.15);
+}
+
 @layer base {
   :root {
     color-scheme: light;
@@ -336,16 +343,19 @@ textarea:-webkit-autofill {
 
 /* ── Custom Utilities for Reliable Coloring ── */
 .text-accent {
-  color: var(--accent) !important;
+  color: #FF6A00 !important;
 }
 .bg-accent {
-  background-color: var(--accent) !important;
+  background-color: #FF6A00 !important;
+}
+.hover\:bg-accent-hover:hover {
+  background-color: #E05300 !important;
 }
 .border-accent {
-  border-color: var(--accent) !important;
+  border-color: #FF6A00 !important;
 }
 .decoration-accent {
-  text-decoration-color: var(--accent) !important;
+  text-decoration-color: #FF6A00 !important;
 }
 .btn-primary-orange {
   background-color: #FF6A00 !important;
@@ -391,28 +401,74 @@ textarea:-webkit-autofill {
   }
 }
 
-/* ── Form Input ──────────────────────────────────── */
-.form-input {
+/* ── Form Inputs (Ultra-Crisp, High Visibility) ── */
+.form-input,
+.form-input-custom,
+input.form-input,
+input.form-input-custom,
+textarea.form-input,
+textarea.form-input-custom,
+select.form-input,
+select.form-input-custom {
   width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  padding: 1rem 1.25rem;
-  color: #111111;
-  font-weight: 700;
-  font-size: 0.825rem;
-  outline: none;
-  transition: all 0.2s ease;
-  border-radius: 8px;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #CBD5E1 !important; /* Crisp Slate-300 border */
+  padding: 0.75rem 1rem !important;
+  color: #0F172A !important; /* Pure legible dark text */
+  font-weight: 500;
+  font-size: 0.875rem !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
-.form-input:focus {
-  border-color: #FF6B00;
-  box-shadow: 0 0 0 1px #FF6B00;
+
+.form-input:focus,
+.form-input-custom:focus,
+input.form-input:focus,
+input.form-input-custom:focus,
+textarea.form-input:focus,
+textarea.form-input-custom:focus,
+select.form-input:focus,
+select.form-input-custom:focus {
+  border-color: #FF6A00 !important;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.18) !important;
+  background-color: #FFFFFF !important;
 }
-.form-input::placeholder {
-  color: #999999;
-  font-weight: 600;
-  opacity: 0.5;
+
+.form-input::placeholder,
+.form-input-custom::placeholder {
+  color: #94A3B8 !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
 }
-select.form-input {
+
+select.form-input,
+select.form-input-custom {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem !important;
   appearance: none;
 }
+
+/* ── Submit Buttons Guarantees ── */
+button[type="submit"]:not([class*="bg-"]):not([class*="btn-"]):not([class*="text-"]),
+.btn-submit {
+  background-color: #FF6A00 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  padding: 0.875rem 2rem !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 14px rgba(255, 106, 0, 0.25) !important;
+}
+
+button[type="submit"]:not([class*="bg-"]):not([class*="btn-"]):not([class*="text-"]):hover,
+.btn-submit:hover {
+  background-color: #E05300 !important;
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.35) !important;
+  transform: translateY(-1px);
+}
+

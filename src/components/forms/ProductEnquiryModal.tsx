@@ -258,7 +258,7 @@ export default function ProductEnquiryModal({
                     placeholder="e.g. Anand Kumar"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                   />
                 </div>
 
@@ -273,14 +273,14 @@ export default function ProductEnquiryModal({
                     placeholder="e.g. anand@college.edu"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                   />
                 </div>
 
                 {/* Phone Number */}
                 <div>
                   <label className="block text-xs font-bold text-text-primary uppercase tracking-wider mb-1.5">
-                    Phone Number <span className="text-accent">*</span>
+                    Phone / Mobile Number <span className="text-accent">*</span>
                   </label>
                   <input
                     type="tel"
@@ -288,19 +288,19 @@ export default function ProductEnquiryModal({
                     placeholder="e.g. +91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                   />
                 </div>
 
-                {/* Customer Type */}
+                {/* Purpose / Customer Type */}
                 <div>
                   <label className="block text-xs font-bold text-text-primary uppercase tracking-wider mb-1.5">
-                    Customer / Organization Type <span className="text-accent">*</span>
+                    Purpose / Order Type <span className="text-accent">*</span>
                   </label>
                   <select
                     value={formData.customerType}
                     onChange={(e) => setFormData({ ...formData, customerType: e.target.value as CustomerType })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs cursor-pointer"
                   >
                     {CUSTOMER_TYPES.map((type) => (
                       <option key={type} value={type}>
@@ -320,7 +320,7 @@ export default function ProductEnquiryModal({
                     placeholder="e.g. PSG College of Tech / RoboClub"
                     value={formData.organization}
                     onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                   />
                 </div>
 
@@ -355,17 +355,18 @@ export default function ProductEnquiryModal({
                   </div>
                 </div>
 
-                {/* City */}
+                {/* City / Delivery Address */}
                 <div>
                   <label className="block text-xs font-bold text-text-primary uppercase tracking-wider mb-1.5">
-                    City / Town
+                    Delivery City / Address <span className="text-accent">*</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Coimbatore"
+                    required
+                    placeholder="e.g. Coimbatore, Tamil Nadu"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
                   />
                 </div>
 
@@ -377,7 +378,7 @@ export default function ProductEnquiryModal({
                   <select
                     value={formData.preferredContactMethod}
                     onChange={(e) => setFormData({ ...formData, preferredContactMethod: e.target.value as PreferredContactMethod })}
-                    className="w-full bg-white border border-border rounded-xl px-3.5 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs cursor-pointer"
                   >
                     <option value="Phone">Phone Call</option>
                     <option value="WhatsApp">WhatsApp</option>
@@ -397,24 +398,24 @@ export default function ProductEnquiryModal({
                   placeholder="Mention battery specs, custom gearing, bulk order timelines, or specific event rules..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-white border border-border rounded-xl p-3 text-xs text-text-primary focus:outline-none focus:border-accent resize-none"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs resize-none"
                 />
               </div>
 
               {/* Submit Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={onClose}
                   disabled={status === "submitting"}
-                  className="px-5 py-2.5 text-xs font-bold text-text-muted hover:text-text-primary uppercase tracking-wider transition-colors cursor-pointer"
+                  className="px-5 py-2.5 text-xs font-bold text-slate-500 hover:text-slate-900 uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#002B66] hover:bg-[#001D47] text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-[#FF6A00] hover:bg-[#E05300] text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/25 transition-all disabled:opacity-50 cursor-pointer"
                 >
                   {status === "submitting" ? (
                     <>
@@ -422,7 +423,7 @@ export default function ProductEnquiryModal({
                     </>
                   ) : (
                     <>
-                      <Send className="w-3.5 h-3.5" /> Submit Enquiry
+                      <Send className="w-3.5 h-3.5" /> Submit Product Enquiry
                     </>
                   )}
                 </button>

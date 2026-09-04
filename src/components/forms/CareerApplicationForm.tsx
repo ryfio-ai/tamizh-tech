@@ -110,10 +110,10 @@ export default function CareerApplicationForm() {
     );
   }
 
-  const inputClass = "w-full bg-white border border-border rounded-xl px-4 py-3 text-xs text-text-primary placeholder-text-muted focus:outline-none focus:border-accent shadow-xs transition-colors";
+  const inputClass = "w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs transition-all";
 
   return (
-    <form onSubmit={handleSubmit} className="bg-subtle border border-border/80 rounded-3xl p-8 sm:p-12 text-left shadow-sm space-y-6">
+    <form onSubmit={handleSubmit} className="bg-white border-2 border-slate-200 rounded-3xl p-8 sm:p-12 text-left shadow-xl space-y-6">
       <div className="border-b border-border pb-4">
         <span className="text-[10px] font-bold text-accent uppercase tracking-widest block mb-1">
           Career Opportunity Desk
@@ -297,11 +297,10 @@ export default function CareerApplicationForm() {
       </div>
 
       <div className="pt-2">
-        <Button
+        <button
           type="submit"
-          variant="primary"
           disabled={status === "submitting"}
-          className="w-full py-4 justify-center text-sm font-bold uppercase tracking-wider gap-2 shadow-md cursor-pointer"
+          className="w-full py-4 justify-center text-sm font-bold uppercase tracking-wider gap-2 shadow-lg shadow-orange-500/25 cursor-pointer bg-[#FF6A00] hover:bg-[#E05300] text-white rounded-xl inline-flex items-center transition-all disabled:opacity-50"
         >
           {status === "submitting" ? (
             <>
@@ -309,10 +308,10 @@ export default function CareerApplicationForm() {
             </>
           ) : (
             <>
-              Submit Career Application <Send className="w-4 h-4" />
+              Submit Career Application <Send className="w-4 h-4 ml-1" />
             </>
           )}
-        </Button>
+        </button>
       </div>
     </form>
   );
