@@ -59,8 +59,11 @@ const config: Config = {
         full: "9999px",
       },
       fontFamily: {
-        sans:    ["var(--font-jakarta)", "Plus Jakarta Sans", "var(--font-tamil)", "Noto Sans Tamil", "system-ui", "sans-serif"],
-        heading: ["var(--font-space-grotesk)", "Space Grotesk", "sans-serif"],
+        sans:    ["var(--font-jakarta)", "var(--font-tamil)", "system-ui", "sans-serif"],
+        display: ["var(--font-space)", "var(--font-space-grotesk)", "var(--font-tamil)", "system-ui", "sans-serif"],
+        heading: ["var(--font-space)", "var(--font-space-grotesk)", "var(--font-tamil)", "system-ui", "sans-serif"],
+        mono:    ["var(--font-mono)", "monospace"],
+        tamil:   ["var(--font-tamil)", "var(--font-jakarta)"],
       },
       fontSize: {
         "display-2xl": ["clamp(3rem,7vw,6rem)",    { lineHeight: "1", letterSpacing: "-0.04em" }],

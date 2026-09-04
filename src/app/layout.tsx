@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -11,9 +11,10 @@ import Script from "next/script";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-space-grotesk",
+  weight: ["500", "600", "700"],
+  variable: "--font-space",
   display: "swap",
+  fallback: ["system-ui", "Arial"],
 });
 
 const jakarta = Plus_Jakarta_Sans({
@@ -21,12 +22,21 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "600", "700"],
   variable: "--font-jakarta",
   display: "swap",
+  fallback: ["system-ui", "Arial"],
+  adjustFontFallback: true,
 });
 
 const notoTamil = Noto_Sans_Tamil({
-  subsets: ["tamil"],
+  subsets: ["tamil", "latin"],
   weight: ["400", "500", "700"],
   variable: "--font-tamil",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -154,7 +164,7 @@ const schemas = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en-IN" className={`${spaceGrotesk.variable} ${jakarta.variable} ${notoTamil.variable} ${jetbrainsMono.variable} scroll-smooth`}>
       <head>
         <meta name="theme-color" content="#FFFFFF" />
         <script
@@ -173,7 +183,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config','G-LZEZV8HPGR');
         `}</Script>
       </head>
-      <body className={`${spaceGrotesk.variable} ${jakarta.variable} ${notoTamil.variable} font-sans bg-page text-text-primary antialiased`}>
+      <body className="font-sans bg-page text-text-primary antialiased">
         <Navbar />
         <main className="flex flex-col min-h-screen">
           {children}
