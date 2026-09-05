@@ -32,10 +32,13 @@ export const metadata: Metadata = {
     "plc programming coimbatore",
     "machine vision systems tamil nadu"
   ],
+  alternates: {
+    canonical: "https://www.tamizhtech.in/industries",
+  },
   openGraph: {
     title: "Industrial Automation & Robotics Integration | Tamizh Tech",
     description: "Empowering factory floors with custom robotics, vision checks, and IoT dashboards. Coimbatore engineering core.",
-    url: "https://tamizhtech.in/industries",
+    url: "https://www.tamizhtech.in/industries",
     type: "website"
   }
 };
@@ -123,13 +126,13 @@ const schemas = [
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://tamizhtech.in"
+        "item": "https://www.tamizhtech.in"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Industrial Automation",
-        "item": "https://tamizhtech.in/industries"
+        "item": "https://www.tamizhtech.in/industries"
       }
     ]
   }

@@ -91,6 +91,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 3. Content Type Hub Pages
   addEntry('/products', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/products/competition', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/courses', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/blog', '2026-03-01T00:00:00.000Z', 0.8, 'weekly');
   addEntry('/projects', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');

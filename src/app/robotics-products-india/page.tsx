@@ -33,7 +33,7 @@ export default function RoboticsProductsIndiaPage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.in"
+      "url": "https://www.tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -55,13 +55,13 @@ export default function RoboticsProductsIndiaPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.in"
+          "item": "https://www.tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Robotics Products India",
-          "item": "https://tamizhtech.in/robotics-products-india"
+          "item": "https://www.tamizhtech.in/robotics-products-india"
         }
       ]
     }

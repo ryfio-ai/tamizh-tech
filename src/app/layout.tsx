@@ -61,7 +61,10 @@ export const metadata: Metadata = {
     "ThiranOli Academy",
   ],
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/logo/TTRC LOGO.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
     apple: "/logo/TTRC LOGO.png",
   },
   manifest: "/manifest.json",

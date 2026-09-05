@@ -35,7 +35,7 @@ export default function AboutTamizhTechPage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.in"
+      "url": "https://www.tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -57,13 +57,13 @@ export default function AboutTamizhTechPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.in"
+          "item": "https://www.tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "About Tamizh Tech",
-          "item": "https://tamizhtech.in/about-tamizh-tech"
+          "item": "https://www.tamizhtech.in/about-tamizh-tech"
         }
       ]
     }

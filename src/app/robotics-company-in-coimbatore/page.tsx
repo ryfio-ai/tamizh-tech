@@ -33,7 +33,7 @@ export default function RoboticsCompanyCoimbatorePage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.in"
+      "url": "https://www.tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -55,13 +55,13 @@ export default function RoboticsCompanyCoimbatorePage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.in"
+          "item": "https://www.tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Robotics Company in Coimbatore",
-          "item": "https://tamizhtech.in/robotics-company-in-coimbatore"
+          "item": "https://www.tamizhtech.in/robotics-company-in-coimbatore"
         }
       ]
     }

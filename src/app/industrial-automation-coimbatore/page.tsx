@@ -33,7 +33,7 @@ export default function IndustrialAutomationCoimbatorePage() {
         "addressCountry": "India"
       },
       "telephone": "+91 81480 45030",
-      "url": "https://tamizhtech.in"
+      "url": "https://www.tamizhtech.in"
     },
     {
       "@context": "https://schema.org",
@@ -55,13 +55,13 @@ export default function IndustrialAutomationCoimbatorePage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://tamizhtech.in"
+          "item": "https://www.tamizhtech.in"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Industrial Automation Coimbatore",
-          "item": "https://tamizhtech.in/industrial-automation-coimbatore"
+          "item": "https://www.tamizhtech.in/industrial-automation-coimbatore"
         }
       ]
     }
