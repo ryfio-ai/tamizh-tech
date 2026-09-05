@@ -96,18 +96,22 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     // 3. Projects
     for (const pr of projects) {
       if (!pr.published) continue;
+      const projectName = pr.name || "";
+      const desc = pr.shortDescription || pr.description || "";
+      const techs = pr.technologies || [];
       if (
-        pr.title.toLowerCase().includes(trimmed) ||
-        pr.description.toLowerCase().includes(trimmed) ||
-        (pr.techStack && pr.techStack.some((t: string) => t.toLowerCase().includes(trimmed))) ||
-        (pr.technology && pr.technology.some((t: string) => t.toLowerCase().includes(trimmed)))
+        projectName.toLowerCase().includes(trimmed) ||
+        desc.toLowerCase().includes(trimmed) ||
+        pr.category.toLowerCase().includes(trimmed) ||
+        techs.some((t: string) => t.toLowerCase().includes(trimmed))
       ) {
+        const statusLabel = pr.projectType === "completed" ? "COMPLETED PROJECT" : "PROJECT TOPIC";
         matches.push({
           id: `proj-${pr.id}`,
           type: "project",
-          category: "Projects",
-          title: pr.title,
-          subtitle: pr.description || pr.category,
+          category: `Projects (${statusLabel})`,
+          title: projectName,
+          subtitle: pr.shortDescription || pr.description || pr.category,
           url: getProjectUrl(pr.categorySlug, pr.slug)
         });
       }

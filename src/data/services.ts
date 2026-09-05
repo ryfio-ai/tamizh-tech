@@ -28,7 +28,7 @@ export const services: ServiceItem[] = [
       "Robotic arms & end-effector mechanisms"
     ],
     color: "blue",
-    href: "/services#robotics"
+    href: "/services/robotics-automation"
   },
   {
     id: "automation",
@@ -45,7 +45,7 @@ export const services: ServiceItem[] = [
       "Factory process optimization & sensors"
     ],
     color: "red",
-    href: "/industrial-automation-coimbatore"
+    href: "/services/industrial-automation"
   },
 
   // ── Prototyping & Fabrication (Strategic Commercial Services) ──
@@ -55,7 +55,7 @@ export const services: ServiceItem[] = [
     title: "3D Printing Services",
     subtitle: "High Quality & Affordable (PLA, PETG, TPU)",
     category: "prototyping",
-    image: "/gallery/21.jpeg",
+    image: "/pic/3d printing.jpg",
     desc: "High quality 3D printing services at affordable and best prices. We create prototypes, custom parts, robotic components, and miniatures printed with high precision for smooth and accurate results. Fast delivery and reliable service for all your projects.",
     features: [
       "Prototypes, custom parts, robotic components & miniatures",
@@ -64,7 +64,7 @@ export const services: ServiceItem[] = [
       "Affordable and best price with fast delivery & reliable service"
     ],
     color: "orange",
-    href: "/services#3d-printing"
+    href: "/services/3d-printing"
   },
   {
     id: "laser-cutting",
@@ -72,7 +72,7 @@ export const services: ServiceItem[] = [
     title: "Laser Cutting (Stainless Steel)",
     subtitle: "Precision Stainless Steel Cutting (Not Wood)",
     category: "prototyping",
-    image: "/gallery/17.jpeg",
+    image: "/pic/laser cutting.jpg",
     desc: "High-precision laser cutting specialized strictly in Stainless Steel (SS 304, SS 316) and sheet metals (not wood). Engineered for high-strength robotic chassis, custom brackets, structural panels, and tight-tolerance mechanical assemblies.",
     features: [
       "High-precision Stainless Steel (SS 304 & SS 316) sheet cutting",
@@ -81,7 +81,7 @@ export const services: ServiceItem[] = [
       "Burr-free clean edges with high-tolerance mechanical snap-fits"
     ],
     color: "yellow",
-    href: "/services#laser-cutting"
+    href: "/services/laser-cutting"
   },
   {
     id: "pcb-services",
@@ -89,7 +89,7 @@ export const services: ServiceItem[] = [
     title: "PCB Services",
     subtitle: "Design + Fabrication + Assembly",
     category: "prototyping",
-    image: "/gallery/16.jpeg",
+    image: "/pic/pcb design.jpg",
     desc: "Turnkey printed circuit board services from schematic capture and multi-layer layout to rapid prototype assembly and hardware testing.",
     features: [
       "Schematic design & multi-layer PCB layout",
@@ -98,7 +98,7 @@ export const services: ServiceItem[] = [
       "Power regulation & sensor interface boards"
     ],
     color: "teal",
-    href: "/services#pcb-services"
+    href: "/services/pcb-design-fabrication-assembly"
   },
 
   // ── Technology ──

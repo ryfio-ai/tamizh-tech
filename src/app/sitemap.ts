@@ -3,6 +3,7 @@ import { products } from '@/data/products';
 import { courses } from '@/data/courses';
 import { blogPosts, getBlogCategorySlug } from '@/data/blogPosts';
 import { projects } from '@/data/projects';
+import { projectCategories } from '@/data/projectCategories';
 import { events } from '@/data/events';
 import { careers } from '@/data/careers';
 import { newsletters } from '@/data/newsletters';
@@ -58,10 +59,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addEntry('/about-tamizh-tech', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/founder', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/services', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/3d-printing', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/laser-cutting', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/pcb-design-fabrication-assembly', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/robotics-automation', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/industrial-automation', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/solutions', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/schools', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/colleges', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/industries', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/schools', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/colleges', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/industries', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/students-makers', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/startups', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/case-studies', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/clients', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/careers', '2026-03-01T00:00:00.000Z', 0.7, 'monthly');
@@ -112,6 +120,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (catUrl) {
       addEntry(catUrl, cat.updatedAt, 0.8, 'weekly');
     }
+  }
+
+  // 4b. 10 Project Categories
+  for (const pcat of projectCategories) {
+    addEntry(getProjectCategoryUrl(pcat.slug), '2026-03-01T00:00:00.000Z', 0.8, 'weekly');
   }
 
   // 5. Dynamic Products (from verified products data)

@@ -25,9 +25,9 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     items: [
       { label: "Robotics Kits", href: "/products/competition", desc: "Competition & learning chassis" },
       { label: "Project Development", href: "/projects", desc: "Hardware guidance & capstones" },
-      { label: "3D Printing", href: "/services#3d-printing", desc: "High quality PLA, PETG & TPU prints" },
-      { label: "Laser Cutting", href: "/services#laser-cutting", desc: "Precision stainless steel sheet cutting" },
-      { label: "PCB Services", href: "/services#pcb-services", desc: "Custom circuit fabrication" },
+      { label: "3D Printing", href: "/services/3d-printing", desc: "High quality PLA, PETG & TPU prints" },
+      { label: "Laser Cutting", href: "/services/laser-cutting", desc: "Precision stainless steel sheet cutting" },
+      { label: "PCB Services", href: "/services/pcb-design-fabrication-assembly", desc: "Custom circuit fabrication" },
       { label: "Robotics Training", href: "/courses", desc: "Beginner to advanced courses" }
     ]
   },
@@ -55,7 +55,7 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     audience: "Industries",
     tagline: "Factory automation & vision",
     items: [
-      { label: "Industrial Automation", href: "/industrial-automation-coimbatore", desc: "PLC, SCADA & conveyor control" },
+      { label: "Industrial Automation", href: "/services/industrial-automation", desc: "PLC, SCADA & conveyor control" },
       { label: "Robotics Integration", href: "/solutions", desc: "AGVs & multi-axis manipulators" },
       { label: "Machine Vision", href: "/services#ai", desc: "Real-time defect detection" },
       { label: "IoT & Embedded", href: "/services#iot", desc: "Remote telemetry & telemetry" },
@@ -66,10 +66,10 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     audience: "Startups & Teams",
     tagline: "Speed-to-market prototypes",
     items: [
-      { label: "Rapid Prototyping", href: "/services#3d-printing", desc: "Functional concept parts" },
-      { label: "PCB Development", href: "/services#pcb-services", desc: "Schematic to assembled board" },
-      { label: "3D Printing & Enclosures", href: "/services#3d-printing", desc: "PLA, PETG & TPU custom parts" },
-      { label: "Laser Cutting", href: "/services#laser-cutting", desc: "Stainless steel chassis & brackets" },
+      { label: "Rapid Prototyping", href: "/services/3d-printing", desc: "Functional concept parts" },
+      { label: "PCB Development", href: "/services/pcb-design-fabrication-assembly", desc: "Schematic to assembled board" },
+      { label: "3D Printing & Enclosures", href: "/services/3d-printing", desc: "PLA, PETG & TPU custom parts" },
+      { label: "Laser Cutting", href: "/services/laser-cutting", desc: "Stainless steel chassis & brackets" },
       { label: "Product Engineering", href: "/solutions", desc: "Full-lifecycle engineering" }
     ]
   }
@@ -108,17 +108,17 @@ export const servicesMegaMenu = {
     {
       title: "Core Engineering",
       items: [
-        { label: "Robotics & Automation", href: "/services#robotics", desc: "Custom autonomous & manipulator systems" },
-        { label: "Industrial Automation", href: "/industrial-automation-coimbatore", desc: "PLC, SCADA & factory lines" }
+        { label: "Robotics & Automation", href: "/services/robotics-automation", desc: "Custom autonomous & manipulator systems" },
+        { label: "Industrial Automation", href: "/services/industrial-automation", desc: "PLC, SCADA & factory lines" }
       ]
     },
     {
       title: "Prototyping & Fabrication",
       isStrategic: true,
       items: [
-        { label: "3D Printing", href: "/services#3d-printing", desc: "High Quality & Affordable (PLA, PETG, TPU)", badge: "Strategic" },
-        { label: "Laser Cutting", href: "/services#laser-cutting", desc: "Precision Stainless Steel Cutting (Not Wood)", badge: "Strategic" },
-        { label: "PCB Services", href: "/services#pcb-services", desc: "Design + Fabrication + Assembly (PCBA)", badge: "Strategic" }
+        { label: "3D Printing", href: "/services/3d-printing", desc: "High Quality & Affordable (PLA, PETG, TPU)", badge: "Strategic" },
+        { label: "Laser Cutting", href: "/services/laser-cutting", desc: "Precision Stainless Steel Cutting (Not Wood)", badge: "Strategic" },
+        { label: "PCB Services", href: "/services/pcb-design-fabrication-assembly", desc: "Design + Fabrication + Assembly (PCBA)", badge: "Strategic" }
       ]
     },
     {

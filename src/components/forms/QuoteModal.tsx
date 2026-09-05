@@ -4,10 +4,30 @@ import React, { useState, useEffect } from "react";
 import { X, CheckCircle2, AlertCircle, Loader2, Send, Wrench, ShieldCheck, ArrowRight, Layers, Cpu, Scissors, Printer, Bot, Factory, FlaskConical, GraduationCap } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
-interface QuoteModalProps {
+export interface ProductEnquiryContext {
+  sourceType: "product";
+  productSlug: string;
+  productName: string;
+  categorySlug: string;
+  sourcePage: string;
+}
+
+export interface ProjectEnquiryContext {
+  sourceType: "project";
+  projectSlug: string;
+  projectName: string;
+  projectCategory: string;
+  projectType: "topic" | "completed";
+  sourcePage: string;
+}
+
+export interface QuoteModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultService?: string;
+  defaultRequirement?: string;
+  productContext?: ProductEnquiryContext;
+  projectContext?: ProjectEnquiryContext;
 }
 
 const SERVICE_OPTIONS = [
@@ -22,7 +42,7 @@ const SERVICE_OPTIONS = [
   { id: "custom-engineering", label: "Custom Engineering / R&D", subtitle: "Bespoke Hardware & Prototyping", icon: Wrench },
 ];
 
-export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps) {
+export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement, productContext, projectContext }: QuoteModalProps) {
   const [selectedService, setSelectedService] = useState<string>("3d-printing");
   const [formData, setFormData] = useState({
     name: "",
@@ -30,7 +50,7 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
     phone: "",
     organization: "",
     city: "Coimbatore",
-    requirement: "",
+    requirement: defaultRequirement || "",
     // Service-specific optional details
     quantity: "1",
     hasDesign: "Yes, 3D model/CAD ready",
@@ -46,11 +66,28 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
   const [leadId, setLeadId] = useState("");
 
   useEffect(() => {
-    if (defaultService) {
+    if (projectContext) {
+      setSelectedService("custom-engineering");
+      if (!formData.requirement) {
+        const typeLabel = projectContext.projectType === "completed" ? "Completed Project Showcase" : "Project Topic Concept";
+        setFormData(prev => ({
+          ...prev,
+          requirement: `Project Discussion: ${projectContext.projectName} (${typeLabel} | Category: ${projectContext.projectCategory}). Engineering requirements/collaboration details: `,
+        }));
+      }
+    } else if (productContext) {
+      setSelectedService("products");
+      if (!formData.requirement) {
+        setFormData(prev => ({
+          ...prev,
+          requirement: `Enquiry for ${productContext.productName} (${productContext.categorySlug}). Quantity needed: `,
+        }));
+      }
+    } else if (defaultService) {
       const match = SERVICE_OPTIONS.find(s => s.id === defaultService || s.label.toLowerCase() === defaultService.toLowerCase());
       if (match) setSelectedService(match.id);
     }
-  }, [defaultService]);
+  }, [defaultService, productContext, projectContext]);
 
   useEffect(() => {
     if (isOpen) {
@@ -79,7 +116,16 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
 
     try {
       // Build structured requirement message
-      let specificNotes = `Selected Category: ${currentServiceObj.label} (${currentServiceObj.subtitle})`;
+      let specificNotes = "";
+      if (projectContext) {
+        const typeLabel = projectContext.projectType === "completed" ? "Completed Project" : "Project Topic";
+        specificNotes = `Project Enquiry: ${projectContext.projectName} [Slug: ${projectContext.projectSlug}] | Type: ${typeLabel} | Category: ${projectContext.projectCategory} | Source: ${projectContext.sourcePage}`;
+      } else if (productContext) {
+        specificNotes = `Product Enquiry: ${productContext.productName} [Slug: ${productContext.productSlug}] | Category: ${productContext.categorySlug} | Source: ${productContext.sourcePage}`;
+      } else {
+        specificNotes = `Selected Category: ${currentServiceObj.label} (${currentServiceObj.subtitle})`;
+      }
+
       if (selectedService === "3d-printing") {
         specificNotes += ` | Quantity: ${formData.quantity} | Part Type: ${formData.partCategory} | Material: ${formData.material} | CAD Status: ${formData.hasDesign}`;
       } else if (selectedService === "laser-cutting") {
@@ -92,13 +138,22 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
         ? `${specificNotes}\n\nCustomer Requirements:\n${formData.requirement}`
         : specificNotes;
 
+      const leadType = projectContext ? "Project Enquiry" : (productContext ? "Product Enquiry" : "Quote");
+      const source = projectContext ? `Project: ${projectContext.sourcePage}` : (productContext ? `Product: ${productContext.sourcePage}` : "Navbar / Footer Get a Quote");
+      const subject = projectContext
+        ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) — ${formData.name}`
+        : (productContext
+            ? `Product Enquiry: ${productContext.productName} (${productContext.categorySlug}) — ${formData.name}`
+            : `Quote Request: ${currentServiceObj.label} — ${formData.name}`);
+      const areaOfInterest = projectContext ? `Project: ${projectContext.projectName}` : (productContext ? `Product: ${productContext.productName}` : currentServiceObj.label);
+
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          leadType: "Quote",
-          source: "Navbar / Footer Get a Quote",
-          pageUrl: typeof window !== "undefined" ? window.location.href : "https://www.tamizhtech.in/",
+          leadType,
+          source,
+          pageUrl: typeof window !== "undefined" ? window.location.href : (projectContext?.sourcePage || productContext?.sourcePage || "https://www.tamizhtech.in/projects"),
           customerName: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -106,10 +161,12 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
           city: formData.city || "Coimbatore",
           organization: formData.organization || "Individual / Student",
           institution: formData.organization || "Individual / Student",
-          areaOfInterest: currentServiceObj.label,
-          subject: `Quote Request: ${currentServiceObj.label} — ${formData.name}`,
-          requirement: currentServiceObj.label,
+          areaOfInterest,
+          subject,
+          requirement: projectContext ? projectContext.projectName : (productContext ? productContext.productName : currentServiceObj.label),
           message: fullMessage,
+          productContext: productContext || undefined,
+          projectContext: projectContext || undefined,
           preferredContactMethod: formData.preferredCallback,
         }),
       });
@@ -145,7 +202,7 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF6B00]" />
             <h2 className="text-lg font-bold text-slate-900 font-heading">
-              Request a Technical Quote
+              {productContext ? "Product Technical Enquiry" : "Request a Technical Quote"}
             </h2>
           </div>
           <button
@@ -184,6 +241,32 @@ export function QuoteModal({ isOpen, onClose, defaultService }: QuoteModalProps)
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {projectContext && (
+                <div className="p-3.5 bg-orange-50/70 border border-orange-200 rounded-xl flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B00] block">
+                      {projectContext.projectType === "completed" ? "Completed Project Showcase" : "Project Topic Concept"}
+                    </span>
+                    <span className="font-bold text-sm text-slate-900">{projectContext.projectName}</span>
+                  </div>
+                  <span className="text-[11px] font-medium text-slate-600 bg-white px-2.5 py-1 rounded-md border border-orange-100 shadow-2xs">
+                    {projectContext.projectCategory}
+                  </span>
+                </div>
+              )}
+
+              {productContext && (
+                <div className="p-3.5 bg-orange-50/70 border border-orange-200 rounded-xl flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B00] block">Enquiring For</span>
+                    <span className="font-bold text-sm text-slate-900">{productContext.productName}</span>
+                  </div>
+                  <span className="text-[11px] font-medium text-slate-600 bg-white px-2.5 py-1 rounded-md border border-orange-100 shadow-2xs">
+                    {productContext.categorySlug}
+                  </span>
+                </div>
+              )}
+
               {/* Question 1: What do you need? */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">

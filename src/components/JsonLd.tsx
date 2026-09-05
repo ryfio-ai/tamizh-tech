@@ -92,27 +92,24 @@ export function LocalBusinessSchema() {
 }
 
 export function ProductSchema({ product }: any) {
-  const canonicalUrl = product.categorySlug
-    ? `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
-    : `https://www.tamizhtech.in/products/${product.slug}`;
+  const images = Array.isArray(product.images) && product.images.length > 0
+    ? product.images.map((img: string) => (img.startsWith("http") ? img : `https://www.tamizhtech.in${img}`))
+    : product.image
+      ? [product.image.startsWith("http") ? product.image : `https://www.tamizhtech.in${product.image}`]
+      : [];
 
   const schema: any = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
-    "image": product.images || [product.image],
+    "image": images,
     "description": product.shortDescription || product.description,
-    "brand": { "@type": "Brand", "name": "Tamizh Tech Robotics" },
-    "sku": product.slug || product.id,
-    "offers": {
-      "@type": "Offer",
-      "url": canonicalUrl,
-      "priceCurrency": "INR",
-      "price": product.price ? String(product.price).replace(/[^0-9.]/g, "") : "0",
-      "availability": "https://schema.org/PreOrder",
-      "itemCondition": "https://schema.org/NewCondition",
-      "seller": { "@type": "Organization", "name": "Tamizh Tech Robotics Company" }
+    "brand": {
+      "@type": "Brand",
+      "name": product.brand || "Tamizh Tech Robotics"
     },
+    "sku": product.sku || product.slug || product.id,
+    "category": product.category,
     "inLanguage": "en-IN"
   };
 

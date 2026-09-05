@@ -133,6 +133,75 @@ export default function SolutionsPage() {
           </p>
         </div>
 
+        {/* Tailored B2B Solutions by Sector */}
+        <div className="mb-32 text-left">
+          <div className="flex items-center gap-6 mb-12">
+            <h3 className="text-2xl font-black text-[#111111] uppercase tracking-tighter">B2B Solutions by Sector</h3>
+            <div className="h-[1px] flex-grow bg-[#E5E5E5]"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link href="/solutions/schools" className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl hover:border-[#FF6B00] hover:shadow-md transition-all flex flex-col justify-between group">
+              <div>
+                <span className="text-[11px] font-bold text-[#FF6B00] uppercase tracking-wider">K-12 Education</span>
+                <h4 className="text-xl font-black text-neutral-900 mt-2 mb-3 group-hover:text-[#FF6B00] transition-colors">Schools & STEM Labs</h4>
+                <p className="text-neutral-600 text-xs leading-relaxed">Turnkey STEM and ATL lab setup, curriculum-aligned robotics courses, school workshops, and tournament coaching.</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-[#FF6B00]">
+                <span>Explore School Solutions</span>
+                <MoveRight className="w-4 h-4" />
+              </div>
+            </Link>
+
+            <Link href="/solutions/colleges" className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl hover:border-[#FF6B00] hover:shadow-md transition-all flex flex-col justify-between group">
+              <div>
+                <span className="text-[11px] font-bold text-[#FF6B00] uppercase tracking-wider">Higher Education</span>
+                <h4 className="text-xl font-black text-neutral-900 mt-2 mb-3 group-hover:text-[#FF6B00] transition-colors">Colleges & CoE Labs</h4>
+                <p className="text-neutral-600 text-xs leading-relaxed">Robotics Centre of Excellence setup, engineering capstone guidance, embedded systems training, and rapid prototyping.</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-[#FF6B00]">
+                <span>Explore College Solutions</span>
+                <MoveRight className="w-4 h-4" />
+              </div>
+            </Link>
+
+            <Link href="/solutions/industries" className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl hover:border-[#FF6B00] hover:shadow-md transition-all flex flex-col justify-between group">
+              <div>
+                <span className="text-[11px] font-bold text-[#FF6B00] uppercase tracking-wider">Manufacturing</span>
+                <h4 className="text-xl font-black text-neutral-900 mt-2 mb-3 group-hover:text-[#FF6B00] transition-colors">Industrial Automation</h4>
+                <p className="text-neutral-600 text-xs leading-relaxed">Turnkey PLC/SCADA control, control cabinet wiring, machine vision quality inspection, and custom machine retrofits.</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-[#FF6B00]">
+                <span>Explore Industrial Solutions</span>
+                <MoveRight className="w-4 h-4" />
+              </div>
+            </Link>
+
+            <Link href="/solutions/students-makers" className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl hover:border-[#FF6B00] hover:shadow-md transition-all flex flex-col justify-between group">
+              <div>
+                <span className="text-[11px] font-bold text-[#FF6B00] uppercase tracking-wider">Makers & Competitors</span>
+                <h4 className="text-xl font-black text-neutral-900 mt-2 mb-3 group-hover:text-[#FF6B00] transition-colors">Students & Makers</h4>
+                <p className="text-neutral-600 text-xs leading-relaxed">National competition robot platforms (Robo Race, Robo Soccer), custom 3D printing, SS laser cutting, and circuit boards.</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-[#FF6B00]">
+                <span>Explore Maker Solutions</span>
+                <MoveRight className="w-4 h-4" />
+              </div>
+            </Link>
+
+            <Link href="/solutions/startups" className="bg-neutral-50 border border-neutral-200 p-8 rounded-2xl hover:border-[#FF6B00] hover:shadow-md transition-all flex flex-col justify-between group">
+              <div>
+                <span className="text-[11px] font-bold text-[#FF6B00] uppercase tracking-wider">Hardware Startups</span>
+                <h4 className="text-xl font-black text-neutral-900 mt-2 mb-3 group-hover:text-[#FF6B00] transition-colors">Startups & Product Teams</h4>
+                <p className="text-neutral-600 text-xs leading-relaxed">Rapid mechanical prototyping, multi-layer PCB design and assembly, stainless steel chassis cutting, and pilot batch runs.</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs font-bold text-neutral-900 group-hover:text-[#FF6B00]">
+                <span>Explore Startup Solutions</span>
+                <MoveRight className="w-4 h-4" />
+              </div>
+            </Link>
+          </div>
+        </div>
+
         {/* Industrial Division */}
         <div className="mb-40 text-left">
           <div className="flex items-center gap-6 mb-16">

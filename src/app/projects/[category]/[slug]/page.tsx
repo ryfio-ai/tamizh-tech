@@ -24,24 +24,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return {};
 
   const canonicalUrl = `https://www.tamizhtech.in/projects/${project.categorySlug}/${project.slug}`;
+  const isCompleted = project.projectType === "completed";
+  const titleSuffix = isCompleted ? "Completed Robotics Project | Tamizh Tech" : "Robotics Project Topic & Architecture | Tamizh Tech";
+  const metaDescription = project.shortDescription || project.description;
+  const ogImage = project.coverImage || "/projects/industrial-manufacturing.jpg";
 
   return {
-    title: `${project.title} | ${project.category} Project | Tamizh Tech`,
-    description: project.description,
+    title: `${project.name} | ${titleSuffix}`,
+    description: metaDescription,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${project.title} | Tamizh Tech Robotics`,
-      description: project.description,
+      title: `${project.name} | ${isCompleted ? "Verified Project Build" : "Project Topic Concept"} | Tamizh Tech`,
+      description: metaDescription,
       url: canonicalUrl,
-      type: "website",
-      images: [{ url: project.coverImage }],
+      type: "article",
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | Tamizh Tech Robotics`,
-      description: project.description,
+      title: `${project.name} | Tamizh Tech Robotics`,
+      description: metaDescription,
+      images: [ogImage],
     }
   };
 }
@@ -58,7 +63,7 @@ export default async function HierarchicalProjectDetailPage({ params }: PageProp
     { name: "Home", url: "https://www.tamizhtech.in" },
     { name: "Projects", url: "https://www.tamizhtech.in/projects" },
     { name: project.category, url: `https://www.tamizhtech.in/projects/${project.categorySlug}` },
-    { name: project.title, url: `https://www.tamizhtech.in/projects/${project.categorySlug}/${project.slug}` },
+    { name: project.name, url: `https://www.tamizhtech.in/projects/${project.categorySlug}/${project.slug}` },
   ];
 
   return (

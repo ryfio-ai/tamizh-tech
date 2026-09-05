@@ -76,11 +76,18 @@ export default function ServicesPage() {
                             </li>
                           ))}
                         </ul>
-                        <Link href="/contact">
-                          <Button variant="primary" size="sm">
-                            Get Started <ArrowRight className="w-4 h-4 ml-1.5" />
-                          </Button>
-                        </Link>
+                        <div className="flex items-center gap-3">
+                          <Link href={svc.href}>
+                            <Button variant="primary" size="sm" className="!bg-[#FF6B00] hover:!bg-[#e05e00] text-white font-bold rounded-lg text-xs">
+                              Explore Service <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                            </Button>
+                          </Link>
+                          <Link href="/contact">
+                            <Button variant="outline" size="sm" className="font-semibold text-xs border-border">
+                              Contact Team
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                     </Card>
                   </div>

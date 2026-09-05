@@ -1,6 +1,7 @@
 export type LeadType =
   | 'Product Enquiry'
   | 'Product Quote'
+  | 'Project Enquiry'
   | 'Cart Enquiry'
   | 'Contact'
   | 'School Enquiry'

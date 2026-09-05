@@ -1,1007 +1,722 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  Check, 
-  Cpu, 
-  FileText, 
-  Download, 
+  CheckCircle2, 
   ArrowLeft, 
-  ChevronDown, 
-  ChevronRight,
-  ShieldCheck,
-  Truck,
-  RotateCcw,
-  Copy,
-  CheckCheck,
-  Calendar,
-  Info
+  ChevronRight, 
+  ShieldCheck, 
+  Wrench, 
+  HelpCircle,
+  FileText,
+  Layers,
+  ArrowRight,
+  PhoneCall,
+  MessageSquare,
+  Bot,
+  Scissors,
+  Printer,
+  Cpu,
+  Factory
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/Card";
-import { getProductUrl, getProductCategoryUrl } from "@/lib/routing";
-import ProductEnquiryModal from "@/components/forms/ProductEnquiryModal";
+import { ProductCard } from "@/components/products/ProductCard";
+import { QuoteModal, ProductEnquiryContext } from "@/components/forms/QuoteModal";
+import { trackMarketingEvent } from "@/lib/analytics";
 
 interface ProductDetailClientProps {
   product: Product;
   related: Product[];
 }
 
+const SERVICE_META: Record<string, { title: string; desc: string; href: string; icon: any }> = {
+  "3d-printing": {
+    title: "Precision 3D Printing",
+    desc: "Custom lightweight brackets, sensor mounts, and prototype casings in PLA, PETG, and TPU.",
+    href: "/services/3d-printing",
+    icon: Printer,
+  },
+  "laser-cutting": {
+    title: "Stainless Steel Laser Cutting",
+    desc: "Precision CNC cut chassis plates, armor guards, and structural brackets (Not Wood).",
+    href: "/services/laser-cutting",
+    icon: Scissors,
+  },
+  "pcb-design-fabrication-assembly": {
+    title: "Custom PCB Design & Assembly",
+    desc: "Custom motor driver shields, power distribution boards, and microcontroller carrier circuits.",
+    href: "/services/pcb-design-fabrication-assembly",
+    icon: Cpu,
+  },
+  "robotics-automation": {
+    title: "Robotics & Autonomous Systems",
+    desc: "Bespoke kinematics design, sensor fusion integration, and tournament tuning.",
+    href: "/services/robotics-automation",
+    icon: Bot,
+  },
+  "industrial-automation": {
+    title: "Industrial Automation & Controls",
+    desc: "PLC, SCADA, and factory line integration for high-reliability systems.",
+    href: "/services/industrial-automation",
+    icon: Factory,
+  },
+};
+
 export default function ProductDetailClient({ product, related }: ProductDetailClientProps) {
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
-  const [activeTab, setActiveTab] = useState<"specs" | "applications" | "downloads" | "code">("specs");
+  const [activeTab, setActiveTab] = useState<"specs" | "included" | "applications" | "docs">("specs");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [qty, setQty] = useState(1);
-  const [copiedCode, setCopiedCode] = useState(false);
 
-  // Frequently Bought Together Bundle Setup (Uses ONLY real available products)
-  const getBundleConfig = () => {
-    const slug = product.slug;
-    if (slug.includes("race")) {
-      return {
-        items: [
-          { name: "RC Robo Race", price: 12499, image: "/product/race/race1.png" },
-          { name: "Flysky FS-i6X 10CH Transmitter", price: 6398, image: "/product/flysky/flysky-fs-i6x-10ch.jpg" },
-          { name: "FlySky FS-CT6B 6CH Radio Set", price: 3548, image: "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg" }
-        ],
-        bundlePrice: 21299,
-        originalTotal: 22445
-      };
-    } else if (slug.includes("soccer")) {
-      return {
-        items: [
-          { name: "RC Robo Soccer", price: 14999, image: "/product/soccer/soccer 1.0.png" },
-          { name: "Flysky FS-i6X 10CH Transmitter", price: 6398, image: "/product/flysky/flysky-fs-i6x-10ch.jpg" },
-          { name: "FlySky FS-i6 6CH Transmitter", price: 5459, image: "/product/flysky/flysky-fs-i6-2.4g-6ch.jpg" }
-        ],
-        bundlePrice: 25499,
-        originalTotal: 26856
-      };
-    } else {
-      // Flysky Transmitter Bundle
-      return {
-        items: [
-          { name: product.name, price: product.price || 6398, image: product.image },
-          { name: "RC Robo Race", price: 12499, image: "/product/race/race1.png" },
-          { name: "RC Robo Soccer", price: 14999, image: "/product/soccer/soccer 1.0.png" }
-        ],
-        bundlePrice: (product.price || 6398) + 25000,
-        originalTotal: (product.price || 6398) + 27498
-      };
-    }
+  // Quote Modal & Structured Context
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [quoteRequirement, setQuoteRequirement] = useState<string | undefined>(undefined);
+
+  const images = product.images && product.images.length > 0 ? product.images : [product.image];
+
+  const productContext: ProductEnquiryContext = {
+    sourceType: "product",
+    productSlug: product.slug,
+    productName: product.name,
+    categorySlug: product.categorySlug,
+    sourcePage: `/products/${product.categorySlug}/${product.slug}`,
   };
 
-  const bundle = getBundleConfig();
+  useEffect(() => {
+    trackMarketingEvent("product_view", {
+      productSlug: product.slug,
+      productName: product.name,
+      categorySlug: product.categorySlug,
+      sourcePage: productContext.sourcePage,
+    });
+  }, [product.slug, product.name, product.categorySlug, productContext.sourcePage]);
 
-  const [rfqForm, setRfqForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    org: "",
-    qty: 1,
-    notes: ""
-  });
-  const [rfqSubmitted, setRfqSubmitted] = useState(false);
-  const [rfqLeadId, setRfqLeadId] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleRfqSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Product Quote",
-          source: "Product Page RFQ Form",
-          pageUrl: `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`,
-          customerName: rfqForm.name,
-          email: rfqForm.email,
-          phone: rfqForm.phone,
-          organization: rfqForm.org,
-          quantity: rfqForm.qty,
-          message: rfqForm.notes,
-          productId: product.id,
-          productName: product.name,
-          productCategory: product.category,
-          productCategorySlug: product.categorySlug,
-          productSlug: product.slug,
-        }),
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setRfqSubmitted(true);
-        setRfqLeadId(data.leadId || "");
-      } else {
-        alert(data.error || "Failed to submit inquiry. Please try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Failed to submit inquiry. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleOpenEnquiry = (customReq?: string) => {
+    setQuoteRequirement(customReq);
+    setIsQuoteOpen(true);
+    trackMarketingEvent("product_enquiry_open", {
+      productSlug: product.slug,
+      productName: product.name,
+      categorySlug: product.categorySlug,
+      sourcePage: productContext.sourcePage,
+    });
   };
 
-  const handleDownloadRequest = (label: string) => {
-    const message = `Hello Tamizh Tech! I am requesting the ${label} for the product: ${product.name}. Please share the files.`;
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/918148045030?text=${encoded}`, "_blank");
+  const handleWhatsApp = () => {
+    trackMarketingEvent("product_whatsapp_click", {
+      productSlug: product.slug,
+      productName: product.name,
+      categorySlug: product.categorySlug,
+      sourcePage: productContext.sourcePage,
+    });
+    const message = encodeURIComponent(
+      `Hello Tamizh Tech! I am viewing "${product.name}" (${product.category}) on your website and would like to know more about requirements, lead times, and availability.`
+    );
+    window.open(`https://wa.me/918148045030?text=${message}`, "_blank");
   };
 
-  const copyToClipboard = (codeStr: string) => {
-    navigator.clipboard.writeText(codeStr);
-    setCopiedCode(true);
-    setTimeout(() => setCopiedCode(false), 2000);
+  const handleTalkEngineer = () => {
+    trackMarketingEvent("product_talk_engineer_click", {
+      productSlug: product.slug,
+      productName: product.name,
+      categorySlug: product.categorySlug,
+      sourcePage: productContext.sourcePage,
+    });
+    handleOpenEnquiry(
+      `Requesting technical discussion with a mechatronics engineer regarding integration, payload, or tournament rules for ${product.name}.`
+    );
   };
 
-  const getWhatsAppMessage = (isBundle = false) => {
-    let msg = "";
-    if (isBundle) {
-      msg = `Hello Tamizh Tech! I want to order the e-commerce bundle deal for "${product.name}" which includes: ${bundle.items.map(i => i.name).join(", ")}. Bundle Offer Price: Γé╣${bundle.bundlePrice.toLocaleString("en-IN")}. Please confirm order details.`;
-    } else {
-      msg = `Hello! I would like to buy the "${product.name}" (Qty: ${qty}) at the deal price of Γé╣${((product.price || 0) * qty).toLocaleString("en-IN")}. Please share shipping and payment options.`;
-    }
-    return `https://wa.me/918148045030?text=${encodeURIComponent(msg)}`;
-  };
+  // Highlights
+  const highlights = product.highlights && product.highlights.length > 0
+    ? product.highlights
+    : (product.specifications ? product.specifications.slice(0, 3) : []);
 
-  // Structured schemas
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": product.name,
-    "image": `https://www.tamizhtech.in${product.image}`,
-    "description": product.description,
-    "brand": {
-      "@type": "Brand",
-      "name": product.slug.includes("flysky") ? "Flysky" : "Tamizh Tech"
-    },
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "INR",
-      "price": product.price,
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock",
-      "url": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
-    }
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.tamizhtech.in"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Products",
-        "item": "https://www.tamizhtech.in/products"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": product.category,
-        "item": `https://www.tamizhtech.in/products/${product.categorySlug}`
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": product.name,
-        "item": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`
-      }
-    ]
-  };
-
-  const sampleArduinoCode = `// Tamizh Tech Robotics Company
-// Sample Driver Code for ${product.name}
-// Hardwired PWM Feedback Loop / Control Pins
-
-#define MOTOR_LEFT_PWM  5
-#define MOTOR_LEFT_DIR  4
-#define MOTOR_RIGHT_PWM 6
-#define MOTOR_RIGHT_DIR 7
-
-void setup() {
-  pinMode(MOTOR_LEFT_PWM, OUTPUT);
-  pinMode(MOTOR_LEFT_DIR, OUTPUT);
-  pinMode(MOTOR_RIGHT_PWM, OUTPUT);
-  pinMode(MOTOR_RIGHT_DIR, OUTPUT);
-  Serial.begin(9600);
-  Serial.println("${product.name} Initialized.");
-}
-
-void loop() {
-  // Move Forward
-  digitalWrite(MOTOR_LEFT_DIR, HIGH);
-  analogWrite(MOTOR_LEFT_PWM, 180);
-  digitalWrite(MOTOR_RIGHT_DIR, HIGH);
-  analogWrite(MOTOR_RIGHT_PWM, 180);
-  delay(1000);
-  
-  // Stop
-  analogWrite(MOTOR_LEFT_PWM, 0);
-  analogWrite(MOTOR_RIGHT_PWM, 0);
-  delay(500);
-}`;
-
-  // Get delivery date estimate (e.g. 3 days from now)
-  const getDeliveryDate = () => {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const target = new Date();
-    target.setDate(target.getDate() + 3);
-    return `${days[target.getDay()]}, ${months[target.getMonth()]} ${target.getDate()}`;
-  };
-
-  const brand = product.slug.includes("flysky") ? "Flysky" : "Tamizh Tech";
+  // Specs list
+  const specsList = product.detailedSpecs && product.detailedSpecs.length > 0
+    ? product.detailedSpecs
+    : product.specifications || [];
 
   return (
-    <div className="bg-white min-h-screen pt-28 pb-20 text-text-primary">
-      {/* Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-
-      <div className="container px-6 max-w-7xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="flex items-center flex-wrap gap-2 mb-8 text-xs font-bold text-text-secondary uppercase tracking-wider text-left">
-          <Link href="/" className="hover:text-accent transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3 h-3 shrink-0" />
-          <Link href="/products" className="hover:text-accent transition-colors">
-            Products
-          </Link>
-          <ChevronRight className="w-3 h-3 shrink-0" />
-          <Link href={getProductCategoryUrl(product.categorySlug)} className="hover:text-accent transition-colors">
-            {product.category}
-          </Link>
-          <ChevronRight className="w-3 h-3 shrink-0" />
-          <span className="text-accent truncate max-w-[200px]">{product.name}</span>
+    <div className="bg-white min-h-screen pt-24 pb-20 text-slate-900">
+      {/* 1. BREADCRUMB */}
+      <div className="border-b border-slate-100 bg-slate-50/60 py-3">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+          <nav className="flex items-center gap-2 text-xs text-slate-500 overflow-x-auto scrollbar-none" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-slate-900 transition-colors shrink-0">Home</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <Link href="/products" className="hover:text-slate-900 transition-colors shrink-0">Products</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <Link href={`/products/${product.categorySlug}`} className="hover:text-slate-900 transition-colors shrink-0">
+              {product.category}
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <span className="font-semibold text-slate-900 truncate max-w-[200px] sm:max-w-none">
+              {product.name}
+            </span>
+          </nav>
         </div>
+      </div>
 
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 pt-6">
         {/* Back Link */}
-        <div className="text-left mb-6">
-          <Link 
-            href={getProductCategoryUrl(product.categorySlug)} 
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-text-muted hover:text-accent transition-colors"
+        <div className="mb-6">
+          <Link
+            href={`/products/${product.categorySlug}`}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#FF6B00] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to {product.category}
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to {product.category}</span>
           </Link>
         </div>
 
-        {/* Product E-Commerce Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 items-start">
+        {/* 2. PRODUCT HERO SECTION (2 COLUMNS) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16 items-start">
           
-          {/* LEFT COLUMN: Gallery & Image Display (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col md:flex-row gap-4">
-            
-            {/* Image Thumbnails Sidebar */}
-            {product.images && product.images.length > 0 && (
-              <div className="flex md:flex-col gap-3 order-2 md:order-1 overflow-x-auto no-scrollbar md:h-[360px] pb-2 md:pb-0 shrink-0">
-                {product.images.map((img, idx) => (
+          {/* LEFT: DOMINANT IMAGE GALLERY (5 cols) */}
+          <div className="lg:col-span-6 flex flex-col gap-4">
+            <div className="relative aspect-[4/3] w-full bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden p-6 sm:p-8 flex items-center justify-center shadow-xs">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image
+                  src={images[selectedImageIdx] || product.image}
+                  alt={`${product.name} - View ${selectedImageIdx + 1}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                  className="object-contain p-2"
+                />
+              </div>
+
+              {product.badge && (
+                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold tracking-wide rounded-md bg-white/95 text-slate-900 border border-slate-200 shadow-2xs">
+                  {product.badge}
+                </span>
+              )}
+            </div>
+
+            {/* Thumbnails if multiple */}
+            {images.length > 1 && (
+              <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+                {images.map((img, idx) => (
                   <button
                     key={idx}
+                    type="button"
                     onClick={() => setSelectedImageIdx(idx)}
-                    className={`relative w-16 h-16 bg-white border rounded-lg overflow-hidden flex items-center justify-center p-1 cursor-pointer transition-all shrink-0 ${
-                      selectedImageIdx === idx 
-                        ? "border-accent ring-1 ring-accent" 
-                        : "border-border hover:border-accent"
+                    className={`relative w-20 h-20 rounded-xl bg-slate-50 border overflow-hidden shrink-0 transition-all p-2 ${
+                      selectedImageIdx === idx
+                        ? "border-[#FF6B00] ring-2 ring-[#FF6B00]/20 shadow-2xs"
+                        : "border-slate-200 hover:border-slate-300 opacity-70 hover:opacity-100"
                     }`}
+                    aria-label={`View photo ${idx + 1}`}
                   >
                     <Image
                       src={img}
-                      alt={`${product.name} thumb ${idx}`}
-                      width={64}
-                      height={64}
-                      className="object-contain w-full h-full"
+                      alt={`${product.name} thumbnail ${idx + 1}`}
+                      fill
+                      className="object-contain p-1"
                     />
                   </button>
                 ))}
               </div>
             )}
-
-            {/* Large Active Image Viewport */}
-            <div className="bg-white border border-border rounded-xl p-6 flex items-center justify-center min-h-[360px] md:h-[400px] relative shadow-sm order-1 md:order-2 flex-grow overflow-hidden group">
-              {product.badge && (
-                <div className="absolute top-4 left-4 bg-accent text-white text-[9px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider z-10 shadow-sm">
-                  {product.badge}
-                </div>
-              )}
-              {product.images && product.images[selectedImageIdx] ? (
-                <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src={product.images[selectedImageIdx]}
-                    alt={product.name}
-                    fill
-                    className="object-contain p-2"
-                    priority
-                  />
-                </div>
-              ) : (
-                <Cpu className="w-24 h-24 stroke-[0.5] text-border" />
-              )}
-            </div>
-
           </div>
 
-          {/* MIDDLE COLUMN: Product Info & Pricing Box (7 cols) */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-8 text-left">
-            
-            {/* Main Info Box */}
-            <div className="md:col-span-8 space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black text-accent uppercase tracking-widest block mb-1">
-                  Brand: {product.brand || brand}
-                </span>
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 bg-accent/10 text-accent text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-accent/20 font-mono">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                    Built to Order / RFQ
+          {/* RIGHT: PRODUCT INFO & ENQUIRY (6 cols) */}
+          <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+            <div>
+              {/* Category & SKU */}
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <Link
+                  href={`/products/${product.categorySlug}`}
+                  className="text-xs font-bold uppercase tracking-wider text-[#FF6B00] hover:underline"
+                >
+                  {product.category}
+                </Link>
+                {product.sku && (
+                  <span className="text-xs font-mono text-slate-400">
+                    SKU #{product.sku}
                   </span>
-                  {product.sku && (
-                    <span className="text-[10px] font-bold text-text-muted uppercase font-mono bg-subtle px-2 py-0.5 rounded border border-border">
-                      SKU: {product.sku}
-                    </span>
-                  )}
-                </div>
+                )}
               </div>
-              <h1 className="text-2xl md:text-3xl font-black font-heading tracking-tight text-text-primary leading-tight uppercase">
+
+              {/* Product Name */}
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-950 leading-tight mb-3">
                 {product.name}
               </h1>
 
-              {/* Engineering Heritage Badge */}
-              <div className="flex items-center gap-3 border-b border-border pb-3">
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-text-secondary">
-                  <span className="w-2 h-2 rounded-full bg-accent" />
-                  Engineered in Coimbatore, India
-                </span>
-                <span className="text-text-muted text-xs">|</span>
-                <span className="text-text-secondary text-xs font-semibold">
-                  Official Hardware &amp; Custom Assembly
-                </span>
-              </div>
+              {/* One-line Value Proposition / Short Description */}
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
+                {product.shortDescription || product.description}
+              </p>
 
-              {/* E-Commerce Price details */}
-              <div className="bg-subtle/50 rounded-xl p-4 border border-border space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black text-rose-500 uppercase tracking-widest block font-mono">
-                    Deal Price
+              {/* Verified Highlights */}
+              {highlights.length > 0 && (
+                <div className="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                    Verified Hardware Highlights
                   </span>
-                  {product.cashback && (
-                    <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 uppercase font-mono">
-                      ≡ƒÄü {product.cashback}
-                    </span>
-                  )}
+                  <ul className="space-y-2">
+                    {highlights.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                {product.price ? (
-                  <div className="space-y-1">
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-3xl font-black text-text-primary tracking-tight font-sans">
-                        Γé╣{product.price.toLocaleString("en-IN")}
-                      </span>
-                      <span className="text-xs font-bold text-text-muted uppercase font-mono">
-                        (inc GST)
-                      </span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-text-muted line-through font-bold">
-                          M.R.P: Γé╣{product.originalPrice.toLocaleString("en-IN")}
-                        </span>
-                      )}
-                    </div>
-                    {product.originalPrice && (
-                      <div className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
-                        You Save: Γé╣{(product.originalPrice - product.price).toLocaleString("en-IN")} ({Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% off)
-                      </div>
-                    )}
-                    <span className="text-[10px] text-text-muted font-bold block uppercase tracking-wider mt-1.5 leading-snug">
-                      Inclusive of all taxes. 18% GST invoice provided for college lab setups.
+              )}
+
+              {/* Pricing (Factual dataset price only) */}
+              {product.price && product.price > 0 && (
+                <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Unit Estimate:</span>
+                    <span className="text-2xl font-black text-slate-950">
+                      ₹{product.price.toLocaleString("en-IN")}
                     </span>
                   </div>
-                ) : (
-                  <span className="text-lg font-black text-accent uppercase font-heading">Price upon request</span>
-                )}
-
-                {/* Tiered Quantity Pricing */}
-                {product.tierPricing && product.tierPricing.length > 0 && (
-                  <div className="mt-3 border border-border rounded-lg overflow-hidden bg-white text-xs shadow-xs">
-                    <div className="bg-subtle px-3 py-1.5 font-bold uppercase text-[10px] text-text-muted border-b border-border flex justify-between tracking-wider font-mono">
-                      <span>Select Quantity</span>
-                      <span>Price</span>
-                    </div>
-                    <div className="divide-y divide-border/60">
-                      {product.tierPricing.map((tier, tidx) => (
-                        <div key={tidx} className="px-3 py-2 flex justify-between font-mono font-bold text-text-secondary hover:bg-subtle/40 transition-colors">
-                          <span>{tier.qty} units</span>
-                          <span className="text-accent font-black">Γé╣{tier.price.toLocaleString("en-IN")}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Bullet Highlights */}
-              <div className="space-y-2">
-                <span className="text-[10px] font-black text-text-muted uppercase tracking-wider block font-mono">
-                  Product Features
-                </span>
-                <ul className="space-y-1.5 text-xs text-text-secondary font-bold">
-                  <li className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-accent shrink-0" />
-                    <span>100% Genuine Branded Equipment</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-accent shrink-0" />
-                    <span>Thoroughly Tested by Tamizh Tech Engineers</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-accent shrink-0" />
-                    <span>Direct Technical Support & Curriculum Integration</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-3.5 h-3.5 text-accent shrink-0" />
-                    <span>Compliant with standard B2B institutional specs</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Trust Badges */}
-              <div className="grid grid-cols-3 gap-3 border-t border-border pt-4 text-center">
-                <div className="p-2.5 bg-subtle rounded-lg flex flex-col items-center justify-center">
-                  <ShieldCheck className="w-5 h-5 text-accent mb-1" />
-                  <span className="text-[9px] font-black text-text-primary uppercase tracking-tight block">1 Yr Warranty</span>
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry.
+                  </p>
                 </div>
-                <div className="p-2.5 bg-subtle rounded-lg flex flex-col items-center justify-center">
-                  <Truck className="w-5 h-5 text-accent mb-1" />
-                  <span className="text-[9px] font-black text-text-primary uppercase tracking-tight block">Express Shipping</span>
-                </div>
-                <div className="p-2.5 bg-subtle rounded-lg flex flex-col items-center justify-center">
-                  <RotateCcw className="w-5 h-5 text-accent mb-1" />
-                  <span className="text-[9px] font-black text-text-primary uppercase tracking-tight block">Lab Ready</span>
-                </div>
-              </div>
-            </div>
+              )}
 
-            {/* Buy Sidebar Checkout Box (4 cols) */}
-            <div className="md:col-span-4 bg-white border border-border shadow-md rounded-xl p-5 space-y-4">
-              <div>
-                <span className="text-[10px] font-black text-accent uppercase tracking-widest block mb-0.5">
-                  • Custom Engineered to Order
-                </span>
-                <span className="text-[10px] font-bold text-text-secondary block font-mono">
-                  Direct from Tamizh Tech Labs, Coimbatore
-                </span>
-              </div>
-
-              {/* Delivery ETA */}
-              <div className="text-xs text-text-secondary font-bold space-y-1">
-                <span className="block">Delivery / Lead Timeline:</span>
-                <span className="text-text-primary font-black flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-accent" /> 3–7 Business Days Across India
-                </span>
-              </div>
-
-              {/* Qty Selector */}
-              <div className="flex items-center justify-between border-t border-b border-border py-3">
-                <span className="text-xs font-black uppercase text-text-muted">Quantity:</span>
-                <select
-                  value={qty}
-                  onChange={(e) => setQty(parseInt(e.target.value) || 1)}
-                  className="bg-subtle border border-border rounded px-2.5 py-1 text-xs font-bold text-text-primary focus:outline-none focus:border-accent cursor-pointer"
+              {/* 3. ENQUIRY CTAs */}
+              <div className="space-y-3 pt-2">
+                {/* PRIMARY CTA: ENQUIRE ABOUT THIS PRODUCT */}
+                <button
+                  type="button"
+                  onClick={() => handleOpenEnquiry()}
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-sm rounded-xl transition-colors shadow-sm"
                 >
-                  {[1, 2, 3, 5, 10, 15, 20].map((v) => (
-                    <option key={v} value={v}>{v}</option>
-                  ))}
-                </select>
-              </div>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>ENQUIRE ABOUT THIS PRODUCT</span>
+                </button>
 
-              {/* Price Calculation */}
-              <div className="flex justify-between items-baseline py-1">
-                <span className="text-xs font-bold text-text-secondary">Subtotal:</span>
-                <span className="text-lg font-black text-text-primary font-sans">
-                  Γé╣{((product.price || 0) * qty).toLocaleString("en-IN")}
-                </span>
-              </div>
-
-              {/* CTAs */}
-              <div className="space-y-2.5 pt-2">
-                <Button 
-                  variant="primary" 
-                  onClick={() => setIsModalOpen(true)}
-                  className="w-full justify-center gap-2 bg-[#002B66] hover:bg-[#001D47] text-white font-black text-xs py-3.5 uppercase tracking-wider rounded-xl shadow-md cursor-pointer"
-                >
-                  Request Official Quote
-                </Button>
-
-                <a
-                  href={getWhatsAppMessage(false)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full"
-                >
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 border-emerald-300 text-emerald-700 font-black text-xs py-3 uppercase tracking-wider rounded-xl"
+                {/* SECONDARY & TERTIARY CTAs */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={handleWhatsApp}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors shadow-2xs"
                   >
-                    <FaWhatsapp className="w-4 h-4 text-emerald-600 shrink-0" /> Chat on WhatsApp
-                  </Button>
-                </a>
+                    <FaWhatsapp className="w-4 h-4" />
+                    <span>WHATSAPP US</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleTalkEngineer}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs rounded-xl transition-colors"
+                  >
+                    <PhoneCall className="w-3.5 h-3.5 text-slate-600" />
+                    <span>TALK TO AN ENGINEER</span>
+                  </button>
+                </div>
+
+                <p className="text-[11px] text-slate-400 text-center pt-1">
+                  Direct engineering enquiry. Official quotation dispatched with reference tracking ID.
+                </p>
               </div>
             </div>
 
+            {/* Engineering Trust Strip */}
+            <div className="pt-6 border-t border-slate-100 grid grid-cols-2 gap-3 text-xs text-slate-600">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Verified Spec Sheet</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Wrench className="w-4 h-4 text-[#FF6B00] shrink-0" />
+                <span>Custom Tuning Available</span>
+              </div>
+            </div>
           </div>
-
         </div>
 
-        {/* Tabbed Detailed Specifications & Specs Sheets */}
-        <div className="border-b border-border mb-8 flex gap-6 overflow-x-auto no-scrollbar">
-          {[
-            { id: "specs", label: "Specifications" },
-            { id: "applications", label: "Use Cases" },
-            { id: "downloads", label: "Datasheets & Manuals" },
-            { id: "code", label: "Sample Code" }
-          ].map((tab) => (
+        {/* 4. "WHY THIS PRODUCT?" SECTION */}
+        {product.whyThisProduct && (
+          <section className="mb-16 bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-200">
+            <div className="max-w-4xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-[11px] font-bold uppercase tracking-wider mb-3">
+                <span>Engineering Assessment</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 mb-4">
+                Why this product? — {product.whyThisProduct.heading}
+              </h2>
+
+              <ul className="space-y-3 mb-6">
+                {product.whyThisProduct.points.map((pt, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00] mt-2 shrink-0" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {product.whyThisProduct.targetAudience && product.whyThisProduct.targetAudience.length > 0 && (
+                <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-bold text-slate-700 mr-1">Designed For:</span>
+                  {product.whyThisProduct.targetAudience.map((audience, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-md bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-2xs"
+                    >
+                      {audience}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* 5. SPECIFICATIONS & DOCUMENTATION TABS */}
+        <section className="mb-16">
+          {/* Tab Navigation */}
+          <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto scrollbar-none mb-8">
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`pb-4 text-xs font-black uppercase tracking-wider border-b-2 transition-all cursor-pointer whitespace-nowrap ${
-                activeTab === tab.id
-                  ? "border-accent text-accent"
-                  : "border-transparent text-text-muted hover:text-text-primary"
+              onClick={() => { setActiveTab("specs"); trackMarketingEvent("product_spec_tab_click", { tab: "specs", productSlug: product.slug }); }}
+              className={`px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
+                activeTab === "specs"
+                  ? "border-[#FF6B00] text-[#FF6B00]"
+                  : "border-transparent text-slate-500 hover:text-slate-900"
               }`}
             >
-              {tab.label}
+              Technical Specifications
             </button>
-          ))}
-        </div>
 
-        {/* Tab content panel */}
-        <div className="mb-16 text-left">
-          {activeTab === "specs" && (
-            <div className="max-w-3xl">
-              <h3 className="text-lg font-black font-heading uppercase mb-4 text-text-primary">
-                Technical Specifications Table
-              </h3>
-              <div className="border border-border rounded-xl overflow-hidden shadow-xs">
-                <table className="w-full text-xs font-bold text-text-secondary">
-                  <tbody>
-                    {product.detailedSpecs && product.detailedSpecs.length > 0 ? (
-                      product.detailedSpecs.map((spec, idx) => {
-                        const parts = spec.split(":");
-                        const hasColon = parts.length > 1;
-                        return (
-                          <tr 
-                            key={idx} 
-                            className={`border-b border-border/60 last:border-b-0 ${idx % 2 === 0 ? "bg-white" : "bg-subtle/50"}`}
-                          >
-                            <td className="p-3.5 font-black text-text-primary w-1/3 uppercase tracking-wider border-r border-border/40 font-mono">
-                              {hasColon ? parts[0].trim() : "Attribute"}
-                            </td>
-                            <td className="p-3.5 font-semibold text-text-secondary uppercase">
-                              {hasColon ? parts.slice(1).join(":").trim() : spec}
-                            </td>
-                          </tr>
-                        );
-                      })
-                    ) : (
-                      <tr>
-                        <td className="p-4 text-center text-text-muted">No specifications found.</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
+            {product.includedItems && product.includedItems.length > 0 && (
+              <button
+                onClick={() => { setActiveTab("included"); trackMarketingEvent("product_spec_tab_click", { tab: "included", productSlug: product.slug }); }}
+                className={`px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
+                  activeTab === "included"
+                    ? "border-[#FF6B00] text-[#FF6B00]"
+                    : "border-transparent text-slate-500 hover:text-slate-900"
+                }`}
+              >
+                What&apos;s Included ({product.includedItems.length})
+              </button>
+            )}
 
-          {activeTab === "applications" && (
-            <div className="max-w-3xl space-y-4">
-              <h3 className="text-lg font-black font-heading uppercase text-text-primary">
-                Classroom & Industrial Use Cases
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {product.applications && product.applications.length > 0 ? (
-                  product.applications.map((app, idx) => (
-                    <div key={idx} className="p-4 border border-border rounded-lg bg-subtle/30 flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent shrink-0 font-mono text-[10px] font-black mt-0.5">
-                        {idx + 1}
-                      </div>
-                      <span className="text-xs font-bold text-text-secondary uppercase leading-relaxed">{app}</span>
-                    </div>
-                  ))
-                ) : (
-                  <span className="text-xs text-text-muted">No applications listed.</span>
-                )}
-              </div>
-            </div>
-          )}
+            {product.applications && product.applications.length > 0 && (
+              <button
+                onClick={() => { setActiveTab("applications"); trackMarketingEvent("product_spec_tab_click", { tab: "applications", productSlug: product.slug }); }}
+                className={`px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
+                  activeTab === "applications"
+                    ? "border-[#FF6B00] text-[#FF6B00]"
+                    : "border-transparent text-slate-500 hover:text-slate-900"
+                }`}
+              >
+                Applications
+              </button>
+            )}
 
-          {activeTab === "downloads" && (
-            <div className="max-w-3xl space-y-4">
-              <h3 className="text-lg font-black font-heading uppercase text-text-primary">
-                Technical Files & Datasheet Resources
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {product.downloads && product.downloads.map((dl, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => handleDownloadRequest(dl.label)}
-                    className="p-4 bg-subtle border border-border rounded-xl hover:border-accent transition-all flex items-center justify-between text-left group cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-white rounded-lg border border-border text-accent">
-                        <FileText className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-black text-text-primary block uppercase">{dl.label}</span>
-                        <span className="text-[9px] font-black text-text-muted uppercase tracking-wider font-mono">
-                          {dl.type.toUpperCase()} File (Upon request)
-                        </span>
-                      </div>
-                    </div>
-                    <Download className="w-4 h-4 text-text-muted group-hover:text-accent transition-colors" />
-                  </button>
-                ))}
-
-                {/* Direct mock CAD stepper block */}
-                <button 
-                  onClick={() => handleDownloadRequest("3D Solid CAD Model STEP File")}
-                  className="p-4 bg-subtle border border-border rounded-xl hover:border-accent transition-all flex items-center justify-between text-left group cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white rounded-lg border border-border text-accent">
-                      <Cpu className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-black text-text-primary block uppercase">3D STEP Chassis Solid Model</span>
-                      <span className="text-[9px] font-black text-text-muted uppercase tracking-wider font-mono">STEP FILE FOR CAD LAYOUTS</span>
-                    </div>
-                  </div>
-                  <Download className="w-4 h-4 text-text-muted group-hover:text-accent transition-colors" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {activeTab === "code" && (
-            <div className="max-w-3xl space-y-4">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-black font-heading uppercase text-text-primary">
-                  Arduino Reference Driver Code
-                </h3>
-                <button 
-                  onClick={() => copyToClipboard(sampleArduinoCode)}
-                  className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-wider text-accent bg-accent/5 hover:bg-accent hover:text-white px-2.5 py-1.5 rounded transition-all font-mono"
-                >
-                  {copiedCode ? <CheckCheck className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copiedCode ? "Copied" : "Copy Code"}
-                </button>
-              </div>
-
-              <div className="relative border border-border rounded-xl overflow-hidden shadow-xs">
-                <pre className="bg-subtle text-text-primary p-6 text-[11px] font-mono overflow-x-auto max-h-72 leading-relaxed text-left">
-                  <code>{sampleArduinoCode}</code>
-                </pre>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* 3. Frequently Bought Together Bundle Builder */}
-        {bundle && (
-          <div className="text-left border border-border rounded-xl p-6 md:p-8 bg-subtle/30 mb-16 shadow-xs">
-            <h3 className="text-lg font-black font-heading uppercase text-text-primary mb-2">
-              Frequently Bought Together
-            </h3>
-            <p className="text-xs text-text-muted font-bold uppercase tracking-wider mb-6">
-              Complete your control systems in one go and save on package pricing.
-            </p>
-
-            <div className="flex flex-col xl:flex-row items-center gap-6 justify-between">
-              {/* Bundle items visuals */}
-              <div className="flex flex-wrap items-center gap-4 md:gap-6 justify-center">
-                {bundle.items.map((item, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <span className="text-xl font-bold text-text-muted">+</span>}
-                    <div className="flex items-center gap-3 p-3 bg-white border border-border rounded-lg max-w-[240px] shrink-0">
-                      <div className="relative w-12 h-12 bg-white flex items-center justify-center shrink-0">
-                        <Image src={item.image} alt={item.name} fill className="object-contain" />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-black text-text-primary uppercase leading-tight block truncate max-w-[140px]">
-                          {item.name}
-                        </span>
-                        <span className="text-xs font-black text-accent font-sans">
-                          Γé╣{item.price.toLocaleString("en-IN")}
-                        </span>
-                      </div>
-                    </div>
-                  </React.Fragment>
-                ))}
-              </div>
-
-              {/* Bundle Action */}
-              <div className="bg-white border border-border p-5 rounded-lg shrink-0 w-full xl:w-72 text-center xl:text-left space-y-4">
-                <div>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-wider block">Bundle Price:</span>
-                  <div className="flex items-baseline justify-center xl:justify-start gap-2">
-                    <span className="text-2xl font-black text-text-primary font-sans">
-                      Γé╣{bundle.bundlePrice.toLocaleString("en-IN")}
-                    </span>
-                    <span className="text-xs text-text-muted line-through font-bold">
-                      Γé╣{bundle.originalTotal.toLocaleString("en-IN")}
-                    </span>
-                  </div>
-                  <span className="text-[9px] font-bold text-emerald-600 block uppercase tracking-wider mt-1">
-                    Save Γé╣{(bundle.originalTotal - bundle.bundlePrice).toLocaleString("en-IN")} on this bundle deal!
-                  </span>
-                </div>
-                <a
-                  href={getWhatsAppMessage(true)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Button 
-                    variant="primary" 
-                    className="w-full justify-center gap-2 bg-[#25D366] hover:bg-[#20ba56] border-[#25D366] text-white font-black text-xs py-3 uppercase tracking-wider"
-                  >
-                    <FaWhatsapp className="w-4 h-4 shrink-0" /> Order Bundle
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* 5. Institutional RFQ form */}
-        <div id="rfq-section" className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 bg-subtle border border-border rounded-lg p-8 lg:p-12 text-left">
-          <div>
-            <span className="text-accent font-bold text-xs uppercase tracking-widest block mb-2">B2B Integration</span>
-            <h2 className="text-2xl font-black font-heading tracking-tight mb-4 text-text-primary uppercase">Request B2B Quote & Custom Pricing</h2>
-            <p className="text-text-secondary text-xs leading-relaxed mb-6 font-semibold uppercase tracking-tight">
-              Setting up a robotics laboratory in your school, college, or university? Or do you need bulk supply for competition teams? Complete the request form and our logistics team will share customized pricing lists and tax invoices within 12 hours.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Check className="w-4 h-4 text-accent" />
-                <span className="text-[10px] font-black uppercase text-text-primary">Bulk Procurement Discounts Available</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Check className="w-4 h-4 text-accent" />
-                <span className="text-[10px] font-black uppercase text-text-primary">GST-Compliant Invoices for Institutions</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Check className="w-4 h-4 text-accent" />
-                <span className="text-[10px] font-black uppercase text-text-primary">Integrated Lab Curriculum Options</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white border border-border rounded-lg p-6 lg:p-8 shadow-xs">
-            {rfqSubmitted ? (
-              <div className="text-center py-12">
-                <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h4 className="text-lg font-bold font-heading uppercase text-text-primary">RFQ Submitted Successfully</h4>
-                <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Our sales consultants will reach out shortly.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleRfqSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Contact Name *</label>
-                    <input
-                      type="text"
-                      required
-                      value={rfqForm.name}
-                      onChange={(e) => setRfqForm({ ...rfqForm, name: e.target.value })}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
-                      placeholder="e.g. Anand Kumar"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      value={rfqForm.email}
-                      onChange={(e) => setRfqForm({ ...rfqForm, email: e.target.value })}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
-                      placeholder="email@institution.edu"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Phone Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={rfqForm.phone}
-                      onChange={(e) => setRfqForm({ ...rfqForm, phone: e.target.value })}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
-                      placeholder="+91 98765 43210"
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Required Quantity</label>
-                    <input
-                      type="number"
-                      required
-                      min={1}
-                      value={rfqForm.qty}
-                      onChange={(e) => setRfqForm({ ...rfqForm, qty: parseInt(e.target.value) || 1 })}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Platform Category</label>
-                    <input
-                      type="text"
-                      disabled
-                      value={product.category}
-                      className="w-full bg-slate-100 border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-600 font-semibold"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1.5">Delivery Address / Requirements & Notes</label>
-                  <textarea
-                    value={rfqForm.notes}
-                    onChange={(e) => setRfqForm({ ...rfqForm, notes: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs h-24 resize-none"
-                    placeholder="Enter delivery city / address and any custom component or battery requirements..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full justify-center py-3.5 px-6 font-bold text-white uppercase tracking-wider bg-[#FF6A00] hover:bg-[#E05300] rounded-xl shadow-lg shadow-orange-500/25 transition-all disabled:opacity-50 cursor-pointer"
-                >
-                  {isSubmitting ? "Submitting..." : "Submit RFQ Request"}
-                </button>
-              </form>
+            {product.downloads && product.downloads.length > 0 && (
+              <button
+                onClick={() => { setActiveTab("docs"); trackMarketingEvent("product_spec_tab_click", { tab: "docs", productSlug: product.slug }); }}
+                className={`px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
+                  activeTab === "docs"
+                    ? "border-[#FF6B00] text-[#FF6B00]"
+                    : "border-transparent text-slate-500 hover:text-slate-900"
+                }`}
+              >
+                Downloads & Schematics
+              </button>
             )}
           </div>
-        </div>
 
-        {/* 6. Accordion FAQs */}
-        {product.faqs && product.faqs.length > 0 && (
-          <div className="mb-16 text-left">
-            <h2 className="text-xl font-black font-heading tracking-tight mb-6 text-text-primary uppercase">
-              Product Q&A / FAQs
-            </h2>
-            <div className="space-y-4 max-w-3xl">
-              {product.faqs.map((faq, idx) => (
-                <div key={idx} className="border border-border rounded-lg bg-subtle overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full px-5 py-4 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-text-primary cursor-pointer hover:bg-border/20 transition-all focus:outline-none"
-                  >
-                    <span className={openFaq === idx ? "text-accent font-black" : "text-text-primary"}>
-                      {faq.question}
-                    </span>
-                    <ChevronDown className={`w-4 h-4 text-text-secondary transition-transform duration-300 ${openFaq === idx ? "rotate-180 text-accent" : ""}`} />
-                  </button>
-                  {openFaq === idx && (
-                    <div className="px-5 pb-5 pt-2 text-xs text-text-secondary font-semibold border-t border-border/50 uppercase leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* 7. Related products list */}
-        {related.length > 0 && (
-          <div className="text-left border-t border-border pt-16">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-              <h2 className="text-xl font-black font-heading tracking-tight text-text-primary uppercase">
-                Related Products
-              </h2>
-              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider font-mono mr-2">Filter:</span>
-                <span className="px-3 py-1 bg-accent text-white text-[10px] font-black rounded uppercase tracking-wider">
-                  From Same Category ({product.category})
+          {/* TAB 1: TECHNICAL SPECS TABLE */}
+          {activeTab === "specs" && (
+            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+              <div className="p-4 sm:p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Verified Engineering Specifications
+                </h3>
+                <span className="text-xs text-slate-500">
+                  {specsList.length} parameters logged
                 </span>
-                {product.brand && (
-                  <span className="px-3 py-1 bg-subtle text-text-secondary text-[10px] font-bold rounded border border-border uppercase tracking-wider">
-                    From Same Brand ({product.brand})
-                  </span>
-                )}
+              </div>
+
+              <div className="divide-y divide-slate-100">
+                {specsList.map((spec, idx) => {
+                  const parts = spec.split(":");
+                  const label = parts[0]?.trim();
+                  const value = parts.slice(1).join(":")?.trim();
+
+                  return (
+                    <div
+                      key={idx}
+                      className={`grid grid-cols-1 sm:grid-cols-3 p-4 text-xs sm:text-sm ${
+                        idx % 2 === 0 ? "bg-white" : "bg-slate-50/30"
+                      }`}
+                    >
+                      <span className="font-semibold text-slate-700 sm:col-span-1">{label}</span>
+                      <span className="text-slate-600 sm:col-span-2 mt-0.5 sm:mt-0 font-mono text-xs">
+                        {value || label}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {related.map((p, idx) => (
-                <Card key={idx} className="p-0 overflow-hidden bg-white border border-border flex flex-col justify-between group hover:shadow-lg transition-all duration-300">
-                  <div className="h-44 bg-subtle border-b border-border flex items-center justify-center p-6 relative">
-                    {p.image ? (
-                      <div className="relative w-full h-[120px] transition-transform duration-500 group-hover:scale-105">
-                        <Image src={p.image} alt={p.name} fill className="object-contain" />
-                      </div>
-                    ) : (
-                      <Cpu className="w-12 h-12 text-border" />
-                    )}
+          )}
+
+          {/* TAB 2: WHAT'S INCLUDED */}
+          {activeTab === "included" && product.includedItems && (
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-heading">
+                Package Contents & Included Hardware
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {product.includedItems.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 p-3.5 rounded-xl border border-slate-100 bg-slate-50/50 text-xs sm:text-sm text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
                   </div>
-                  <div className="p-5 flex-grow flex flex-col justify-between space-y-3">
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] font-black text-accent uppercase font-mono">{p.brand || "Tamizh Tech"}</span>
-                        {p.price && (
-                          <span className="text-xs font-black text-text-primary font-sans">₹{p.price.toLocaleString("en-IN")}</span>
-                        )}
-                      </div>
-                      <h4 className="text-xs font-black font-heading uppercase text-text-primary tracking-tight group-hover:text-accent transition-colors leading-tight line-clamp-2">
-                        {p.name}
-                      </h4>
-                    </div>
-                    <Link href={getProductUrl(p.categorySlug, p.slug)}>
-                      <Button variant="outline" size="sm" className="w-full justify-center font-bold text-xs uppercase tracking-wider">
-                        View Product
-                      </Button>
-                    </Link>
-                  </div>
-                </Card>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* TAB 3: APPLICATIONS */}
+          {activeTab === "applications" && product.applications && (
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-heading">
+                Typical Engineering Scenarios & Competitions
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {product.applications.map((app, idx) => (
+                  <div key={idx} className="p-4 rounded-xl border border-slate-100 bg-slate-50/50 text-xs sm:text-sm text-slate-800">
+                    <span className="font-semibold">{app}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: DOWNLOADS & SCHEMATICS */}
+          {activeTab === "docs" && product.downloads && (
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+              <h3 className="text-sm font-bold text-slate-900 mb-4 font-heading">
+                Datasheets, Schematics & CAD Reference
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {product.downloads.map((doc, idx) => (
+                  <div key={idx} className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <FileText className="w-5 h-5 text-[#FF6B00]" />
+                      <div>
+                        <span className="text-xs font-bold text-slate-900 block">{doc.label}</span>
+                        <span className="text-[10px] text-slate-500 uppercase">{doc.type || "PDF"} Document</span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleOpenEnquiry(`Requesting datasheet / schematic download for: ${doc.label} (${product.name})`)}
+                      className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition-colors"
+                    >
+                      Request File
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* 6. GENUINELY RELEVANT COMMERCIAL SERVICES (PHASE 1 LINKS) */}
+        {product.relatedServices && product.relatedServices.length > 0 && (
+          <section className="mb-16">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Customization & Fabrication
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+                  Relevant Engineering Services
+                </h2>
+              </div>
+              <p className="text-xs text-slate-500 max-w-sm">
+                Need customized mounts, replacement brackets, or bespoke motor drivers for this platform?
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {product.relatedServices.map((serviceKey) => {
+                const service = SERVICE_META[serviceKey];
+                if (!service) return null;
+                const Icon = service.icon;
+
+                return (
+                  <Link
+                    key={serviceKey}
+                    href={service.href}
+                    onClick={() => trackMarketingEvent("product_related_service_click", {
+                      service: serviceKey,
+                      productSlug: product.slug,
+                    })}
+                    className="group p-5 rounded-2xl border border-slate-200 hover:border-[#FF6B00] bg-white hover:bg-orange-50/20 transition-all flex flex-col justify-between shadow-2xs"
+                  >
+                    <div>
+                      <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#FF6B00] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#FF6B00] transition-colors mb-1">
+                        {service.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {service.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1 text-xs font-bold text-[#FF6B00]">
+                      <span>Explore Service</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
         )}
 
+        {/* 7. RELATED PRODUCTS */}
+        {related && related.length > 0 && (
+          <section className="mb-16">
+            <div className="mb-6">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                More Hardware
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+                Related {product.category}
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {related.map((rel) => (
+                <ProductCard
+                  key={rel.id}
+                  product={rel}
+                  onEnquire={(p) => {
+                    handleOpenEnquiry(`Enquiring about ${p.name} (${p.categorySlug})`);
+                  }}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 8. VERIFIED PRODUCT FAQS */}
+        {product.faqs && product.faqs.length > 0 && (
+          <section className="mb-16 max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                Answers & Clarifications
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <div className="space-y-3">
+              {product.faqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpenFaq(isOpen ? null : idx);
+                        if (!isOpen) {
+                          trackMarketingEvent("product_faq_open", {
+                            question: faq.question,
+                            productSlug: product.slug,
+                          });
+                        }
+                      }}
+                      className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3 hover:bg-slate-50 transition-colors"
+                    >
+                      <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4 text-[#FF6B00] shrink-0" />
+                        {faq.question}
+                      </span>
+                      <ChevronRight
+                        className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${
+                          isOpen ? "rotate-90 text-[#FF6B00]" : ""
+                        }`}
+                      />
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/40">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* 9. BOTTOM SHOWROOM CTA */}
+        <section className="p-8 sm:p-12 rounded-3xl bg-slate-950 text-white text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold font-heading mb-3">
+            Ready to Order or Integrate {product.name}?
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Our mechatronics engineering team at Coimbatore provides quick lead time confirmations, binding support, and custom mechanical mounting.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button
+              onClick={() => handleOpenEnquiry()}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs rounded-xl transition-colors shadow-sm"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Enquire About This Product</span>
+            </button>
+
+            <button
+              onClick={handleWhatsApp}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors shadow-sm"
+            >
+              <FaWhatsapp className="w-4 h-4" />
+              <span>WhatsApp Engineering Team</span>
+            </button>
+          </div>
+        </section>
       </div>
 
-      {/* Sticky Bottom WhatsApp CTA for Mobile */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-border p-4 flex md:hidden items-center justify-between z-40 shadow-lg">
-        <div>
-          <span className="text-[9px] font-black text-text-muted uppercase tracking-wider block">Price</span>
-          <span className="text-sm font-extrabold text-accent font-sans">
-            ₹{(product.price || 0).toLocaleString("en-IN")}
-          </span>
-        </div>
-        <div className="flex gap-2">
-          <Button
-            size="sm"
-            onClick={() => setIsModalOpen(true)}
-            className="bg-[#002B66] text-white font-bold text-xs uppercase px-4 py-2"
-          >
-            Quote
-          </Button>
-          <a
-            href={getWhatsAppMessage(false)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-emerald-600 text-white font-black text-xs uppercase tracking-wider px-4 py-2.5 rounded-lg flex items-center gap-1.5"
-          >
-            <FaWhatsapp className="w-4 h-4" /> WhatsApp
-          </a>
-        </div>
+      {/* 10. MOBILE STICKY ENQUIRY BAR (320px, 375px, 390px, 430px) */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 shadow-lg flex items-center gap-2">
+        <button
+          onClick={() => handleOpenEnquiry()}
+          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs rounded-xl transition-colors"
+        >
+          <MessageSquare className="w-3.5 h-3.5" />
+          <span>Enquire About Product</span>
+        </button>
+        <button
+          onClick={handleWhatsApp}
+          className="inline-flex items-center justify-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
+          aria-label="WhatsApp"
+        >
+          <FaWhatsapp className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* Centralized Product Enquiry Modal */}
-      <ProductEnquiryModal
-        product={product}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        initialQuantity={qty}
-        mode="quote"
+      {/* 11. TECHNICAL QUOTE MODAL */}
+      <QuoteModal
+        isOpen={isQuoteOpen}
+        onClose={() => setIsQuoteOpen(false)}
+        defaultService="products"
+        defaultRequirement={quoteRequirement}
+        productContext={productContext}
       />
     </div>
   );
