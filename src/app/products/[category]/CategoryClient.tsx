@@ -60,7 +60,7 @@ export default function CategoryClient({
     <div className="bg-white min-h-screen pt-24 pb-20 text-slate-900">
       {/* 1. BREADCRUMBS */}
       <div className="border-b border-slate-100 bg-slate-50/60 py-3">
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="container max-w-[1680px] mx-auto px-4 sm:px-6">
           <nav className="flex items-center gap-2 text-xs text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
@@ -71,7 +71,7 @@ export default function CategoryClient({
         </div>
       </div>
 
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+      <div className="container max-w-[1680px] mx-auto px-4 sm:px-6 pt-6">
         {/* Back Link */}
         <div className="mb-6">
           <Link 
@@ -115,18 +115,20 @@ export default function CategoryClient({
           </div>
         </header>
 
-        {/* 3. PRODUCTS GRID */}
+        {/* 3. PRODUCTS GRID (4 IN EACH ROW ON DESKTOP, ALPHABETICAL A TO Z) */}
         <section aria-labelledby="products-heading" className="mb-16">
           <h2 id="products-heading" className="sr-only">Available {category.name}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {categoryProducts.map((product, idx) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onEnquire={handleEnquire}
-                priority={idx < 3}
-              />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...categoryProducts]
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((product, idx) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onEnquire={handleEnquire}
+                  priority={idx < 4}
+                />
+              ))}
           </div>
         </section>
 

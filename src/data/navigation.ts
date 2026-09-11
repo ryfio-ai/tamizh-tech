@@ -82,18 +82,35 @@ export const productsDropdown = {
   viewAllLabel: "View All Products",
   categories: [
     {
-      title: "Robotics & Kits",
+      title: "Competition Robots",
       items: [
-        { label: "Competition Robots", href: "/products/competition", desc: "Combat & race bots engineered in Coimbatore" },
-        { label: "RC Robo Race", href: "/products/competition/rc-robo-race", desc: "High-RPM racing & drift chassis" },
-        { label: "RC Robo Soccer", href: "/products/competition/rc-robo-soccer", desc: "High-torque tournament striker" }
+        { label: "All Competition Bots", href: "/products/competition", desc: "TTRC LF, Robo Race & Robo Soccer" },
+        { label: "TTRC LF 5.0 Line Follower", href: "/products/competition/ttrc-lf-5-0", desc: "PID competition-grade racer" },
+        { label: "TTRC RR-5.0 Robo Race", href: "/products/competition/rc-robo-race", desc: "High-RPM racing & drift chassis" },
+        { label: "TTRC RS-5.0 Robo Soccer", href: "/products/competition/rc-robo-soccer", desc: "High-torque tournament striker" }
       ]
     },
     {
       title: "Radio Controllers",
       items: [
-        { label: "Radio Controllers", href: "/products/radio-controllers", desc: "FlySky 2.4GHz transmitters & telemetry" },
-        { label: "FlySky FS-i6X 10CH", href: "/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver", desc: "10-Channel telemetry controller" }
+        { label: "All Radio Controllers", href: "/products/radio-controllers", desc: "FlySky 2.4GHz transmitters & receivers" },
+        { label: "FlySky FS-i6X 10CH", href: "/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver", desc: "10-Channel telemetry controller" },
+        { label: "FlySky FS-i6 6CH", href: "/products/radio-controllers/flysky-fs-i6-2.4g-6ch", desc: "Reliable 6-channel RC radio" }
+      ]
+    },
+    {
+      title: "Educational Robotics",
+      items: [
+        { label: "All Educational Kits", href: "/products/educational-robotics", desc: "Hands-on STEM robotics platforms" },
+        { label: "The Boxing Bot", href: "/products/educational-robotics/boxing-bot", desc: "Interactive combat learning kit" }
+      ]
+    },
+    {
+      title: "Robotics Components",
+      items: [
+        { label: "All Components", href: "/products/robotics-components", desc: "Motors, wheels & hardware" },
+        { label: "112MM / 100MM Wheels", href: "/products/robotics-components/112mm-buggy-wheel", desc: "High-grip competition buggy wheels" },
+        { label: "TTRC DGJ DC Motors", href: "/products/robotics-components/ttrc-dgj-300rpm", desc: "300RPM & 600RPM geared motors" }
       ]
     }
   ]

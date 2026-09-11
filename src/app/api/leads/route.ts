@@ -163,6 +163,7 @@ export async function POST(request: Request) {
       productCategorySlug,
       productSlug,
       productUrl,
+      productConfiguration: body.productConfiguration || body.productContext?.productConfiguration || undefined,
       quantity,
       lineItems: body.lineItems ? String(body.lineItems).slice(0, 1000) : undefined,
       courseName,

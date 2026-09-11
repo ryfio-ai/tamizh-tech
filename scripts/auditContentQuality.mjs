@@ -108,6 +108,13 @@ const requiredImages = [
   'public/projects/security-emergency.jpg',
   'public/projects/commercial-automation.jpg',
   'public/projects/advanced-kinematics.jpg',
+  'public/product/lfr/1.jpeg',
+  'public/product/lfr/2.jpeg',
+  'public/product/lfr/3.jpeg',
+  'public/product/dc motors/300rpm johnson 1.jpg',
+  'public/product/dc motors/300rpm johnson 2.jpg',
+  'public/product/dc motors/600rpm johnson 1.jpg',
+  'public/product/dc motors/600rpm johnson 2.jpg',
 ];
 
 for (const img of requiredImages) {

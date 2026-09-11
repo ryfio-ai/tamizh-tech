@@ -73,6 +73,27 @@ const nextConfig = {
         destination: '/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver',
         permanent: true,
       },
+      // ── DC Motors Alternate & Flat URLs → Canonical Hierarchical URLs (HTTP 308) ──
+      {
+        source: '/products/dc-motors/ttrc-dgj-300rpm',
+        destination: '/products/robotics-components/ttrc-dgj-300rpm',
+        permanent: true,
+      },
+      {
+        source: '/products/dc-motors/ttrc-dgj-600rpm',
+        destination: '/products/robotics-components/ttrc-dgj-600rpm',
+        permanent: true,
+      },
+      {
+        source: '/products/ttrc-dgj-300rpm',
+        destination: '/products/robotics-components/ttrc-dgj-300rpm',
+        permanent: true,
+      },
+      {
+        source: '/products/ttrc-dgj-600rpm',
+        destination: '/products/robotics-components/ttrc-dgj-600rpm',
+        permanent: true,
+      },
       // ── Legacy Flat Course URLs → Canonical Hierarchical URLs (HTTP 308) ──
       {
         source: '/courses/robotics-for-schools',

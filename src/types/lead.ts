@@ -61,6 +61,7 @@ export interface LeadPayload {
   productCategorySlug?: string;
   productSlug?: string;
   productUrl?: string;
+  productConfiguration?: string;
   quantity?: number | string;
 
   // Multi-product line items (Cart)

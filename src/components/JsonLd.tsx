@@ -113,6 +113,20 @@ export function ProductSchema({ product }: any) {
     "inLanguage": "en-IN"
   };
 
+  // Honest published price Offer without fake merchant/stock markup
+  if (product.price && typeof product.price === 'number' && product.price > 0) {
+    schema.offers = {
+      "@type": "Offer",
+      "price": product.price,
+      "priceCurrency": "INR",
+      "url": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`,
+      "seller": {
+        "@type": "Organization",
+        "name": "Tamizh Tech Robotics Company"
+      }
+    };
+  }
+
   return (
     <script
       type="application/ld+json"
@@ -215,6 +229,44 @@ export function ArticleSchema({ post }: { post: any }) {
         "@type": "ImageObject",
         "url": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png"
       }
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function CompetitionGuideSchema({ guide }: { guide: any }) {
+  const canonicalUrl = `https://www.tamizhtech.in/events/${guide.categorySlug}/${guide.slug}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": guide.title,
+    "description": guide.metaDescription || guide.overview,
+    "url": canonicalUrl,
+    "datePublished": guide.createdAt || "2026-03-01T00:00:00.000Z",
+    "dateModified": guide.updatedAt || "2026-09-11T00:00:00.000Z",
+    "inLanguage": "en-IN",
+    "author": {
+      "@type": "Organization",
+      "name": "Tamizh Tech Robotics Club & Company",
+      "url": "https://www.tamizhtech.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tamizh Tech Robotics Company",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalUrl
     }
   };
 

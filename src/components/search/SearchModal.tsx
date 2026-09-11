@@ -76,11 +76,20 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     // 2. Products
     for (const p of products) {
       if (!p.published) continue;
+      const configMatch = p.configurations?.some(
+        c => c.name.toLowerCase().includes(trimmed) || (c.sku && c.sku.toLowerCase().includes(trimmed))
+      );
       if (
         p.name.toLowerCase().includes(trimmed) ||
+        (p.sku && p.sku.toLowerCase().includes(trimmed)) ||
+        configMatch ||
         (p.shortDescription && p.shortDescription.toLowerCase().includes(trimmed)) ||
+        (p.description && p.description.toLowerCase().includes(trimmed)) ||
         p.category.toLowerCase().includes(trimmed) ||
-        (p.specs && p.specs.toLowerCase().includes(trimmed))
+        (p.specs && p.specs.toLowerCase().includes(trimmed)) ||
+        (p.applications && p.applications.some(a => a.toLowerCase().includes(trimmed))) ||
+        (p.highlights && p.highlights.some(h => h.toLowerCase().includes(trimmed))) ||
+        p.slug.toLowerCase().includes(trimmed)
       ) {
         matches.push({
           id: `prod-${p.id}`,

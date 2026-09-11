@@ -51,6 +51,8 @@ const expectedRedirects = [
   '/products/competition/rc-robo-sumo',
   '/products/radio-controllers/flysky-fs-i6-transmitter',
   '/products/radio-controllers/flysky-fs-i6x-transmitter',
+  '/products/dc-motors/ttrc-dgj-300rpm',
+  '/products/dc-motors/ttrc-dgj-600rpm',
   '/en-us',
   '/ta'
 ];

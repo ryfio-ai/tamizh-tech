@@ -19,7 +19,9 @@ import {
   Scissors,
   Printer,
   Cpu,
-  Factory
+  Factory,
+  GraduationCap,
+  FolderGit2
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
@@ -65,10 +67,105 @@ const SERVICE_META: Record<string, { title: string; desc: string; href: string; 
   },
 };
 
+const COURSE_META: Record<string, { title: string; desc: string; href: string }> = {
+  "robotics-for-schools": {
+    title: "Robotics for Schools",
+    desc: "Hands-on robotics program for school students (Grade 6–12). Build, program, and compete.",
+    href: "/courses/school/robotics-for-schools"
+  },
+  "stem-basics": {
+    title: "STEM Basics",
+    desc: "Foundational STEM, basic circuitry, and interactive logic block programming.",
+    href: "/courses/school/stem-basics"
+  },
+  "embedded-systems": {
+    title: "Embedded Systems & IoT",
+    desc: "Microcontroller architecture, sensor communication protocols, and RTOS firmware.",
+    href: "/courses/college/embedded-systems"
+  },
+  "drone-engineering": {
+    title: "Drone Engineering",
+    desc: "UAV frame aerodynamics, flight controller tuning, and RF transmitter calibration.",
+    href: "/courses/college/drone-engineering"
+  },
+  "industrial-automation-plc": {
+    title: "Industrial Automation (PLC)",
+    desc: "Industry-grade PLC programming, SCADA, motor drives, and industrial automation.",
+    href: "/courses/professionals/industrial-automation-plc"
+  },
+  "ai-machine-learning": {
+    title: "AI & Machine Learning",
+    desc: "Edge computing, vision models, and intelligent robotics navigation.",
+    href: "/courses/college/ai-machine-learning"
+  },
+  "robotics-iot-embedded": {
+    title: "Embedded Systems & IoT",
+    desc: "Microcontroller architecture, sensor communication protocols, and RTOS firmware.",
+    href: "/courses/college/embedded-systems"
+  },
+  "arduino-robotics": {
+    title: "Robotics for Schools & Makers",
+    desc: "Hands-on microcontroller programming, sensor integration, and chassis assembly.",
+    href: "/courses/school/robotics-for-schools"
+  },
+  "cad-3d-printing": {
+    title: "Precision 3D Printing & CAD",
+    desc: "Rapid mechanical prototyping, CAD enclosures, and custom mounting brackets.",
+    href: "/services/3d-printing"
+  }
+};
+
+const PROJECT_CATEGORY_META: Record<string, { title: string; desc: string; href: string }> = {
+  "advanced-kinematics": {
+    title: "Advanced Kinematics & Robotics",
+    desc: "Multi-axis motion mechanics, competition robotics, and dynamic balancing systems.",
+    href: "/projects/category/advanced-kinematics"
+  },
+  "ev-smart-mobility": {
+    title: "EV & Smart Mobility",
+    desc: "High-torque drivetrain testing, motor speed control, and battery telemetry.",
+    href: "/projects/category/ev-smart-mobility"
+  },
+  "computer-vision-edge-ai": {
+    title: "Computer Vision & Edge AI",
+    desc: "Autonomous optical line tracking, obstacle detection, and edge camera processing.",
+    href: "/projects/category/computer-vision-edge-ai"
+  },
+  "commercial-automation": {
+    title: "Commercial & Lab Automation",
+    desc: "Custom mechanical sorting mechanisms, lab demonstration rigs, and testing beds.",
+    href: "/projects/category/commercial-automation"
+  },
+  "industrial-manufacturing": {
+    title: "Industrial Manufacturing Systems",
+    desc: "Heavy-duty conveyor drives, AGV platforms, and robust factory mechanisms.",
+    href: "/projects/category/industrial-manufacturing"
+  },
+  "security-emergency": {
+    title: "Security & Emergency Robotics",
+    desc: "Long-range RF remote inspection robots and hazardous area rovers.",
+    href: "/projects/category/security-emergency"
+  },
+  "healthcare-assistive": {
+    title: "Healthcare & Assistive Robotics",
+    desc: "Servo-driven biomimetic joints, articulated robotic arms, and rehabilitation tools.",
+    href: "/projects/category/healthcare-assistive"
+  }
+};
+
 export default function ProductDetailClient({ product, related }: ProductDetailClientProps) {
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [activeTab, setActiveTab] = useState<"specs" | "included" | "applications" | "docs">("specs");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Configuration Selector State
+  const [selectedConfigId, setSelectedConfigId] = useState<string>(
+    product.configurations && product.configurations.length > 0
+      ? (product.configurations.find(c => c.isDefault)?.id || product.configurations[0].id)
+      : ""
+  );
+
+  const selectedConfig = product.configurations?.find(c => c.id === selectedConfigId);
 
   // Quote Modal & Structured Context
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
@@ -82,6 +179,10 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
     productName: product.name,
     categorySlug: product.categorySlug,
     sourcePage: `/products/${product.categorySlug}/${product.slug}`,
+    productConfiguration: selectedConfig ? selectedConfig.id : undefined,
+    configurationName: selectedConfig ? selectedConfig.name : undefined,
+    productConfigurationSku: selectedConfig?.sku || product.sku,
+    configurationPrice: selectedConfig?.price || product.price,
   };
 
   useEffect(() => {
@@ -93,6 +194,20 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
     });
   }, [product.slug, product.name, product.categorySlug, productContext.sourcePage]);
 
+  const handleSelectConfiguration = (cfgId: string) => {
+    setSelectedConfigId(cfgId);
+    const cfg = product.configurations?.find(c => c.id === cfgId);
+    if (cfg) {
+      trackMarketingEvent("product_configuration_select", {
+        productSlug: product.slug,
+        productName: product.name,
+        productConfiguration: cfg.id,
+        productConfigurationSku: cfg.sku || product.sku,
+        sourcePage: `/products/${product.categorySlug}/${product.slug}`,
+      });
+    }
+  };
+
   const handleOpenEnquiry = (customReq?: string) => {
     setQuoteRequirement(customReq);
     setIsQuoteOpen(true);
@@ -100,6 +215,8 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       productSlug: product.slug,
       productName: product.name,
       categorySlug: product.categorySlug,
+      productConfiguration: selectedConfig?.id,
+      productConfigurationSku: selectedConfig?.sku || product.sku,
       sourcePage: productContext.sourcePage,
     });
   };
@@ -109,11 +226,20 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       productSlug: product.slug,
       productName: product.name,
       categorySlug: product.categorySlug,
+      productConfiguration: selectedConfig?.id,
+      productConfigurationSku: selectedConfig?.sku || product.sku,
       sourcePage: productContext.sourcePage,
     });
-    const message = encodeURIComponent(
-      `Hello Tamizh Tech! I am viewing "${product.name}" (${product.category}) on your website and would like to know more about requirements, lead times, and availability.`
-    );
+    let messageText = `Hello Tamizh Tech! I am viewing "${product.name}" (${product.category}) on your website and would like to know more about requirements, lead times, and availability.`;
+    if (product.slug === "ttrc-dgj-300rpm") {
+      messageText = "Hi Tamizh Tech, I am interested in the TTRC DGJ 300RPM motor. I would like to know more about the product.";
+    } else if (product.slug === "ttrc-dgj-600rpm") {
+      messageText = "Hi Tamizh Tech, I am interested in the TTRC DGJ 600RPM motor. I would like to know more about the product.";
+    } else if (selectedConfig) {
+      const prodTitle = product.slug === "rc-robo-race" ? "TTRC RR-5.0 Robo Race" : product.name;
+      messageText = `Hi Tamizh Tech, I am interested in the ${prodTitle} — ${selectedConfig.name} configuration. I would like to know more about the product.`;
+    }
+    const message = encodeURIComponent(messageText);
     window.open(`https://wa.me/918148045030?text=${message}`, "_blank");
   };
 
@@ -122,6 +248,8 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       productSlug: product.slug,
       productName: product.name,
       categorySlug: product.categorySlug,
+      productConfiguration: selectedConfig?.id,
+      productConfigurationSku: selectedConfig?.sku || product.sku,
       sourcePage: productContext.sourcePage,
     });
     handleOpenEnquiry(
@@ -129,10 +257,12 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
     );
   };
 
-  // Highlights
-  const highlights = product.highlights && product.highlights.length > 0
-    ? product.highlights
-    : (product.specifications ? product.specifications.slice(0, 3) : []);
+  // Dynamic Highlights based on selected configuration
+  const highlights = selectedConfig?.highlights && selectedConfig.highlights.length > 0
+    ? selectedConfig.highlights
+    : (product.highlights && product.highlights.length > 0
+      ? product.highlights
+      : (product.specifications ? product.specifications.slice(0, 3) : []));
 
   // Specs list
   const specsList = product.detailedSpecs && product.detailedSpecs.length > 0
@@ -177,20 +307,20 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
           
           {/* LEFT: DOMINANT IMAGE GALLERY (5 cols) */}
           <div className="lg:col-span-6 flex flex-col gap-4">
-            <div className="relative aspect-[4/3] w-full bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden p-6 sm:p-8 flex items-center justify-center shadow-xs">
-              <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative aspect-[4/3] w-full bg-slate-100 rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+              <div className="relative w-full h-full">
                 <Image
                   src={images[selectedImageIdx] || product.image}
-                  alt={`${product.name} - View ${selectedImageIdx + 1}`}
+                  alt={product.imageAlts && product.imageAlts[selectedImageIdx] ? product.imageAlts[selectedImageIdx] : `${product.name} - View ${selectedImageIdx + 1}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
-                  className="object-contain p-2"
+                  className="object-cover"
                 />
               </div>
 
               {product.badge && (
-                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold tracking-wide rounded-md bg-white/95 text-slate-900 border border-slate-200 shadow-2xs">
+                <span className="absolute top-4 left-4 px-3 py-1 text-xs font-bold tracking-wide rounded-md bg-white/95 text-slate-900 border border-slate-200 shadow-2xs backdrop-blur-xs">
                   {product.badge}
                 </span>
               )}
@@ -204,18 +334,18 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                     key={idx}
                     type="button"
                     onClick={() => setSelectedImageIdx(idx)}
-                    className={`relative w-20 h-20 rounded-xl bg-slate-50 border overflow-hidden shrink-0 transition-all p-2 ${
+                    className={`relative w-20 h-20 rounded-xl bg-slate-100 border overflow-hidden shrink-0 transition-all ${
                       selectedImageIdx === idx
-                        ? "border-[#FF6B00] ring-2 ring-[#FF6B00]/20 shadow-2xs"
-                        : "border-slate-200 hover:border-slate-300 opacity-70 hover:opacity-100"
+                        ? "border-[#FF6B00] ring-2 ring-[#FF6B00]/40 shadow-xs"
+                        : "border-slate-200 hover:border-slate-300 opacity-75 hover:opacity-100"
                     }`}
                     aria-label={`View photo ${idx + 1}`}
                   >
                     <Image
                       src={img}
-                      alt={`${product.name} thumbnail ${idx + 1}`}
+                      alt={product.imageAlts && product.imageAlts[idx] ? product.imageAlts[idx] : `${product.name} thumbnail ${idx + 1}`}
                       fill
-                      className="object-contain p-1"
+                      className="object-cover"
                     />
                   </button>
                 ))}
@@ -268,17 +398,62 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                 </div>
               )}
 
+              {/* Configuration Selector */}
+              {product.configurations && product.configurations.length > 0 && (
+                <div className="mb-6">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2.5">
+                    Choose Configuration:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {product.configurations.map((cfg) => {
+                      const isSelected = selectedConfigId === cfg.id;
+                      return (
+                        <button
+                          key={cfg.id}
+                          type="button"
+                          onClick={() => handleSelectConfiguration(cfg.id)}
+                          className={`p-3.5 rounded-xl border text-left transition-all flex items-center justify-between ${
+                            isSelected
+                              ? "border-[#FF6B00] bg-orange-50/70 ring-2 ring-[#FF6B00]/20 shadow-2xs"
+                              : "border-slate-200 hover:border-slate-300 bg-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${isSelected ? "border-[#FF6B00]" : "border-slate-300"}`}>
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-[#FF6B00]" />}
+                            </div>
+                            <div>
+                              <span className="text-xs sm:text-sm font-bold text-slate-900 block">{cfg.name}</span>
+                              {cfg.sku && (
+                                <span className="text-[10px] font-mono text-slate-400 block">SKU #{cfg.sku}</span>
+                              )}
+                            </div>
+                          </div>
+                          <span className="text-xs sm:text-sm font-black text-slate-950">₹{cfg.price.toLocaleString("en-IN")}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Pricing (Factual dataset price only) */}
-              {product.price && product.price > 0 && (
+              {((selectedConfig?.price) || (product.price && product.price > 0)) && (
                 <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Unit Estimate:</span>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      {selectedConfig ? `${selectedConfig.name}:` : "Unit Estimate:"}
+                    </span>
                     <span className="text-2xl font-black text-slate-950">
-                      ₹{product.price.toLocaleString("en-IN")}
+                      ₹{(selectedConfig ? selectedConfig.price : product.price)?.toLocaleString("en-IN")}{product.priceUnit && !selectedConfig ? ` ${product.priceUnit}` : ""}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1">
-                    Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry.
+                    {selectedConfig
+                      ? `Verified configuration pricing for ${selectedConfig.name}. Official quotation provided on enquiry. No online payment.`
+                      : product.pricingNote
+                      ? `${product.pricingNote} Official quotation provided on enquiry. No online payment.`
+                      : "Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry."}
                   </p>
                 </div>
               )}
@@ -335,6 +510,22 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
             </div>
           </div>
         </div>
+
+        {/* AEO Quick Answer (Visible Question -> Direct Answer -> Semantic HTML) */}
+        {product.quickAnswer && (
+          <section className="mb-12 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-2xs">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF6B00] mb-2">
+              <HelpCircle className="w-4 h-4 text-[#FF6B00]" />
+              <span>Quick Answer</span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold font-heading text-slate-950 mb-3">
+              What is {product.name}?
+            </h2>
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+              {product.quickAnswer}
+            </p>
+          </section>
+        )}
 
         {/* 4. "WHY THIS PRODUCT?" SECTION */}
         {product.whyThisProduct && (
@@ -465,19 +656,104 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
           )}
 
           {/* TAB 2: WHAT'S INCLUDED */}
-          {activeTab === "included" && product.includedItems && (
+          {activeTab === "included" && (
             <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
-              <h3 className="text-sm font-bold text-slate-900 mb-4 font-heading">
-                Package Contents & Included Hardware
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {product.includedItems.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 p-3.5 rounded-xl border border-slate-100 bg-slate-50/50 text-xs sm:text-sm text-slate-800">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </div>
-                ))}
+              <div className="mb-6">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Package Contents & Hardware Breakdown
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Verified hardware components included in each product configuration.
+                </p>
               </div>
+
+              {/* Configuration Comparison or Standard List */}
+              {product.configurations && product.configurations.some(c => c.includedItems && c.includedItems.length > 0) ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {product.configurations.map((cfg) => {
+                    const isSelected = selectedConfigId === cfg.id;
+                    const items = cfg.includedItems || product.includedItems || [];
+                    return (
+                      <div
+                        key={cfg.id}
+                        className={`rounded-2xl border transition-all p-5 sm:p-6 flex flex-col justify-between ${
+                          isSelected
+                            ? "border-[#FF6B00] bg-orange-50/25 ring-2 ring-[#FF6B00]/20 shadow-xs"
+                            : "border-slate-200 bg-white hover:border-slate-300"
+                        }`}
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-black uppercase tracking-wider text-slate-950">
+                                  {cfg.name}
+                                </span>
+                                {cfg.sku && (
+                                  <span className="text-[10px] font-mono text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">
+                                    SKU #{cfg.sku}
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-lg font-black text-[#FF6B00] block mt-1">
+                                ₹{cfg.price.toLocaleString("en-IN")}
+                              </span>
+                            </div>
+                            {isSelected ? (
+                              <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#FF6B00] bg-orange-100/80 rounded-md border border-orange-200">
+                                Selected Configuration
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => handleSelectConfiguration(cfg.id)}
+                                className="px-2.5 py-1 text-[10px] font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors"
+                              >
+                                Select
+                              </button>
+                            )}
+                          </div>
+
+                          <ul className="space-y-2.5">
+                            {items.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                                <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? "text-[#FF6B00]" : "text-emerald-600"}`} />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="pt-5 mt-5 border-t border-slate-100">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              handleSelectConfiguration(cfg.id);
+                              handleOpenEnquiry(`Enquiry for ${product.name} — ${cfg.name} configuration (₹${cfg.price.toLocaleString("en-IN")})`);
+                            }}
+                            className={`w-full py-2.5 px-4 text-xs font-bold rounded-xl transition-colors text-center ${
+                              isSelected
+                                ? "bg-[#FF6B00] hover:bg-[#e05e00] text-white shadow-xs"
+                                : "bg-slate-100 hover:bg-slate-200 text-slate-900"
+                            }`}
+                          >
+                            Enquire for {cfg.name}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {(product.includedItems || []).map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 p-3.5 rounded-xl border border-slate-100 bg-slate-50/50 text-xs sm:text-sm text-slate-800">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
@@ -526,6 +802,122 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
           )}
         </section>
 
+        {/* 5b. COMPARE THE TWO MOTORS (TTRC DGJ 300RPM vs 600RPM) */}
+        {(product.slug === "ttrc-dgj-300rpm" || product.slug === "ttrc-dgj-600rpm") && (
+          <section className="mb-16 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+            <div className="p-5 sm:p-6 border-b border-slate-100 bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Side-by-Side Comparison
+                </span>
+                <h2 className="text-lg sm:text-xl font-bold font-heading text-slate-900">
+                  Compare the Two Motors — TTRC DGJ Series
+                </h2>
+              </div>
+              <p className="text-xs text-slate-500 max-w-sm">
+                Factual specification differences to help choose the right motor for your speed, torque, and mounting constraints.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-100/70">
+                    <th className="p-4 font-bold text-slate-900">Specification</th>
+                    <th className={`p-4 font-bold ${product.slug === "ttrc-dgj-300rpm" ? "text-[#FF6B00] bg-orange-50/50" : "text-slate-900"}`}>
+                      TTRC DGJ 300RPM
+                      {product.slug === "ttrc-dgj-300rpm" && (
+                        <span className="ml-2 text-[10px] font-semibold bg-orange-100 text-[#FF6B00] px-2 py-0.5 rounded">
+                          Current
+                        </span>
+                      )}
+                    </th>
+                    <th className={`p-4 font-bold ${product.slug === "ttrc-dgj-600rpm" ? "text-[#FF6B00] bg-orange-50/50" : "text-slate-900"}`}>
+                      TTRC DGJ 600RPM
+                      {product.slug === "ttrc-dgj-600rpm" && (
+                        <span className="ml-2 text-[10px] font-semibold bg-orange-100 text-[#FF6B00] px-2 py-0.5 rounded">
+                          Current
+                        </span>
+                      )}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">SKU</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30 font-bold" : "text-slate-600"}`}>TTRC-RC-4</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30 font-bold" : "text-slate-600"}`}>TTRC-RC-5</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Catalogue Price</td>
+                    <td className={`p-4 font-bold ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-900"}`}>₹650</td>
+                    <td className={`p-4 font-bold ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-900"}`}>₹700</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Operating Voltage</td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>6–18 V</td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>6–18 V</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Rated Voltage</td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>12 V</td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>12 V</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Base Motor RPM</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>18000</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>18000</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Rated Torque</td>
+                    <td className={`p-4 font-semibold ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-700"}`}>34.2 N-cm</td>
+                    <td className={`p-4 font-semibold ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-700"}`}>15.1 N-cm</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Stall Torque</td>
+                    <td className={`p-4 font-semibold ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-700"}`}>300 N-cm</td>
+                    <td className={`p-4 font-semibold ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30 text-slate-950" : "text-slate-700"}`}>122 N-cm</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Gearbox Dimensions (L × W)</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>25 × 37 mm</td>
+                    <td className={`p-4 font-mono ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30" : "text-slate-600"}`}>22 × 37 mm</td>
+                  </tr>
+                  <tr className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 font-semibold text-slate-700">Product Page Action</td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-300rpm" ? "bg-orange-50/30" : ""}`}>
+                      {product.slug === "ttrc-dgj-300rpm" ? (
+                        <span className="text-xs font-bold text-[#FF6B00]">Currently Viewing</span>
+                      ) : (
+                        <Link
+                          href="/products/robotics-components/ttrc-dgj-300rpm"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
+                        >
+                          <span>View 300RPM Specs</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                    </td>
+                    <td className={`p-4 ${product.slug === "ttrc-dgj-600rpm" ? "bg-orange-50/30" : ""}`}>
+                      {product.slug === "ttrc-dgj-600rpm" ? (
+                        <span className="text-xs font-bold text-[#FF6B00]">Currently Viewing</span>
+                      ) : (
+                        <Link
+                          href="/products/robotics-components/ttrc-dgj-600rpm"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
+                        >
+                          <span>View 600RPM Specs</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
         {/* 6. GENUINELY RELEVANT COMMERCIAL SERVICES (PHASE 1 LINKS) */}
         {product.relatedServices && product.relatedServices.length > 0 && (
           <section className="mb-16">
@@ -573,6 +965,116 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
 
                     <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1 text-xs font-bold text-[#FF6B00]">
                       <span>Explore Service</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* RELATED COURSES & HANDS-ON LEARNING */}
+        {product.relatedCourses && product.relatedCourses.length > 0 && (
+          <section className="mb-16">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Skill Building & Training
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+                  Recommended Courses & Labs
+                </h2>
+              </div>
+              <p className="text-xs text-slate-500 max-w-sm">
+                Learn to program, assemble, and customize robotics systems with hands-on mentoring.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {product.relatedCourses.map((courseKey) => {
+                const course = COURSE_META[courseKey];
+                if (!course) return null;
+
+                return (
+                  <Link
+                    key={courseKey}
+                    href={course.href}
+                    onClick={() => trackMarketingEvent("product_related_course_click", {
+                      course: courseKey,
+                      productSlug: product.slug,
+                    })}
+                    className="group p-5 rounded-2xl border border-slate-200 hover:border-blue-500 bg-white hover:bg-blue-50/20 transition-all flex flex-col justify-between shadow-2xs"
+                  >
+                    <div>
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                        <GraduationCap className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
+                        {course.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {course.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1 text-xs font-bold text-blue-600">
+                      <span>View Course Syllabus</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* RELATED PROJECTS & DOMAIN APPLICATIONS */}
+        {product.relatedProjects && product.relatedProjects.length > 0 && (
+          <section className="mb-16">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Engineering Case Studies
+                </span>
+                <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+                  Related Project Categories
+                </h2>
+              </div>
+              <p className="text-xs text-slate-500 max-w-sm">
+                Explore real-world deployments and engineering architectures using this mechatronics class.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {product.relatedProjects.map((projectKey) => {
+                const project = PROJECT_CATEGORY_META[projectKey];
+                if (!project) return null;
+
+                return (
+                  <Link
+                    key={projectKey}
+                    href={project.href}
+                    onClick={() => trackMarketingEvent("product_related_project_click", {
+                      projectCategory: projectKey,
+                      productSlug: product.slug,
+                    })}
+                    className="group p-5 rounded-2xl border border-slate-200 hover:border-emerald-600 bg-white hover:bg-emerald-50/20 transition-all flex flex-col justify-between shadow-2xs"
+                  >
+                    <div>
+                      <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                        <FolderGit2 className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors mb-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {project.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center gap-1 text-xs font-bold text-emerald-600">
+                      <span>Explore Projects</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
@@ -695,18 +1197,19 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       {/* 10. MOBILE STICKY ENQUIRY BAR (320px, 375px, 390px, 430px) */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 shadow-lg flex items-center gap-2">
         <button
-          onClick={() => handleOpenEnquiry()}
-          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs rounded-xl transition-colors"
-        >
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>Enquire About Product</span>
-        </button>
-        <button
           onClick={handleWhatsApp}
-          className="inline-flex items-center justify-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors shadow-2xs"
           aria-label="WhatsApp"
         >
           <FaWhatsapp className="w-4 h-4" />
+          <span>WhatsApp</span>
+        </button>
+        <button
+          onClick={() => handleOpenEnquiry()}
+          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs rounded-xl transition-colors shadow-2xs"
+        >
+          <MessageSquare className="w-3.5 h-3.5" />
+          <span>ENQUIRE ABOUT THIS PRODUCT</span>
         </button>
       </div>
 

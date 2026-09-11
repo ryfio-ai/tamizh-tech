@@ -49,7 +49,7 @@ export const categories: Category[] = [
     slug: 'radio-controllers',
     name: 'Radio Controllers',
     contentType: 'products',
-    description: 'Precision 2.4GHz AFHDS transmitters and receivers from FlySky with multi-channel telemetry for UAVs, aircraft, and competition robots.',
+    description: 'FlySky 2.4GHz AFHDS and AFHDS 2A transmitters and receivers with multi-channel telemetry for UAVs, aircraft, and robotics platforms.',
     image: '/product/flysky/flysky-fs-i6x-10ch.jpg',
     seoTitle: 'Radio Controllers & RC Transmitters | Tamizh Tech Coimbatore',
     seoDescription: 'Shop FlySky 2.4GHz 6CH and 10CH RC transmitters, receivers, and telemetry controllers with GST invoice and technical support in India.',
@@ -69,6 +69,66 @@ export const categories: Category[] = [
     ],
     published: true,
     createdAt: '2024-02-10T00:00:00.000Z',
+    updatedAt: '2026-03-01T00:00:00.000Z'
+  },
+  {
+    id: 'prod-educational-robotics',
+    slug: 'educational-robotics',
+    name: 'Educational Robotics',
+    contentType: 'products',
+    description: 'Hands-on educational robotics kits designed for STEM learning, modular building, and practical engineering experimentation.',
+    image: '/product/boxingrobot/3.jpeg',
+    seoTitle: 'Educational Robotics Kits & STEM Bots | Tamizh Tech Coimbatore',
+    seoDescription: 'Explore hands-on educational robotics kits by Tamizh Tech Coimbatore. Build, program, and control real robots for STEM learning and competitions.',
+    primaryKeyword: 'educational robotics kits India',
+    secondaryKeywords: [
+      'educational robotics',
+      'STEM robotics kit',
+      'boxing robot kit',
+      'ESP32 robotics kit',
+      'robotics learning kit Coimbatore'
+    ],
+    applications: [
+      'Robotics Training',
+      'STEM Education',
+      'Hands-on Robotics Learning',
+      'Robotics Practice',
+      'Competitive / Gamified Robotics'
+    ],
+    published: true,
+    createdAt: '2024-03-01T00:00:00.000Z',
+    updatedAt: '2026-03-01T00:00:00.000Z'
+  },
+  {
+    id: 'prod-robotics-components',
+    slug: 'robotics-components',
+    name: 'Robotics Components',
+    contentType: 'products',
+    description: 'Geared DC motors, high-traction buggy wheels, heavy-duty robot wheels, and mechanical hardware for robotics platforms.',
+    image: '/product/wheels/buggy wheel/112mm wheel 1.jpg',
+    seoTitle: 'Robotics Components, DC Motors & Robot Wheels | Tamizh Tech Coimbatore',
+    seoDescription: 'Genuine geared DC motors, robotic wheels, 112mm and 100mm buggy wheels, and heavy-duty nylon wheels for competition bots and rovers in India.',
+    primaryKeyword: 'robotics components India',
+    secondaryKeywords: [
+      'geared DC motor Coimbatore',
+      'TTRC DGJ DC motor',
+      '300RPM 600RPM motor',
+      'robot wheels India',
+      'buggy wheels robotics',
+      '112mm robot wheel',
+      '100mm robot wheel',
+      'TTRC HD wheel',
+      'competition robot components Coimbatore'
+    ],
+    applications: [
+      'Robo Race competitions',
+      'Robo Soccer platforms',
+      'Autonomous rovers and mobile platforms',
+      'Geared DC motor drive systems',
+      'High-traction robotics wheel replacements'
+    ],
+    published: true,
+    createdAt: '2024-03-01T00:00:00.000Z',
     updatedAt: '2026-03-01T00:00:00.000Z'
   },
 

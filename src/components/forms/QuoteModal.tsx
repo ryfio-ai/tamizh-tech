@@ -5,11 +5,15 @@ import { X, CheckCircle2, AlertCircle, Loader2, Send, Wrench, ShieldCheck, Arrow
 import { FaWhatsapp } from "react-icons/fa";
 
 export interface ProductEnquiryContext {
-  sourceType: "product";
-  productSlug: string;
+  sourceType: "product" | "event";
+  productSlug?: string;
   productName: string;
   categorySlug: string;
   sourcePage: string;
+  productConfiguration?: string;
+  configurationName?: string;
+  productConfigurationSku?: string;
+  configurationPrice?: number;
 }
 
 export interface ProjectEnquiryContext {
@@ -76,11 +80,15 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
         }));
       }
     } else if (productContext) {
-      setSelectedService("products");
+      setSelectedService(productContext.sourceType === "event" ? "training" : "products");
       if (!formData.requirement) {
+        const configStr = productContext.configurationName ? ` [Configuration: ${productContext.configurationName}]` : "";
+        const isWheel = productContext.productSlug?.includes("wheel");
         setFormData(prev => ({
           ...prev,
-          requirement: `Enquiry for ${productContext.productName} (${productContext.categorySlug}). Quantity needed: `,
+          requirement: isWheel
+            ? `Enquiry for ${productContext.productName}. Quantity needed (sets of 4 or individual pcs): `
+            : `Enquiry for ${productContext.productName}${configStr}. Quantity needed / application requirements: `,
         }));
       }
     } else if (defaultService) {
@@ -121,7 +129,10 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
         const typeLabel = projectContext.projectType === "completed" ? "Completed Project" : "Project Topic";
         specificNotes = `Project Enquiry: ${projectContext.projectName} [Slug: ${projectContext.projectSlug}] | Type: ${typeLabel} | Category: ${projectContext.projectCategory} | Source: ${projectContext.sourcePage}`;
       } else if (productContext) {
-        specificNotes = `Product Enquiry: ${productContext.productName} [Slug: ${productContext.productSlug}] | Category: ${productContext.categorySlug} | Source: ${productContext.sourcePage}`;
+        const configNote = productContext.configurationName || productContext.productConfiguration
+          ? ` | Configuration: ${productContext.configurationName || productContext.productConfiguration}${productContext.configurationPrice ? ` (₹${productContext.configurationPrice.toLocaleString("en-IN")})` : ""}${productContext.productConfigurationSku ? ` [SKU: ${productContext.productConfigurationSku}]` : ""}`
+          : "";
+        specificNotes = `Product Enquiry: ${productContext.productName} [Slug: ${productContext.productSlug}]${configNote} | Category: ${productContext.categorySlug} | Source: ${productContext.sourcePage}`;
       } else {
         specificNotes = `Selected Category: ${currentServiceObj.label} (${currentServiceObj.subtitle})`;
       }
@@ -143,7 +154,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
       const subject = projectContext
         ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) — ${formData.name}`
         : (productContext
-            ? `Product Enquiry: ${productContext.productName} (${productContext.categorySlug}) — ${formData.name}`
+            ? `Product Enquiry: ${productContext.productName}${productContext.configurationName ? ` (${productContext.configurationName})` : ""} (${productContext.categorySlug}) — ${formData.name}`
             : `Quote Request: ${currentServiceObj.label} — ${formData.name}`);
       const areaOfInterest = projectContext ? `Project: ${projectContext.projectName}` : (productContext ? `Product: ${productContext.productName}` : currentServiceObj.label);
 
@@ -167,6 +178,9 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
           message: fullMessage,
           productContext: productContext || undefined,
           projectContext: projectContext || undefined,
+          productConfiguration: productContext?.productConfiguration,
+          configurationName: productContext?.configurationName,
+          productConfigurationSku: productContext?.productConfigurationSku,
           preferredContactMethod: formData.preferredCallback,
         }),
       });
@@ -260,8 +274,27 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B00] block">Enquiring For</span>
                     <span className="font-bold text-sm text-slate-900">{productContext.productName}</span>
+                    {(productContext.configurationName || productContext.productConfiguration) && (
+                      <div className="text-xs text-slate-700 mt-0.5 flex flex-wrap items-center gap-1.5">
+                        <span className="font-semibold text-slate-500">Configuration:</span>
+                        <span className="font-bold text-[#FF6B00]">
+                          {productContext.configurationName || (productContext.productConfiguration === "with-battery" ? "With Battery" : "Without Battery")}
+                          {productContext.configurationPrice ? ` — ₹${productContext.configurationPrice.toLocaleString("en-IN")}` : ""}
+                        </span>
+                        {productContext.productConfigurationSku && (
+                          <span className="font-mono text-slate-500 text-[11px]">
+                            (SKU #{productContext.productConfigurationSku})
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    {(productContext.categorySlug === "robotics-components" || productContext.productSlug?.includes("wheel")) && (
+                      <div className="mt-2 text-[11px] text-amber-800 bg-amber-50 border border-amber-200/80 rounded-lg px-2.5 py-1.5 leading-relaxed">
+                        <strong className="font-semibold">Note:</strong> Catalogue pricing is per set of 4 pcs. Need fewer than 4 pcs? State your requested quantity below for custom pricing.
+                      </div>
+                    )}
                   </div>
-                  <span className="text-[11px] font-medium text-slate-600 bg-white px-2.5 py-1 rounded-md border border-orange-100 shadow-2xs">
+                  <span className="text-[11px] font-medium text-slate-600 bg-white px-2.5 py-1 rounded-md border border-orange-100 shadow-2xs shrink-0 self-start">
                     {productContext.categorySlug}
                   </span>
                 </div>
