@@ -169,24 +169,44 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" className={`${spaceGrotesk.variable} ${jakarta.variable} ${notoTamil.variable} ${jetbrainsMono.variable} scroll-smooth`}>
       <head>
-        <meta name="theme-color" content="#FFFFFF" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
-        />
-        <OrganizationSchema />
+        {/* Google tag (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-LZEZV8HPGR"
+          src="https://www.googletagmanager.com/gtag/js?id=G-T1RM1F2DEC"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">{`
           window.dataLayer=window.dataLayer||[];
           function gtag(){dataLayer.push(arguments);}
           gtag('js',new Date());
-          gtag('config','G-LZEZV8HPGR');
+          gtag('config','G-T1RM1F2DEC');
         `}</Script>
+        {/* Google Tag Manager */}
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+dl:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-W4R5BHLW');`}
+        </Script>
+        {/* End Google Tag Manager */}
+        <meta name="theme-color" content="#FFFFFF" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+        />
+        <OrganizationSchema />
       </head>
       <body className="font-sans bg-page text-text-primary antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W4R5BHLW"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <Navbar />
         <main className="flex flex-col min-h-screen">
           {children}

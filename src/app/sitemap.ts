@@ -8,6 +8,7 @@ import { events } from '@/data/events';
 import { careers } from '@/data/careers';
 import { newsletters } from '@/data/newsletters';
 import { categories } from '@/data/categories';
+import { competitionGuides } from '@/data/competitionGuides';
 import { 
   getProductUrl, 
   getProductCategoryUrl, 
@@ -157,6 +158,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const ev of events) {
     if (!ev.published) continue;
     addEntry(getEventUrl(ev.categorySlug, ev.slug), ev.updatedAt || ev.createdAt, 0.8, 'weekly');
+  }
+
+  // 10. Competition Guides (from verified competitionGuides data)
+  for (const guide of competitionGuides) {
+    addEntry(getEventUrl(guide.categorySlug, guide.slug), '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   }
 
   return entries;

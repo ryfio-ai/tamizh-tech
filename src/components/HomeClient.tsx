@@ -2,28 +2,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, Bot, Brain, Cpu, Zap, Factory, Plane,
-  Network, FlaskConical, GraduationCap, Briefcase,
-  TrendingUp, Users, Award, Globe, Shield, CheckCircle,
-  HelpCircle, Swords, Ship, Wind, Route, Grid, Rocket, Target,
-  X, ChevronLeft, ChevronRight,
+  ArrowRight, Zap, FlaskConical, GraduationCap, Briefcase,
+  Users, Award, Globe, CheckCircle, Grid, X, ChevronLeft, ChevronRight,
 } from "lucide-react";
-import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/button";
-import { ServiceCard } from "@/components/ui/ServiceCard";
-import { ProjectCard } from "@/components/ui/ProjectCard";
-import { GalleryGrid } from "@/components/ui/GalleryGrid";
-import { CTABanner } from "@/components/ui/CTABanner";
 import { Card } from "@/components/ui/Card";
-import { InteractiveRobotSpline } from "@/components/ui/interactive-3d-robot";
-import { Spotlight } from "@/components/ui/spotlight";
+import { ServiceCard } from "@/components/ui/ServiceCard";
 import {
   RoboticsIcon, AIIcon, DroneIcon, IoTIcon, EmbeddedIcon, AutomationIcon,
   MfgIcon, EduIcon, DefIcon, CityIcon, LabIcon, HealthIcon, AgriIcon, AutoIcon
@@ -116,6 +106,40 @@ const competitions = [
   { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", categorySlug: "radio-controllers", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
 ];
 
+function LazyVideo() {
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      {inView ? (
+        <video
+          src="/3d printing.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <div className="w-full h-full bg-zinc-900" />
+      )}
+    </div>
+  );
+}
+
 export default function HomeClient() {
   const [activeImageIdx, setActiveImageIdx] = useState<number | null>(null);
   const [activeFaqIdx, setActiveFaqIdx] = useState<number | null>(null);
@@ -124,8 +148,7 @@ export default function HomeClient() {
 
       {/* 1. HERO SECTION — compact on mobile, fits viewport on desktop */}
       <section
-        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)]"
-        style={{ marginTop: '80px' }}
+        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)] mt-20"
       >
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
@@ -134,12 +157,8 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-6 md:gap-0">
 
             {/* ── LEFT COLUMN ── */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-8 lg:pr-12"
-              style={{ gap: '16px' }}
+            <div
+              className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-8 lg:pr-12 gap-4"
             >
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent w-fit">
@@ -149,14 +168,13 @@ export default function HomeClient() {
 
               {/* Heading */}
               <h1
-                className="font-black text-text-primary font-heading tracking-tight leading-none"
-                style={{ fontSize: 'clamp(36px, 5vw, 72px)', lineHeight: 1.02 }}
+                className="font-black text-text-primary font-heading tracking-tight leading-none text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
               >
                 Engineering the{' '}
-                <span style={{ color: '#FF6A00' }} className="underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
+                <span className="text-accent underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
                 <br />
                 of{' '}
-                <span style={{ color: '#FF6A00' }}>Robotics & AI</span>
+                <span className="text-accent">Robotics & AI</span>
               </h1>
 
               {/* Tamil tagline — one line only */}
@@ -167,8 +185,8 @@ export default function HomeClient() {
               </div>
 
               {/* Short description — max 3 lines */}
-              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans" style={{ maxWidth: '440px' }}>
-                <span style={{ color: '#FF6A00' }} className="font-bold">TamizhTech</span> develops cutting-edge robots, custom automation solutions and industrial systems for modern manufacturing and education.
+              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[440px]">
+                <span className="text-accent font-bold">TamizhTech</span> develops cutting-edge robots, custom automation solutions and industrial systems for modern manufacturing and education.
               </p>
 
               {/* Features — 2 columns, tight */}
@@ -199,13 +217,10 @@ export default function HomeClient() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
+            </div>
 
             {/* ── RIGHT COLUMN — Premium Triangular Hero Composition ── */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="relative flex items-center justify-center w-full mt-2 md:-mt-8"
             >
               {/* Image Container — height 280px on mobile, 540px on desktop */}
@@ -213,10 +228,7 @@ export default function HomeClient() {
 
                 {/* Centered Background Glow */}
                 <div 
-                  className="absolute inset-0 pointer-events-none z-0"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(255,115,0,.20) 0%, rgba(255,115,0,.08) 38%, transparent 75%)'
-                  }}
+                  className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle,rgba(255,115,0,0.20)_0%,rgba(255,115,0,0.08)_38%,transparent_75%)]"
                 />
 
                 {/* 1. AMR — Left (Lower, width ~290px/44%, bottom 20px, z-10) */}
@@ -226,9 +238,7 @@ export default function HomeClient() {
                     alt="TamizhTech AMR Autonomous Mobile Robot"
                     fill
                     sizes="(max-width: 768px) 46vw, 260px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
-                    style={{ filter: 'drop-shadow(0 25px 50px rgba(0,0,0,.15))' }}
-                    priority
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)]"
                   />
                 </div>
 
@@ -239,8 +249,7 @@ export default function HomeClient() {
                     alt="TamizhTech Robotic Arm Platform — Hero Product"
                     fill
                     sizes="(max-width: 768px) 58vw, 360px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
-                    style={{ filter: 'drop-shadow(0 35px 70px rgba(0,0,0,.22))' }}
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_35px_70px_rgba(0,0,0,0.22)]"
                     priority
                   />
                 </div>
@@ -252,14 +261,12 @@ export default function HomeClient() {
                     alt="TamizhTech Advanced Service Robot"
                     fill
                     sizes="(max-width: 768px) 48vw, 290px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105"
-                    style={{ filter: 'drop-shadow(0 28px 55px rgba(0,0,0,.18))' }}
-                    priority
+                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_28px_55px_rgba(0,0,0,0.18)]"
                   />
                 </div>
 
               </div>
-            </motion.div>
+            </div>
 
           </div>
         </div>
@@ -539,20 +546,14 @@ export default function HomeClient() {
         </div>
       </section>
 
+
       {/* 3D Printing Service Section */}
       <section className="section bg-white py-24 border-t border-border/30">
         <div className="container px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left side: Video */}
             <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-lg">
-              <video
-                src="/3d printing.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              <LazyVideo />
             </AnimatedSection>
 
             {/* Right side: Copy & WhatsApp Button */}
@@ -621,7 +622,7 @@ export default function HomeClient() {
               </span>
               <h2 className="text-3xl md:text-4xl font-black font-heading text-text-primary uppercase tracking-tight leading-none">
                 Join our exclusively <br />
-                <span style={{ color: '#FF6A00' }}>Robotics Club</span>
+                <span className="text-accent">Robotics Club</span>
               </h2>
               <p className="text-sm text-text-secondary leading-relaxed max-w-xl font-sans">
                 Unlock direct access to advanced robotics kits, professional R&D testing labs, student competitions training, and expert mentoring. Connect with Coimbatore's largest community of young makers and engineering minds.
@@ -652,7 +653,7 @@ export default function HomeClient() {
               </Link>
               <Link href="/robotics-club" className="w-full">
                 <Button size="lg" className="w-full justify-center text-base font-bold hover:-translate-y-px transition-all rounded-full btn-outline-orange">
-                  Learn More
+                  Explore Robotics Club
                 </Button>
               </Link>
             </div>
