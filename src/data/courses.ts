@@ -8,7 +8,7 @@ export interface Course {
   description?: string;
   language: string[];
   duration: string;
-  price: string;
+  price?: string;
   mode: "Online" | "Offline" | "Hybrid";
   syllabus: string[];
   curriculum?: string[];
@@ -34,7 +34,7 @@ export const courses: Course[] = [
     description: "Hands-on robotics program for school students (Grade 6–12). Build, program, and compete.",
     language: ["English", "Tamil"],
     duration: "3 months",
-    price: "₹8,500",
+    price: "On Enquiry",
     mode: "Offline",
     syllabus: [
       "Introduction to Electronics & Microcontrollers",
@@ -69,7 +69,7 @@ export const courses: Course[] = [
     description: "Introduction to STEM concepts through fun activities and mini-projects.",
     language: ["English", "Tamil"],
     duration: "1 month",
-    price: "₹3,200",
+    price: "On Enquiry",
     mode: "Online",
     syllabus: [
       "Fundamentals of Science & Engineering Design Processes",
@@ -102,7 +102,7 @@ export const courses: Course[] = [
     description: "Deep dive into microcontrollers, RTOS, and firmware development for engineering students.",
     language: ["English"],
     duration: "2 months",
-    price: "₹12,500",
+    price: "On Enquiry",
     mode: "Offline",
     syllabus: [
       "AVR, PIC & ARM Architecture Fundamentals",
@@ -137,7 +137,7 @@ export const courses: Course[] = [
     description: "From Python basics to deploying ML models — complete AI course for college students.",
     language: ["English"],
     duration: "3 months",
-    price: "₹15,000",
+    price: "On Enquiry",
     mode: "Hybrid",
     syllabus: [
       "Python Basics, NumPy, Pandas & Matplotlib",
@@ -172,7 +172,7 @@ export const courses: Course[] = [
     description: "Design, build, and fly a custom UAV. Covers aerodynamics, electronics, and flight control.",
     language: ["English", "Tamil"],
     duration: "6 weeks",
-    price: "₹18,000",
+    price: "On Enquiry",
     mode: "Offline",
     syllabus: [
       "UAV Aerodynamics, Lift, Drag & Frame Mechanics",
@@ -207,7 +207,7 @@ export const courses: Course[] = [
     description: "Industry-grade PLC, SCADA, and industrial automation for working professionals.",
     language: ["English"],
     duration: "45 days",
-    price: "₹22,000",
+    price: "On Enquiry",
     mode: "Offline",
     syllabus: [
       "Siemens / Delta PLC Architecture & Hardware Wiring",

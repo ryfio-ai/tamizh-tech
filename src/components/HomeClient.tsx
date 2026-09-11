@@ -566,7 +566,7 @@ export default function HomeClient() {
                 <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Services</span>
               </h2>
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
-                Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish at an <span className="text-accent font-semibold">affordable price</span>.
+                Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish with <span className="text-accent font-semibold">transparent quotations and fast turnaround</span>.
               </p>
 
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">

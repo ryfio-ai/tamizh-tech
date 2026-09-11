@@ -85,7 +85,7 @@ export default function CoursesPage() {
                     </div>
                     <Link href={getCourseUrl(course.categorySlug, course.slug)} className="block w-full">
                       <Button variant="primary" className="w-full justify-center font-bold text-white">
-                        Explore Syllabus <ArrowRight className="w-4 h-4 ml-1.5" />
+                        Enquire About Course <ArrowRight className="w-4 h-4 ml-1.5" />
                       </Button>
                     </Link>
                   </div>

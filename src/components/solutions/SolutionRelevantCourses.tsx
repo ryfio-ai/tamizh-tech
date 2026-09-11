@@ -95,16 +95,16 @@ export function SolutionRelevantCourses({
                 </div>
 
                 <div className="pt-4 border-t border-neutral-200/70 flex items-center justify-between">
-                  <div className="text-sm font-bold text-neutral-900">
-                    {course.price}
-                  </div>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                    {course.mode} &bull; {course.duration}
+                  </span>
 
                   <Link
                     href={courseHref}
                     onClick={() => onCourseClick(course.slug, course.title)}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FF6B00] hover:text-[#e05e00] transition-colors"
                   >
-                    <span>Explore Course Track</span>
+                    <span>Enquire About Course</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

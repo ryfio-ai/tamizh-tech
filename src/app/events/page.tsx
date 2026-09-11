@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, MapPin, Tag, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowRight } from "lucide-react";
 import { events } from "@/data/events";
 import { getEventUrl } from "@/lib/routing";
 import { PageHero } from "@/components/ui/PageHero";
@@ -85,8 +85,8 @@ export default function EventsPage() {
                           <span className="truncate">{event.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs font-bold text-text-secondary uppercase tracking-wider">
-                          <Tag className="w-4 h-4 text-accent shrink-0" />
-                          <span>{event.price}</span>
+                          <Users className="w-4 h-4 text-accent shrink-0" />
+                          <span>Capacity: {event.capacity}</span>
                         </div>
                       </div>
                     </div>
@@ -94,7 +94,7 @@ export default function EventsPage() {
                     <div className="flex gap-3">
                       <Link href={getEventUrl(event.categorySlug, event.slug)} className="block w-full">
                         <Button variant="primary" className="w-full justify-center font-bold text-white">
-                          Register Now <ArrowRight className="w-4 h-4 ml-1.5" />
+                          View Details & Enquire <ArrowRight className="w-4 h-4 ml-1.5" />
                         </Button>
                       </Link>
                     </div>

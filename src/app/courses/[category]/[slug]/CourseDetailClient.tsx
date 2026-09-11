@@ -129,8 +129,8 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                 <span className="text-sm font-bold text-text-primary">{course.language.join(" / ")}</span>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Pricing</span>
-                <span className="text-sm font-bold text-accent">{course.price}</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Fee Structure</span>
+                <span className="text-sm font-bold text-accent">On Enquiry</span>
               </div>
             </div>
           </div>
@@ -142,9 +142,9 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                 <div className="text-center py-10 space-y-4">
                   <Check className="w-12 h-12 text-emerald-600 mx-auto" />
                   <div>
-                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Application Received</h3>
+                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Enquiry Received</h3>
                     <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                      Thank you for your interest! A counselor from TamizhTech will call or email you with batch timetables within 24 hours.
+                      Thank you for your interest! A counselor from TamizhTech will call or email you with batch timetables and curriculum details within 24 hours.
                     </p>
                   </div>
                   {leadId && (
@@ -157,8 +157,8 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
               ) : (
                 <form onSubmit={handleEnrollSubmit} className="space-y-4">
                   <div className="text-left mb-6">
-                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Enroll Interest</h3>
-                    <p className="text-xs text-text-muted mt-1 uppercase">Reserve your seat. No payment needed today.</p>
+                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Enquire About Course</h3>
+                    <p className="text-xs text-text-muted mt-1 uppercase">Get syllabus breakdown, batch schedule, and fee details.</p>
                   </div>
 
                   <div>
@@ -226,7 +226,7 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                   </div>
 
                   <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 font-bold text-white">
-                    {isSubmitting ? "Registering..." : "Submit Enrollment"}
+                    {isSubmitting ? "Submitting..." : "Submit Course Enquiry"}
                   </Button>
                 </form>
               )}

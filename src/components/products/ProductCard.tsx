@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, MessageSquare } from "lucide-react";
 import { Product } from "@/data/products";
 import { trackMarketingEvent } from "@/lib/analytics";
+import { getProductPriceDisplay } from "@/lib/pricing";
 
 interface ProductCardProps {
   product: Product;
@@ -114,29 +115,26 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
             </ul>
           )}
 
-          {/* PRICING DISPLAY */}
-          {product.configurations && product.configurations.length > 0 ? (
-            <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
-              <span className="text-slate-500 text-xs font-medium">Configurations</span>
-              <span className="font-extrabold text-slate-900 text-sm tracking-tight">
-                ₹{product.configurations[0].price.toLocaleString("en-IN")} – ₹{product.configurations[product.configurations.length - 1].price.toLocaleString("en-IN")}
-              </span>
-            </div>
-          ) : product.price && product.price > 0 ? (
-            <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
-              <span className="text-slate-500 text-xs font-medium">Estimate</span>
-              <div className="text-right">
-                <span className="font-extrabold text-slate-900 text-base tracking-tight">
-                  ₹{product.price.toLocaleString("en-IN")}{product.priceUnit ? ` ${product.priceUnit}` : ""}
-                </span>
-                {product.pricingNote && (
-                  <p className="text-[10px] text-slate-400 font-medium mt-0.5">
-                    Enquire for volume
-                  </p>
-                )}
+          {/* PRICING DISPLAY (Verified Product Price only) */}
+          {(() => {
+            const priceInfo = getProductPriceDisplay(product);
+            if (!priceInfo.hasPrice || !priceInfo.displayPrice) return null;
+            return (
+              <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                <span className="text-slate-500 text-xs font-medium">{priceInfo.label}</span>
+                <div className="text-right">
+                  <span className="font-extrabold text-slate-900 text-base tracking-tight">
+                    {priceInfo.displayPrice}
+                  </span>
+                  {product.pricingNote && (
+                    <p className="text-[10px] text-slate-400 font-medium mt-0.5">
+                      Enquire for volume
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          ) : null}
+            );
+          })()}
         </div>
 
         {/* 3. ACTIONS: [ View Specs ] [ Enquire ] */}

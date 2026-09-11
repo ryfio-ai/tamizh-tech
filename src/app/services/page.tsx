@@ -121,7 +121,7 @@ export default function ServicesPage() {
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
                 High Quality 3D Printing Services <br />
-                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Affordable & Best Price</span>
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Precision Engineering & Fast Turnaround</span>
               </h2>
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-4">
                 We create <span className="text-accent font-semibold">prototypes, custom parts, robotic components, and miniatures</span>. Printed with high precision for smooth and accurate results, we guarantee fast delivery and reliable service for all your engineering, academic, and commercial projects.
@@ -142,7 +142,7 @@ export default function ServicesPage() {
                   "Custom Parts & Robotic Components",
                   "Available in PLA, PETG & TPU Materials",
                   "Printed with High Precision for Smooth Results",
-                  "Affordable & Best Price Guarantee",
+                  "Transparent Custom Quotations",
                   "Fast Delivery & Reliable Engineering Service"
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">

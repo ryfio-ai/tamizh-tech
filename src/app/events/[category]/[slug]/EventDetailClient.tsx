@@ -138,10 +138,10 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
                 </div>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Fee</span>
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Access</span>
                 <div className="flex items-center gap-1.5 text-sm font-bold text-accent">
                   <Tag className="w-4 h-4 text-accent shrink-0" />
-                  <span>{event.price}</span>
+                  <span>On Registration</span>
                 </div>
               </div>
               <div>
@@ -176,8 +176,8 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
               ) : (
                 <form onSubmit={handleRegisterSubmit} className="space-y-4">
                   <div className="text-left mb-6">
-                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Register Interest</h3>
-                    <p className="text-xs text-text-muted mt-1 uppercase">Submit details to reserve your delegate passes.</p>
+                    <h3 className="text-lg font-bold font-heading uppercase text-text-primary">Register / Enquire for Event</h3>
+                    <p className="text-xs text-text-muted mt-1 uppercase">Submit details to enquire and receive schedule updates.</p>
                   </div>
 
                   <div>
@@ -254,7 +254,7 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
                   </div>
 
                   <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 font-bold text-white">
-                    {isSubmitting ? "Registering..." : "Submit Registration"}
+                    {isSubmitting ? "Submitting..." : "Submit Registration Enquiry"}
                   </Button>
                 </form>
               )}

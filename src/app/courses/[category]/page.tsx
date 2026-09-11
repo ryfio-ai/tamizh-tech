@@ -168,8 +168,8 @@ export default async function CourseCategoryPage({ params }: PageProps) {
                   <div className="pt-4 border-t border-border/60 space-y-3 mt-auto">
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-[9px] font-bold text-text-muted uppercase block">Course Fee</span>
-                        <span className="text-base font-black text-accent">{course.price}</span>
+                        <span className="text-[9px] font-bold text-text-muted uppercase block">Mode & Duration</span>
+                        <span className="text-xs font-bold text-slate-900">{course.mode} &bull; {course.duration}</span>
                       </div>
                       <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
                         {course.seatsLeft} seats left
@@ -182,7 +182,7 @@ export default async function CourseCategoryPage({ params }: PageProps) {
                         size="sm" 
                         className="w-full justify-center gap-1.5 bg-[#002B66] hover:bg-[#001D47] text-white font-black text-[11px] py-2.5 uppercase tracking-wider rounded-xl shadow-xs"
                       >
-                        Explore Curriculum <ChevronRight className="w-4 h-4" />
+                        Enquire About Course <ChevronRight className="w-4 h-4" />
                       </Button>
                     </Link>
                   </div>

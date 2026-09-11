@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Bot, ShieldCheck } from "lucide-react";
 import { Product } from "@/data/products";
+import { formatProductPrice } from "@/lib/pricing";
 
 interface SolutionRelevantProductsProps {
   products: Product[];
@@ -88,13 +89,9 @@ export function SolutionRelevantProducts({
 
                   <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
                     <div>
-                      {product.price ? (
+                      {formatProductPrice(product.price, product.priceUnit) && (
                         <div className="text-sm font-bold text-neutral-950">
-                          ₹{product.price.toLocaleString("en-IN")}
-                        </div>
-                      ) : (
-                        <div className="text-xs font-semibold text-neutral-600">
-                          Custom Order
+                          {formatProductPrice(product.price, product.priceUnit)}
                         </div>
                       )}
                     </div>
@@ -103,7 +100,7 @@ export function SolutionRelevantProducts({
                       onClick={() => onProductClick(product.slug, product.name)}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-[#FF6B00] hover:text-[#e05e00] transition-colors"
                     >
-                      <span>Details</span>
+                      <span>Enquire</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>

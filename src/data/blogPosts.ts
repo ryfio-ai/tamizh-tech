@@ -62,10 +62,10 @@ export const blogPosts: BlogPost[] = [
       { type: 'p', text: 'Use LiPo batteries (3S to 6S, 1300–2200 mAh) for best power-to-weight ratio. Always use a LiPo-safe charging bag and never leave batteries charging unattended.' },
       { type: 'h2', heading: 'Safety and Competition Rules' },
       { type: 'ul', items: ['Always use a hardware safety switch (removable link) that cuts power to the entire robot', 'Weapon activation must require a separate arming step after the drive is enabled', 'Arena walls are typically 100–150mm polycarbonate — design weapons that won\'t breach them', 'Register with official bodies like BotBrawl or college-level tech fests that follow standard rules'] },
-      { type: 'cta', ctaText: 'Buy Ready-to-Compete Combat Robot Kits →', ctaHref: '/products' },
+      { type: 'cta', ctaText: 'Explore Competition Robot Kits →', ctaHref: '/products' },
     ],
     faq: [
-      { q: 'How much does it cost to build a combat robot in India?', a: 'A beginner 1 kg combat robot (Beetleweight) typically costs ₹3,000–₹8,000 in components including chassis, motors, ESC, receiver, and LiPo battery. TamizhTech offers complete competition-ready kits starting from ₹4,500.' },
+      { q: 'How much does it cost to build a combat robot in India?', a: 'A beginner 1 kg combat robot (Beetleweight) typically costs ₹3,000–₹8,000 in components including chassis, motors, ESC, receiver, and LiPo battery. TamizhTech offers complete competition-ready kits on technical enquiry.' },
       { q: 'What is the most effective combat robot weapon for beginners?', a: 'A lifter or wedge weapon is most practical for beginners. It requires no high-speed spinning (which needs precise balancing) and is very effective at flipping opponents, especially against spinners that can\'t self-right.' },
       { q: 'What programming language is used for combat robots?', a: 'Most beginner combat robots use no programming at all — they operate purely on RC remote control with ESC (Electronic Speed Controller) units. Advanced robots may use Arduino C++ or MicroPython for autonomous features.' },
       { q: 'Are combat robot competitions available for school students in Tamil Nadu?', a: 'Yes. Many college tech fests in Tamil Nadu (including events at PSG Tech, Kumaraguru, and Amrita) have open combat robot categories for school and college teams. TamizhTech\'s Tamil Robotics Club (TRC) also organizes events for beginners.' },

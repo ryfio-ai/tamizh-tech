@@ -442,7 +442,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                 <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      {selectedConfig ? `${selectedConfig.name}:` : "Unit Estimate:"}
+                      {selectedConfig ? `${selectedConfig.name}:` : "Catalogue Price:"}
                     </span>
                     <span className="text-2xl font-black text-slate-950">
                       ₹{(selectedConfig ? selectedConfig.price : product.price)?.toLocaleString("en-IN")}{product.priceUnit && !selectedConfig ? ` ${product.priceUnit}` : ""}
