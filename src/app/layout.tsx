@@ -192,6 +192,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           })(window,document,'script','dataLayer','GTM-W4R5BHLW');`}
         </Script>
         {/* End Google Tag Manager */}
+        {/* Google AdSense Verification */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1776519071587782"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <meta name="theme-color" content="#FFFFFF" />
         <script
           type="application/ld+json"
