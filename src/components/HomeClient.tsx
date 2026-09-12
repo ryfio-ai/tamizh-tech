@@ -185,8 +185,8 @@ export default function HomeClient() {
               </div>
 
               {/* Short description — max 3 lines */}
-              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[440px]">
-                <span className="text-accent font-bold">TamizhTech</span> develops cutting-edge robots, custom automation solutions and industrial systems for modern manufacturing and education.
+              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[460px]">
+                <span className="text-accent font-bold">Tamizh Tech Robotics Company</span> engineers robotics, AI, automation, and STEM solutions for students, institutions, and modern industries.
               </p>
 
               {/* Features — 2 columns, tight */}
