@@ -3,21 +3,30 @@ export interface ProductFAQ {
   answer: string;
 }
 
-export interface ProductDownload {
-  label: string;
-  href: string;
-  type: "pdf" | "code" | "cad";
-}
-
 export interface ProductConfiguration {
   id: string;
   name: string;
   price: number;
+  sellingPrice?: number;
+  regularPrice?: number;
+  mrp?: number;
+  currency?: "INR";
   sku?: string;
   isDefault?: boolean;
   includedItems?: string[];
   highlights?: string[];
 }
+
+export type ProductAvailability = 
+  | "in_stock"
+  | "out_of_stock"
+  | "preorder"
+  | "backorder"
+  | "InStock" 
+  | "OutOfStock" 
+  | "PreOrder" 
+  | "BackOrder" 
+  | "InStoreOnly";
 
 export interface Product {
   id: string;
@@ -26,11 +35,18 @@ export interface Product {
   categorySlug: string;
   brand?: string;
   sku?: string;
+  availability?: ProductAvailability;
   name: string;
   metaTitle?: string;
   metaDescription?: string;
   shortDescription?: string;
   price?: number;
+  sellingPrice?: number;
+  regularPrice?: number;
+  mrp?: number;
+  currency?: "INR";
+  priceValidFrom?: string;
+  priceValidThrough?: string;
   priceUnit?: string;
   pricingNote?: string;
   configurations?: ProductConfiguration[];
@@ -55,8 +71,6 @@ export interface Product {
   relatedCourses?: string[];
   relatedProjects?: string[];
   faqs: ProductFAQ[];
-  downloads?: ProductDownload[];
-  documents?: ProductDownload[];
   status?: "published" | "draft";
   published: boolean;
   createdAt: string;
@@ -71,15 +85,18 @@ export const products: Product[] = [
     categorySlug: "competition",
     brand: "Tamizh Tech",
     sku: "TTRC-C-1",
+    availability: "in_stock",
     name: "TTRC LF 5.0",
     metaTitle: "TTRC LF 5.0 Line Follower Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. ₹3,800 without battery / ₹4,800 with battery.",
+    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. ₹3,799 without battery / ₹4,799 with battery.",
     shortDescription: "TTRC LF 5.0 is a high-speed line follower robot designed for robotics training, STEM education and line follower competition use.",
     quickAnswer: "TTRC LF 5.0 is an autonomous high-speed line follower robot engineered for competitive track navigation using a 7-array sensor, TTRC C-Board 5.0 controller, and 600 RPM high-speed DG N20 motors.",
-    price: 3800,
+    price: 3799,
+    sellingPrice: 3799,
+    currency: "INR",
     configurations: [
-      { id: "without-battery", name: "Without Battery", price: 3800, isDefault: true },
-      { id: "with-battery", name: "With Battery", price: 4800 }
+      { id: "without-battery", name: "Without Battery", price: 3799, sellingPrice: 3799, currency: "INR", isDefault: true },
+      { id: "with-battery", name: "With Battery", price: 4799, sellingPrice: 4799, currency: "INR" }
     ],
     badge: "Competition / Line Follower",
     image: "/product/lfr/1.jpeg",
@@ -175,18 +192,12 @@ export const products: Product[] = [
       },
       {
         question: "What are the available configurations and pricing?",
-        answer: "The TTRC LF 5.0 is available in two configurations: Without Battery at ₹3,800, and With Battery at ₹4,800."
+        answer: "The TTRC LF 5.0 is available in two configurations: Without Battery at ₹3,799, and With Battery at ₹4,799."
       },
       {
         question: "How can I enquire about the TTRC LF 5.0?",
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or contact our Coimbatore team via WhatsApp. An official quotation with reference tracking ID will be generated."
       }
-    ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
     ],
     status: "published",
     published: true,
@@ -200,17 +211,22 @@ export const products: Product[] = [
     categorySlug: "competition",
     brand: "Tamizh Tech",
     sku: "TTRC-C-2",
+    availability: "in_stock",
     name: "TTRC RR-5.0",
     metaTitle: "TTRC RR-5.0 Robo Race Robot | Competition Robot | Tamizh Tech",
     metaDescription: "TTRC RR-5.0 tournament robo race robot with 4WD chassis, 600RPM motors, high-torque gearboxes, and 112MM buggy wheels. ₹7,999 Only Bot / ₹20,999 Full Kit.",
     shortDescription: "TTRC RR-5.0 is a competition-oriented robo race platform with a 4-wheel robotic chassis, 600RPM motors and TTRC high-torque gearboxes, available as an Only Bot or Full Kit configuration.",
     quickAnswer: "TTRC RR-5.0 is a tournament-grade 4-wheel drive Robo Race platform equipped with 600 RPM graded diamond motors, TTRC high-torque gearboxes, and 112MM high-traction buggy wheels for extreme track agility.",
     price: 7999,
+    sellingPrice: 7999,
+    currency: "INR",
     configurations: [
       {
         id: "only-bot",
         name: "Only Bot",
         price: 7999,
+        sellingPrice: 7999,
+        currency: "INR",
         sku: "TTRC-C-2-A",
         isDefault: true,
         includedItems: [
@@ -233,6 +249,8 @@ export const products: Product[] = [
         id: "full-kit",
         name: "Full Kit",
         price: 20999,
+        sellingPrice: 20999,
+        currency: "INR",
         sku: "TTRC-C-2-B",
         includedItems: [
           "600RPM Graded Diamond Motor × 4",
@@ -377,12 +395,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to connect directly with our engineering team at Coimbatore."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-01-15T00:00:00.000Z",
@@ -395,17 +407,22 @@ export const products: Product[] = [
     categorySlug: "competition",
     brand: "Tamizh Tech",
     sku: "TTRC-C-3",
+    availability: "in_stock",
     name: "TTRC RS-5.0 Robo Soccer",
     metaTitle: "TTRC RS-5.0 Robo Soccer Robot | Competition Robot | Tamizh Tech",
     metaDescription: "TTRC RS-5.0 tournament robo soccer robot with four 300 RPM motors, high-torque gearboxes, and soccer wheels. ₹7,999 Only Bot / ₹21,999 Full Kit.",
     shortDescription: "A competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications.",
     quickAnswer: "TTRC RS-5.0 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
     price: 7999,
+    sellingPrice: 7999,
+    currency: "INR",
     configurations: [
       {
         id: "only-bot",
         name: "Only Bot",
         price: 7999,
+        sellingPrice: 7999,
+        currency: "INR",
         sku: "TTRC-C-3-A",
         isDefault: true,
         includedItems: [
@@ -427,6 +444,8 @@ export const products: Product[] = [
         id: "full-kit",
         name: "Full Kit",
         price: 21999,
+        sellingPrice: 21999,
+        currency: "INR",
         sku: "TTRC-C-3-B",
         includedItems: [
           "300 RPM DGJ / Graded Diamond Motor × 4",
@@ -559,12 +578,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to contact our Coimbatore engineering team directly."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-01-15T00:00:00.000Z",
@@ -577,12 +590,15 @@ export const products: Product[] = [
     categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "TTRC-R-1",
+    availability: "in_stock",
     name: "Flysky FS-i6X 2.4GHz 10CH AFHDS 2A RC Transmitter With FS-iA10B 2.4GHz 10CH Receiver",
     metaTitle: "Flysky FS-i6X 10CH RC Transmitter | Radio Controller | Tamizh Tech",
     metaDescription: "Flysky FS-i6X 2.4GHz 10CH AFHDS 2A RC transmitter with dual-antenna FS-iA10B receiver, i-BUS telemetry, and 135 frequency-hopping channels. ₹6,398.",
     shortDescription: "10-channel AFHDS 2A digital proportional computerized RC system with high-gain dual antennas and bidirectional telemetry.",
     quickAnswer: "The FlySky FS-i6X is a 10-channel 2.4GHz AFHDS 2A digital proportional RC transmitter bundled with the dual-antenna FS-iA10B receiver, featuring 135 frequency-hopping channels and bidirectional telemetry.",
     price: 6398,
+    sellingPrice: 6398,
+    currency: "INR",
     badge: "10CH Dual Antenna",
     image: "/product/flysky/flysky-fs-i6x-10ch.jpg",
     images: [
@@ -671,14 +687,6 @@ export const products: Product[] = [
         answer: "Yes, it has dedicated i-BUS and data acquisition interfaces, allowing you to connect telemetry sensors like temperature, voltage, and altitude modules."
       }
     ],
-    downloads: [
-      { label: "FS-i6X User Manual", href: "#manual", type: "pdf" },
-      { label: "FS-iA10B Pinout Datasheet", href: "#datasheet", type: "pdf" }
-    ],
-    documents: [
-      { label: "FS-i6X User Manual", href: "#manual", type: "pdf" },
-      { label: "FS-iA10B Pinout Datasheet", href: "#datasheet", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-02-10T00:00:00.000Z",
@@ -691,12 +699,15 @@ export const products: Product[] = [
     categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "TTRC-R-2",
+    availability: "in_stock",
     name: "FlySky FS-i6 2.4G 6CH AFHDS RC Transmitter With FS-iA6 Receiver",
     metaTitle: "FlySky FS-i6 RC Transmitter | 6CH Radio Controller | Tamizh Tech",
     metaDescription: "FlySky FS-i6 2.4GHz 6CH AFHDS RC transmitter with FS-iA6 receiver, 20-model memory, and backlit LCD. ₹5,459 catalogue price with technical enquiry.",
     shortDescription: "Reliable 6-channel 2.4GHz AFHDS 2A remote control system with 20-model memory and jamming-free range.",
     quickAnswer: "The FlySky FS-i6 is a 6-channel 2.4GHz AFHDS remote control system with a backlit LCD, 20-model internal memory, and interference-free frequency hopping engineered for RC robots and models.",
     price: 5459,
+    sellingPrice: 5459,
+    currency: "INR",
     badge: "6CH AFHDS 2A",
     image: "/product/flysky/flysky-fs-i6-2.4g-6ch.jpg",
     images: [
@@ -779,12 +790,6 @@ export const products: Product[] = [
         answer: "The AFHDS 2A system provides a reliable, jamming-free range of up to 500m to 1km in open line-of-sight environments."
       }
     ],
-    downloads: [
-      { label: "FS-i6 User Manual", href: "#manual", type: "pdf" }
-    ],
-    documents: [
-      { label: "FS-i6 User Manual", href: "#manual", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-02-10T00:00:00.000Z",
@@ -797,12 +802,15 @@ export const products: Product[] = [
     categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "TTRC-R-3",
+    availability: "in_stock",
     name: "Flysky FS-i6S 2.4G 10CH AFHDS Transmitter With FS-iA10B 10CH Receiver",
     metaTitle: "Flysky FS-i6S Touchscreen Transmitter | 10CH RC Controller | Tamizh Tech",
     metaDescription: "Flysky FS-i6S 10-channel 2.4GHz AFHDS 2A touchscreen RC transmitter with FS-iA10B receiver, USB charging, and 4096-level gimbals. ₹7,398 with technical support.",
     shortDescription: "10-channel 2.4GHz transmitter featuring a full capacitive touchscreen interface, USB charging, and low-latency response.",
     quickAnswer: "The FlySky FS-i6S is a 10-channel 2.4GHz AFHDS 2A transmitter equipped with a capacitive touchscreen interface, dual high-gain antennas, and 4096-level stick resolution for low-latency robotics control.",
     price: 7398,
+    sellingPrice: 7398,
+    currency: "INR",
     badge: "Touchscreen 10CH",
     image: "/product/flysky/FS-i6S with FS-iA10B 10CH.jpg",
     images: [
@@ -878,12 +886,6 @@ export const products: Product[] = [
         answer: "Yes, the FS-i6S has an integrated USB charging and data port for firmware updates and charging."
       }
     ],
-    downloads: [
-      { label: "FS-i6S English User Manual", href: "#manual", type: "pdf" }
-    ],
-    documents: [
-      { label: "FS-i6S English User Manual", href: "#manual", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-02-10T00:00:00.000Z",
@@ -896,12 +898,15 @@ export const products: Product[] = [
     categorySlug: "radio-controllers",
     brand: "FlySky",
     sku: "TTRC-R-4",
+    availability: "in_stock",
     name: "FlySky FS-CT6B 2.4G 6CH Radio Set System with RX FS-R6B receiver",
     metaTitle: "FlySky FS-CT6B PC Programmable Transmitter | 6CH Radio Set | Tamizh Tech",
     metaDescription: "FlySky FS-CT6B 2.4GHz 6CH radio set system with FS-R6B receiver and PC USB programming interface. ₹3,548 budget RC controller with technical enquiry.",
     shortDescription: "Cost-effective 6-channel 2.4GHz radio control system with PC computer programming interface and FS-R6B receiver.",
     quickAnswer: "The FlySky FS-CT6B is a cost-effective 6-channel 2.4GHz GFSK radio control system configured via PC computer interface (T6Config) and bundled with a matching FS-R6B 6-channel receiver.",
     price: 3548,
+    sellingPrice: 3548,
+    currency: "INR",
     badge: "PC Programmable 6CH",
     image: "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg",
     images: [
@@ -963,12 +968,6 @@ export const products: Product[] = [
         answer: "The FS-CT6B is programmed via a PC connection cable through its DSC port, allowing you to configure channel mixing, pitch curves, and dual rates using T6Config software."
       }
     ],
-    downloads: [
-      { label: "FS-CT6B T6Config Software & Manual", href: "#manual", type: "pdf" }
-    ],
-    documents: [
-      { label: "FS-CT6B T6Config Software & Manual", href: "#manual", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-02-10T00:00:00.000Z",
@@ -981,12 +980,15 @@ export const products: Product[] = [
     categorySlug: "educational-robotics",
     brand: "Tamizh Tech",
     sku: "TTRC-E-1",
+    availability: "in_stock",
     name: "THE BOXING BOT",
     metaTitle: "The Boxing Bot | Educational Boxing Robot Kit | Tamizh Tech",
     metaDescription: "The Boxing Bot 5-DOF educational robotics kit with ESP32 microcontroller, 5 MG995 servos, 4 BO motors, and wireless control for hands-on STEM learning. ₹14,999.",
     shortDescription: "The Boxing Bots is a hands-on robotics kit that lets you build, program, and control real robots while learning through practical experimentation and competitive gameplay.",
     quickAnswer: "The Boxing Bot is an educational robotics kit featuring 5 degrees of freedom, an ESP32 microcontroller, 5 MG995 metal gear servos, and 4 BO motors designed for hands-on STEM learning and competitive robotics gameplay.",
     price: 14999,
+    sellingPrice: 14999,
+    currency: "INR",
     badge: "Educational STEM Kit",
     image: "/product/boxingrobot/3.jpeg",
     images: [
@@ -1113,12 +1115,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to connect directly with the Tamizh Tech engineering team in Coimbatore."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
@@ -1131,12 +1127,15 @@ export const products: Product[] = [
     categorySlug: "robotics-components",
     brand: "Tamizh Tech",
     sku: "TTRC-RC-1",
+    availability: "in_stock",
     name: "112MM BUGGY WHEEL",
     metaTitle: "112MM Buggy Wheel | Robotics Competition Wheel | Tamizh Tech",
-    metaDescription: "112MM Buggy Wheel for competition robots. 112mm diameter, 45mm width, 6mm hub ID, reinforced rim, high-traction rubber tyre. ₹3,000 set of 4 with quotation.",
+    metaDescription: "112MM Buggy Wheel for competition robots. 112mm diameter, 45mm width, 6mm hub ID, reinforced rim, high-traction rubber tyre. ₹2,999 set of 4 with quotation.",
     shortDescription: "A 112mm buggy wheel with a plastic wheel body, rubber tyre, 45mm thickness, 6mm hub ID and 92g wheel weight.",
     quickAnswer: "The 112MM Buggy Wheel is a competition-grade robotics wheel featuring a 112mm outer diameter, 45mm rim width, 6mm internal hub diameter, and high-traction rubber tyre with foam insert supplied in a set of 4 pieces.",
-    price: 3000,
+    price: 2999,
+    sellingPrice: 2999,
+    currency: "INR",
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Competition Wheels",
@@ -1209,12 +1208,6 @@ export const products: Product[] = [
         answer: "The standard catalogue packaging is a set of 4 pieces. If you need single replacement wheels or custom quantities, please contact our team via enquiry."
       }
     ],
-    downloads: [
-      { label: "112MM Wheel Dimensional CAD", href: "#cad", type: "cad" }
-    ],
-    documents: [
-      { label: "112MM Wheel Dimensional CAD", href: "#cad", type: "cad" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
@@ -1227,12 +1220,15 @@ export const products: Product[] = [
     categorySlug: "robotics-components",
     brand: "Tamizh Tech",
     sku: "TTRC-RC-2",
+    availability: "in_stock",
     name: "100MM BUGGY WHEEL",
     metaTitle: "100MM Buggy Wheel | Robotics Competition Wheel | Tamizh Tech",
-    metaDescription: "100MM Buggy Wheel for robotics racing. 100mm outer diameter, 35mm tyre width, 6mm hub ID, plastic rim, and high-traction rubber tyre. ₹3,000 set of 4 pieces.",
+    metaDescription: "100MM Buggy Wheel for robotics racing. 100mm outer diameter, 35mm tyre width, 6mm hub ID, plastic rim, and high-traction rubber tyre. ₹2,999 set of 4 pieces.",
     shortDescription: "A 100mm buggy wheel with a plastic rim and rubber tyre, 35mm tyre width and black tyre/rim finish.",
     quickAnswer: "The 100MM Buggy Wheel is a low-profile competition wheel engineered with a 100mm outer diameter, 35mm tyre width, 6mm hub ID, and high-traction synthetic rubber tread supplied as a balanced set of 4 pieces.",
-    price: 3000,
+    price: 2999,
+    sellingPrice: 2999,
+    currency: "INR",
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Competition Wheels",
@@ -1293,7 +1289,7 @@ export const products: Product[] = [
     faqs: [
       {
         question: "Is the listed price for one wheel or four wheels?",
-        answer: "The listed catalogue prices are for a set of 4 pieces (₹3,000 for 4 pcs)."
+        answer: "The listed catalogue prices are for a set of 4 pieces (₹2,999 for 4 pcs)."
       },
       {
         question: "Can I order fewer than 4 pieces?",
@@ -1312,12 +1308,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or reach our Coimbatore team on WhatsApp."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
@@ -1330,12 +1320,15 @@ export const products: Product[] = [
     categorySlug: "robotics-components",
     brand: "Tamizh Tech",
     sku: "TTRC-RC-3",
+    availability: "in_stock",
     name: "TTRC HD 80MM WHEEL",
     metaTitle: "TTRC HD 80MM Wheel | Heavy Duty Nylon Robotics Wheel | Tamizh Tech",
-    metaDescription: "TTRC HD 80MM heavy-duty white nylon robotics wheel. 88.9mm diameter, 60mm thickness, 6mm hub ID for combat bots and rovers. ₹2,000 set of 4 pieces on enquiry.",
+    metaDescription: "TTRC HD 80MM heavy-duty white nylon robotics wheel. 88.9mm diameter, 60mm thickness, 6mm hub ID for combat bots and rovers. ₹1,999 set of 4 pieces on enquiry.",
     shortDescription: "A TTRC HD wheel supplied in white with the stated dimensions, 6mm hub ID and 130 weight value from the source.",
     quickAnswer: "The TTRC HD 80MM Wheel is a heavy-duty white nylon robotics wheel featuring an 88.9mm diameter, 60mm broad thickness, and 6mm hub ID engineered for high-impact combat robots and heavy industrial rovers.",
-    price: 2000,
+    price: 1999,
+    sellingPrice: 1999,
+    currency: "INR",
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Heavy Duty Wheel",
@@ -1354,7 +1347,7 @@ export const products: Product[] = [
       "Stated Diameter: 88.9 mm with 60 mm Thickness",
       "6 mm Internal Hub Diameter (Hub ID)",
       "High Impact-Resistant White Body",
-      "Standard Catalogue Pricing: ₹2,000 for 4 pcs"
+      "Standard Catalogue Pricing: ₹1,999 for 4 pcs"
     ],
     whyThisProduct: {
       heading: "Heavy-Duty Collision-Resistant Architecture",
@@ -1399,7 +1392,7 @@ export const products: Product[] = [
     faqs: [
       {
         question: "Is the listed price for one wheel or four wheels?",
-        answer: "The listed catalogue prices are for a set of 4 pieces (₹2,000 for 4 pcs)."
+        answer: "The listed catalogue prices are for a set of 4 pieces (₹1,999 for 4 pcs)."
       },
       {
         question: "Can I order fewer than 4 pieces?",
@@ -1418,12 +1411,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to speak directly with our team in Coimbatore."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
@@ -1436,12 +1423,15 @@ export const products: Product[] = [
     categorySlug: "robotics-components",
     brand: "Tamizh Tech",
     sku: "TTRC-RC-4",
+    availability: "in_stock",
     name: "TTRC DGJ 300RPM",
     metaTitle: "TTRC DGJ 300RPM | Geared DC Motor | Tamizh Tech",
-    metaDescription: "TTRC DGJ 300RPM geared DC motor for robotics. 18,000 base RPM, 6–18V operating range, 12V rated, 34.2 N-cm rated torque, 300 N-cm stall torque. ₹650 verified unit price.",
+    metaDescription: "TTRC DGJ 300RPM geared DC motor for robotics. 18,000 base RPM, 6–18V operating range, 12V rated, 34.2 N-cm rated torque, 300 N-cm stall torque. ₹649 verified unit price.",
     shortDescription: "TTRC DGJ 300RPM is a geared DC motor designed for robotics and engineering applications, with a 6–18V operating range, 12V rated voltage and the supplied torque specifications.",
     quickAnswer: "The TTRC DGJ 300RPM is a high-torque geared DC motor engineered for robotics with an 18,000 base motor RPM, 6–18V operating range (12V rated), 34.2 N-cm rated torque, and 300 N-cm stall torque in a 25 × 37 mm gearbox.",
-    price: 650,
+    price: 649,
+    sellingPrice: 649,
+    currency: "INR",
     pricingNote: "Verified single unit catalogue price. Official quotation provided on enquiry. No online payment.",
     badge: "Geared DC Motor",
     image: "/product/dc motors/300rpm johnson 1.jpg",
@@ -1460,7 +1450,7 @@ export const products: Product[] = [
       "Rated Torque: 34.2 N-cm",
       "Stall Torque: 300 N-cm",
       "Gearbox Dimensions: 25 × 37 (L × W) mm",
-      "Catalogue Price: ₹650"
+      "Catalogue Price: ₹649"
     ],
     whyThisProduct: {
       heading: "Verified Mechatronic Specifications",
@@ -1521,12 +1511,6 @@ export const products: Product[] = [
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to speak directly with our engineering team in Coimbatore."
       }
     ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
     status: "published",
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
@@ -1539,12 +1523,15 @@ export const products: Product[] = [
     categorySlug: "robotics-components",
     brand: "Tamizh Tech",
     sku: "TTRC-RC-5",
+    availability: "in_stock",
     name: "TTRC DGJ 600RPM",
     metaTitle: "TTRC DGJ 600RPM | Geared DC Motor | Tamizh Tech",
-    metaDescription: "TTRC DGJ 600RPM high-speed geared DC motor for robotics. 18,000 base RPM, 6–18V range, 12V rated, 15.1 N-cm rated torque, 122 N-cm stall torque. ₹700 catalogue price.",
+    metaDescription: "TTRC DGJ 600RPM high-speed geared DC motor for robotics. 18,000 base RPM, 6–18V range, 12V rated, 15.1 N-cm rated torque, 122 N-cm stall torque. ₹699 catalogue price.",
     shortDescription: "TTRC DGJ 600RPM is a geared DC motor designed for robotics and engineering applications, with a 6–18V operating range, 12V rated voltage and the supplied torque specifications.",
     quickAnswer: "The TTRC DGJ 600RPM is a high-speed geared DC motor designed for competition robots, offering an 18,000 base motor RPM, 6–18V operating range (12V rated), 15.1 N-cm rated torque, and 122 N-cm stall torque in a 22 × 37 mm gearbox.",
-    price: 700,
+    price: 699,
+    sellingPrice: 699,
+    currency: "INR",
     pricingNote: "Verified single unit catalogue price. Official quotation provided on enquiry. No online payment.",
     badge: "Geared DC Motor",
     image: "/product/dc motors/600rpm johnson 1.jpg",
@@ -1563,7 +1550,7 @@ export const products: Product[] = [
       "Rated Torque: 15.1 N-cm",
       "Stall Torque: 122 N-cm",
       "Gearbox Dimensions: 22 × 37 (L × W) mm",
-      "Catalogue Price: ₹700"
+      "Catalogue Price: ₹699"
     ],
     whyThisProduct: {
       heading: "Verified Mechatronic Specifications",
@@ -1623,12 +1610,6 @@ export const products: Product[] = [
         question: "How do I enquire or place an order for the TTRC DGJ 600RPM motor?",
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to speak directly with our engineering team in Coimbatore."
       }
-    ],
-    downloads: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
-    ],
-    documents: [
-      { label: "Technical Specification Sheet", href: "#specs", type: "pdf" }
     ],
     status: "published",
     published: true,

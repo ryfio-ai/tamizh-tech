@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
+import { productPolicies } from "@/data/productPolicies";
+import { calculateDiscountPercentage } from "@/lib/pricing";
 import { ProductCard } from "@/components/products/ProductCard";
 import { QuoteModal, ProductEnquiryContext } from "@/components/forms/QuoteModal";
 import { trackMarketingEvent } from "@/lib/analytics";
@@ -155,7 +157,7 @@ const PROJECT_CATEGORY_META: Record<string, { title: string; desc: string; href:
 
 export default function ProductDetailClient({ product, related }: ProductDetailClientProps) {
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
-  const [activeTab, setActiveTab] = useState<"specs" | "included" | "applications" | "docs">("specs");
+  const [activeTab, setActiveTab] = useState<"specs" | "included" | "applications">("specs");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Configuration Selector State
@@ -182,17 +184,27 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
     productConfiguration: selectedConfig ? selectedConfig.id : undefined,
     configurationName: selectedConfig ? selectedConfig.name : undefined,
     productConfigurationSku: selectedConfig?.sku || product.sku,
-    configurationPrice: selectedConfig?.price || product.price,
+    configurationPrice: selectedConfig?.price || product.sellingPrice || product.price,
+    productPrice: selectedConfig?.price || product.sellingPrice || product.price,
+    productSku: selectedConfig?.sku || product.sku,
+    productCategory: product.category,
   };
 
   useEffect(() => {
     trackMarketingEvent("product_view", {
       productSlug: product.slug,
       productName: product.name,
+      product_name: product.name,
+      productSku: product.sku,
+      product_sku: product.sku,
+      productPrice: product.sellingPrice || product.price,
+      product_price: product.sellingPrice || product.price,
+      productCategory: product.category,
+      product_category: product.category,
       categorySlug: product.categorySlug,
       sourcePage: productContext.sourcePage,
     });
-  }, [product.slug, product.name, product.categorySlug, productContext.sourcePage]);
+  }, [product.slug, productContext.sourcePage]);
 
   const handleSelectConfiguration = (cfgId: string) => {
     setSelectedConfigId(cfgId);
@@ -201,6 +213,14 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
       trackMarketingEvent("product_configuration_select", {
         productSlug: product.slug,
         productName: product.name,
+        product_name: product.name,
+        productSku: cfg.sku || product.sku,
+        product_sku: cfg.sku || product.sku,
+        productPrice: cfg.price,
+        product_price: cfg.price,
+        productCategory: product.category,
+        product_category: product.category,
+        configuration: cfg.name || cfg.id,
         productConfiguration: cfg.id,
         productConfigurationSku: cfg.sku || product.sku,
         sourcePage: `/products/${product.categorySlug}/${product.slug}`,
@@ -211,23 +231,43 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   const handleOpenEnquiry = (customReq?: string) => {
     setQuoteRequirement(customReq);
     setIsQuoteOpen(true);
+    const activePrice = selectedConfig?.price || product.sellingPrice || product.price;
+    const activeSku = selectedConfig?.sku || product.sku;
     trackMarketingEvent("product_enquiry_open", {
       productSlug: product.slug,
       productName: product.name,
+      product_name: product.name,
+      productSku: activeSku,
+      product_sku: activeSku,
+      productPrice: activePrice,
+      product_price: activePrice,
+      productCategory: product.category,
+      product_category: product.category,
+      configuration: selectedConfig?.name || selectedConfig?.id,
       categorySlug: product.categorySlug,
       productConfiguration: selectedConfig?.id,
-      productConfigurationSku: selectedConfig?.sku || product.sku,
+      productConfigurationSku: activeSku,
       sourcePage: productContext.sourcePage,
     });
   };
 
   const handleWhatsApp = () => {
+    const activePrice = selectedConfig?.price || product.sellingPrice || product.price;
+    const activeSku = selectedConfig?.sku || product.sku;
     trackMarketingEvent("product_whatsapp_click", {
       productSlug: product.slug,
       productName: product.name,
+      product_name: product.name,
+      productSku: activeSku,
+      product_sku: activeSku,
+      productPrice: activePrice,
+      product_price: activePrice,
+      productCategory: product.category,
+      product_category: product.category,
+      configuration: selectedConfig?.name || selectedConfig?.id,
       categorySlug: product.categorySlug,
       productConfiguration: selectedConfig?.id,
-      productConfigurationSku: selectedConfig?.sku || product.sku,
+      productConfigurationSku: activeSku,
       sourcePage: productContext.sourcePage,
     });
     let messageText = `Hello Tamizh Tech! I am viewing "${product.name}" (${product.category}) on your website and would like to know more about requirements, lead times, and availability.`;
@@ -244,12 +284,22 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   };
 
   const handleTalkEngineer = () => {
+    const activePrice = selectedConfig?.price || product.sellingPrice || product.price;
+    const activeSku = selectedConfig?.sku || product.sku;
     trackMarketingEvent("product_talk_engineer_click", {
       productSlug: product.slug,
       productName: product.name,
+      product_name: product.name,
+      productSku: activeSku,
+      product_sku: activeSku,
+      productPrice: activePrice,
+      product_price: activePrice,
+      productCategory: product.category,
+      product_category: product.category,
+      configuration: selectedConfig?.name || selectedConfig?.id,
       categorySlug: product.categorySlug,
       productConfiguration: selectedConfig?.id,
-      productConfigurationSku: selectedConfig?.sku || product.sku,
+      productConfigurationSku: activeSku,
       sourcePage: productContext.sourcePage,
     });
     handleOpenEnquiry(
@@ -438,25 +488,60 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
               )}
 
               {/* Pricing (Factual dataset price only) */}
-              {((selectedConfig?.price) || (product.price && product.price > 0)) && (
-                <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      {selectedConfig ? `${selectedConfig.name}:` : "Catalogue Price:"}
-                    </span>
-                    <span className="text-2xl font-black text-slate-950">
-                      ₹{(selectedConfig ? selectedConfig.price : product.price)?.toLocaleString("en-IN")}{product.priceUnit && !selectedConfig ? ` ${product.priceUnit}` : ""}
-                    </span>
+              {((selectedConfig?.price) || (product.price && product.price > 0)) && (() => {
+                const currentSelling = selectedConfig ? selectedConfig.price : (product.sellingPrice || product.price || 0);
+                const currentRegular = selectedConfig ? selectedConfig.regularPrice : product.regularPrice;
+                const discount = calculateDiscountPercentage(currentRegular, currentSelling);
+
+                return (
+                  <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
+                    <div className="flex items-center justify-between gap-2 flex-wrap mb-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                          {selectedConfig ? `${selectedConfig.name}:` : "Catalogue Price:"}
+                        </span>
+                        <span className="text-2xl font-black text-slate-950">
+                          ₹{currentSelling.toLocaleString("en-IN")}{product.priceUnit && !selectedConfig ? ` ${product.priceUnit}` : ""}
+                        </span>
+                        {/* Strikethrough regular price strictly when genuine regularPrice > sellingPrice */}
+                        {currentRegular && currentRegular > currentSelling && (
+                          <span className="text-sm font-semibold text-slate-400 line-through">
+                            ₹{currentRegular.toLocaleString("en-IN")}
+                          </span>
+                        )}
+                        {/* Calculated discount badge strictly when genuine discount exists */}
+                        {discount && discount > 0 && (
+                          <span className="px-2 py-0.5 rounded-md text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200/60">
+                            {discount}% OFF
+                          </span>
+                        )}
+                      </div>
+                      {/* Factual In Stock badge */}
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        In Stock
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 mt-1">
+                      {selectedConfig
+                        ? `Verified configuration pricing for ${selectedConfig.name}. Official quotation provided on enquiry. No online payment.`
+                        : product.pricingNote
+                        ? `${product.pricingNote} Official quotation provided on enquiry. No online payment.`
+                        : "Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry."}
+                    </p>
+                    <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500">
+                      <div>
+                        <span className="font-semibold text-slate-700">Shipping: </span>
+                        <span>{productPolicies.shipping.displayText}</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold text-slate-700">Payment: </span>
+                        <span>{productPolicies.payment.displayText}</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-1">
-                    {selectedConfig
-                      ? `Verified configuration pricing for ${selectedConfig.name}. Official quotation provided on enquiry. No online payment.`
-                      : product.pricingNote
-                      ? `${product.pricingNote} Official quotation provided on enquiry. No online payment.`
-                      : "Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry."}
-                  </p>
-                </div>
-              )}
+                );
+              })()}
 
               {/* 3. ENQUIRY CTAs */}
               <div className="space-y-3 pt-2">
@@ -498,14 +583,18 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
             </div>
 
             {/* Engineering Trust Strip */}
-            <div className="pt-6 border-t border-slate-100 grid grid-cols-2 gap-3 text-xs text-slate-600">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Verified Spec Sheet</span>
+            <div className="pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 text-xs text-slate-600">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="font-semibold text-slate-800">In Stock</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Verified Specs</span>
+              </div>
+              <div className="flex items-center gap-1.5">
                 <Wrench className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <span>Custom Tuning Available</span>
+                <span>Custom Tuning</span>
               </div>
             </div>
           </div>
@@ -602,19 +691,6 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                 }`}
               >
                 Applications
-              </button>
-            )}
-
-            {product.downloads && product.downloads.length > 0 && (
-              <button
-                onClick={() => { setActiveTab("docs"); trackMarketingEvent("product_spec_tab_click", { tab: "docs", productSlug: product.slug }); }}
-                className={`px-5 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap ${
-                  activeTab === "docs"
-                    ? "border-[#FF6B00] text-[#FF6B00]"
-                    : "border-transparent text-slate-500 hover:text-slate-900"
-                }`}
-              >
-                Downloads & Schematics
               </button>
             )}
           </div>
@@ -767,34 +843,6 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                 {product.applications.map((app, idx) => (
                   <div key={idx} className="p-4 rounded-xl border border-slate-100 bg-slate-50/50 text-xs sm:text-sm text-slate-800">
                     <span className="font-semibold">{app}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* TAB 4: DOWNLOADS & SCHEMATICS */}
-          {activeTab === "docs" && product.downloads && (
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
-              <h3 className="text-sm font-bold text-slate-900 mb-4 font-heading">
-                Datasheets, Schematics & CAD Reference
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {product.downloads.map((doc, idx) => (
-                  <div key={idx} className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <FileText className="w-5 h-5 text-[#FF6B00]" />
-                      <div>
-                        <span className="text-xs font-bold text-slate-900 block">{doc.label}</span>
-                        <span className="text-[10px] text-slate-500 uppercase">{doc.type || "PDF"} Document</span>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => handleOpenEnquiry(`Requesting datasheet / schematic download for: ${doc.label} (${product.name})`)}
-                      className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition-colors"
-                    >
-                      Request File
-                    </button>
                   </div>
                 ))}
               </div>
@@ -1109,6 +1157,48 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
             </div>
           </section>
         )}
+
+        {/* 7.5. FACTUAL PRODUCT SHIPPING, PAYMENT & RETURN POLICY */}
+        <section className="mb-16 max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+              Store & Fulfilment Terms
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900">
+              Shipping, Payment & Return Policy
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-2xs">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Shipping</h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {productPolicies.shipping.displayText}
+              </p>
+            </div>
+            <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-2xs">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Payment</h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {productPolicies.payment.displayText}
+              </p>
+            </div>
+            <div className="p-5 bg-white border border-slate-200 rounded-2xl shadow-2xs">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">Returns</h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {productPolicies.returns.displayText}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* 8. VERIFIED PRODUCT FAQS */}
         {product.faqs && product.faqs.length > 0 && (

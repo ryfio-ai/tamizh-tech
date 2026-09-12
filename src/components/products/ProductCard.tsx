@@ -84,10 +84,14 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
       {/* 2. CARD CONTENT */}
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
-          {/* CATEGORY */}
-          <div className="mb-2">
+          {/* CATEGORY & STATUS */}
+          <div className="mb-2 flex items-center justify-between">
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00]">
               {product.category}
+            </span>
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              In Stock
             </span>
           </div>
 
@@ -122,10 +126,22 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
             return (
               <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
                 <span className="text-slate-500 text-xs font-medium">{priceInfo.label}</span>
-                <div className="text-right">
-                  <span className="font-extrabold text-slate-900 text-base tracking-tight">
-                    {priceInfo.displayPrice}
-                  </span>
+                <div className="text-right flex flex-col items-end">
+                  <div className="flex items-baseline gap-1.5 flex-wrap justify-end">
+                    {priceInfo.discountPercentage && priceInfo.displayRegularPrice && (
+                      <span className="text-xs font-medium text-slate-400 line-through">
+                        {priceInfo.displayRegularPrice}
+                      </span>
+                    )}
+                    <span className="font-extrabold text-slate-900 text-base tracking-tight">
+                      {priceInfo.displayPrice}
+                    </span>
+                    {priceInfo.discountPercentage && (
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200/60">
+                        {priceInfo.discountPercentage}% OFF
+                      </span>
+                    )}
+                  </div>
                   {product.pricingNote && (
                     <p className="text-[10px] text-slate-400 font-medium mt-0.5">
                       Enquire for volume

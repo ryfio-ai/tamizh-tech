@@ -106,7 +106,7 @@ export function ProductSchema({ product }: any) {
     "description": product.shortDescription || product.description,
     "brand": {
       "@type": "Brand",
-      "name": product.brand || "Tamizh Tech Robotics"
+      "name": product.brand || "Tamizh Tech Robotics Company"
     },
     "sku": product.sku || product.slug || product.id,
     "category": product.category,
@@ -114,10 +114,11 @@ export function ProductSchema({ product }: any) {
   };
 
   // Honest published price Offer without fake merchant/stock markup
-  if (product.price && typeof product.price === 'number' && product.price > 0) {
-    schema.offers = {
+  const activeSellingPrice = product.sellingPrice || product.price;
+  if (activeSellingPrice && typeof activeSellingPrice === 'number' && activeSellingPrice > 0) {
+    const offer: any = {
       "@type": "Offer",
-      "price": product.price,
+      "price": activeSellingPrice,
       "priceCurrency": "INR",
       "url": `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}`,
       "seller": {
@@ -125,6 +126,46 @@ export function ProductSchema({ product }: any) {
         "name": "Tamizh Tech Robotics Company"
       }
     };
+
+    // Controlled availability field: only add schema availability if factually verified in source data
+    if (product.availability) {
+      const availabilityMap: Record<string, string> = {
+        InStock: "https://schema.org/InStock",
+        in_stock: "https://schema.org/InStock",
+        OutOfStock: "https://schema.org/OutOfStock",
+        out_of_stock: "https://schema.org/OutOfStock",
+        PreOrder: "https://schema.org/PreOrder",
+        preorder: "https://schema.org/PreOrder",
+        BackOrder: "https://schema.org/BackOrder",
+        backorder: "https://schema.org/BackOrder",
+        InStoreOnly: "https://schema.org/InStoreOnly",
+      };
+      const schemaAvailability = availabilityMap[product.availability] || (typeof product.availability === "string" && product.availability.startsWith("http") ? product.availability : undefined);
+      if (schemaAvailability) {
+        offer.availability = schemaAvailability;
+      }
+    }
+
+    // Google-compliant StrikethroughPrice PriceSpecification: only when genuine regularPrice is verified & higher
+    if (
+      typeof product.regularPrice === 'number' &&
+      product.regularPrice > 0 &&
+      product.regularPrice > activeSellingPrice
+    ) {
+      offer.priceSpecification = [
+        {
+          "@type": "UnitPriceSpecification",
+          "price": product.regularPrice,
+          "priceCurrency": "INR",
+          "priceType": "https://schema.org/StrikethroughPrice"
+        }
+      ];
+    }
+
+    if (product.priceValidFrom) offer.validFrom = product.priceValidFrom;
+    if (product.priceValidThrough) offer.validThrough = product.priceValidThrough;
+
+    schema.offers = offer;
   }
 
   return (

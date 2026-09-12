@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { X, CheckCircle2, AlertCircle, Loader2, Send, Wrench, ShieldCheck, ArrowRight, Layers, Cpu, Scissors, Printer, Bot, Factory, FlaskConical, GraduationCap } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { trackMarketingEvent } from "@/lib/analytics";
 
 export interface ProductEnquiryContext {
   sourceType: "product" | "event";
@@ -14,6 +15,9 @@ export interface ProductEnquiryContext {
   configurationName?: string;
   productConfigurationSku?: string;
   configurationPrice?: number;
+  productPrice?: number;
+  productSku?: string;
+  productCategory?: string;
 }
 
 export interface ProjectEnquiryContext {
@@ -191,8 +195,27 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
         throw new Error(result.error || "Failed to log quote inquiry. Please try again.");
       }
 
-      setLeadId(result.leadId || `TT-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`);
+      const generatedLeadId = result.leadId || `TT-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
+      setLeadId(generatedLeadId);
       setStatus("success");
+
+      // Dispatch structured GA4 / GTM telemetry for product enquiry submission
+      if (productContext) {
+        trackMarketingEvent("product_enquiry_submit", {
+          productSlug: productContext.productSlug,
+          productName: productContext.productName,
+          product_name: productContext.productName,
+          productSku: productContext.productConfigurationSku || productContext.productSku,
+          product_sku: productContext.productConfigurationSku || productContext.productSku,
+          productPrice: productContext.configurationPrice || productContext.productPrice,
+          product_price: productContext.configurationPrice || productContext.productPrice,
+          productCategory: productContext.productCategory || productContext.categorySlug,
+          product_category: productContext.productCategory || productContext.categorySlug,
+          configuration: productContext.configurationName || productContext.productConfiguration,
+          sourcePage: productContext.sourcePage,
+          leadId: generatedLeadId,
+        });
+      }
     } catch (err: any) {
       setErrorMessage(err.message || "Network Error: Unable to transmit quote request.");
       setStatus("error");
