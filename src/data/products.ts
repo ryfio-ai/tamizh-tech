@@ -88,15 +88,17 @@ export const products: Product[] = [
     availability: "in_stock",
     name: "TTRC LF 5.0",
     metaTitle: "TTRC LF 5.0 Line Follower Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. ₹3,799 without battery / ₹4,799 with battery.",
+    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. ₹3,799 without battery (MRP ₹6,000) / ₹4,799 with battery (MRP ₹6,500).",
     shortDescription: "TTRC LF 5.0 is a high-speed line follower robot designed for robotics training, STEM education and line follower competition use.",
     quickAnswer: "TTRC LF 5.0 is an autonomous high-speed line follower robot engineered for competitive track navigation using a 7-array sensor, TTRC C-Board 5.0 controller, and 600 RPM high-speed DG N20 motors.",
     price: 3799,
     sellingPrice: 3799,
+    regularPrice: 6000,
+    mrp: 6500,
     currency: "INR",
     configurations: [
-      { id: "without-battery", name: "Without Battery", price: 3799, sellingPrice: 3799, currency: "INR", isDefault: true },
-      { id: "with-battery", name: "With Battery", price: 4799, sellingPrice: 4799, currency: "INR" }
+      { id: "without-battery", name: "Without Battery", price: 3799, sellingPrice: 3799, regularPrice: 6000, mrp: 6000, currency: "INR", isDefault: true },
+      { id: "with-battery", name: "With Battery", price: 4799, sellingPrice: 4799, regularPrice: 6500, mrp: 6500, currency: "INR" }
     ],
     badge: "Competition / Line Follower",
     image: "/product/lfr/1.jpeg",
@@ -192,7 +194,7 @@ export const products: Product[] = [
       },
       {
         question: "What are the available configurations and pricing?",
-        answer: "The TTRC LF 5.0 is available in two configurations: Without Battery at ₹3,799, and With Battery at ₹4,799."
+        answer: "The TTRC LF 5.0 is available in two configurations: Without Battery at a discounted selling price of ₹3,799 (Original price: ₹6,000), and With Battery at ₹4,799 (Original price: ₹6,500)."
       },
       {
         question: "How can I enquire about the TTRC LF 5.0?",
@@ -214,11 +216,13 @@ export const products: Product[] = [
     availability: "in_stock",
     name: "TTRC RR-5.0",
     metaTitle: "TTRC RR-5.0 Robo Race Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC RR-5.0 tournament robo race robot with 4WD chassis, 600RPM motors, high-torque gearboxes, and 112MM buggy wheels. ₹7,999 Only Bot / ₹20,999 Full Kit.",
+    metaDescription: "TTRC RR-5.0 tournament robo race robot with 4WD chassis, 600RPM motors, high-torque gearboxes, and 112MM buggy wheels. ₹7,999 Only Bot (MRP ₹12,000) / ₹20,999 Full Kit (MRP ₹30,000).",
     shortDescription: "TTRC RR-5.0 is a competition-oriented robo race platform with a 4-wheel robotic chassis, 600RPM motors and TTRC high-torque gearboxes, available as an Only Bot or Full Kit configuration.",
     quickAnswer: "TTRC RR-5.0 is a tournament-grade 4-wheel drive Robo Race platform equipped with 600 RPM graded diamond motors, TTRC high-torque gearboxes, and 112MM high-traction buggy wheels for extreme track agility.",
     price: 7999,
     sellingPrice: 7999,
+    regularPrice: 12000,
+    mrp: 30000,
     currency: "INR",
     configurations: [
       {
@@ -226,6 +230,8 @@ export const products: Product[] = [
         name: "Only Bot",
         price: 7999,
         sellingPrice: 7999,
+        regularPrice: 12000,
+        mrp: 12000,
         currency: "INR",
         sku: "TTRC-C-2-A",
         isDefault: true,
@@ -250,6 +256,8 @@ export const products: Product[] = [
         name: "Full Kit",
         price: 20999,
         sellingPrice: 20999,
+        regularPrice: 30000,
+        mrp: 30000,
         currency: "INR",
         sku: "TTRC-C-2-B",
         includedItems: [
@@ -356,7 +364,7 @@ export const products: Product[] = [
       },
       {
         question: "What configurations are available?",
-        answer: "The TTRC RR-5.0 is available in two configurations: Only Bot (SKU: TT0006) at ₹7,999 and Full Kit (SKU: TT0007) at ₹20,999."
+        answer: "The TTRC RR-5.0 is available in two configurations: Only Bot at a discounted selling price of ₹7,999 (Original price: ₹12,000) and Full Kit at ₹20,999 (Original price: ₹30,000)."
       },
       {
         question: "What is included in the Only Bot configuration?",
@@ -408,11 +416,11 @@ export const products: Product[] = [
     brand: "Tamizh Tech",
     sku: "TTRC-C-3",
     availability: "in_stock",
-    name: "ROBO Soccer bot TTRC SOCCER 5.1",
-    metaTitle: "ROBO Soccer bot TTRC SOCCER 5.1 | Competition Robot | Tamizh Tech",
-    metaDescription: "ROBO Soccer bot TTRC SOCCER 5.1 tournament robot with four 300 RPM motors, high-torque gearboxes, FlySky transmitter, and soccer wheels. ₹21,499 (Original ₹29,000, 26% OFF).",
+    name: "TTRC SOCCER 5.1",
+    metaTitle: "TTRC SOCCER 5.1 | Competition Robot | Tamizh Tech",
+    metaDescription: "TTRC SOCCER 5.1 tournament robo soccer robot with four 300 RPM motors, high-torque gearboxes, FlySky transmitter, and soccer wheels. ₹21,499 (Original ₹29,000, 26% OFF).",
     shortDescription: "A competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications.",
-    quickAnswer: "ROBO Soccer bot TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
+    quickAnswer: "TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
     price: 21499,
     sellingPrice: 21499,
     regularPrice: 29000,
@@ -479,9 +487,9 @@ export const products: Product[] = [
       "/product/soccer/soccer1.2.png"
     ],
     imageAlts: [
-      "ROBO Soccer bot TTRC SOCCER 5.1 robot front angle",
-      "ROBO Soccer bot TTRC SOCCER 5.1 chassis and drive assembly",
-      "ROBO Soccer bot TTRC SOCCER 5.1 complete platform overview"
+      "TTRC SOCCER 5.1 robot front angle",
+      "TTRC SOCCER 5.1 chassis and drive assembly",
+      "TTRC SOCCER 5.1 complete platform overview"
     ],
     specs: "300 RPM DGJ / Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, 80MM / 100MM Soccer Wheels, 280 × 270 × 80 mm.",
     highlights: [
@@ -546,12 +554,12 @@ export const products: Product[] = [
     ],
     faqs: [
       {
-        question: "What is the ROBO Soccer bot TTRC SOCCER 5.1?",
-        answer: "ROBO Soccer bot TTRC SOCCER 5.1 is a competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications."
+        question: "What is the TTRC SOCCER 5.1?",
+        answer: "TTRC SOCCER 5.1 is a competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications."
       },
       {
         question: "What configurations are available?",
-        answer: "The ROBO Soccer bot TTRC SOCCER 5.1 is available at a discounted selling price of ₹21,499 (Original price: ₹29,000 for Full Kit), and Only Bot at ₹7,999."
+        answer: "The TTRC SOCCER 5.1 is available at a discounted selling price of ₹21,499 (Original price: ₹29,000 for Full Kit), and Only Bot at ₹7,999."
       },
       {
         question: "What is included in the Only Bot configuration?",
@@ -578,7 +586,7 @@ export const products: Product[] = [
         answer: "Yes, the Full Kit configuration includes the FlySky FS-i6 transmitter and a 2200mAh LiPo Battery with charger."
       },
       {
-        question: "How can I enquire about the ROBO Soccer bot TTRC SOCCER 5.1?",
+        question: "How can I enquire about the TTRC SOCCER 5.1?",
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to contact our Coimbatore engineering team directly."
       }
     ],
@@ -987,11 +995,13 @@ export const products: Product[] = [
     availability: "in_stock",
     name: "THE BOXING BOT",
     metaTitle: "The Boxing Bot | Educational Boxing Robot Kit | Tamizh Tech",
-    metaDescription: "The Boxing Bot 5-DOF educational robotics kit with ESP32 microcontroller, 5 MG995 servos, 4 BO motors, and wireless control for hands-on STEM learning. ₹14,999.",
+    metaDescription: "The Boxing Bot 5-DOF educational robotics kit with ESP32 microcontroller, 5 MG995 servos, 4 BO motors, and wireless control for hands-on STEM learning. ₹14,999 (Original ₹20,000, 25% OFF).",
     shortDescription: "The Boxing Bots is a hands-on robotics kit that lets you build, program, and control real robots while learning through practical experimentation and competitive gameplay.",
     quickAnswer: "The Boxing Bot is an educational robotics kit featuring 5 degrees of freedom, an ESP32 microcontroller, 5 MG995 metal gear servos, and 4 BO motors designed for hands-on STEM learning and competitive robotics gameplay.",
     price: 14999,
     sellingPrice: 14999,
+    regularPrice: 20000,
+    mrp: 20000,
     currency: "INR",
     badge: "Educational STEM Kit",
     image: "/product/boxingrobot/3.jpeg",
@@ -1113,6 +1123,10 @@ export const products: Product[] = [
       {
         question: "Does the kit include a battery and charger?",
         answer: "Yes, the kit includes a 7.4V battery, compatible charger, and micro USB cable for programming and charging."
+      },
+      {
+        question: "What is the price of The Boxing Bot?",
+        answer: "The Boxing Bot is available at a discounted selling price of ₹14,999 (Original price: ₹20,000, 25% OFF) with technical support and assembly guide included."
       },
       {
         question: "How can I enquire about The Boxing Bot?",

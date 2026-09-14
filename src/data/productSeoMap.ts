@@ -95,7 +95,7 @@ export const productSeoMap: Record<string, ProductSeoEntry> = {
     relatedCourses: ["robotics-iot-embedded", "cad-3d-printing"]
   },
 
-  // 3. ROBO Soccer bot TTRC SOCCER 5.1
+  // 3. TTRC SOCCER 5.1
   "rc-robo-soccer": {
     productSlug: "rc-robo-soccer",
     sku: "TTRC-C-3",
@@ -109,20 +109,20 @@ export const productSeoMap: Record<string, ProductSeoEntry> = {
     ],
     longTailKeywords: [
       "robo soccer competition robot with 300RPM motor and dual ESC",
-      "ROBO Soccer bot TTRC SOCCER 5.1 platform for robotics tournaments",
+      "TTRC SOCCER 5.1 platform for robotics tournaments",
       "four wheel drive robotic soccer bot kit price India",
       "high torque robo soccer robot with FlySky controller",
       "robo soccer chassis with heavy duty nylon wheels"
     ],
     questionKeywords: [
-      "What is ROBO Soccer bot TTRC SOCCER 5.1?",
+      "What is TTRC SOCCER 5.1?",
       "What motors power the TTRC Robo Soccer bot?",
       "What wheel sizes fit the TTRC SOCCER 5.1 platform?",
       "What ESC is used in the full kit configuration?",
       "How do I calibrate the controller for robo soccer maneuvers?"
     ],
     searchIntent: "Robo Soccer Competition Platform",
-    quickAnswer: "ROBO Soccer bot TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
+    quickAnswer: "TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
     targetAudience: [
       "Inter-Collegiate Robo Soccer Teams",
       "Robotics Sports Competitors",
