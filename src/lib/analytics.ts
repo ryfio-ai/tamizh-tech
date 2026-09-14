@@ -118,7 +118,8 @@ export type MarketingEventName =
   | "project_whatsapp_click"
   | "project_related_service_click"
   | "project_related_product_click"
-  | "project_related_course_click";
+  | "project_related_course_click"
+  | "product_ad_click";
 
 /**
  * Dispatches privacy-conscious analytics events without transmitting personally identifiable information.

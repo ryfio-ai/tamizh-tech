@@ -57,33 +57,44 @@ export default function ServicesPage() {
               return (
                 <AnimatedSection key={svc.id} delay={i * 0.05}>
                   <div id={svc.id} className="scroll-mt-24">
-                    <Card className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0 overflow-hidden p-0 hover:border-accent/10 hover:shadow-[0_12px_30px_rgba(37,99,235,0.06)]`}>
-                      <div className="relative lg:w-2/5 aspect-video lg:aspect-auto bg-subtle">
-                        <Image src={svc.image} alt={svc.title} fill className="object-cover" />
+                    <Card className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} lg:items-center gap-0 overflow-hidden p-0 border border-slate-200/80 bg-white hover:border-accent/30 hover:shadow-[0_16px_36px_rgba(37,99,235,0.08)] transition-all duration-300 rounded-2xl group`}>
+                      {/* 4:3 Aspect Ratio Image Container */}
+                      <div className="relative w-full lg:w-[460px] xl:w-[500px] shrink-0 aspect-[4/3] overflow-hidden bg-slate-100">
+                        <Image
+                          src={svc.image}
+                          alt={svc.title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 500px"
+                          priority={i < 2}
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
                       </div>
-                      <div className="flex-1 p-8 lg:p-12">
-                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${colorBadge[svc.color] || "bg-accent/5 text-accent"} mb-4`}>
+
+                      {/* Content Details */}
+                      <div className="flex-1 p-8 lg:p-10 flex flex-col justify-center">
+                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${colorBadge[svc.color] || "bg-accent/5 text-accent"} mb-4 w-fit`}>
                           <Icon className="w-4 h-4" />
                           <span className="text-xs font-bold uppercase tracking-wide">{svc.title}</span>
                         </div>
-                        <h2 className="text-2xl font-bold text-text-primary mb-3">{svc.title}</h2>
-                        <p className="text-text-muted mb-6 leading-relaxed">{svc.desc}</p>
+                        <h2 className="text-2xl font-bold text-text-primary mb-3 font-heading group-hover:text-accent transition-colors">{svc.title}</h2>
+                        <p className="text-text-muted mb-6 leading-relaxed text-sm lg:text-base">{svc.desc}</p>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                           {svc.features.map((f) => (
                             <li key={f} className="flex items-center gap-2 text-sm text-text-secondary">
-                              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                              {f}
+                              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                              <span>{f}</span>
                             </li>
                           ))}
                         </ul>
                         <div className="flex items-center gap-3">
                           <Link href={svc.href}>
-                            <Button variant="primary" size="sm" className="!bg-[#FF6B00] hover:!bg-[#e05e00] text-white font-bold rounded-lg text-xs">
+                            <Button variant="primary" size="sm" className="!bg-[#FF6B00] hover:!bg-[#e05e00] text-white font-bold rounded-lg text-xs px-5 py-2.5 shadow-sm">
                               Explore Service <ArrowRight className="w-3.5 h-3.5 ml-1" />
                             </Button>
                           </Link>
                           <Link href="/contact">
-                            <Button variant="outline" size="sm" className="font-semibold text-xs border-border">
+                            <Button variant="outline" size="sm" className="font-semibold text-xs border-border hover:bg-slate-50 px-5 py-2.5">
                               Contact Team
                             </Button>
                           </Link>
@@ -236,15 +247,17 @@ export default function ServicesPage() {
               </div>
             </AnimatedSection>
 
-            {/* Right side: Image Showcase */}
-            <AnimatedSection className="lg:col-span-6 relative aspect-[4/3] bg-slate-950 rounded-3xl overflow-hidden border border-border shadow-xl order-1 lg:order-2" direction="left">
-              <Image
-                src="/gallery/17.jpeg"
-                alt="Stainless Steel Laser Cutting Services Coimbatore"
-                fill
-                className="object-cover"
+            {/* Right side: Video Showcase */}
+            <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-xl order-1 lg:order-2" direction="left">
+              <video
+                src="/laser-cutting.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none flex flex-col justify-end p-6 md:p-8">
                 <div className="inline-block px-3 py-1 rounded-md bg-[#FF6A00] text-white text-xs font-bold uppercase tracking-wider mb-2 w-fit">
                   Metal Laser Fabrication
                 </div>

@@ -18,6 +18,8 @@ import {
   RoboticsIcon, AIIcon, DroneIcon, IoTIcon, EmbeddedIcon, AutomationIcon,
   MfgIcon, EduIcon, DefIcon, CityIcon, LabIcon, HealthIcon, AgriIcon, AutoIcon
 } from "@/components/ui/CustomIcons";
+import { FloatingCompetitionRobotAd } from "@/components/home/FloatingCompetitionRobotAd";
+import { CustomerReviewsSection } from "@/components/home/CustomerReviewsSection";
 
 // Data
 const services = [
@@ -52,10 +54,38 @@ const industries = [
 ];
 
 const whyUs = [
-  { icon: CheckCircle, title: "End-to-End Solutions", desc: "From ideation and prototyping to deployment and training." },
-  { icon: Users, title: "Expert Team", desc: "Engineers, researchers, and educators with deep domain expertise." },
-  { icon: Award, title: "Proven Track Record", desc: "Podium finishes in national design and engineering contests." },
-  { icon: Globe, title: "Pan-India Presence", desc: "Serving clients across industries from Coimbatore nationwide." },
+  {
+    icon: CheckCircle,
+    title: "End-to-End Solutions",
+    badge: "Concept to Build",
+    image: "/gallery/21.jpeg",
+    desc: "From 3D CAD design & prototyping to SS fiber laser cutting, custom electronics, and tournament deployment.",
+    highlight: "CAD • 3D Print • Metal • Assembly"
+  },
+  {
+    icon: Users,
+    title: "Expert Team",
+    badge: "In-House Engineers",
+    image: "/gallery/18.jpeg",
+    desc: "Mechatronics, robotics, and embedded systems specialists with real hands-on competitive hardware experience.",
+    highlight: "Dedicated Engineering Lab"
+  },
+  {
+    icon: Award,
+    title: "Proven Track Record",
+    badge: "Championship Podiums",
+    image: "/gallery/3.jpg",
+    desc: "1st place championship trophies, state awards, and battle-tested robotic systems recognized nationwide.",
+    highlight: "180+ Tournament Recognitions"
+  },
+  {
+    icon: Globe,
+    title: "Pan-India Presence",
+    badge: "Nationwide Reach",
+    image: "/gallery/10.jpg",
+    desc: "Serving 15+ industry partners and educational institutions across Tamil Nadu and all of India from Coimbatore.",
+    highlight: "Coimbatore Hub to All India"
+  },
 ];
 
 const projects = [
@@ -106,7 +136,7 @@ const competitions = [
   { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", categorySlug: "radio-controllers", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
 ];
 
-function LazyVideo() {
+function LazyVideo({ src = "/3d printing.mp4" }: { src?: string }) {
   const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -126,7 +156,7 @@ function LazyVideo() {
     <div ref={containerRef} className="w-full h-full">
       {inView ? (
         <video
-          src="/3d printing.mp4"
+          src={src}
           autoPlay
           loop
           muted
@@ -150,6 +180,9 @@ export default function HomeClient() {
       <section
         className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)] mt-20"
       >
+        {/* Floating Competition Robot Advertisement (Left Side) */}
+        <FloatingCompetitionRobotAd />
+
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
 
@@ -158,47 +191,50 @@ export default function HomeClient() {
 
             {/* ── LEFT COLUMN ── */}
             <div
-              className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-8 lg:pr-12 gap-4"
+              className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-6 lg:pr-10 gap-4"
             >
-              {/* Badge */}
+              {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[10px] tracking-[0.1em] font-extrabold uppercase">Robotics & Automation</span>
+                <span className="text-[11px] tracking-[0.12em] font-extrabold uppercase">TAMIZH TECH ROBOTICS</span>
               </div>
 
-              {/* Heading */}
+              {/* Main Headline */}
               <h1
-                className="font-black text-text-primary font-heading tracking-tight leading-none text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                className="font-black text-text-primary font-heading tracking-tight leading-[1.05] text-4xl sm:text-5xl md:text-5xl lg:text-[3.6rem] uppercase"
               >
-                Engineering the{' '}
-                <span className="text-accent underline decoration-4 decoration-accent/25 underline-offset-4">Future</span>
-                <br />
-                of{' '}
-                <span className="text-accent">Robotics & AI</span>
+                Learn. Build.<br />
+                Play.{' '}
+                <span className="text-accent underline decoration-4 decoration-accent/25 underline-offset-6">
+                  Compete.
+                </span>
               </h1>
 
-              {/* Tamil tagline — one line only */}
-              <div className="border-l-2 border-accent pl-4 py-0.5">
-                <p className="text-xs sm:text-base font-black text-text-primary font-heading leading-snug whitespace-nowrap">
+              {/* Tamil tagline & secondary motto */}
+              <div className="border-l-2 border-accent pl-3.5 py-0.5 space-y-0.5">
+                <p className="text-xs sm:text-sm font-black text-text-primary font-heading leading-snug">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
+                </p>
+                <p className="text-[11px] sm:text-xs font-bold text-accent tracking-wide">
+                  More Than Robots. We Build Skills, Ideas & Innovation.
                 </p>
               </div>
 
-              {/* Short description — max 3 lines */}
-              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[460px]">
-                <span className="text-accent font-bold">Tamizh Tech Robotics Company</span> engineers robotics, AI, automation, and STEM solutions for students, institutions, and modern industries.
+              {/* Supporting headline */}
+              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[480px]">
+                A hands-on robotics ecosystem for students, schools, colleges, makers and innovators.
               </p>
 
-              {/* Features — 2 columns, tight */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              {/* Supporting proof categories */}
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                 {[
-                  "Mobile Robotics",
-                  "Industrial Automation",
-                  "Industrial Robotics",
-                  "STEM Labs",
+                  "Gamified Learning",
+                  "Hands-on Skills",
+                  "Competition Robotics",
+                  "Real-world Applications",
                 ].map((feat) => (
-                  <div key={feat} className="flex items-center gap-2 text-xs font-bold text-text-secondary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                  <div key={feat} className="flex items-center gap-2 text-xs sm:text-sm font-bold text-text-secondary">
+                    <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
                     {feat}
                   </div>
                 ))}
@@ -206,65 +242,40 @@ export default function HomeClient() {
 
               {/* CTAs */}
               <div className="flex items-center gap-3 flex-wrap pt-1">
-                <Link href="/services" className="w-full sm:w-auto">
+                <Link href="/solutions" className="w-full sm:w-auto">
                   <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
-                    Explore Services <ArrowRight className="w-4 h-4 ml-1.5" />
+                    Explore Our Robotics World <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
                 </Link>
-                <Link href="/products" className="w-full sm:w-auto">
+                <Link href="/services" className="w-full sm:w-auto">
                   <Button className="w-full justify-center text-sm font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange">
-                    Buy Products
+                    Build With Us <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
                 </Link>
               </div>
+
+              {/* Supporting B2B/B2C Micro-strip */}
+              <p className="text-[11px] font-semibold text-text-muted tracking-wide pt-0.5">
+                Robotics Education • Competition Robots • STEM Programs • Custom Robot Solutions
+              </p>
             </div>
 
-            {/* ── RIGHT COLUMN — Premium Triangular Hero Composition ── */}
-            <div
-              className="relative flex items-center justify-center w-full mt-2 md:-mt-8"
-            >
-              {/* Image Container — height 280px on mobile, 540px on desktop */}
-              <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[540px] max-w-[620px]">
+            {/* ── RIGHT COLUMN — TamizhTech Robotics Fleet Showcase ── */}
+            <div className="relative flex items-center justify-center w-full py-4 lg:py-6">
+              {/* Diffused Ambient Glow Behind the Showcase */}
+              <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-tr from-accent/20 via-accent/5 to-transparent rounded-[2.5rem] blur-2xl opacity-60 pointer-events-none -z-10" />
 
-                {/* Centered Background Glow */}
-                <div 
-                  className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle,rgba(255,115,0,0.20)_0%,rgba(255,115,0,0.08)_38%,transparent_75%)]"
+              {/* Clean Hardware Showcase Container (No intrusive badges) */}
+              <div className="relative w-full max-w-[590px] aspect-[3/2] rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-[0_15px_45px_-10px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.03)] transition-all duration-500 hover:shadow-[0_20px_55px_-10px_rgba(0,0,0,0.12)]">
+                {/* Product Fleet Photograph */}
+                <Image
+                  src="/hero-combined.jpg"
+                  alt="TamizhTech Robotics Fleet — Combat Robot, Bipedal Platform, Line Follower & All-Terrain Rover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
+                  className="object-contain transition-transform duration-700 ease-out hover:scale-[1.02]"
+                  priority
                 />
-
-                {/* 1. AMR — Left (Lower, width ~290px/44%, bottom 20px, z-10) */}
-                <div className="absolute left-0 bottom-[20px] w-[46%] sm:w-[44%] h-[70%] z-10">
-                  <Image
-                    src="/hero-amr.png"
-                    alt="TamizhTech AMR Autonomous Mobile Robot"
-                    fill
-                    sizes="(max-width: 768px) 46vw, 260px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)]"
-                  />
-                </div>
-
-                {/* 2. ROBOT ARM — Center (Hero Product, Tallest, width ~420px/58%, bottom 0, z-30) */}
-                <div className="absolute left-[22%] sm:left-[23%] bottom-0 w-[58%] h-[98%] z-30">
-                  <Image
-                    src="/hero-hero.png"
-                    alt="TamizhTech Robotic Arm Platform — Hero Product"
-                    fill
-                    sizes="(max-width: 768px) 58vw, 360px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_35px_70px_rgba(0,0,0,0.22)]"
-                    priority
-                  />
-                </div>
-
-                {/* 3. SERVICE ROBOT — Right (Slightly behind Arm, width ~330px/48%, bottom 15px, z-20) */}
-                <div className="absolute right-0 bottom-[15px] w-[48%] sm:w-[46%] h-[82%] z-20">
-                  <Image
-                    src="/hero-human.png"
-                    alt="TamizhTech Advanced Service Robot"
-                    fill
-                    sizes="(max-width: 768px) 48vw, 290px"
-                    className="object-contain object-bottom [mix-blend-mode:multiply] transition-all duration-500 hover:scale-105 drop-shadow-[0_28px_55px_rgba(0,0,0,0.18)]"
-                  />
-                </div>
-
               </div>
             </div>
 
@@ -454,25 +465,65 @@ export default function HomeClient() {
       {/* 5. WHY TAMIZHTECH SECTION */}
       <section className="section bg-subtle py-24 border-t border-border/30">
         <div className="container px-6">
-          <AnimatedSection className="mb-16 text-center">
+          <AnimatedSection className="mb-16 text-center max-w-3xl mx-auto">
             <SectionHeader
               tag="Why Choose Us"
               title="The TamizhTech"
               highlight="difference"
-              subtitle="What sets us apart in custom engineering and robotics solutions."
+              subtitle="Real hardware, championship-winning robotics, and hands-on execution from Coimbatore to all of India."
             />
           </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-            {whyUs.map(({ icon: Icon, title, desc }) => (
-              <StaggerItem key={title} className="text-left flex flex-col items-start space-y-4">
-                <div className="w-12 h-12 rounded-lg bg-accent-soft flex items-center justify-center text-accent">
-                  <Icon className="w-6 h-6 stroke-[2]" />
-                </div>
-                <h3 className="text-lg font-bold font-heading text-text-primary">{title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{desc}</p>
-              </StaggerItem>
-            ))}
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whyUs.map((item) => {
+              const Icon = item.icon;
+              return (
+                <StaggerItem key={item.title} className="h-full">
+                  <div className="h-full bg-white border border-border/80 hover:border-accent/40 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
+                    {/* Visual Image Container */}
+                    <div className="relative aspect-[16/11] w-full overflow-hidden bg-slate-900">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
+
+                      {/* Top Floating Badge */}
+                      <div className="absolute top-3 left-3 bg-black/65 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A00]" />
+                        <span>{item.badge}</span>
+                      </div>
+
+                      {/* Bottom Right Icon Pill */}
+                      <div className="absolute bottom-3 right-3 w-8 h-8 rounded-lg bg-white/95 backdrop-blur-md text-accent flex items-center justify-center shadow-md border border-white/40">
+                        <Icon className="w-4 h-4 stroke-[2.5]" />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-5 flex flex-col flex-grow justify-between text-left">
+                      <div>
+                        <h3 className="text-base font-bold font-heading text-text-primary mb-2 group-hover:text-accent transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs text-text-secondary leading-relaxed mb-4">
+                          {item.desc}
+                        </p>
+                      </div>
+
+                      {/* Footer Highlight */}
+                      <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-[11px] font-semibold text-slate-700">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                        <span>{item.highlight}</span>
+                      </div>
+                    </div>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
@@ -607,9 +658,75 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* Stainless Steel Laser Cutting Service Section */}
+      <section className="section bg-subtle py-24 border-t border-border/30">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left side: Copy & Actions */}
+            <AnimatedSection className="lg:col-span-6 flex flex-col justify-center text-left order-2 lg:order-1" delay={0.1}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold tracking-wide uppercase mb-4 w-fit">
+                <span>Precision Fiber Laser Cutting</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
+                Stainless Steel Laser Cutting <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Engineered for Metal (Not Wood)</span>
+              </h2>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-4">
+                We specialize strictly in <span className="text-text-primary font-bold">Stainless Steel (SS 304 & SS 316)</span> and precision sheet metal laser cutting — <span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">not wood or MDF</span>. Engineered for heavy-duty combat bot chassis, custom brackets, motor mounts, industrial panels, and tight-tolerance mechanical assemblies.
+              </p>
 
+              <div className="mb-6 p-4 rounded-xl bg-white border border-slate-200 text-xs text-text-primary space-y-2 shadow-2xs">
+                <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#FF6A00]" />
+                  <span>Specialized Stainless Steel Capabilities</span>
+                </div>
+                <p className="text-text-muted leading-relaxed">
+                  Burr-free clean edge quality with tight mechanical tolerances. Direct processing from DXF, DWG, and STEP CAD files with nesting optimization to minimize metal scrap.
+                </p>
+              </div>
 
-      {/* 6. JOIN OUR EXCLUSIVE ROBOTICS CLUB */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {[
+                  "Stainless Steel SS 304 & SS 316 Sheet Cutting",
+                  "Dedicated Metal Laser Cutting (Not Wood)",
+                  "Custom Robot Chassis Panels & Brackets",
+                  "Clean, Burr-Free Edges & High Accuracy",
+                  "DXF / DWG / 2D CAD Nesting Optimization",
+                  "Affordable Factory Direct Coimbatore Pricing"
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://wa.me/918148045030?text=Hi%20TamizhTech,%20I%20am%20looking%20for%20Stainless%20Steel%20Laser%20Cutting%20services%20(Not%20wood).%20Can%20you%20share%20pricing%20and%20turnaround%20time%20for%20SS%20parts?"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button variant="primary" size="lg" className="w-full justify-center !bg-[#FF6A00] hover:!bg-[#E05300] text-white font-bold rounded-lg border-none px-8 py-3.5 shadow-md shadow-orange-500/20">
+                    Order SS Laser Cutting via WhatsApp
+                  </Button>
+                </a>
+                <Link href="/services/laser-cutting" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full justify-center border-border hover:bg-white text-text-primary font-bold rounded-lg px-8 py-3.5">
+                    View Laser Cutting Details
+                  </Button>
+                </Link>
+              </div>
+            </AnimatedSection>
+
+            {/* Right side: Video */}
+            <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-lg order-1 lg:order-2" direction="left">
+              <LazyVideo src="/laser-cutting.mp4" />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
       <section className="section bg-subtle py-24 border-t border-border/30 overflow-hidden text-left">
         <div className="container px-6 max-w-5xl mx-auto">
           <div className="bg-white/70 backdrop-blur-md border border-border/80 rounded-2xl shadow-xl p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
@@ -758,6 +875,9 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* 9.5 CUSTOMER REVIEWS (REAL GOOGLE REVIEWS TRUST LAYER) */}
+      <CustomerReviewsSection />
+
       {/* 10. START BUILDING (FINAL CTA BAND) - Pure Orange & White Brand Identity */}
       <section className="bg-white py-24 text-text-primary border-t border-border/40 relative overflow-hidden">
         {/* Subtle orange accent glow */}
@@ -765,6 +885,10 @@ export default function HomeClient() {
 
         <div className="container relative z-10 px-6 max-w-5xl mx-auto text-center">
           <AnimatedSection>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent w-fit mb-4 mx-auto">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-[11px] font-extrabold uppercase tracking-widest">Your Idea. Our Innovation.</span>
+            </div>
             <h2 className="text-3xl md:text-4xl font-black mb-4 font-heading tracking-tight text-text-primary uppercase">
               Ready to build something <span className="text-accent">extraordinary</span>?
             </h2>

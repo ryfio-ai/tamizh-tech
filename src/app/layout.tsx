@@ -43,11 +43,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tamizhtech.in"),
   title: {
-    default: "Robotics Company Coimbatore — TamizhTech | AI & Automation",
-    template: "%s | TamizhTech Robotics Company",
+    default: "Tamizh Tech Robotics | Robotics, STEM & Competition Robots India",
+    template: "%s | Tamizh Tech Robotics",
   },
   description:
-    "TamizhTech Robotics Company builds AI, robotics & automation systems in Coimbatore. Competition robots, industrial AGVs, STEM labs & robotics courses across India.",
+    "Explore Tamizh Tech Robotics for robotics education, STEM programs, competition robots, robotics kits, components and custom robotics solutions for students, schools, colleges and innovators.",
   keywords: [
     "robotics company Coimbatore",
     "AI robotics solutions India",

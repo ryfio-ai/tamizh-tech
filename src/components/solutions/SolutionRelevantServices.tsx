@@ -49,7 +49,7 @@ export function SolutionRelevantServices({
               className="group bg-neutral-50/70 rounded-2xl border border-neutral-200 hover:border-neutral-300 hover:shadow-md transition-all duration-200 flex flex-col overflow-hidden"
             >
               {/* Media Thumbnail */}
-              <div className="relative aspect-[16/9] w-full bg-neutral-100 overflow-hidden">
+              <div className="relative aspect-[4/3] w-full bg-neutral-100 overflow-hidden">
                 <Image
                   src={service.primaryImage}
                   alt={service.h1}

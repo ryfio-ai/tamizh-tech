@@ -408,45 +408,27 @@ export const products: Product[] = [
     brand: "Tamizh Tech",
     sku: "TTRC-C-3",
     availability: "in_stock",
-    name: "TTRC RS-5.0 Robo Soccer",
-    metaTitle: "TTRC RS-5.0 Robo Soccer Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC RS-5.0 tournament robo soccer robot with four 300 RPM motors, high-torque gearboxes, and soccer wheels. ₹7,999 Only Bot / ₹21,999 Full Kit.",
+    name: "ROBO Soccer bot TTRC SOCCER 5.1",
+    metaTitle: "ROBO Soccer bot TTRC SOCCER 5.1 | Competition Robot | Tamizh Tech",
+    metaDescription: "ROBO Soccer bot TTRC SOCCER 5.1 tournament robot with four 300 RPM motors, high-torque gearboxes, FlySky transmitter, and soccer wheels. ₹21,499 (Original ₹29,000, 26% OFF).",
     shortDescription: "A competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications.",
-    quickAnswer: "TTRC RS-5.0 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
-    price: 7999,
-    sellingPrice: 7999,
+    quickAnswer: "ROBO Soccer bot TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
+    price: 21499,
+    sellingPrice: 21499,
+    regularPrice: 29000,
+    mrp: 29000,
     currency: "INR",
     configurations: [
       {
-        id: "only-bot",
-        name: "Only Bot",
-        price: 7999,
-        sellingPrice: 7999,
-        currency: "INR",
-        sku: "TTRC-C-3-A",
-        isDefault: true,
-        includedItems: [
-          "300 RPM DGJ / Graded Diamond Motor × 4",
-          "TTRC High-Torque Gearbox × 4",
-          "80MM / 100MM Soccer Wheels × 4",
-          "TTRC Robo Soccer Chassis × 1",
-          "Extra Screws, Connectors & Wires"
-        ],
-        highlights: [
-          "300 RPM DGJ / Graded Diamond Motors × 4",
-          "TTRC High-Torque Gearboxes × 4",
-          "80MM / 100MM Soccer Wheels × 4",
-          "TTRC Robo Soccer Chassis",
-          "280 × 270 × 80 mm Approx. Dimensions"
-        ]
-      },
-      {
         id: "full-kit",
         name: "Full Kit",
-        price: 21999,
-        sellingPrice: 21999,
+        price: 21499,
+        sellingPrice: 21499,
+        regularPrice: 29000,
+        mrp: 29000,
         currency: "INR",
         sku: "TTRC-C-3-B",
+        isDefault: true,
         includedItems: [
           "300 RPM DGJ / Graded Diamond Motor × 4",
           "TTRC High-Torque Gearbox × 4",
@@ -465,6 +447,28 @@ export const products: Product[] = [
           "2200mAh LiPo Battery + Charger",
           "FlySky FS-i6 Transmitter"
         ]
+      },
+      {
+        id: "only-bot",
+        name: "Only Bot",
+        price: 7999,
+        sellingPrice: 7999,
+        currency: "INR",
+        sku: "TTRC-C-3-A",
+        includedItems: [
+          "300 RPM DGJ / Graded Diamond Motor × 4",
+          "TTRC High-Torque Gearbox × 4",
+          "80MM / 100MM Soccer Wheels × 4",
+          "TTRC Robo Soccer Chassis × 1",
+          "Extra Screws, Connectors & Wires"
+        ],
+        highlights: [
+          "300 RPM DGJ / Graded Diamond Motors × 4",
+          "TTRC High-Torque Gearboxes × 4",
+          "80MM / 100MM Soccer Wheels × 4",
+          "TTRC Robo Soccer Chassis",
+          "280 × 270 × 80 mm Approx. Dimensions"
+        ]
       }
     ],
     badge: "Competition / Robo Soccer",
@@ -475,9 +479,9 @@ export const products: Product[] = [
       "/product/soccer/soccer1.2.png"
     ],
     imageAlts: [
-      "TTRC RS-5.0 Robo Soccer robot front angle",
-      "TTRC RS-5.0 Robo Soccer chassis and drive assembly",
-      "TTRC RS-5.0 Robo Soccer complete platform overview"
+      "ROBO Soccer bot TTRC SOCCER 5.1 robot front angle",
+      "ROBO Soccer bot TTRC SOCCER 5.1 chassis and drive assembly",
+      "ROBO Soccer bot TTRC SOCCER 5.1 complete platform overview"
     ],
     specs: "300 RPM DGJ / Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, 80MM / 100MM Soccer Wheels, 280 × 270 × 80 mm.",
     highlights: [
@@ -489,13 +493,13 @@ export const products: Product[] = [
       "4-Wheel Competition Platform"
     ],
     whyThisProduct: {
-      heading: "WHY TTRC RS-5.0?",
+      heading: "WHY TTRC SOCCER 5.1?",
       points: [
         "300 RPM DGJ / Graded Diamond Motors × 4 for consistent torque and pace.",
         "TTRC High-Torque Gearboxes × 4 engineered for competition arena endurance.",
         "Custom 80MM / 100MM Soccer Wheels provide optimal arena grip.",
         "Robust TTRC Robo Soccer Chassis engineered for collision resilience.",
-        "Two configuration choices: Only Bot and Full Kit."
+        "Two configuration choices: Full Kit (Ready-to-Play) and Only Bot."
       ],
       targetAudience: ["Robotics Teams", "Students", "Makers", "Educational Institutions", "Competition Participants"]
     },
@@ -542,12 +546,12 @@ export const products: Product[] = [
     ],
     faqs: [
       {
-        question: "What is the TTRC RS-5.0?",
-        answer: "TTRC RS-5.0 is a competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications."
+        question: "What is the ROBO Soccer bot TTRC SOCCER 5.1?",
+        answer: "ROBO Soccer bot TTRC SOCCER 5.1 is a competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications."
       },
       {
         question: "What configurations are available?",
-        answer: "The TTRC RS-5.0 is available in two configurations: Only Bot at ₹7,999 and Full Kit at ₹21,999."
+        answer: "The ROBO Soccer bot TTRC SOCCER 5.1 is available at a discounted selling price of ₹21,499 (Original price: ₹29,000 for Full Kit), and Only Bot at ₹7,999."
       },
       {
         question: "What is included in the Only Bot configuration?",
@@ -574,7 +578,7 @@ export const products: Product[] = [
         answer: "Yes, the Full Kit configuration includes the FlySky FS-i6 transmitter and a 2200mAh LiPo Battery with charger."
       },
       {
-        question: "How can I enquire about the TTRC RS-5.0?",
+        question: "How can I enquire about the ROBO Soccer bot TTRC SOCCER 5.1?",
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to contact our Coimbatore engineering team directly."
       }
     ],

@@ -479,7 +479,12 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                               )}
                             </div>
                           </div>
-                          <span className="text-xs sm:text-sm font-black text-slate-950">₹{cfg.price.toLocaleString("en-IN")}</span>
+                          <div className="text-right">
+                            <span className="text-xs sm:text-sm font-black text-slate-950 block">₹{cfg.price.toLocaleString("en-IN")}</span>
+                            {cfg.regularPrice && cfg.regularPrice > cfg.price && (
+                              <span className="text-[10px] font-semibold text-slate-400 line-through block">₹{cfg.regularPrice.toLocaleString("en-IN")}</span>
+                            )}
+                          </div>
                         </button>
                       );
                     })}

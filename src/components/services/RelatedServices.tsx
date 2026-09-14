@@ -33,7 +33,7 @@ export function RelatedServices({ relatedServices, relatedProducts }: RelatedSer
               href={svc.href}
               className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs hover:border-accent/40 hover:shadow-sm transition-all text-left flex flex-col"
             >
-              <div className="relative aspect-video bg-slate-900 overflow-hidden">
+              <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
                 <Image
                   src={svc.image}
                   alt={svc.title}

@@ -100,7 +100,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     badge: "Additive Manufacturing",
     h1: "High-Precision 3D Printing Services in Coimbatore",
     heroSub: "Affordable rapid prototyping and additive manufacturing for functional prototypes, custom robotic components, drone brackets, enclosures, and miniatures.",
-    primaryImage: "/pic/3d printing.jpg",
+    primaryImage: "/service/3d-printing-services.png",
     overview: {
       heading: "Production-Grade Prototyping & Custom Parts",
       paragraphs: [
@@ -249,21 +249,21 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "Laser Cutting (Stainless Steel)",
         desc: "Precision stainless steel sheet metal cutting for high-strength robotic chassis and brackets.",
         href: "/services/laser-cutting",
-        image: "/pic/laser cutting.jpg"
+        image: "/service/laser-cutting.png"
       },
       {
         slug: "pcb-design-fabrication-assembly",
         title: "PCB Services",
         desc: "Custom schematic design, bare board fabrication, and component assembly (PCBA).",
         href: "/services/pcb-design-fabrication-assembly",
-        image: "/pic/pcb design.jpg"
+        image: "/service/pcb-services.png"
       },
       {
         slug: "robotics-automation",
         title: "Robotics & Automation",
         desc: "Turnkey autonomous systems, manipulator mechanisms, and competition bot builds.",
         href: "/services/robotics-automation",
-        image: "/gallery/10.jpg"
+        image: "/service/robotics-automation.png"
       }
     ],
     relatedProducts: [
@@ -289,7 +289,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     badge: "Fiber Laser Metal Fabrication",
     h1: "Precision Stainless Steel Laser Cutting Services",
     heroSub: "Industrial fiber laser sheet metal cutting specialized strictly in Stainless Steel (SS 304 & SS 316) and precision sheet metals. Engineered for high-strength metal fabrication — not wood or MDF.",
-    primaryImage: "/pic/laser cutting.jpg",
+    primaryImage: "/service/laser-cutting.png",
     overview: {
       heading: "Dedicated Stainless Steel & Sheet Metal Laser Cutting",
       paragraphs: [
@@ -382,7 +382,8 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "Fiber Laser Metal Cutting",
         desc: "High-precision fiber laser cutting stainless steel sheet metal in our Coimbatore manufacturing network.",
         image: "/pic/laser cutting.jpg",
-        type: "image"
+        type: "video",
+        videoSrc: "/laser-cutting.mp4"
       },
       {
         title: "Precision Metal Panels & Robot Brackets",
@@ -433,21 +434,21 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "3D Printing Services",
         desc: "Complement metal laser-cut frames with lightweight 3D printed enclosures, brackets, and sensor mounts.",
         href: "/services/3d-printing",
-        image: "/pic/3d printing.jpg"
+        image: "/service/3d-printing-services.png"
       },
       {
         slug: "robotics-automation",
         title: "Robotics & Automation",
         desc: "Complete robotic system design, chassis fabrication, and embedded motion control integration.",
         href: "/services/robotics-automation",
-        image: "/gallery/10.jpg"
+        image: "/service/robotics-automation.png"
       },
       {
         slug: "industrial-automation",
         title: "Industrial Automation",
         desc: "Custom control panels, PLC logic, and factory line integration in Coimbatore.",
         href: "/services/industrial-automation",
-        image: "/gallery/18.jpeg"
+        image: "/service/industrial-automation.png"
       }
     ],
     relatedProducts: [
@@ -473,7 +474,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     badge: "Turnkey Electronics Engineering",
     h1: "Turnkey PCB Services: Design, Fabrication & Assembly (PCBA)",
     heroSub: "End-to-end circuit board engineering — from schematic capture and multi-layer layout to rapid prototype fabrication, component assembly (PCBA), and hardware bench testing.",
-    primaryImage: "/pic/pcb design.jpg",
+    primaryImage: "/service/pcb-services.png",
     overview: {
       heading: "Complete Hardware Lifecycle: Schematic to Assembled Board",
       paragraphs: [
@@ -613,21 +614,21 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "Robotics & Automation",
         desc: "Integrate your custom PCB into complete robotic chassis and autonomous platforms.",
         href: "/services/robotics-automation",
-        image: "/gallery/10.jpg"
+        image: "/service/robotics-automation.png"
       },
       {
         slug: "3d-printing",
         title: "3D Printing Services",
         desc: "Fabricate tailored enclosures, mounting brackets, and standoffs for your custom circuit boards.",
         href: "/services/3d-printing",
-        image: "/pic/3d printing.jpg"
+        image: "/service/3d-printing-services.png"
       },
       {
         slug: "industrial-automation",
         title: "Industrial Automation",
         desc: "Interfacing custom sensor electronics with PLCs, SCADA dashboards, and 24V industrial controls.",
         href: "/services/industrial-automation",
-        image: "/gallery/18.jpeg"
+        image: "/service/industrial-automation.png"
       }
     ],
     whatsappMessage: "Hi Tamizh Tech, I need PCB Design/Fabrication/Assembly support for my hardware project.",
@@ -645,7 +646,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     badge: "Specialized Engineering",
     h1: "Custom Robotics & Automation Engineering",
     heroSub: "We design, build, and deploy custom robotic systems — from tournament-tested competition combat platforms to autonomous mobile bases and multi-axis manipulator mechanisms.",
-    primaryImage: "/gallery/10.jpg",
+    primaryImage: "/service/robotics-automation.png",
     overview: {
       heading: "End-to-End Robotics Design, Kinematics & Embedded Control",
       paragraphs: [
@@ -771,14 +772,14 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "Laser Cutting (Stainless Steel)",
         desc: "Precision stainless steel sheet cutting for robot armor, chassis baseplates, and structural gussets.",
         href: "/services/laser-cutting",
-        image: "/pic/laser cutting.jpg"
+        image: "/service/laser-cutting.png"
       },
       {
         slug: "pcb-design-fabrication-assembly",
         title: "PCB Services",
         desc: "Turnkey circuit board design and assembly for custom motor drivers and power management.",
         href: "/services/pcb-design-fabrication-assembly",
-        image: "/pic/pcb design.jpg"
+        image: "/service/pcb-services.png"
       }
     ],
     relatedProducts: [
@@ -810,7 +811,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     badge: "B2B Factory Engineering",
     h1: "Industrial Automation Solutions: PLC, SCADA & Machine Integration",
     heroSub: "End-to-end industrial automation and machine retrofitting in Coimbatore and Tamil Nadu — bridging industrial control hardware, PLCs, SCADA dashboards, and field sensors for maximum factory uptime.",
-    primaryImage: "/gallery/18.jpeg",
+    primaryImage: "/service/industrial-automation.png",
     overview: {
       heading: "Practical Industrial Automation for Coimbatore & Tamil Nadu Manufacturers",
       paragraphs: [
@@ -950,21 +951,21 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "Robotics & Automation",
         desc: "Custom autonomous mobile robots and multi-axis manipulators for factory material handling.",
         href: "/services/robotics-automation",
-        image: "/gallery/10.jpg"
+        image: "/service/robotics-automation.png"
       },
       {
         slug: "laser-cutting",
         title: "Laser Cutting (Stainless Steel)",
         desc: "Precision stainless steel sheet cutting for control panel faceplates, brackets, and machine guards.",
         href: "/services/laser-cutting",
-        image: "/pic/laser cutting.jpg"
+        image: "/service/laser-cutting.png"
       },
       {
         slug: "pcb-design-fabrication-assembly",
         title: "PCB Services",
         desc: "Custom embedded sensor boards and communication nodes integrated with industrial controllers.",
         href: "/services/pcb-design-fabrication-assembly",
-        image: "/pic/pcb design.jpg"
+        image: "/service/pcb-services.png"
       }
     ],
     whatsappMessage: "Hi Tamizh Tech, I have an Industrial Automation requirement.",

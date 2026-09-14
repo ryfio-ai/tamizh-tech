@@ -23,19 +23,11 @@ test.describe('TamizhTech Pre-Launch Test Suite', () => {
     expect(criticalErrors).toEqual([]);
   });
 
-  test('2. Verify Triangular Hero Asset & Glass Badges Visibility', async ({ page }: { page: Page }) => {
-    // Assert the structural image stack is available
-    const centerArm = page.locator('img[src*="hero-hero.png"]');
-    const leftAMR = page.locator('img[src*="hero-amr.png"]');
-    const rightHuman = page.locator('img[src*="hero-human.png"]');
+  test('2. Verify Hero Asset Visibility', async ({ page }: { page: Page }) => {
+    // Assert the structural hero image is available
+    const heroCombined = page.locator('img[src*="hero-combined"]');
 
-    await expect(centerArm).toBeVisible();
-    await expect(leftAMR).toBeVisible();
-    await expect(rightHuman).toBeVisible();
-
-    // Verify presence of interactive floating glass tags
-    const glassBadge = page.locator('text=AI Powered');
-    await expect(glassBadge).toBeVisible();
+    await expect(heroCombined).toBeVisible();
   });
 
   test('3. Validate B2B Product RFQ Form Modal Payload Injection', async ({ page }: { page: Page }) => {

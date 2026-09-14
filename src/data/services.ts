@@ -19,7 +19,7 @@ export const services: ServiceItem[] = [
     title: "Robotics & Automation",
     subtitle: "Custom Autonomous & Manipulator Systems",
     category: "core",
-    image: "/gallery/10.jpg",
+    image: "/service/robotics-automation.png",
     desc: "We design, fabricate, and deploy custom robotic systems for industrial, educational, and research applications.",
     features: [
       "Custom robot design & chassis fabrication",
@@ -36,7 +36,7 @@ export const services: ServiceItem[] = [
     title: "Industrial Automation",
     subtitle: "PLC, SCADA & Factory Floor Integration",
     category: "core",
-    image: "/gallery/18.jpeg",
+    image: "/service/industrial-automation.png",
     desc: "End-to-end factory automation solutions — from PLCs, HMIs, and SCADA to fully synchronized production cells.",
     features: [
       "PLC & SCADA ladder logic & commissioning",
@@ -55,7 +55,7 @@ export const services: ServiceItem[] = [
     title: "3D Printing Services",
     subtitle: "High Quality & Affordable (PLA, PETG, TPU)",
     category: "prototyping",
-    image: "/pic/3d printing.jpg",
+    image: "/service/3d-printing-services.png",
     desc: "High quality 3D printing services at affordable and best prices. We create prototypes, custom parts, robotic components, and miniatures printed with high precision for smooth and accurate results. Fast delivery and reliable service for all your projects.",
     features: [
       "Prototypes, custom parts, robotic components & miniatures",
@@ -72,7 +72,7 @@ export const services: ServiceItem[] = [
     title: "Laser Cutting (Stainless Steel)",
     subtitle: "Precision Stainless Steel Cutting (Not Wood)",
     category: "prototyping",
-    image: "/pic/laser cutting.jpg",
+    image: "/service/laser-cutting.png",
     desc: "High-precision laser cutting specialized strictly in Stainless Steel (SS 304, SS 316) and sheet metals (not wood). Engineered for high-strength robotic chassis, custom brackets, structural panels, and tight-tolerance mechanical assemblies.",
     features: [
       "High-precision Stainless Steel (SS 304 & SS 316) sheet cutting",
@@ -89,7 +89,7 @@ export const services: ServiceItem[] = [
     title: "PCB Services",
     subtitle: "Design + Fabrication + Assembly",
     category: "prototyping",
-    image: "/pic/pcb design.jpg",
+    image: "/service/pcb-services.png",
     desc: "Turnkey printed circuit board services from schematic capture and multi-layer layout to rapid prototype assembly and hardware testing.",
     features: [
       "Schematic design & multi-layer PCB layout",
@@ -108,7 +108,7 @@ export const services: ServiceItem[] = [
     title: "Embedded Systems",
     subtitle: "Firmware & Real-Time Hardware",
     category: "technology",
-    image: "/gallery/17.jpeg",
+    image: "/service/embedded-systems.png",
     desc: "Low-level firmware and hardware design for microcontrollers, FPGAs, motor drivers, and real-time deterministic systems.",
     features: [
       "Microcontroller programming (STM32, ESP32, AVR)",
@@ -125,7 +125,7 @@ export const services: ServiceItem[] = [
     title: "IoT Solutions",
     subtitle: "Connected Ecosystems & Dashboards",
     category: "technology",
-    image: "/gallery/16.jpeg",
+    image: "/service/iot-solutions.png",
     desc: "Connected sensor networks bridging physical hardware with cloud analytics, telemetry dashboards, and remote device monitoring.",
     features: [
       "Industrial sensor network deployment",
@@ -142,7 +142,7 @@ export const services: ServiceItem[] = [
     title: "AI & Computer Vision",
     subtitle: "Deep Learning & Quality Inspection",
     category: "technology",
-    image: "/gallery/12.jpg",
+    image: "/service/ai-computer-vision.png",
     desc: "Deep learning models, OpenCV computer vision, and edge artificial intelligence for automated quality control and object tracking.",
     features: [
       "Real-time visual defect detection & OCR",
@@ -159,7 +159,7 @@ export const services: ServiceItem[] = [
     title: "Drone Technology",
     subtitle: "UAV Design & Aerial Telemetry",
     category: "technology",
-    image: "/gallery/14.jpg",
+    image: "/service/drone-technology.png",
     desc: "Custom UAV airframes, autonomous flight controllers, and payload integration for mapping, agriculture, and telemetry.",
     features: [
       "Custom multirotor & hexacopter airframe assembly",
@@ -178,7 +178,7 @@ export const services: ServiceItem[] = [
     title: "STEM Labs",
     subtitle: "Turnkey School & College Tinkering Labs",
     category: "education",
-    image: "/gallery/20.jpeg",
+    image: "/service/stem-labs.png",
     desc: "Turnkey STEM, AI, and Robotics lab setups for schools and colleges — including equipment, structured syllabus, and trainer mentoring.",
     features: [
       "Comprehensive ATL & STEM lab equipment supply",
@@ -195,7 +195,7 @@ export const services: ServiceItem[] = [
     title: "Research & Development",
     subtitle: "Applied Engineering & Innovation",
     category: "education",
-    image: "/gallery/21.jpeg",
+    image: "/service/research-development.png",
     desc: "Collaborative R&D with institutions and engineering teams for novel product design, prototyping, and applied technology research.",
     features: [
       "Concept feasibility studies & rapid prototyping",
@@ -212,7 +212,7 @@ export const services: ServiceItem[] = [
     title: "Training & Workshops",
     subtitle: "Hands-on Technical Upskilling",
     category: "education",
-    image: "/gallery/22.jpeg",
+    image: "/service/training-workshops.png",
     desc: "Practical robotics, PLC automation, and embedded systems training programs for students, faculties, and corporate teams.",
     features: [
       "Hands-on robotics & hardware workshops",
@@ -229,7 +229,7 @@ export const services: ServiceItem[] = [
     title: "Engineering Consulting",
     subtitle: "Architecture & Feasibility",
     category: "education",
-    image: "/gallery/23.jpeg",
+    image: "/service/engineering-consulting.png",
     desc: "Expert technical guidance on robotics system architecture, vendor selection, BOM optimization, and automation feasibility.",
     features: [
       "System architecture & hardware review",
