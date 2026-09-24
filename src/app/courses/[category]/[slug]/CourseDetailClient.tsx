@@ -19,6 +19,9 @@ import { Card } from "@/components/ui/Card";
 import { getCourseCategoryUrl } from "@/lib/routing";
 import { ChevronRight } from "lucide-react";
 
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
+
 interface CourseDetailClientProps {
   course: Course;
 }
@@ -28,46 +31,53 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
   const [enrollForm, setEnrollForm] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     mode: course.mode,
     notes: ""
   });
   const [submitted, setSubmitted] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleEnrollSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const activeKey = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) {
+      setIdempotencyKey(activeKey);
+    }
+
     try {
       const courseUrl = `https://www.tamizhtech.in/courses/${course.categorySlug}/${course.slug}`;
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Course Enquiry",
-          source: "Course Detail Page",
-          pageUrl: courseUrl,
-          customerName: enrollForm.name,
-          email: enrollForm.email,
-          phone: enrollForm.phone,
-          courseName: course.title,
-          courseCategory: course.cat,
-          courseUrl: courseUrl,
-          requirement: `Preferred Mode: ${enrollForm.mode}`,
-          message: enrollForm.notes,
-        }),
+      const cleanMobile = enrollForm.mobile.replace(/\D/g, "");
+
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: activeKey,
+        payload: {
+          name: enrollForm.name.trim(),
+          mobile: cleanMobile || undefined,
+          email: enrollForm.email.trim() || undefined,
+          country: "India",
+          subject: `Course Enrollment Interest: ${course.title} — ${enrollForm.name.trim()}`,
+          productRequirements: `${course.title} (${course.cat})`,
+          message: enrollForm.notes.trim() || undefined,
+          technicalRequirements: `Preferred Mode: ${enrollForm.mode} | Course URL: ${courseUrl}`,
+        },
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setSubmitted(true);
-        setLeadId(data.leadId || "");
-      } else {
-        alert(data.error || "Failed to submit enrollment request. Please try again.");
+
+      setSubmitted(true);
+      setLeadId(result.submissionNo);
+      setIdempotencyKey("");
+    } catch (err: any) {
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey("");
       }
-    } catch (err) {
-      console.error(err);
-      alert("Failed to submit enrollment request. Please try again.");
+      alert(err.message || "Failed to submit enrollment request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -186,15 +196,38 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number</label>
-                    <input
-                      type="tel"
-                      required
-                      value={enrollForm.phone}
-                      onChange={(e) => setEnrollForm({ ...enrollForm, phone: e.target.value })}
-                      className="w-full bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                      placeholder="10-digit mobile number"
-                    />
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">
+                      Mobile Number (10 digits) <span className="text-accent">*</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={enrollForm.countryCode}
+                        onChange={(e) => setEnrollForm({ ...enrollForm, countryCode: e.target.value })}
+                        className="w-[95px] bg-white border border-border rounded-lg px-2 py-2 text-xs font-bold text-text-primary focus:outline-none focus:border-accent"
+                        aria-label="Country Code"
+                      >
+                        {COMMON_COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.flag} {c.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        type="tel"
+                        required
+                        maxLength={10}
+                        value={enrollForm.mobile}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setEnrollForm({ ...enrollForm, mobile: val, phone: `${enrollForm.countryCode} ${val}`.trim() });
+                        }}
+                        className="flex-1 bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent font-mono tracking-wide"
+                        placeholder="9876543210"
+                      />
+                    </div>
+                    <span className="text-[10px] text-slate-400 mt-0.5 block">
+                      Enter 10-digit national number
+                    </span>
                   </div>
 
                   <div>
@@ -222,7 +255,7 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
 
                   <div className="bg-accent/5 p-3 rounded-lg border border-accent/20 flex gap-2.5 text-[10px] font-bold text-accent uppercase tracking-wider items-center mb-2">
                     <Users className="w-4 h-4 shrink-0" />
-                    <span>Hurry! Only {course.seatsLeft} seats left for next batch.</span>
+                    <span>Cohort-based batch learning &bull; Admissions open</span>
                   </div>
 
                   <Button type="submit" variant="primary" disabled={isSubmitting} className="w-full justify-center py-3.5 font-bold text-white">

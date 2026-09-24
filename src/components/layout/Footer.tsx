@@ -158,14 +158,14 @@ export function Footer() {
                 <li className="pt-1 pb-1">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Rapid Prototyping</span>
                   <div className="space-y-1.5 pl-2 border-l border-orange-200">
-                    <Link href="/services#3d-printing" className="text-[#FF6B00] font-semibold hover:underline block">
+                    <Link href="/services/3d-printing" className="text-[#FF6B00] font-semibold hover:underline block">
                       3D Printing (Design + Print)
                     </Link>
-                    <Link href="/services#laser-cutting" className="text-[#FF6B00] font-semibold hover:underline block">
-                      Laser Cutting (Design + Cut)
+                    <Link href="/services/laser-cutting" className="text-[#FF6B00] font-semibold hover:underline block">
+                      Laser Cutting (SS Sheet Metal)
                     </Link>
-                    <Link href="/services#pcb-services" className="text-[#FF6B00] font-semibold hover:underline block">
-                      PCB Services (Design + Assembly)
+                    <Link href="/services/pcb-design-fabrication-assembly" className="text-[#FF6B00] font-semibold hover:underline block">
+                      PCB Services (Design + PCBA)
                     </Link>
                   </div>
                 </li>
@@ -281,6 +281,11 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/blog/pcb-engineering" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                    PCB Engineering Guides (15)
+                  </Link>
+                </li>
+                <li>
                   <Link href="/projects" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Verified Projects
                   </Link>
@@ -347,9 +352,9 @@ export function Footer() {
               </button>
               {openAccordions.services && (
                 <ul className="pt-2 pl-2 space-y-2 text-xs text-slate-600">
-                  <li><Link href="/services#3d-printing" className="text-[#FF6B00] font-semibold">3D Printing (Design + Print)</Link></li>
-                  <li><Link href="/services#laser-cutting" className="text-[#FF6B00] font-semibold">Laser Cutting (Design + Cut)</Link></li>
-                  <li><Link href="/services#pcb-services" className="text-[#FF6B00] font-semibold">PCB Services (Design + Assembly)</Link></li>
+                  <li><Link href="/services/3d-printing" className="text-[#FF6B00] font-semibold">3D Printing (Design + Print)</Link></li>
+                  <li><Link href="/services/laser-cutting" className="text-[#FF6B00] font-semibold">Laser Cutting (SS Metal)</Link></li>
+                  <li><Link href="/services/pcb-design-fabrication-assembly" className="text-[#FF6B00] font-semibold">PCB Services (Design + PCBA)</Link></li>
                   <li><Link href="/services#robotics" className="hover:text-[#FF6B00]">Robotics & Automation</Link></li>
                   <li><Link href="/industrial-automation-coimbatore" className="hover:text-[#FF6B00]">Industrial Automation</Link></li>
                   <li><Link href="/schools" className="hover:text-[#FF6B00]">STEM Tinkering Labs</Link></li>

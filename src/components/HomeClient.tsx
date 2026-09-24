@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, Zap, FlaskConical, GraduationCap, Briefcase,
   Users, Award, Globe, CheckCircle, Grid, X, ChevronLeft, ChevronRight,
+  ShieldCheck, Wrench, Cpu, Bot, Scissors, Printer, Factory
 } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { StatCounter } from "@/components/ui/StatCounter";
@@ -56,35 +57,43 @@ const industries = [
 const whyUs = [
   {
     icon: CheckCircle,
-    title: "End-to-End Solutions",
-    badge: "Concept to Build",
+    title: "Quality-Focused",
+    badge: "Quality Priority",
     image: "/gallery/21.jpeg",
-    desc: "From 3D CAD design & prototyping to SS fiber laser cutting, custom electronics, and tournament deployment.",
-    highlight: "CAD • 3D Print • Metal • Assembly"
-  },
-  {
-    icon: Users,
-    title: "Expert Team",
-    badge: "In-House Engineers",
-    image: "/gallery/18.jpeg",
-    desc: "Mechatronics, robotics, and embedded systems specialists with real hands-on competitive hardware experience.",
-    highlight: "Dedicated Engineering Lab"
+    desc: "We prioritize practical product and engineering quality across tournament robots, components, and fabrication.",
+    highlight: "Quality as Key Parameter"
   },
   {
     icon: Award,
-    title: "Proven Track Record",
-    badge: "Championship Podiums",
+    title: "Competitive Value",
+    badge: "Value Always",
     image: "/gallery/3.jpg",
-    desc: "1st place championship trophies, state awards, and battle-tested robotic systems recognized nationwide.",
-    highlight: "180+ Tournament Recognitions"
+    desc: "We aim to keep products and services competitively priced with transparent scopes and no artificial markups.",
+    highlight: "Accessible & Fair Pricing"
   },
   {
-    icon: Globe,
-    title: "Pan-India Presence",
-    badge: "Nationwide Reach",
+    icon: Zap,
+    title: "Practical Engineering",
+    badge: "Built for Real Use",
+    image: "/gallery/18.jpeg",
+    desc: "Solutions and hardware platforms are engineered around actual use cases — from student tournaments to factory floors.",
+    highlight: "Real-World Engineering"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Clear Communication",
+    badge: "Transparent Scope",
+    image: "/gallery/14.jpg",
+    desc: "Specifications, inclusions, and limitations are communicated clearly before enquiry and ordering.",
+    highlight: "Informed Decision-Making"
+  },
+  {
+    icon: Users,
+    title: "Direct Support",
+    badge: "Direct Team Access",
     image: "/gallery/10.jpg",
-    desc: "Serving 15+ industry partners and educational institutions across Tamil Nadu and all of India from Coimbatore.",
-    highlight: "Coimbatore Hub to All India"
+    desc: "Customers and engineering teams can discuss their requirements directly with our technical team.",
+    highlight: "Direct Team Communication"
   },
 ];
 
@@ -117,6 +126,7 @@ const galleryImages = [
 ];
 
 const faqs = [
+  { q: "Why choose Tamizh Tech Robotics?", a: "We focus on quality-focused robotics products and practical engineering services while keeping pricing competitive and transparent." },
   { q: "What industries do you build automation solutions for?", a: "We primarily work with manufacturing, automotive, agriculture, defense, and education industries, designing custom autonomous machinery, robotic arms, IoT systems, and quality control vision AI models." },
   { q: "Do you design custom competition robots?", a: "Yes, TamizhTech has a dedicated division that engineers custom combat robots, RC race cars, and student competition platforms." },
   { q: "How can schools set up STEM tinkering labs?", a: "We provide complete turnkey STEM and robotics tinkering labs. This includes structural hardware setup, procurement of learning kits, curriculum alignment, and comprehensive teacher training." },
@@ -193,10 +203,10 @@ export default function HomeClient() {
             <div
               className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-6 lg:pr-10 gap-4"
             >
-              {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-accent w-fit">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[11px] tracking-[0.12em] font-extrabold uppercase">TAMIZH TECH ROBOTICS</span>
+              {/* Premium Positioning Eyebrow */}
+              <div className="flex items-center gap-2 text-[#FF6B00] font-bold text-xs sm:text-sm md:text-[15px] tracking-[0.1em] uppercase">
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00] shrink-0" />
+                <span>INDIA&apos;S LEADING GAMIFIED PLATFORM</span>
               </div>
 
               {/* Main Headline */}
@@ -222,16 +232,16 @@ export default function HomeClient() {
 
               {/* Supporting headline */}
               <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[480px]">
-                A hands-on robotics ecosystem for students, schools, colleges, makers and innovators.
+                Hands-on robotics, competition hardware and engineering solutions for students, schools, colleges, makers and businesses.
               </p>
 
               {/* Supporting proof categories */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                 {[
-                  "Gamified Learning",
-                  "Hands-on Skills",
-                  "Competition Robotics",
-                  "Real-world Applications",
+                  "Robotics Education",
+                  "Competition Hardware",
+                  "Robotics Products & Parts",
+                  "Automation & Solutions",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-2 text-xs sm:text-sm font-bold text-text-secondary">
                     <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
@@ -256,7 +266,7 @@ export default function HomeClient() {
 
               {/* Supporting B2B/B2C Micro-strip */}
               <p className="text-[11px] font-semibold text-text-muted tracking-wide pt-0.5">
-                Robotics Education • Competition Robots • STEM Programs • Custom Robot Solutions
+                Schools & Colleges • Student Competitions • Hardware Startups • Industrial Plants
               </p>
             </div>
 
@@ -279,6 +289,37 @@ export default function HomeClient() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* 1.1 COMMERCIAL PRINCIPLE: QUALITY FIRST. VALUE ALWAYS. */}
+      <section className="bg-white border-b border-[#E5E5E5] py-10 md:py-14">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-xs font-bold tracking-wider uppercase mb-3.5">
+            <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+            <span>Commercial Positioning</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading tracking-tight text-[#111111] uppercase leading-tight">
+            QUALITY FIRST. <span className="text-[#FF6B00]">VALUE ALWAYS.</span>
+          </h2>
+
+          <p className="mt-3.5 text-sm sm:text-base md:text-[17px] text-[#111111]/80 max-w-2xl mx-auto leading-relaxed">
+            Quality is our key parameter — with competitive pricing across our robotics products and engineering services. We focus on dependable quality, practical engineering and competitive pricing across products and services.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3.5 mt-6">
+            <Link href="/products">
+              <Button className="bg-[#FF6B00] hover:bg-[#E05E00] text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all">
+                Explore Products <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
+            <Link href="/services">
+              <Button variant="outline" className="border-[#E5E5E5] text-[#111111] hover:bg-slate-50 font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full">
+                Explore Services <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -467,14 +508,14 @@ export default function HomeClient() {
         <div className="container px-6">
           <AnimatedSection className="mb-16 text-center max-w-3xl mx-auto">
             <SectionHeader
-              tag="Why Choose Us"
-              title="The TamizhTech"
-              highlight="difference"
-              subtitle="Real hardware, championship-winning robotics, and hands-on execution from Coimbatore to all of India."
+              tag="Why Choose Tamizh Tech?"
+              title="Quality First."
+              highlight="Value Always."
+              subtitle="We focus on dependable quality, practical engineering and competitive pricing across our robotics products and engineering services."
             />
           </AnimatedSection>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
             {whyUs.map((item) => {
               const Icon = item.icon;
               return (
@@ -487,7 +528,7 @@ export default function HomeClient() {
                         alt={item.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
 
@@ -597,6 +638,68 @@ export default function HomeClient() {
         </div>
       </section>
 
+      {/* 5.6 PRODUCT + SERVICE CROSS-POSITIONING: END-TO-END PROJECT SUPPORT */}
+      <section className="section bg-slate-50/60 py-20 border-t border-border/30">
+        <div className="container px-6 max-w-6xl mx-auto">
+          <AnimatedSection className="text-center max-w-3xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-xs font-bold tracking-wider uppercase mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00]" />
+              <span>End-to-End Engineering</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading text-text-primary uppercase tracking-tight mb-3">
+              Supporting Your Build <span className="text-accent">Beyond A Single Product</span>
+            </h2>
+            <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
+              From initial idea to tournament platform and industrial deployment, Tamizh Tech brings together hardware products and engineering services under one roof.
+            </p>
+          </AnimatedSection>
+
+          {/* Lifecycle Flow Pipeline */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 relative">
+            {[
+              { step: "01", title: "Idea", desc: "Requirements, concept scoping & CAD design", icon: FlaskConical, href: "/contact" },
+              { step: "02", title: "Robotics Product", desc: "Competition robots, chassis kits & transmitters", icon: Bot, href: "/products/competition" },
+              { step: "03", title: "Custom Fabrication", desc: "SS laser cutting & precision 3D printing", icon: Scissors, href: "/services/laser-cutting" },
+              { step: "04", title: "PCB", desc: "Design, fabrication & board assembly", icon: Cpu, href: "/services/pcb-design-fabrication-assembly" },
+              { step: "05", title: "Automation", desc: "Firmware, kinematics, sensor fusion & PLC", icon: Factory, href: "/services/industrial-automation" },
+              { step: "06", title: "Engineering Support", desc: "Testing, direct consultation & team training", icon: Users, href: "/colleges" },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.step}
+                  href={item.href}
+                  className="bg-white border border-border/80 hover:border-accent/40 rounded-xl p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between text-left group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-mono font-black text-accent bg-accent/10 px-2 py-0.5 rounded">
+                        {item.step}
+                      </span>
+                      <Icon className="w-4 h-4 text-slate-400 group-hover:text-accent transition-colors" />
+                    </div>
+                    <h3 className="text-xs sm:text-sm font-bold text-text-primary mb-1 group-hover:text-accent transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] text-text-muted leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                  {idx < 5 && (
+                    <div className="hidden lg:flex justify-end pt-3 text-slate-300 group-hover:text-accent group-hover:translate-x-1 transition-all">
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </div>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          <p className="text-center text-xs text-text-muted mt-6 italic">
+            * Projects can utilize individual products or leverage our multi-disciplinary engineering services as needed.
+          </p>
+        </div>
+      </section>
 
       {/* 3D Printing Service Section */}
       <section className="section bg-white py-24 border-t border-border/30">
@@ -613,11 +716,11 @@ export default function HomeClient() {
                 Additive Manufacturing
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
-                Professional 3D Printing <br />
-                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Services</span>
+                Functional Parts with Practical <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Engineering Value</span>
               </h2>
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
-                Get high-quality 3D printed parts for both <span className="text-accent font-semibold">personal (own)</span> and <span className="text-accent font-semibold">commercial purposes</span>. We deliver industrial-grade dimensional accuracy, durability, and a premium finish with <span className="text-accent font-semibold">transparent quotations and fast turnaround</span>.
+                Quality-focused 3D printing for robotics, prototypes and functional parts, with quotations based on actual part requirements. Turnaround times are planned realistically based on part geometry, infill density, and machine schedule.
               </p>
 
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
@@ -692,7 +795,7 @@ export default function HomeClient() {
                   "Custom Robot Chassis Panels & Brackets",
                   "Clean, Burr-Free Edges & High Accuracy",
                   "DXF / DWG / 2D CAD Nesting Optimization",
-                  "Affordable Factory Direct Coimbatore Pricing"
+                  "Competitive Direct Coimbatore Quotations"
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />

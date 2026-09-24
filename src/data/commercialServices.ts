@@ -55,6 +55,14 @@ export interface RelatedProductItem {
   image: string;
 }
 
+export interface ServiceTechnicalArticle {
+  title: string;
+  slug: string;
+  categorySlug: string;
+  desc: string;
+  readTime: string;
+}
+
 export type CommercialService = CommercialServiceDetail;
 
 export interface CommercialServiceDetail {
@@ -66,6 +74,12 @@ export interface CommercialServiceDetail {
   h1: string;
   heroSub: string;
   primaryImage: string;
+  // Product & Service Honesty Fields
+  targetAudience?: string;
+  problemSolved?: string;
+  deliverable?: string;
+  customerRequirements?: string;
+  pricingNotice?: string;
   overview: {
     heading: string;
     paragraphs: string[];
@@ -84,6 +98,7 @@ export interface CommercialServiceDetail {
   faqs: ServiceFaqItem[];
   relatedServices: RelatedServiceItem[];
   relatedProducts?: RelatedProductItem[];
+  technicalArticles?: ServiceTechnicalArticle[];
   whatsappMessage: string;
   seo: {
     title: string;
@@ -99,8 +114,13 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     quoteServiceId: "3d-printing",
     badge: "Additive Manufacturing",
     h1: "High-Precision 3D Printing Services in Coimbatore",
-    heroSub: "Affordable rapid prototyping and additive manufacturing for functional prototypes, custom robotic components, drone brackets, enclosures, and miniatures.",
+    heroSub: "Functional parts with practical engineering value. Quality-focused 3D printing for robotics, prototypes, custom parts, enclosures, and miniatures, with quotations based on actual part requirements.",
     primaryImage: "/service/3d-printing-services.png",
+    targetAudience: "Engineering students, hardware startups, roboticists, makers, and R&D teams requiring functional parts or visual prototypes.",
+    problemSolved: "Eliminates high upfront tooling & injection mold costs by producing single or small-batch custom parts on-demand with 0.1–0.3mm layer heights.",
+    deliverable: "Finished 3D printed parts in PLA, PETG, or TPU with supports removed and dimensional fitment verified against submitted CAD geometry.",
+    customerRequirements: "3D CAD model file (.STL, .STEP, or .OBJ format) or dimensional reference drawing with infill/strength requirements.",
+    pricingNotice: "Quotation is calculated per part based on material weight, infill density, print time, and quantity. Turnaround time depends on geometry, volume, and machine schedule (no fixed turnaround guarantee).",
     overview: {
       heading: "Production-Grade Prototyping & Custom Parts",
       paragraphs: [
@@ -192,14 +212,14 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
       {
         title: "Additive Manufacturing Workshop",
         desc: "High-precision 3D printing equipment printing custom engineering parts in our Coimbatore workshop.",
-        image: "/pic/3d printing.jpg",
+        image: "/service/3d-printing-services.png",
         type: "video",
         videoSrc: "/3d printing.mp4"
       },
       {
         title: "Finished 3D Printed Components",
         desc: "Functional mechanical components, custom robotic brackets, and test prototypes printed with tight tolerances.",
-        image: "/pic/3d printing.jpg",
+        image: "/service/3d-printing-services.png",
         type: "image"
       },
       {
@@ -288,8 +308,13 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     quoteServiceId: "laser-cutting",
     badge: "Fiber Laser Metal Fabrication",
     h1: "Precision Stainless Steel Laser Cutting Services",
-    heroSub: "Industrial fiber laser sheet metal cutting specialized strictly in Stainless Steel (SS 304 & SS 316) and precision sheet metals. Engineered for high-strength metal fabrication — not wood or MDF.",
+    heroSub: "Precision stainless-steel fabrication with transparent quotation based on actual requirements. Specialized strictly in Stainless Steel (SS 304 & SS 316) sheet metals — engineered for metal, not wood or MDF.",
     primaryImage: "/service/laser-cutting.png",
+    targetAudience: "Robotics tournament builders, mechanical fabricators, machinery OEMs, and engineering teams needing durable stainless steel chassis plates, armor guards, or mounting brackets.",
+    problemSolved: "Eliminates imprecise hand cutting and expensive CNC milling for flat sheet profiles. Provides burr-free edges and tight hole-to-edge tolerances in high-grade stainless steel.",
+    deliverable: "CNC fiber laser cut stainless steel sheet parts (SS 304 / SS 316) de-burred and packaged to drawing specifications. Strictly sheet metal — wood, acrylic, and MDF are not processed.",
+    customerRequirements: "2D vector geometry in .DXF or .DWG format (1:1 scale) with metal grade (SS 304/316) and sheet thickness specified.",
+    pricingNotice: "Quotation is calculated based on cutting perimeter length, sheet thickness, material grade, and laser piercing cycles.",
     overview: {
       heading: "Dedicated Stainless Steel & Sheet Metal Laser Cutting",
       paragraphs: [
@@ -381,7 +406,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
       {
         title: "Fiber Laser Metal Cutting",
         desc: "High-precision fiber laser cutting stainless steel sheet metal in our Coimbatore manufacturing network.",
-        image: "/pic/laser cutting.jpg",
+        image: "/service/laser-cutting.png",
         type: "video",
         videoSrc: "/laser-cutting.mp4"
       },
@@ -473,18 +498,26 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     quoteServiceId: "pcb-services",
     badge: "Turnkey Electronics Engineering",
     h1: "Turnkey PCB Services: Design, Fabrication & Assembly (PCBA)",
-    heroSub: "End-to-end circuit board engineering — from schematic capture and multi-layer layout to rapid prototype fabrication, component assembly (PCBA), and hardware bench testing.",
+    heroSub: "Quality-focused PCB design, fabrication and assembly with quotation based on actual project scope. Structured stages covering schematic capture, multi-layer routing, bare board fabrication, and SMT/THT assembly.",
     primaryImage: "/service/pcb-services.png",
+    targetAudience: "Electronics product designers, robotics developers, IoT startups, and engineering researchers needing custom circuit boards without coordinating multiple fragmented vendors.",
+    problemSolved: "Eliminates multi-vendor coordination bottlenecks between schematic designers, bare PCB board houses, and assembly labs by managing full lifecycle in one workflow.",
+    deliverable: "Customer's choice of: (1) Gerber manufacturing files, (2) Bare fabricated FR-4 circuit boards, or (3) Fully assembled and bench-tested PCBA units with verified power rails.",
+    customerRequirements: "Schematic files or circuit requirements, target board physical dimensions, and preferred component package constraints.",
+    pricingNotice: "Quotation depends on layer count (1/2/4-layer), board dimensions, surface finish (HASL/ENIG), component count, and assembly volume.",
     overview: {
       heading: "Complete Hardware Lifecycle: Schematic to Assembled Board",
       paragraphs: [
-        "Tamizh Tech provides turnkey Printed Circuit Board (PCB) services tailored for robotics controllers, embedded systems, industrial telemetry, and IoT hardware developers.",
-        "Instead of coordinating between separate design houses, board fabricators, and manual assembly technicians, our turnkey workflow covers schematic capture, multi-layer routing, Design for Manufacturing (DFM) verification, bare board fabrication, SMT/THT component assembly, and hardware power rail testing."
+        "Tamizh Tech provides turnkey Printed Circuit Board (PCB) services tailored for robotics controllers, embedded systems, industrial telemetry, and IoT hardware developers in Coimbatore and across Tamil Nadu.",
+        "Instead of coordinating between separate design houses, board fabricators, and manual assembly technicians, our turnkey workflow covers schematic capture, multi-layer routing, Design for Manufacturing (DFM) verification, bare board fabrication, SMT/THT component assembly, and hardware power rail testing.",
+        "A common search query among developers is 'PCB printing'. In engineering practice, PCB printing refers to industrial circuit board fabrication—a multi-step chemical etching, photolithographic imaging, CNC drilling, and solder mask curing process on FR-4 laminates rather than office paper printing. We deliver industry-grade, IPC-compliant fabricated and assembled circuit boards built for harsh environments.",
+        "We also assist engineering teams in optimizing physical board dimensions (length × width), component density, and layer stackups. Whether you are packaging a micro sensor node (25mm × 35mm), an ESP32/STM32 controller (50mm × 70mm), or a high-current motor driver (80mm × 100mm), our engineers ensure proper mounting hole keep-outs, connector clearances, and thermal dissipation paths before releasing Gerber files."
       ],
       highlights: [
         { title: "Turnkey PCBA Workflow", desc: "Single-source coordination from circuit schematic to assembled, tested boards." },
         { title: "Prototype to Small-Batch Runs", desc: "Supporting quick-turn 1-10 prototype boards to 100+ unit pilot production." },
-        { title: "Hardware Bring-Up & Testing", desc: "Visual inspection, power rail continuity verification, and basic firmware flashing." }
+        { title: "Hardware Bring-Up & Testing", desc: "Visual inspection, power rail continuity verification, and basic firmware flashing." },
+        { title: "Coimbatore Engineering Facility", desc: "Local engineering support in Coimbatore with secure dispatch across Tamil Nadu & India." }
       ]
     },
     capabilities: [
@@ -566,7 +599,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
       {
         title: "Multi-Layer PCB Design & Routing",
         desc: "High-density multi-layer routing, differential pair impedance matching, and ground plane design.",
-        image: "/pic/pcb design.jpg",
+        image: "/service/pcb-services.png",
         type: "image"
       },
       {
@@ -584,44 +617,194 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     ],
     faqs: [
       {
-        q: "Can you design a PCB from just a breadboard circuit or schematic drawing?",
-        a: "Yes. You can provide a hand-drawn circuit diagram, breadboard prototype photos, or simulation schematic. Our engineers will capture the schematic, select SMD components, and layout the PCB."
+        q: "What is PCB design?",
+        a: "PCB design is the engineering process of taking a circuit schematic and translating it into a physical board layout. It involves component placement, routing conductive copper traces across multiple layers, establishing continuous ground planes, observing design rule clearances (DRC), and generating RS-274X Gerber and drill files for manufacturing."
       },
       {
-        q: "Do you provide component assembly (PCBA) or only bare boards?",
-        a: "We provide both options. You can order bare fabricated circuit boards, or choose full turnkey PCBA where we procure components, solder them, and inspect the finished boards."
+        q: "What is PCB fabrication?",
+        a: "PCB fabrication is the manufacturing process of producing bare, unpopulated circuit boards. It involves laminating FR-4 copper-clad substrate, photolithographic imaging, chemical copper etching, CNC drilling of via and component holes, copper plating, solder mask application, surface finishing (HASL or ENIG), and electrical flying-probe testing."
       },
       {
-        q: "Can you source electronic components on the BOM?",
-        a: "Yes. We source authentic components from authorized electronic distributors. If you have custom or pre-flashed microcontrollers, you can also ship components to our Coimbatore facility."
+        q: "What is PCB assembly (PCBA)?",
+        a: "PCB assembly (PCBA) is the process of mounting and soldering active and passive electronic components (microcontrollers, resistors, capacitors, connectors) onto a bare fabricated PCB. It uses laser-cut solder paste stencils, automated high-speed surface-mount (SMT) pick-and-place machines, multi-zone reflow ovens, and manual through-hole (THT) soldering."
       },
       {
-        q: "What files do you need if I already have a completed PCB layout?",
-        a: "If your layout is ready, please send standard RS-274X Gerber files (copper layers, solder mask, silkscreen, drill file). For PCBA, also include the Bill of Materials (BOM) with manufacturer part numbers and centroid (pick-and-place) data."
+        q: "Do you provide PCB prototypes?",
+        a: "Yes. Tamizh Tech specializes in rapid prototype PCB fabrication and assembly, supporting quantities from 1 to 10 boards so engineers, startups, and college researchers can validate hardware before volume manufacturing."
       },
       {
-        q: "What is the typical turnaround time for prototype PCBA?",
-        a: "Turnaround time typically ranges from 5 to 8 working days for bare boards, and 8 to 12 working days for turnkey assembly, depending on component lead times."
+        q: "Do you provide PCB assembly?",
+        a: "Yes. We offer turnkey PCB Assembly (PCBA) as well as consigned assembly where the customer provides components. Our assembly covers SMT packages down to 0402, QFNs, and robust through-hole terminal blocks."
       },
       {
-        q: "Do you test the boards before delivery?",
-        a: "Yes. Every assembled board undergoes visual magnification inspection, short-circuit continuity checks across power rails, and basic voltage regulation verification before shipment."
+        q: "Can you design a PCB from a schematic or breadboard circuit?",
+        a: "Yes. You can supply a circuit diagram, breadboard prototype photos, or simulation schematic. Our Coimbatore engineering team captures the schematic in professional EDA software, selects production-grade SMD parts, and designs the complete layout."
+      },
+      {
+        q: "Can you work from existing Gerber files?",
+        a: "Yes. If your PCB layout is already complete, submit standard RS-274X Gerber files and Excellon drill files. We run automated and manual Design for Manufacturing (DFM) verification before initiating bare-board fabrication."
+      },
+      {
+        q: "What PCB layers do you support?",
+        a: "We support 1-layer, 2-layer, and 4-layer standard FR-4 circuit boards for rapid prototyping and production, with controlled dielectric thickness and dedicated internal ground and power planes."
+      },
+      {
+        q: "What PCB board dimensions can be manufactured?",
+        a: "We support board dimensions up to 400mm × 500mm, with the majority of robotics and IoT projects measuring between 25mm × 35mm (wearable/sensor nodes) and 100mm × 150mm (multi-motor robotics controllers). Custom milled polygon and circular outlines are supported via mechanical DXF files."
+      },
+      {
+        q: "Do you source components?",
+        a: "Yes. In our turnkey PCBA service, Tamizh Tech sources authentic electronic components directly from authorized distributors (Mouser, Element14, DigiKey, LCSC) with complete BOM lifecycle verification."
+      },
+      {
+        q: "Do you provide SMT assembly?",
+        a: "Yes. We provide automated Surface Mount Technology (SMT) assembly utilizing precision solder paste stencils, pick-and-place component placement, and profiled reflow soldering."
+      },
+      {
+        q: "Do you provide THT assembly?",
+        a: "Yes. We provide manual and selective Through-Hole Technology (THT) soldering for heavy connectors, screw terminals, high-wattage power inductors, and relays requiring strong mechanical retention."
+      },
+      {
+        q: "What files are required for a PCB quotation?",
+        a: "For layout design: circuit schematic (PDF, KiCad, or Altium), preliminary BOM, and physical board outline dimensions. For fabrication and assembly: standard RS-274X Gerber ZIP, Excellon drill file (.drl), Bill of Materials (.xlsx/.csv) with Manufacturer Part Numbers (MPNs), and Pick-and-Place centroid file (.csv)."
+      },
+      {
+        q: "How long does PCB prototyping take?",
+        a: "Typical turnaround time is 5 to 8 working days for bare board fabrication, and 8 to 12 working days for turnkey PCB assembly, depending on component availability and layer stackup. Fast-track options are evaluated per project."
+      },
+      {
+        q: "What is the difference between 'PCB printing' and industrial PCB fabrication?",
+        a: "Colloquially, users often search for 'PCB printing' when referring to circuit board production. Unlike printing ink on paper, industrial PCB fabrication involves photolithographic chemical etching of copper-clad FR-4 laminates, CNC drilling, solder mask thermal curing, and automated SMT component soldering to withstand mechanical vibration and electrical thermal loads."
+      }
+    ],
+    technicalArticles: [
+      {
+        title: "PCB Design Services in Coimbatore: From Schematic to Manufacturing",
+        slug: "pcb-design-services-in-coimbatore-schematic-to-manufacturing",
+        categorySlug: "pcb-engineering",
+        desc: "Turnkey PCB design, fabrication & SMT assembly workflow in Coimbatore.",
+        readTime: "9 min read"
+      },
+      {
+        title: "How Much Does PCB Design Cost? Key Factors Determining Pricing",
+        slug: "how-much-does-pcb-design-cost-factors",
+        categorySlug: "pcb-engineering",
+        desc: "Engineering breakdown of layers, component density, and BOM sourcing cost drivers.",
+        readTime: "8 min read"
+      },
+      {
+        title: "PCB Prototype vs PCB Production: What Is the Difference?",
+        slug: "pcb-prototype-vs-pcb-production",
+        categorySlug: "pcb-engineering",
+        desc: "Compare prototype validation vs high-volume panelization, NRE tooling and testing.",
+        readTime: "7 min read"
+      },
+      {
+        title: "2 Layer vs 4 Layer PCB Design: When Should You Use Each?",
+        slug: "2-layer-vs-4-layer-pcb-design",
+        categorySlug: "pcb-engineering",
+        desc: "Understand ground planes, EMI reduction, signal integrity, and cost trade-offs.",
+        readTime: "8 min read"
+      },
+      {
+        title: "PCB Board Size and Area: How to Decide the Right Dimensions",
+        slug: "pcb-board-size-and-area-guide",
+        categorySlug: "pcb-engineering",
+        desc: "Calculate board surface area, mounting holes, trace clearance, and enclosure fit.",
+        readTime: "8 min read"
+      },
+      {
+        title: "PCB Design Checklist Before Sending Gerber Files for Manufacturing",
+        slug: "pcb-design-checklist-before-gerber-files",
+        categorySlug: "pcb-engineering",
+        desc: "Essential pre-flight checklist: DRC rules, silkscreen polarity, and drill alignment.",
+        readTime: "9 min read"
+      },
+      {
+        title: "Gerber Files Explained: What a PCB Manufacturer Needs",
+        slug: "gerber-files-explained-what-manufacturers-need",
+        categorySlug: "pcb-engineering",
+        desc: "RS-274X layer extensions, Excellon drill files, and centroid pick-and-place data.",
+        readTime: "7 min read"
+      },
+      {
+        title: "PCB Fabrication vs PCB Assembly: Understanding PCBA",
+        slug: "pcb-fabrication-vs-assembly-pcba",
+        categorySlug: "pcb-engineering",
+        desc: "Distinct manufacturing stages from raw FR-4 substrates to populated boards.",
+        readTime: "8 min read"
+      },
+      {
+        title: "SMT vs THT PCB Assembly: When to Use Each Soldering Method",
+        slug: "smt-vs-tht-assembly-comparison",
+        categorySlug: "pcb-engineering",
+        desc: "Compare surface mount density with through-hole mechanical retention.",
+        readTime: "7 min read"
+      },
+      {
+        title: "PCB Design for Robotics and Embedded Systems: Best Practices",
+        slug: "pcb-design-robotics-embedded-systems",
+        categorySlug: "pcb-engineering",
+        desc: "Ground separation, inductive back-EMF protection, and CAN/RS485 routing.",
+        readTime: "9 min read"
+      },
+      {
+        title: "High Current PCB Design for Motor Drivers and Power Electronics",
+        slug: "high-current-pcb-design-motor-drivers",
+        categorySlug: "pcb-engineering",
+        desc: "Routing 10A–30A currents, IPC-2152 trace widths, thermal vias, and Kelvin sensing.",
+        readTime: "8 min read"
+      },
+      {
+        title: "PCB Design for ESP32, STM32 and Embedded Hardware",
+        slug: "pcb-design-esp32-stm32-embedded-hardware",
+        categorySlug: "pcb-engineering",
+        desc: "Antenna keepouts, crystal oscillator routing, power regulation, and SWD headers.",
+        readTime: "9 min read"
+      },
+      {
+        title: "Common PCB Design Errors: DRC, Clearance, Grounding and Thermal Issues",
+        slug: "common-pcb-design-errors-drc-grounding-thermal",
+        categorySlug: "pcb-engineering",
+        desc: "Avoid tombstoning, broken ground returns, acid traps, and narrow mask slivers.",
+        readTime: "8 min read"
+      },
+      {
+        title: "PCB Prototype Development: From Circuit Idea to Tested Hardware",
+        slug: "pcb-prototype-development-circuit-to-tested-hardware",
+        categorySlug: "pcb-engineering",
+        desc: "Practical progression from breadboard circuit to bench bring-up in Coimbatore.",
+        readTime: "8 min read"
+      },
+      {
+        title: "How to Prepare a PCB Manufacturing BOM: Template and Fields",
+        slug: "how-to-prepare-pcb-manufacturing-bom",
+        categorySlug: "pcb-engineering",
+        desc: "Format error-free BOMs with MPNs, footprints, tolerances, and feeder overages.",
+        readTime: "7 min read"
       }
     ],
     relatedServices: [
       {
         slug: "robotics-automation",
         title: "Robotics & Automation",
-        desc: "Integrate your custom PCB into complete robotic chassis and autonomous platforms.",
+        desc: "Integrate custom PCB controllers into complete robotic chassis and autonomous platforms.",
         href: "/services/robotics-automation",
         image: "/service/robotics-automation.png"
       },
       {
         slug: "3d-printing",
         title: "3D Printing Services",
-        desc: "Fabricate tailored enclosures, mounting brackets, and standoffs for your custom circuit boards.",
+        desc: "Fabricate tailored enclosures, mounting brackets, and standoffs for custom circuit boards.",
         href: "/services/3d-printing",
         image: "/service/3d-printing-services.png"
+      },
+      {
+        slug: "laser-cutting",
+        title: "Stainless Steel Laser Cutting",
+        desc: "Precision sheet metal chassis, baseplates, and shielding brackets for electronics hardware.",
+        href: "/services/laser-cutting",
+        image: "/service/laser-cutting.png"
       },
       {
         slug: "industrial-automation",
@@ -629,6 +812,20 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         desc: "Interfacing custom sensor electronics with PLCs, SCADA dashboards, and 24V industrial controls.",
         href: "/services/industrial-automation",
         image: "/service/industrial-automation.png"
+      },
+      {
+        slug: "embedded-systems",
+        title: "Embedded Systems & Firmware",
+        desc: "Low-level firmware development, FreeRTOS, and communication protocols for custom PCBs.",
+        href: "/services#embedded",
+        image: "/service/embedded-systems.png"
+      },
+      {
+        slug: "projects",
+        title: "Verified Engineering Projects",
+        desc: "Explore deployed robotics, IoT, and embedded hardware case studies engineered in Coimbatore.",
+        href: "/projects",
+        image: "/gallery/21.jpeg"
       }
     ],
     whatsappMessage: "Hi Tamizh Tech, I need PCB Design/Fabrication/Assembly support for my hardware project.",
@@ -645,8 +842,13 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     quoteServiceId: "robotics",
     badge: "Specialized Engineering",
     h1: "Custom Robotics & Automation Engineering",
-    heroSub: "We design, build, and deploy custom robotic systems — from tournament-tested competition combat platforms to autonomous mobile bases and multi-axis manipulator mechanisms.",
+    heroSub: "Practical engineering solutions designed around the customer's actual application. We engineer mechanical kinematics, custom electronics, real-time firmware, and full hardware testing for tournament teams and commercial robotics.",
     primaryImage: "/service/robotics-automation.png",
+    targetAudience: "Engineering colleges, competition robotics teams, research labs, and hardware startups building bespoke robotic platforms.",
+    problemSolved: "Solves the limitation of rigid, off-the-shelf kits by designing purpose-built kinematics, robust chassis frames, and custom embedded control firmware.",
+    deliverable: "Custom-built functional robotic hardware platform, wired power stages, flashed microcontrollers, user manual, and basic calibration handover.",
+    customerRequirements: "Clear functional specifications, operating environment constraints, payload requirements, and tournament rules if intended for competitions.",
+    pricingNotice: "Project quotations are based on structural fabrication scope, motor drive power sizing, sensor integration level, and engineering R&D hours.",
     overview: {
       heading: "End-to-End Robotics Design, Kinematics & Embedded Control",
       paragraphs: [
@@ -765,7 +967,7 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
         title: "3D Printing Services",
         desc: "Rapid prototyping of robotic sensor covers, brackets, and custom wheel hubs in PLA, PETG, and TPU.",
         href: "/services/3d-printing",
-        image: "/pic/3d printing.jpg"
+        image: "/service/3d-printing-services.png"
       },
       {
         slug: "laser-cutting",
@@ -810,8 +1012,13 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
     quoteServiceId: "industrial-automation",
     badge: "B2B Factory Engineering",
     h1: "Industrial Automation Solutions: PLC, SCADA & Machine Integration",
-    heroSub: "End-to-end industrial automation and machine retrofitting in Coimbatore and Tamil Nadu — bridging industrial control hardware, PLCs, SCADA dashboards, and field sensors for maximum factory uptime.",
+    heroSub: "Engineering quality, application fit and clear project scope. Practical industrial automation and machine retrofitting in Coimbatore and Tamil Nadu — bridging PLCs, SCADA dashboards, cabinet wiring, and field sensors.",
     primaryImage: "/service/industrial-automation.png",
+    targetAudience: "Manufacturing plant managers, process engineers, machine tool builders, and industrial operations in Coimbatore and Tamil Nadu looking to modernize assembly lines.",
+    problemSolved: "Eliminates production downtime and operator bottlenecks caused by outdated relay-based panels or manual inspection by retrofitting reliable PLC/HMI architectures.",
+    deliverable: "Commissioned electrical control cabinet, validated PLC/HMI software programs, sensor wiring loom, electrical single-line schematic, and on-site operator training.",
+    customerRequirements: "Current machine electrical drawings/schematics, cycle sequence requirements, input/output sensor count, and factory site location.",
+    pricingNotice: "Quotation is customized based on hardware Bill of Materials (PLC/HMI/VFD brand), panel size, I/O count, and on-site commissioning duration.",
     overview: {
       heading: "Practical Industrial Automation for Coimbatore & Tamil Nadu Manufacturers",
       paragraphs: [

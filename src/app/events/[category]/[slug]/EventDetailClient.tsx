@@ -17,6 +17,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/Card";
 
 import { getEventCategoryUrl } from "@/lib/routing";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
 
 interface EventDetailClientProps {
   event: EventItem;
@@ -26,6 +28,8 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
   const [registerForm, setRegisterForm] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     org: "",
     teamSize: 1,
@@ -33,40 +37,48 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
   });
   const [submitted, setSubmitted] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const activeKey = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) {
+      setIdempotencyKey(activeKey);
+    }
+
     try {
       const eventUrl = `https://www.tamizhtech.in/events/${event.categorySlug}/${event.slug}`;
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Contact",
-          source: "Event Registration Page",
-          pageUrl: eventUrl,
-          customerName: registerForm.name,
-          email: registerForm.email,
-          phone: registerForm.phone,
-          organization: registerForm.org,
-          quantity: registerForm.teamSize,
-          subject: `Registration: ${event.title}`,
-          requirement: `Event: ${event.title} (${event.type}), Team Size: ${registerForm.teamSize}`,
-          message: registerForm.notes,
-        }),
+      const cleanMobile = registerForm.mobile.replace(/\D/g, "");
+      const teamQty = Math.max(1, Number(registerForm.teamSize) || 1);
+
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: activeKey,
+        payload: {
+          name: registerForm.name.trim(),
+          mobile: cleanMobile || undefined,
+          email: registerForm.email.trim() || undefined,
+          company: registerForm.org.trim() || undefined,
+          country: "India",
+          subject: `Event Registration: ${event.title} — ${registerForm.name.trim()}`,
+          productRequirements: `${event.title} (${event.type})`,
+          quantity: teamQty,
+          message: registerForm.notes.trim() || undefined,
+          technicalRequirements: `Team Size: ${registerForm.teamSize} | Event URL: ${eventUrl}`,
+        },
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setSubmitted(true);
-        setLeadId(data.leadId || "");
-      } else {
-        alert(data.error || "Failed to submit registration. Please try again.");
+
+      setSubmitted(true);
+      setLeadId(result.submissionNo);
+      setIdempotencyKey("");
+    } catch (err: any) {
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey("");
       }
-    } catch (err) {
-      console.error(err);
-      alert("Failed to submit registration. Please try again.");
+      alert(err.message || "Failed to submit registration. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -205,15 +217,38 @@ export default function EventDetailClient({ event }: EventDetailClientProps) {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number</label>
-                    <input
-                      type="tel"
-                      required
-                      value={registerForm.phone}
-                      onChange={(e) => setRegisterForm({ ...registerForm, phone: e.target.value })}
-                      className="w-full bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                      placeholder="10-digit mobile number"
-                    />
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">
+                      Mobile Number (10 digits) <span className="text-accent">*</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={registerForm.countryCode}
+                        onChange={(e) => setRegisterForm({ ...registerForm, countryCode: e.target.value })}
+                        className="w-[95px] bg-white border border-border rounded-lg px-2 py-2 text-xs font-bold text-text-primary focus:outline-none focus:border-accent"
+                        aria-label="Country Code"
+                      >
+                        {COMMON_COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.flag} {c.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        type="tel"
+                        required
+                        maxLength={10}
+                        value={registerForm.mobile}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setRegisterForm({ ...registerForm, mobile: val, phone: `${registerForm.countryCode} ${val}`.trim() });
+                        }}
+                        className="flex-1 bg-white border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent font-mono tracking-wide"
+                        placeholder="9876543210"
+                      />
+                    </div>
+                    <span className="text-[10px] text-slate-400 mt-0.5 block">
+                      Enter 10-digit national number
+                    </span>
                   </div>
 
                   <div>

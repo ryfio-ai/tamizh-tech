@@ -3,10 +3,13 @@
 import React, { useState } from "react";
 import { Mail, CheckCircle, Loader2 } from "lucide-react";
 
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
+
 export default function NewsletterSubscribe() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [leadId, setLeadId] = useState("");
+  const [submissionNo, setSubmissionNo] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,28 +17,23 @@ export default function NewsletterSubscribe() {
 
     setStatus("submitting");
 
+    const key = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) setIdempotencyKey(key);
+
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Newsletter",
-          source: "Website Newsletter Signup",
-          pageUrl: typeof window !== "undefined" ? window.location.href : "https://www.tamizhtech.in",
-          customerName: "Newsletter Subscriber",
+      const result = await submitPublicForm({
+        type: "CONTACT",
+        idempotencyKey: key,
+        payload: {
+          name: "Newsletter Subscriber",
           email: email.trim().toLowerCase(),
-          phone: "N/A",
-        }),
+          subject: "Newsletter Subscription",
+          message: "Website newsletter subscription request",
+        },
       });
 
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setStatus("success");
-        setLeadId(data.leadId || "");
-      } else {
-        setStatus("error");
-      }
+      setStatus("success");
+      setSubmissionNo(result.submissionNo);
     } catch {
       setStatus("error");
     }
@@ -45,7 +43,7 @@ export default function NewsletterSubscribe() {
     return (
       <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs">
         <CheckCircle className="w-4 h-4 shrink-0" />
-        <span>Subscribed successfully! {leadId && `(Ref: ${leadId})`}</span>
+        <span>Subscribed successfully! {submissionNo && `(Ref: ${submissionNo})`}</span>
       </div>
     );
   }

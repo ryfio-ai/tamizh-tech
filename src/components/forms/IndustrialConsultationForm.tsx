@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
 
 const PROJECT_TYPES = [
   "Industrial Automation",
@@ -20,17 +22,17 @@ const PROJECT_TYPES = [
 
 const INDUSTRIES = [
   "Automotive & Components",
-  "Textile & Garments",
-  "Foundry & Casting",
-  "Pumps & Motors",
-  "Electronics & PCB",
-  "FMCG & Packaging",
-  "General Engineering",
-  "Other",
+  "Textiles & Garment Manufacturing",
+  "Pumps, Motors & Foundry",
+  "Electronics & PCB Assembly",
+  "Food Processing & Packaging",
+  "Warehousing & Intralogistics",
+  "Education & Research Institutions",
+  "Other Manufacturing",
 ];
 
 const TIMELINES = [
-  "Immediate (< 1 Month)",
+  "Immediate (Under 1 Month)",
   "1 — 3 Months",
   "3 — 6 Months",
   "Exploratory / Planning",
@@ -41,9 +43,10 @@ export default function IndustrialConsultationForm() {
     name: "",
     company: "",
     email: "",
-    phone: "",
-    industry: "Automotive & Components",
+    countryCode: "+91",
+    mobile: "",
     projectType: "Industrial Automation",
+    industry: "Automotive & Components",
     city: "",
     state: "Tamil Nadu",
     timeline: "1 — 3 Months",
@@ -53,56 +56,57 @@ export default function IndustrialConsultationForm() {
   });
 
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [leadId, setLeadId] = useState("");
+  const [submissionNo, setSubmissionNo] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === "submitting") return;
 
+    if (form.honeypot) {
+      // Spam trapped
+      setStatus("success");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMessage("");
 
+    const key = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) setIdempotencyKey(key);
+
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Industry Enquiry",
-          source: "Industries Page",
-          pageUrl: "https://www.tamizhtech.in/industries",
-          customerName: form.name,
-          organization: form.company,
-          customerType: "Industry",
-          email: form.email,
-          phone: form.phone,
-          city: form.city,
-          state: form.state,
-          subject: `${form.projectType} — ${form.industry}`,
-          requirement: `${form.projectType} (${form.timeline})`,
-          message: `Industry: ${form.industry}, Timeline: ${form.timeline}. Requirements: ${form.requirement}`,
-          preferredContactMethod: form.preferredContactMethod,
-          honeypot: form.honeypot,
-        }),
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: key,
+        payload: {
+          name: form.name.trim(),
+          mobile: `${form.countryCode} ${form.mobile}`.trim(),
+          email: form.email?.trim() || undefined,
+          company: form.company?.trim() || undefined,
+          city: form.city?.trim() || undefined,
+          state: form.state?.trim() || undefined,
+          country: "India",
+          subject: `Industrial Consultation: ${form.projectType} (${form.company || form.name})`,
+          productRequirements: form.projectType,
+          message: form.requirement?.trim() || undefined,
+          deliveryTimeline: form.timeline || undefined,
+          technicalRequirements: `Industry: ${form.industry} | Preferred Contact: ${form.preferredContactMethod} | Notes: ${form.requirement || "None"}`
+        }
       });
 
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setStatus("success");
-        setLeadId(data.leadId || "");
-      } else {
-        setStatus("error");
-        setErrorMessage(data.error || "Failed to submit consultation request. Please try again.");
-      }
-    } catch (err) {
+      setStatus("success");
+      setSubmissionNo(result.submissionNo);
+    } catch (err: any) {
       console.error(err);
       setStatus("error");
-      setErrorMessage("Network error. Please verify connection and try again.");
+      setErrorMessage(err.message || "Failed to submit consultation request. Please try again.");
     }
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Tamizh Tech! I am interested in Industrial Automation solutions for: ${form.company || "my company"}.\nProject: ${form.projectType}\nTimeline: ${form.timeline}\n${leadId ? `Reference ID: ${leadId}\n` : ""}Please connect me with an automation engineer.`
+    `Hello Tamizh Tech! I am interested in Industrial Automation solutions for: ${form.company || "my company"}.\nProject: ${form.projectType}\nTimeline: ${form.timeline}\n${submissionNo ? `Reference ID: ${submissionNo}\n` : ""}Please connect me with an automation engineer.`
   );
 
   const formInputClass =
@@ -121,13 +125,13 @@ export default function IndustrialConsultationForm() {
           </p>
         </div>
 
-        {leadId && (
+        {submissionNo && (
           <div className="bg-subtle p-4 rounded-2xl border border-border inline-block min-w-[280px]">
             <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">
-              Official Lead Reference ID
+              Official Reference ID
             </span>
             <span className="text-xl font-black font-mono text-accent">
-              {leadId}
+              {submissionNo}
             </span>
           </div>
         )}
@@ -143,7 +147,11 @@ export default function IndustrialConsultationForm() {
           </a>
           <button
             type="button"
-            onClick={() => setStatus("idle")}
+            onClick={() => {
+              setStatus("idle");
+              setSubmissionNo("");
+              setIdempotencyKey(generateIdempotencyKey());
+            }}
             className="w-full sm:w-auto px-6 py-3 rounded-xl bg-subtle hover:bg-border/60 text-text-primary font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
           >
             Submit Another Request
@@ -222,16 +230,37 @@ export default function IndustrialConsultationForm() {
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider">
-            Direct Phone Number <span className="text-accent">*</span>
+            Mobile Number (10 digits) {(form.preferredContactMethod === "WhatsApp" || form.preferredContactMethod === "Phone") && <span className="text-accent">*</span>}
           </label>
-          <input
-            required
-            type="tel"
-            placeholder="+91 98765 43210"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className={formInputClass}
-          />
+          <div className="flex gap-2">
+            <select
+              value={form.countryCode}
+              onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+              className="w-[95px] bg-white border border-slate-300 rounded-xl px-2 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
+              aria-label="Country Code"
+            >
+              {COMMON_COUNTRY_CODES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.flag} {c.code}
+                </option>
+              ))}
+            </select>
+            <input
+              required={form.preferredContactMethod === "WhatsApp" || form.preferredContactMethod === "Phone"}
+              type="tel"
+              maxLength={10}
+              placeholder="9876543210"
+              value={form.mobile}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                setForm({ ...form, mobile: val });
+              }}
+              className="flex-1 bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs font-mono tracking-wide"
+            />
+          </div>
+          <span className="text-[10px] text-slate-400">
+            Enter 10-digit national number
+          </span>
         </div>
       </div>
 

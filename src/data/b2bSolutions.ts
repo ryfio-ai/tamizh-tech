@@ -98,7 +98,7 @@ export const b2bSolutions: Record<string, B2BSolution> = {
       subtitle: "Build practical STEM and robotics learning programs with turnkey labs, hands-on workshops, teacher-supported curricula, and national competition training.",
       image: "/gallery/10.jpg",
       imageAlt: "School robotics and STEM learning platform engineered at Tamizh Tech",
-      primaryCtaText: "Get a Quote / School Enquiry",
+      primaryCtaText: "Discuss a School Program",
       secondaryCtaText: "Talk to an Engineer",
     },
     whatWeHelpBuild: {
@@ -312,7 +312,7 @@ export const b2bSolutions: Record<string, B2BSolution> = {
       subtitle: "From advanced robotics labs and engineering capstones to prototyping, technical training, and R&D collaboration.",
       image: "/gallery/16.jpeg",
       imageAlt: "Advanced college robotics and electronics engineering facility",
-      primaryCtaText: "Get a Quote / College Enquiry",
+      primaryCtaText: "Discuss a College Program",
       secondaryCtaText: "Talk to an Engineer",
     },
     whatWeHelpBuild: {
@@ -522,7 +522,7 @@ export const b2bSolutions: Record<string, B2BSolution> = {
       subtitle: "Design and integration support for industrial automation, robotics, PLC/SCADA systems, machine vision, and custom engineering.",
       image: "/gallery/18.jpeg",
       imageAlt: "Industrial automation control panel and machine wiring at Tamizh Tech",
-      primaryCtaText: "Request Industrial Consultation",
+      primaryCtaText: "Request a Consultation",
       secondaryCtaText: "Talk to an Engineer",
     },
     whatWeHelpBuild: {
@@ -732,7 +732,7 @@ export const b2bSolutions: Record<string, B2BSolution> = {
       subtitle: "Products, fabrication, PCB, robotics and technical support for projects, competitions and prototypes.",
       image: "/gallery/10.jpg",
       imageAlt: "Robotics hardware and competition chassis built for student makers",
-      primaryCtaText: "Get a Quote / Project Support",
+      primaryCtaText: "Explore Robotics Products",
       secondaryCtaText: "Talk to an Engineer",
     },
     whatWeHelpBuild: {
@@ -897,7 +897,7 @@ export const b2bSolutions: Record<string, B2BSolution> = {
         {
           title: "Custom 3D Printed Parts",
           description: "High-precision brackets and functional mechanical components printed in PLA and PETG.",
-          image: "/pic/3d printing.jpg",
+          image: "/service/3d-printing-services.png",
           alt: "3D printed robotics brackets and custom parts",
           category: "3D Printing"
         }
@@ -945,9 +945,9 @@ export const b2bSolutions: Record<string, B2BSolution> = {
     hero: {
       title: "From Hardware Idea to Working Prototype",
       subtitle: "Rapid prototyping, PCB development, fabrication, embedded systems and robotics engineering support.",
-      image: "/pic/pcb design.jpg",
+      image: "/service/pcb-services.png",
       imageAlt: "Turnkey PCB design and hardware engineering for startups at Tamizh Tech",
-      primaryCtaText: "Get a Quote / Hardware Consultation",
+      primaryCtaText: "Discuss Your Project",
       secondaryCtaText: "Talk to an Engineer",
     },
     whatWeHelpBuild: {
@@ -1093,21 +1093,21 @@ export const b2bSolutions: Record<string, B2BSolution> = {
         {
           title: "Custom PCB Design & Assembly",
           description: "Dense multi-layer printed circuit boards designed, fabricated, and assembled for client hardware prototypes.",
-          image: "/pic/pcb design.jpg",
+          image: "/service/pcb-services.png",
           alt: "Custom PCB design and assembly for hardware startups",
           category: "Electronics"
         },
         {
           title: "Precision 3D Printed Enclosures",
           description: "Functional enclosures with accurate mounting bosses and snap-fits printed in engineering filaments.",
-          image: "/pic/3d printing.jpg",
+          image: "/service/3d-printing-services.png",
           alt: "3D printed prototype enclosures for product teams",
           category: "Mechanical"
         },
         {
           title: "Precision Laser Cut Metal Parts",
           description: "Stainless steel chassis plates cut for industrial durability and rigidity.",
-          image: "/pic/laser cutting.jpg",
+          image: "/service/laser-cutting.png",
           alt: "Precision laser cutting for startup chassis brackets",
           category: "Fabrication"
         }

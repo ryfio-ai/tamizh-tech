@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { X, CheckCircle2, AlertCircle, Loader2, Send, Wrench, ShieldCheck, ArrowRight, Layers, Cpu, Scissors, Printer, Bot, Factory, FlaskConical, GraduationCap } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { trackMarketingEvent } from "@/lib/analytics";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
 
 export interface ProductEnquiryContext {
   sourceType: "product" | "event";
@@ -55,6 +57,8 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     organization: "",
     city: "Coimbatore",
@@ -72,6 +76,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState<string>("");
 
   useEffect(() => {
     if (projectContext) {
@@ -123,6 +128,49 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "submitting") return;
+
+    // 1. Client-Side Validation
+    const trimmedName = formData.name.trim();
+    if (!trimmedName || trimmedName.length < 2) {
+      setErrorMessage("Please enter your full name (minimum 2 characters).");
+      return;
+    }
+
+    const pref = (formData.preferredCallback || "WhatsApp").toLowerCase();
+    const cleanMobile = formData.mobile.replace(/\D/g, "");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const trimmedEmail = formData.email.trim().toLowerCase();
+
+    if (pref.includes("whatsapp")) {
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setErrorMessage("Please enter your WhatsApp/mobile number to continue (exactly 10 digits).");
+        return;
+      }
+    } else if (pref.includes("phone")) {
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setErrorMessage("Please enter your mobile number for phone callback (exactly 10 digits).");
+        return;
+      }
+    } else if (pref.includes("email")) {
+      if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+        setErrorMessage("Please enter a valid email address.");
+        return;
+      }
+    } else {
+      const hasValidMobile = cleanMobile.length === 10;
+      const hasValidEmail = trimmedEmail && emailRegex.test(trimmedEmail);
+      if (!hasValidMobile && !hasValidEmail) {
+        setErrorMessage("Please provide at least one valid contact method (10-digit mobile or email address).");
+        return;
+      }
+    }
+
+    if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     setStatus("submitting");
     setErrorMessage("");
 
@@ -156,48 +204,42 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
       const leadType = projectContext ? "Project Enquiry" : (productContext ? "Product Enquiry" : "Quote");
       const source = projectContext ? `Project: ${projectContext.sourcePage}` : (productContext ? `Product: ${productContext.sourcePage}` : "Navbar / Footer Get a Quote");
       const subject = projectContext
-        ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) — ${formData.name}`
+        ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) — ${trimmedName}`
         : (productContext
-            ? `Product Enquiry: ${productContext.productName}${productContext.configurationName ? ` (${productContext.configurationName})` : ""} (${productContext.categorySlug}) — ${formData.name}`
-            : `Quote Request: ${currentServiceObj.label} — ${formData.name}`);
-      const areaOfInterest = projectContext ? `Project: ${projectContext.projectName}` : (productContext ? `Product: ${productContext.productName}` : currentServiceObj.label);
+            ? `Product Enquiry: ${productContext.productName}${productContext.configurationName ? ` (${productContext.configurationName})` : ""} (${productContext.categorySlug}) — ${trimmedName}`
+            : `Quote Request: ${currentServiceObj.label} — ${trimmedName}`);
 
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType,
-          source,
-          pageUrl: typeof window !== "undefined" ? window.location.href : (projectContext?.sourcePage || productContext?.sourcePage || "https://www.tamizhtech.in/projects"),
-          customerName: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          mobile: formData.phone,
-          city: formData.city || "Coimbatore",
-          organization: formData.organization || "Individual / Student",
-          institution: formData.organization || "Individual / Student",
-          areaOfInterest,
-          subject,
-          requirement: projectContext ? projectContext.projectName : (productContext ? productContext.productName : currentServiceObj.label),
-          message: fullMessage,
-          productContext: productContext || undefined,
-          projectContext: projectContext || undefined,
-          productConfiguration: productContext?.productConfiguration,
-          configurationName: productContext?.configurationName,
-          productConfigurationSku: productContext?.productConfigurationSku,
-          preferredContactMethod: formData.preferredCallback,
-        }),
-      });
+      const parsedQty = parseInt(formData.quantity, 10);
+      const numericQuantity = isNaN(parsedQty) || parsedQty <= 0 ? 1 : parsedQty;
 
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || "Failed to log quote inquiry. Please try again.");
+      // Preserve stable idempotency key for this submission attempt
+      const activeKey = idempotencyKey || generateIdempotencyKey();
+      if (!idempotencyKey) {
+        setIdempotencyKey(activeKey);
       }
 
-      const generatedLeadId = result.leadId || `TT-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
-      setLeadId(generatedLeadId);
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: activeKey,
+        payload: {
+          name: trimmedName,
+          mobile: cleanMobile || undefined,
+          email: trimmedEmail || undefined,
+          company: formData.organization || undefined,
+          city: formData.city || "Coimbatore",
+          state: "Tamil Nadu",
+          country: "India",
+          subject,
+          message: fullMessage,
+          productRequirements: projectContext ? projectContext.projectName : (productContext ? productContext.productName : currentServiceObj.label),
+          quantity: numericQuantity,
+          configurationRequirements: productContext?.configurationName || productContext?.productConfiguration || undefined,
+        },
+      });
+
+      setLeadId(result.submissionNo);
       setStatus("success");
+      setIdempotencyKey(""); // Reset on genuine success so subsequent requests get a new token
 
       // Dispatch structured GA4 / GTM telemetry for product enquiry submission
       if (productContext) {
@@ -213,10 +255,13 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
           product_category: productContext.productCategory || productContext.categorySlug,
           configuration: productContext.configurationName || productContext.productConfiguration,
           sourcePage: productContext.sourcePage,
-          leadId: generatedLeadId,
+          leadId: result.submissionNo,
         });
       }
     } catch (err: any) {
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey(""); // Allow a fresh token on next attempt
+      }
       setErrorMessage(err.message || "Network Error: Unable to transmit quote request.");
       setStatus("error");
     }
@@ -456,9 +501,31 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
 
               {/* Contact Details */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
-                  2. Contact & Project Details <span className="text-red-500">*</span>
-                </label>
+                <div className="flex items-center justify-between mb-2.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+                    2. Contact & Project Details <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <span className="text-slate-500 text-[11px]">Preferred Contact:</span>
+                    <div className="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50">
+                      {(["WhatsApp", "Phone", "Email"] as const).map((mode) => (
+                        <button
+                          type="button"
+                          key={mode}
+                          onClick={() => setFormData({ ...formData, preferredCallback: mode })}
+                          className={`px-2 py-0.5 text-[11px] font-semibold rounded-md transition-all ${
+                            formData.preferredCallback === mode
+                              ? "bg-[#FF6B00] text-white shadow-2xs"
+                              : "text-slate-600 hover:text-slate-900"
+                          }`}
+                        >
+                          {mode}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Your Name *</label>
@@ -482,10 +549,12 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Email Address {formData.preferredCallback === "Email" && <span className="text-red-500">*</span>}
+                    </label>
                     <input
                       type="email"
-                      required
+                      required={formData.preferredCallback === "Email"}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@email.com"
@@ -493,15 +562,42 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Phone / WhatsApp *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
-                      className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#FF6B00]"
-                    />
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Mobile Number (10 digits) {(formData.preferredCallback === "WhatsApp" || formData.preferredCallback === "Phone") && <span className="text-red-500">*</span>}
+                    </label>
+                    <div className="flex gap-2">
+                      <select
+                        value={formData.countryCode}
+                        onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                        className="w-[95px] px-2 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-900 focus:outline-none focus:border-[#FF6B00]"
+                        aria-label="Country Code"
+                      >
+                        {COMMON_COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.flag} {c.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        type="tel"
+                        required={formData.preferredCallback === "WhatsApp" || formData.preferredCallback === "Phone"}
+                        maxLength={10}
+                        value={formData.mobile}
+                        onChange={(e) => {
+                          let val = e.target.value.replace(/\D/g, "");
+                          if (val.length === 12 && val.startsWith("91")) {
+                            val = val.slice(2);
+                          }
+                          val = val.slice(0, 10);
+                          setFormData({ ...formData, mobile: val, phone: `${formData.countryCode} ${val}`.trim() });
+                        }}
+                        placeholder="9876543210"
+                        className="flex-1 px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#FF6B00] font-mono tracking-wide"
+                      />
+                    </div>
+                    <span className="text-[10px] text-slate-400 mt-0.5 block">
+                      Enter 10-digit national mobile number (country code is set separately)
+                    </span>
                   </div>
                 </div>
 

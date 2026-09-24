@@ -14,6 +14,9 @@ export interface ProductConfiguration {
   sku?: string;
   isDefault?: boolean;
   includedItems?: string[];
+  excludedItems?: string[];
+  setupRequirements?: string[];
+  selectionGuidance?: string;
   highlights?: string[];
 }
 
@@ -56,6 +59,9 @@ export interface Product {
   imageAlts?: string[];
   specs: string;
   highlights: string[];
+  bestSuitedFor?: string[];
+  notIdealFor?: string[];
+  competitionNotice?: string;
   whyThisProduct?: {
     heading: string;
     points: string[];
@@ -67,6 +73,8 @@ export interface Product {
   detailedSpecs: string[];
   applications: string[];
   includedItems?: string[];
+  excludedItems?: string[];
+  setupRequirements?: string[];
   relatedServices?: string[];
   relatedCourses?: string[];
   relatedProjects?: string[];
@@ -88,17 +96,85 @@ export const products: Product[] = [
     availability: "in_stock",
     name: "TTRC LF 5.0",
     metaTitle: "TTRC LF 5.0 Line Follower Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. ₹3,799 without battery (MRP ₹6,000) / ₹4,799 with battery (MRP ₹6,500).",
-    shortDescription: "TTRC LF 5.0 is a high-speed line follower robot designed for robotics training, STEM education and line follower competition use.",
+    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. Verified catalogue price ₹3,799 without battery / ₹4,799 with battery.",
+    shortDescription: "High-speed autonomous line follower robot engineered with a 7-array optical sensor and TTRC C-Board 5.0 PID controller for razor-sharp track tracking.",
     quickAnswer: "TTRC LF 5.0 is an autonomous high-speed line follower robot engineered for competitive track navigation using a 7-array sensor, TTRC C-Board 5.0 controller, and 600 RPM high-speed DG N20 motors.",
     price: 3799,
     sellingPrice: 3799,
-    regularPrice: 6000,
-    mrp: 6500,
     currency: "INR",
+    bestSuitedFor: [
+      "Students preparing for national line follower competitions",
+      "Collegiate robotics teams and engineering clubs",
+      "Practical PID control algorithm and optical sensing education"
+    ],
+    notIdealFor: [
+      "Rough outdoor terrain or uneven dirt tracks",
+      "Non-line tracking autonomous navigation",
+      "Tournaments strictly capping sensor counts below 7 channels"
+    ],
+    competitionNotice: "Before Enquiring: Verify your competition's line track specifications (typically 30mm black or white line), minimum turn curve radius, and allowable vehicle footprint limits (TTRC LF 5.0 dimensions: 155 × 170 × 40 mm).",
     configurations: [
-      { id: "without-battery", name: "Without Battery", price: 3799, sellingPrice: 3799, regularPrice: 6000, mrp: 6000, currency: "INR", isDefault: true },
-      { id: "with-battery", name: "With Battery", price: 4799, sellingPrice: 4799, regularPrice: 6500, mrp: 6500, currency: "INR" }
+      {
+        id: "without-battery",
+        name: "Without Battery",
+        price: 3799,
+        sellingPrice: 3799,
+        currency: "INR",
+        isDefault: true,
+        selectionGuidance: "Choose Without Battery if your team already owns compatible compact LiPo batteries and a balance charger.",
+        includedItems: [
+          "TTRC LF 5.0 Robot Chassis & Baseplate",
+          "2x 600 RPM DG N20 High-Speed Geared Motors",
+          "2x 40 × 10 × 4 mm HD Track Wheels",
+          "7-Array High-Sensitivity Line Sensor Module",
+          "TTRC C-Board 5.0 Microcontroller Board with PID Tracking Firmware",
+          "Mounting Hardware, Screws & Spacers"
+        ],
+        excludedItems: [
+          "LiPo Battery NOT included (Requires 7.4V or 11.1V compact LiPo pack)",
+          "LiPo Balance Charger NOT included"
+        ],
+        setupRequirements: [
+          "Customer must provide a compatible 7.4V (2S) or 11.1V (3S) compact LiPo battery",
+          "Requires track threshold calibration and PID parameter tuning before tournament runs"
+        ],
+        highlights: [
+          "600 RPM DG N20 High-Speed Motors",
+          "7-Array Line Sensor",
+          "TTRC C-Board 5.0 with Pre-flashed PID",
+          "Without Battery (Bring Your Own Pack)"
+        ]
+      },
+      {
+        id: "with-battery",
+        name: "With Battery",
+        price: 4799,
+        sellingPrice: 4799,
+        currency: "INR",
+        selectionGuidance: "Choose With Battery to receive the matching factory-tested 11.1V LiPo battery fitted for the chassis.",
+        includedItems: [
+          "TTRC LF 5.0 Robot Chassis & Baseplate",
+          "2x 600 RPM DG N20 High-Speed Geared Motors",
+          "2x 40 × 10 × 4 mm HD Track Wheels",
+          "7-Array High-Sensitivity Line Sensor Module",
+          "TTRC C-Board 5.0 Microcontroller Board with PID Tracking Firmware",
+          "Compact 350 mAh 11.1V Li-Po Battery Pack",
+          "Mounting Hardware, Screws & Spacers"
+        ],
+        excludedItems: [
+          "LiPo Balance Charger NOT included (available separately)"
+        ],
+        setupRequirements: [
+          "Requires a compatible LiPo balance charger to recharge the battery",
+          "Requires track threshold calibration for local arena surface lighting"
+        ],
+        highlights: [
+          "600 RPM DG N20 High-Speed Motors",
+          "7-Array Line Sensor",
+          "TTRC C-Board 5.0 with Pre-flashed PID",
+          "Includes 350 mAh 11.1V Li-Po Battery"
+        ]
+      }
     ],
     badge: "Competition / Line Follower",
     image: "/product/lfr/1.jpeg",
@@ -141,7 +217,7 @@ export const products: Product[] = [
       "Optional 350 mAh 11.1V Li-Po Battery (in With Battery Configuration)"
     ],
     relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly", "laser-cutting"],
-    description: "TTRC LF 5.0 is a high-speed line follower robot designed for robotics training, STEM education and line follower competition use.",
+    description: "TTRC LF 5.0 is a high-speed autonomous line follower robot engineered with a 7-array sensor, TTRC C-Board 5.0 PID controller, and dual 600 RPM motors for collegiate and national robotics competitions.",
     detailedSpecs: [
       "Motor: 600 RPM DG N20 High-Speed Motors",
       "Wheels: 40 × 10 × 4 mm HD Wheels",
@@ -170,35 +246,31 @@ export const products: Product[] = [
     faqs: [
       {
         question: "What is the TTRC LF 5.0?",
-        answer: "TTRC LF 5.0 is a high-speed line follower robot designed for robotics training, STEM education and line follower competition use."
+        answer: "TTRC LF 5.0 is an autonomous high-speed line follower robot designed for competitive arena navigation and PID control learning."
+      },
+      {
+        question: "What is the difference between With Battery and Without Battery?",
+        answer: "The 'With Battery' configuration includes a fitted 350 mAh 11.1V Li-Po battery pack. The 'Without Battery' configuration allows teams to supply their own compatible LiPo power source."
+      },
+      {
+        question: "Is the battery charger included?",
+        answer: "No. The battery charger is not included and must be sourced separately. A standard 2S/3S LiPo balance charger is required."
       },
       {
         question: "What motor does the TTRC LF 5.0 use?",
-        answer: "The TTRC LF 5.0 is powered by 600 RPM DG N20 High-Speed Motors."
-      },
-      {
-        question: "What wheels are fitted on the robot?",
-        answer: "It is fitted with 40 × 10 × 4 mm HD Wheels for precision surface grip and steering response."
+        answer: "The TTRC LF 5.0 is powered by dual 600 RPM DG N20 High-Speed geared DC motors."
       },
       {
         question: "What sensor array is included?",
-        answer: "It includes a 7-Array Line Sensor module for high-accuracy line tracking."
-      },
-      {
-        question: "What controller board powers the robot?",
-        answer: "The robot runs on the proprietary TTRC C-Board 5.0 controller with high-speed PID tracking."
+        answer: "It includes a 7-Array IR Line Sensor module for precision track edge detection and high-speed corner tracking."
       },
       {
         question: "What are the dimensions of the robot?",
-        answer: "The robot measures 155 × 170 × 40 mm."
-      },
-      {
-        question: "What are the available configurations and pricing?",
-        answer: "The TTRC LF 5.0 is available in two configurations: Without Battery at a discounted selling price of ₹3,799 (Original price: ₹6,000), and With Battery at ₹4,799 (Original price: ₹6,500)."
+        answer: "The robot measures 155 × 170 × 40 mm. Please verify your tournament's maximum dimensional limits before ordering."
       },
       {
         question: "How can I enquire about the TTRC LF 5.0?",
-        answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or contact our Coimbatore team via WhatsApp. An official quotation with reference tracking ID will be generated."
+        answer: "Click 'ENQUIRE ABOUT THIS CONFIGURATION' on this page or message our engineering line on WhatsApp. We generate an official quotation with GST and shipping breakdown."
       }
     ],
     status: "published",
@@ -216,39 +288,58 @@ export const products: Product[] = [
     availability: "in_stock",
     name: "TTRC RR-5.0",
     metaTitle: "TTRC RR-5.0 Robo Race Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC RR-5.0 tournament robo race robot with 4WD chassis, 600RPM motors, high-torque gearboxes, and 112MM buggy wheels. ₹7,999 Only Bot (MRP ₹12,000) / ₹20,999 Full Kit (MRP ₹30,000).",
-    shortDescription: "TTRC RR-5.0 is a competition-oriented robo race platform with a 4-wheel robotic chassis, 600RPM motors and TTRC high-torque gearboxes, available as an Only Bot or Full Kit configuration.",
+    metaDescription: "TTRC RR-5.0 tournament robo race platform with 4WD chassis, 600RPM motors, high-torque gearboxes, and 112MM buggy wheels. Verified catalogue price ₹7,999 Only Bot / ₹20,999 Full Kit.",
+    shortDescription: "Tournament-grade 4WD Robo Race platform engineered with 600 RPM high-torque geared motors and 112mm high-traction buggy wheels for extreme track grip, fast cornering, and obstacle clearance.",
     quickAnswer: "TTRC RR-5.0 is a tournament-grade 4-wheel drive Robo Race platform equipped with 600 RPM graded diamond motors, TTRC high-torque gearboxes, and 112MM high-traction buggy wheels for extreme track agility.",
     price: 7999,
     sellingPrice: 7999,
-    regularPrice: 12000,
-    mrp: 30000,
     currency: "INR",
+    bestSuitedFor: [
+      "University and college Robo Race tournament teams",
+      "Obstacle and speed track competitors",
+      "Engineering student robotics symposium projects"
+    ],
+    notIdealFor: [
+      "Casual indoor toy car users",
+      "Tournaments with vehicle width limits capped below 210 mm",
+      "High-impact spinning weapon combat robot arenas (requires combat-class armor)"
+    ],
+    competitionNotice: "Before Enquiring: Verify your event's exact rulebook for robot footprint dimensions (TTRC RR-5.0 is approx 210 × 250 × 112 mm), motor voltage caps, wheel diameter restrictions, and weight classification.",
     configurations: [
       {
         id: "only-bot",
         name: "Only Bot",
         price: 7999,
         sellingPrice: 7999,
-        regularPrice: 12000,
-        mrp: 12000,
         currency: "INR",
         sku: "TTRC-C-2-A",
         isDefault: true,
+        selectionGuidance: "Choose Only Bot if your team already owns an RC transmitter, ESC motor driver, and LiPo batteries and only requires the assembled mechanical 4WD chassis.",
         includedItems: [
-          "600RPM Graded Diamond Motor × 4",
-          "TTRC High-Torque Gearbox × 4",
-          "TTRC 112MM Buggy Wheels × 4",
-          "TTRC Robo Race Chassis × 1",
-          "Extra Screws, Connectors & Wires"
+          "600 RPM Graded Diamond Motors × 4",
+          "TTRC High-Torque Gearboxes × 4",
+          "TTRC 112MM HD Buggy Wheels (high-traction rubber with foam insert) × 4",
+          "TTRC Heavy-Duty Robo Race Chassis Frame × 1",
+          "Mounting Screws, Brackets, Connectors & Wires"
+        ],
+        excludedItems: [
+          "LiPo Battery NOT included (requires 11.1V 3S LiPo)",
+          "Battery Charger NOT included",
+          "Electronic Speed Controller (ESC) NOT included",
+          "2.4GHz RC Transmitter & Receiver NOT included"
+        ],
+        setupRequirements: [
+          "Requires dual-channel ESC or high-current motor driver (20A+ continuous recommended)",
+          "Requires 2.4GHz RC transmitter & receiver (e.g. FlySky FS-i6)",
+          "Requires 11.1V 3S LiPo battery with 25C+ discharge rating and compatible balance charger",
+          "Requires basic electrical wiring and motor terminal soldering"
         ],
         highlights: [
-          "600RPM Graded Diamond Motors × 4",
+          "600 RPM Graded Diamond Motors × 4",
           "TTRC High-Torque Gearboxes × 4",
-          "112MM Buggy Wheels × 4",
-          "TTRC Robo Race Chassis",
-          "210 × 250 × 112 mm Approx. Dimensions",
-          "4-Wheel Competition Platform"
+          "112MM HD Buggy Wheels for Superior Track Grip",
+          "4-Wheel Drive Platform (Approx. 210 × 250 × 112 mm)",
+          "Only Bot (Bring Your Own Electronics & Transmitter)"
         ]
       },
       {
@@ -256,28 +347,36 @@ export const products: Product[] = [
         name: "Full Kit",
         price: 20999,
         sellingPrice: 20999,
-        regularPrice: 30000,
-        mrp: 30000,
         currency: "INR",
         sku: "TTRC-C-2-B",
+        selectionGuidance: "Choose Full Kit for a complete competition setup including the robot chassis, motors, ESC, battery, charger, and FlySky 2.4GHz radio controller.",
         includedItems: [
-          "600RPM Graded Diamond Motor × 4",
-          "TTRC High-Torque Gearbox × 4",
-          "TTRC 112MM Buggy Wheels × 4",
-          "20D ESC × 1",
-          "Dual-Channel Motor Control",
-          "1000mAh LiPo Battery + Charger × 1",
-          "FlySky FS-i6 × 1",
-          "TTRC Robo Race Chassis × 1",
-          "Extra Screws, Connectors & Wires"
+          "600 RPM Graded Diamond Motors × 4",
+          "TTRC High-Torque Gearboxes × 4",
+          "TTRC 112MM HD Buggy Wheels (high-traction rubber with foam insert) × 4",
+          "20D High-Current ESC (Dual-Channel Motor Control) × 1",
+          "1000mAh 11.1V LiPo Battery Pack × 1",
+          "LiPo Balance Charger × 1",
+          "FlySky FS-i6 2.4GHz 6-Channel Transmitter & Receiver × 1",
+          "TTRC Heavy-Duty Robo Race Chassis Frame × 1",
+          "Assembly Fasteners, Pre-crimped Wires & Connectors"
+        ],
+        excludedItems: [
+          "Extra spare battery packs (optional add-on for consecutive tournament heats)",
+          "4x AA batteries for handheld FlySky transmitter (standard 1.5V AA cells)"
+        ],
+        setupRequirements: [
+          "Requires initial balance charging of the included LiPo battery",
+          "Customer must supply 4 × AA batteries for the handheld radio transmitter",
+          "Requires arena obstacle test driving and trim calibration before match day"
         ],
         highlights: [
-          "600RPM Graded Diamond Motors × 4",
+          "600 RPM Graded Diamond Motors × 4",
           "TTRC High-Torque Gearboxes × 4",
-          "112MM Buggy Wheels × 4",
+          "112MM HD Buggy Wheels × 4",
           "20D ESC & Dual-Channel Motor Control",
-          "1000mAh LiPo Battery + Charger",
-          "FlySky FS-i6 Transmitter"
+          "1000mAh LiPo Battery + Balance Charger",
+          "FlySky FS-i6 2.4GHz 6-Channel Radio System"
         ]
       }
     ],
@@ -293,20 +392,19 @@ export const products: Product[] = [
     highlights: [
       "600RPM Graded Diamond Motors × 4",
       "TTRC High-Torque Gearboxes × 4",
-      "112MM Buggy Wheels × 4",
+      "112MM HD Buggy Wheels for Maximum Grip",
       "TTRC Robo Race Chassis",
       "210 × 250 × 112 mm Approx. Dimensions",
-      "4-Wheel Competition Platform"
+      "4-Wheel Drive Competition Configuration"
     ],
     whyThisProduct: {
-      heading: "WHY TTRC RR-5.0?",
+      heading: "Tournament-Engineered Robo Race Architecture",
       points: [
-        "600RPM Graded Diamond Motors × 4",
-        "TTRC High-Torque Gearboxes × 4",
-        "112MM Buggy Wheels × 4",
-        "Robo Race Chassis",
-        "Two configuration choices",
-        "Full Kit includes controller electronics, battery and transmitter"
+        "600 RPM Graded Diamond Motors paired with TTRC High-Torque Gearboxes deliver punchy acceleration off the start line.",
+        "112 mm HD Buggy Wheels provide superior traction across wooden ramps, vinyl bridges, and carpet turns.",
+        "4-wheel drive configuration ensures controlled movement and prevents spin-outs during high-speed obstacle navigation.",
+        "Reinforced chassis frame handles collisions with arena barriers and competitor vehicles.",
+        "Two configuration choices: Only Bot for teams with existing electronics, or Full Kit with transmitter and battery."
       ],
       targetAudience: [
         "Robotics Teams",
@@ -326,11 +424,11 @@ export const products: Product[] = [
     relatedServices: ["robotics-automation", "3d-printing", "laser-cutting", "pcb-design-fabrication-assembly"],
     relatedCourses: ["robotics-iot-embedded", "cad-3d-printing"],
     relatedProjects: ["advanced-kinematics", "ev-smart-mobility"],
-    description: "TTRC RR-5.0 is a competition-oriented robo race platform with a 4-wheel robotic chassis, 600RPM motors and TTRC high-torque gearboxes, available as an Only Bot or Full Kit configuration.",
+    description: "TTRC RR-5.0 is a competition-grade robo race platform featuring a 4-wheel drive chassis, high-torque 600 RPM geared motors, and 112mm high-traction buggy wheels engineered for speed and obstacle agility in collegiate and national competitions.",
     detailedSpecs: [
       "Motor: 600RPM Graded Diamond Motor × 4",
       "Gearbox: TTRC High-Torque Gearbox × 4",
-      "Wheels: TTRC 112MM Buggy Wheels × 4",
+      "Wheels: TTRC 112MM HD Buggy Wheels × 4",
       "Chassis: TTRC Robo Race Chassis × 1",
       "ESC: 20D ESC × 1 (Full Kit)",
       "Motor Control: Dual-Channel Motor Control (Full Kit)",
@@ -342,7 +440,7 @@ export const products: Product[] = [
     specifications: [
       "Motor: 600RPM Graded Diamond Motor × 4",
       "Gearbox: TTRC High-Torque Gearbox × 4",
-      "Wheels: TTRC 112MM Buggy Wheels × 4",
+      "Wheels: TTRC 112MM HD Buggy Wheels × 4",
       "Chassis: TTRC Robo Race Chassis × 1",
       "ESC: 20D ESC × 1 (Full Kit)",
       "Motor Control: Dual-Channel Motor Control (Full Kit)",
@@ -360,47 +458,27 @@ export const products: Product[] = [
     faqs: [
       {
         question: "What is the TTRC RR-5.0?",
-        answer: "TTRC RR-5.0 is a competition-oriented robo race platform with a 4-wheel robotic chassis, 600RPM motors and TTRC high-torque gearboxes, available as an Only Bot or Full Kit configuration."
+        answer: "TTRC RR-5.0 is a competition-grade 4WD robo race platform equipped with four 600 RPM high-torque geared motors and 112mm buggy wheels engineered for competitive race tracks."
       },
       {
         question: "What configurations are available?",
-        answer: "The TTRC RR-5.0 is available in two configurations: Only Bot at a discounted selling price of ₹7,999 (Original price: ₹12,000) and Full Kit at ₹20,999 (Original price: ₹30,000)."
+        answer: "The TTRC RR-5.0 is available in two configurations: Only Bot at ₹7,999 (mechanical platform and motors only) and Full Kit at ₹20,999 (includes 20D ESC, LiPo battery, charger, and FlySky FS-i6 radio transmitter)."
       },
       {
-        question: "What is included in the Only Bot configuration?",
-        answer: "The Only Bot configuration includes: 600RPM Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, TTRC 112MM Buggy Wheels × 4, TTRC Robo Race Chassis × 1, and Extra Screws, Connectors & Wires."
+        question: "What is the difference between Only Bot and Full Kit?",
+        answer: "The Only Bot configuration includes the chassis, 4 motors, 4 gearboxes, 4 buggy wheels, and mounting hardware. It does NOT include an ESC, battery, charger, or radio controller. The Full Kit includes all electrical control gear and the transmitter."
       },
       {
-        question: "What is included in the Full Kit?",
-        answer: "The Full Kit includes: 600RPM Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, TTRC 112MM Buggy Wheels × 4, 20D ESC × 1, Dual-Channel Motor Control, 1000mAh LiPo Battery + Charger × 1, FlySky FS-i6 × 1, TTRC Robo Race Chassis × 1, and Extra Screws, Connectors & Wires."
+        question: "What are the dimensions of the robot?",
+        answer: "The approximate footprint is 210 × 250 × 112 mm. Please check your specific competition's dimensional limits before ordering."
       },
       {
-        question: "What motors are used?",
-        answer: "The robot utilizes 600RPM Graded Diamond Motor × 4 paired with TTRC High-Torque Gearbox × 4."
-      },
-      {
-        question: "What wheels are used?",
-        answer: "The robot is fitted with TTRC 112MM Buggy Wheels × 4 for reliable competition traction."
-      },
-      {
-        question: "What are the robot dimensions?",
-        answer: "The approximate dimensions are 210 × 250 × 112 mm."
-      },
-      {
-        question: "Does the Full Kit include the transmitter?",
-        answer: "Yes, the Full Kit includes the FlySky FS-i6 transmitter × 1."
-      },
-      {
-        question: "Does the Full Kit include a battery and charger?",
-        answer: "Yes, the Full Kit includes a 1000mAh LiPo Battery + Charger × 1."
-      },
-      {
-        question: "What are the prices for the two configurations?",
-        answer: "The Only Bot configuration is priced at ₹7,999 and the Full Kit configuration is priced at ₹20,999."
+        question: "Does the Full Kit include transmitter batteries?",
+        answer: "No. The handheld FlySky FS-i6 transmitter requires 4 standard AA 1.5V batteries, which must be supplied by the customer."
       },
       {
         question: "How can I enquire about the TTRC RR-5.0?",
-        answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to connect directly with our engineering team at Coimbatore."
+        answer: "Select your preferred configuration and click 'ENQUIRE ABOUT THIS CONFIGURATION' or message our team via WhatsApp. An official quotation will be generated."
       }
     ],
     status: "published",
@@ -417,43 +495,61 @@ export const products: Product[] = [
     sku: "TTRC-C-3",
     availability: "in_stock",
     name: "TTRC SOCCER 5.1",
-    metaTitle: "TTRC SOCCER 5.1 | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC SOCCER 5.1 tournament robo soccer robot with four 300 RPM motors, high-torque gearboxes, FlySky transmitter, and soccer wheels. ₹21,499 (Original ₹29,000, 26% OFF).",
-    shortDescription: "A competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications.",
+    metaTitle: "TTRC SOCCER 5.1 | Competition Robo Soccer Robot | Tamizh Tech",
+    metaDescription: "TTRC SOCCER 5.1 tournament robo soccer platform with four 300 RPM motors, high-torque gearboxes, FlySky transmitter, and soccer wheels. Verified catalogue price ₹21,499 Full Kit / ₹7,999 Only Bot.",
+    shortDescription: "Competition Robo Soccer platform engineered with four 300 RPM high-torque geared motors, reinforced chassis, ball-handling scoop, and FlySky 2.4GHz radio controller for agile soccer matches.",
     quickAnswer: "TTRC SOCCER 5.1 is a competition-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling and defense.",
     price: 21499,
     sellingPrice: 21499,
-    regularPrice: 29000,
-    mrp: 29000,
     currency: "INR",
+    bestSuitedFor: [
+      "University and collegiate Robo Soccer tournament teams",
+      "Technical symposium robotics soccer matches",
+      "Tactical multi-wheel ground robot maneuvering practice"
+    ],
+    notIdealFor: [
+      "High-kinetic spinning weapon combat robot matches (requires combat-class hardened armor)",
+      "Heavyweight robotics categories exceeding 5 kg limits",
+      "Autonomous vision-only soccer leagues without wireless pilot control"
+    ],
+    competitionNotice: "Before Enquiring: Verify your tournament's regulation ball size, maximum robot footprint (TTRC SOCCER 5.1 is approx 280 × 270 × 80 mm), weight classification, and scoop depth limits (many tournaments cap ball-holding scoops at 10–15mm to avoid ball trapping penalties).",
     configurations: [
       {
         id: "full-kit",
         name: "Full Kit",
         price: 21499,
         sellingPrice: 21499,
-        regularPrice: 29000,
-        mrp: 29000,
         currency: "INR",
         sku: "TTRC-C-3-B",
         isDefault: true,
+        selectionGuidance: "Choose Full Kit for a complete tournament setup including the robot chassis, motors, ESC, high-capacity 2200mAh LiPo battery, balance charger, and FlySky 2.4GHz radio system.",
         includedItems: [
-          "300 RPM DGJ / Graded Diamond Motor × 4",
-          "TTRC High-Torque Gearbox × 4",
-          "80MM / 100MM Soccer Wheels × 4",
-          "20D ESC × 1",
-          "Dual-Channel Motor Control",
-          "2200mAh LiPo Battery + Charger × 1",
-          "FlySky FS-i6 × 1",
-          "TTRC Robo Soccer Chassis × 1",
-          "Extra Screws, Connectors & Wires"
+          "300 RPM DGJ / Graded Diamond High-Torque Motors × 4",
+          "TTRC High-Torque Gearboxes × 4",
+          "80MM / 100MM High-Grip Soccer Wheels × 4",
+          "20D High-Current ESC (Dual-Channel Motor Control) × 1",
+          "2200mAh LiPo Battery Pack × 1",
+          "LiPo Balance Charger × 1",
+          "FlySky FS-i6 2.4GHz 6-Channel Transmitter & Receiver × 1",
+          "Reinforced Robo Soccer Chassis with Ball-Handling Scoop × 1",
+          "Mounting Fasteners, Pre-crimped Wires & Connectors"
+        ],
+        excludedItems: [
+          "Regulation tournament match ball (supplied by competition organizers)",
+          "4x AA batteries for handheld FlySky transmitter (standard 1.5V AA cells)"
+        ],
+        setupRequirements: [
+          "Requires charging the 2200mAh LiPo battery using the included balance charger",
+          "Customer must supply 4 × AA batteries for the handheld radio transmitter",
+          "Requires practice maneuvering and scoop ball-control testing on a sample arena surface"
         ],
         highlights: [
-          "300 RPM DGJ / Graded Diamond Motors × 4",
+          "300 RPM DGJ High-Torque Motors × 4",
           "TTRC High-Torque Gearboxes × 4",
           "20D ESC & Dual-Channel Motor Control",
-          "2200mAh LiPo Battery + Charger",
-          "FlySky FS-i6 Transmitter"
+          "2200mAh LiPo Battery + Balance Charger",
+          "FlySky FS-i6 2.4GHz 6-Channel Radio System",
+          "Ready-to-Play Tournament Package"
         ]
       },
       {
@@ -463,19 +559,33 @@ export const products: Product[] = [
         sellingPrice: 7999,
         currency: "INR",
         sku: "TTRC-C-3-A",
+        selectionGuidance: "Choose Only Bot if your team already has an RC transmitter, dual ESC motor driver, and LiPo batteries and only requires the assembled mechanical soccer chassis and motors.",
         includedItems: [
-          "300 RPM DGJ / Graded Diamond Motor × 4",
-          "TTRC High-Torque Gearbox × 4",
-          "80MM / 100MM Soccer Wheels × 4",
-          "TTRC Robo Soccer Chassis × 1",
-          "Extra Screws, Connectors & Wires"
+          "300 RPM DGJ / Graded Diamond High-Torque Motors × 4",
+          "TTRC High-Torque Gearboxes × 4",
+          "80MM / 100MM High-Grip Soccer Wheels × 4",
+          "Reinforced Robo Soccer Chassis with Ball-Handling Scoop × 1",
+          "Mounting Screws, Brackets & Connecting Hardware"
+        ],
+        excludedItems: [
+          "LiPo Battery NOT included",
+          "Battery Charger NOT included",
+          "Electronic Speed Controller (ESC) NOT included",
+          "2.4GHz Radio Transmitter & Receiver NOT included"
+        ],
+        setupRequirements: [
+          "Requires dual-channel ESC or high-current motor driver (20A+ recommended)",
+          "Requires 2.4GHz RC transmitter & receiver (e.g. FlySky FS-i6)",
+          "Requires 7.4V or 11.1V LiPo battery pack and compatible balance charger",
+          "Requires basic wiring and motor terminal connections"
         ],
         highlights: [
-          "300 RPM DGJ / Graded Diamond Motors × 4",
+          "300 RPM DGJ High-Torque Motors × 4",
           "TTRC High-Torque Gearboxes × 4",
           "80MM / 100MM Soccer Wheels × 4",
-          "TTRC Robo Soccer Chassis",
-          "280 × 270 × 80 mm Approx. Dimensions"
+          "TTRC Robo Soccer Chassis with Ball Scoop",
+          "Approx. 280 × 270 × 80 mm Footprint",
+          "Only Bot (Bring Your Own Electronics & Transmitter)"
         ]
       }
     ],
@@ -496,18 +606,17 @@ export const products: Product[] = [
       "300 RPM DGJ / Graded Diamond Motors × 4",
       "TTRC High-Torque Gearboxes × 4",
       "80MM / 100MM Soccer Wheels × 4",
-      "TTRC Robo Soccer Chassis",
+      "TTRC Robo Soccer Chassis with Ball Scoop",
       "280 × 270 × 80 mm Approx. Dimensions",
       "4-Wheel Competition Platform"
     ],
     whyThisProduct: {
-      heading: "WHY TTRC SOCCER 5.1?",
+      heading: "Tournament-Proven Robo Soccer Architecture",
       points: [
-        "300 RPM DGJ / Graded Diamond Motors × 4 for consistent torque and pace.",
-        "TTRC High-Torque Gearboxes × 4 engineered for competition arena endurance.",
-        "Custom 80MM / 100MM Soccer Wheels provide optimal arena grip.",
-        "Robust TTRC Robo Soccer Chassis engineered for collision resilience.",
-        "Two configuration choices: Full Kit (Ready-to-Play) and Only Bot."
+        "Four 300 RPM high-torque geared motors deliver dependable pushing force and defensive blocking power.",
+        "Reinforced chassis with integrated front ball scoop provides responsive ball-handling without violating trap rules.",
+        "Custom high-grip soccer wheels provide rapid directional changes on smooth plywood and carpet arenas.",
+        "Two configuration choices: Full Kit with battery, charger, and transmitter, or Only Bot for custom electronics integration."
       ],
       targetAudience: ["Robotics Teams", "Students", "Makers", "Educational Institutions", "Competition Participants"]
     },
@@ -521,12 +630,12 @@ export const products: Product[] = [
     relatedServices: ["robotics-automation", "laser-cutting", "pcb-design-fabrication-assembly", "3d-printing"],
     relatedCourses: ["robotics-iot-embedded", "industrial-automation-plc"],
     relatedProjects: ["advanced-kinematics", "commercial-automation"],
-    description: "A competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications.",
+    description: "TTRC SOCCER 5.1 is a competition-grade robotic soccer platform engineered with four 300 RPM high-torque motors, ball-handling scoop, and responsive 4-wheel drive for collegiate and national robotics tournaments.",
     detailedSpecs: [
       "Motor: 300 RPM DGJ / Graded Diamond Motor × 4",
       "Gearbox: TTRC High-Torque Gearbox × 4",
       "Wheels: 80MM / 100MM Soccer Wheels × 4",
-      "Chassis: TTRC Robo Soccer Chassis × 1",
+      "Chassis: TTRC Robo Soccer Chassis with Ball Scoop × 1",
       "ESC: 20D ESC × 1 (Full Kit)",
       "Motor Control: Dual-Channel Motor Control (Full Kit)",
       "Battery: 2200mAh LiPo Battery + Charger × 1 (Full Kit)",
@@ -538,7 +647,7 @@ export const products: Product[] = [
       "Motor: 300 RPM DGJ / Graded Diamond Motor × 4",
       "Gearbox: TTRC High-Torque Gearbox × 4",
       "Wheels: 80MM / 100MM Soccer Wheels × 4",
-      "Chassis: TTRC Robo Soccer Chassis × 1",
+      "Chassis: TTRC Robo Soccer Chassis with Ball Scoop × 1",
       "ESC: 20D ESC × 1 (Full Kit)",
       "Motor Control: Dual-Channel Motor Control (Full Kit)",
       "Battery: 2200mAh LiPo Battery + Charger × 1 (Full Kit)",
@@ -555,39 +664,27 @@ export const products: Product[] = [
     faqs: [
       {
         question: "What is the TTRC SOCCER 5.1?",
-        answer: "TTRC SOCCER 5.1 is a competition-oriented robotic soccer platform designed for practical robotics training, STEM learning and robo-soccer competition applications."
+        answer: "TTRC SOCCER 5.1 is a tournament-proven robotic soccer platform designed with four 300 RPM high-torque motors, reinforced competition chassis, and precision speed control for agile ball-handling."
       },
       {
         question: "What configurations are available?",
-        answer: "The TTRC SOCCER 5.1 is available at a discounted selling price of ₹21,499 (Original price: ₹29,000 for Full Kit), and Only Bot at ₹7,999."
+        answer: "The TTRC SOCCER 5.1 is available in two configurations: Full Kit at ₹21,499 (includes 20D ESC, 2200mAh LiPo battery, balance charger, and FlySky FS-i6 transmitter) and Only Bot at ₹7,999 (chassis, 4 motors, gearboxes, and wheels only)."
       },
       {
-        question: "What is included in the Only Bot configuration?",
-        answer: "The Only Bot configuration includes: 300 RPM DGJ / Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, 80MM / 100MM Soccer Wheels × 4, TTRC Robo Soccer Chassis × 1, and Extra Screws, Connectors & Wires."
+        question: "What is the difference between Only Bot and Full Kit?",
+        answer: "The Only Bot configuration includes the mechanical platform, motors, gearboxes, wheels, and chassis scoop. It does NOT include an ESC, battery, charger, or radio controller. The Full Kit includes all electrical control gear and the transmitter."
       },
       {
-        question: "What is included in the Full Kit?",
-        answer: "The Full Kit includes: 300 RPM DGJ / Graded Diamond Motor × 4, TTRC High-Torque Gearbox × 4, 80MM / 100MM Soccer Wheels × 4, 20D ESC × 1, Dual-Channel Motor Control, 2200mAh LiPo Battery + Charger × 1, FlySky FS-i6 × 1, TTRC Robo Soccer Chassis × 1, and Extra Screws, Connectors & Wires."
+        question: "What are the dimensions of the robot?",
+        answer: "The approximate dimensions are 280 × 270 × 80 mm. Please verify your event's robot footprint regulations before ordering."
       },
       {
-        question: "What motors are used?",
-        answer: "It uses 300 RPM DGJ / Graded Diamond Motor × 4 with TTRC High-Torque Gearbox × 4."
-      },
-      {
-        question: "What wheels are fitted?",
-        answer: "It is fitted with 80MM / 100MM Soccer Wheels × 4."
-      },
-      {
-        question: "What are the robot dimensions?",
-        answer: "The approximate dimensions are 280 × 270 × 80 mm."
-      },
-      {
-        question: "Does the Full Kit include transmitter and battery?",
-        answer: "Yes, the Full Kit configuration includes the FlySky FS-i6 transmitter and a 2200mAh LiPo Battery with charger."
+        question: "Does the Full Kit include transmitter batteries?",
+        answer: "No. The handheld FlySky FS-i6 transmitter requires 4 standard AA 1.5V batteries, which must be supplied by the customer."
       },
       {
         question: "How can I enquire about the TTRC SOCCER 5.1?",
-        answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or use 'WHATSAPP US' to contact our Coimbatore engineering team directly."
+        answer: "Select your preferred configuration and click 'ENQUIRE ABOUT THIS CONFIGURATION' or message our team via WhatsApp to receive an official quotation."
       }
     ],
     status: "published",
@@ -1146,10 +1243,10 @@ export const products: Product[] = [
     brand: "Tamizh Tech",
     sku: "TTRC-RC-1",
     availability: "in_stock",
-    name: "112MM BUGGY WHEEL",
-    metaTitle: "112MM Buggy Wheel | Robotics Competition Wheel | Tamizh Tech",
-    metaDescription: "112MM Buggy Wheel for competition robots. 112mm diameter, 45mm width, 6mm hub ID, reinforced rim, high-traction rubber tyre. ₹2,999 set of 4 with quotation.",
-    shortDescription: "A 112mm buggy wheel with a plastic wheel body, rubber tyre, 45mm thickness, 6mm hub ID and 92g wheel weight.",
+    name: "112MM HD BUGGY WHEEL",
+    metaTitle: "112MM HD Buggy Wheel | Robotics Competition Wheel | Tamizh Tech",
+    metaDescription: "112MM HD Buggy Wheel for competition robots. 112mm diameter, 45mm width, 6mm hub ID, reinforced rim, high-traction rubber tyre with foam insert. ₹2,999 set of 4 pieces.",
+    shortDescription: "112mm HD Buggy Wheels (Set of 4) — High-traction rubber tyre with foam insert designed for competition robots where track grip, acceleration, and obstacle clearance matter. Direct fit for 6mm motor shafts.",
     quickAnswer: "The 112MM Buggy Wheel is a competition-grade robotics wheel featuring a 112mm outer diameter, 45mm rim width, 6mm internal hub diameter, and high-traction rubber tyre with foam insert supplied in a set of 4 pieces.",
     price: 2999,
     sellingPrice: 2999,
@@ -1157,6 +1254,17 @@ export const products: Product[] = [
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Competition Wheels",
+    bestSuitedFor: [
+      "Robo Race competition platforms and obstacle racers",
+      "Heavy-duty mobile rovers requiring high track traction",
+      "Drive systems utilizing 6mm D-shaft or round-shaft motors"
+    ],
+    notIdealFor: [
+      "Miniature N20 motors (3mm shaft) without a shaft coupler",
+      "Heavyweight combat robots with high-kinetic spinning blades",
+      "Vehicles with tight chassis wheel-well clearance under 115mm"
+    ],
+    competitionNotice: "Before Enquiring: Verify your competition's maximum allowable wheel diameter (112 mm outer diameter) and overall robot width restrictions.",
     image: "/product/wheels/buggy wheel/112mm wheel 1.jpg",
     images: [
       "/product/wheels/buggy wheel/112mm wheel 1.jpg",
@@ -1186,14 +1294,21 @@ export const products: Product[] = [
       targetAudience: ["Robo Race Teams", "Combat Bot Builders", "Heavy-Duty Rover Projects", "Robotics Colleges"]
     },
     includedItems: [
-      "112MM Buggy Wheels × 4",
-      "Pre-mounted Rubber Tyres with Foam Insert × 4",
-      "Set Screw / Hub Mounting Hardware"
+      "112MM HD Buggy Wheels (plastic rim + rubber tyre + foam insert) × 4",
+      "Integrated 6mm Hub with Locking Set Screws × 4"
+    ],
+    excludedItems: [
+      "Drive motors and gearboxes NOT included",
+      "Shaft adapter couplers for non-6mm shafts NOT included"
+    ],
+    setupRequirements: [
+      "Requires geared motor with 6mm diameter shaft (D-shaft or round with flat set-screw face)",
+      "Requires hex key (Allen key) to tighten hub set-screws securely"
     ],
     relatedServices: ["robotics-automation", "3d-printing"],
     relatedCourses: ["cad-3d-printing", "robotics-iot-embedded"],
     relatedProjects: ["advanced-kinematics", "ev-smart-mobility"],
-    description: "A 112mm buggy wheel with a plastic wheel body, rubber tyre, 45mm thickness, 6mm hub ID and 92g wheel weight.",
+    description: "112MM HD Buggy Wheels designed for robotics racing and mobile platforms. Built with a high-impact reinforced plastic rim, 6mm hub ID, and high-traction rubber tyre with internal foam insert to deliver dependable grip across wood, vinyl, and composite tournament tracks.",
     detailedSpecs: [
       "Wheel Diameter: 112 mm",
       "Tyre Width: 45 mm",
@@ -1242,7 +1357,7 @@ export const products: Product[] = [
     name: "100MM BUGGY WHEEL",
     metaTitle: "100MM Buggy Wheel | Robotics Competition Wheel | Tamizh Tech",
     metaDescription: "100MM Buggy Wheel for robotics racing. 100mm outer diameter, 35mm tyre width, 6mm hub ID, plastic rim, and high-traction rubber tyre. ₹2,999 set of 4 pieces.",
-    shortDescription: "A 100mm buggy wheel with a plastic rim and rubber tyre, 35mm tyre width and black tyre/rim finish.",
+    shortDescription: "100mm Buggy Wheels (Set of 4) — Low-profile competition wheels with 35mm tyre width and 6mm hub ID, designed for quick acceleration and agile cornering on robotics racing tracks.",
     quickAnswer: "The 100MM Buggy Wheel is a low-profile competition wheel engineered with a 100mm outer diameter, 35mm tyre width, 6mm hub ID, and high-traction synthetic rubber tread supplied as a balanced set of 4 pieces.",
     price: 2999,
     sellingPrice: 2999,
@@ -1250,6 +1365,16 @@ export const products: Product[] = [
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Competition Wheels",
+    bestSuitedFor: [
+      "Robo Race platforms requiring compact wheel profiles",
+      "Agile Robo Soccer drive bases",
+      "6mm shaft motor systems requiring quick acceleration"
+    ],
+    notIdealFor: [
+      "Miniature N20 3mm shafts without coupler",
+      "Extreme high-clearance off-road vehicles"
+    ],
+    competitionNotice: "Verify track clearance and wheel diameter requirements (100mm outer diameter, 35mm tyre width) in your event's regulations.",
     image: "/product/wheels/buggy wheel/100mm wheel 1.jpg",
     images: [
       "/product/wheels/buggy wheel/100mm wheel 1.jpg",
@@ -1278,13 +1403,18 @@ export const products: Product[] = [
       targetAudience: ["Robo Race Teams", "Robotics Hobbyists", "University Competition Clubs", "Rover Builders"]
     },
     includedItems: [
-      "100MM Buggy Wheels × 4",
-      "Pre-mounted High-Traction Rubber Tyres × 4"
+      "100MM Buggy Wheels with pre-mounted synthetic rubber tyres × 4"
+    ],
+    excludedItems: [
+      "Drive motors, gearboxes, and hex couplers NOT included"
+    ],
+    setupRequirements: [
+      "Requires motor with 6mm shaft diameter"
     ],
     relatedServices: ["robotics-automation", "3d-printing"],
     relatedCourses: ["cad-3d-printing"],
     relatedProjects: ["advanced-kinematics"],
-    description: "A 100mm buggy wheel with a plastic rim and rubber tyre, 35mm tyre width and black tyre/rim finish.",
+    description: "100mm competition buggy wheels engineered for robotics platforms. Features a balanced multi-spoke plastic rim, 6mm hub ID, and synthetic rubber tyre that minimizes rolling resistance while preserving track grip in tight turns.",
     detailedSpecs: [
       "Material: Plastic Rim and high-quality Rubber Tyre",
       "Outer Diameter: 100 mm",
@@ -1342,7 +1472,7 @@ export const products: Product[] = [
     name: "TTRC HD 80MM WHEEL",
     metaTitle: "TTRC HD 80MM Wheel | Heavy Duty Nylon Robotics Wheel | Tamizh Tech",
     metaDescription: "TTRC HD 80MM heavy-duty white nylon robotics wheel. 88.9mm diameter, 60mm thickness, 6mm hub ID for combat bots and rovers. ₹1,999 set of 4 pieces on enquiry.",
-    shortDescription: "A TTRC HD wheel supplied in white with the stated dimensions, 6mm hub ID and 130 weight value from the source.",
+    shortDescription: "Heavy-duty white nylon robotics wheel (88.9mm diameter, 60mm broad thickness, 6mm hub ID) designed for high-impact combat robots, rovers, and push platforms where rim durability and surface traction matter.",
     quickAnswer: "The TTRC HD 80MM Wheel is a heavy-duty white nylon robotics wheel featuring an 88.9mm diameter, 60mm broad thickness, and 6mm hub ID engineered for high-impact combat robots and heavy industrial rovers.",
     price: 1999,
     sellingPrice: 1999,
@@ -1350,6 +1480,15 @@ export const products: Product[] = [
     priceUnit: "/ 4 pcs",
     pricingNote: "Need fewer than 4 pcs? Contact our team for availability and pricing.",
     badge: "Heavy Duty Wheel",
+    bestSuitedFor: [
+      "Combat robotics platforms and battle bots",
+      "Robo Soccer high-impact push chassis",
+      "Heavy industrial rovers and testing carts"
+    ],
+    notIdealFor: [
+      "Lightweight high-speed racing where narrow low-friction wheels are preferred",
+      "Miniature N20 3mm shafts without coupler"
+    ],
     image: "/product/wheels/nylon wheel/80mm wheel 1.jpg",
     images: [
       "/product/wheels/nylon wheel/80mm wheel 1.jpg",
@@ -1378,12 +1517,18 @@ export const products: Product[] = [
       targetAudience: ["Robo Soccer Teams", "Combat Robotics Competitors", "Industrial Rover Builders", "STEM Labs"]
     },
     includedItems: [
-      "TTRC HD 80MM Wheels × 4"
+      "TTRC HD 80MM White Nylon Wheels × 4"
+    ],
+    excludedItems: [
+      "Drive motors, axles, and couplers NOT included"
+    ],
+    setupRequirements: [
+      "Requires 6mm shaft geared motor or compatible hub adapter"
     ],
     relatedServices: ["robotics-automation", "3d-printing", "laser-cutting"],
     relatedCourses: ["cad-3d-printing", "industrial-automation-plc"],
     relatedProjects: ["advanced-kinematics", "industrial-manufacturing"],
-    description: "A TTRC HD wheel supplied in white with the stated dimensions, 6mm hub ID and 130 weight value from the source.",
+    description: "TTRC HD 80MM heavy-duty nylon robotics wheel engineered for collision resilience and broad footprint traction. Features an 88.9mm diameter, 60mm thickness, and 6mm hub ID to withstand heavy collision loads in combat and push arenas.",
     detailedSpecs: [
       "Color: White",
       "Sizes: 88.9 × 35 mm",

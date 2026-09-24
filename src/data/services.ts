@@ -53,15 +53,15 @@ export const services: ServiceItem[] = [
     id: "3d-printing",
     slug: "3d-printing",
     title: "3D Printing Services",
-    subtitle: "High Quality & Affordable (PLA, PETG, TPU)",
+    subtitle: "Quality-Focused Additive Manufacturing (PLA, PETG, TPU)",
     category: "prototyping",
     image: "/service/3d-printing-services.png",
-    desc: "High quality 3D printing services at affordable and best prices. We create prototypes, custom parts, robotic components, and miniatures printed with high precision for smooth and accurate results. Fast delivery and reliable service for all your projects.",
+    desc: "Functional parts with practical engineering value. Quality-focused 3D printing for robotics, prototypes, custom parts, and miniatures, with quotations based on actual part geometry and material requirements.",
     features: [
-      "Prototypes, custom parts, robotic components & miniatures",
-      "Available in premium PLA, PETG, and TPU materials",
-      "Printed with high precision for smooth and accurate results",
-      "Affordable and best price with fast delivery & reliable service"
+      "Functional prototypes, custom parts, robotic components & miniatures",
+      "Available in premium PLA, PETG, and flexible TPU materials",
+      "Printed with high dimensional accuracy for mechanical fitment",
+      "Transparent quotations based on part volume and machine schedule"
     ],
     color: "orange",
     href: "/services/3d-printing"

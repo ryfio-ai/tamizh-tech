@@ -172,7 +172,7 @@ export default async function CourseCategoryPage({ params }: PageProps) {
                         <span className="text-xs font-bold text-slate-900">{course.mode} &bull; {course.duration}</span>
                       </div>
                       <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
-                        {course.seatsLeft} seats left
+                        Admissions Open
                       </span>
                     </div>
 

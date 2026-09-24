@@ -17,7 +17,6 @@ export interface Course {
     bio: string;
     image?: string;
   };
-  seatsLeft: number;
   published: boolean;
   createdAt: string;
   updatedAt: string;
@@ -54,7 +53,6 @@ export const courses: Course[] = [
       name: "Er. K. Tamizharasan",
       bio: "Founder of TamizhTech and passionate robotics educator with over 8 years of school training experience."
     },
-    seatsLeft: 8,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"
@@ -87,7 +85,6 @@ export const courses: Course[] = [
       name: "Priya Krishnan",
       bio: "Curriculum director at TamizhTech, specialising in early childhood STEM education."
     },
-    seatsLeft: 14,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"
@@ -122,7 +119,6 @@ export const courses: Course[] = [
       name: "Arun Selvaraj",
       bio: "Lead Embedded Firmware Engineer with expertise in industrial IoT sensor deployments."
     },
-    seatsLeft: 5,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"
@@ -157,7 +153,6 @@ export const courses: Course[] = [
       name: "Meera Nair",
       bio: "AI R&D lead at TamizhTech, specialising in edge computing and computer vision solutions."
     },
-    seatsLeft: 6,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"
@@ -192,7 +187,6 @@ export const courses: Course[] = [
       name: "Er. K. Tamizharasan",
       bio: "UAV expert and certified pilot, trainer of over 200+ students in drone design."
     },
-    seatsLeft: 4,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"
@@ -227,7 +221,6 @@ export const courses: Course[] = [
       name: "Arun Selvaraj",
       bio: "Lead Industrial Automation Engineer, successfully commissioned 20+ factories."
     },
-    seatsLeft: 3,
     published: true,
     createdAt: "2024-03-01T00:00:00.000Z",
     updatedAt: "2026-03-01T00:00:00.000Z"

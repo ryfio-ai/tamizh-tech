@@ -6,10 +6,14 @@ import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     email: "",
     city: "",
@@ -22,46 +26,46 @@ export default function ContactPage() {
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     setError("");
-    
+
     try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "Contact",
-          source: "Contact Page",
-          pageUrl: "https://www.tamizhtech.in/contact",
-          customerName: form.name,
-          email: form.email,
-          phone: form.phone,
-          mobile: form.phone,
-          city: form.city,
-          organization: form.company || "Individual",
-          institution: form.company || "Individual",
-          areaOfInterest: form.purpose,
-          subject: `Inquiry: ${form.purpose} — ${form.name}`,
-          requirement: form.purpose,
-          message: form.message,
-          preferredContactMethod: form.callbackMode,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || "Failed to submit inquiry. Please try again.");
+      const cleanMobile = form.mobile.replace(/\D/g, "");
+      const activeKey = idempotencyKey || generateIdempotencyKey();
+      if (!idempotencyKey) {
+        setIdempotencyKey(activeKey);
       }
 
-      setLeadId(result.leadId || "");
+      const result = await submitPublicForm({
+        type: "CONTACT",
+        idempotencyKey: activeKey,
+        payload: {
+          name: form.name.trim(),
+          mobile: cleanMobile || undefined,
+          email: form.email.trim() || undefined,
+          company: form.company.trim() || undefined,
+          city: form.city.trim() || undefined,
+          state: "Tamil Nadu",
+          subject: `Inquiry: ${form.purpose} — ${form.name.trim()}`,
+          message: form.message.trim() || `Inquiry regarding ${form.purpose}. Preferred callback: ${form.callbackMode}`,
+        },
+      });
+
+      setLeadId(result.submissionNo);
       setIsSuccess(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setIdempotencyKey(""); // Clear key on success
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: any) {
-      setError(err.message || "Network Error: Technical coordination is offline.");
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey(""); // Reset token on key reuse error
+      }
+      setError(err.message || "We couldn't reach our submission service right now. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -161,7 +165,23 @@ export default function ContactPage() {
                   <div className="pt-4">
                     <button 
                       type="button" 
-                      onClick={() => setIsSuccess(false)}
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setLeadId("");
+                        setIdempotencyKey("");
+                        setForm({
+                          name: "",
+                          countryCode: "+91",
+                          mobile: "",
+                          phone: "",
+                          email: "",
+                          city: "",
+                          company: "",
+                          purpose: "General Inquiry",
+                          message: "",
+                          callbackMode: "WhatsApp",
+                        });
+                      }}
                       className="px-6 py-3 rounded-xl border border-slate-300 font-bold text-xs uppercase tracking-wider text-slate-700 hover:bg-slate-50 transition-colors"
                     >
                       Send Another Message
@@ -212,19 +232,40 @@ export default function ContactPage() {
                     {/* Mobile Number */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                        Mobile Number <span className="text-accent">*</span>
+                        Mobile Number (10 digits) {(form.callbackMode === "WhatsApp" || form.callbackMode === "Phone") && <span className="text-accent">*</span>}
                       </label>
-                      <div className="relative">
-                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
-                        <input
-                          required
-                          type="tel"
-                          placeholder="e.g. 9876543210"
-                          value={form.phone}
-                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                          className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-sm transition-all"
-                        />
+                      <div className="flex gap-2">
+                        <select
+                          value={form.countryCode}
+                          onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                          className="w-[100px] bg-white border border-slate-300 rounded-xl px-2.5 py-3 text-sm font-bold text-slate-900 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-sm transition-all"
+                          aria-label="Country Code"
+                        >
+                          {COMMON_COUNTRY_CODES.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="relative flex-1">
+                          <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
+                          <input
+                            required={form.callbackMode === "WhatsApp" || form.callbackMode === "Phone"}
+                            type="tel"
+                            maxLength={10}
+                            placeholder="9876543210"
+                            value={form.mobile}
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setForm({ ...form, mobile: val, phone: `${form.countryCode} ${val}`.trim() });
+                            }}
+                            className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-sm transition-all font-mono tracking-wide"
+                          />
+                        </div>
                       </div>
+                      <span className="text-[10px] text-slate-400 mt-1 block">
+                        Enter 10-digit national mobile number (country code is set separately)
+                      </span>
                     </div>
 
                     {/* Email Address */}

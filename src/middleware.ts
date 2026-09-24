@@ -55,7 +55,7 @@ export function middleware(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'none';
     frame-src 'self' https://www.google.com https://maps.google.com https://lottie.host https://www.googletagmanager.com https://*.googletagmanager.com;
-    connect-src 'self' https://prod.spline.design https://*.spline.design https://www.gstatic.com https://lottie.host https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com https://*.doubleclick.net https://stats.g.doubleclick.net https://*.google.com https://vitals.vercel-insights.com https://*.vercel-insights.com;
+    connect-src 'self' https://tamizhtech-erp.vercel.app https://*.tamizhtech.in https://tamizhtech.in https://prod.spline.design https://*.spline.design https://www.gstatic.com https://lottie.host https://api.groq.com https://api.openai.com https://api.anthropic.com https://api.google.com https://openrouter.ai https://api.cohere.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com https://*.doubleclick.net https://stats.g.doubleclick.net https://*.google.com https://vitals.vercel-insights.com https://*.vercel-insights.com;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
  

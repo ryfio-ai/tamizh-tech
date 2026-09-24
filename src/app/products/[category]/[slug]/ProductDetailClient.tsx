@@ -21,7 +21,9 @@ import {
   Cpu,
   Factory,
   GraduationCap,
-  FolderGit2
+  FolderGit2,
+  AlertTriangle,
+  XCircle
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
@@ -427,9 +429,40 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
               </h1>
 
               {/* One-line Value Proposition / Short Description */}
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
                 {product.shortDescription || product.description}
               </p>
+
+              {/* BUYER FIT & LIMITATION PILLS */}
+              {(product.bestSuitedFor || product.notIdealFor) && (
+                <div className="mb-5 space-y-2">
+                  {product.bestSuitedFor && (
+                    <div className="flex items-start gap-2 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/60 text-xs">
+                      <span className="font-bold text-emerald-800 shrink-0">Best suited for:</span>
+                      <span className="text-emerald-900">{product.bestSuitedFor}</span>
+                    </div>
+                  )}
+                  {product.notIdealFor && (
+                    <div className="flex items-start gap-2 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/60 text-xs">
+                      <span className="font-bold text-amber-800 shrink-0">Not ideal for:</span>
+                      <span className="text-amber-900">{product.notIdealFor}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* COMPETITION NOTICE (RULEBOOK VERIFICATION) */}
+              {(product.competitionNotice || product.categorySlug === "competition") && (
+                <div className="mb-5 p-3.5 rounded-xl bg-amber-50/80 border border-amber-300/70 text-xs text-amber-950 flex items-start gap-2.5">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold block text-amber-900 mb-0.5">Before You Enquire: Verify Event Rulebook</span>
+                    <p className="leading-relaxed">
+                      {product.competitionNotice || "Competition rules differ by event. Always verify maximum dimensions, motor/RPM limits, wheel diameter restrictions, and permitted battery voltages with your tournament organizer before selecting your configuration."}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Verified Highlights */}
               {highlights.length > 0 && (
@@ -454,7 +487,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2.5">
                     Choose Configuration:
                   </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     {product.configurations.map((cfg) => {
                       const isSelected = selectedConfigId === cfg.id;
                       return (
@@ -489,6 +522,72 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                       );
                     })}
                   </div>
+
+                  {/* CONFIGURATION SELECTION GUIDANCE & HARDWARE BREAKDOWN */}
+                  {selectedConfig && (
+                    <div className="p-4 bg-slate-50/90 border border-slate-200 rounded-xl space-y-3 text-xs">
+                      {selectedConfig.selectionGuidance && (
+                        <div>
+                          <span className="font-bold text-slate-800 block mb-1">Which configuration should I choose?</span>
+                          <p className="text-slate-600 leading-relaxed">{selectedConfig.selectionGuidance}</p>
+                        </div>
+                      )}
+
+                      {/* INCLUDED IN THIS CONFIGURATION */}
+                      {((selectedConfig.includedItems && selectedConfig.includedItems.length > 0) || (product.includedItems && product.includedItems.length > 0)) && (
+                        <div className="pt-2 border-t border-slate-200/60">
+                          <span className="font-bold text-emerald-800 block mb-1.5 flex items-center gap-1.5">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                            What&apos;s Included in {selectedConfig.name}:
+                          </span>
+                          <ul className="space-y-1 text-slate-700 pl-1">
+                            {(selectedConfig.includedItems || product.includedItems || []).map((inc, i) => (
+                              <li key={i} className="flex items-start gap-1.5">
+                                <span className="text-emerald-600 font-bold">•</span>
+                                <span>{inc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* EXCLUDED IN THIS CONFIGURATION */}
+                      {selectedConfig.excludedItems && selectedConfig.excludedItems.length > 0 && (
+                        <div className="pt-2 border-t border-slate-200/60">
+                          <span className="font-bold text-rose-800 block mb-1.5 flex items-center gap-1.5">
+                            <XCircle className="w-3.5 h-3.5 text-rose-600" />
+                            Not Included in {selectedConfig.name}:
+                          </span>
+                          <ul className="space-y-1 text-slate-700 pl-1">
+                            {selectedConfig.excludedItems.map((exc, i) => (
+                              <li key={i} className="flex items-start gap-1.5">
+                                <span className="text-rose-600 font-bold">•</span>
+                                <span>{exc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* SETUP REQUIREMENTS */}
+                      {((selectedConfig.setupRequirements && selectedConfig.setupRequirements.length > 0) || (product.setupRequirements && product.setupRequirements.length > 0)) && (
+                        <div className="pt-2 border-t border-slate-200/60">
+                          <span className="font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                            <Wrench className="w-3.5 h-3.5 text-amber-600" />
+                            Setup / Customer Requirements:
+                          </span>
+                          <ul className="space-y-1 text-slate-700 pl-1">
+                            {(selectedConfig.setupRequirements || product.setupRequirements || []).map((req, i) => (
+                              <li key={i} className="flex items-start gap-1.5">
+                                <span className="text-amber-600 font-bold">•</span>
+                                <span>{req}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -529,10 +628,10 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                     </div>
                     <p className="text-[11px] text-slate-500 mt-1">
                       {selectedConfig
-                        ? `Verified configuration pricing for ${selectedConfig.name}. Official quotation provided on enquiry. No online payment.`
+                        ? `Built around practical robotics requirements and offered at a competitive selling price for ${selectedConfig.name}. Official quotation provided on enquiry. Direct engineering support.`
                         : product.pricingNote
-                        ? `${product.pricingNote} Official quotation provided on enquiry. No online payment.`
-                        : "Includes verified hardware assembly. Custom specifications and institutional volume pricing provided on enquiry."}
+                        ? `${product.pricingNote} Built around practical robotics requirements and offered at a competitive selling price.`
+                        : "Built around practical robotics requirements and offered at a competitive selling price. Official quotation provided on enquiry."}
                     </p>
                     <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500">
                       <div>
@@ -550,14 +649,16 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
 
               {/* 3. ENQUIRY CTAs */}
               <div className="space-y-3 pt-2">
-                {/* PRIMARY CTA: ENQUIRE ABOUT THIS PRODUCT */}
+                {/* PRIMARY CTA: SPECIFIC CONFIGURATION / PRODUCT ENQUIRY */}
                 <button
                   type="button"
                   onClick={() => handleOpenEnquiry()}
                   className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-sm rounded-xl transition-colors shadow-sm"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>ENQUIRE ABOUT THIS PRODUCT</span>
+                  <span>
+                    {selectedConfig ? `ENQUIRE ABOUT ${selectedConfig.name.toUpperCase()}` : "ENQUIRE ABOUT THIS PRODUCT"}
+                  </span>
                 </button>
 
                 {/* SECONDARY & TERTIARY CTAs */}
@@ -588,18 +689,28 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
             </div>
 
             {/* Engineering Trust Strip */}
-            <div className="pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 text-xs text-slate-600">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-800">In Stock</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Verified Specs</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Wrench className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <span>Custom Tuning</span>
+            <div className="pt-6 border-t border-slate-100">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-[11px] font-semibold text-slate-700">
+                <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Real Product</span>
+                </div>
+                <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                  <span>Clear Specs</span>
+                </div>
+                <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <Layers className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                  <span>Honest Config</span>
+                </div>
+                <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-50 border border-slate-100">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FF6B00] shrink-0" />
+                  <span>Competitive Price</span>
+                </div>
+                <div className="flex items-center gap-1.5 p-2 rounded-lg bg-slate-50 border border-slate-100 col-span-2 sm:col-span-1">
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Direct Support</span>
+                </div>
               </div>
             </div>
           </div>
@@ -795,7 +906,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                             )}
                           </div>
 
-                          <ul className="space-y-2.5">
+                          <ul className="space-y-2.5 mb-4">
                             {items.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
                                 <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? "text-[#FF6B00]" : "text-emerald-600"}`} />
@@ -803,6 +914,42 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                               </li>
                             ))}
                           </ul>
+
+                          {/* Explicit Exclusions in Configuration Tab */}
+                          {cfg.excludedItems && cfg.excludedItems.length > 0 && (
+                            <div className="pt-3 border-t border-slate-100 mb-3">
+                              <span className="text-[11px] font-bold text-rose-800 uppercase tracking-wider block mb-1 flex items-center gap-1">
+                                <XCircle className="w-3.5 h-3.5 text-rose-600" />
+                                Not Included ({cfg.name})
+                              </span>
+                              <ul className="space-y-1 text-xs text-slate-600">
+                                {cfg.excludedItems.map((exc, i) => (
+                                  <li key={i} className="flex items-start gap-1.5">
+                                    <span className="text-rose-600 font-bold">•</span>
+                                    <span>{exc}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {/* Setup Requirements */}
+                          {cfg.setupRequirements && cfg.setupRequirements.length > 0 && (
+                            <div className="pt-2 border-t border-slate-100">
+                              <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider block mb-1 flex items-center gap-1">
+                                <Wrench className="w-3.5 h-3.5 text-amber-600" />
+                                Setup Requirements
+                              </span>
+                              <ul className="space-y-1 text-xs text-slate-600">
+                                {cfg.setupRequirements.map((req, i) => (
+                                  <li key={i} className="flex items-start gap-1.5">
+                                    <span className="text-amber-600 font-bold">•</span>
+                                    <span>{req}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
 
                         <div className="pt-5 mt-5 border-t border-slate-100">

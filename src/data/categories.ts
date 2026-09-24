@@ -268,6 +268,26 @@ export const categories: Category[] = [
     createdAt: '2024-05-01T00:00:00.000Z',
     updatedAt: '2026-03-01T00:00:00.000Z'
   },
+  {
+    id: 'blog-pcb-engineering',
+    slug: 'pcb-engineering',
+    name: 'PCB Engineering & Design',
+    contentType: 'blog',
+    description: 'Practical engineering guides covering PCB design, 2-layer vs 4-layer layout, Gerber files, DFM/DRC rules, SMT/THT assembly, and board size optimization.',
+    seoTitle: 'PCB Design, Fabrication & Assembly Guides | Tamizh Tech Blog',
+    seoDescription: 'Authoritative PCB engineering guides from Tamizh Tech Robotics Company in Coimbatore. Learn layout rules, Gerber preparation, PCBA, SMT vs THT, and board dimensions.',
+    primaryKeyword: 'PCB design and fabrication guides India',
+    secondaryKeywords: [
+      'PCB design Coimbatore',
+      '2 layer vs 4 layer PCB',
+      'Gerber file checklist',
+      'PCBA assembly process',
+      'PCB cost factors India'
+    ],
+    published: true,
+    createdAt: '2024-05-01T00:00:00.000Z',
+    updatedAt: '2026-03-01T00:00:00.000Z'
+  },
 
   // ── Projects Categories ─────────────────────────────────────────────────────
   {

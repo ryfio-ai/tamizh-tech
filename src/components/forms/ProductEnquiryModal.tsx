@@ -4,8 +4,22 @@ import React, { useState } from "react";
 import { X, CheckCircle, AlertCircle, Loader2, Send, MessageSquare } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Product } from "@/data/products";
-import { CustomerType, PreferredContactMethod } from "@/types/lead";
 import { getProductUrl } from "@/lib/routing";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
+
+export type CustomerType =
+  | "Individual"
+  | "Student"
+  | "School"
+  | "College"
+  | "University"
+  | "Startup"
+  | "Business"
+  | "Industry"
+  | "Other";
+
+export type PreferredContactMethod = "WhatsApp" | "Phone" | "Email";
 
 interface ProductEnquiryModalProps {
   product: Product;
@@ -37,6 +51,8 @@ export default function ProductEnquiryModal({
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     whatsapp: "",
     organization: "",
@@ -52,6 +68,7 @@ export default function ProductEnquiryModal({
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
 
   if (!isOpen) return null;
 
@@ -64,52 +81,43 @@ export default function ProductEnquiryModal({
     setStatus("submitting");
     setErrorMessage("");
 
-    try {
-      const payload = {
-        leadType: mode === "quote" ? "Product Quote" : "Product Enquiry",
-        source: "Product Page",
-        pageUrl: productUrl,
-        customerName: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        whatsapp: formData.whatsapp || formData.phone,
-        organization: formData.organization,
-        customerType: formData.customerType,
-        quantity: Math.max(1, Number(formData.quantity) || 1),
-        city: formData.city,
-        state: formData.state,
-        message: formData.message,
-        preferredContactMethod: formData.preferredContactMethod,
-        // Product Metadata
-        productId: product.id,
-        productName: product.name,
-        productCategory: product.category,
-        productCategorySlug: product.categorySlug,
-        productSlug: product.slug,
-        productUrl: productUrl,
-        // Anti-spam
-        honeypot: formData.honeypot,
-      };
+    const activeKey = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) {
+      setIdempotencyKey(activeKey);
+    }
 
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+    try {
+      const cleanMobile = formData.mobile.replace(/\D/g, "");
+      const qty = Math.max(1, Number(formData.quantity) || 1);
+
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: activeKey,
+        payload: {
+          name: formData.name.trim(),
+          mobile: cleanMobile || undefined,
+          email: formData.email.trim() || undefined,
+          company: formData.organization.trim() || undefined,
+          city: formData.city.trim() || undefined,
+          state: formData.state.trim() || undefined,
+          country: "India",
+          subject: `${mode === "quote" ? "Product Quote" : "Product Enquiry"}: ${product.name} (Qty: ${qty})`,
+          productRequirements: `${product.name} [Category: ${product.category}, Slug: ${product.slug}]`,
+          quantity: qty,
+          message: formData.message.trim() || undefined,
+          technicalRequirements: `Customer Type: ${formData.customerType} | Preferred Contact: ${formData.preferredContactMethod} | Product URL: ${productUrl}`,
+        },
       });
 
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setStatus("success");
-        setLeadId(data.leadId || data.referenceId || "TT-REF");
-      } else {
-        setStatus("error");
-        setErrorMessage(data.error || "Something went wrong while submitting your enquiry. Please try again.");
-      }
+      setStatus("success");
+      setLeadId(result.submissionNo);
+      setIdempotencyKey("");
     } catch (err: any) {
-      console.error("[Enquiry Submit Error]", err);
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey("");
+      }
       setStatus("error");
-      setErrorMessage("Network error. Please check your connection and try again.");
+      setErrorMessage(err.message || "Something went wrong while submitting your enquiry. Please try again.");
     }
   };
 
@@ -277,19 +285,40 @@ export default function ProductEnquiryModal({
                   />
                 </div>
 
-                {/* Phone Number */}
+                {/* Phone / Mobile Number */}
                 <div>
                   <label className="block text-xs font-bold text-text-primary uppercase tracking-wider mb-1.5">
-                    Phone / Mobile Number <span className="text-accent">*</span>
+                    Mobile Number (10 digits) {(formData.preferredContactMethod === "WhatsApp" || formData.preferredContactMethod === "Phone") && <span className="text-accent">*</span>}
                   </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="e.g. +91 98765 43210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
-                  />
+                  <div className="flex gap-2">
+                    <select
+                      value={formData.countryCode}
+                      onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                      className="w-[95px] bg-white border border-slate-300 rounded-xl px-2 py-2.5 text-xs font-bold text-slate-900 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs"
+                      aria-label="Country Code"
+                    >
+                      {COMMON_COUNTRY_CODES.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          {c.flag} {c.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      required={formData.preferredContactMethod === "WhatsApp" || formData.preferredContactMethod === "Phone"}
+                      maxLength={10}
+                      placeholder="9876543210"
+                      value={formData.mobile}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                        setFormData({ ...formData, mobile: val, phone: `${formData.countryCode} ${val}`.trim() });
+                      }}
+                      className="flex-1 bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6A00] focus:ring-2 focus:ring-[#FF6A00]/20 shadow-xs font-mono tracking-wide"
+                    />
+                  </div>
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Enter 10-digit national number
+                  </span>
                 </div>
 
                 {/* Purpose / Customer Type */}

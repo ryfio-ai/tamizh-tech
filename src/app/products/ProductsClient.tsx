@@ -11,6 +11,7 @@ import {
   ChevronRight, 
   ShieldCheck, 
   Clock, 
+  CheckCircle,
   MessageSquare, 
   ArrowRight,
   GraduationCap,
@@ -152,32 +153,40 @@ export default function ProductsClient() {
       {/* 2. HERO SECTION */}
       <section className="py-8 sm:py-12 border-b border-slate-200/80 bg-white">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-xs font-bold tracking-wide uppercase mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-xs font-bold tracking-wider uppercase mb-3">
             <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-            Hardware Catalogue & Enquiry System
+            QUALITY FIRST. VALUE ALWAYS.
           </div>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950 mb-3">
-            Robotics Hardware, Kits & Controllers
+            Robotics Hardware, Kits &amp; Controllers
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl mx-auto mb-6">
-            Engineered combat bots, DC geared motors, high-traction wheels, and certified FlySky radio transmitters. Built for tournament teams, engineering research, and robotics labs.
+          <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed max-w-3xl mx-auto mb-6">
+            Quality-focused robotics hardware at competitive prices. Real products, verified specifications, clear configurations, transparent pricing, and direct engineering support.
           </p>
 
           {/* Trust Strip */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-medium text-slate-600">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-semibold text-slate-600">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>100% Verified Specifications</span>
+              <span>Real Products</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-[#FF6B00]" />
-              <span>Direct Coimbatore Engineering Support</span>
+              <CheckCircle className="w-4 h-4 text-[#FF6B00]" />
+              <span>Verified Specifications</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Wrench className="w-4 h-4 text-blue-600" />
-              <span>Custom Prototyping Available</span>
+              <Layers className="w-4 h-4 text-indigo-600" />
+              <span>Clear Configurations</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
+              <span>Transparent Pricing</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MessageSquare className="w-4 h-4 text-blue-600" />
+              <span>Direct Enquiry</span>
             </div>
           </div>
         </div>

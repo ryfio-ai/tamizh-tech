@@ -138,6 +138,37 @@ export default async function BlogCategoryPage({ params }: PageProps) {
           </div>
         </header>
 
+        {/* PCB Engineering Commercial Bridge */}
+        {category.slug === 'pcb-engineering' && (
+          <div className="mb-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-teal-500/10 via-slate-50 to-orange-500/10 border border-teal-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-left">
+            <div className="max-w-2xl">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#FF6A00] block mb-1">
+                Commercial Engineering Services in Coimbatore
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading text-text-primary">
+                Need Turnkey PCB Design, Fabrication or SMT Assembly?
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary mt-1.5 leading-relaxed">
+                Tamizh Tech provides single-source electronics development in Coimbatore. From circuit schematics and 1–4 layer layout to bare-board fabrication, verified BOM component sourcing, and bench testing.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <Link
+                href="/services/pcb-design-fabrication-assembly"
+                className="px-5 py-2.5 rounded-xl bg-[#FF6A00] hover:bg-[#E05300] text-white text-xs font-bold shadow-md shadow-orange-500/20 transition-all flex items-center gap-1.5"
+              >
+                Explore PCB Services <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/contact"
+                className="px-5 py-2.5 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-xs font-bold text-text-primary transition-all"
+              >
+                Talk to an Engineer
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Posts Grid */}
         <section aria-labelledby="posts-heading" className="mb-16">
           <h2 id="posts-heading" className="sr-only">Articles in {category.name}</h2>

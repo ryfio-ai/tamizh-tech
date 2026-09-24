@@ -15,6 +15,11 @@ interface ServiceHeroProps {
   heroSub: string;
   primaryImage: string;
   whatsappMessage: string;
+  targetAudience?: string;
+  problemSolved?: string;
+  deliverable?: string;
+  customerRequirements?: string;
+  pricingNotice?: string;
   onOpenQuote: () => void;
 }
 
@@ -25,6 +30,11 @@ export function ServiceHero({
   heroSub,
   primaryImage,
   whatsappMessage,
+  targetAudience,
+  problemSolved,
+  deliverable,
+  customerRequirements,
+  pricingNotice,
   onOpenQuote,
 }: ServiceHeroProps) {
   const whatsappUrl = `https://wa.me/918148045030?text=${encodeURIComponent(whatsappMessage)}`;
@@ -130,6 +140,50 @@ export function ServiceHero({
             </div>
           </div>
         </div>
+
+        {/* SERVICE HONESTY & TRANSPARENCY BREAKDOWN */}
+        {(targetAudience || problemSolved || deliverable || customerRequirements) && (
+          <div className="mt-10 p-5 sm:p-6 bg-slate-50/90 border border-slate-200 rounded-2xl">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                Service Scope & Quotation Transparency
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              {targetAudience && (
+                <div className="p-3 bg-white rounded-xl border border-slate-200/80">
+                  <span className="font-bold text-slate-900 block mb-1">Who this is for</span>
+                  <p className="text-slate-600 leading-relaxed">{targetAudience}</p>
+                </div>
+              )}
+              {problemSolved && (
+                <div className="p-3 bg-white rounded-xl border border-slate-200/80">
+                  <span className="font-bold text-slate-900 block mb-1">What problem we solve</span>
+                  <p className="text-slate-600 leading-relaxed">{problemSolved}</p>
+                </div>
+              )}
+              {deliverable && (
+                <div className="p-3 bg-white rounded-xl border border-slate-200/80">
+                  <span className="font-bold text-slate-900 block mb-1">What we deliver</span>
+                  <p className="text-slate-600 leading-relaxed">{deliverable}</p>
+                </div>
+              )}
+              {customerRequirements && (
+                <div className="p-3 bg-white rounded-xl border border-slate-200/80">
+                  <span className="font-bold text-slate-900 block mb-1">What you must provide</span>
+                  <p className="text-slate-600 leading-relaxed">{customerRequirements}</p>
+                </div>
+              )}
+            </div>
+            {pricingNotice && (
+              <div className="mt-3 pt-3 border-t border-slate-200/60 text-[11px] text-slate-500">
+                <span className="font-semibold text-slate-700">How quotes are calculated: </span>
+                <span>{pricingNotice}</span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ import { ProcessWorkflow } from "@/components/services/ProcessWorkflow";
 import { WhatYouNeed } from "@/components/services/WhatYouNeed";
 import { ServiceProof } from "@/components/services/ServiceProof";
 import { RelatedServices } from "@/components/services/RelatedServices";
+import { ServiceTechnicalArticles } from "@/components/services/ServiceTechnicalArticles";
 import { ServiceFaq } from "@/components/services/ServiceFaq";
 import { ServiceCta } from "@/components/services/ServiceCta";
 import { ServiceStickyCta } from "@/components/services/ServiceStickyCta";
@@ -114,6 +115,11 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
         heroSub={service.heroSub}
         primaryImage={service.primaryImage}
         whatsappMessage={service.whatsappMessage}
+        targetAudience={service.targetAudience}
+        problemSolved={service.problemSolved}
+        deliverable={service.deliverable}
+        customerRequirements={service.customerRequirements}
+        pricingNotice={service.pricingNotice}
         onOpenQuote={() => setIsQuoteOpen(true)}
       />
 
@@ -151,6 +157,11 @@ export function ServicePageTemplate({ service }: ServicePageTemplateProps) {
         relatedServices={service.relatedServices}
         relatedProducts={service.relatedProducts}
       />
+
+      {/* 8b. Technical Knowledge Hub & Engineering Guides */}
+      {service.technicalArticles && service.technicalArticles.length > 0 && (
+        <ServiceTechnicalArticles articles={service.technicalArticles} />
+      )}
 
       {/* 9. FAQs */}
       <ServiceFaq slug={service.slug} faqs={service.faqs} />

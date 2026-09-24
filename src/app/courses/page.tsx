@@ -80,7 +80,7 @@ export default function CoursesPage() {
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Users className="w-4 h-4 text-accent" />
-                        <span>{course.seatsLeft} Seats Left</span>
+                        <span>Admissions Open</span>
                       </div>
                     </div>
                     <Link href={getCourseUrl(course.categorySlug, course.slug)} className="block w-full">
@@ -93,6 +93,13 @@ export default function CoursesPage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+          {filtered.length === 0 && (
+            <div className="text-center py-20 bg-subtle border border-border rounded-lg max-w-xl mx-auto">
+              <Users className="w-12 h-12 text-text-muted mx-auto mb-4" />
+              <h4 className="text-lg font-bold uppercase text-text-primary">No courses found</h4>
+              <p className="text-xs text-text-muted uppercase tracking-widest mt-1">Check back later for new programs.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>

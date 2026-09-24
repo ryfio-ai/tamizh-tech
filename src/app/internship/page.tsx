@@ -42,12 +42,17 @@ const benefits = [
   { title: "Resume & Portfolio Support", desc: "Learn how to document your internship projects on GitHub and design a high-impact resume.", icon: FileCheck }
 ];
 
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
+
 const formInputClass = "w-full bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-bold text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D] focus:ring-1 focus:ring-[#FF4D2D] placeholder-gray-400 placeholder:opacity-60 appearance-none";
 
 export default function InternshipPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     linkedin: "",
     college: "",
@@ -60,6 +65,8 @@ export default function InternshipPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submissionNo, setSubmissionNo] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [error, setError] = useState("");
 
   const handleDomainSelect = (domainName: string) => {
@@ -76,24 +83,47 @@ export default function InternshipPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
     setError("");
 
     try {
-      const response = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Submission failed. Please check fields.");
+      const activeKey = idempotencyKey || generateIdempotencyKey();
+      if (!idempotencyKey) {
+        setIdempotencyKey(activeKey);
       }
 
+      const cleanMobile = formData.mobile.replace(/\D/g, "");
+      const detailsArr = [];
+      if (formData.category) detailsArr.push(`Format: ${formData.category}`);
+      if (formData.college) detailsArr.push(`College: ${formData.college}`);
+      if (formData.branch) detailsArr.push(`Branch: ${formData.branch}`);
+      if (formData.experience) detailsArr.push(`Experience: ${formData.experience}`);
+      if (formData.linkedin) detailsArr.push(`LinkedIn: ${formData.linkedin}`);
+      if (formData.resume) detailsArr.push(`Resume: ${formData.resume}`);
+
+      const result = await submitPublicForm({
+        type: "CAREER",
+        idempotencyKey: activeKey,
+        payload: {
+          name: formData.name.trim(),
+          mobile: cleanMobile || undefined,
+          email: formData.email.trim() || undefined,
+          position: `${formData.role} (${formData.category})`,
+          qualification: formData.branch || undefined,
+          experience: formData.experience || undefined,
+          location: formData.college || undefined,
+          coverMessage: detailsArr.join(" | "),
+        },
+      });
+
+      setSubmissionNo(result.submissionNo);
       setIsSuccess(true);
+      setIdempotencyKey("");
     } catch (err: any) {
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey("");
+      }
       setError(err.message || "An error occurred. Please try again or apply via WhatsApp.");
     } finally {
       setIsSubmitting(false);
@@ -208,21 +238,33 @@ export default function InternshipPage() {
                 <CheckCircle2 className="w-10 h-10 text-[#FF4D2D] animate-pulse" />
               </div>
               <h3 className="text-3xl font-heading font-black text-[#F5F6F8] tracking-tighter uppercase mb-4">Registration Received!</h3>
-              <p className="text-[#9AA1AC] text-sm font-bold uppercase tracking-tight mb-8 max-w-lg mx-auto leading-relaxed">
+              <p className="text-[#9AA1AC] text-sm font-bold uppercase tracking-tight mb-6 max-w-lg mx-auto leading-relaxed">
                 Thank you for applying to the <span className="text-[#FF4D2D]">{formData.role}</span> program, <span className="text-[#F5F6F8]">{formData.name}</span>! We've received your credentials and our onboarding team will contact you at <span className="text-[#F5F6F8]">{formData.email}</span> within 24 hours.
               </p>
-              <button
-                onClick={() => {
-                  setIsSuccess(false);
-                  setFormData({
-                    name: "", email: "", phone: "", linkedin: "", college: "", branch: "",
-                    role: "Robotics Internship", category: "Online", experience: "Beginner", resume: ""
-                  });
-                }}
-                className="btn-primary py-4 px-8 inline-flex items-center gap-3"
-              >
-                Submit Another Response
-              </button>
+              {submissionNo && (
+                <div className="inline-block bg-[#181C24] border border-[#232833] px-5 py-3 rounded-xl text-center mb-8">
+                  <span className="text-[10px] font-bold text-[#858E9B] uppercase tracking-widest block mb-1">
+                    Application Reference
+                  </span>
+                  <span className="text-base font-black font-mono text-[#FF4D2D]">{submissionNo}</span>
+                </div>
+              )}
+              <div>
+                <button
+                  onClick={() => {
+                    setIsSuccess(false);
+                    setSubmissionNo("");
+                    setIdempotencyKey("");
+                    setFormData({
+                      name: "", email: "", countryCode: "+91", mobile: "", phone: "", linkedin: "", college: "", branch: "",
+                      role: "Robotics Internship", category: "Online", experience: "Beginner", resume: ""
+                    });
+                  }}
+                  className="btn-primary py-4 px-8 inline-flex items-center gap-3"
+                >
+                  Submit Another Response
+                </button>
+              </div>
             </div>
           ) : (
             <div>
@@ -256,17 +298,39 @@ export default function InternshipPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="phone" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Mobile Number *</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
-                      required 
-                      value={formData.phone} 
-                      onChange={handleChange}
-                      placeholder="e.g. 8148045030"
-                      className={formInputClass}
-                    />
+                    <label htmlFor="phone" className="text-[10px] font-black text-[#858E9B] uppercase tracking-widest">Mobile Number (10 digits) *</label>
+                    <div className="flex gap-2">
+                      <select
+                        name="countryCode"
+                        value={formData.countryCode}
+                        onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                        className="w-[95px] bg-[#181C24] border border-[#232833] px-2 py-3 text-xs font-bold text-[#F5F6F8] rounded-lg outline-none focus:border-[#FF4D2D]"
+                        aria-label="Country Code"
+                      >
+                        {COMMON_COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.flag} {c.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        required 
+                        maxLength={10}
+                        value={formData.mobile} 
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setFormData({ ...formData, mobile: val, phone: `${formData.countryCode} ${val}`.trim() });
+                        }}
+                        placeholder="9876543210"
+                        className="flex-1 bg-[#181C24] border border-[#232833] px-4 py-3.5 text-[#F5F6F8] font-mono tracking-wide text-xs rounded-lg outline-none transition-all focus:border-[#FF4D2D]"
+                      />
+                    </div>
+                    <span className="text-[10px] text-gray-500">
+                      Enter 10-digit national number
+                    </span>
                   </div>
                 </div>
 

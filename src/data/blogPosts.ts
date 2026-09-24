@@ -33,7 +33,7 @@ export interface BlogSection {
   ctaHref?: string;
 }
 
-export const blogPosts: BlogPost[] = [
+const baseBlogPosts: BlogPost[] = [
   {
     slug: 'how-to-build-a-combat-robot',
     title: 'How to Build a Combat Robot: A Beginner\'s Guide',
@@ -297,11 +297,19 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+import { pcbBlogPosts } from "./pcbBlogPosts";
+
+export const blogPosts: BlogPost[] = [
+  ...baseBlogPosts,
+  ...pcbBlogPosts,
+];
+
 export const blogCategorySlugMap: Record<string, string> = {
   'Robotics': 'robotics',
   'Industrial Automation': 'industrial-automation',
   'Education': 'education',
   'Artificial Intelligence': 'artificial-intelligence',
+  'PCB Engineering': 'pcb-engineering',
 };
 
 export function getBlogCategorySlug(categoryName: string): string {

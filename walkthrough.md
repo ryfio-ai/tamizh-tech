@@ -96,15 +96,29 @@ We have completed a comprehensive overhaul of the TamizhTech platform, aligning 
 
 
 
+### 17. Authoritative ERP Public Contract Migration
+*   **Centralized ERP Client**: Implemented `src/lib/erpApi.ts` connecting all public website forms directly to the canonical TamizhTech ERP (`https://tamizhtech-erp.vercel.app/api/public/v1/submissions`) and resume uploads (`/api/public/v1/uploads`).
+*   **Canonical Production Origin**: Standardized `https://www.tamizhtech.in` as the authoritative website origin. Non-www `tamizhtech.in` is permanently redirected to `https://www.tamizhtech.in` in `middleware.ts` and `next.config.mjs`.
+*   **Frozen 4-Type Contract**: Conformed all website submissions strictly to the ERP's supported types:
+    *   `RFQ`: Product quotes, Industrial consultation, Schools STEM lab, Colleges lab/training, Course enrollment, Event registration (`QuoteModal`, `ProductEnquiryModal`, `IndustrialConsultationForm`, `schools/page.tsx`, `colleges/page.tsx`, `CourseDetailClient`, `EventDetailClient`).
+    *   `CONTACT`: General contact inquiries (`contact/page.tsx`) and Newsletter subscriptions (`NewsletterSubscribe.tsx` with `subject: "Newsletter Subscription"`, `message: "Website newsletter subscription request"`).
+    *   `CAREER`: Job applications and internship forms (`CareerApplicationForm`, `internship/page.tsx`) with pre-validated resume file upload and attachment metadata linkage.
+    *   `CLUB_REGISTRATION`: Robotics club membership applications (`robotics-club/join/page.tsx`).
+*   **Audit & Retirement of Legacy Backend**: Performed full codebase search confirming zero callers, then removed legacy website API routes (`/api/leads`, `/api/contact`, `/api/apply`, `/api/join-club`) and legacy website integration files (`googleSheets.ts`, `email.ts`, `leadMapping.ts`, `types/lead.ts`). The ERP is now the single operational backend.
+*   **Isolated Testing**: Authored `tests/erp-integration.spec.ts` using mocked/intercepted Playwright route handlers to test payload generation, headers, and UI state without writing QA data into the production ERP database.
+
 ---
 
 ## Verification & Testing
 
-### 1. Production Build Compilation
-*   Run: `npm run build`
-*   Result: `✓ Compiled successfully`
-*   All routes verified as static or SSG (zero client-side flash).
-
-### 2. Form Submissions Validation
-*   All forms (Contact, B2B RFQ, Course Enrollment, Event Registration, and Careers/Internships) correctly POST data to their respective API handlers.
-*   API returns valid JSON payloads and simulates email transmission correctly on local runs.
+### 1. Launch Verification Steps (Independent Reporting)
+*   **`npm run lint`**:
+    *   Command: `npm run lint` (runs `tsc --noEmit`)
+    *   Result: `✓ Passed (Exit code 0, 0 errors)`
+*   **`npx tsc --noEmit`**:
+    *   Command: `npx tsc --noEmit`
+    *   Result: `✓ Passed (Exit code 0, 0 type errors)`
+*   **`npm run build`**:
+    *   Command: `npm run build` (Turbopack production build)
+    *   Result: `✓ Compiled successfully (Exit code 0)`
+    *   All 356 pages pre-rendered as static (○) or SSG (●). Zero dynamic lead capture routes on the website. Single serverless route is `/api/chat` for AI conversational assistant.

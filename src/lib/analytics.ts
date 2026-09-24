@@ -132,9 +132,21 @@ export function trackMarketingEvent(
   if (typeof window === "undefined") return;
 
   const utm = getStoredUtmParams();
+
+  // Strict PII Protection Guard: Strip email, phone, mobile, and customer names from analytics
+  const safeProperties = { ...(properties || {}) };
+  delete safeProperties.phone;
+  delete safeProperties.mobile;
+  delete safeProperties.mobileNo;
+  delete safeProperties.email;
+  delete safeProperties.mail;
+  delete safeProperties.mailId;
+  delete safeProperties.customerName;
+  delete safeProperties.name;
+
   const payload = {
     event: eventName,
-    ...properties,
+    ...safeProperties,
     ...utm,
     timestamp: new Date().toISOString(),
   };

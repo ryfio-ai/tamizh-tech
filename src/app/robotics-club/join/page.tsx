@@ -2,10 +2,13 @@
 
 import { useState, FormEvent } from "react";
 import { ArrowRight, MessageCircle, Zap, CheckCircle2, Send } from "lucide-react";
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
 
 export default function JoinClubPage() {
   const [formData, setFormData] = useState({
     name: "",
+    countryCode: "+91",
     mobile: "",
     email: "",
     status: "",
@@ -27,6 +30,8 @@ export default function JoinClubPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submissionNo, setSubmissionNo] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
@@ -34,19 +39,50 @@ export default function JoinClubPage() {
     setIsSubmitting(true);
     setError("");
 
+    const key = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) setIdempotencyKey(key);
+
     try {
-      const response = await fetch("/api/join-club", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const statusLower = (formData.status || "").toLowerCase();
+      const institution = statusLower === "school" 
+        ? formData.schoolName 
+        : statusLower === "college" 
+          ? formData.collegeName 
+          : formData.organizationName;
+
+      const department = statusLower === "college" 
+        ? formData.department 
+        : formData.role || undefined;
+
+      const year = statusLower === "school" 
+        ? formData.standard 
+        : statusLower === "college" 
+          ? formData.yearOfStudy 
+          : undefined;
+
+      const city = statusLower === "school"
+        ? formData.schoolLocation
+        : statusLower === "college"
+          ? formData.collegeLocation
+          : formData.address;
+
+      const result = await submitPublicForm({
+        type: "CLUB_REGISTRATION",
+        idempotencyKey: key,
+        payload: {
+          name: formData.name,
+          mobile: `${formData.countryCode} ${formData.mobile}`.trim(),
+          email: formData.email,
+          institution: institution || undefined,
+          department: department || undefined,
+          year: year || undefined,
+          city: city || undefined,
+          interests: formData.purpose ? [formData.purpose] : undefined,
+          message: `Applicant Status: ${formData.status || "Not specified"} | Purpose / Notes: ${formData.purpose || "General membership application"}`
+        }
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to submit application");
-      }
-
+      setSubmissionNo(result.submissionNo);
       setIsSuccess(true);
     } catch (err: any) {
       setError(err.message || "Something went wrong. Please try again.");
@@ -89,14 +125,22 @@ export default function JoinClubPage() {
                   <CheckCircle2 className="w-10 h-10 text-[#FF6B00] animate-pulse" />
                 </div>
                 <h3 className="text-3xl font-black text-[#111111] mb-2 uppercase tracking-tighter">Application Submitted!</h3>
+                {submissionNo && (
+                  <div className="inline-block bg-[#FFF2E6] border border-[#FF6B00]/30 rounded-xl px-4 py-2 mb-4">
+                    <span className="text-xs text-gray-500 font-bold uppercase tracking-widest block">Reference ID</span>
+                    <span className="text-base font-black text-[#FF6B00] font-mono tracking-wider">{submissionNo}</span>
+                  </div>
+                )}
                 <p className="text-gray-500 text-sm font-bold uppercase tracking-tight mb-4 max-w-md mx-auto leading-relaxed">
                   Thank you for applying to the Tamil Robotics Club (TRC), <span className="text-[#FF6B00] font-bold">{formData.name}</span>! We've received your application and will contact you at <span className="text-[#111111]">{formData.email}</span>.
                 </p>
                 <button
                   onClick={() => {
                     setIsSuccess(false);
+                    setSubmissionNo("");
+                    setIdempotencyKey(generateIdempotencyKey());
                     setFormData({ 
-                      name: "", mobile: "", email: "", status: "", 
+                      name: "", countryCode: "+91", mobile: "", email: "", status: "", 
                       standard: "", schoolName: "", schoolLocation: "",
                       department: "", yearOfStudy: "", collegeName: "", collegeLocation: "",
                       organizationName: "", role: "",
@@ -134,17 +178,39 @@ export default function JoinClubPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="mobile" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Mobile Number *</label>
-                    <input 
-                      type="tel" 
-                      id="mobile" 
-                      name="mobile" 
-                      required
-                      value={formData.mobile}
-                      onChange={handleChange}
-                      className="form-input"
-                      placeholder="+91 XXXXX XXXXX"
-                    />
+                    <label htmlFor="mobile" className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Mobile Number (10 digits) *</label>
+                    <div className="flex gap-2">
+                      <select
+                        name="countryCode"
+                        value={formData.countryCode}
+                        onChange={handleChange}
+                        className="w-[95px] bg-white border border-slate-300 rounded-xl px-2 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:border-[#FF6A00]"
+                        aria-label="Country Code"
+                      >
+                        {COMMON_COUNTRY_CODES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.flag} {c.code}
+                          </option>
+                        ))}
+                      </select>
+                      <input 
+                        type="tel" 
+                        id="mobile" 
+                        name="mobile" 
+                        required
+                        maxLength={10}
+                        value={formData.mobile}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setFormData({ ...formData, mobile: val });
+                        }}
+                        className="form-input flex-1 font-mono tracking-wide"
+                        placeholder="9876543210"
+                      />
+                    </div>
+                    <span className="text-[10px] text-slate-400">
+                      Enter 10-digit national number
+                    </span>
                   </div>
                 </div>
 

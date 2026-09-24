@@ -165,6 +165,7 @@ export const learnDropdown = {
   items: [
     { label: "Courses", href: "/courses", desc: "STEM, college engineering, & automation tracks" },
     { label: "Technical Blog", href: "/blog", desc: "Robotics guides, PLC vs SCADA, & OpenCV" },
+    { label: "PCB Engineering Guides", href: "/blog/pcb-engineering", desc: "Design rules, Gerber files, SMT & PCBA" },
     { label: "Events & Competitions", href: "/events", desc: "National tournaments, battles & fests" },
     { label: "Robotics in Coimbatore", href: "/robotics-company-in-coimbatore", desc: "Regional engineering ecosystem" },
     { label: "FAQs", href: "/about#faq", desc: "Answers to common institutional queries" }

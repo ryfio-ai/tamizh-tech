@@ -43,8 +43,8 @@ export default function ServicesPage() {
     <div>
       {/* Hero */}
       <PageHero
-        title="Complete technology solutions"
-        subtitle="Specialized service areas covering modern robotics, industrial automation, rapid prototyping, and embedded intelligence."
+        title="Quality-Focused Engineering Services"
+        subtitle="Quality-focused engineering services with practical, competitive pricing. From 3D printing and stainless-steel laser cutting to PCB assembly and industrial automation, we focus on practical engineering quality without unnecessary complexity."
         breadcrumbActive="Services"
       />
 
@@ -128,14 +128,14 @@ export default function ServicesPage() {
             {/* Right side: Copy & WhatsApp Button */}
             <AnimatedSection className="lg:col-span-6 flex flex-col justify-center text-left" direction="right" delay={0.1}>
               <span className="text-xs font-bold tracking-[0.15em] text-accent uppercase mb-4 block">
-                High Quality Additive Manufacturing
+                Additive Manufacturing
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
-                High Quality 3D Printing Services <br />
-                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Precision Engineering & Fast Turnaround</span>
+                Functional Parts with Practical <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Engineering Value</span>
               </h2>
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-4">
-                We create <span className="text-accent font-semibold">prototypes, custom parts, robotic components, and miniatures</span>. Printed with high precision for smooth and accurate results, we guarantee fast delivery and reliable service for all your engineering, academic, and commercial projects.
+                Quality-focused 3D printing for robotics, prototypes, and functional parts, with quotations based on actual part requirements. Engineered with dimensional fidelity for mechanical fitment and dependable real-world performance.
               </p>
               
               <div className="mb-6 p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-xs text-text-primary font-medium flex items-center gap-2">
@@ -152,9 +152,9 @@ export default function ServicesPage() {
                   "Functional Prototypes & Miniatures",
                   "Custom Parts & Robotic Components",
                   "Available in PLA, PETG & TPU Materials",
-                  "Printed with High Precision for Smooth Results",
-                  "Transparent Custom Quotations",
-                  "Fast Delivery & Reliable Engineering Service"
+                  "High Dimensional Accuracy for Mechanical Fits",
+                  "Transparent Quotations by Part Geometry & Infill",
+                  "Realistic Timelines Based on Geometry & Schedule"
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
@@ -219,7 +219,7 @@ export default function ServicesPage() {
                   "Custom Robot Chassis Panels & Brackets",
                   "Clean, Burr-Free Edges & High Accuracy",
                   "DXF / DWG / 2D CAD Nesting Optimization",
-                  "Affordable Factory Direct Coimbatore Pricing"
+                  "Competitive Direct Coimbatore Quotations"
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -265,6 +265,86 @@ export default function ServicesPage() {
                 <p className="text-xs text-white/80">
                   Custom robot chassis, high-strength brackets, and precision industrial sheet metal parts fabricated in Coimbatore.
                 </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* PCB Design, Fabrication & Assembly Showcase Section */}
+      <section id="pcb-services-showcase" className="section bg-subtle py-24 border-t border-border/30 scroll-mt-24">
+        <div className="container px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left side: Image Showcase */}
+            <AnimatedSection className="lg:col-span-6 relative aspect-4/3 sm:aspect-video lg:aspect-4/3 rounded-3xl overflow-hidden border border-border shadow-lg bg-slate-900 group">
+              <Image
+                src="/service/pcb-services.png"
+                alt="Turnkey PCB design, fabrication and SMT assembly in Coimbatore"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none flex flex-col justify-end p-6 md:p-8">
+                <div className="inline-block px-3 py-1 rounded-md bg-[#FF6A00] text-white text-xs font-bold uppercase tracking-wider mb-2 w-fit">
+                  Turnkey Electronics Engineering
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">From Schematic to Assembled Hardware</h3>
+                <p className="text-xs text-white/80">
+                  Custom multi-layer PCB layout, bare-board fabrication, SMT stencil reflow assembly, and power rail testing in Coimbatore.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Right side: Copy & CTAs */}
+            <AnimatedSection className="lg:col-span-6 flex flex-col justify-center text-left" direction="right" delay={0.1}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-700 text-xs font-bold tracking-wide uppercase mb-4 w-fit">
+                <span>PCB Engineering & PCBA</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight font-heading">
+                Turnkey PCB Design, Fabrication <br />
+                <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">& Assembly in Coimbatore</span>
+              </h2>
+              <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-4">
+                Single-source electronics development eliminating multi-vendor bottlenecks. Whether you refer to it colloquially as &apos;PCB printing&apos; or industrial electronics manufacturing, we provide end-to-end schematic capture, 1 to 4 layer routing, DFM verification, rapid prototyping, and automated SMT assembly.
+              </p>
+
+              <div className="mb-6 p-4 rounded-xl bg-white border border-slate-200 text-xs text-text-primary space-y-2 shadow-2xs">
+                <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#FF6A00]" />
+                  <span>PCB Size, Layers & Engineering Capabilities</span>
+                </div>
+                <p className="text-text-muted leading-relaxed">
+                  Support for compact sensor nodes (25mm × 35mm) up to large industrial controllers (400mm × 500mm). 1, 2, and 4 layers in FR-4 with Lead-Free HASL or ENIG gold finishes, IPC-compliant trace spacing, and 2 oz copper options.
+                </p>
+              </div>
+
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {[
+                  "1, 2 & 4 Layer Multi-Layer PCB Layout",
+                  "Turnkey SMT & Through-Hole Assembly (PCBA)",
+                  "Design Rule Checks (DRC & DFM Verification)",
+                  "Component Sourcing with Verified BOMs",
+                  "Hardware Bench Testing & Bring-Up in Coimbatore",
+                  "15+ Published In-Depth Technical Engineering Guides"
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/services/pcb-design-fabrication-assembly" className="w-full sm:w-auto">
+                  <Button variant="primary" size="lg" className="w-full justify-center !bg-[#FF6A00] hover:!bg-[#E05300] text-white font-bold rounded-lg border-none px-8 py-3.5 shadow-md shadow-orange-500/20">
+                    Explore PCB Services <ArrowRight className="w-4 h-4 ml-1.5" />
+                  </Button>
+                </Link>
+                <Link href="/blog/pcb-engineering" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full justify-center border-border hover:bg-white text-text-primary font-bold rounded-lg px-8 py-3.5">
+                    Read PCB Guides (15)
+                  </Button>
+                </Link>
               </div>
             </AnimatedSection>
           </div>

@@ -6,15 +6,21 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 
+import { COMMON_COUNTRY_CODES } from "@/lib/phoneNormalization";
+import { submitPublicForm, generateIdempotencyKey } from "@/lib/erpApi";
+
 export default function CollegesPage() {
   const [submitted, setSubmitted] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [idempotencyKey, setIdempotencyKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     collegeName: "",
     dept: "Robotics / Mechatronics",
     contactPerson: "",
     email: "",
+    countryCode: "+91",
+    mobile: "",
     phone: "",
     city: "",
     state: "Tamil Nadu",
@@ -27,38 +33,41 @@ export default function CollegesPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const activeKey = idempotencyKey || generateIdempotencyKey();
+    if (!idempotencyKey) {
+      setIdempotencyKey(activeKey);
+    }
+
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadType: "College Enquiry",
-          source: "Colleges Page",
-          pageUrl: "https://www.tamizhtech.in/colleges",
-          customerName: form.contactPerson,
-          organization: form.collegeName,
-          customerType: "College",
-          email: form.email,
-          phone: form.phone,
-          city: form.city,
-          state: form.state,
-          subject: `${form.requirement} — ${form.dept}`,
-          requirement: `${form.requirement} (${form.dept})`,
+      const cleanMobile = form.mobile.replace(/\D/g, "");
+
+      const result = await submitPublicForm({
+        type: "RFQ",
+        idempotencyKey: activeKey,
+        payload: {
+          name: form.contactPerson.trim(),
+          mobile: cleanMobile || undefined,
+          email: form.email?.trim() || undefined,
+          company: form.collegeName?.trim() || undefined,
+          city: form.city?.trim() || undefined,
+          state: form.state?.trim() || undefined,
+          country: "India",
+          subject: `College Proposal: ${form.requirement} — ${form.dept} (${form.collegeName})`,
+          productRequirements: `${form.requirement} (${form.dept})`,
           message: `Department: ${form.dept}, Approx Students: ${form.numStudents || "N/A"}. Notes: ${form.notes}`,
-          preferredContactMethod: form.preferredContactMethod,
-        }),
+          technicalRequirements: `Preferred Contact: ${form.preferredContactMethod} | Dept: ${form.dept} | Students: ${form.numStudents || "N/A"}`,
+        },
       });
 
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setSubmitted(true);
-        setLeadId(data.leadId || "");
-      } else {
-        alert(data.error || "Failed to submit request. Please try again.");
+      setSubmitted(true);
+      setLeadId(result.submissionNo);
+      setIdempotencyKey("");
+    } catch (err: any) {
+      if (err.code === "IDEMPOTENCY_KEY_REUSE") {
+        setIdempotencyKey("");
       }
-    } catch (err) {
-      console.error(err);
-      alert("Failed to submit request. Please try again.");
+      alert(err.message || "Failed to submit request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -255,15 +264,38 @@ export default function CollegesPage() {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">Phone Number</label>
-                      <input
-                        type="tel"
-                        required
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        placeholder="+91 94432 10987"
-                        className="w-full bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent"
-                      />
+                      <label className="text-[10px] font-bold text-text-muted uppercase tracking-wider block mb-1">
+                        Mobile Number (10 digits) {(form.preferredContactMethod === "WhatsApp" || form.preferredContactMethod === "Phone") && <span className="text-accent">*</span>}
+                      </label>
+                      <div className="flex gap-2">
+                        <select
+                          value={form.countryCode}
+                          onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                          className="w-[95px] bg-subtle border border-border rounded-lg px-2 py-2 text-xs font-bold text-text-primary focus:outline-none focus:border-accent"
+                          aria-label="Country Code"
+                        >
+                          {COMMON_COUNTRY_CODES.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
+                        <input
+                          type="tel"
+                          required={form.preferredContactMethod === "WhatsApp" || form.preferredContactMethod === "Phone"}
+                          maxLength={10}
+                          value={form.mobile}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                            setForm({ ...form, mobile: val, phone: `${form.countryCode} ${val}`.trim() });
+                          }}
+                          placeholder="9876543210"
+                          className="flex-1 bg-subtle border border-border rounded-lg px-4 py-2.5 text-xs text-text-primary focus:outline-none focus:border-accent font-mono tracking-wide"
+                        />
+                      </div>
+                      <span className="text-[10px] text-slate-400 mt-0.5 block">
+                        Enter 10-digit national number
+                      </span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
