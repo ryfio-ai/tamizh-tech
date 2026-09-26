@@ -77,12 +77,19 @@ export default function IndustrialConsultationForm() {
     if (!idempotencyKey) setIdempotencyKey(key);
 
     try {
+      const cleanMobile = form.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setErrorMessage("Please enter a valid 10-digit mobile number.");
+        setStatus("idle");
+        return;
+      }
+
       const result = await submitPublicForm({
         type: "RFQ",
         idempotencyKey: key,
         payload: {
           name: form.name.trim(),
-          mobile: `${form.countryCode} ${form.mobile}`.trim(),
+          mobile: `${form.countryCode} ${cleanMobile}`,
           email: form.email?.trim() || undefined,
           company: form.company?.trim() || undefined,
           city: form.city?.trim() || undefined,

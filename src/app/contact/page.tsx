@@ -37,6 +37,12 @@ export default function ContactPage() {
 
     try {
       const cleanMobile = form.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setError("Please enter a valid 10-digit mobile number.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const activeKey = idempotencyKey || generateIdempotencyKey();
       if (!idempotencyKey) {
         setIdempotencyKey(activeKey);
@@ -47,7 +53,7 @@ export default function ContactPage() {
         idempotencyKey: activeKey,
         payload: {
           name: form.name.trim(),
-          mobile: cleanMobile || undefined,
+          mobile: `${form.countryCode} ${cleanMobile}`,
           email: form.email.trim() || undefined,
           company: form.company.trim() || undefined,
           city: form.city.trim() || undefined,
@@ -232,7 +238,7 @@ export default function ContactPage() {
                     {/* Mobile Number */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                        Mobile Number (10 digits) {(form.callbackMode === "WhatsApp" || form.callbackMode === "Phone") && <span className="text-accent">*</span>}
+                        Mobile Number (10 digits) <span className="text-accent">*</span>
                       </label>
                       <div className="flex gap-2">
                         <select
@@ -250,7 +256,7 @@ export default function ContactPage() {
                         <div className="relative flex-1">
                           <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                           <input
-                            required={form.callbackMode === "WhatsApp" || form.callbackMode === "Phone"}
+                            required
                             type="tel"
                             maxLength={10}
                             placeholder="9876543210"

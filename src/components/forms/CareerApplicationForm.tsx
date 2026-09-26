@@ -138,6 +138,11 @@ export default function CareerApplicationForm() {
       }
 
       const cleanMobile = formData.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setErrorMsg("Please enter a valid 10-digit mobile number.");
+        setStatus("IDLE");
+        return;
+      }
 
       const notesArr = [];
       if (formData.message) notesArr.push(formData.message);
@@ -148,7 +153,7 @@ export default function CareerApplicationForm() {
         idempotencyKey: activeKey,
         payload: {
           name: formData.name.trim(),
-          mobile: cleanMobile || undefined,
+          mobile: `+91 ${cleanMobile}`,
           email: formData.email.trim() || undefined,
           position: formData.areaOfInterest,
           qualification: formData.department || undefined,

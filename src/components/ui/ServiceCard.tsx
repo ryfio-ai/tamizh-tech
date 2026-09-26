@@ -25,8 +25,8 @@ export function ServiceCard({
     <Link href={href} className={cn("block group h-full transition-transform duration-300 hover:-translate-y-1", className)}>
       <Card className="flex flex-col justify-between h-full p-8 border border-border bg-white rounded-lg hover:border-accent/40 hover:shadow-lg transition-all duration-300">
         <div>
-          <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-accent-soft text-accent mb-6 transition-transform duration-300 group-hover:scale-105">
-            <Icon className="w-6 h-6 stroke-[2.5]" />
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent-soft text-accent mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-accent group-hover:text-white shadow-xs group-hover:shadow-md">
+            <Icon className="w-6 h-6 stroke-[2.5] transition-transform duration-300 group-hover:scale-110" />
           </div>
           <h3 className="text-xl font-bold font-heading text-text-primary mb-3 group-hover:text-accent transition-colors">
             {title}

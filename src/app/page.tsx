@@ -10,8 +10,20 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "Tamizh Tech Robotics | Robotics, STEM & Competition Robots India",
-  description: "Explore Tamizh Tech Robotics for robotics education, STEM programs, competition robots, robotics kits, components and custom robotics solutions for students, schools, colleges and innovators.",
+  title: "TamizhTech Robotics Coimbatore | Robotics Company India",
+  description: "Leading robotics company in Coimbatore specializing in AI, STEM tinkering labs, industrial automation, and competition robots. Get a quote today.",
+  alternates: {
+    canonical: "https://www.tamizhtech.in",
+  },
+  openGraph: {
+    title: "TamizhTech Robotics Coimbatore | Robotics Company India",
+    description: "Leading robotics company in Coimbatore specializing in AI, STEM tinkering labs, industrial automation, and competition robots. Get a quote today.",
+    url: "https://www.tamizhtech.in",
+    siteName: "TamizhTech Robotics Company",
+    images: [{ url: "/logo/banner.png", width: 1200, height: 630, alt: "TamizhTech Robotics Headquarters" }],
+    locale: "en_IN",
+    type: "website",
+  },
   keywords: [
     // 1. Core brand keywords
     "Tamizh Tech Robotics",
@@ -108,15 +120,7 @@ export const metadata: Metadata = {
     "Industrial Robotics Solutions",
     "Robotics Integration Services",
     "Robotics R&D Company",
-    "Robotics Innovation Company"
-  ],
-  openGraph: {
-    title: "Tamizh Tech Robotics | Robotics, STEM & Competition Robots India",
-    description: "Explore Tamizh Tech Robotics for robotics education, STEM programs, competition robots, robotics kits, components and custom robotics solutions for students, schools, colleges and innovators.",
-    url: "https://www.tamizhtech.in",
-    siteName: "Tamizh Tech Robotics",
-    type: "website",
-  }
+  ]
 };
 
 export default function Home() {

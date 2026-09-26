@@ -31,7 +31,8 @@ export function OrganizationSchema() {
     "sameAs": [
       "https://www.linkedin.com/company/tamizh-tech-robotics-company",
       "https://www.instagram.com/tamizh_tech_robotics_company",
-      "https://www.youtube.com/@covaiscientist"
+      "https://www.youtube.com/@covaiscientist",
+      "https://www.facebook.com/tamizhtech"
     ],
     "contactPoint": [{
       "@type": "ContactPoint",
@@ -61,6 +62,13 @@ export function LocalBusinessSchema() {
     "email": "contact@tamizhtech.in",
     "url": "https://www.tamizhtech.in",
     "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "14",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
@@ -227,8 +235,8 @@ export function CourseSchema({ course }: { course: any }) {
     "url": canonicalUrl,
     "provider": {
       "@type": "Organization",
-      "name": "Tamizh Tech Robotics Company",
-      "sameAs": "https://www.tamizhtech.in"
+      "name": "ThiranOli Academy (TamizhTech Robotics)",
+      "sameAs": "https://www.tamizhtech.in/courses"
     },
     "hasCourseInstance": {
       "@type": "CourseInstance",

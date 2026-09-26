@@ -41,13 +41,18 @@ export default function CollegesPage() {
 
     try {
       const cleanMobile = form.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        alert("Please enter a valid 10-digit mobile number.");
+        setIsSubmitting(false);
+        return;
+      }
 
       const result = await submitPublicForm({
         type: "RFQ",
         idempotencyKey: activeKey,
         payload: {
           name: form.contactPerson.trim(),
-          mobile: cleanMobile || undefined,
+          mobile: `${form.countryCode} ${cleanMobile}`,
           email: form.email?.trim() || undefined,
           company: form.collegeName?.trim() || undefined,
           city: form.city?.trim() || undefined,

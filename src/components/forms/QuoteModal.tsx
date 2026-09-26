@@ -142,28 +142,9 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const trimmedEmail = formData.email.trim().toLowerCase();
 
-    if (pref.includes("whatsapp")) {
-      if (!cleanMobile || cleanMobile.length !== 10) {
-        setErrorMessage("Please enter your WhatsApp/mobile number to continue (exactly 10 digits).");
-        return;
-      }
-    } else if (pref.includes("phone")) {
-      if (!cleanMobile || cleanMobile.length !== 10) {
-        setErrorMessage("Please enter your mobile number for phone callback (exactly 10 digits).");
-        return;
-      }
-    } else if (pref.includes("email")) {
-      if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
-        setErrorMessage("Please enter a valid email address.");
-        return;
-      }
-    } else {
-      const hasValidMobile = cleanMobile.length === 10;
-      const hasValidEmail = trimmedEmail && emailRegex.test(trimmedEmail);
-      if (!hasValidMobile && !hasValidEmail) {
-        setErrorMessage("Please provide at least one valid contact method (10-digit mobile or email address).");
-        return;
-      }
+    if (!cleanMobile || cleanMobile.length !== 10) {
+      setErrorMessage("Please enter a valid 10-digit mobile number.");
+      return;
     }
 
     if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
@@ -223,7 +204,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
         idempotencyKey: activeKey,
         payload: {
           name: trimmedName,
-          mobile: cleanMobile || undefined,
+          mobile: `${formData.countryCode} ${cleanMobile}`,
           email: trimmedEmail || undefined,
           company: formData.organization || undefined,
           city: formData.city || "Coimbatore",
@@ -563,7 +544,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Mobile Number (10 digits) {(formData.preferredCallback === "WhatsApp" || formData.preferredCallback === "Phone") && <span className="text-red-500">*</span>}
+                      Mobile Number (10 digits) <span className="text-red-500">*</span>
                     </label>
                     <div className="flex gap-2">
                       <select
@@ -580,7 +561,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                       </select>
                       <input
                         type="tel"
-                        required={formData.preferredCallback === "WhatsApp" || formData.preferredCallback === "Phone"}
+                        required
                         maxLength={10}
                         value={formData.mobile}
                         onChange={(e) => {

@@ -265,12 +265,19 @@
   .btn-lg  { padding: 17px 36px; font-size: 16px; }
   .btn-icon { width: 44px; height: 44px; padding: 0; border-radius: 50%; }
 
-  /* ── Hero grid ──────────────────────────────────── */
-  .hero-grid {
+  /* ── Hero & Engineering grid (64px DXF/CAD-style) ── */
+  @keyframes gridDrift {
+    0%   { background-position: 0 0; }
+    50%  { background-position: 20px 20px; }
+    100% { background-position: 0 0; }
+  }
+
+  .hero-grid, .engineering-grid {
     background-image:
       linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
     background-size: 64px 64px;
+    animation: gridDrift 40s ease-in-out infinite;
   }
 
   /* ── Gradient hero bg ──────────────────────────── */
@@ -310,7 +317,33 @@
   }
 }
 
-/* ── Animations ──────────────────────────────────── */
+/* ── SVG Self-Drawing Stroke Animations ── */
+@keyframes drawStroke {
+  from {
+    stroke-dashoffset: 600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fadeInNode {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.draw-svg path,
+.draw-svg rect,
+.draw-svg polygon {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawStroke 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.draw-svg circle[fill="#FF6A00"] {
+  opacity: 0;
+  animation: fadeInNode 0.3s ease-out 0.5s forwards;
+}
+
 @keyframes pulse-dot {
   0%,100% { opacity:1; transform:scale(1); }
   50%      { opacity:0.5; transform:scale(0.75); }
@@ -358,13 +391,13 @@ textarea:-webkit-autofill {
   text-decoration-color: #FF6A00 !important;
 }
 .btn-primary-orange {
-  background-color: #FF6A00 !important;
+  background-color: #E05300 !important;
   color: #FFFFFF !important;
-  border-color: #FF6A00 !important;
+  border-color: #E05300 !important;
 }
 .btn-primary-orange:hover {
-  background-color: #E05300 !important;
-  border-color: #E05300 !important;
+  background-color: #C44600 !important;
+  border-color: #C44600 !important;
 }
 .btn-outline-orange {
   background-color: transparent !important;

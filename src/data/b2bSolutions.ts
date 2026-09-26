@@ -289,14 +289,14 @@ export const b2bSolutions: Record<string, B2BSolution> = {
     quoteService: "stem-labs",
     whatsappMessage: "Hi Tamizh Tech, I am interested in your School Robotics & STEM Lab solutions.",
     seo: {
-      title: "Robotics & STEM Solutions for Schools | Coimbatore | Tamizh Tech",
-      description: "Turnkey STEM and robotics labs, curriculum-aligned school courses, teacher training, and competition support in Coimbatore and across Tamil Nadu.",
+      title: "Robotics Lab Setup for Schools & STEM Labs | TamizhTech",
+      description: "Turnkey robotics lab setup for schools and Atal Tinkering Labs in India. Practical STEM curriculum and hardware. Schedule a school consultation.",
       keywords: [
-        "school robotics programs coimbatore",
-        "stem lab setup schools tamil nadu",
+        "robotics lab setup for schools",
+        "STEM lab setup India",
+        "Atal Tinkering Lab vendor",
         "robotics curriculum for schools",
-        "atal tinkering lab trainer coimbatore",
-        "school robotics workshop"
+        "school robotics program Tamil Nadu"
       ],
       canonical: "https://www.tamizhtech.in/solutions/schools"
     }
@@ -499,14 +499,14 @@ export const b2bSolutions: Record<string, B2BSolution> = {
     quoteService: "robotics",
     whatsappMessage: "Hi Tamizh Tech, I am interested in your College Robotics Lab & Engineering Project solutions.",
     seo: {
-      title: "Robotics & Engineering Solutions for Colleges | Coimbatore | Tamizh Tech",
-      description: "Robotics Centre of Excellence lab setup, engineering capstone guidance, embedded training, and rapid prototyping services for colleges in Coimbatore & Tamil Nadu.",
+      title: "Robotics Center of Excellence for Colleges | TamizhTech",
+      description: "Establish an advanced robotics center of excellence in your engineering college. Hands-on R&D hardware and competition training. Contact our team.",
       keywords: [
-        "robotics lab setup colleges coimbatore",
-        "engineering project center coimbatore",
-        "centre of excellence robotics tamil nadu",
-        "embedded systems training engineering students",
-        "pcb fabrication student projects coimbatore"
+        "robotics center of excellence",
+        "college robotics center of excellence India",
+        "robotics lab setup colleges Coimbatore",
+        "engineering college robotics event",
+        "embedded systems training engineering students"
       ],
       canonical: "https://www.tamizhtech.in/solutions/colleges"
     }

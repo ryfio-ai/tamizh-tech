@@ -88,6 +88,11 @@ export default function ProductEnquiryModal({
 
     try {
       const cleanMobile = formData.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setErrorMessage("Please enter a valid 10-digit mobile number.");
+        setStatus("idle");
+        return;
+      }
       const qty = Math.max(1, Number(formData.quantity) || 1);
 
       const result = await submitPublicForm({
@@ -95,7 +100,7 @@ export default function ProductEnquiryModal({
         idempotencyKey: activeKey,
         payload: {
           name: formData.name.trim(),
-          mobile: cleanMobile || undefined,
+          mobile: `${formData.countryCode} ${cleanMobile}`,
           email: formData.email.trim() || undefined,
           company: formData.organization.trim() || undefined,
           city: formData.city.trim() || undefined,

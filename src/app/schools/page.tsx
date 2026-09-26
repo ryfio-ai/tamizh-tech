@@ -38,12 +38,19 @@ export default function SchoolsPage() {
     if (!idempotencyKey) setIdempotencyKey(key);
 
     try {
+      const cleanMobile = form.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        alert("Please enter a valid 10-digit mobile number.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const result = await submitPublicForm({
         type: "RFQ",
         idempotencyKey: key,
         payload: {
           name: form.contactPerson.trim(),
-          mobile: `${form.countryCode} ${form.mobile}`.trim(),
+          mobile: `${form.countryCode} ${cleanMobile}`,
           email: form.email?.trim() || undefined,
           company: form.schoolName?.trim() || undefined,
           city: form.city?.trim() || undefined,

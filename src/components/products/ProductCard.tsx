@@ -16,6 +16,23 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onEnquire, priority = false }: ProductCardProps) {
   const detailHref = `/products/${product.categorySlug}/${product.slug}`;
+  const allImages = product.images && product.images.length > 0 ? product.images : [product.image];
+  const [activeImgIndex, setActiveImgIndex] = React.useState(0);
+  const [rotateX, setRotateX] = React.useState(0);
+  const [rotateY, setRotateY] = React.useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setRotateY((x / (rect.width / 2)) * 5);
+    setRotateX(-(y / (rect.height / 2)) * 5);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   const handleCardClick = () => {
     trackMarketingEvent("product_view", {
@@ -45,31 +62,38 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
 
   return (
     <div
-      className="group bg-white rounded-2xl border border-slate-200/90 hover:border-orange-300/80 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+        transition: "transform 0.15s ease-out, border-color 0.3s, box-shadow 0.3s",
+      }}
+      className="group bg-white rounded-2xl border border-slate-200/90 hover:border-orange-400/80 shadow-xs hover:shadow-2xl flex flex-col h-full overflow-hidden"
     >
-      {/* 1. DOMINANT PRODUCT IMAGE - FULL BLEED BOX FILL WITH SUBTLE OVERLAY */}
-      <Link
-        href={detailHref}
-        onClick={handleCardClick}
-        className="relative block aspect-[4/3] w-full bg-slate-100/80 border-b border-slate-100 overflow-hidden"
-        aria-label={`View technical specifications for ${product.name}`}
-      >
-        <div className="relative w-full h-full">
+      {/* 1. DOMINANT PRODUCT IMAGE AREA WITH MULTI-ANGLE PREVIEW */}
+      <div className="relative aspect-[4/3] w-full bg-slate-100/80 border-b border-slate-100 overflow-hidden group/img">
+        <Link
+          href={detailHref}
+          onClick={handleCardClick}
+          className="relative block w-full h-full"
+          aria-label={`View technical specifications for ${product.name}`}
+        >
           <Image
-            src={product.image}
-            alt={product.name}
+            src={allImages[activeImgIndex] || product.image}
+            alt={`${product.name} angle ${activeImgIndex + 1}`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             priority={priority}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-cover transition-all duration-500 ease-out group-hover:scale-105"
           />
-        </div>
+        </Link>
 
         {/* Top Tag Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
           {product.badge ? (
-            <span className="px-2.5 py-1 text-[11px] font-bold tracking-wide rounded-lg bg-white/95 text-slate-900 border border-slate-200/80 shadow-xs backdrop-blur-md">
-              {product.badge}
+            <span className="px-2.5 py-1 text-[11px] font-bold tracking-wide rounded-lg bg-white/95 text-slate-900 border border-slate-200/80 shadow-xs backdrop-blur-md flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00] animate-pulse" />
+              <span>{product.badge}</span>
             </span>
           ) : <span />}
 
@@ -79,7 +103,31 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
             </span>
           )}
         </div>
-      </Link>
+
+        {/* Multi-Angle Hover Indicator Pills */}
+        {allImages.length > 1 && (
+          <div className="absolute bottom-2.5 left-0 right-0 z-20 flex items-center justify-center gap-1.5 px-3 pointer-events-auto">
+            {allImages.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setActiveImgIndex(idx);
+                }}
+                onMouseEnter={() => setActiveImgIndex(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === activeImgIndex
+                    ? "w-6 bg-[#FF6B00] shadow-xs"
+                    : "w-1.5 bg-white/70 hover:bg-white backdrop-blur-xs"
+                }`}
+                aria-label={`Preview angle ${idx + 1} for ${product.name}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* 2. CARD CONTENT */}
       <div className="p-5 flex-1 flex flex-col justify-between">
@@ -90,7 +138,7 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
               {product.category}
             </span>
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               In Stock
             </span>
           </div>
@@ -158,7 +206,7 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
           <Link
             href={detailHref}
             onClick={handleCardClick}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all duration-200 text-center"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all duration-200 text-center hover:scale-[1.02]"
           >
             <span>View Specs</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -167,8 +215,9 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
           <button
             type="button"
             onClick={handleEnquireClick}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.02] cursor-pointer relative overflow-hidden group/btn"
           >
+            <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 pointer-events-none" />
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Enquire</span>
           </button>

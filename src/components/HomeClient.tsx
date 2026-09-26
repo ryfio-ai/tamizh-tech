@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import {
   ArrowRight, Zap, FlaskConical, GraduationCap, Briefcase,
   Users, Award, Globe, CheckCircle, Grid, X, ChevronLeft, ChevronRight,
@@ -19,7 +19,6 @@ import {
   RoboticsIcon, AIIcon, DroneIcon, IoTIcon, EmbeddedIcon, AutomationIcon,
   MfgIcon, EduIcon, DefIcon, CityIcon, LabIcon, HealthIcon, AgriIcon, AutoIcon
 } from "@/components/ui/CustomIcons";
-import { FloatingCompetitionRobotAd } from "@/components/home/FloatingCompetitionRobotAd";
 import { CustomerReviewsSection } from "@/components/home/CustomerReviewsSection";
 
 // Data
@@ -59,7 +58,6 @@ const whyUs = [
     icon: CheckCircle,
     title: "Quality-Focused",
     badge: "Quality Priority",
-    image: "/gallery/21.jpeg",
     desc: "We prioritize practical product and engineering quality across tournament robots, components, and fabrication.",
     highlight: "Quality as Key Parameter"
   },
@@ -67,7 +65,6 @@ const whyUs = [
     icon: Award,
     title: "Competitive Value",
     badge: "Value Always",
-    image: "/gallery/3.jpg",
     desc: "We aim to keep products and services competitively priced with transparent scopes and no artificial markups.",
     highlight: "Accessible & Fair Pricing"
   },
@@ -75,7 +72,6 @@ const whyUs = [
     icon: Zap,
     title: "Practical Engineering",
     badge: "Built for Real Use",
-    image: "/gallery/18.jpeg",
     desc: "Solutions and hardware platforms are engineered around actual use cases — from student tournaments to factory floors.",
     highlight: "Real-World Engineering"
   },
@@ -83,7 +79,6 @@ const whyUs = [
     icon: ShieldCheck,
     title: "Clear Communication",
     badge: "Transparent Scope",
-    image: "/gallery/14.jpg",
     desc: "Specifications, inclusions, and limitations are communicated clearly before enquiry and ordering.",
     highlight: "Informed Decision-Making"
   },
@@ -91,7 +86,6 @@ const whyUs = [
     icon: Users,
     title: "Direct Support",
     badge: "Direct Team Access",
-    image: "/gallery/10.jpg",
     desc: "Customers and engineering teams can discuss their requirements directly with our technical team.",
     highlight: "Direct Team Communication"
   },
@@ -126,10 +120,14 @@ const galleryImages = [
 ];
 
 const faqs = [
-  { q: "Why choose Tamizh Tech Robotics?", a: "We focus on quality-focused robotics products and practical engineering services while keeping pricing competitive and transparent." },
-  { q: "What industries do you build automation solutions for?", a: "We primarily work with manufacturing, automotive, agriculture, defense, and education industries, designing custom autonomous machinery, robotic arms, IoT systems, and quality control vision AI models." },
-  { q: "Do you design custom competition robots?", a: "Yes, TamizhTech has a dedicated division that engineers custom combat robots, RC race cars, and student competition platforms." },
-  { q: "How can schools set up STEM tinkering labs?", a: "We provide complete turnkey STEM and robotics tinkering labs. This includes structural hardware setup, procurement of learning kits, curriculum alignment, and comprehensive teacher training." },
+  { q: "What is TamizhTech Robotics Company?", a: "TamizhTech is an indigenous robotics engineering company based in Coimbatore, Tamil Nadu. We specialize in custom competition combat bots, turnkey STEM lab setups for schools, custom PCB design and assembly, embedded firmware development, and B2B industrial automation." },
+  { q: "Do you design and build custom competition robots?", a: "Yes. TamizhTech designs and manufactures national-level competition robots, including Line Followers (TTRC LF 5.0), RC Robo Race, RC Robo Soccer, and custom combat bots (Beetleweight to Featherweight) with 180+ podium competition wins." },
+  { q: "Do you offer PCB design, fabrication, and SMT assembly in Coimbatore?", a: "Yes. We deliver complete turnkey PCB engineering services — from schematic capture and multi-layer layout (1, 2, 4-layer FR-4) to bare board fabrication, component sourcing, SMT/THT assembly, and bench testing in our Coimbatore lab." },
+  { q: "What industrial automation solutions do you provide for factories?", a: "We engineer industrial automation solutions including PLC control panel wiring, SCADA telemetry dashboards, computer vision defect inspection, machine retrofitting, and Autonomous Mobile Robots (AMRs) for manufacturing units in Coimbatore and South India." },
+  { q: "How does TamizhTech set up STEM tinkering labs for schools?", a: "We provide end-to-end STEM tinkering lab setups for schools (CBSE, ICSE, State Board, and ATL grants). This includes ESD workbenches, Arduino/ESP32 kits, 3D printers, soldering bays, 40-week NEP 2020 curriculum, and hands-on teacher training." },
+  { q: "Can engineering colleges get robotics R&D lab support?", a: "Yes. We partner with engineering colleges across Tamil Nadu under MoU frameworks to establish robotics R&D centers, provide faculty development programs (FDP), and mentor student teams for national robotics championships." },
+  { q: "Do you offer custom 3D printing and laser cutting services?", a: "Yes. We provide precision FDM 3D printing (PLA, PETG, ABS) and fiber laser cutting for SS304/SS316 stainless steel and aluminium chassis parts with rapid local turnaround in Coimbatore." },
+  { q: "How do I submit an engineering requirement or request a quotation?", a: "You can submit your engineering requirements directly through our online quote forms, contact page, or WhatsApp CTA. Every enquiry is registered into our central ERP system and receives a tracking reference (e.g., TTRC-RFQ-2026-XXXX)." },
 ];
 
 const partnerLogos = [
@@ -183,16 +181,25 @@ function LazyVideo({ src = "/3d printing.mp4" }: { src?: string }) {
 export default function HomeClient() {
   const [activeImageIdx, setActiveImageIdx] = useState<number | null>(null);
   const [activeFaqIdx, setActiveFaqIdx] = useState<number | null>(null);
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+
   return (
     <div className="flex flex-col bg-white">
 
       {/* 1. HERO SECTION — compact on mobile, fits viewport on desktop */}
       <section
+        ref={heroRef}
         className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)] mt-20"
       >
-        {/* Floating Competition Robot Advertisement (Left Side) */}
-        <FloatingCompetitionRobotAd />
-
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
 
@@ -200,17 +207,39 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-6 md:gap-0">
 
             {/* ── LEFT COLUMN ── */}
-            <div
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.07,
+                    delayChildren: 0.05,
+                  },
+                },
+              }}
               className="flex flex-col justify-center text-left relative z-10 py-2 md:py-0 pr-0 md:pr-6 lg:pr-10 gap-4"
             >
-              {/* Premium Positioning Eyebrow */}
-              <div className="flex items-center gap-2 text-[#FF6B00] font-bold text-xs sm:text-sm md:text-[15px] tracking-[0.1em] uppercase">
+              {/* Eyebrow */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 12 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+                }}
+                className="flex items-center gap-2 text-[#FF6B00] font-bold text-xs sm:text-sm md:text-[15px] tracking-[0.1em] uppercase"
+              >
                 <span className="w-2 h-2 rounded-full bg-[#FF6B00] shrink-0" />
                 <span>INDIA&apos;S LEADING GAMIFIED PLATFORM</span>
-              </div>
+              </motion.div>
 
               {/* Main Headline */}
-              <h1
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
                 className="font-black text-text-primary font-heading tracking-tight leading-[1.05] text-4xl sm:text-5xl md:text-5xl lg:text-[3.6rem] uppercase"
               >
                 Learn. Build.<br />
@@ -218,25 +247,43 @@ export default function HomeClient() {
                 <span className="text-accent underline decoration-4 decoration-accent/25 underline-offset-6">
                   Compete.
                 </span>
-              </h1>
+              </motion.h1>
 
               {/* Tamil tagline & secondary motto */}
-              <div className="border-l-2 border-accent pl-3.5 py-0.5 space-y-0.5">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
+                className="border-l-2 border-accent pl-3.5 py-0.5 space-y-0.5"
+              >
                 <p className="text-xs sm:text-sm font-black text-text-primary font-heading leading-snug">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
                 </p>
                 <p className="text-[11px] sm:text-xs font-bold text-accent tracking-wide">
                   More Than Robots. We Build Skills, Ideas & Innovation.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Supporting headline */}
-              <p className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[480px]">
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
+                className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[480px]"
+              >
                 Hands-on robotics, competition hardware and engineering solutions for students, schools, colleges, makers and businesses.
-              </p>
+              </motion.p>
 
               {/* Supporting proof categories */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
+                className="grid grid-cols-2 gap-x-4 gap-y-2.5"
+              >
                 {[
                   "Robotics Education",
                   "Competition Hardware",
@@ -248,45 +295,60 @@ export default function HomeClient() {
                     {feat}
                   </div>
                 ))}
-              </div>
+              </motion.div>
 
               {/* CTAs */}
-              <div className="flex items-center gap-3 flex-wrap pt-1">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+                }}
+                className="flex items-center gap-3 flex-wrap pt-1"
+              >
                 <Link href="/solutions" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange">
-                    Explore Our Robotics World <ArrowRight className="w-4 h-4 ml-1.5" />
+                  <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange group">
+                    Explore Our Robotics World <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link href="/services" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-sm font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange">
-                    Build With Us <ArrowRight className="w-4 h-4 ml-1.5" />
+                  <Button className="w-full justify-center text-sm font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange group">
+                    Build With Us <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
 
               {/* Supporting B2B/B2C Micro-strip */}
-              <p className="text-[11px] font-semibold text-text-muted tracking-wide pt-0.5">
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 12 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+                }}
+                className="text-[11px] font-semibold text-text-muted tracking-wide pt-0.5"
+              >
                 Schools & Colleges • Student Competitions • Hardware Startups • Industrial Plants
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             {/* ── RIGHT COLUMN — TamizhTech Robotics Fleet Showcase ── */}
             <div className="relative flex items-center justify-center w-full py-4 lg:py-6">
               {/* Diffused Ambient Glow Behind the Showcase */}
               <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-tr from-accent/20 via-accent/5 to-transparent rounded-[2.5rem] blur-2xl opacity-60 pointer-events-none -z-10" />
 
-              {/* Clean Hardware Showcase Container (No intrusive badges) */}
-              <div className="relative w-full max-w-[590px] aspect-[3/2] rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-[0_15px_45px_-10px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.03)] transition-all duration-500 hover:shadow-[0_20px_55px_-10px_rgba(0,0,0,0.12)]">
+              {/* Clean Hardware Showcase Container with scroll parallax & soft zoom */}
+              <motion.div
+                style={shouldReduceMotion ? {} : { y: heroY, scale: heroScale }}
+                className="relative w-full max-w-[590px] aspect-[3/2] rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-[0_15px_45px_-10px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.03)] transition-all duration-500 hover:shadow-[0_20px_55px_-10px_rgba(0,0,0,0.12)]"
+              >
                 {/* Product Fleet Photograph */}
                 <Image
                   src="/hero-combined.jpg"
                   alt="TamizhTech Robotics Fleet — Combat Robot, Bipedal Platform, Line Follower & All-Terrain Rover"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
-                  className="object-contain transition-transform duration-700 ease-out hover:scale-[1.02]"
+                  className="object-contain transition-transform duration-700 ease-out hover:scale-[1.03]"
                   priority
                 />
-              </div>
+              </motion.div>
             </div>
 
           </div>
@@ -371,8 +433,8 @@ export default function HomeClient() {
             <AnimatedSection direction="left">
               <div className="relative rounded-xl overflow-hidden aspect-[4/3] shadow-md border border-border">
                 <Image
-                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop"
-                  alt="TamizhTech engineering lab"
+                  src="/office.png"
+                  alt="TamizhTech Headquarters & R&D Office in Coimbatore"
                   fill className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
@@ -434,9 +496,20 @@ export default function HomeClient() {
             />
           </AnimatedSection>
 
-          {/* Horizontal Timeline Grid/Scroller */}
+          {/* Horizontal Timeline Grid/Scroller with animated connecting progress bar */}
           <div className="relative w-full py-4">
-            <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0">
+            {/* Connecting progress line behind dots */}
+            <div className="hidden lg:block absolute top-[24px] left-6 right-6 h-[2px] bg-slate-200 z-0">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                className="h-full bg-accent origin-left"
+              />
+            </div>
+
+            <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory lg:grid lg:grid-cols-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0 relative z-10">
               {[
                 { year: "2021", text: "Tamizh Robotics Club was established." },
                 { year: "2022", text: "Started participating in robotics competitions across Tamil Nadu." },
@@ -467,14 +540,14 @@ export default function HomeClient() {
       </section>
 
       {/* 3. SERVICES SECTION */}
-      <section className="section bg-white py-24 border-t border-border/30">
+      <section className="section bg-white engineering-grid py-24 border-t border-border/30">
         <div className="container px-6">
           <AnimatedSection className="mb-16">
             <SectionHeader
-              tag="What We Do"
-              title="Complete technology"
-              highlight="solutions"
-              subtitle="From robotics engineering to AI development - we cover every dimension of modern technology."
+              tag="Industrial Automation & PCB Design"
+              title="Robotics & Engineering"
+              highlight="Services in Coimbatore"
+              subtitle="Specializing in industrial automation, PCB design, 3D printing, laser cutting, and custom robotics development across Tamil Nadu."
             />
           </AnimatedSection>
 
@@ -494,7 +567,7 @@ export default function HomeClient() {
           <AnimatedSection className="mt-12 text-center">
             <Link href="/services">
               <Button variant="secondary">
-                View All Services <ArrowRight className="w-4 h-4 ml-1.5" />
+                View All Engineering Services <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
             </Link>
           </AnimatedSection>
@@ -520,46 +593,32 @@ export default function HomeClient() {
               const Icon = item.icon;
               return (
                 <StaggerItem key={item.title} className="h-full">
-                  <div className="h-full bg-white border border-border/80 hover:border-accent/40 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
-                    {/* Visual Image Container */}
-                    <div className="relative aspect-[16/11] w-full overflow-hidden bg-slate-900">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
-
-                      {/* Top Floating Badge */}
-                      <div className="absolute top-3 left-3 bg-black/65 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF6A00]" />
-                        <span>{item.badge}</span>
+                  <div className="h-full bg-white border border-border/80 hover:border-accent/40 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between p-6 group">
+                    <div>
+                      {/* Top Header: Badge & Icon */}
+                      <div className="flex items-start justify-between gap-2 mb-6">
+                        <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                          <Icon className="w-6 h-6 stroke-[2.25]" />
+                        </div>
+                        <div className="bg-slate-100 group-hover:bg-accent/10 border border-slate-200/80 group-hover:border-accent/30 text-slate-700 group-hover:text-accent text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 transition-colors">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                          <span className="truncate">{item.badge}</span>
+                        </div>
                       </div>
 
-                      {/* Bottom Right Icon Pill */}
-                      <div className="absolute bottom-3 right-3 w-8 h-8 rounded-lg bg-white/95 backdrop-blur-md text-accent flex items-center justify-center shadow-md border border-white/40">
-                        <Icon className="w-4 h-4 stroke-[2.5]" />
-                      </div>
+                      {/* Content */}
+                      <h3 className="text-base font-bold font-heading text-text-primary mb-2 group-hover:text-accent transition-colors">
+                        {item.title}
+                      </h3>
+                        <p className="text-xs text-text-secondary leading-relaxed mb-6">
+                        {item.desc}
+                      </p>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-5 flex flex-col flex-grow justify-between text-left">
-                      <div>
-                        <h3 className="text-base font-bold font-heading text-text-primary mb-2 group-hover:text-accent transition-colors">
-                          {item.title}
-                        </h3>
-                        <p className="text-xs text-text-secondary leading-relaxed mb-4">
-                          {item.desc}
-                        </p>
-                      </div>
-
-                      {/* Footer Highlight */}
-                      <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-[11px] font-semibold text-slate-700">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                        <span>{item.highlight}</span>
-                      </div>
+                    {/* Footer Highlight */}
+                    <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] font-semibold text-slate-700">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      <span>{item.highlight}</span>
                     </div>
                   </div>
                 </StaggerItem>
@@ -596,8 +655,9 @@ export default function HomeClient() {
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 280px, 200px"
                       />
-                      <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                        Enquire Now
+                      <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm backdrop-blur-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        <span>Enquire Now</span>
                       </div>
                     </div>
                     <div className="p-5 flex flex-col justify-between flex-grow">
@@ -904,7 +964,7 @@ export default function HomeClient() {
                   src={src}
                   alt={`Gallery image ${idx + 1}`}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-250 ease-out group-hover:scale-[1.03]"
                   sizes="(max-width: 768px) 50vw, 25vw"
                   loading="lazy"
                 />
@@ -963,7 +1023,7 @@ export default function HomeClient() {
                     </button>
                     {/* Collapsible Answer */}
                     <div
-                      className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[200px] mt-4 opacity-100" : "max-h-0 opacity-0"
+                      className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] mt-4 opacity-100" : "max-h-0 opacity-0"
                         }`}
                     >
                       <p className="text-sm text-text-secondary leading-relaxed font-sans">
@@ -1040,7 +1100,13 @@ export default function HomeClient() {
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            <div className="relative max-w-[85vw] max-h-[85vh] aspect-[4/3] w-full md:w-[70vw]">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative max-w-[85vw] max-h-[85vh] aspect-[4/3] w-full md:w-[70vw]"
+            >
               <Image
                 src={galleryImages[activeImageIdx]}
                 alt={`Lightbox image ${activeImageIdx + 1}`}
@@ -1048,7 +1114,7 @@ export default function HomeClient() {
                 className="object-contain"
                 priority
               />
-            </div>
+            </motion.div>
 
             <button
               className="absolute right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"

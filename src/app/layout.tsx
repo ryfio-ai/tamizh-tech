@@ -3,7 +3,7 @@ import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil, JetBrains_Mono } fro
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { OrganizationSchema } from "@/components/JsonLd";
+import { OrganizationSchema, LocalBusinessSchema } from "@/components/JsonLd";
 import { FloatingWidgets } from "@/components/layout/FloatingWidgets";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -195,6 +195,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
         />
         <OrganizationSchema />
+        <LocalBusinessSchema />
       </head>
       <body className="font-sans bg-page text-text-primary antialiased">
         {/* Google Tag Manager (noscript) */}

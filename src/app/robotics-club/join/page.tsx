@@ -43,6 +43,13 @@ export default function JoinClubPage() {
     if (!idempotencyKey) setIdempotencyKey(key);
 
     try {
+      const cleanMobile = formData.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setError("Please enter a valid 10-digit mobile number.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const statusLower = (formData.status || "").toLowerCase();
       const institution = statusLower === "school" 
         ? formData.schoolName 
@@ -71,7 +78,7 @@ export default function JoinClubPage() {
         idempotencyKey: key,
         payload: {
           name: formData.name,
-          mobile: `${formData.countryCode} ${formData.mobile}`.trim(),
+          mobile: `${formData.countryCode} ${cleanMobile}`,
           email: formData.email,
           institution: institution || undefined,
           department: department || undefined,

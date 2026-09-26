@@ -118,6 +118,27 @@ export async function submitPublicForm<T extends SubmissionType>(params: {
           500
         );
       }
+
+      // Asynchronously trigger multi-recipient instant email notification (non-blocking)
+      try {
+        const sourcePage = typeof window !== "undefined" ? window.location.href : "Website Direct";
+        fetch("/api/lead-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type,
+            submissionNo: data.submissionNo,
+            payload,
+            timestamp: new Date().toISOString(),
+            sourcePage,
+          }),
+        }).catch((err) => {
+          console.warn("[LEAD_ALERT_DISPATCH_WARNING] Email notification fetch error:", err);
+        });
+      } catch (e) {
+        // Non-blocking catch to preserve ERP UI success state
+      }
+
       return {
         success: true,
         submissionNo: data.submissionNo,

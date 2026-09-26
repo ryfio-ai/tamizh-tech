@@ -21,7 +21,7 @@ export function RoboticsIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Base platform */}
       <path d="M2 20h20" stroke="#FB7115" />
@@ -53,7 +53,7 @@ export function AIIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Antenna */}
       <path d="M12 6V3" stroke="#FB7115" />
@@ -87,7 +87,7 @@ export function DroneIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Central unit */}
       <rect x="10" y="10" width="4" height="4" rx="1" fill="currentColor" />
@@ -119,7 +119,7 @@ export function IoTIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Central Hub */}
       <circle cx="12" cy="12" r="3" fill="#FB7115" stroke="#FB7115" />
@@ -151,7 +151,7 @@ export function EmbeddedIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Microchip main body */}
       <rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor" fillOpacity="0.1" />
@@ -178,7 +178,7 @@ export function AutomationIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Conveyor track */}
       <rect x="3" y="14" width="18" height="6" rx="3" />
@@ -209,7 +209,7 @@ export function MfgIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Factory profile */}
       <path d="M3 20V9l6 4V9l6 4V7l6 4v9H3z" fill="currentColor" fillOpacity="0.1" />
@@ -236,7 +236,7 @@ export function EduIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Cap diamond */}
       <path d="M12 4L3 9l9 5 9-5-9-5z" stroke="#FB7115" fill="currentColor" fillOpacity="0.1" />
@@ -263,7 +263,7 @@ export function DefIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Shield container */}
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" fillOpacity="0.1" />
@@ -286,7 +286,7 @@ export function CityIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Floor line */}
       <path d="M2 20h20" stroke="#FB7115" />
@@ -315,7 +315,7 @@ export function LabIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Beaker outline */}
       <path d="M9 3h6M10 3v5l-6 9c-1 1.5 0 3 2 3h12c2 0 3-1.5 2-3l-6-9V3" fill="currentColor" fillOpacity="0.1" />
@@ -338,7 +338,7 @@ export function HealthIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Medical Cross shape */}
       <path d="M10 3h4v6h6v4h-6v6h-4v-6H4v-4h6V3z" fill="currentColor" fillOpacity="0.1" />
@@ -361,7 +361,7 @@ export function AgriIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Stem */}
       <path d="M12 20V8" stroke="#FB7115" />
@@ -387,7 +387,7 @@ export function AutoIcon({ className, size = 48 }: IconProps) {
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
+      className={`draw-svg ${className || ""}`}
     >
       {/* Outer tire */}
       <circle cx="12" cy="12" r="9" fill="currentColor" fillOpacity="0.1" />
@@ -437,13 +437,51 @@ export function AwardIcon({ className, size = 48 }: IconProps) {
 export function UsersIcon({ className, size = 48 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      {/* Front user */}
       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" fill="currentColor" fillOpacity="0.1" />
-      
-      {/* Back user */}
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="#FB7115" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#FB7115" />
+      <circle cx="9" cy="7" r="4" fill="rgba(255,106,0,0.06)" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="#FF6A00" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#FF6A00" />
+      <circle cx="9" cy="7" r="1.5" fill="#FF6A00" />
     </svg>
   );
 }
+
+// 19. 3D Printing - Additive nozzle & build layer
+export function Printing3DIcon({ className, size = 48 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M6 18h12M4 21h16" stroke="#FF6A00" />
+      <path d="M12 3v8" />
+      <polygon points="12 11 9 7 15 7 12 11" fill="rgba(255,106,0,0.06)" />
+      <circle cx="12" cy="11" r="1.5" fill="#FF6A00" />
+      <rect x="7" y="14" width="10" height="3" rx="1" fill="rgba(255,106,0,0.06)" />
+    </svg>
+  );
+}
+
+// 20. Laser Cutting - Precision fiber laser emitter & cut line
+export function LaserCuttingIcon({ className, size = 48 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="8" y="2" width="8" height="6" rx="1" fill="rgba(255,106,0,0.06)" />
+      <path d="M12 8v7" stroke="#FF6A00" strokeDasharray="2 2" />
+      <circle cx="12" cy="15" r="1.5" fill="#FF6A00" />
+      <path d="M3 20h18" stroke="#FF6A00" />
+      <path d="M6 20l3-4M18 20l-3-4" />
+    </svg>
+  );
+}
+
+// 21. PCB Services - Multi-layer FR-4 circuit trace & SMT pad
+export function PCBServicesIcon({ className, size = 48 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="rgba(255,106,0,0.06)" />
+      <path d="M7 7h4v4M17 17h-4v-4" stroke="#FF6A00" />
+      <circle cx="7" cy="7" r="1.5" fill="#FF6A00" />
+      <circle cx="17" cy="17" r="1.5" fill="#FF6A00" />
+      <circle cx="12" cy="12" r="2" fill="#FF6A00" />
+    </svg>
+  );
+}
+

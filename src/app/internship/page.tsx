@@ -94,6 +94,11 @@ export default function InternshipPage() {
       }
 
       const cleanMobile = formData.mobile.replace(/\D/g, "");
+      if (!cleanMobile || cleanMobile.length !== 10) {
+        setError("Please enter a valid 10-digit mobile number.");
+        setIsSubmitting(false);
+        return;
+      }
       const detailsArr = [];
       if (formData.category) detailsArr.push(`Format: ${formData.category}`);
       if (formData.college) detailsArr.push(`College: ${formData.college}`);
@@ -107,7 +112,7 @@ export default function InternshipPage() {
         idempotencyKey: activeKey,
         payload: {
           name: formData.name.trim(),
-          mobile: cleanMobile || undefined,
+          mobile: `${formData.countryCode} ${cleanMobile}`,
           email: formData.email.trim() || undefined,
           position: `${formData.role} (${formData.category})`,
           qualification: formData.branch || undefined,
