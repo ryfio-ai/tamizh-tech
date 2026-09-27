@@ -185,10 +185,10 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
       const leadType = projectContext ? "Project Enquiry" : (productContext ? "Product Enquiry" : "Quote");
       const source = projectContext ? `Project: ${projectContext.sourcePage}` : (productContext ? `Product: ${productContext.sourcePage}` : "Navbar / Footer Get a Quote");
       const subject = projectContext
-        ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) — ${trimmedName}`
+        ? `Project Discussion: ${projectContext.projectName} (${projectContext.projectType === "completed" ? "Completed" : "Topic"}) - ${trimmedName}`
         : (productContext
-            ? `Product Enquiry: ${productContext.productName}${productContext.configurationName ? ` (${productContext.configurationName})` : ""} (${productContext.categorySlug}) — ${trimmedName}`
-            : `Quote Request: ${currentServiceObj.label} — ${trimmedName}`);
+            ? `Product Enquiry: ${productContext.productName}${productContext.configurationName ? ` (${productContext.configurationName})` : ""} (${productContext.categorySlug}) - ${trimmedName}`
+            : `Quote Request: ${currentServiceObj.label} - ${trimmedName}`);
 
       const parsedQty = parseInt(formData.quantity, 10);
       const numericQuantity = isNaN(parsedQty) || parsedQty <= 0 ? 1 : parsedQty;
@@ -328,7 +328,7 @@ export function QuoteModal({ isOpen, onClose, defaultService, defaultRequirement
                         <span className="font-semibold text-slate-500">Configuration:</span>
                         <span className="font-bold text-[#FF6B00]">
                           {productContext.configurationName || (productContext.productConfiguration === "with-battery" ? "With Battery" : "Without Battery")}
-                          {productContext.configurationPrice ? ` — ₹${productContext.configurationPrice.toLocaleString("en-IN")}` : ""}
+                          {productContext.configurationPrice ? ` - ₹${productContext.configurationPrice.toLocaleString("en-IN")}` : ""}
                         </span>
                         {productContext.productConfigurationSku && (
                           <span className="font-mono text-slate-500 text-[11px]">

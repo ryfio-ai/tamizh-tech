@@ -21,7 +21,7 @@ export function RelatedServices({ relatedServices, relatedProducts }: RelatedSer
             Related Capabilities & Products
           </h2>
           <p className="text-sm text-text-muted leading-relaxed">
-            Combine services for complete product engineering — from metal cutting and 3D printing to circuit design and robotics integration.
+            Combine services for complete product engineering: from metal cutting and 3D printing to circuit design and robotics integration.
           </p>
         </div>
 

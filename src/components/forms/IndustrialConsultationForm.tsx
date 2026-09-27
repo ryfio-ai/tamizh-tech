@@ -33,8 +33,8 @@ const INDUSTRIES = [
 
 const TIMELINES = [
   "Immediate (Under 1 Month)",
-  "1 — 3 Months",
-  "3 — 6 Months",
+  "1-3 Months",
+  "3-6 Months",
   "Exploratory / Planning",
 ];
 
@@ -49,7 +49,7 @@ export default function IndustrialConsultationForm() {
     industry: "Automotive & Components",
     city: "",
     state: "Tamil Nadu",
-    timeline: "1 — 3 Months",
+    timeline: "1-3 Months",
     requirement: "",
     preferredContactMethod: "Phone",
     honeypot: "",

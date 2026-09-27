@@ -72,7 +72,7 @@ const whyUs = [
     icon: Zap,
     title: "Practical Engineering",
     badge: "Built for Real Use",
-    desc: "Solutions and hardware platforms are engineered around actual use cases — from student tournaments to factory floors.",
+    desc: "Solutions and hardware platforms are engineered around actual use cases, from student tournaments to factory floors.",
     highlight: "Real-World Engineering"
   },
   {
@@ -122,7 +122,7 @@ const galleryImages = [
 const faqs = [
   { q: "What is TamizhTech Robotics Company?", a: "TamizhTech is an indigenous robotics engineering company based in Coimbatore, Tamil Nadu. We specialize in custom competition combat bots, turnkey STEM lab setups for schools, custom PCB design and assembly, embedded firmware development, and B2B industrial automation." },
   { q: "Do you design and build custom competition robots?", a: "Yes. TamizhTech designs and manufactures national-level competition robots, including Line Followers (TTRC LF 5.0), RC Robo Race, RC Robo Soccer, and custom combat bots (Beetleweight to Featherweight) with 180+ podium competition wins." },
-  { q: "Do you offer PCB design, fabrication, and SMT assembly in Coimbatore?", a: "Yes. We deliver complete turnkey PCB engineering services — from schematic capture and multi-layer layout (1, 2, 4-layer FR-4) to bare board fabrication, component sourcing, SMT/THT assembly, and bench testing in our Coimbatore lab." },
+  { q: "Do you offer PCB design, fabrication, and SMT assembly in Coimbatore?", a: "Yes. We deliver complete turnkey PCB engineering services, from schematic capture and multi-layer layout (1, 2, 4-layer FR-4) to bare board fabrication, component sourcing, SMT/THT assembly, and bench testing in our Coimbatore lab." },
   { q: "What industrial automation solutions do you provide for factories?", a: "We engineer industrial automation solutions including PLC control panel wiring, SCADA telemetry dashboards, computer vision defect inspection, machine retrofitting, and Autonomous Mobile Robots (AMRs) for manufacturing units in Coimbatore and South India." },
   { q: "How does TamizhTech set up STEM tinkering labs for schools?", a: "We provide end-to-end STEM tinkering lab setups for schools (CBSE, ICSE, State Board, and ATL grants). This includes ESD workbenches, Arduino/ESP32 kits, 3D printers, soldering bays, 40-week NEP 2020 curriculum, and hands-on teacher training." },
   { q: "Can engineering colleges get robotics R&D lab support?", a: "Yes. We partner with engineering colleges across Tamil Nadu under MoU frameworks to establish robotics R&D centers, provide faculty development programs (FDP), and mentor student teams for national robotics championships." },
@@ -195,10 +195,10 @@ export default function HomeClient() {
   return (
     <div className="flex flex-col bg-white">
 
-      {/* 1. HERO SECTION — compact on mobile, fits viewport on desktop */}
+      {/* 1. HERO SECTION: compact on mobile, fits viewport on desktop */}
       <section
         ref={heroRef}
-        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100vh-80px)] mt-20"
+        className="relative flex items-center overflow-hidden bg-white hero-grid hero-gradient border-b border-border/40 py-6 md:py-0 md:min-h-[calc(100dvh-80px)] mt-20"
       >
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
@@ -306,14 +306,20 @@ export default function HomeClient() {
                 className="flex items-center gap-3 flex-wrap pt-1"
               >
                 <Link href="/solutions" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-sm font-bold shadow-[0_4px_14px_rgba(255,106,0,0.2)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] hover:-translate-y-px transition-all rounded-full btn-primary-orange group">
-                    Explore Our Robotics World <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Button>
+                  <button className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center pl-6 pr-2 py-2.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-full shadow-[0_4px_16px_rgba(255,106,0,0.25)] hover:shadow-[0_8px_24px_rgba(255,106,0,0.35)] active:scale-[0.98] transition-all duration-300 group">
+                    <span>Explore Our Robotics World</span>
+                    <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center ml-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </span>
+                  </button>
                 </Link>
                 <Link href="/services" className="w-full sm:w-auto">
-                  <Button className="w-full justify-center text-sm font-bold hover:bg-subtle hover:-translate-y-px transition-all rounded-full btn-outline-orange group">
-                    Build With Us <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Button>
+                  <button className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center pl-6 pr-2 py-2.5 text-sm font-bold text-slate-800 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 rounded-full shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all duration-300 group">
+                    <span>Build With Us</span>
+                    <span className="w-8 h-8 rounded-full bg-slate-200/80 group-hover:bg-accent/15 flex items-center justify-center ml-3.5 transition-all duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                      <ArrowRight className="w-4 h-4 text-slate-700 group-hover:text-accent" />
+                    </span>
+                  </button>
                 </Link>
               </motion.div>
 
@@ -329,25 +335,27 @@ export default function HomeClient() {
               </motion.p>
             </motion.div>
 
-            {/* ── RIGHT COLUMN — TamizhTech Robotics Fleet Showcase ── */}
+            {/* RIGHT COLUMN: TamizhTech Robotics Fleet Showcase */}
             <div className="relative flex items-center justify-center w-full py-4 lg:py-6">
               {/* Diffused Ambient Glow Behind the Showcase */}
-              <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-tr from-accent/20 via-accent/5 to-transparent rounded-[2.5rem] blur-2xl opacity-60 pointer-events-none -z-10" />
+              <div className="absolute -inset-3 sm:-inset-6 bg-gradient-to-tr from-accent/20 via-accent/5 to-transparent rounded-[2.8rem] blur-2xl opacity-60 pointer-events-none -z-10" />
 
-              {/* Clean Hardware Showcase Container with scroll parallax & soft zoom */}
+              {/* Machined Double-Bezel Hardware Showcase Container with scroll parallax & soft zoom */}
               <motion.div
                 style={shouldReduceMotion ? {} : { y: heroY, scale: heroScale }}
-                className="relative w-full max-w-[590px] aspect-[3/2] rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-[0_15px_45px_-10px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.03)] transition-all duration-500 hover:shadow-[0_20px_55px_-10px_rgba(0,0,0,0.12)]"
+                className="relative w-full max-w-[600px] p-2 sm:p-2.5 rounded-[2rem] sm:rounded-[2.4rem] bg-slate-100/90 ring-1 ring-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.12)]"
               >
-                {/* Product Fleet Photograph */}
-                <Image
-                  src="/hero-combined.jpg"
-                  alt="TamizhTech Robotics Fleet — Combat Robot, Bipedal Platform, Line Follower & All-Terrain Rover"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
-                  className="object-contain transition-transform duration-700 ease-out hover:scale-[1.03]"
-                  priority
-                />
+                <div className="relative w-full aspect-[3/2] rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.4rem-0.625rem)] overflow-hidden bg-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.03)] border border-slate-200/60">
+                  {/* Product Fleet Photograph */}
+                  <Image
+                    src="/hero-combined.jpg"
+                    alt="TamizhTech Robotics Fleet: Combat Robot, Bipedal Platform, Line Follower and All-Terrain Rover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
+                    className="object-contain transition-transform duration-700 ease-out hover:scale-[1.03]"
+                    priority
+                  />
+                </div>
               </motion.div>
             </div>
 
@@ -356,31 +364,83 @@ export default function HomeClient() {
       </section>
 
       {/* 1.1 COMMERCIAL PRINCIPLE: QUALITY FIRST. VALUE ALWAYS. */}
-      <section className="bg-white border-b border-[#E5E5E5] py-10 md:py-14">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF6B00] text-xs font-bold tracking-wider uppercase mb-3.5">
-            <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-            <span>Commercial Positioning</span>
+      <section className="bg-white border-b border-[#E5E5E5] py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200/80 text-accent text-xs font-bold tracking-[0.16em] uppercase mb-4 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span>Commercial Positioning</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading tracking-tight text-[#111111] uppercase leading-tight">
+              QUALITY FIRST. <span className="text-accent">VALUE ALWAYS.</span>
+            </h2>
+
+            <p className="mt-3.5 text-sm sm:text-base text-text-secondary leading-relaxed">
+              Quality is our key parameter, paired with competitive pricing across our robotics products and engineering services. We focus on dependable quality, practical engineering and competitive pricing across products and services.
+            </p>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading tracking-tight text-[#111111] uppercase leading-tight">
-            QUALITY FIRST. <span className="text-[#FF6B00]">VALUE ALWAYS.</span>
-          </h2>
+          {/* Double-Bezel Dual Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            {/* Pillar 1 */}
+            <div className="p-1 rounded-3xl bg-slate-100/80 ring-1 ring-slate-200/80">
+              <div className="p-6 sm:p-7 rounded-[calc(1.5rem-4px)] bg-white h-full border border-slate-200/60 shadow-2xs flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-accent font-mono">01 / Discipline</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-orange-50 text-accent border border-orange-200/60">Quality Standard</span>
+                  </div>
+                  <h3 className="text-lg font-bold font-heading text-text-primary mb-2">Engineered for Dependability</h3>
+                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                    Tournament-tested combat frames, IPC-compliant PCB layouts, high-precision SS 304/316 fiber laser cut brackets, and industrial grade deterministic firmware.
+                  </p>
+                </div>
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500">
+                  <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                  <span>Podium-proven engineering quality</span>
+                </div>
+              </div>
+            </div>
 
-          <p className="mt-3.5 text-sm sm:text-base md:text-[17px] text-[#111111]/80 max-w-2xl mx-auto leading-relaxed">
-            Quality is our key parameter — with competitive pricing across our robotics products and engineering services. We focus on dependable quality, practical engineering and competitive pricing across products and services.
-          </p>
+            {/* Pillar 2 */}
+            <div className="p-1 rounded-3xl bg-slate-100/80 ring-1 ring-slate-200/80">
+              <div className="p-6 sm:p-7 rounded-[calc(1.5rem-4px)] bg-white h-full border border-slate-200/60 shadow-2xs flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-accent font-mono">02 / Integrity</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200/80">Direct Pricing</span>
+                  </div>
+                  <h3 className="text-lg font-bold font-heading text-text-primary mb-2">Transparent Commercial Value</h3>
+                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                    Accessible, fair pricing with zero middleman inflations. All hardware products and service scopes are communicated transparently before production.
+                  </p>
+                </div>
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500">
+                  <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                  <span>Direct Coimbatore engineering pricing</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3.5 mt-6">
+          {/* Island Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5">
             <Link href="/products">
-              <Button className="bg-[#FF6B00] hover:bg-[#E05E00] text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all">
-                Explore Products <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
+              <button className="inline-flex items-center pl-6 pr-2 py-2 text-xs sm:text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-full shadow-xs hover:shadow-md active:scale-[0.98] transition-all group">
+                <span>Explore Products</span>
+                <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center ml-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                  <ArrowRight className="w-3.5 h-3.5 text-white" />
+                </span>
+              </button>
             </Link>
             <Link href="/services">
-              <Button variant="outline" className="border-[#E5E5E5] text-[#111111] hover:bg-slate-50 font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full">
-                Explore Services <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
+              <button className="inline-flex items-center pl-6 pr-2 py-2 text-xs sm:text-sm font-bold text-slate-800 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 rounded-full shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all group">
+                <span>Explore Services</span>
+                <span className="w-7 h-7 rounded-full bg-slate-200/80 group-hover:bg-accent/15 flex items-center justify-center ml-3 transition-all duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-accent" />
+                </span>
+              </button>
             </Link>
           </div>
         </div>
@@ -388,9 +448,9 @@ export default function HomeClient() {
 
       {/* 1.2 FESTFIND LIVE SHOWCASE */}
       {/* 1.5 STATS BAND */}
-      <section className="bg-subtle border-y border-border py-10">
-        <div className="container px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/60">
+      <section className="bg-subtle border-y border-border/60 py-12">
+        <div className="container px-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {[
               { target: 180, suffix: "+", label: "Competition Wins", icon: Award },
               { target: 15, suffix: "+", label: "Industry Partners", icon: Users },
@@ -404,10 +464,10 @@ export default function HomeClient() {
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.05, duration: 0.5 }}
-                  className="flex flex-col items-center text-center p-4 md:p-0"
+                  transition={{ delay: i * 0.05, duration: 0.5, ease: "easeOut" }}
+                  className="p-1 rounded-2xl bg-white border border-slate-200/70 shadow-2xs hover:shadow-sm hover:border-accent/40 transition-all duration-300 flex flex-col items-center text-center p-5 group"
                 >
-                  <div className="w-10 h-10 rounded-full bg-accent-soft flex items-center justify-center text-accent mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-accent-soft flex items-center justify-center text-accent mb-3 group-hover:bg-accent group-hover:text-white transition-all duration-300 group-hover:scale-105 shadow-2xs">
                     <Icon className="w-5 h-5 stroke-[2]" />
                   </div>
                   <StatCounter
@@ -416,7 +476,7 @@ export default function HomeClient() {
                     label={s.label}
                     customCard={true}
                     numberClassName="text-3xl md:text-4xl font-black text-text-primary tracking-tight font-heading"
-                    labelClassName="mt-1 text-xs font-bold text-text-muted uppercase tracking-wider block"
+                    labelClassName="mt-1 text-[11px] font-bold text-text-muted uppercase tracking-wider block"
                   />
                 </motion.div>
               );
@@ -835,17 +895,19 @@ export default function HomeClient() {
                 <span className="text-accent underline decoration-2 decoration-accent/40 underline-offset-4">Engineered for Metal (Not Wood)</span>
               </h2>
               <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-4">
-                We specialize strictly in <span className="text-text-primary font-bold">Stainless Steel (SS 304 & SS 316)</span> and precision sheet metal laser cutting — <span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">not wood or MDF</span>. Engineered for heavy-duty combat bot chassis, custom brackets, motor mounts, industrial panels, and tight-tolerance mechanical assemblies.
+                We specialize strictly in <span className="text-text-primary font-bold">Stainless Steel (SS 304 & SS 316)</span> and precision sheet metal laser cutting (<span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">strictly metal, not wood or MDF</span>). Engineered for heavy-duty combat bot chassis, custom brackets, motor mounts, industrial panels, and tight-tolerance mechanical assemblies.
               </p>
 
-              <div className="mb-6 p-4 rounded-xl bg-white border border-slate-200 text-xs text-text-primary space-y-2 shadow-2xs">
-                <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#FF6A00]" />
-                  <span>Specialized Stainless Steel Capabilities</span>
+              <div className="mb-6 p-1 rounded-2xl bg-slate-100/80 ring-1 ring-slate-200/80">
+                <div className="p-4 sm:p-5 rounded-[calc(1rem-2px)] bg-white border border-slate-200/60 text-xs text-text-primary space-y-2 shadow-2xs">
+                  <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                    <span className="w-2 h-2 rounded-full bg-[#FF6A00]" />
+                    <span>Specialized Stainless Steel Capabilities</span>
+                  </div>
+                  <p className="text-text-muted leading-relaxed">
+                    Burr-free clean edge quality with tight mechanical tolerances. Direct processing from DXF, DWG, and STEP CAD files with nesting optimization to minimize metal scrap.
+                  </p>
                 </div>
-                <p className="text-text-muted leading-relaxed">
-                  Burr-free clean edge quality with tight mechanical tolerances. Direct processing from DXF, DWG, and STEP CAD files with nesting optimization to minimize metal scrap.
-                </p>
               </div>
 
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
@@ -864,28 +926,38 @@ export default function HomeClient() {
                 ))}
               </ul>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3.5">
                 <a
                   href="https://wa.me/918148045030?text=Hi%20TamizhTech,%20I%20am%20looking%20for%20Stainless%20Steel%20Laser%20Cutting%20services%20(Not%20wood).%20Can%20you%20share%20pricing%20and%20turnaround%20time%20for%20SS%20parts?"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
-                  <Button variant="primary" size="lg" className="w-full justify-center !bg-[#FF6A00] hover:!bg-[#E05300] text-white font-bold rounded-lg border-none px-8 py-3.5 shadow-md shadow-orange-500/20">
-                    Order SS Laser Cutting via WhatsApp
-                  </Button>
+                  <button className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center pl-6 pr-2 py-2.5 text-xs sm:text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-full shadow-xs hover:shadow-md active:scale-[0.98] transition-all group">
+                    <span>Order SS Laser Cutting</span>
+                    <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center ml-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                      <ArrowRight className="w-3.5 h-3.5 text-white" />
+                    </span>
+                  </button>
                 </a>
                 <Link href="/services/laser-cutting" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full justify-center border-border hover:bg-white text-text-primary font-bold rounded-lg px-8 py-3.5">
-                    View Laser Cutting Details
-                  </Button>
+                  <button className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center pl-6 pr-2 py-2.5 text-xs sm:text-sm font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-full shadow-2xs hover:shadow-xs active:scale-[0.98] transition-all group">
+                    <span>View Laser Cutting Details</span>
+                    <span className="w-7 h-7 rounded-full bg-slate-100 group-hover:bg-accent/10 flex items-center justify-center ml-3 transition-all duration-300 group-hover:translate-x-0.5 group-hover:scale-105 shrink-0">
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-accent" />
+                    </span>
+                  </button>
                 </Link>
               </div>
             </AnimatedSection>
 
-            {/* Right side: Video */}
-            <AnimatedSection className="lg:col-span-6 relative aspect-video bg-black rounded-3xl overflow-hidden border border-border shadow-lg order-1 lg:order-2" direction="left">
-              <LazyVideo src="/laser-cutting.mp4" />
+            {/* Right side: Video with Double-Bezel Frame */}
+            <AnimatedSection className="lg:col-span-6 order-1 lg:order-2" direction="left">
+              <div className="p-2 sm:p-2.5 rounded-[2rem] bg-slate-100/90 ring-1 ring-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08)]">
+                <div className="relative aspect-video bg-black rounded-[calc(2rem-0.5rem)] overflow-hidden border border-slate-200/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.2)]">
+                  <LazyVideo src="/laser-cutting.mp4" />
+                </div>
+              </div>
             </AnimatedSection>
           </div>
         </div>

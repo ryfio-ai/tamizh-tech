@@ -21,7 +21,7 @@ const reviews: Review[] = [
     timeAgo: "1 year ago",
     headline: "Innovative and Reliable Robotics Solutions!",
     content:
-      "I’ve been following Tamizh Tech Robotics Company for a while and recently got a custom robotics project done through them. I’m genuinely impressed with their professionalism, creativity, and the effort they put into every detail. The team is young but extremely talented — they explained every step clearly and delivered on time. Their Robo Soccer Bot and other innovations are truly next-level.",
+      "I’ve been following Tamizh Tech Robotics Company for a while and recently got a custom robotics project done through them. I’m genuinely impressed with their professionalism, creativity, and the effort they put into every detail. The team is young but extremely talented; they explained every step clearly and delivered on time. Their Robo Soccer Bot and other innovations are truly next-level.",
     useCase: "Custom Robotics",
     stars: 5,
   },
@@ -41,7 +41,7 @@ const reviews: Review[] = [
     timeAgo: "1 year ago",
     headline: "Next-Level Innovations Built from Scratch",
     content:
-      "Their Robo Soccer Bot and other innovations are truly next-level. I love that they are building everything from scratch and supporting local engineering talent. I would definitely recommend Tamizh Tech for any robotics or electronics-based needs — whether it’s for education, competition, or custom builds.",
+      "Their Robo Soccer Bot and other innovations are truly next-level. I love that they are building everything from scratch and supporting local engineering talent. I would definitely recommend Tamizh Tech for any robotics or electronics-based needs, whether it is for education, competition, or custom builds.",
     useCase: "Competition Robots",
     stars: 5,
   },

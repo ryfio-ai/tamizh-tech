@@ -529,13 +529,16 @@ export function Navbar() {
               <kbd className="text-[10px] font-mono text-slate-400 px-1 py-0.5 bg-white rounded-full">⌘K</kbd>
             </button>
 
-            {/* Primary CTA: GET A QUOTE (Oval Pill) */}
+            {/* Primary CTA: GET A QUOTE (Island Button-in-Button) */}
             <button
               type="button"
               onClick={() => openQuote()}
-              className="px-4 py-2 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs uppercase tracking-wider rounded-full shadow-xs hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2"
+              className="inline-flex items-center pl-4 pr-1.5 py-1.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-bold text-xs uppercase tracking-wider rounded-full shadow-xs hover:shadow-md active:scale-[0.98] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] focus:ring-offset-2 group"
             >
-              Get a Quote
+              <span>Get a Quote</span>
+              <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center ml-2 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:scale-105">
+                <ArrowRight className="w-3.5 h-3.5 text-white" />
+              </span>
             </button>
           </div>
 
