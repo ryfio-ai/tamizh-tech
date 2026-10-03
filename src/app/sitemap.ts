@@ -89,6 +89,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addEntry('/stem-education-india', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/robotics-products-india', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/industrial-automation-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/laser-cutting-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/3d-printing-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/services/pcb-assembly-tamilnadu', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/stem-lab-setup-schools', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/solutions/colleges-robotics-coe', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/products/competition-robots', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
+  addEntry('/products/line-follower', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
 
   // 3. Content Type Hub Pages
   addEntry('/products', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');

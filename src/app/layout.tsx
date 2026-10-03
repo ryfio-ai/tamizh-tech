@@ -3,7 +3,7 @@ import { Space_Grotesk, Plus_Jakarta_Sans, Noto_Sans_Tamil, JetBrains_Mono } fro
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { OrganizationSchema, LocalBusinessSchema } from "@/components/JsonLd";
+import { GlobalSiteGraphSchema } from "@/components/JsonLd";
 import { FloatingWidgets } from "@/components/layout/FloatingWidgets";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -100,71 +100,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schemas = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "TamizhTech Robotics Company",
-    url: "https://www.tamizhtech.in",
-    logo: "https://www.tamizhtech.in/logo/TTRC LOGO.png",
-    foundingYear: "2024",
-    description: "TamizhTech Robotics Company is a Coimbatore-based engineering company founded in 2024, specializing in robotics, AI, drone technology, IoT, industrial automation, and STEM education through ThiranOli Academy. Evolved from Tamizh Robotics Club (established 2021).",
-    areaServed: "IN",
-    sameAs: [
-      "https://www.linkedin.com/company/tamizh-tech-robotics-company",
-      "https://www.instagram.com/tamizh_tech_robotics_company",
-      "https://youtube.com/@covaiscientist",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+918148045030",
-      contactType: "customer service",
-      email: "info@tamizhtech.in",
-      areaServed: "IN",
-      availableLanguage: ["English", "Tamil", "Hindi"],
-    },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Thiruchendur Gdn Rd, Kurumbapalayam SSKulam",
-      addressLocality: "Coimbatore",
-      addressRegion: "Tamil Nadu",
-      postalCode: "641107",
-      addressCountry: "IN",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://www.tamizhtech.in/#localbusiness",
-    name: "TamizhTech Robotics Company",
-    telephone: "+918148045030",
-    email: "info@tamizhtech.in",
-    url: "https://www.tamizhtech.in",
-    priceRange: "₹₹",
-    openingHours: "Mo-Sa 09:00-18:00",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Thiruchendur Gdn Rd, Kurumbapalayam SSKulam",
-      addressLocality: "Coimbatore",
-      addressRegion: "Tamil Nadu",
-      postalCode: "641107",
-      addressCountry: "IN",
-    },
-    geo: { "@type": "GeoCoordinates", latitude: 11.0168, longitude: 76.9558 },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "TamizhTech Robotics Company",
-    url: "https://www.tamizhtech.in",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://www.tamizhtech.in/blog?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-  },
-];
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${spaceGrotesk.variable} ${jakarta.variable} ${notoTamil.variable} ${jetbrainsMono.variable} scroll-smooth`}>
@@ -190,12 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         {/* End Google Tag Manager */}
         <meta name="theme-color" content="#FFFFFF" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
-        />
-        <OrganizationSchema />
-        <LocalBusinessSchema />
+        <GlobalSiteGraphSchema />
       </head>
       <body className="font-sans bg-page text-text-primary antialiased">
         {/* Google Tag Manager (noscript) */}

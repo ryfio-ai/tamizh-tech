@@ -198,6 +198,63 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      // ── Strategic SEO Keyword Landing Page Aliases ──
+      {
+        source: '/products/competition-robots',
+        destination: '/products/competition',
+      },
+      {
+        source: '/products/competition-kits',
+        destination: '/products/competition',
+      },
+      {
+        source: '/products/line-follower',
+        destination: '/products/competition/ttrc-lf-6-0',
+      },
+      {
+        source: '/services/laser-cutting-coimbatore',
+        destination: '/services/laser-cutting',
+      },
+      {
+        source: '/services/3d-printing-coimbatore',
+        destination: '/services/3d-printing',
+      },
+      {
+        source: '/services/pcb-assembly-tamilnadu',
+        destination: '/services/pcb-design-fabrication-assembly',
+      },
+      {
+        source: '/services/pcb-services',
+        destination: '/services/pcb-design-fabrication-assembly',
+      },
+      {
+        source: '/solutions/stem-lab-setup-schools',
+        destination: '/solutions/schools',
+      },
+      {
+        source: '/solutions/schools-stem-lab',
+        destination: '/solutions/schools',
+      },
+      {
+        source: '/solutions/colleges-robotics-coe',
+        destination: '/solutions/colleges',
+      },
+      {
+        source: '/solutions/colleges-coe',
+        destination: '/solutions/colleges',
+      },
+      {
+        source: '/learn',
+        destination: '/blog',
+      },
+      {
+        source: '/learn/:path*',
+        destination: '/blog/:path*',
+      },
+    ];
+  },
   async headers() {
     return [
       {

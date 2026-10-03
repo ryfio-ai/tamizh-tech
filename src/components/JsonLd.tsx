@@ -1,44 +1,185 @@
 import React from 'react';
 
+export function GlobalSiteGraphSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.tamizhtech.in/#organization",
+        "name": "TamizhTech Robotics Company",
+        "alternateName": ["Tamizh Tech", "TTRC"],
+        "url": "https://www.tamizhtech.in/",
+        "logo": "https://www.tamizhtech.in/logo.png",
+        "image": "https://www.tamizhtech.in/hero-robotics.jpg",
+        "description": "Indigenous robotics engineering, competition combat bots, SS 304/316 fiber laser cutting, PCB assembly, and STEM tinkering lab setups in Coimbatore, Tamil Nadu.",
+        "telephone": "+918148045030",
+        "email": "info@tamizhtech.in",
+        "founder": {
+          "@type": "Person",
+          "name": "Er. K. Tamizharasan"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Thiruchendur Garden Road, Kurumbapalayam",
+          "addressLocality": "Coimbatore",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "641107",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 11.1085,
+          "longitude": 77.0152
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "19:00"
+          }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Coimbatore" },
+          { "@type": "AdministrativeArea", "name": "Tamil Nadu" },
+          { "@type": "Country", "name": "India" }
+        ],
+        "priceRange": "$$",
+        "sameAs": [
+          "https://www.instagram.com/tamizhtech",
+          "https://www.instagram.com/tamizh_tech_robotics_company",
+          "https://www.linkedin.com/company/tamizhtech",
+          "https://www.linkedin.com/company/tamizh-tech-robotics-company",
+          "https://youtube.com/@covaiscientist"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.tamizhtech.in/#website",
+        "name": "TamizhTech Robotics Company",
+        "url": "https://www.tamizhtech.in",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.tamizhtech.in/blog?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://www.tamizhtech.in/products/rc-robo-soccer#product",
+        "name": "RC Robo Soccer Competition Bot Platform",
+        "image": "https://www.tamizhtech.in/products/robo-soccer.jpg",
+        "description": "Tournament-grade RC Robo Soccer bot with active pneumatic striker mechanism, omni-directional wheels, and customized RC setup engineered in Coimbatore.",
+        "brand": {
+          "@type": "Brand",
+          "name": "TamizhTech"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.tamizhtech.in/products/rc-robo-soccer",
+          "priceCurrency": "INR",
+          "price": "14999",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@id": "https://www.tamizhtech.in/#organization"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "14"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.tamizhtech.in/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What robotics engineering services does TamizhTech offer in Coimbatore?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "TamizhTech specializes in custom competition combat bots, precision SS 304 and SS 316 fiber laser cutting, PCB design and PCBA fabrication, turnkey STEM tinkering lab setups for schools, and industrial automation solutions across Tamil Nadu."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does TamizhTech build custom competition robots for national tournaments?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. TamizhTech designs and manufactures competition-ready platforms including Line Followers (TTRC LF 5.0), RC Robo Race, RC Robo Soccer, and combat bots with over 180+ podium tournament wins."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can TamizhTech set up turnkey STEM and ATL labs for schools in Tamil Nadu?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. TamizhTech delivers end-to-end STEM tinkering lab solutions compliant with NEP 2020 and ATL grants. Packages include ESD workbenches, 3D printers, microcontrollers, modular robotics hardware, and full teacher training programs."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://www.tamizhtech.in/#organization",
-    "name": "Tamizh Tech Robotics Company",
-    "alternateName": ["TamizhTech", "TTRC"],
+    "name": "TamizhTech Robotics Company",
+    "alternateName": ["Tamizh Tech", "TTRC"],
     "url": "https://www.tamizhtech.in",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png",
+      "url": "https://www.tamizhtech.in/logo.png",
       "width": 500,
       "height": 500
     },
+    "image": "https://www.tamizhtech.in/hero-robotics.jpg",
     "foundingDate": "2024-10-22",
     "founders": [{ "@type": "Person", "name": "Er. K. Tamizharasan" }],
-    "description": "Coimbatore-based robotics engineering company specializing in custom competition combat bots, B2B industrial automation, STEM Tinkering labs, and engineering robotics education.",
+    "description": "Indigenous robotics engineering, competition combat bots, SS 304/316 fiber laser cutting, PCB assembly, and STEM tinkering lab setups in Coimbatore, Tamil Nadu.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
+      "streetAddress": "Thiruchendur Garden Road, Kurumbapalayam",
       "addressLocality": "Coimbatore",
       "addressRegion": "Tamil Nadu",
       "postalCode": "641107",
       "addressCountry": "IN"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 11.1085,
+      "longitude": 77.0152
+    },
     "areaServed": [
+      { "@type": "City", "name": "Coimbatore" },
+      { "@type": "AdministrativeArea", "name": "Tamil Nadu" },
       { "@type": "Country", "name": "India" }
     ],
     "sameAs": [
-      "https://www.linkedin.com/company/tamizh-tech-robotics-company",
+      "https://www.instagram.com/tamizhtech",
       "https://www.instagram.com/tamizh_tech_robotics_company",
-      "https://www.youtube.com/@covaiscientist",
-      "https://www.facebook.com/tamizhtech"
+      "https://www.linkedin.com/company/tamizhtech",
+      "https://www.linkedin.com/company/tamizh-tech-robotics-company",
+      "https://youtube.com/@covaiscientist"
     ],
     "contactPoint": [{
       "@type": "ContactPoint",
-      "telephone": "+91 8148045030",
+      "telephone": "+918148045030",
       "contactType": "customer support",
-      "email": "contact@tamizhtech.in",
+      "email": "info@tamizhtech.in",
       "areaServed": "IN",
       "availableLanguage": ["en", "ta"]
     }]
@@ -55,13 +196,20 @@ export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://www.tamizhtech.in/#localbusiness",
-    "name": "Tamizh Tech Robotics Company",
-    "image": "https://www.tamizhtech.in/logo/TTRC%20LOGO.png",
-    "telephone": "+91 8148045030",
-    "email": "contact@tamizhtech.in",
-    "url": "https://www.tamizhtech.in",
+    "@id": "https://www.tamizhtech.in/#organization",
+    "name": "TamizhTech Robotics Company",
+    "alternateName": "Tamizh Tech",
+    "image": "https://www.tamizhtech.in/hero-robotics.jpg",
+    "logo": "https://www.tamizhtech.in/logo.png",
+    "telephone": "+918148045030",
+    "email": "info@tamizhtech.in",
+    "url": "https://www.tamizhtech.in/",
     "priceRange": "$$",
+    "description": "Indigenous robotics engineering, competition combat bots, SS 304/316 fiber laser cutting, PCB assembly, and STEM tinkering lab setups in Coimbatore, Tamil Nadu.",
+    "founder": {
+      "@type": "Person",
+      "name": "Er. K. Tamizharasan"
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -71,7 +219,7 @@ export function LocalBusinessSchema() {
     },
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Thiruchendur Gdn Rd, Kurumbapalayam",
+      "streetAddress": "Thiruchendur Garden Road, Kurumbapalayam",
       "addressLocality": "Coimbatore",
       "addressRegion": "Tamil Nadu",
       "postalCode": "641107",
@@ -79,16 +227,28 @@ export function LocalBusinessSchema() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 11.0967,
-      "longitude": 77.0146
+      "latitude": 11.1085,
+      "longitude": 77.0152
     },
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         "opens": "09:00",
-        "closes": "18:30"
+        "closes": "19:00"
       }
+    ],
+    "areaServed": [
+      { "@type": "City", "name": "Coimbatore" },
+      { "@type": "AdministrativeArea", "name": "Tamil Nadu" },
+      { "@type": "Country", "name": "India" }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/tamizhtech",
+      "https://www.instagram.com/tamizh_tech_robotics_company",
+      "https://www.linkedin.com/company/tamizhtech",
+      "https://www.linkedin.com/company/tamizh-tech-robotics-company",
+      "https://youtube.com/@covaiscientist"
     ]
   };
   return (
