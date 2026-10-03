@@ -98,7 +98,7 @@ export function Navbar() {
     if (key === "Services" && (pathname.startsWith("/services") || pathname.startsWith("/industrial-automation-coimbatore"))) return true;
     if (key === "Learn" && (pathname.startsWith("/courses") || pathname.startsWith("/blog") || pathname.startsWith("/events"))) return true;
     if (key === "Projects" && pathname.startsWith("/projects")) return true;
-    if (key === "Company" && (pathname.startsWith("/about") || pathname.startsWith("/founder") || pathname.startsWith("/careers") || pathname.startsWith("/contact") || pathname.startsWith("/robotics-club"))) return true;
+    if (key === "Company" && (pathname.startsWith("/about") || pathname.startsWith("/team") || pathname.startsWith("/careers") || pathname.startsWith("/contact") || pathname.startsWith("/robotics-club"))) return true;
     return false;
   };
 

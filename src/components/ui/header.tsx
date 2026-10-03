@@ -40,7 +40,7 @@ function Header1() {
 
   const companyDropdown = [
     { title: "About Us", href: "/about", desc: "Our team, story and technical creed.", icon: Users },
-    { title: "Founder Profile", href: "/founder", desc: "Read the journey of Er. K. Tamizharasan.", icon: Users },
+    { title: "Our Team", href: "/team", desc: "Core leadership & engineering minds.", icon: Users },
     { title: "Robotics in Coimbatore", href: "/robotics-company-in-coimbatore", desc: "Coimbatore's premier R&D hub.", icon: Factory },
     { title: "Achievements Hub", href: "/#achievements", desc: "180+ winning spots across India.", icon: Award },
     { title: "Visual Gallery", href: "/gallery", desc: "Photos of bots, labs, and workshop events.", icon: ImageIcon },

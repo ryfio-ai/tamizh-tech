@@ -248,11 +248,6 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/founder" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
-                    Founder Profile (Er. K. Tamizharasan)
-                  </Link>
-                </li>
-                <li>
                   <Link href="/team" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Leadership & Engineering Team
                   </Link>
@@ -402,7 +397,6 @@ export function Footer() {
               {openAccordions.companyLearn && (
                 <ul className="pt-2 pl-2 space-y-2 text-xs text-slate-600">
                   <li><Link href="/about" className="hover:text-[#FF6B00]">About Us</Link></li>
-                  <li><Link href="/founder" className="hover:text-[#FF6B00]">Founder Profile</Link></li>
                   <li><Link href="/team" className="hover:text-[#FF6B00]">Leadership & Team</Link></li>
                   <li><Link href="/careers" className="hover:text-[#FF6B00]">Careers</Link></li>
                   <li><Link href="/robotics-club/join" className="hover:text-[#FF6B00]">Robotics Club</Link></li>

@@ -82,7 +82,7 @@ export const seoKeywordMap: SEOKeywordMapping[] = [
   {
     keyword: "er k tamizharasan",
     intent: "NAVIGATIONAL",
-    page: "/founder",
+    page: "/team",
     audience: "General Audience",
     businessValue: "BRAND_AUTHORITY",
     status: "INDEXED_CANONICAL",

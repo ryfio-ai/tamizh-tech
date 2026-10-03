@@ -159,10 +159,15 @@ const nextConfig = {
         destination: '/blog/education/robotics-course-tamil-vs-english',
         permanent: true,
       },
-      // ── About Duplicate Canonical Consolidation ──
+      // ── About & Founder Consolidation ──
       {
         source: '/about-tamizh-tech',
         destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/founder',
+        destination: '/team',
         permanent: true,
       },
       // ── Legacy Project Category 404 Fixes (HTTP 308/301) ──

@@ -57,7 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 1. Core Static Authority Pages
   addEntry('/', '2026-03-01T00:00:00.000Z', 1.0, 'weekly');
   addEntry('/about', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
-  addEntry('/founder', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/team', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/services', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/services/3d-printing', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');

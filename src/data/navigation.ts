@@ -178,7 +178,7 @@ export const companyDropdown = {
   heading: "Company",
   items: [
     { label: "About Us", href: "/about", desc: "Company journey, mission & values" },
-    { label: "Founder Profile", href: "/founder", desc: "Er. K. Tamizharasan" },
+    { label: "Our Team", href: "/team", desc: "Leadership & engineering minds" },
     { label: "Careers", href: "/careers", desc: "Join our engineering & training team" },
     { label: "Robotics Club", href: "/robotics-club/join", desc: "Tamizh Robotics Club (TRC) membership" },
     { label: "Contact Us", href: "/contact", desc: "Coimbatore office & direct lines" }

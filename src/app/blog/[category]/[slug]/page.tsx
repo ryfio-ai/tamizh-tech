@@ -141,7 +141,7 @@ export default async function HierarchicalBlogPostPage({ params }: PageProps) {
       '@type': 'Person',
       name: post.author,
       jobTitle: post.authorTitle,
-      url: 'https://www.tamizhtech.in/founder',
+      url: 'https://www.tamizhtech.in/team',
     },
     publisher: {
       '@type': 'Organization',
@@ -233,7 +233,7 @@ export default async function HierarchicalBlogPostPage({ params }: PageProps) {
               <p className="font-black text-text-primary text-sm uppercase tracking-wide">{post.author}</p>
               <p className="text-xs text-text-muted mb-2">{post.authorTitle}</p>
               <p className="text-sm text-text-secondary leading-relaxed">Er. K. Tamizharasan is the founder of TamizhTech Robotics Company and Tamizh Robotics Club (TRC). He has 10+ years of experience in competitive robotics, industrial automation, and STEM education across Tamil Nadu.</p>
-              <Link href="/founder" className="text-xs font-bold text-accent hover:underline mt-1 inline-block">Read full profile →</Link>
+              <Link href="/team" className="text-xs font-bold text-accent hover:underline mt-1 inline-block">Meet our team →</Link>
             </div>
           </div>
 
