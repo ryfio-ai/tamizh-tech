@@ -24,7 +24,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     role: 'Founder & CEO',
     image: '/team/Tamizharasan K.PNG',
     social: {
-      linkedin: 'https://www.linkedin.com/company/tamizh-tech-robotics-company',
+      linkedin: 'https://www.linkedin.com/in/tamizharasan-k-1757a3301/',
       instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
     },
   },
@@ -34,7 +34,8 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     role: 'CTO | Technology, Product & Business Operations',
     image: '/team/sathish.jpeg',
     social: {
-      linkedin: 'https://www.linkedin.com/company/tamizh-tech-robotics-company',
+      linkedin: 'https://www.linkedin.com/in/sathishkumarp126/',
+      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
     },
   },
   {
@@ -43,7 +44,8 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     role: 'Head of R&D',
     image: '/team/sukesh.jpeg',
     social: {
-      linkedin: 'https://www.linkedin.com/company/tamizh-tech-robotics-company',
+      linkedin: 'https://www.linkedin.com/in/sukeshan-s-a44b31298/',
+      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
     },
   },
   {
@@ -52,7 +54,8 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     role: 'Embedded System Engineer',
     image: '/team/kowsik.jpeg',
     social: {
-      linkedin: 'https://www.linkedin.com/company/tamizh-tech-robotics-company',
+      linkedin: 'https://www.linkedin.com/in/kowsik-k-38a471329/',
+      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
     },
   },
   {
@@ -61,7 +64,8 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     role: 'Head of R&D',
     image: '/team/amuthabharathi.png',
     social: {
-      linkedin: 'https://www.linkedin.com/company/tamizh-tech-robotics-company',
+      linkedin: 'https://www.linkedin.com/in/amuthabharathi-r-3379563b3/',
+      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
     },
   },
 ];
