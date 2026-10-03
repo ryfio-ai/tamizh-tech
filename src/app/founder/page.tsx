@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, GraduationCap, ArrowRight } from "lucide-react";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ export default function FounderPage() {
     "alumniOf": "Anna University",
     "sameAs": [
       "https://www.linkedin.com/in/tamizharasan-k-1757a3301/",
+      "https://www.instagram.com/tamizharasan__k/",
       "https://www.instagram.com/tamizh_tech_robotics_company"
     ],
     "address": {
@@ -73,14 +74,22 @@ export default function FounderPage() {
               <h2 className="text-2xl font-bold uppercase tracking-tight text-text-primary">Er. K. Tamizharasan</h2>
               <span className="text-xs font-bold text-accent uppercase tracking-widest mt-1 block">Founder & CEO</span>
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mt-0.5 block">Tamizh Tech Robotics Company</span>
-              <div className="mt-4 flex items-center justify-center">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                 <a
                   href="https://www.linkedin.com/in/tamizharasan-k-1757a3301/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all shadow-2xs"
                 >
-                  <FaLinkedinIn className="w-3.5 h-3.5" /> LinkedIn Profile
+                  <FaLinkedinIn className="w-3.5 h-3.5" /> LinkedIn
+                </a>
+                <a
+                  href="https://www.instagram.com/tamizharasan__k/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-600 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all shadow-2xs"
+                >
+                  <FaInstagram className="w-3.5 h-3.5" /> Instagram
                 </a>
               </div>
             </div>

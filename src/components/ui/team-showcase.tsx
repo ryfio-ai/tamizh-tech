@@ -25,7 +25,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     image: '/team/Tamizharasan K.PNG',
     social: {
       linkedin: 'https://www.linkedin.com/in/tamizharasan-k-1757a3301/',
-      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
+      instagram: 'https://www.instagram.com/tamizharasan__k/',
     },
   },
   {
@@ -35,7 +35,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     image: '/team/sathish.jpeg',
     social: {
       linkedin: 'https://www.linkedin.com/in/sathishkumarp126/',
-      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
+      instagram: 'https://www.instagram.com/sathishh_26/',
     },
   },
   {
@@ -45,7 +45,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     image: '/team/sukesh.jpeg',
     social: {
       linkedin: 'https://www.linkedin.com/in/sukeshan-s-a44b31298/',
-      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
+      instagram: 'https://www.instagram.com/sukesshh__/',
     },
   },
   {
@@ -55,7 +55,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     image: '/team/kowsik.jpeg',
     social: {
       linkedin: 'https://www.linkedin.com/in/kowsik-k-38a471329/',
-      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
+      instagram: 'https://www.instagram.com/_.kxsxk_.46/',
     },
   },
   {
@@ -65,7 +65,7 @@ export const TAMIZHTECH_TEAM: TeamMember[] = [
     image: '/team/amuthabharathi.png',
     social: {
       linkedin: 'https://www.linkedin.com/in/amuthabharathi-r-3379563b3/',
-      instagram: 'https://www.instagram.com/tamizh_tech_robotics_company',
+      instagram: 'https://www.instagram.com/_amuthabharathi_/',
     },
   },
 ];
