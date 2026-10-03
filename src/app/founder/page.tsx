@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, GraduationCap, ArrowRight } from "lucide-react";
-import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { Award, ShieldCheck, Heart, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
@@ -52,65 +50,6 @@ export default function FounderPage() {
         subtitle="Er. K. Tamizharasan — Driving indigenous robotics development, B2B industrial automation, and hands-on K-12 STEM education setups across India."
         breadcrumbActive="Founder"
       />
-
-      {/* Profile Section */}
-      <section className="section py-16">
-        <div className="container px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Image Placeholder/Design */}
-            <div className="lg:col-span-5 bg-subtle border border-border rounded-3xl p-8 flex flex-col items-center justify-center min-h-[400px] shadow-sm relative overflow-hidden text-center">
-              <div className="absolute top-4 right-4 text-accent z-10">
-                <Star className="w-6 h-6 fill-current animate-pulse" />
-              </div>
-              <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-accent shadow-lg mb-6 shrink-0 bg-white">
-                <Image
-                  src="/team/Tamizharasan K.PNG"
-                  alt="Er. K. Tamizharasan"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-text-primary">Er. K. Tamizharasan</h2>
-              <span className="text-xs font-bold text-accent uppercase tracking-widest mt-1 block">Founder & CEO</span>
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mt-0.5 block">Tamizh Tech Robotics Company</span>
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                <a
-                  href="https://www.linkedin.com/in/tamizharasan-k-1757a3301/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all shadow-2xs"
-                >
-                  <FaLinkedinIn className="w-3.5 h-3.5" /> LinkedIn
-                </a>
-                <a
-                  href="https://www.instagram.com/tamizharasan__k/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-600 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all shadow-2xs"
-                >
-                  <FaInstagram className="w-3.5 h-3.5" /> Instagram
-                </a>
-              </div>
-            </div>
-
-            {/* Biography & Message */}
-            <div className="lg:col-span-7">
-              <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Message from the Founders</span>
-              <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight mb-4">Engineering the Future Starts Here</h2>
-              <p className="text-text-secondary text-sm leading-relaxed mb-4 font-semibold italic">
-                "Engineering is not just about learning theories; it is about transforming ideas into reality."
-              </p>
-              <p className="text-text-secondary text-sm leading-relaxed mb-4">
-                Tamizh Tech Robotics was born from a passion for innovation, robotics, and hands-on engineering. What began as a student robotics club has now evolved into a technology company committed to developing future engineers, creating indigenous robotics solutions, and bridging the gap between education and industry.
-              </p>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                Today, we proudly serve students, industries, and institutions through robotics products, mentorship programs, industrial automation solutions, and technology education.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Timeline / Journey */}
       <section className="section py-16 bg-subtle border-t border-border">
