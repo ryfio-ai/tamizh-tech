@@ -99,7 +99,7 @@ export const products: Product[] = [
     subcategory: "Line Follower",
     brand: "TamizhTech Robotics",
     manufacturer: "TamizhTech Robotics Company",
-    availability: "preorder",
+    availability: "in_stock",
     name: "TTRC LF 6.0",
     metaTitle: "TTRC LF 6.0 Line Follower Robot | TamizhTech Robotics",
     metaDescription: "TTRC LF 6.0 autonomous line follower robot by TamizhTech. Regular catalogue price ₹3,799, offer price ₹3,199 (Supplied only without battery). Engineered for robotics competitions and STEM education.",

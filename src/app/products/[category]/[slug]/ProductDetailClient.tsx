@@ -1727,7 +1727,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-400">Availability:</span>
-                      <span className="font-semibold text-amber-300">Pre-Order / Enquiries</span>
+                      <span className="font-semibold text-emerald-400">In Stock</span>
                     </div>
                   </div>
                   {product.slug !== "ttrc-lf-6-0" ? (
