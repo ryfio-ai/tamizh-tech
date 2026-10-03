@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, GraduationCap } from "lucide-react";
+import { Mail, Phone, Award, ShieldCheck, Heart, Sparkles, BookOpen, Star, GraduationCap, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import TeamShowcase from "@/components/ui/team-showcase";
 
 export const metadata: Metadata = {
   title: "Er. K. Tamizharasan — Founder & CEO of TamizhTech",
@@ -140,6 +141,33 @@ export default function FounderPage() {
               <h4 className="text-sm font-bold uppercase text-text-primary mb-2">Made in India Vision</h4>
               <p className="text-text-secondary text-xs leading-relaxed">Dedicated to replacing imported Chinese robotics modules with local CNC/3D printed electronics kits.</p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Leadership & Engineering Team */}
+      <section className="section py-16 bg-subtle border-t border-border">
+        <div className="container px-6">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-accent font-extrabold text-xs uppercase tracking-widest block mb-2">Our Team</span>
+            <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-text-primary">
+              Core Leadership & Engineering
+            </h2>
+            <p className="mt-3 text-sm text-text-muted">
+              Working alongside Er. K. Tamizharasan is an expert core team driving technology, hardware R&D, and embedded systems.
+            </p>
+          </div>
+
+          <div className="bg-white border border-border/60 rounded-3xl p-6 sm:p-10 shadow-xs mb-8">
+            <TeamShowcase />
+          </div>
+
+          <div className="text-center">
+            <Link href="/team">
+              <Button variant="outline" className="gap-2">
+                Explore Full Team Profile <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

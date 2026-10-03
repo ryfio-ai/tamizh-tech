@@ -8,6 +8,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/button";
 import { TargetIcon, HeartIcon, AwardIcon, UsersIcon } from "@/components/ui/CustomIcons";
+import TeamShowcase from "@/components/ui/team-showcase";
 
 export const metadata: Metadata = {
   title: "About TamizhTech | Story, Vision & Team Coimbatore",
@@ -246,7 +247,22 @@ export default function AboutPage() {
         </div>
       </section>
 
-
+      {/* Team Showcase */}
+      <section className="section bg-subtle py-24 border-b border-border/30">
+        <div className="container px-6">
+          <AnimatedSection className="mb-12">
+            <SectionHeader
+              tag="Our People"
+              title="Leadership & Engineering"
+              highlight="Team"
+              subtitle="Meet the core minds steering technology, embedded systems, and R&D at TamizhTech Robotics."
+            />
+          </AnimatedSection>
+          <div className="bg-white border border-border/60 rounded-3xl p-6 sm:p-10 shadow-xs">
+            <TeamShowcase />
+          </div>
+        </div>
+      </section>
 
       {/* CTA - Clean Orange + White Brand Theme */}
       <section className="bg-white py-24 text-text-primary border-t border-border/40 relative overflow-hidden">
