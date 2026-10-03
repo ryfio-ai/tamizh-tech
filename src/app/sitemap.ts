@@ -57,7 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 1. Core Static Authority Pages
   addEntry('/', '2026-03-01T00:00:00.000Z', 1.0, 'weekly');
   addEntry('/about', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
-  addEntry('/about-tamizh-tech', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/founder', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
   addEntry('/services', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/services/3d-printing', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
@@ -84,18 +83,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addEntry('/terms', '2026-01-01T00:00:00.000Z', 0.3, 'yearly');
   addEntry('/cookies', '2026-01-01T00:00:00.000Z', 0.3, 'yearly');
 
-  // 2. High-Intent Local & National SEO/GEO Landing Pages
+  // 2. High-Intent Local & National SEO/GEO Landing Pages (Dedicated Standalone Pages)
   addEntry('/robotics-company-in-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/stem-education-india', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/robotics-products-india', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/industrial-automation-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/services/laser-cutting-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/services/3d-printing-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/services/pcb-assembly-tamilnadu', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/solutions/stem-lab-setup-schools', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/solutions/colleges-robotics-coe', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/products/competition-robots', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/products/line-follower', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
 
   // 3. Content Type Hub Pages
   addEntry('/products', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');

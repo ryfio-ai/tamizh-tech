@@ -66,32 +66,6 @@ export function GlobalSiteGraphSchema() {
         }
       },
       {
-        "@type": "Product",
-        "@id": "https://www.tamizhtech.in/products/rc-robo-soccer#product",
-        "name": "RC Robo Soccer Competition Bot Platform",
-        "image": "https://www.tamizhtech.in/products/robo-soccer.jpg",
-        "description": "Tournament-grade RC Robo Soccer bot with active pneumatic striker mechanism, omni-directional wheels, and customized RC setup engineered in Coimbatore.",
-        "brand": {
-          "@type": "Brand",
-          "name": "TamizhTech"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://www.tamizhtech.in/products/rc-robo-soccer",
-          "priceCurrency": "INR",
-          "price": "14999",
-          "availability": "https://schema.org/InStock",
-          "seller": {
-            "@id": "https://www.tamizhtech.in/#organization"
-          }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "5.0",
-          "reviewCount": "14"
-        }
-      },
-      {
         "@type": "FAQPage",
         "@id": "https://www.tamizhtech.in/#faq",
         "mainEntity": [
@@ -209,13 +183,6 @@ export function LocalBusinessSchema() {
     "founder": {
       "@type": "Person",
       "name": "Er. K. Tamizharasan"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "14",
-      "bestRating": "5",
-      "worstRating": "1"
     },
     "address": {
       "@type": "PostalAddress",

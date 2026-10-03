@@ -159,20 +159,42 @@ const nextConfig = {
         destination: '/blog/education/robotics-course-tamil-vs-english',
         permanent: true,
       },
+      // ── About Duplicate Canonical Consolidation ──
+      {
+        source: '/about-tamizh-tech',
+        destination: '/about',
+        permanent: true,
+      },
+      // ── Legacy Project Category 404 Fixes (HTTP 308/301) ──
+      {
+        source: '/projects/robotics-logistics',
+        destination: '/projects/logistics-retail',
+        permanent: true,
+      },
+      {
+        source: '/projects/artificial-intelligence',
+        destination: '/projects/computer-vision-edge-ai',
+        permanent: true,
+      },
+      {
+        source: '/projects/drone-technology',
+        destination: '/projects/agri-tech',
+        permanent: true,
+      },
       // ── Legacy Flat Project URLs → Canonical Hierarchical URLs (HTTP 308) ──
       {
         source: '/projects/autonomous-navigation-robot',
-        destination: '/projects/robotics-logistics/autonomous-navigation-robot',
+        destination: '/projects/logistics-retail',
         permanent: true,
       },
       {
         source: '/projects/ai-vision-quality-inspection',
-        destination: '/projects/artificial-intelligence/ai-vision-quality-inspection',
+        destination: '/projects/computer-vision-edge-ai',
         permanent: true,
       },
       {
         source: '/projects/agricultural-drone-system',
-        destination: '/projects/drone-technology/agricultural-drone-system',
+        destination: '/projects/agri-tech',
         permanent: true,
       },
       // ── Legacy Flat Event URLs → Canonical Hierarchical URLs (HTTP 308) ──

@@ -63,7 +63,7 @@ const defaultSections = [
   {
     title: "SEO Pages",
     links: [
-      { name: "About Tamizh Tech", href: "/about-tamizh-tech" },
+      { name: "About Tamizh Tech", href: "/about" },
       { name: "Robotics Company in Coimbatore", href: "/robotics-company-in-coimbatore" },
       { name: "Robotics Products India", href: "/robotics-products-india" },
       { name: "STEM Education India", href: "/stem-education-india" },

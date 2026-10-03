@@ -12,6 +12,22 @@ import { TargetIcon, HeartIcon, AwardIcon, UsersIcon } from "@/components/ui/Cus
 export const metadata: Metadata = {
   title: "About TamizhTech | Story, Vision & Team Coimbatore",
   description: "Learn about the journey, values, and engineering team of TamizhTech Robotics Company in Coimbatore.",
+  alternates: {
+    canonical: "https://www.tamizhtech.in/about",
+  },
+  openGraph: {
+    title: "About TamizhTech | Story, Vision & Team Coimbatore",
+    description: "Learn about the journey, values, and engineering team of TamizhTech Robotics Company in Coimbatore.",
+    url: "https://www.tamizhtech.in/about",
+    siteName: "TamizhTech Robotics Company",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About TamizhTech | Story, Vision & Team Coimbatore",
+    description: "Learn about the journey, values, and engineering team of TamizhTech Robotics Company in Coimbatore.",
+  },
 };
 
 const timeline = [

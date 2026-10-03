@@ -291,61 +291,6 @@ export const categories: Category[] = [
     updatedAt: '2026-03-01T00:00:00.000Z'
   },
 
-  // ── Projects Categories ─────────────────────────────────────────────────────
-  {
-    id: 'proj-robotics-logistics',
-    slug: 'robotics-logistics',
-    name: 'Robotics & Logistics',
-    contentType: 'projects',
-    description: 'Autonomous mobile robots and automated guided vehicles engineered for warehouse distribution and industrial material handling.',
-    seoTitle: 'Robotics & Logistics Projects | Tamizh Tech Coimbatore',
-    seoDescription: 'Custom autonomous navigation AGV projects designed and manufactured for manufacturing assembly plants in Tamil Nadu.',
-    primaryKeyword: 'autonomous AGV project India',
-    secondaryKeywords: [
-      'autonomous navigation robot',
-      'industrial AGV logistics Coimbatore',
-      'ROS LiDAR SLAM mobile robot'
-    ],
-    published: true,
-    createdAt: '2024-04-01T00:00:00.000Z',
-    updatedAt: '2026-03-01T00:00:00.000Z'
-  },
-  {
-    id: 'proj-artificial-intelligence',
-    slug: 'artificial-intelligence',
-    name: 'Artificial Intelligence & Vision',
-    contentType: 'projects',
-    description: 'Industrial machine vision inspection systems powered by edge deep learning models and high-speed GigE cameras.',
-    seoTitle: 'AI Vision Quality Inspection Projects | Tamizh Tech',
-    seoDescription: 'High-speed AI vision inspection system deployed on casting engine block production lines for real-time micro-defect identification.',
-    primaryKeyword: 'AI vision quality inspection system',
-    secondaryKeywords: [
-      'industrial machine vision project',
-      'YOLOv8 edge defect detection',
-      'Nvidia Jetson industrial vision'
-    ],
-    published: true,
-    createdAt: '2024-04-01T00:00:00.000Z',
-    updatedAt: '2026-03-01T00:00:00.000Z'
-  },
-  {
-    id: 'proj-drone-technology',
-    slug: 'drone-technology',
-    name: 'Drone Technology',
-    contentType: 'projects',
-    description: 'Autonomous agricultural hexacopters and specialized aerial platforms with electrostatic liquid spray payloads.',
-    seoTitle: 'Agricultural Drone Projects | Tamizh Tech Coimbatore',
-    seoDescription: 'Autonomous crop spraying hexacopter drone project with precision electrostatic nozzles and Pixhawk flight control.',
-    primaryKeyword: 'agricultural crop spraying drone India',
-    secondaryKeywords: [
-      'autonomous hexacopter project',
-      'precision agriculture UAV Coimbatore',
-      'Pixhawk drone development'
-    ],
-    published: true,
-    createdAt: '2024-04-01T00:00:00.000Z',
-    updatedAt: '2026-03-01T00:00:00.000Z'
-  },
 
   // ── Events Categories ───────────────────────────────────────────────────────
   {
