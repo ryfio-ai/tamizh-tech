@@ -85,6 +85,7 @@ export const productsDropdown = {
       title: "Competition Robots",
       items: [
         { label: "All Competition Bots", href: "/products/competition", desc: "TTRC LF, Robo Race & Robo Soccer" },
+        { label: "TTRC LF 6.0 (Latest)", href: "/products/competition/ttrc-lf-6-0", desc: "Next-gen high-speed line tracker" },
         { label: "TTRC LF 5.0 Line Follower", href: "/products/competition/ttrc-lf-5-0", desc: "PID competition-grade racer" },
         { label: "TTRC RR-5.0 Robo Race", href: "/products/competition/rc-robo-race", desc: "High-RPM racing & drift chassis" },
         { label: "TTRC SOCCER 5.1 Robo Soccer", href: "/products/competition/rc-robo-soccer", desc: "High-torque tournament striker" }

@@ -175,7 +175,23 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [quoteRequirement, setQuoteRequirement] = useState<string | undefined>(undefined);
 
+  // Image Gallery Interaction
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (images.length <= 1) return;
+      if (e.key === "ArrowLeft") {
+        setSelectedImageIdx((prev) => (prev - 1 + images.length) % images.length);
+      } else if (e.key === "ArrowRight") {
+        setSelectedImageIdx((prev) => (prev + 1) % images.length);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [images.length]);
 
   const productContext: ProductEnquiryContext = {
     sourceType: "product",
@@ -334,6 +350,12 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
             <Link href={`/products/${product.categorySlug}`} className="hover:text-slate-900 transition-colors shrink-0">
               {product.category}
             </Link>
+            {product.subcategory && (
+              <>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <span className="text-slate-500 shrink-0">{product.subcategory}</span>
+              </>
+            )}
             <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span className="font-semibold text-slate-900 truncate max-w-[200px] sm:max-w-none">
               {product.name}
@@ -359,7 +381,21 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
           
           {/* LEFT: DOMINANT IMAGE GALLERY (5 cols) */}
           <div className="lg:col-span-6 flex flex-col gap-4">
-            <div className="relative aspect-[4/3] w-full bg-slate-100 rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+            <div 
+              className="relative aspect-[4/3] w-full bg-slate-100 rounded-2xl border border-slate-200 overflow-hidden shadow-xs touch-pan-y"
+              onTouchStart={(e) => setTouchStart(e.targetTouches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (touchStart === null) return;
+                const touchEnd = e.changedTouches[0].clientX;
+                const diff = touchStart - touchEnd;
+                if (diff > 50) {
+                  setSelectedImageIdx((prev) => (prev + 1) % images.length);
+                } else if (diff < -50) {
+                  setSelectedImageIdx((prev) => (prev - 1 + images.length) % images.length);
+                }
+                setTouchStart(null);
+              }}
+            >
               <div className="relative w-full h-full">
                 <Image
                   src={images[selectedImageIdx] || product.image}
@@ -367,7 +403,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
-                  className="object-cover"
+                  className="object-cover select-none"
                 />
               </div>
 
@@ -380,7 +416,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
 
             {/* Thumbnails if multiple */}
             {images.length > 1 && (
-              <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+              <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none" aria-label="Product thumbnails">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
@@ -397,6 +433,7 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                       src={img}
                       alt={product.imageAlts && product.imageAlts[idx] ? product.imageAlts[idx] : `${product.name} thumbnail ${idx + 1}`}
                       fill
+                      loading="lazy"
                       className="object-cover"
                     />
                   </button>
@@ -408,14 +445,21 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
           {/* RIGHT: PRODUCT INFO & ENQUIRY (6 cols) */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
             <div>
-              {/* Category & SKU */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <Link
-                  href={`/products/${product.categorySlug}`}
-                  className="text-xs font-bold uppercase tracking-wider text-[#FF6B00] hover:underline"
-                >
-                  {product.category}
-                </Link>
+              {/* Category, Subcategory & SKU */}
+              <div className="flex items-center justify-between gap-2 mb-3 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/products/${product.categorySlug}`}
+                    className="text-xs font-bold uppercase tracking-wider text-[#FF6B00] hover:underline"
+                  >
+                    {product.category}
+                  </Link>
+                  {product.subcategory && (
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      / {product.subcategory}
+                    </span>
+                  )}
+                </div>
                 {product.sku && (
                   <span className="text-xs font-mono text-slate-400">
                     SKU #{product.sku}
@@ -424,9 +468,24 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
               </div>
 
               {/* Product Name */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-950 leading-tight mb-3">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-950 leading-tight mb-2">
                 {product.name}
               </h1>
+
+              {/* Tagline / Positioning Statement */}
+              {product.tagline && (
+                <p className="text-sm sm:text-base font-bold text-[#FF6B00] mb-3">
+                  {product.tagline}
+                </p>
+              )}
+
+              {/* Manufacturer Information */}
+              {product.manufacturer && (
+                <div className="mb-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200 text-xs text-slate-600">
+                  <span className="font-semibold text-slate-800">Engineered by:</span>
+                  <span>{product.manufacturer}</span>
+                </div>
+              )}
 
               {/* One-line Value Proposition / Short Description */}
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
@@ -484,9 +543,16 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
               {/* Configuration Selector */}
               {product.configurations && product.configurations.length > 0 && (
                 <div className="mb-6">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2.5">
-                    Choose Configuration:
-                  </span>
+                  <div className="flex items-center justify-between mb-2.5 flex-wrap gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                      {product.configurations.length === 1 ? "Configuration (Only Option):" : "Choose Configuration:"}
+                    </span>
+                    {product.configurations.length === 1 && product.configurations[0].id === "without-battery" && (
+                      <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200/90 px-2.5 py-0.5 rounded-md">
+                        Supplied Only Without Battery
+                      </span>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     {product.configurations.map((cfg) => {
                       const isSelected = selectedConfigId === cfg.id;
@@ -591,8 +657,8 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                 </div>
               )}
 
-              {/* Pricing (Factual dataset price only) */}
-              {((selectedConfig?.price) || (product.price && product.price > 0)) && (() => {
+              {/* Pricing (Factual dataset price or Price on Request) */}
+              {((selectedConfig?.price) || (product.price && product.price > 0)) ? (() => {
                 const currentSelling = selectedConfig ? selectedConfig.price : (product.sellingPrice || product.price || 0);
                 const currentRegular = selectedConfig ? selectedConfig.regularPrice : product.regularPrice;
                 const discount = calculateDiscountPercentage(currentRegular, currentSelling);
@@ -602,7 +668,11 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                     <div className="flex items-center justify-between gap-2 flex-wrap mb-1">
                       <div className="flex items-baseline gap-2 flex-wrap">
                         <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                          {selectedConfig ? `${selectedConfig.name}:` : "Catalogue Price:"}
+                          {currentRegular && currentRegular > currentSelling
+                            ? "Offer Price:"
+                            : selectedConfig
+                            ? `${selectedConfig.name}:`
+                            : "Catalogue Price:"}
                         </span>
                         <span className="text-2xl font-black text-slate-950">
                           ₹{currentSelling.toLocaleString("en-IN")}{product.priceUnit && !selectedConfig ? ` ${product.priceUnit}` : ""}
@@ -620,17 +690,24 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                           </span>
                         )}
                       </div>
-                      {/* Factual In Stock badge */}
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        In Stock
-                      </span>
+                      {/* Availability badge */}
+                      {product.availability === "in_stock" || product.availability === "InStock" ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          In Stock
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          Available Soon
+                        </span>
+                      )}
                     </div>
                     <p className="text-[11px] text-slate-500 mt-1">
-                      {selectedConfig
+                      {product.pricingNote
+                        ? product.pricingNote
+                        : selectedConfig
                         ? `Built around practical robotics requirements and offered at a competitive selling price for ${selectedConfig.name}. Official quotation provided on enquiry. Direct engineering support.`
-                        : product.pricingNote
-                        ? `${product.pricingNote} Built around practical robotics requirements and offered at a competitive selling price.`
                         : "Built around practical robotics requirements and offered at a competitive selling price. Official quotation provided on enquiry."}
                     </p>
                     <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500">
@@ -645,7 +722,37 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                     </div>
                   </div>
                 );
-              })()}
+              })() : (
+                <div className="mb-6 p-4 bg-slate-50/70 border border-slate-200 rounded-xl">
+                  <div className="flex items-center justify-between gap-2 flex-wrap mb-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Pricing:
+                      </span>
+                      <span className="text-2xl font-black text-slate-950">
+                        Price on Request
+                      </span>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200/60">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      Available Soon
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    Pricing for this latest-generation model is available on request. Submit an enquiry or message our engineering line for availability, institutional quotes, and lead times.
+                  </p>
+                  <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500">
+                    <div>
+                      <span className="font-semibold text-slate-700">Availability: </span>
+                      <span>Available Soon / Open for Pre-Order Enquiries</span>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-slate-700">Support: </span>
+                      <span>Direct technical consultation with TamizhTech mechatronics engineers</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* 3. ENQUIRY CTAs */}
               <div className="space-y-3 pt-2">
@@ -819,31 +926,61 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                   Verified Engineering Specifications
                 </h3>
                 <span className="text-xs text-slate-500">
-                  {specsList.length} parameters logged
+                  {specsList.length > 0 ? `${specsList.length} parameters logged` : "Parameters finalizing"}
                 </span>
               </div>
 
-              <div className="divide-y divide-slate-100">
-                {specsList.map((spec, idx) => {
-                  const parts = spec.split(":");
-                  const label = parts[0]?.trim();
-                  const value = parts.slice(1).join(":")?.trim();
+              {specsList.length > 0 ? (
+                <div className="divide-y divide-slate-100">
+                  {specsList.map((spec, idx) => {
+                    const parts = spec.split(":");
+                    const label = parts[0]?.trim();
+                    const value = parts.slice(1).join(":")?.trim();
 
-                  return (
-                    <div
-                      key={idx}
-                      className={`grid grid-cols-1 sm:grid-cols-3 p-4 text-xs sm:text-sm ${
-                        idx % 2 === 0 ? "bg-white" : "bg-slate-50/30"
-                      }`}
+                    return (
+                      <div
+                        key={idx}
+                        className={`grid grid-cols-1 sm:grid-cols-3 p-4 text-xs sm:text-sm ${
+                          idx % 2 === 0 ? "bg-white" : "bg-slate-50/30"
+                        }`}
+                      >
+                        <span className="font-semibold text-slate-700 sm:col-span-1">{label}</span>
+                        <span className="text-slate-600 sm:col-span-2 mt-0.5 sm:mt-0 font-mono text-xs">
+                          {value || label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="p-8 sm:p-12 text-center bg-white">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-50 text-[#FF6B00] mb-3">
+                    <Wrench className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-base font-bold text-slate-900 mb-1.5 font-heading">
+                    Specifications Coming Soon
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-500 max-w-lg mx-auto leading-relaxed mb-5">
+                    Official engineering specifications for {product.name} are undergoing tournament track benchmarking and verification. To ensure complete technical accuracy, unconfirmed numbers remain unpublished until track trials are finalized.
+                  </p>
+                  <div className="inline-flex flex-wrap items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleOpenEnquiry(`Technical specifications inquiry for ${product.name}`)}
+                      className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-colors"
                     >
-                      <span className="font-semibold text-slate-700 sm:col-span-1">{label}</span>
-                      <span className="text-slate-600 sm:col-span-2 mt-0.5 sm:mt-0 font-mono text-xs">
-                        {value || label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+                      Request Technical Datasheet
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleTalkEngineer}
+                      className="px-4 py-2 bg-orange-50 hover:bg-orange-100 text-[#FF6B00] font-bold text-xs rounded-xl transition-colors border border-orange-200"
+                    >
+                      Talk to an Engineer
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -1107,6 +1244,101 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                           className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
                         >
                           <span>View 600RPM Specs</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
+        {/* 5c. LF PLATFORM GENERATION ROADMAP (TTRC LF 5.0 vs LF 6.0) */}
+        {(product.slug === "ttrc-lf-6-0" || product.slug === "ttrc-lf-5-0") && (
+          <section className="mb-16 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+            <div className="p-5 sm:p-6 border-b border-slate-100 bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Platform Generations
+                </span>
+                <h2 className="text-lg sm:text-xl font-bold font-heading text-slate-900">
+                  TTRC Line Follower Platform Generations
+                </h2>
+              </div>
+              <p className="text-xs text-slate-500 max-w-sm">
+                Both generations remain actively supported in the TamizhTech catalog to support diverse competition tiers and learning requirements.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-100/70">
+                    <th className="p-4 font-bold text-slate-900">Model</th>
+                    <th className="p-4 font-bold text-slate-900">Generation</th>
+                    <th className="p-4 font-bold text-slate-900">Platform Status</th>
+                    <th className="p-4 font-bold text-slate-900 text-right">Catalog Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  <tr className={product.slug === "ttrc-lf-5-0" ? "bg-orange-50/30" : "hover:bg-slate-50/50 transition-colors"}>
+                    <td className="p-4 font-bold text-slate-900">
+                      TTRC LF 5.0
+                      {product.slug === "ttrc-lf-5-0" && (
+                        <span className="ml-2 text-[10px] font-semibold bg-orange-100 text-[#FF6B00] px-2 py-0.5 rounded">
+                          Current Page
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-4 text-slate-600">Previous Generation</td>
+                    <td className="p-4">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        Available
+                      </span>
+                    </td>
+                    <td className="p-4 text-right">
+                      {product.slug === "ttrc-lf-5-0" ? (
+                        <span className="text-xs font-semibold text-slate-400">Currently viewing</span>
+                      ) : (
+                        <Link
+                          href="/products/competition/ttrc-lf-5-0"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
+                        >
+                          <span>Explore LF 5.0</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      )}
+                    </td>
+                  </tr>
+
+                  <tr className={product.slug === "ttrc-lf-6-0" ? "bg-orange-50/30" : "hover:bg-slate-50/50 transition-colors"}>
+                    <td className="p-4 font-bold text-slate-900">
+                      TTRC LF 6.0
+                      {product.slug === "ttrc-lf-6-0" && (
+                        <span className="ml-2 text-[10px] font-semibold bg-orange-100 text-[#FF6B00] px-2 py-0.5 rounded">
+                          Current Page
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-4 text-slate-600">Latest Generation</td>
+                    <td className="p-4">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                        New / Latest Model
+                      </span>
+                    </td>
+                    <td className="p-4 text-right">
+                      {product.slug === "ttrc-lf-6-0" ? (
+                        <span className="text-xs font-semibold text-slate-400">Currently viewing</span>
+                      ) : (
+                        <Link
+                          href="/products/competition/ttrc-lf-6-0"
+                          className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
+                        >
+                          <span>Explore LF 6.0</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       )}
@@ -1403,6 +1635,150 @@ export default function ProductDetailClient({ product, related }: ProductDetailC
                   </div>
                 );
               })}
+            </div>
+          </section>
+        )}
+
+        {/* 8b. LINE FOLLOWER GENERATION ROADMAP (When viewing LF 6.0 or LF 5.0) */}
+        {product.subcategory === "Line Follower" && (
+          <section className="mb-16 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center gap-2 mb-2 text-[#FF6B00] text-xs font-bold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00] animate-ping" />
+                <span>TTRC Line Follower Platform Generations</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading mb-2">
+                Choosing Your TTRC Line Follower
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+                TamizhTech produces competition-grade line follower robots for students, college clubs, and national tournament teams. Both LF 5.0 and LF 6.0 are maintained in our lineup.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* LF 5.0 Card */}
+                <div className={`p-5 rounded-xl border transition-all ${
+                  product.slug === "ttrc-lf-5-0"
+                    ? "bg-slate-800/80 border-[#FF6B00] ring-1 ring-[#FF6B00]"
+                    : "bg-slate-800/40 border-slate-700/60 hover:border-slate-600"
+                }`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Previous Generation</span>
+                    {product.slug === "ttrc-lf-5-0" && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#FF6B00] text-white">Viewing Now</span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">TTRC LF 5.0</h3>
+                  <p className="text-xs text-slate-300 mb-3 leading-relaxed">
+                    Proven tournament line follower with 7-array sensor, TTRC C-Board 5.0, and 600 RPM N20 motors.
+                  </p>
+                  <div className="space-y-1 text-xs text-slate-300 mb-4 pt-2 border-t border-slate-700/60">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Configurations:</span>
+                      <span className="font-semibold text-white">With & Without Battery</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Pricing:</span>
+                      <span className="font-semibold text-white">₹3,799 / ₹4,799</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Availability:</span>
+                      <span className="font-semibold text-emerald-400">In Stock</span>
+                    </div>
+                  </div>
+                  {product.slug !== "ttrc-lf-5-0" ? (
+                    <Link
+                      href="/products/competition/ttrc-lf-5-0"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF6B00] hover:text-orange-400"
+                    >
+                      <span>Explore TTRC LF 5.0 Platform</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  ) : (
+                    <span className="text-xs font-semibold text-slate-400">Currently viewing this model</span>
+                  )}
+                </div>
+
+                {/* LF 6.0 Card */}
+                <div className={`p-5 rounded-xl border transition-all ${
+                  product.slug === "ttrc-lf-6-0"
+                    ? "bg-slate-800/80 border-[#FF6B00] ring-1 ring-[#FF6B00]"
+                    : "bg-slate-800/40 border-slate-700/60 hover:border-slate-600"
+                }`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#FF6B00]">Latest Generation</span>
+                    {product.slug === "ttrc-lf-6-0" ? (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#FF6B00] text-white">Viewing Now</span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">New Model</span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">TTRC LF 6.0</h3>
+                  <p className="text-xs text-slate-300 mb-3 leading-relaxed">
+                    Next-generation line follower platform engineered for precision optical line tracking and high-speed competitive arena pacing.
+                  </p>
+                  <div className="space-y-1 text-xs text-slate-300 mb-4 pt-2 border-t border-slate-700/60">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Configurations:</span>
+                      <span className="font-semibold text-amber-300">Only Without Battery</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Pricing:</span>
+                      <span className="font-semibold text-emerald-400">Offer ₹3,199 <span className="text-slate-400 line-through text-[11px]">₹3,799</span></span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Availability:</span>
+                      <span className="font-semibold text-amber-300">Pre-Order / Enquiries</span>
+                    </div>
+                  </div>
+                  {product.slug !== "ttrc-lf-6-0" ? (
+                    <Link
+                      href="/products/competition/ttrc-lf-6-0"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF6B00] hover:text-orange-400"
+                    >
+                      <span>Explore TTRC LF 6.0 Platform</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  ) : (
+                    <span className="text-xs font-semibold text-slate-400">Currently viewing this model</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 8c. RELATED PRODUCTS SECTION */}
+        {related && related.length > 0 && (
+          <section className="mb-16">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
+                  Catalog Continuity & Related Hardware
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold font-heading text-slate-900">
+                  {product.categorySlug === "competition" ? "Competition Platforms & Gear" : `Related in ${product.category}`}
+                </h2>
+              </div>
+              <Link
+                href={`/products/${product.categorySlug}`}
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-[#FF6B00] hover:underline"
+              >
+                <span>View all {product.category}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {related.map((relProduct) => (
+                <ProductCard
+                  key={relProduct.id}
+                  product={relProduct}
+                  onEnquire={(p) => {
+                    setQuoteRequirement(`Inquiring about related platform: ${p.name}`);
+                    setIsQuoteOpen(true);
+                  }}
+                />
+              ))}
             </div>
           </section>
         )}

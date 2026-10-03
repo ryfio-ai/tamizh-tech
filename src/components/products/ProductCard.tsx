@@ -137,10 +137,17 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00]">
               {product.category}
             </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              In Stock
-            </span>
+            {product.availability === "in_stock" || product.availability === "InStock" ? (
+              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                In Stock
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/60">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                Available Soon
+              </span>
+            )}
           </div>
 
           {/* PRODUCT NAME - High clarity, 2-line clean wrap */}
@@ -167,10 +174,24 @@ export function ProductCard({ product, onEnquire, priority = false }: ProductCar
             </ul>
           )}
 
-          {/* PRICING DISPLAY (Verified Product Price only) */}
+          {/* PRICING DISPLAY (Verified Product Price or Price on Request) */}
           {(() => {
             const priceInfo = getProductPriceDisplay(product);
-            if (!priceInfo.hasPrice || !priceInfo.displayPrice) return null;
+            if (!priceInfo.hasPrice || !priceInfo.displayPrice) {
+              return (
+                <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
+                  <span className="text-slate-500 text-xs font-medium">Pricing</span>
+                  <div className="text-right flex flex-col items-end">
+                    <span className="font-extrabold text-slate-900 text-sm tracking-tight">
+                      Price on Request
+                    </span>
+                    <span className="text-[10px] text-amber-600 font-medium mt-0.5">
+                      Enquire for quote
+                    </span>
+                  </div>
+                </div>
+              );
+            }
             return (
               <div className="mb-4 pt-3 border-t border-slate-100 flex items-baseline justify-between">
                 <span className="text-slate-500 text-xs font-medium">{priceInfo.label}</span>

@@ -15,6 +15,53 @@ export interface ProductSeoEntry {
 }
 
 export const productSeoMap: Record<string, ProductSeoEntry> = {
+  // 0. TTRC LF 6.0 (Latest Generation)
+  "ttrc-lf-6-0": {
+    productSlug: "ttrc-lf-6-0",
+    sku: "TTRC-LF-6.0",
+    primaryKeyword: "TTRC LF 6.0",
+    secondaryKeywords: [
+      "TTRC LF 6.0 line follower",
+      "TTRC LF 6.0 price",
+      "line follower robot India",
+      "high speed line follower robot",
+      "line follower competition robot",
+      "robotics competition kit",
+      "robotics training kit",
+      "STEM robotics kit",
+      "TamizhTech line follower",
+      "line follower robot Tamil Nadu"
+    ],
+    longTailKeywords: [
+      "TTRC LF 6.0 latest generation line follower robot",
+      "TTRC LF 6.0 line follower robot price ₹3,199 India",
+      "high speed line follower robot for robotics competitions",
+      "precision line follower robot for STEM and engineering education",
+      "TamizhTech TTRC LF 6.0 line tracker platform India"
+    ],
+    questionKeywords: [
+      "What is TTRC LF 6.0?",
+      "What is the price of TTRC LF 6.0?",
+      "What is the difference between TTRC LF 5.0 and LF 6.0?",
+      "Can TTRC LF 6.0 be used in college robotics competitions?",
+      "How to enquire about TTRC LF 6.0?"
+    ],
+    searchIntent: "Latest Generation Competition Line Follower Platform",
+    quickAnswer: "TTRC LF 6.0 is the latest-generation TamizhTech line follower platform, engineered for precision line following, high-speed performance and competition-ready robotics applications.",
+    targetAudience: [
+      "Robotics Competitions",
+      "Engineering Students",
+      "Robotics Training",
+      "STEM Education",
+      "College Robotics Teams",
+      "Line Following Practice"
+    ],
+    relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly", "laser-cutting"],
+    relatedProducts: ["ttrc-lf-5-0", "rc-robo-race", "rc-robo-soccer"],
+    relatedProjects: ["advanced-kinematics", "computer-vision-edge-ai"],
+    relatedCourses: ["robotics-iot-embedded", "arduino-robotics"]
+  },
+
   // 1. TTRC LF 5.0
   "ttrc-lf-5-0": {
     productSlug: "ttrc-lf-5-0",

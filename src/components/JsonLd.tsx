@@ -114,9 +114,15 @@ export function ProductSchema({ product }: any) {
     "description": product.shortDescription || product.description,
     "brand": {
       "@type": "Brand",
-      "name": product.brand || "Tamizh Tech Robotics Company"
+      "name": product.brand || "TamizhTech Robotics"
     },
-    "sku": product.sku || product.slug || product.id,
+    ...(product.manufacturer ? {
+      "manufacturer": {
+        "@type": "Organization",
+        "name": product.manufacturer
+      }
+    } : {}),
+    ...(product.sku ? { "sku": product.sku } : {}),
     "category": product.category,
     "inLanguage": "en-IN"
   };

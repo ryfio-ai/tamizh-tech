@@ -139,9 +139,46 @@ const partnerLogos = [
 ];
 
 const competitions = [
-  { title: "RC Robo Race", spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", image: "/product/race/race1.png", categorySlug: "competition", slug: "rc-robo-race" },
-  { title: "RC Robo Soccer", spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", image: "/product/soccer/soccer 1.0.png", categorySlug: "competition", slug: "rc-robo-soccer" },
-  { title: "Flysky FS-i6X 10CH", spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", image: "/product/flysky/flysky-fs-i6x-10ch.jpg", categorySlug: "radio-controllers", slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" },
+  { 
+    title: "TTRC LF 6.0 — Latest", 
+    spec: "Precision line following, high-speed performance and competition-ready robotics applications.", 
+    image: "/product/lfr/lfr-6.0.jpg", 
+    categorySlug: "competition", 
+    slug: "ttrc-lf-6-0",
+    badge: "Latest Model"
+  },
+  { 
+    title: "TTRC LF 5.0", 
+    spec: "600 RPM high-speed motors, 7-array sensor, TTRC C-Board 5.0 PID controller.", 
+    image: "/product/lfr/1.jpeg", 
+    categorySlug: "competition", 
+    slug: "ttrc-lf-5-0",
+    badge: "Line Follower"
+  },
+  { 
+    title: "RC Robo Race", 
+    spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", 
+    image: "/product/race/race1.png", 
+    categorySlug: "competition", 
+    slug: "rc-robo-race",
+    badge: "Robo Race"
+  },
+  { 
+    title: "RC Robo Soccer", 
+    spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", 
+    image: "/product/soccer/soccer 1.0.png", 
+    categorySlug: "competition", 
+    slug: "rc-robo-soccer",
+    badge: "Robo Soccer"
+  },
+  { 
+    title: "Flysky FS-i6X 10CH", 
+    spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", 
+    image: "/product/flysky/flysky-fs-i6x-10ch.jpg", 
+    categorySlug: "radio-controllers", 
+    slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
+    badge: "Radio Controller"
+  },
 ];
 
 function LazyVideo({ src = "/3d printing.mp4" }: { src?: string }) {
@@ -178,9 +215,74 @@ function LazyVideo({ src = "/3d printing.mp4" }: { src?: string }) {
   );
 }
 
+// Hero Carousel Slides: First shown is TTRC LF 6.0 Advertisement (8s interval)
+const heroSlides = [
+  {
+    id: "ttrc-lf-6-0",
+    badge: "NEW LAUNCH • LATEST MODEL",
+    title: "TTRC LF 6.0 Line Follower",
+    subtitle: "Precision Line Following. Maximum Speed.",
+    image: "/product/lfr/lfr-6.0.jpg",
+    imageAlt: "TTRC LF 6.0 high-speed line follower robot by TamizhTech Robotics",
+    price: "₹3,199",
+    regularPrice: "₹3,799",
+    discount: "16% OFF",
+    href: "/products/competition/ttrc-lf-6-0",
+    ctaText: "Explore LF 6.0",
+    eyebrow: "NEW LAUNCH: TTRC LF 6.0 LINE FOLLOWER — OFFER ₹3,199",
+  },
+  {
+    id: "fleet",
+    badge: "OFFICIAL HARDWARE FLEET",
+    title: "Competition & Educational Platforms",
+    subtitle: "Combat Bots, Line Followers, Bipeds & Rovers",
+    image: "/hero-combined.jpg",
+    imageAlt: "TamizhTech Robotics Fleet: Combat Robot, Bipedal Platform, Line Follower and All-Terrain Rover",
+    price: null,
+    regularPrice: null,
+    discount: null,
+    href: "/products",
+    ctaText: "Explore Products",
+    eyebrow: "INDIA'S LEADING GAMIFIED PLATFORM",
+  },
+];
+
 export default function HomeClient() {
   const [activeImageIdx, setActiveImageIdx] = useState<number | null>(null);
   const [activeFaqIdx, setActiveFaqIdx] = useState<number | null>(null);
+
+  // Hero 8-Second Advertisement Carousel State
+  const [heroSlideIdx, setHeroSlideIdx] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const [slideProgressKey, setSlideProgressKey] = useState(0);
+
+  useEffect(() => {
+    if (isHeroPaused) return;
+    const timer = setInterval(() => {
+      setHeroSlideIdx((prev) => (prev + 1) % heroSlides.length);
+      setSlideProgressKey((k) => k + 1);
+    }, 8000); // 8-second interval
+    return () => clearInterval(timer);
+  }, [isHeroPaused, heroSlideIdx]);
+
+  const handlePrevSlide = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setHeroSlideIdx((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setSlideProgressKey((k) => k + 1);
+  };
+
+  const handleNextSlide = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setHeroSlideIdx((prev) => (prev + 1) % heroSlides.length);
+    setSlideProgressKey((k) => k + 1);
+  };
+
+  const handleSelectSlide = (idx: number) => {
+    setHeroSlideIdx(idx);
+    setSlideProgressKey((k) => k + 1);
+  };
 
   const heroRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -228,10 +330,12 @@ export default function HomeClient() {
                   hidden: { opacity: 0, y: 12 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
                 }}
-                className="flex items-center gap-2 text-[#FF6B00] font-bold text-xs sm:text-sm md:text-[15px] tracking-[0.1em] uppercase"
+                className="flex items-center gap-2 text-[#FF6B00] font-bold text-xs sm:text-sm md:text-[14px] tracking-[0.08em] uppercase"
               >
-                <span className="w-2 h-2 rounded-full bg-[#FF6B00] shrink-0" />
-                <span>INDIA&apos;S LEADING GAMIFIED PLATFORM</span>
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00] shrink-0 animate-pulse" />
+                <span key={heroSlideIdx}>
+                  {heroSlides[heroSlideIdx].eyebrow}
+                </span>
               </motion.div>
 
               {/* Main Headline */}
@@ -335,8 +439,12 @@ export default function HomeClient() {
               </motion.p>
             </motion.div>
 
-            {/* RIGHT COLUMN: TamizhTech Robotics Fleet Showcase */}
-            <div className="relative flex items-center justify-center w-full py-4 lg:py-6">
+            {/* RIGHT COLUMN: TamizhTech Hardware & New Launch Advertisement Carousel (15s interval, LF 6.0 shown first) */}
+            <div 
+              className="relative flex flex-col items-center justify-center w-full py-4 lg:py-6"
+              onMouseEnter={() => setIsHeroPaused(true)}
+              onMouseLeave={() => setIsHeroPaused(false)}
+            >
               {/* Diffused Ambient Glow Behind the Showcase */}
               <div className="absolute -inset-3 sm:-inset-6 bg-gradient-to-tr from-accent/20 via-accent/5 to-transparent rounded-[2.8rem] blur-2xl opacity-60 pointer-events-none -z-10" />
 
@@ -345,18 +453,124 @@ export default function HomeClient() {
                 style={shouldReduceMotion ? {} : { y: heroY, scale: heroScale }}
                 className="relative w-full max-w-[600px] p-2 sm:p-2.5 rounded-[2rem] sm:rounded-[2.4rem] bg-slate-100/90 ring-1 ring-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.12)]"
               >
-                <div className="relative w-full aspect-[3/2] rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.4rem-0.625rem)] overflow-hidden bg-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.03)] border border-slate-200/60">
-                  {/* Product Fleet Photograph */}
-                  <Image
-                    src="/hero-combined.jpg"
-                    alt="TamizhTech Robotics Fleet: Combat Robot, Bipedal Platform, Line Follower and All-Terrain Rover"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
-                    className="object-contain transition-transform duration-700 ease-out hover:scale-[1.03]"
-                    priority
-                  />
+                <div className="relative w-full aspect-[3/2] rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.4rem-0.625rem)] overflow-hidden bg-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.03)] border border-slate-200/60 group">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={heroSlides[heroSlideIdx].id}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.02 }}
+                      transition={{ duration: 0.45, ease: "easeOut" }}
+                      className="relative w-full h-full"
+                    >
+                      <Image
+                        src={heroSlides[heroSlideIdx].image}
+                        alt={heroSlides[heroSlideIdx].imageAlt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
+                        className={heroSlides[heroSlideIdx].id === "ttrc-lf-6-0" ? "object-cover" : "object-contain"}
+                        priority
+                      />
+
+                      {/* Top Badges */}
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10 pointer-events-none">
+                        <span className="px-3 py-1 rounded-full bg-slate-950/90 text-white backdrop-blur-md text-[11px] font-bold tracking-wide flex items-center gap-1.5 shadow-md border border-white/10 uppercase">
+                          <span className="w-2 h-2 rounded-full bg-[#FF6B00] animate-pulse" />
+                          <span className="text-[#FF6B00] font-black">TAMIZHTECH</span>
+                          <span className="text-slate-500 font-normal">|</span>
+                          <span>{heroSlides[heroSlideIdx].badge}</span>
+                        </span>
+
+                        {heroSlides[heroSlideIdx].discount && (
+                          <span className="px-2.5 py-1 rounded-lg bg-[#FF6B00] text-white text-xs font-black shadow-md border border-white/20 tracking-wider">
+                            {heroSlides[heroSlideIdx].discount}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Bottom Frosted Glass Advertisement Overlay */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/80 to-transparent p-4 sm:p-5 text-white flex items-end justify-between gap-3 z-10">
+                        <div className="space-y-1.5 max-w-[70%]">
+                          <div className="text-[10px] font-black tracking-widest uppercase text-orange-400">
+                            TamizhTech Robotics Company
+                          </div>
+                          <h3 
+                            style={{ color: "#ffffff" }}
+                            className="text-base sm:text-lg font-black !text-white leading-tight font-heading drop-shadow-sm"
+                          >
+                            {heroSlides[heroSlideIdx].title}
+                          </h3>
+                          {heroSlides[heroSlideIdx].price ? (
+                            <div className="flex items-center gap-2 flex-wrap pt-0.5">
+                              <span className="text-xs text-orange-400 font-bold uppercase tracking-wider">Offer Price:</span>
+                              <span className="text-base sm:text-xl font-black text-white">{heroSlides[heroSlideIdx].price}</span>
+                              <span className="text-xs text-slate-400 line-through font-medium">{heroSlides[heroSlideIdx].regularPrice}</span>
+                            </div>
+                          ) : (
+                            <p className="text-xs text-slate-300 line-clamp-1">
+                              {heroSlides[heroSlideIdx].subtitle}
+                            </p>
+                          )}
+                        </div>
+
+                        <Link
+                          href={heroSlides[heroSlideIdx].href}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl shadow-md transition-all shrink-0 hover:scale-105 active:scale-95"
+                        >
+                          <span>{heroSlides[heroSlideIdx].ctaText}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Manual Arrow Controls (revealed on hover) */}
+                  <button
+                    type="button"
+                    onClick={handlePrevSlide}
+                    aria-label="Previous advertisement"
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs border border-white/20 shadow-md"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextSlide}
+                    aria-label="Next advertisement"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs border border-white/20 shadow-md"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
               </motion.div>
+
+              {/* Progress Bar & Slide Indicator Dots */}
+              <div className="flex items-center justify-center w-full max-w-[600px] mt-3 gap-2 px-3">
+                {heroSlides.map((slide, idx) => {
+                  const isActive = heroSlideIdx === idx;
+                  return (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      onClick={() => handleSelectSlide(idx)}
+                      aria-label={`Switch to ${slide.title}`}
+                      className={`h-2 rounded-full transition-all duration-300 relative overflow-hidden ${
+                        isActive ? "w-16 sm:w-20 bg-slate-200" : "w-4 bg-slate-300 hover:bg-slate-400"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.div
+                          key={slideProgressKey}
+                          initial={{ width: "0%" }}
+                          animate={{ width: isHeroPaused ? "0%" : "100%" }}
+                          transition={{ duration: 8, ease: "linear" }}
+                          className="h-full bg-[#FF6B00] rounded-full"
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
           </div>
@@ -692,7 +906,7 @@ export default function HomeClient() {
       {/* 5.5 ROBOTICS COMPETITION EXCELLENCE SECTION */}
       <section className="section bg-white py-24 border-t border-border/30 overflow-hidden">
         <div className="container px-6">
-          <AnimatedSection className="mb-16">
+          <AnimatedSection className="mb-12">
             <SectionHeader
               tag="Competition Excellence"
               title="Robotics Competition"
@@ -717,7 +931,7 @@ export default function HomeClient() {
                       />
                       <div className="absolute top-3 left-3 bg-accent text-white text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm backdrop-blur-xs">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                        <span>Enquire Now</span>
+                        <span>{comp.badge || "Enquire Now"}</span>
                       </div>
                     </div>
                     <div className="p-5 flex flex-col justify-between flex-grow">

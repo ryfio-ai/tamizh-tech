@@ -166,6 +166,8 @@ export function getProductPriceDisplay(product: PriceableProduct): {
   if (product.configurations && product.configurations.length > 0) {
     const range = formatConfigurationPriceRange(product.configurations);
     if (range) {
+      const isSingleConfig = product.configurations.length === 1;
+      const singleConfigName = product.configurations[0].name;
       return {
         hasPrice: true,
         displayPrice: range,
@@ -173,7 +175,7 @@ export function getProductPriceDisplay(product: PriceableProduct): {
         regularPrice: verifiedRegular,
         displayRegularPrice: formatProductPrice(verifiedRegular),
         discountPercentage: discount,
-        label: 'Configurations',
+        label: isSingleConfig ? (singleConfigName || 'Price') : 'Configurations',
       };
     }
   }

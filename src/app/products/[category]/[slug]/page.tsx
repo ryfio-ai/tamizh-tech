@@ -57,10 +57,18 @@ export default async function HierarchicalProductDetailPage({ params }: PageProp
     notFound();
   }
 
-  // Related products from the same category (prioritize counterpart motor for DGJ motors)
+  // Related products from the same category (prioritize counterpart motor for DGJ motors and counterpart LF for line followers)
   let related = products
     .filter((p) => p.categorySlug === product.categorySlug && p.slug !== product.slug);
-  if (product.slug === "ttrc-dgj-300rpm") {
+  if (product.slug === "ttrc-lf-6-0") {
+    const lf5 = related.find((p) => p.slug === "ttrc-lf-5-0");
+    const others = related.filter((p) => p.slug !== "ttrc-lf-5-0");
+    related = lf5 ? [lf5, ...others].slice(0, 3) : related.slice(0, 3);
+  } else if (product.slug === "ttrc-lf-5-0") {
+    const lf6 = related.find((p) => p.slug === "ttrc-lf-6-0");
+    const others = related.filter((p) => p.slug !== "ttrc-lf-6-0");
+    related = lf6 ? [lf6, ...others].slice(0, 3) : related.slice(0, 3);
+  } else if (product.slug === "ttrc-dgj-300rpm") {
     const dgj600 = related.find((p) => p.slug === "ttrc-dgj-600rpm");
     const others = related.filter((p) => p.slug !== "ttrc-dgj-600rpm");
     related = dgj600 ? [dgj600, ...others].slice(0, 3) : related.slice(0, 3);
@@ -77,6 +85,7 @@ export default async function HierarchicalProductDetailPage({ params }: PageProp
     { name: "Home", url: "https://www.tamizhtech.in" },
     { name: "Products", url: "https://www.tamizhtech.in/products" },
     { name: product.category, url: `https://www.tamizhtech.in/products/${product.categorySlug}` },
+    ...(product.subcategory ? [{ name: product.subcategory, url: `https://www.tamizhtech.in/products/${product.categorySlug}` }] : []),
     { name: product.name, url: `https://www.tamizhtech.in/products/${product.categorySlug}/${product.slug}` }
   ];
 

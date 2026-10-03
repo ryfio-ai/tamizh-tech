@@ -86,6 +86,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         (p.shortDescription && p.shortDescription.toLowerCase().includes(trimmed)) ||
         (p.description && p.description.toLowerCase().includes(trimmed)) ||
         p.category.toLowerCase().includes(trimmed) ||
+        (p.subcategory && p.subcategory.toLowerCase().includes(trimmed)) ||
+        (p.searchKeywords && p.searchKeywords.some(k => k.toLowerCase().includes(trimmed))) ||
         (p.specs && p.specs.toLowerCase().includes(trimmed)) ||
         (p.applications && p.applications.some(a => a.toLowerCase().includes(trimmed))) ||
         (p.highlights && p.highlights.some(h => h.toLowerCase().includes(trimmed))) ||

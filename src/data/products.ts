@@ -36,6 +36,11 @@ export interface Product {
   slug: string;
   category: string;
   categorySlug: string;
+  subcategory?: string;
+  manufacturer?: string;
+  tagline?: string;
+  generation?: string;
+  searchKeywords?: string[];
   brand?: string;
   sku?: string;
   availability?: ProductAvailability;
@@ -87,10 +92,171 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    id: "ttrc-lf-6-0",
+    slug: "ttrc-lf-6-0",
+    category: "Competition Robots",
+    categorySlug: "competition",
+    subcategory: "Line Follower",
+    brand: "TamizhTech Robotics",
+    manufacturer: "TamizhTech Robotics Company",
+    availability: "preorder",
+    name: "TTRC LF 6.0",
+    metaTitle: "TTRC LF 6.0 Line Follower Robot | TamizhTech Robotics",
+    metaDescription: "TTRC LF 6.0 autonomous line follower robot by TamizhTech. Regular catalogue price ₹3,799, offer price ₹3,199 (Supplied only without battery). Engineered for robotics competitions and STEM education.",
+    shortDescription: "High-speed precision line follower robot engineered for robotics competitions and STEM education. Supplied exclusively without battery at offer price ₹3,199 (Catalogue ₹3,799).",
+    tagline: "Precision Line Following. Maximum Speed.",
+    generation: "Latest Generation",
+    quickAnswer: "TTRC LF 6.0 is the latest-generation TamizhTech line follower platform, engineered for precision line following, high-speed performance and competition-ready robotics applications. Supplied only without battery.",
+    price: 3199,
+    sellingPrice: 3199,
+    regularPrice: 3799,
+    currency: "INR",
+    pricingNote: "Regular Price ₹3,799 | Special Offer Price ₹3,199. Supplied only without battery.",
+    configurations: [
+      {
+        id: "without-battery",
+        name: "Without Battery",
+        price: 3199,
+        sellingPrice: 3199,
+        regularPrice: 3799,
+        currency: "INR",
+        isDefault: true,
+        selectionGuidance: "TTRC LF 6.0 is supplied only without battery. Suitable for robotics teams, engineering students, and makers who supply their own compatible compact LiPo power pack.",
+        includedItems: [
+          "TTRC LF 6.0 Robot Chassis & Baseplate",
+          "High-Traction Patterned Track Wheels",
+          "Precision Optical Line Sensor Array",
+          "TTRC LF 6.0 Main Controller Board with Line Following Firmware",
+          "Dedicated High-Speed Motor Driver Module",
+          "Connecting Harness & Mounting Hardware"
+        ],
+        excludedItems: [
+          "LiPo Battery NOT included (Supplied only without battery; requires compatible compact LiPo pack)",
+          "LiPo Balance Charger NOT included"
+        ],
+        setupRequirements: [
+          "User must provide a compatible compact LiPo battery pack",
+          "Requires track threshold calibration for local arena surface and lighting"
+        ],
+        highlights: [
+          "Only Without Battery Configuration",
+          "TTRC LF 6.0 Controller Board",
+          "Precision Optical Sensor Array",
+          "High-Traction Patterned Wheels"
+        ]
+      }
+    ],
+    badge: "Latest Model",
+    image: "/product/lfr/lfr-6.0.jpg",
+    images: [
+      "/product/lfr/lfr-6.0.jpg",
+      "/product/lfr/lfr-6.0-1.jpg",
+      "/product/lfr/lfr-6.0-2.jpg",
+      "/product/lfr/lfr-6.0-3.jpg"
+    ],
+    imageAlts: [
+      "TTRC LF 6.0 high-speed line follower robot",
+      "TTRC LF 6.0 line follower robot top-down view showing TTRC LF 6.0 mainboard and sensor array",
+      "TTRC LF 6.0 line follower robot angled perspective view on competition track",
+      "TTRC LF 6.0 line follower robot rear and motor driver component view"
+    ],
+    specs: "Latest-generation high-speed line follower platform engineered for competitive arena tracking and STEM training. Detailed technical parameters coming soon.",
+    highlights: [
+      "Precision Line Following — Engineered for accurate line tracking and responsive control",
+      "High-Speed Performance — Designed around high-speed line-following applications",
+      "Competition-Ready Design — Built for robotics competition environments and demanding track performance",
+      "Robotics & STEM Training — Suitable for practical robotics education, engineering training and hands-on learning"
+    ],
+    bestSuitedFor: [
+      "Robotics Competitions & Tournament Teams",
+      "Engineering Students & College Robotics Clubs",
+      "Robotics & STEM Education Programs",
+      "Line Following Practice & Algorithm Development"
+    ],
+    notIdealFor: [
+      "Rough outdoor terrain or unpaved off-road tracks",
+      "Non-optical line following applications"
+    ],
+    competitionNotice: "Before Enquiring: Verify your competition's line track specifications (typically 30mm black or white line), minimum turn curve radius, and allowable vehicle footprint limits with your tournament organizer.",
+    whyThisProduct: {
+      heading: "Next-Generation Line Follower Architecture",
+      points: [
+        "Latest-generation evolution of the proven TTRC Line Follower competition platform.",
+        "Engineered for precision optical line tracking and responsive steering control.",
+        "Optimized for competitive arena navigation and high-speed track pacing.",
+        "Designed for practical learning in control systems, robotics and embedded firmware."
+      ],
+      targetAudience: [
+        "Robotics Competitions",
+        "Engineering Students",
+        "Robotics Training",
+        "STEM Education",
+        "College Robotics Teams",
+        "Line Following Practice"
+      ]
+    },
+    description: "TTRC LF 6.0 is the latest-generation TamizhTech line follower platform, engineered for precision line following, high-speed performance and competition-ready robotics applications. Designed for students, robotics teams, engineering institutions and competitive robotics enthusiasts, the LF 6.0 represents the next evolution of the TTRC line follower platform.",
+    detailedSpecs: [],
+    specifications: [],
+    applications: [
+      "Robotics Competitions — For teams preparing high-speed line-following robots for competitive events",
+      "Engineering Education — For practical learning in sensors, control systems, embedded programming and robotics",
+      "STEM Training — For hands-on robotics and engineering education",
+      "Line Following Practice — For algorithm optimization and competitive track tuning"
+    ],
+    searchKeywords: [
+      "TTRC LF 6.0",
+      "LF 6.0",
+      "TTRC LF6",
+      "Line Follower 6.0",
+      "Line Follower Robot",
+      "High Speed Line Follower"
+    ],
+    relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly", "laser-cutting"],
+    relatedCourses: ["robotics-iot-embedded", "arduino-robotics"],
+    relatedProjects: ["advanced-kinematics", "computer-vision-edge-ai"],
+    faqs: [
+      {
+        question: "What is the TTRC LF 6.0?",
+        answer: "TTRC LF 6.0 is the latest-generation line follower robot platform from TamizhTech, engineered for precision line tracking, high-speed performance, and competition-ready robotics applications."
+      },
+      {
+        question: "What is the difference between TTRC LF 5.0 and TTRC LF 6.0?",
+        answer: "TTRC LF 6.0 is the new latest-generation successor to TTRC LF 5.0, featuring an updated chassis layout and control architecture. Both models remain active in the TamizhTech competition lineup."
+      },
+      {
+        question: "Is TTRC LF 6.0 suitable for college robotics competitions?",
+        answer: "Yes. TTRC LF 6.0 is purpose-built for robotics competition environments, college symposiums, and national-level line tracking tournaments."
+      },
+      {
+        question: "What is the price of TTRC LF 6.0?",
+        answer: "The TTRC LF 6.0 regular catalogue price is ₹3,799, with an active offer price of ₹3,199 (Supplied only without battery)."
+      },
+      {
+        question: "Is battery included with TTRC LF 6.0?",
+        answer: "No. TTRC LF 6.0 is offered strictly without battery at an offer price of ₹3,199 (regular catalogue price ₹3,799). Teams and students must provide their own compatible compact LiPo battery pack (e.g. 2S LiPo) and balance charger."
+      },
+      {
+        question: "Can I buy TTRC LF 6.0 with a battery?",
+        answer: "No, TTRC LF 6.0 is supplied only without battery. If you require a competition line follower with a battery included, please explore the TTRC LF 5.0 With Battery package."
+      },
+      {
+        question: "How can I enquire about the TTRC LF 6.0?",
+        answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or message our engineering line on WhatsApp. Our engineering team provides official quotations, bulk institutional pricing, and lead-time estimates."
+      }
+    ],
+    status: "published",
+    published: true,
+    createdAt: "2026-03-01T00:00:00.000Z",
+    updatedAt: "2026-03-01T00:00:00.000Z"
+  },
+  {
     id: "ttrc-lf-5-0",
     slug: "ttrc-lf-5-0",
     category: "Competition Robots",
     categorySlug: "competition",
+    subcategory: "Line Follower",
+    generation: "Previous Generation",
     brand: "Tamizh Tech",
     sku: "TTRC-C-1",
     availability: "in_stock",
