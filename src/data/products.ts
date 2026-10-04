@@ -686,6 +686,9 @@ export const products: Product[] = [
     images: [
       "/product/flysky/flysky-fs-i6x-10ch.jpg"
     ],
+    imageAlts: [
+      "FlySky FS-i6X 10-channel 2.4GHz AFHDS 2A transmitter with FS-iA10B dual antenna receiver"
+    ],
     specs: "Bidirectional Communication, 135-channel Hopping, Omni-directional gain antenna, Unique ID recognition system, Low power consumption.",
     highlights: [
       "10-Channel 2.4GHz AFHDS 2A Digital Frequency Hopping",
@@ -795,6 +798,9 @@ export const products: Product[] = [
     images: [
       "/product/flysky/flysky-fs-i6-2.4g-6ch.jpg"
     ],
+    imageAlts: [
+      "FlySky FS-i6 6-channel 2.4GHz AFHDS RC transmitter with FS-iA6 receiver and backlit LCD"
+    ],
     specs: "6 Channels, AFHDS 2A system, 142 channels, 16 channel hopping, High gain omni-directional antenna, Low power consumption.",
     highlights: [
       "AFHDS 2A 2.4GHz Protocol with 16-Channel Hopping",
@@ -898,6 +904,9 @@ export const products: Product[] = [
     images: [
       "/product/flysky/FS-i6S with FS-iA10B 10CH.jpg"
     ],
+    imageAlts: [
+      "FlySky FS-i6S 10-channel capacitive touchscreen transmitter with FS-iA10B receiver"
+    ],
     specs: "10 Channels, Touchscreen interface, AFHDS 2A system, 140 channels, Bidirectional communication, USB charging port.",
     highlights: [
       "Capacitive Touchscreen for Rapid Settings & Mixing Setup",
@@ -993,6 +1002,9 @@ export const products: Product[] = [
     image: "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg",
     images: [
       "/product/flysky/flysky-fs-ct6b-2.4g-6ch-radio-set-system-with-rx-fs-r6b-receiver2-550x550.jpg"
+    ],
+    imageAlts: [
+      "FlySky FS-CT6B 6-channel PC programmable 2.4GHz radio set with FS-R6B receiver"
     ],
     specs: "6 Channels, 2.4GHz GFSK modulation, 1024 sensitivity, LED Low voltage warning, DSC Port for PC programming.",
     highlights: [

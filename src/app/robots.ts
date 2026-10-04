@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: ['/', '/api/feed/'],
         disallow: [
           '/api/',
           '/admin/',
@@ -23,7 +23,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Applebot'],
-        allow: '/',
+        allow: ['/', '/api/feed/'],
         disallow: [
           '/api/',
           '/admin/',
