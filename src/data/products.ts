@@ -97,6 +97,7 @@ export const products: Product[] = [
     category: "Competition Robots",
     categorySlug: "competition",
     subcategory: "Line Follower",
+    sku: "TTRC-LF-6.0",
     brand: "TamizhTech Robotics",
     manufacturer: "TamizhTech Robotics Company",
     availability: "in_stock",
@@ -222,7 +223,7 @@ export const products: Product[] = [
       },
       {
         question: "What is the difference between TTRC LF 5.0 and TTRC LF 6.0?",
-        answer: "TTRC LF 6.0 is the new latest-generation successor to TTRC LF 5.0, featuring an updated chassis layout and control architecture. Both models remain active in the TamizhTech competition lineup."
+        answer: "TTRC LF 6.0 is the upgraded latest-generation successor to TTRC LF 5.0, featuring an updated chassis layout, improved sensor integration, and enhanced control architecture. LF 6.0 has superseded the LF 5.0 model and is our active line follower platform."
       },
       {
         question: "Is TTRC LF 6.0 suitable for college robotics competitions?",
@@ -238,205 +239,11 @@ export const products: Product[] = [
       },
       {
         question: "Can I buy TTRC LF 6.0 with a battery?",
-        answer: "No, TTRC LF 6.0 is supplied only without battery. If you require a competition line follower with a battery included, please explore the TTRC LF 5.0 With Battery package."
+        answer: "No, TTRC LF 6.0 is supplied strictly without battery to allow competition teams to use their preferred high-discharge LiPo battery packs (e.g., 2S LiPo) and balance chargers."
       },
       {
         question: "How can I enquire about the TTRC LF 6.0?",
         answer: "Click 'ENQUIRE ABOUT THIS PRODUCT' on this page or message our engineering line on WhatsApp. Our engineering team provides official quotations, bulk institutional pricing, and lead-time estimates."
-      }
-    ],
-    status: "published",
-    published: true,
-    createdAt: "2026-03-01T00:00:00.000Z",
-    updatedAt: "2026-03-01T00:00:00.000Z"
-  },
-  {
-    id: "ttrc-lf-5-0",
-    slug: "ttrc-lf-5-0",
-    category: "Competition Robots",
-    categorySlug: "competition",
-    subcategory: "Line Follower",
-    generation: "Previous Generation",
-    brand: "Tamizh Tech",
-    sku: "TTRC-C-1",
-    availability: "in_stock",
-    name: "TTRC LF 5.0",
-    metaTitle: "TTRC LF 5.0 Line Follower Robot | Competition Robot | Tamizh Tech",
-    metaDescription: "TTRC LF 5.0 autonomous line follower robot with 7-array sensor, TTRC C-Board 5.0 PID controller, and 600 RPM N20 motors. Verified catalogue price ₹3,799 without battery / ₹4,799 with battery.",
-    shortDescription: "High-speed autonomous line follower robot engineered with a 7-array optical sensor and TTRC C-Board 5.0 PID controller for razor-sharp track tracking.",
-    quickAnswer: "TTRC LF 5.0 is an autonomous high-speed line follower robot engineered for competitive track navigation using a 7-array sensor, TTRC C-Board 5.0 controller, and 600 RPM high-speed DG N20 motors.",
-    price: 3799,
-    sellingPrice: 3799,
-    currency: "INR",
-    bestSuitedFor: [
-      "Students preparing for national line follower competitions",
-      "Collegiate robotics teams and engineering clubs",
-      "Practical PID control algorithm and optical sensing education"
-    ],
-    notIdealFor: [
-      "Rough outdoor terrain or uneven dirt tracks",
-      "Non-line tracking autonomous navigation",
-      "Tournaments strictly capping sensor counts below 7 channels"
-    ],
-    competitionNotice: "Before Enquiring: Verify your competition's line track specifications (typically 30mm black or white line), minimum turn curve radius, and allowable vehicle footprint limits (TTRC LF 5.0 dimensions: 155 × 170 × 40 mm).",
-    configurations: [
-      {
-        id: "without-battery",
-        name: "Without Battery",
-        price: 3799,
-        sellingPrice: 3799,
-        currency: "INR",
-        isDefault: true,
-        selectionGuidance: "Choose Without Battery if your team already owns compatible compact LiPo batteries and a balance charger.",
-        includedItems: [
-          "TTRC LF 5.0 Robot Chassis & Baseplate",
-          "2x 600 RPM DG N20 High-Speed Geared Motors",
-          "2x 40 × 10 × 4 mm HD Track Wheels",
-          "7-Array High-Sensitivity Line Sensor Module",
-          "TTRC C-Board 5.0 Microcontroller Board with PID Tracking Firmware",
-          "Mounting Hardware, Screws & Spacers"
-        ],
-        excludedItems: [
-          "LiPo Battery NOT included (Requires 7.4V or 11.1V compact LiPo pack)",
-          "LiPo Balance Charger NOT included"
-        ],
-        setupRequirements: [
-          "Customer must provide a compatible 7.4V (2S) or 11.1V (3S) compact LiPo battery",
-          "Requires track threshold calibration and PID parameter tuning before tournament runs"
-        ],
-        highlights: [
-          "600 RPM DG N20 High-Speed Motors",
-          "7-Array Line Sensor",
-          "TTRC C-Board 5.0 with Pre-flashed PID",
-          "Without Battery (Bring Your Own Pack)"
-        ]
-      },
-      {
-        id: "with-battery",
-        name: "With Battery",
-        price: 4799,
-        sellingPrice: 4799,
-        currency: "INR",
-        selectionGuidance: "Choose With Battery to receive the matching factory-tested 11.1V LiPo battery fitted for the chassis.",
-        includedItems: [
-          "TTRC LF 5.0 Robot Chassis & Baseplate",
-          "2x 600 RPM DG N20 High-Speed Geared Motors",
-          "2x 40 × 10 × 4 mm HD Track Wheels",
-          "7-Array High-Sensitivity Line Sensor Module",
-          "TTRC C-Board 5.0 Microcontroller Board with PID Tracking Firmware",
-          "Compact 350 mAh 11.1V Li-Po Battery Pack",
-          "Mounting Hardware, Screws & Spacers"
-        ],
-        excludedItems: [
-          "LiPo Balance Charger NOT included (available separately)"
-        ],
-        setupRequirements: [
-          "Requires a compatible LiPo balance charger to recharge the battery",
-          "Requires track threshold calibration for local arena surface lighting"
-        ],
-        highlights: [
-          "600 RPM DG N20 High-Speed Motors",
-          "7-Array Line Sensor",
-          "TTRC C-Board 5.0 with Pre-flashed PID",
-          "Includes 350 mAh 11.1V Li-Po Battery"
-        ]
-      }
-    ],
-    badge: "Competition / Line Follower",
-    image: "/product/lfr/1.jpeg",
-    images: [
-      "/product/lfr/1.jpeg",
-      "/product/lfr/2.jpeg",
-      "/product/lfr/3.jpeg"
-    ],
-    imageAlts: [
-      "TTRC LF 5.0 line follower robot front view",
-      "TTRC LF 5.0 line follower robot side view",
-      "TTRC LF 5.0 line follower robot top and component view"
-    ],
-    specs: "600 RPM DG N20 High-Speed Motors, 40 × 10 × 4 mm HD Wheels, 7-Array Line Sensor, TTRC C-Board 5.0, High-Speed PID-Based Line Tracking.",
-    highlights: [
-      "600 RPM DG N20 High-Speed Motors",
-      "7-Array Line Sensor",
-      "TTRC C-Board 5.0",
-      "High-Speed PID-Based Line Tracking",
-      "155 × 170 × 40 mm Form Factor",
-      "Available With or Without Battery"
-    ],
-    whyThisProduct: {
-      heading: "High-Speed Line Tracking Architecture",
-      points: [
-        "High-speed 600 RPM DG N20 motors for responsive competition pacing.",
-        "7-array line sensor provides precision line acquisition.",
-        "TTRC C-Board 5.0 controller optimized for PID-based tracking loops.",
-        "Compact 155 × 170 × 40 mm form factor with 40 × 10 × 4 mm HD wheels.",
-        "Available with or without battery to match team power preferences."
-      ],
-      targetAudience: ["Robotics Training", "STEM Education", "Line Follower Competitions"]
-    },
-    includedItems: [
-      "TTRC LF 5.0 Robot Chassis & Structural Frame",
-      "2x 600 RPM DG N20 High-Speed Motors",
-      "2x 40 × 10 × 4 mm HD Wheels",
-      "7-Array Line Sensor Module",
-      "TTRC C-Board 5.0 High-Speed Controller Board",
-      "Optional 350 mAh 11.1V Li-Po Battery (in With Battery Configuration)"
-    ],
-    relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly", "laser-cutting"],
-    description: "TTRC LF 5.0 is a high-speed autonomous line follower robot engineered with a 7-array sensor, TTRC C-Board 5.0 PID controller, and dual 600 RPM motors for collegiate and national robotics competitions.",
-    detailedSpecs: [
-      "Motor: 600 RPM DG N20 High-Speed Motors",
-      "Wheels: 40 × 10 × 4 mm HD Wheels",
-      "Sensor: 7-Array Line Sensor",
-      "Controller: TTRC C-Board 5.0",
-      "Dimensions: 155 × 170 × 40 mm",
-      "Control: High-Speed PID-Based Line Tracking",
-      "Applications: Robotics Training, STEM Education & Line Follower Competitions"
-    ],
-    specifications: [
-      "Motor: 600 RPM DG N20 High-Speed Motors",
-      "Wheels: 40 × 10 × 4 mm HD Wheels",
-      "Sensor: 7-Array Line Sensor",
-      "Controller: TTRC C-Board 5.0",
-      "Dimensions: 155 × 170 × 40 mm",
-      "Control: High-Speed PID-Based Line Tracking",
-      "Applications: Robotics Training, STEM Education & Line Follower Competitions"
-    ],
-    applications: [
-      "Robotics Training",
-      "STEM Education",
-      "Line Follower Competitions"
-    ],
-    relatedCourses: ["robotics-iot-embedded", "arduino-robotics"],
-    relatedProjects: ["advanced-kinematics", "computer-vision-edge-ai"],
-    faqs: [
-      {
-        question: "What is the TTRC LF 5.0?",
-        answer: "TTRC LF 5.0 is an autonomous high-speed line follower robot designed for competitive arena navigation and PID control learning."
-      },
-      {
-        question: "What is the difference between With Battery and Without Battery?",
-        answer: "The 'With Battery' configuration includes a fitted 350 mAh 11.1V Li-Po battery pack. The 'Without Battery' configuration allows teams to supply their own compatible LiPo power source."
-      },
-      {
-        question: "Is the battery charger included?",
-        answer: "No. The battery charger is not included and must be sourced separately. A standard 2S/3S LiPo balance charger is required."
-      },
-      {
-        question: "What motor does the TTRC LF 5.0 use?",
-        answer: "The TTRC LF 5.0 is powered by dual 600 RPM DG N20 High-Speed geared DC motors."
-      },
-      {
-        question: "What sensor array is included?",
-        answer: "It includes a 7-Array IR Line Sensor module for precision track edge detection and high-speed corner tracking."
-      },
-      {
-        question: "What are the dimensions of the robot?",
-        answer: "The robot measures 155 × 170 × 40 mm. Please verify your tournament's maximum dimensional limits before ordering."
-      },
-      {
-        question: "How can I enquire about the TTRC LF 5.0?",
-        answer: "Click 'ENQUIRE ABOUT THIS CONFIGURATION' on this page or message our engineering line on WhatsApp. We generate an official quotation with GST and shipping breakdown."
       }
     ],
     status: "published",

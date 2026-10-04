@@ -121,7 +121,7 @@ const galleryImages = [
 
 const faqs = [
   { q: "What is TamizhTech Robotics Company?", a: "TamizhTech is an indigenous robotics engineering company based in Coimbatore, Tamil Nadu. We specialize in custom competition combat bots, turnkey STEM lab setups for schools, custom PCB design and assembly, embedded firmware development, and B2B industrial automation." },
-  { q: "Do you design and build custom competition robots?", a: "Yes. TamizhTech designs and manufactures national-level competition robots, including Line Followers (TTRC LF 5.0), RC Robo Race, RC Robo Soccer, and custom combat bots (Beetleweight to Featherweight) with 180+ podium competition wins." },
+  { q: "Do you design and build custom competition robots?", a: "Yes. TamizhTech designs and manufactures national-level competition robots, including Line Followers (TTRC LF 6.0), RC Robo Race, RC Robo Soccer, and custom combat bots (Beetleweight to Featherweight) with 180+ podium competition wins." },
   { q: "Do you offer PCB design, fabrication, and SMT assembly in Coimbatore?", a: "Yes. We deliver complete turnkey PCB engineering services, from schematic capture and multi-layer layout (1, 2, 4-layer FR-4) to bare board fabrication, component sourcing, SMT/THT assembly, and bench testing in our Coimbatore lab." },
   { q: "What industrial automation solutions do you provide for factories?", a: "We engineer industrial automation solutions including PLC control panel wiring, SCADA telemetry dashboards, computer vision defect inspection, machine retrofitting, and Autonomous Mobile Robots (AMRs) for manufacturing units in Coimbatore and South India." },
   { q: "How does TamizhTech set up STEM tinkering labs for schools?", a: "We provide end-to-end STEM tinkering lab setups for schools (CBSE, ICSE, State Board, and ATL grants). This includes ESD workbenches, Arduino/ESP32 kits, 3D printers, soldering bays, 40-week NEP 2020 curriculum, and hands-on teacher training." },
@@ -140,19 +140,11 @@ const partnerLogos = [
 
 const competitions = [
   { 
-    title: "TTRC LF 6.0 — Latest", 
+    title: "TTRC LF 6.0", 
     spec: "Precision line following, high-speed performance and competition-ready robotics applications.", 
     image: "/product/lfr/lfr-6.0.jpg", 
     categorySlug: "competition", 
     slug: "ttrc-lf-6-0",
-    badge: "Latest Model"
-  },
-  { 
-    title: "TTRC LF 5.0", 
-    spec: "600 RPM high-speed motors, 7-array sensor, TTRC C-Board 5.0 PID controller.", 
-    image: "/product/lfr/1.jpeg", 
-    categorySlug: "competition", 
-    slug: "ttrc-lf-5-0",
     badge: "Line Follower"
   },
   { 

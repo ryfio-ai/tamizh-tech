@@ -42,6 +42,16 @@ const nextConfig = {
       },
       // ── Legacy Flat Product URLs → Canonical Hierarchical URLs (HTTP 308) ──
       {
+        source: '/products/competition/ttrc-lf-5-0',
+        destination: '/products/competition/ttrc-lf-6-0',
+        permanent: true,
+      },
+      {
+        source: '/products/ttrc-lf-5-0',
+        destination: '/products/competition/ttrc-lf-6-0',
+        permanent: true,
+      },
+      {
         source: '/products/rc-robo-race',
         destination: '/products/competition/rc-robo-race',
         permanent: true,

@@ -281,7 +281,7 @@ export const competitionGuides: CompetitionGuide[] = [
       "Dusty tires that slip on smooth vinyl, causing differential steering loss."
     ],
     productSlugs: [
-      "ttrc-lf-5-0",
+      "ttrc-lf-6-0",
       "boxing-bot"
     ],
     courseSlugs: [
@@ -622,7 +622,7 @@ export const competitionGuides: CompetitionGuide[] = [
       "Lack of battery voltage compensation, causing motor speed profiles to slow down as battery discharges."
     ],
     productSlugs: [
-      "ttrc-lf-5-0",
+      "ttrc-lf-6-0",
       "boxing-bot"
     ],
     courseSlugs: [
@@ -709,7 +709,7 @@ export const competitionGuides: CompetitionGuide[] = [
     productSlugs: [
       "rc-robo-race",
       "rc-robo-soccer",
-      "ttrc-lf-5-0",
+      "ttrc-lf-6-0",
       "112mm-buggy-wheel",
       "100mm-buggy-wheel",
       "ttrc-hd-80mm-wheel",

@@ -57,52 +57,12 @@ export const productSeoMap: Record<string, ProductSeoEntry> = {
       "Line Following Practice"
     ],
     relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly", "laser-cutting"],
-    relatedProducts: ["ttrc-lf-5-0", "rc-robo-race", "rc-robo-soccer"],
-    relatedProjects: ["advanced-kinematics", "computer-vision-edge-ai"],
-    relatedCourses: ["robotics-iot-embedded", "arduino-robotics"]
-  },
-
-  // 1. TTRC LF 5.0
-  "ttrc-lf-5-0": {
-    productSlug: "ttrc-lf-5-0",
-    sku: "TTRC-C-1",
-    primaryKeyword: "line follower robot",
-    secondaryKeywords: [
-      "line follower competition robot",
-      "high speed line follower",
-      "PID line follower kit",
-      "autonomous line tracking bot",
-      "robotics competition bot India"
-    ],
-    longTailKeywords: [
-      "high speed line follower robot for national competitions",
-      "PID based line follower robot with 7 array sensor",
-      "TTRC LF 5.0 line tracking robot specifications",
-      "line follower robot kit with high speed N20 motors",
-      "line follower robot price in India"
-    ],
-    questionKeywords: [
-      "What is TTRC LF 5.0?",
-      "What sensors are used on the TTRC line follower robot?",
-      "Can TTRC LF 5.0 be used in college robotics competitions?",
-      "Is battery included with TTRC LF 5.0?",
-      "What is the top speed of TTRC LF 5.0 line follower?"
-    ],
-    searchIntent: "Competition Line Follower Platform",
-    quickAnswer: "TTRC LF 5.0 is an autonomous high-speed line follower robot engineered for competitive track navigation using a 7-array sensor, TTRC C-Board 5.0 controller, and 600 RPM high-speed DG N20 motors.",
-    targetAudience: [
-      "Engineering College Robotics Teams",
-      "National Robotics Competition Competitors",
-      "Robotics Club Racers",
-      "Autonomous Systems Students"
-    ],
-    relatedServices: ["robotics-automation", "pcb-design-fabrication-assembly", "3d-printing"],
     relatedProducts: ["rc-robo-race", "rc-robo-soccer"],
     relatedProjects: ["advanced-kinematics", "computer-vision-edge-ai"],
     relatedCourses: ["robotics-iot-embedded", "arduino-robotics"]
   },
 
-  // 2. TTRC RR-5.0
+  // 1. TTRC RR-5.0
   "rc-robo-race": {
     productSlug: "rc-robo-race",
     sku: "TTRC-C-2",
@@ -377,7 +337,7 @@ export const productSeoMap: Record<string, ProductSeoEntry> = {
       "Robotics Enthusiasts"
     ],
     relatedServices: ["robotics-automation", "3d-printing", "pcb-design-fabrication-assembly"],
-    relatedProducts: ["ttrc-lf-5-0", "rc-robo-race"],
+    relatedProducts: ["ttrc-lf-6-0", "rc-robo-race"],
     relatedProjects: ["advanced-kinematics", "healthcare-assistive"],
     relatedCourses: ["arduino-robotics", "robotics-iot-embedded"]
   },

@@ -48,7 +48,7 @@ let allPassed = true;
 
 // Known verified catalogue prices as specified in business rules
 const knownVerifiedPrices = {
-  'ttrc-lf-5-0': 3799,
+  'ttrc-lf-6-0': 3199,
   'rc-robo-race': 7999,
   'ttrc-rs-5-0-robo-soccer': 7999,
   'flysky-fs-i6x-transmitter-receiver': 6398,

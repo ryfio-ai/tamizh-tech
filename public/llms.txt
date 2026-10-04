@@ -21,7 +21,7 @@ Website: https://www.tamizhtech.in
 ## Core Capabilities & Engineering Offerings
 
 ### 1. Custom Competition Robotics & Hardware Fabrication
-- National championship-winning robotics kits: TTRC LF 5.0 Line Follower, RC Robo Race, RC Robo Soccer, RC Robo Sumo.
+- National championship-winning robotics kits: TTRC LF 6.0 Line Follower, RC Robo Race, RC Robo Soccer, RC Robo Sumo.
 - Custom combat robot chassis engineering (150g Antweight to 60kg Heavyweight).
 - Precision fiber laser cutting for SS304/SS316 stainless steel and aluminium chassis.
 - High-resolution FDM 3D printing for structural robotics parts.

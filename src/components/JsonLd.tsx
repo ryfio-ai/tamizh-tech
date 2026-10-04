@@ -82,7 +82,7 @@ export function GlobalSiteGraphSchema() {
             "name": "Does TamizhTech build custom competition robots for national tournaments?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. TamizhTech designs and manufactures competition-ready platforms including Line Followers (TTRC LF 5.0), RC Robo Race, RC Robo Soccer, and combat bots with over 180+ podium tournament wins."
+              "text": "Yes. TamizhTech designs and manufactures competition-ready platforms including Line Followers (TTRC LF 6.0), RC Robo Race, RC Robo Soccer, and combat bots with over 180+ podium tournament wins."
             }
           },
           {

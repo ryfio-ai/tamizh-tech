@@ -340,7 +340,7 @@ const baseBlogPosts: BlogPost[] = [
     content: [
       { type: 'p', text: 'Choosing the right competition bot for your student team determines how quickly you master foundational robotics engineering principles. Each format tests distinct sub-disciplines: Line Followers emphasize PID closed-loop control, Robo Race stresses mechanical chassis geometry and high-speed traction, while Robo Soccer demands real-time wireless telemetry and active mechanism integration.' },
       { type: 'h2', heading: 'Technical Comparison Matrix' },
-      { type: 'table', headers: ['Robot Type', 'Primary Engineering Challenge', 'Key Components', 'Difficulty Level'], rows: [['Line Follower (TTRC LF 5.0)', 'PID sensor array calibration & high-speed curve tracking', 'QTR-8A IR array, N20 1000RPM motors, L298N/TB6612FNG driver', 'Beginner to Intermediate'], ['Robo Race', 'Chassis center of gravity, drift handling & impact resistance', 'High-torque Johnson motors, metal gear servomotor steering, 4S LiPo', 'Intermediate'], ['Robo Soccer', 'Wireless RC control, omni/differential drive & kicker actuators', 'Flysky FS-i6X RC, custom metal chassis, active pneumatic/solenoid kicker', 'Intermediate to Advanced']] },
+      { type: 'table', headers: ['Robot Type', 'Primary Engineering Challenge', 'Key Components', 'Difficulty Level'], rows: [['Line Follower (TTRC LF 6.0)', 'PID sensor array calibration & high-speed curve tracking', 'QTR-8A IR array, N20 1000RPM motors, L298N/TB6612FNG driver', 'Beginner to Intermediate'], ['Robo Race', 'Chassis center of gravity, drift handling & impact resistance', 'High-torque Johnson motors, metal gear servomotor steering, 4S LiPo', 'Intermediate'], ['Robo Soccer', 'Wireless RC control, omni/differential drive & kicker actuators', 'Flysky FS-i6X RC, custom metal chassis, active pneumatic/solenoid kicker', 'Intermediate to Advanced']] },
       { type: 'h2', heading: '1. Line Follower: Mastering Control Systems' },
       { type: 'p', text: 'Line follower robots are the single best entry point for understanding analog/digital sensor reading and proportional-integral-derivative (PID) control algorithm design. Achieving high speeds without overshooting sharp 90-degree corners requires fine-tuning motor differential speeds.' },
       { type: 'h2', heading: '2. Robo Race: High-Speed Mechanical Dynamics' },
@@ -351,7 +351,7 @@ const baseBlogPosts: BlogPost[] = [
     ],
     faq: [
       { q: 'Which robot is best for absolute beginners?', a: 'A Line Follower bot is recommended for beginners as it teaches basic C++ programming, IR sensor calibration, and motor control without complex RF wireless debugging.' },
-      { q: 'Does TamizhTech provide ready-to-assemble competition kits?', a: 'Yes, TamizhTech manufactures competition-tested kits including the TTRC LF 5.0 Line Follower, RC Robo Race, and RC Robo Soccer platforms.' },
+      { q: 'Does TamizhTech provide ready-to-assemble competition kits?', a: 'Yes, TamizhTech manufactures competition-tested kits including the TTRC LF 6.0 Line Follower, RC Robo Race, and RC Robo Soccer platforms.' },
     ],
     internalLinks: [{ text: 'Explore Competition Bot Kits', href: '/products' }, { text: 'Join Tamil Robotics Club', href: '/robotics-club' }],
   },
