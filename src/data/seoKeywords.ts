@@ -55,7 +55,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "PLC automation coimbatore",
     intent: "B2B",
     contentType: "industry",
-    targetPage: "/industries",
+    targetPage: "/solutions/industries",
     priority: "HIGH",
     businessValue: "PRIMARY_REVENUE",
     notes: "Siemens/Delta/Allen-Bradley PLC programming and panel assembly inquiries."
@@ -73,7 +73,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "industrial robotics integration",
     intent: "B2B",
     contentType: "industry",
-    targetPage: "/industries",
+    targetPage: "/solutions/industries",
     priority: "HIGH",
     businessValue: "PRIMARY_REVENUE",
     notes: "Factory automation, AGVs, AMRs, and custom conveyor sensor automation."
@@ -102,7 +102,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "school robotics lab setup",
     intent: "B2B",
     contentType: "service",
-    targetPage: "/schools",
+    targetPage: "/solutions/schools",
     priority: "HIGH",
     businessValue: "STRATEGIC_B2B",
     notes: "K-12 Atal Tinkering Lab (ATL) and private CBSE school STEM laboratory implementation."
@@ -111,7 +111,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "STEM lab setup for schools",
     intent: "B2B",
     contentType: "service",
-    targetPage: "/schools",
+    targetPage: "/solutions/schools",
     priority: "HIGH",
     businessValue: "STRATEGIC_B2B",
     notes: "Grade 1 to 12 experiential STEM, 3D printing, and visual block coding training."
@@ -120,7 +120,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "college robotics lab setup",
     intent: "B2B",
     contentType: "service",
-    targetPage: "/colleges",
+    targetPage: "/solutions/colleges",
     priority: "HIGH",
     businessValue: "STRATEGIC_B2B",
     notes: "Centre of Excellence (CoE), collegiate R&D MoUs, and advanced micro-robotics infrastructure."
@@ -129,7 +129,7 @@ export const seoKeywords: SEOKeywordTarget[] = [
     keyword: "engineering robotics projects",
     intent: "EDUCATIONAL",
     contentType: "service",
-    targetPage: "/colleges",
+    targetPage: "/solutions/colleges",
     priority: "MEDIUM",
     businessValue: "TALENT_PIPELINE",
     notes: "Final year B.E./B.Tech engineering capstone projects in ROS, IoT, and embedded firmware."

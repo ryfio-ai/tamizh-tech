@@ -138,7 +138,7 @@ export default function StemEducationIndiaPage() {
                 Choose us to bring certified STEM training packages, robust local hardware supplies, and fully mapped curriculum modules directly to your educational institution.
               </p>
               <div className="flex gap-4">
-                <Link href="/schools">
+                <Link href="/solutions/schools">
                   <Button variant="primary">School Solutions</Button>
                 </Link>
                 <Link href="/contact">

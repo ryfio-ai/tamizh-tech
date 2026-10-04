@@ -17,6 +17,8 @@ export default function robots(): MetadataRoute.Robots {
           '/register/',
           '/cart/',
           '/checkout/',
+          '/docs/',
+          '/search',
         ],
       },
       {
@@ -33,6 +35,8 @@ export default function robots(): MetadataRoute.Robots {
           '/register/',
           '/cart/',
           '/checkout/',
+          '/docs/',
+          '/search',
         ],
       },
     ],

@@ -988,7 +988,7 @@ export default function HomeClient() {
               { step: "03", title: "Custom Fabrication", desc: "SS laser cutting & precision 3D printing", icon: Scissors, href: "/services/laser-cutting" },
               { step: "04", title: "PCB", desc: "Design, fabrication & board assembly", icon: Cpu, href: "/services/pcb-design-fabrication-assembly" },
               { step: "05", title: "Automation", desc: "Firmware, kinematics, sensor fusion & PLC", icon: Factory, href: "/services/industrial-automation" },
-              { step: "06", title: "Engineering Support", desc: "Testing, direct consultation & team training", icon: Users, href: "/colleges" },
+              { step: "06", title: "Engineering Support", desc: "Testing, direct consultation & team training", icon: Users, href: "/solutions/colleges" },
             ].map((item, idx) => {
               const Icon = item.icon;
               return (

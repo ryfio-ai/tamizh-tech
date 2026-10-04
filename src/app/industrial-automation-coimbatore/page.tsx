@@ -138,7 +138,7 @@ export default function IndustrialAutomationCoimbatorePage() {
                 Choose us to secure local engineering support, direct factory pricing, robust hardware structures, and full compliance with GST invoicing rules.
               </p>
               <div className="flex gap-4">
-                <Link href="/industries">
+                <Link href="/solutions/industries">
                   <Button variant="primary">Industrial Solutions</Button>
                 </Link>
                 <Link href="/contact">

@@ -39,12 +39,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: metaDesc,
       url: canonicalUrl,
       type: "website",
-      images: product.images && product.images.length > 0 ? [{ url: product.images[0] }] : undefined,
+      images: product.images && product.images.length > 0 
+        ? [{ url: product.images[0].startsWith("http") ? product.images[0] : `https://www.tamizhtech.in${product.images[0]}` }] 
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: metaTitle,
       description: metaDesc,
+      images: product.images && product.images.length > 0 
+        ? [product.images[0].startsWith("http") ? product.images[0] : `https://www.tamizhtech.in${product.images[0]}`] 
+        : undefined,
     }
   };
 }

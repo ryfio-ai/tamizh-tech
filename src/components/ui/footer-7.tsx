@@ -43,11 +43,11 @@ const defaultSections = [
   {
     title: "Solutions",
     links: [
-      { name: "Schools", href: "/schools" },
-      { name: "Colleges", href: "/colleges" },
-      { name: "Industries", href: "/industries" },
-      { name: "STEM Labs", href: "/schools" },
-      { name: "Industrial Automation", href: "/industries" },
+      { name: "Schools", href: "/solutions/schools" },
+      { name: "Colleges", href: "/solutions/colleges" },
+      { name: "Industries", href: "/solutions/industries" },
+      { name: "STEM Labs", href: "/solutions/schools" },
+      { name: "Industrial Automation", href: "/solutions/industries" },
     ],
   },
   {

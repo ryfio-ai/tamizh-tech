@@ -33,9 +33,9 @@ function Header1() {
   ];
 
   const solutionsDropdown = [
-    { title: "Schools Setup", href: "/schools", desc: "Tinkering labs & teacher guidance.", icon: GraduationCap },
-    { title: "Colleges Program", href: "/colleges", desc: "R&D incubators & project prototyping.", icon: GraduationCap },
-    { title: "Industries Served", href: "/industries", desc: "Custom AGVs, vision, & PLC integrations.", icon: Factory },
+    { title: "Schools Setup", href: "/solutions/schools", desc: "Tinkering labs & teacher guidance.", icon: GraduationCap },
+    { title: "Colleges Program", href: "/solutions/colleges", desc: "R&D incubators & project prototyping.", icon: GraduationCap },
+    { title: "Industries Served", href: "/solutions/industries", desc: "Custom AGVs, vision, & PLC integrations.", icon: Factory },
   ];
 
   const companyDropdown = [

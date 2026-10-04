@@ -7,8 +7,8 @@ export function GlobalSiteGraphSchema() {
       {
         "@type": "LocalBusiness",
         "@id": "https://www.tamizhtech.in/#organization",
-        "name": "TamizhTech Robotics Company",
-        "alternateName": ["Tamizh Tech", "TTRC"],
+        "name": "Tamizh Tech Robotics Company",
+        "alternateName": ["TamizhTech", "TTRC", "Tamizh Tech Robotics"],
         "url": "https://www.tamizhtech.in/",
         "logo": "https://www.tamizhtech.in/logo.png",
         "image": "https://www.tamizhtech.in/hero-robotics.jpg",
@@ -111,8 +111,8 @@ export function OrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": "https://www.tamizhtech.in/#organization",
-    "name": "TamizhTech Robotics Company",
-    "alternateName": ["Tamizh Tech", "TTRC"],
+    "name": "Tamizh Tech Robotics Company",
+    "alternateName": ["TamizhTech", "TTRC", "Tamizh Tech Robotics"],
     "url": "https://www.tamizhtech.in",
     "logo": {
       "@type": "ImageObject",
@@ -171,8 +171,8 @@ export function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": "https://www.tamizhtech.in/#organization",
-    "name": "TamizhTech Robotics Company",
-    "alternateName": "Tamizh Tech",
+    "name": "Tamizh Tech Robotics Company",
+    "alternateName": ["TamizhTech", "TTRC", "Tamizh Tech Robotics"],
     "image": "https://www.tamizhtech.in/hero-robotics.jpg",
     "logo": "https://www.tamizhtech.in/logo.png",
     "telephone": "+918148045030",
@@ -241,7 +241,7 @@ export function ProductSchema({ product }: any) {
     "description": product.shortDescription || product.description,
     "brand": {
       "@type": "Brand",
-      "name": product.brand || "TamizhTech Robotics"
+      "name": product.brand || "Tamizh Tech Robotics Company"
     },
     ...(product.manufacturer ? {
       "manufacturer": {

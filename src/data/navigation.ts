@@ -35,9 +35,9 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     audience: "Schools",
     tagline: "K-12 STEM & ATL innovation",
     items: [
-      { label: "STEM Labs", href: "/schools", desc: "Turnkey ATL lab setup" },
+      { label: "STEM Labs", href: "/solutions/schools", desc: "Turnkey ATL lab setup" },
       { label: "Robotics Programs", href: "/courses/school", desc: "Curriculum-aligned courses" },
-      { label: "School Workshops", href: "/schools", desc: "Hands-on science bootcamps" },
+      { label: "School Workshops", href: "/solutions/schools", desc: "Hands-on science bootcamps" },
       { label: "Competition Support", href: "/events", desc: "Tournament prep & arena kits" }
     ]
   },
@@ -45,10 +45,10 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     audience: "Colleges",
     tagline: "Engineering R&D & CoE",
     items: [
-      { label: "Robotics Labs", href: "/colleges", desc: "Advanced Centre of Excellence" },
+      { label: "Robotics Labs", href: "/solutions/colleges", desc: "Advanced Centre of Excellence" },
       { label: "Engineering Projects", href: "/projects", desc: "Industry-grade capstones" },
       { label: "Training Programs", href: "/courses/college", desc: "Embedded, AI & drone tracks" },
-      { label: "R&D Collaboration", href: "/colleges", desc: "Faculty & student innovation" }
+      { label: "R&D Collaboration", href: "/solutions/colleges", desc: "Faculty & student innovation" }
     ]
   },
   {
@@ -150,8 +150,8 @@ export const servicesMegaMenu = {
     {
       title: "Education & R&D",
       items: [
-        { label: "STEM Labs", href: "/schools", desc: "Turnkey school lab setup" },
-        { label: "R&D Collaboration", href: "/colleges", desc: "Centre of Excellence & patents" },
+        { label: "STEM Labs", href: "/solutions/schools", desc: "Turnkey school lab setup" },
+        { label: "R&D Collaboration", href: "/solutions/colleges", desc: "Centre of Excellence & patents" },
         { label: "Training & Workshops", href: "/courses", desc: "Practical hands-on bootcamps" },
         { label: "Engineering Consulting", href: "/services#consulting", desc: "Architecture & feasibility review" }
       ]

@@ -125,17 +125,32 @@ const nextConfig = {
       },
       {
         source: '/courses/drone-design',
-        destination: '/courses/college/drone-design',
+        destination: '/courses/college/drone-engineering',
+        permanent: true,
+      },
+      {
+        source: '/courses/college/drone-design',
+        destination: '/courses/college/drone-engineering',
         permanent: true,
       },
       {
         source: '/courses/industrial-iot',
-        destination: '/courses/professionals/industrial-iot',
+        destination: '/courses/professionals/industrial-automation-plc',
+        permanent: true,
+      },
+      {
+        source: '/courses/professionals/industrial-iot',
+        destination: '/courses/professionals/industrial-automation-plc',
         permanent: true,
       },
       {
         source: '/courses/ros-robotics',
-        destination: '/courses/professionals/ros-robotics',
+        destination: '/courses',
+        permanent: true,
+      },
+      {
+        source: '/courses/professionals/ros-robotics',
+        destination: '/courses',
         permanent: true,
       },
       // ── Legacy Flat Blog URLs → Canonical Hierarchical URLs (HTTP 308) ──
@@ -169,7 +184,121 @@ const nextConfig = {
         destination: '/blog/education/robotics-course-tamil-vs-english',
         permanent: true,
       },
-      // ── About & Founder Consolidation ──
+      // ── Solutions & Entity Consolidation (HTTP 308) ──
+      {
+        source: '/schools',
+        destination: '/solutions/schools',
+        permanent: true,
+      },
+      {
+        source: '/colleges',
+        destination: '/solutions/colleges',
+        permanent: true,
+      },
+      {
+        source: '/industries',
+        destination: '/solutions/industries',
+        permanent: true,
+      },
+      {
+        source: '/solutions/stem-lab-setup-schools',
+        destination: '/solutions/schools',
+        permanent: true,
+      },
+      {
+        source: '/solutions/schools-stem-lab',
+        destination: '/solutions/schools',
+        permanent: true,
+      },
+      {
+        source: '/solutions/colleges-robotics-coe',
+        destination: '/solutions/colleges',
+        permanent: true,
+      },
+      {
+        source: '/solutions/colleges-coe',
+        destination: '/solutions/colleges',
+        permanent: true,
+      },
+      // ── Services Keyword & Legacy Aliases (HTTP 308) ──
+      {
+        source: '/services/laser-cutting-coimbatore',
+        destination: '/services/laser-cutting',
+        permanent: true,
+      },
+      {
+        source: '/services/3d-printing-coimbatore',
+        destination: '/services/3d-printing',
+        permanent: true,
+      },
+      {
+        source: '/services/pcb-assembly-tamilnadu',
+        destination: '/services/pcb-design-fabrication-assembly',
+        permanent: true,
+      },
+      {
+        source: '/services/pcb-services',
+        destination: '/services/pcb-design-fabrication-assembly',
+        permanent: true,
+      },
+      {
+        source: '/services/pcb-design',
+        destination: '/services/pcb-design-fabrication-assembly',
+        permanent: true,
+      },
+      {
+        source: '/services/engineering-rd',
+        destination: '/services/robotics-automation',
+        permanent: true,
+      },
+      {
+        source: '/services/embedded-iot',
+        destination: '/services/robotics-automation',
+        permanent: true,
+      },
+      {
+        source: '/services/ai-vision',
+        destination: '/services/industrial-automation',
+        permanent: true,
+      },
+      {
+        source: '/services/stem-lab-setup',
+        destination: '/solutions/schools',
+        permanent: true,
+      },
+      // ── Products Keyword & Legacy Aliases (HTTP 308) ──
+      {
+        source: '/products/competition-robots',
+        destination: '/products/competition',
+        permanent: true,
+      },
+      {
+        source: '/products/competition-kits',
+        destination: '/products/competition',
+        permanent: true,
+      },
+      {
+        source: '/products/line-follower',
+        destination: '/products/competition/ttrc-lf-6-0',
+        permanent: true,
+      },
+      // ── Learn & Blog Aliases (HTTP 308) ──
+      {
+        source: '/learn',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/learn/:path*',
+        destination: '/blog/:path*',
+        permanent: true,
+      },
+      // ── Club, About & Founder Consolidation ──
+      {
+        source: '/club',
+        destination: '/robotics-club',
+        permanent: true,
+      },
       {
         source: '/about-tamizh-tech',
         destination: '/about',
@@ -180,7 +309,7 @@ const nextConfig = {
         destination: '/team',
         permanent: true,
       },
-      // ── Legacy Project Category 404 Fixes (HTTP 308/301) ──
+      // ── Legacy Project Category 404 Fixes (HTTP 308) ──
       {
         source: '/projects/robotics-logistics',
         destination: '/projects/logistics-retail',
@@ -232,63 +361,6 @@ const nextConfig = {
         source: '/events/future-of-industrial-automation',
         destination: '/events/webinar/future-of-industrial-automation',
         permanent: true,
-      },
-    ];
-  },
-  async rewrites() {
-    return [
-      // ── Strategic SEO Keyword Landing Page Aliases ──
-      {
-        source: '/products/competition-robots',
-        destination: '/products/competition',
-      },
-      {
-        source: '/products/competition-kits',
-        destination: '/products/competition',
-      },
-      {
-        source: '/products/line-follower',
-        destination: '/products/competition/ttrc-lf-6-0',
-      },
-      {
-        source: '/services/laser-cutting-coimbatore',
-        destination: '/services/laser-cutting',
-      },
-      {
-        source: '/services/3d-printing-coimbatore',
-        destination: '/services/3d-printing',
-      },
-      {
-        source: '/services/pcb-assembly-tamilnadu',
-        destination: '/services/pcb-design-fabrication-assembly',
-      },
-      {
-        source: '/services/pcb-services',
-        destination: '/services/pcb-design-fabrication-assembly',
-      },
-      {
-        source: '/solutions/stem-lab-setup-schools',
-        destination: '/solutions/schools',
-      },
-      {
-        source: '/solutions/schools-stem-lab',
-        destination: '/solutions/schools',
-      },
-      {
-        source: '/solutions/colleges-robotics-coe',
-        destination: '/solutions/colleges',
-      },
-      {
-        source: '/solutions/colleges-coe',
-        destination: '/solutions/colleges',
-      },
-      {
-        source: '/learn',
-        destination: '/blog',
-      },
-      {
-        source: '/learn/:path*',
-        destination: '/blog/:path*',
       },
     ];
   },

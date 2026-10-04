@@ -187,7 +187,7 @@ export const services: ServiceItem[] = [
       "Robotics competition arena kits"
     ],
     color: "green",
-    href: "/schools"
+    href: "/solutions/schools"
   },
   {
     id: "research",
@@ -204,7 +204,7 @@ export const services: ServiceItem[] = [
       "Interdisciplinary engineering research"
     ],
     color: "indigo",
-    href: "/colleges"
+    href: "/solutions/colleges"
   },
   {
     id: "training",

@@ -88,6 +88,9 @@ export const metadata: Metadata = {
     images: ["/logo/banner.png"],
   },
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.tamizhtech.in",
+  },
   verification: {
     google: "7g5KeZcS4nwoVQGUS7gpb2JqM1nOLUtq9SQPvxolQNE",
   },

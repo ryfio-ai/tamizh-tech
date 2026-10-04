@@ -750,7 +750,7 @@ export function Navbar() {
                         Industrial Automation
                       </Link>
                       <Link
-                        href="/schools"
+                        href="/solutions/schools"
                         onClick={() => setIsOpen(false)}
                         className="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#FF6B00]"
                       >

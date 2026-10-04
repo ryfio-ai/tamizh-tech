@@ -107,27 +107,27 @@ export function Footer() {
               </h3>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <Link href="/products/competition" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/students-makers" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Students & Makers
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schools" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/schools" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Schools (STEM & ATL Labs)
                   </Link>
                 </li>
                 <li>
-                  <Link href="/colleges" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/colleges" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Colleges (R&D & CoE)
                   </Link>
                 </li>
                 <li>
-                  <Link href="/industrial-automation-coimbatore" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/industries" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Industries & Manufacturing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/startups" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     Startups & Product Teams
                   </Link>
                 </li>
@@ -185,7 +185,7 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/schools" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
+                  <Link href="/solutions/schools" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
                     STEM Tinkering Labs
                   </Link>
                 </li>
@@ -331,11 +331,11 @@ export function Footer() {
               </button>
               {openAccordions.solutions && (
                 <ul className="pt-2 pl-2 space-y-2 text-xs text-slate-600">
-                  <li><Link href="/products/competition" className="hover:text-[#FF6B00]">Students & Makers</Link></li>
-                  <li><Link href="/schools" className="hover:text-[#FF6B00]">Schools (STEM Labs)</Link></li>
-                  <li><Link href="/colleges" className="hover:text-[#FF6B00]">Colleges (R&D)</Link></li>
-                  <li><Link href="/industrial-automation-coimbatore" className="hover:text-[#FF6B00]">Industries</Link></li>
-                  <li><Link href="/solutions" className="hover:text-[#FF6B00]">Startups & Teams</Link></li>
+                  <li><Link href="/solutions/students-makers" className="hover:text-[#FF6B00]">Students & Makers</Link></li>
+                  <li><Link href="/solutions/schools" className="hover:text-[#FF6B00]">Schools (STEM Labs)</Link></li>
+                  <li><Link href="/solutions/colleges" className="hover:text-[#FF6B00]">Colleges (R&D)</Link></li>
+                  <li><Link href="/solutions/industries" className="hover:text-[#FF6B00]">Industries</Link></li>
+                  <li><Link href="/solutions/startups" className="hover:text-[#FF6B00]">Startups & Teams</Link></li>
                 </ul>
               )}
             </div>
@@ -357,7 +357,7 @@ export function Footer() {
                   <li><Link href="/services/pcb-design-fabrication-assembly" className="text-[#FF6B00] font-semibold">PCB Services (Design + PCBA)</Link></li>
                   <li><Link href="/services#robotics" className="hover:text-[#FF6B00]">Robotics & Automation</Link></li>
                   <li><Link href="/industrial-automation-coimbatore" className="hover:text-[#FF6B00]">Industrial Automation</Link></li>
-                  <li><Link href="/schools" className="hover:text-[#FF6B00]">STEM Tinkering Labs</Link></li>
+                  <li><Link href="/solutions/schools" className="hover:text-[#FF6B00]">STEM Tinkering Labs</Link></li>
                   <li><Link href="/services" className="font-bold text-[#FF6B00]">View All Services →</Link></li>
                 </ul>
               )}
