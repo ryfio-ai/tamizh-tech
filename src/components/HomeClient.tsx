@@ -827,7 +827,7 @@ export default function HomeClient() {
                 { year: "2023", text: "Expanded participation to national and international competitions." },
                 { year: "2024", text: "Tamizh Tech Robotics Company was officially established." },
                 { year: "2025", text: "Robotics products supplied to schools and colleges across India." },
-                { year: "2026", text: "Launch of ThiranOli Academy." },
+                { year: "2026", text: "Launch of our official ecommerce platform ttrc.store." },
               ].map((step, idx) => (
                 <div
                   key={idx}
