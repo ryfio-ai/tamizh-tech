@@ -37,7 +37,7 @@ const timeline = [
   { year: "2023", title: "National Expansion", desc: "Expanded components supply and technical project mentorship to national level." },
   { year: "2024", title: "Company Inception", desc: "Tamizh Tech Robotics Company was officially incorporated as an LLC on 22 October 2024." },
   { year: "2025", title: "STEM Setup Dominance", desc: "Began deploying complete robotics tinkering laboratories to schools and colleges across India." },
-  { year: "2026", title: "Academy & Advanced R&D", desc: "Launched ThiranOli Academy to scale technical training, and expanded B2B automation." },
+  { year: "2026", title: "Official E-Commerce Store", desc: "Launched our official ecommerce platform TTRC Store (ttrc.store) to deliver robotics kits, components, and controllers across India." },
 ];
 
 const missionVision = [
@@ -150,7 +150,7 @@ export default function AboutPage() {
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg border border-border">
-                <Image src="/hero-combined.jpg" alt="TamizhTech Engineering and Robotics Platform" fill className="object-cover" />
+                <Image src="/office.png" alt="TamizhTech Robotics Workspace & Engineering Facility" fill className="object-cover" priority />
               </div>
             </AnimatedSection>
           </div>
