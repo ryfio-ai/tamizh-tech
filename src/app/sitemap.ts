@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { products } from '@/data/products';
 import { courses } from '@/data/courses';
 import { blogPosts, getBlogCategorySlug } from '@/data/blogPosts';
 import { projects } from '@/data/projects';
@@ -10,8 +9,6 @@ import { newsletters } from '@/data/newsletters';
 import { categories } from '@/data/categories';
 import { competitionGuides } from '@/data/competitionGuides';
 import { 
-  getProductUrl, 
-  getProductCategoryUrl, 
   getCourseUrl, 
   getCourseCategoryUrl, 
   getBlogUrl, 
@@ -90,8 +87,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   addEntry('/industrial-automation-coimbatore', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
 
   // 3. Content Type Hub Pages
-  addEntry('/products', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
-  addEntry('/products/competition', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/courses', '2026-03-01T00:00:00.000Z', 0.9, 'weekly');
   addEntry('/blog', '2026-03-01T00:00:00.000Z', 0.8, 'weekly');
   addEntry('/projects', '2026-03-01T00:00:00.000Z', 0.8, 'monthly');
@@ -102,9 +97,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (!cat.published) continue;
     let catUrl = '';
     switch (cat.contentType) {
-      case 'products':
-        catUrl = getProductCategoryUrl(cat.slug);
-        break;
       case 'courses':
         catUrl = getCourseCategoryUrl(cat.slug);
         break;
@@ -126,12 +118,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 4b. 10 Project Categories
   for (const pcat of projectCategories) {
     addEntry(getProjectCategoryUrl(pcat.slug), '2026-03-01T00:00:00.000Z', 0.8, 'weekly');
-  }
-
-  // 5. Dynamic Products (from verified products data)
-  for (const p of products) {
-    if (!p.published) continue;
-    addEntry(getProductUrl(p.categorySlug, p.slug), p.updatedAt || p.createdAt, 0.9, 'weekly');
   }
 
   // 6. Dynamic Courses (from verified courses data)

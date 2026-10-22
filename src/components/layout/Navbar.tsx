@@ -12,12 +12,12 @@ import {
   ArrowRight,
   Printer,
   Scissors,
-  Cpu
+  Cpu,
+  ExternalLink
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   solutionsMegaMenu, 
-  productsDropdown, 
   servicesMegaMenu, 
   learnDropdown, 
   companyDropdown 
@@ -241,77 +241,19 @@ export function Navbar() {
               </AnimatePresence>
             </div>
 
-            {/* Products ▾ (Database Categories) */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveMenu("Products")}
-              onMouseLeave={() => setActiveMenu(null)}
+            {/* Store (Official TTRC Store Direct Link) */}
+            <a
+              href="https://www.ttrc.store/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full text-[#111111] hover:text-[#FF6B00] hover:bg-slate-50 transition-colors"
             >
-              <button
-                type="button"
-                onClick={() => setActiveMenu(activeMenu === "Products" ? null : "Products")}
-                aria-expanded={activeMenu === "Products"}
-                aria-controls="products-menu"
-                className={`flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-full transition-colors ${
-                  isNavActive("Products") || activeMenu === "Products"
-                    ? "text-[#FF6B00] bg-orange-50"
-                    : "text-[#111111] hover:text-[#FF6B00] hover:bg-slate-50"
-                }`}
-              >
-                <span>Products</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMenu === "Products" ? "rotate-180" : ""}`} />
-              </button>
-
-              <AnimatePresence>
-                {activeMenu === "Products" && (
-                  <motion.div
-                    id="products-menu"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[min(600px,calc(100vw-32px))] z-50 pointer-events-auto"
-                  >
-                    <div className="bg-white border border-slate-200/90 rounded-2xl shadow-xl p-5">
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        {productsDropdown.categories.map((cat) => (
-                          <div key={cat.title} className="space-y-2">
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-2">{cat.title}</h4>
-                            <div className="space-y-1">
-                              {cat.items.map((item) => (
-                                <Link
-                                  key={item.label}
-                                  href={item.href}
-                                  className="block p-2 rounded-xl hover:bg-slate-50 transition-colors group"
-                                >
-                                  <span className="text-xs font-bold text-slate-800 group-hover:text-[#FF6B00] transition-colors block">
-                                    {item.label}
-                                  </span>
-                                  <span className="text-[11px] text-slate-400 line-clamp-1 block mt-0.5">
-                                    {item.desc}
-                                  </span>
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <span className="text-[11px] text-slate-400">Engineered in Coimbatore</span>
-                        <Link
-                          href={productsDropdown.viewAllHref}
-                          className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:text-[#e05e00] transition-colors"
-                        >
-                          <span>{productsDropdown.viewAllLabel}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              <span>Store</span>
+              <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 bg-orange-100 text-[#FF6B00] rounded-full leading-none">
+                TTRC
+              </span>
+              <ExternalLink className="w-3 h-3 text-[#FF6B00]" />
+            </a>
 
             {/* Services ▾ (Strategic Highlight: 3D Printing, Laser Cutting, PCB) */}
             <div 
@@ -665,41 +607,29 @@ export function Navbar() {
                   )}
                 </div>
 
-                {/* Products Accordion */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setMobileExpanded(mobileExpanded === "Products" ? null : "Products")}
-                    className="flex items-center justify-between w-full px-3 py-2.5 text-sm font-semibold text-slate-800 hover:text-[#FF6B00] rounded-xl hover:bg-slate-50"
+                {/* Official Store Card in Mobile Drawer */}
+                <div className="p-3.5 my-2 rounded-2xl bg-orange-50/80 border border-orange-100/90 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black text-slate-900 uppercase tracking-tight">
+                      Official Tamizh Tech Store
+                    </span>
+                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 bg-orange-100 text-[#FF6B00] rounded-full leading-none">
+                      ttrc.store
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    For all robotics kits, components, and controllers, purchase directly on our ecommerce platform.
+                  </p>
+                  <a
+                    href="https://www.ttrc.store/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl transition-colors shadow-2xs"
                   >
-                    <span>Products</span>
-                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${mobileExpanded === "Products" ? "rotate-180" : ""}`} />
-                  </button>
-                  {mobileExpanded === "Products" && (
-                    <div className="ml-3 pl-3 border-l border-slate-200 py-1 space-y-1">
-                      <Link
-                        href="/products/competition"
-                        onClick={() => setIsOpen(false)}
-                        className="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#FF6B00]"
-                      >
-                        Competition Robots
-                      </Link>
-                      <Link
-                        href="/products/radio-controllers"
-                        onClick={() => setIsOpen(false)}
-                        className="block px-2 py-1.5 text-xs text-slate-600 hover:text-[#FF6B00]"
-                      >
-                        Radio Controllers
-                      </Link>
-                      <Link
-                        href="/products"
-                        onClick={() => setIsOpen(false)}
-                        className="block px-2 py-1.5 text-xs font-bold text-[#FF6B00]"
-                      >
-                        View All Products →
-                      </Link>
-                    </div>
-                  )}
+                    <span>Visit TTRC Store</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
 
                 {/* Services Accordion */}

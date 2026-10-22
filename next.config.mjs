@@ -40,6 +40,17 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      // ── Products → Official TTRC Store E-Commerce Platform (HTTP 308) ──
+      {
+        source: '/products',
+        destination: 'https://www.ttrc.store/',
+        permanent: true,
+      },
+      {
+        source: '/products/:path*',
+        destination: 'https://www.ttrc.store/',
+        permanent: true,
+      },
       // ── Legacy Flat Product URLs → Canonical Hierarchical URLs (HTTP 308) ──
       {
         source: '/products/competition/ttrc-lf-5-0',

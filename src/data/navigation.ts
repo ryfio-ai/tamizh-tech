@@ -23,7 +23,7 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
     audience: "Students & Makers",
     tagline: "Hands-on bots & prototyping",
     items: [
-      { label: "Robotics Kits", href: "/products/competition", desc: "Competition & learning chassis" },
+      { label: "Robotics Kits", href: "https://www.ttrc.store/", desc: "Buy on Official TTRC Store", isExternal: true },
       { label: "Project Development", href: "/projects", desc: "Hardware guidance & capstones" },
       { label: "3D Printing", href: "/services/3d-printing", desc: "High quality PLA, PETG & TPU prints" },
       { label: "Laser Cutting", href: "/services/laser-cutting", desc: "Precision stainless steel sheet cutting" },
@@ -75,45 +75,12 @@ export const solutionsMegaMenu: SolutionsColumn[] = [
   }
 ];
 
-// ── Products Dropdown Data ─────────────────────────────────────────────────────
-export const productsDropdown = {
-  heading: "Products",
-  viewAllHref: "/products",
-  viewAllLabel: "View All Products",
-  categories: [
-    {
-      title: "Competition Robots",
-      items: [
-        { label: "All Competition Bots", href: "/products/competition", desc: "TTRC LF, Robo Race & Robo Soccer" },
-        { label: "TTRC LF 6.0 Line Follower", href: "/products/competition/ttrc-lf-6-0", desc: "Next-gen high-speed line tracker" },
-        { label: "TTRC RR-5.0 Robo Race", href: "/products/competition/rc-robo-race", desc: "High-RPM racing & drift chassis" },
-        { label: "TTRC SOCCER 5.1 Robo Soccer", href: "/products/competition/rc-robo-soccer", desc: "High-torque tournament striker" }
-      ]
-    },
-    {
-      title: "Radio Controllers",
-      items: [
-        { label: "All Radio Controllers", href: "/products/radio-controllers", desc: "FlySky 2.4GHz transmitters & receivers" },
-        { label: "FlySky FS-i6X 10CH", href: "/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver", desc: "10-Channel telemetry controller" },
-        { label: "FlySky FS-i6 6CH", href: "/products/radio-controllers/flysky-fs-i6-2.4g-6ch", desc: "Reliable 6-channel RC radio" }
-      ]
-    },
-    {
-      title: "Educational Robotics",
-      items: [
-        { label: "All Educational Kits", href: "/products/educational-robotics", desc: "Hands-on STEM robotics platforms" },
-        { label: "The Boxing Bot", href: "/products/educational-robotics/boxing-bot", desc: "Interactive combat learning kit" }
-      ]
-    },
-    {
-      title: "Robotics Components",
-      items: [
-        { label: "All Components", href: "/products/robotics-components", desc: "Motors, wheels & hardware" },
-        { label: "112MM / 100MM Wheels", href: "/products/robotics-components/112mm-buggy-wheel", desc: "High-grip competition buggy wheels" },
-        { label: "TTRC DGJ DC Motors", href: "/products/robotics-components/ttrc-dgj-300rpm", desc: "300RPM & 600RPM geared motors" }
-      ]
-    }
-  ]
+// ── Official TTRC Store Link ──────────────────────────────────────────────────
+export const officialStoreLink = {
+  label: "Store",
+  href: "https://www.ttrc.store/",
+  badge: "TTRC",
+  isExternal: true,
 };
 
 // ── Services Mega Menu Data ────────────────────────────────────────────────────

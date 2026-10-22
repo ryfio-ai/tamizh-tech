@@ -1,5 +1,4 @@
 import { commercialServices, CommercialService } from "./commercialServices";
-import { products, Product } from "./products";
 import { courses, Course } from "./courses";
 
 export interface SolutionNeed {
@@ -883,14 +882,14 @@ export const b2bSolutions: Record<string, B2BSolution> = {
         {
           title: "RC Robo Race Competition Platform",
           description: "Carbon fiber composite chassis with silicon wheels and dual motor drivers.",
-          image: "/product/race/race1.png",
+          image: "/gallery/21.jpeg",
           alt: "RC Robo Race chassis platform built for competition",
           category: "Robots"
         },
         {
           title: "RC Robo Soccer Striker",
           description: "Armored aluminum body with omni-directional wheels and pneumatic striker.",
-          image: "/product/soccer/soccer 1.0.png",
+          image: "/gallery/8.jpg",
           alt: "Robo Soccer tournament bot engineered at Tamizh Tech",
           category: "Robots"
         },
@@ -1158,12 +1157,10 @@ export function getSolutionServices(solution: B2BSolution): CommercialService[] 
 }
 
 /**
- * Helper to resolve referenced Products by slug.
+ * Helper to resolve referenced Products by slug (all sales routed to TTRC Store).
  */
-export function getSolutionProducts(solution: B2BSolution): Product[] {
-  return solution.productSlugs
-    .map(slug => products.find(p => p.slug === slug || p.id === slug))
-    .filter((p): p is Product => Boolean(p));
+export function getSolutionProducts(_solution: B2BSolution): any[] {
+  return [];
 }
 
 /**

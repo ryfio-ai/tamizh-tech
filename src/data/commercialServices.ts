@@ -988,14 +988,14 @@ export const commercialServices: Record<string, CommercialServiceDetail> = {
       {
         title: "RC Robo Race Competition Bot",
         desc: "National championship racing platform with dual high-RPM drive motors and low-profile aluminum chassis.",
-        href: "/products/competition/rc-robo-race",
+        href: "https://www.ttrc.store/",
         image: "/gallery/21.jpeg"
       },
       {
-        title: "FlySky FS-i6X 10CH Transmitter",
-        desc: "Reliable 2.4GHz 10-channel telemetry transmitter used across our competition robotics platforms.",
-        href: "/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
-        image: "/product/fs-i6x.jpg"
+        title: "FlySky Radio Controllers & Telemetry",
+        desc: "Reliable 2.4GHz multi-channel telemetry transmitters available on our official store.",
+        href: "https://www.ttrc.store/",
+        image: "/gallery/8.jpg"
       }
     ],
     whatsappMessage: "Hi Tamizh Tech, I have a Robotics & Automation requirement.",

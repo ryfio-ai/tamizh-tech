@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, ChevronUp, ChevronDown, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, ChevronUp, ChevronDown, ArrowRight, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
 import { FaLinkedin, FaInstagram, FaYoutube, FaWhatsapp, FaFacebook } from "react-icons/fa";
 import { QuoteModal } from "@/components/forms/QuoteModal";
 
@@ -197,43 +197,33 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Column 4: Products */}
+            {/* Column 4: Official Store (TTRC Store) */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-100 pb-2">
-                Products
-              </h3>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <Link href="/products/competition" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
-                    Competition Robots
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/competition/rc-robo-race" className="text-slate-600 hover:text-[#FF6B00] transition-colors block pl-2 border-l border-slate-200">
-                    RC Robo Race Platform
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/competition/rc-robo-soccer" className="text-slate-600 hover:text-[#FF6B00] transition-colors block pl-2 border-l border-slate-200">
-                    RC Robo Soccer Platform
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/radio-controllers" className="text-slate-600 hover:text-[#FF6B00] transition-colors block">
-                    Radio Controllers
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/products/radio-controllers/flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver" className="text-slate-600 hover:text-[#FF6B00] transition-colors block pl-2 border-l border-slate-200">
-                    FlySky FS-i6X 10CH
-                  </Link>
-                </li>
-                <li className="pt-1">
-                  <Link href="/products" className="text-xs font-bold text-[#FF6B00] hover:text-[#e05e00] inline-flex items-center gap-1">
-                    View All Products <ArrowRight className="w-3 h-3" />
-                  </Link>
-                </li>
-              </ul>
+              <div className="flex items-center gap-1.5 border-b border-slate-100 pb-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
+                  Official Store
+                </h3>
+                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 bg-orange-100 text-[#FF6B00] rounded-full">
+                  ttrc.store
+                </span>
+              </div>
+              <div className="p-4 rounded-2xl bg-orange-50/70 border border-orange-100/80 space-y-2.5">
+                <div className="text-xs font-black text-slate-900 uppercase tracking-tight">
+                  Official Tamizh Tech Store
+                </div>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
+                  For all robotics kits, components, and controllers, purchase directly on our ecommerce platform.
+                </p>
+                <a
+                  href="https://www.ttrc.store/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-lg transition-colors shadow-2xs"
+                >
+                  <span>Visit TTRC Store</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
 
             {/* Column 5: Company & Learn */}
@@ -363,25 +353,33 @@ export function Footer() {
               )}
             </div>
 
-            {/* Accordion 3: Products */}
+            {/* Accordion 3: Official Store (TTRC Store) */}
             <div className="border-b border-slate-100 pb-3">
-              <button
-                type="button"
-                onClick={() => toggleAccordion("products")}
-                className="flex items-center justify-between w-full py-2 text-xs font-bold uppercase tracking-wider text-slate-900"
-              >
-                <span>Products</span>
-                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${openAccordions.products ? "rotate-180" : ""}`} />
-              </button>
-              {openAccordions.products && (
-                <ul className="pt-2 pl-2 space-y-2 text-xs text-slate-600">
-                  <li><Link href="/products/competition" className="hover:text-[#FF6B00]">Competition Robots</Link></li>
-                  <li><Link href="/products/competition/rc-robo-race" className="hover:text-[#FF6B00]">RC Robo Race</Link></li>
-                  <li><Link href="/products/competition/rc-robo-soccer" className="hover:text-[#FF6B00]">RC Robo Soccer</Link></li>
-                  <li><Link href="/products/radio-controllers" className="hover:text-[#FF6B00]">Radio Controllers (FlySky)</Link></li>
-                  <li><Link href="/products" className="font-bold text-[#FF6B00]">View All Products →</Link></li>
-                </ul>
-              )}
+              <div className="py-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-900">Official Store</span>
+                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.5 bg-orange-100 text-[#FF6B00] rounded-full">
+                    ttrc.store
+                  </span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-orange-50 border border-orange-100 space-y-2">
+                  <div className="text-xs font-black text-slate-900 uppercase tracking-tight">
+                    Official Tamizh Tech Store
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    For all robotics kits, components, and controllers, purchase directly on our ecommerce platform.
+                  </p>
+                  <a
+                    href="https://www.ttrc.store/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-lg transition-colors shadow-2xs"
+                  >
+                    <span>Visit TTRC Store</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Accordion 4: Company & Learn */}

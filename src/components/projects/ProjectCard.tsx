@@ -16,7 +16,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, onDiscuss, className }: ProjectCardProps) {
   const isCompleted = project.projectType === "completed";
   const projectHref = getProjectUrl(project.categorySlug, project.slug);
-  const imageSrc = project.coverImage || (isCompleted ? "/product/race/race1.png" : "/pic/3d printing.jpg");
+  const imageSrc = project.coverImage || (isCompleted ? "/hero-combined.jpg" : "/hero-robotics.jpg");
 
   return (
     <div

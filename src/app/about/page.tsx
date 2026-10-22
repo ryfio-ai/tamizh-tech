@@ -40,11 +40,42 @@ const timeline = [
   { year: "2026", title: "Academy & Advanced R&D", desc: "Launched ThiranOli Academy to scale technical training, and expanded B2B automation." },
 ];
 
-const values = [
-  { icon: TargetIcon,      title: "Vision",    desc: "To be India's most trusted robotics and AI engineering company." },
-  { icon: HeartIcon,       title: "Mission",   desc: "Building technology that empowers industries and educates the next generation." },
-  { icon: AwardIcon,       title: "Excellence",desc: "Every project is built to the highest standards of engineering quality." },
-  { icon: UsersIcon,       title: "Community", desc: "Creating a thriving ecosystem of engineers, innovators, and educators." },
+const missionVision = [
+  {
+    icon: TargetIcon,
+    title: "Our Mission",
+    desc: "To build practical, accessible, and impactful technology through robotics, AI, and engineering innovation—solving real-world problems while empowering the next generation of innovators through hands-on learning.",
+    badge: "Purpose"
+  },
+  {
+    icon: AwardIcon,
+    title: "Our Vision",
+    desc: "To make India a global hub for robotics and engineering innovation by developing trusted technology solutions, advancing industrial automation, and nurturing future-ready engineers.",
+    badge: "Future"
+  }
+];
+
+const coreValues = [
+  {
+    icon: Zap,
+    title: "Innovation",
+    desc: "Turning ideas into practical technology."
+  },
+  {
+    icon: AwardIcon,
+    title: "Engineering Excellence",
+    desc: "Building reliable, quality-focused solutions."
+  },
+  {
+    icon: UsersIcon,
+    title: "Education",
+    desc: "Inspiring students through hands-on learning."
+  },
+  {
+    icon: HeartIcon,
+    title: "Real-World Impact",
+    desc: "Delivering solutions for industry and society."
+  }
 ];
 
 const team = [
@@ -72,8 +103,8 @@ export default function AboutPage() {
     <div>
       {/* Hero */}
       <PageHero
-        title="A technology company with purpose"
-        subtitle="From a student robotics club to a premier AI & engineering company — the TamizhTech story is built on passion, innovation, and impact."
+        title="Engineering Today. Innovating Tomorrow."
+        subtitle="From robotics and embedded systems to AI-driven automation, we turn engineering ideas into real-world solutions. Learn. Build. Innovate."
         breadcrumbActive="About"
       />
 
@@ -82,12 +113,12 @@ export default function AboutPage() {
         <div className="container px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection direction="left">
-              <SectionHeader tag="Who We Are" title="A technology company" highlight="with purpose" align="left" />
+              <SectionHeader tag="Who We Are" title="TAMIZHTECH ROBOTICS COMPANY" highlight="Coimbatore" align="left" />
               <p className="mt-6 text-text-muted text-base md:text-lg leading-relaxed">
-                TamizhTech Robotics Company is a Coimbatore-based technology company specializing in Robotics, AI, Drone Technology, IoT, and Embedded Systems. We serve industries ranging from manufacturing to healthcare while empowering thousands of students with hands-on STEM education.
+                TamizhTech Robotics Company is an indigenously focused technology firm headquartered in Coimbatore, Tamil Nadu. From robotics, drone technology, and embedded systems to AI-driven automation, we transform bold engineering ideas into reliable, practical solutions for manufacturing plants, institutions, and builders.
               </p>
               <div className="mt-8 space-y-3">
-                {["Founded in Coimbatore, Tamil Nadu", "8+ years of engineering excellence", "Serving 15+ industry partners nationally", "1000+ students trained across India"].map(pt => (
+                {["Founded in Coimbatore, Tamil Nadu", "Turnkey industrial robotics & automation", "High-precision 3D printing & fiber laser cutting", "1000+ students & innovators mentored across India"].map(pt => (
                   <div key={pt} className="flex items-center gap-3 text-text-secondary">
                     <CheckCircle className="w-5 h-5 text-accent shrink-0" />
                     <span className="text-sm font-semibold">{pt}</span>
@@ -96,8 +127,11 @@ export default function AboutPage() {
               </div>
 
               <div className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-2xl">
-                <h4 className="font-bold text-text-primary text-sm tracking-wide uppercase mb-1">TamizhTech Robotics Company</h4>
-                <p className="text-xs text-accent font-bold mb-4">The Future of Engineering Starts Here</p>
+                <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-accent text-white tracking-widest inline-block mb-3">
+                  Learn. Build. Innovate.
+                </span>
+                <h4 className="font-bold text-text-primary text-base tracking-wide uppercase mb-1">TAMIZHTECH ROBOTICS COMPANY</h4>
+                <p className="text-xs text-accent font-bold mb-4">Engineering Today. Innovating Tomorrow.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-text-secondary">
                   <div>
                     <span className="text-text-muted text-xs block">Established</span>
@@ -108,15 +142,15 @@ export default function AboutPage() {
                     Coimbatore, Tamil Nadu
                   </div>
                   <div className="sm:col-span-2">
-                    <span className="text-text-muted text-xs block">Evolution</span>
-                    From a student robotics club to a leading robotics, engineering, and technology solutions company.
+                    <span className="text-text-muted text-xs block">Focus</span>
+                    Industrial Automation, Robotics, Precision Prototyping & STEM Innovation.
                   </div>
                 </div>
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg border border-border">
-                <Image src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop" alt="TamizhTech lab" fill className="object-cover" />
+                <Image src="/hero-combined.jpg" alt="TamizhTech Engineering and Robotics Platform" fill className="object-cover" />
               </div>
             </AnimatedSection>
           </div>
@@ -126,17 +160,54 @@ export default function AboutPage() {
       {/* Vision & Mission */}
       <section className="section bg-subtle py-24 border-y border-border/30">
         <div className="container px-6">
-          <AnimatedSection className="mb-16">
-            <SectionHeader tag="Our Values" title="What drives" highlight="us" />
+          <AnimatedSection className="mb-14 text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold text-accent uppercase tracking-widest block mb-2">Our Foundation</span>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-text-primary uppercase tracking-tight">
+              Mission & Vision
+            </h2>
+            <p className="text-sm text-text-muted mt-3">
+              Guiding our engineering commitments, product development, and industrial partnerships.
+            </p>
           </AnimatedSection>
+
+          {/* Mission & Vision Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {missionVision.map(({ icon: Icon, title, desc, badge }) => (
+              <Card key={title} className="p-8 md:p-10 bg-white border border-border/80 rounded-2xl shadow-sm hover:shadow-xl hover:border-accent/40 transition-all duration-300">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent border border-accent/20">
+                    <Icon className="w-7 h-7" />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-slate-100 text-slate-700 rounded-full border border-slate-200">
+                    {badge}
+                  </span>
+                </div>
+                <h3 className="font-heading font-black text-2xl text-text-primary uppercase tracking-tight mb-4">
+                  {title}
+                </h3>
+                <p className="text-text-secondary text-sm md:text-base leading-relaxed font-sans">
+                  {desc}
+                </p>
+              </Card>
+            ))}
+          </div>
+
+          {/* Core Values */}
+          <AnimatedSection className="mb-10 text-center">
+            <span className="text-xs font-bold text-accent uppercase tracking-widest block mb-1">Principles</span>
+            <h3 className="text-2xl md:text-3xl font-heading font-black text-text-primary uppercase tracking-tight">
+              Our Core Values
+            </h3>
+          </AnimatedSection>
+
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map(({ icon: Icon, title, desc }) => (
+            {coreValues.map(({ icon: Icon, title, desc }) => (
               <StaggerItem key={title}>
-                <Card className="h-full p-8 flex flex-col items-start hover:border-accent/40 shadow-sm hover:shadow-lg transition-all duration-300 bg-white">
+                <Card className="h-full p-8 flex flex-col items-start hover:border-accent/40 shadow-sm hover:shadow-lg transition-all duration-300 bg-white rounded-2xl">
                   <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 border border-accent/20 shadow-xs">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="font-bold text-text-primary text-base mb-2 font-heading uppercase tracking-tight">{title}</h3>
+                  <h4 className="font-bold text-text-primary text-base mb-2 font-heading uppercase tracking-tight">{title}</h4>
                   <p className="text-xs text-text-secondary leading-relaxed font-sans">{desc}</p>
                 </Card>
               </StaggerItem>

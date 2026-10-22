@@ -42,15 +42,15 @@ export default function NotFound() {
                 </div>
                 <div className="mt-12 pt-8 border-t border-border">
                     <p className="text-xs text-text-muted">
-                        Looking for something specific? Try our{" "}
-                        <Link href="/products" className="text-accent hover:text-accent-hover font-bold">
-                            Products
-                        </Link>
-                        ,{" "}
+                        Looking for something specific? Visit our{" "}
+                        <a href="https://www.ttrc.store/" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover font-bold">
+                            Official Store (ttrc.store)
+                        </a>
+                        , or explore our{" "}
                         <Link href="/courses" className="text-accent hover:text-accent-hover font-bold">
                             Courses
                         </Link>
-                        , or{" "}
+                        {" "}and{" "}
                         <Link href="/services" className="text-accent hover:text-accent-hover font-bold">
                             Services
                         </Link>

@@ -23,13 +23,7 @@ function Header1() {
   }, []);
 
   const productsDropdown = [
-    { title: "Product Catalog", href: "/products", desc: "Browse our complete mechatronics selection.", icon: Cpu },
-    { title: "Robo Race Bots", href: "/products?category=Robo%20Race%20Bots", desc: "High-RPM racing platforms.", icon: Bot },
-    { title: "Robo Soccer Bots", href: "/products?category=Robo%20Soccer%20Bots", desc: "Autonomous & remote striker bots.", icon: Bot },
-    { title: "Robo Sumo Bots", href: "/products?category=Robo%20Sumo%20Bots", desc: "Heavyweight eviction models.", icon: Bot },
-    { title: "Line Follower Robots", href: "/products?category=Line%20Follower%20Robots", desc: "Optically-tracked precision crawlers.", icon: Bot },
-    { title: "STEM Kits", href: "/products?category=STEM%20Learning%20Kits", desc: "Tinkering kits for students.", icon: Cpu },
-    { title: "Lab Kits", href: "/products?category=School%20Robotics%20Lab%20Kits", desc: "Curriculum-linked school modules.", icon: Cpu },
+    { title: "Official TTRC Store", href: "https://www.ttrc.store/", desc: "Shop robotics kits & components on our official store.", icon: Cpu },
   ];
 
   const solutionsDropdown = [

@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 const events = [
-  { name: "RC Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", image: "/product/soccer rc.jpg", icon: <Trophy /> },
-  { name: "RC Robo Sumo", desc: "Push rivals out of the ring using strength, weight, and strategy.", image: "/product/sumo rc.jpg", icon: <Target /> },
+  { name: "RC Robo Soccer", desc: "Team-based autonomous or RC robot soccer competition.", image: "/gallery/8.jpg", icon: <Trophy /> },
+  { name: "RC Robo Sumo", desc: "Push rivals out of the ring using strength, weight, and strategy.", image: "/gallery/21.jpeg", icon: <Target /> },
   { name: "RC Robo Race", desc: "Time-trial high-speed racing on custom drift-tuned tracks.", image: "/events/robo-race.png", icon: <Zap /> },
   { name: "RC Robo War", desc: "Battle bots competition with custom-built high-impact combat machines.", image: "/events/robo-war.png", icon: <ShieldCheck /> },
   { name: "RC Boat", desc: "Water-cooled brushless motor speedboats racing on aquatic courses.", image: "", icon: <Ship /> },

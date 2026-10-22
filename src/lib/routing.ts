@@ -4,13 +4,13 @@
  * /{contentType}/{categorySlug}/{slug}
  */
 
-// ── Products ──────────────────────────────────────────────────────────────────
-export function getProductCategoryUrl(categorySlug: string): string {
-  return `/products/${categorySlug}`;
+// ── Products (Official TTRC Store) ───────────────────────────────────────────
+export function getProductCategoryUrl(_categorySlug?: string): string {
+  return "https://www.ttrc.store/";
 }
 
-export function getProductUrl(categorySlug: string, slug: string): string {
-  return `/products/${categorySlug}/${slug}`;
+export function getProductUrl(_categorySlug?: string, _slug?: string): string {
+  return "https://www.ttrc.store/";
 }
 
 // ── Courses ───────────────────────────────────────────────────────────────────

@@ -78,8 +78,8 @@ export default function AboutTamizhTechPage() {
       <FAQSchema faqs={faqItems} />
 
       <PageHero
-        title="About Tamizh Tech Robotics"
-        subtitle="Learn about our journey, engineering philosophy, and dedication to building high-grade B2B industrial automation and K-12 STEM education platforms."
+        title="TAMIZHTECH ROBOTICS COMPANY"
+        subtitle="Engineering Today. Innovating Tomorrow. From robotics and embedded systems to AI-driven automation, we turn engineering ideas into real-world solutions."
         breadcrumbActive="About Tamizh Tech"
       />
 
@@ -89,10 +89,55 @@ export default function AboutTamizhTechPage() {
             
             {/* Who are we? */}
             <div>
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-accent text-white tracking-widest inline-block mb-3">
+                Learn. Build. Innovate.
+              </span>
               <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Who are we?</h2>
               <p className="text-text-secondary text-sm leading-relaxed">
-                Tamizh Tech Robotics Company is a premier indigenously-focused robotics design, fabrication, and automation firm headquartered in Coimbatore, Tamil Nadu. Established with the vision to foster Indian self-reliance in engineering, we design high-RPM competition bots, modular STEM tinkering setups, and custom factory line control devices.
+                TamizhTech Robotics Company is a premier technology firm headquartered in Coimbatore, Tamil Nadu. From robotics, drone technology, and embedded systems to AI-driven automation, we transform bold engineering ideas into reliable, practical solutions for manufacturing plants, institutions, and builders.
               </p>
+            </div>
+
+            {/* Mission & Vision */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-2xs">
+                <span className="text-[10px] font-black uppercase tracking-wider text-accent block mb-2">Our Purpose</span>
+                <h3 className="text-xl font-heading font-black uppercase tracking-tight text-text-primary mb-3">Our Mission</h3>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  To build practical, accessible, and impactful technology through robotics, AI, and engineering innovation—solving real-world problems while empowering the next generation of innovators through hands-on learning.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-2xs">
+                <span className="text-[10px] font-black uppercase tracking-wider text-accent block mb-2">Our Target</span>
+                <h3 className="text-xl font-heading font-black uppercase tracking-tight text-text-primary mb-3">Our Vision</h3>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  To make India a global hub for robotics and engineering innovation by developing trusted technology solutions, advancing industrial automation, and nurturing future-ready engineers.
+                </p>
+              </div>
+            </div>
+
+            {/* Core Values */}
+            <div>
+              <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-text-primary">Our Core Values</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-slate-200 bg-white">
+                  <h4 className="text-sm font-bold text-accent uppercase tracking-wide mb-1">Innovation</h4>
+                  <p className="text-xs text-text-secondary">Turning ideas into practical technology.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-slate-200 bg-white">
+                  <h4 className="text-sm font-bold text-accent uppercase tracking-wide mb-1">Engineering Excellence</h4>
+                  <p className="text-xs text-text-secondary">Building reliable, quality-focused solutions.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-slate-200 bg-white">
+                  <h4 className="text-sm font-bold text-accent uppercase tracking-wide mb-1">Education</h4>
+                  <p className="text-xs text-text-secondary">Inspiring students through hands-on learning.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-slate-200 bg-white">
+                  <h4 className="text-sm font-bold text-accent uppercase tracking-wide mb-1">Real-World Impact</h4>
+                  <p className="text-xs text-text-secondary">Delivering solutions for industry and society.</p>
+                </div>
+              </div>
             </div>
 
             {/* What do we do? */}
@@ -141,9 +186,9 @@ export default function AboutTamizhTechPage() {
                 Choose us for 100% Made in India robotics kits, complete syllabus integrations, professional-grade PLC cabinet configurations, and on-ground engineering mentorship from our Founder and technical staff.
               </p>
               <div className="flex gap-4">
-                <Link href="/products">
-                  <Button variant="primary">Explore Catalog</Button>
-                </Link>
+                <a href="https://www.ttrc.store/" target="_blank" rel="noopener noreferrer">
+                  <Button variant="primary">Visit TTRC Store</Button>
+                </a>
                 <Link href="/contact">
                   <Button variant="secondary">Contact Consultant</Button>
                 </Link>

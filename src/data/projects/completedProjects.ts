@@ -40,10 +40,10 @@ export const completedProjects: Project[] = [
       "Center-of-gravity positioning to prevent roll during high-speed banked turns",
       "Motor driver heat dissipation during continuous stall bursts"
     ],
-    coverImage: "/product/race/race1.png",
-    images: ["/product/race/race1.png", "/product/race/race2.png"],
+    coverImage: "/gallery/7.JPG",
+    images: ["/gallery/7.JPG", "/gallery/8.jpg"],
     relatedServices: ["robotics-automation", "laser-cutting", "pcb-design-fabrication-assembly", "3d-printing"],
-    relatedProducts: ["rc-robo-race"],
+    relatedProducts: [],
     verifiedEvidence: {
       clientType: "Engineering Competition Teams & Labs",
       deliverables: ["Precision laser-cut chassis", "Planetary motor drive system", "Wiring harness and test documentation"]
@@ -92,10 +92,10 @@ export const completedProjects: Project[] = [
       "Rapid pressure recovery between successive kicks",
       "Omni-wheel traction balance across high-gloss tournament surfaces"
     ],
-    coverImage: "/product/soccer/soccer 1.0.png",
-    images: ["/product/soccer/soccer 1.0.png", "/product/soccer/soccer1.1.png"],
+    coverImage: "/gallery/11.jpg",
+    images: ["/gallery/11.jpg", "/gallery/12.jpg"],
     relatedServices: ["robotics-automation", "laser-cutting", "pcb-design-fabrication-assembly", "3d-printing"],
-    relatedProducts: ["rc-robo-soccer"],
+    relatedProducts: [],
     verifiedEvidence: {
       clientType: "Robo Soccer Tournament Teams",
       deliverables: ["Pneumatic system assembly", "4-wheel omni drive base", "Tested solenoid driver board"]

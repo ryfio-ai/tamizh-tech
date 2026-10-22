@@ -138,9 +138,9 @@ export default function RoboticsProductsIndiaPage() {
                 Choose us to secure local engineering support, direct factory pricing, robust hardware structures, and full compliance with GST invoicing rules.
               </p>
               <div className="flex gap-4">
-                <Link href="/products">
-                  <Button variant="primary">Shop Products</Button>
-                </Link>
+                <a href="https://www.ttrc.store/" target="_blank" rel="noopener noreferrer">
+                  <Button variant="primary">Shop on TTRC Store</Button>
+                </a>
                 <Link href="/contact">
                   <Button variant="secondary">Request B2B Quote</Button>
                 </Link>

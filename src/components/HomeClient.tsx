@@ -140,35 +140,35 @@ const partnerLogos = [
 
 const competitions = [
   { 
-    title: "TTRC LF 6.0", 
+    title: "TTRC LF 6.0 Line Follower", 
     spec: "Precision line following, high-speed performance and competition-ready robotics applications.", 
-    image: "/product/lfr/lfr-6.0.jpg", 
+    image: "/gallery/1.JPEG", 
     categorySlug: "competition", 
     slug: "ttrc-lf-6-0",
     badge: "Line Follower"
   },
   { 
-    title: "RC Robo Race", 
+    title: "RC Robo Race Platform", 
     spec: "High-RPM metal gear motors, drift chassis, carbon fiber structure.", 
-    image: "/product/race/race1.png", 
+    image: "/gallery/7.JPG", 
     categorySlug: "competition", 
     slug: "rc-robo-race",
     badge: "Robo Race"
   },
   { 
-    title: "RC Robo Soccer", 
+    title: "RC Robo Soccer Platform", 
     spec: "Pneumatic active striker mechanism, omni-directional wheels, customized RC remote.", 
-    image: "/product/soccer/soccer 1.0.png", 
+    image: "/gallery/11.jpg", 
     categorySlug: "competition", 
     slug: "rc-robo-soccer",
     badge: "Robo Soccer"
   },
   { 
-    title: "Flysky FS-i6X 10CH", 
-    spec: "2.4GHz 10-Channel AFHDS 2A Transmitter & FS-iA10B Receiver.", 
-    image: "/product/flysky/flysky-fs-i6x-10ch.jpg", 
+    title: "Flysky Radio Controllers", 
+    spec: "2.4GHz Multi-Channel AFHDS Transmitters & Telemetry Receivers.", 
+    image: "/gallery/14.jpg", 
     categorySlug: "radio-controllers", 
-    slug: "flysky-fs-i6x-2.4ghz-6ch-afhds-2a-rc-transmitter-with-fs-ia10b-2.4ghz-10ch-receiver",
+    slug: "flysky-fs-i6x",
     badge: "Radio Controller"
   },
 ];
@@ -207,35 +207,55 @@ function LazyVideo({ src = "/3d printing.mp4" }: { src?: string }) {
   );
 }
 
-// Hero Carousel Slides: First shown is TTRC LF 6.0 Advertisement (8s interval)
+// Hero Carousel Slides: Exactly 3 Slides (Laser Cutting Video, 3D Printing Video, Official TTRC Store)
 const heroSlides = [
   {
-    id: "ttrc-lf-6-0",
-    badge: "NEW LAUNCH • LATEST MODEL",
-    title: "TTRC LF 6.0 Line Follower",
-    subtitle: "Precision Line Following. Maximum Speed.",
-    image: "/product/lfr/lfr-6.0.jpg",
-    imageAlt: "TTRC LF 6.0 high-speed line follower robot by TamizhTech Robotics",
-    price: "₹3,199",
-    regularPrice: "₹3,799",
-    discount: "16% OFF",
-    href: "/products/competition/ttrc-lf-6-0",
-    ctaText: "Explore LF 6.0",
-    eyebrow: "NEW LAUNCH: TTRC LF 6.0 LINE FOLLOWER — OFFER ₹3,199",
-  },
-  {
-    id: "fleet",
-    badge: "OFFICIAL HARDWARE FLEET",
-    title: "Competition & Educational Platforms",
-    subtitle: "Combat Bots, Line Followers, Bipeds & Rovers",
-    image: "/hero-combined.jpg",
-    imageAlt: "TamizhTech Robotics Fleet: Combat Robot, Bipedal Platform, Line Follower and All-Terrain Rover",
+    id: "laser-cutting-video",
+    badge: "FIBER LASER CUTTING",
+    title: "Precision Laser Cutting Services",
+    subtitle: "SS304/SS316 Stainless Steel & Sheet Metal Precision Fabrication",
+    videoSrc: "/laser-cutting.mp4",
+    image: "/service/laser-cutting-services.png",
+    imageAlt: "Tamizh Tech Precision Laser Cutting in Coimbatore",
     price: null,
     regularPrice: null,
     discount: null,
-    href: "/products",
-    ctaText: "Explore Products",
-    eyebrow: "INDIA'S LEADING GAMIFIED PLATFORM",
+    href: "/services/laser-cutting",
+    ctaText: "Explore Laser Cutting",
+    eyebrow: "INDUSTRIAL PRECISION SHEET METAL FABRICATION",
+    isExternal: false,
+  },
+  {
+    id: "3d-printing-video",
+    badge: "ADDITIVE MANUFACTURING",
+    title: "High-Precision 3D Printing",
+    subtitle: "Rapid Prototyping & Functional Parts in PLA, PETG & TPU",
+    videoSrc: "/3d printing.mp4",
+    image: "/service/3d-printing-services.png",
+    imageAlt: "Tamizh Tech Rapid 3D Printing Prototyping Services",
+    price: null,
+    regularPrice: null,
+    discount: null,
+    href: "/services/3d-printing",
+    ctaText: "Explore 3D Printing",
+    eyebrow: "RAPID PROTOTYPING & ENGINEERING COMPONENTS",
+    isExternal: false,
+  },
+  {
+    id: "ttrc-store",
+    badge: "OFFICIAL STORE • TTRC.STORE",
+    title: "Official Tamizh Tech Store",
+    subtitle: "Buy Verified Robots, STEM Kits & FlySky Transmitters Online",
+    videoSrc: null,
+    image: "/hero-combined.jpg",
+    imageAlt: "Tamizh Tech Robotics official ecommerce platform TTRC Store",
+    price: null,
+    regularPrice: null,
+    discount: null,
+    href: "https://www.ttrc.store/",
+    ctaText: "Visit TTRC Store",
+    eyebrow: "NOW LIVE: OFFICIAL TAMIZH TECH STORE — WWW.TTRC.STORE",
+    isExternal: true,
   },
 ];
 
@@ -297,8 +317,8 @@ export default function HomeClient() {
         {/* Global radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_100%_50%,rgba(255,136,0,0.10),transparent_70%)] pointer-events-none z-0" />
 
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 md:px-14 lg:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-[46%_54%] items-center gap-6 md:gap-0">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] items-center gap-8 lg:gap-6">
 
             {/* ── LEFT COLUMN ── */}
             <motion.div
@@ -356,8 +376,8 @@ export default function HomeClient() {
                 <p className="text-xs sm:text-sm font-black text-text-primary font-heading leading-snug">
                   தமிழின் தொழில்நுட்பம், நாளைய உலகிற்காக
                 </p>
-                <p className="text-[11px] sm:text-xs font-bold text-accent tracking-wide">
-                  More Than Robots. We Build Skills, Ideas & Innovation.
+                <p className="text-[11px] sm:text-xs font-bold text-accent tracking-wide uppercase">
+                  Engineering Today. Innovating Tomorrow. • Learn. Build. Innovate.
                 </p>
               </motion.div>
 
@@ -367,9 +387,9 @@ export default function HomeClient() {
                   hidden: { opacity: 0, y: 16 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
                 }}
-                className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[480px]"
+                className="text-xs sm:text-base text-text-secondary leading-relaxed font-sans max-w-[520px]"
               >
-                Hands-on robotics, competition hardware and engineering solutions for students, schools, colleges, makers and businesses.
+                From robotics and embedded systems to AI-driven automation, we turn engineering ideas into real-world solutions.
               </motion.p>
 
               {/* Supporting proof categories */}
@@ -443,9 +463,9 @@ export default function HomeClient() {
               {/* Machined Double-Bezel Hardware Showcase Container with scroll parallax & soft zoom */}
               <motion.div
                 style={shouldReduceMotion ? {} : { y: heroY, scale: heroScale }}
-                className="relative w-full max-w-[600px] p-2 sm:p-2.5 rounded-[2rem] sm:rounded-[2.4rem] bg-slate-100/90 ring-1 ring-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.12)]"
+                className="relative w-full max-w-[760px] xl:max-w-[820px] p-2.5 sm:p-3.5 rounded-[2rem] sm:rounded-[2.6rem] bg-slate-100/90 ring-1 ring-slate-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.12)]"
               >
-                <div className="relative w-full aspect-[3/2] rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.4rem-0.625rem)] overflow-hidden bg-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.03)] border border-slate-200/60 group">
+                <div className="relative w-full aspect-[16/10.5] rounded-[calc(2rem-0.5rem)] sm:rounded-[calc(2.6rem-0.75rem)] overflow-hidden bg-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_3px_rgba(0,0,0,0.03)] border border-slate-200/60 group">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={heroSlides[heroSlideIdx].id}
@@ -455,14 +475,27 @@ export default function HomeClient() {
                       transition={{ duration: 0.45, ease: "easeOut" }}
                       className="relative w-full h-full"
                     >
-                      <Image
-                        src={heroSlides[heroSlideIdx].image}
-                        alt={heroSlides[heroSlideIdx].imageAlt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
-                        className={heroSlides[heroSlideIdx].id === "ttrc-lf-6-0" ? "object-cover" : "object-contain"}
-                        priority
-                      />
+                      {heroSlides[heroSlideIdx].videoSrc ? (
+                        <video
+                          key={heroSlides[heroSlideIdx].videoSrc}
+                          src={heroSlides[heroSlideIdx].videoSrc}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="auto"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <Image
+                          src={heroSlides[heroSlideIdx].image}
+                          alt={heroSlides[heroSlideIdx].imageAlt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 590px"
+                          className="object-contain"
+                          priority
+                        />
+                      )}
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10 pointer-events-none">
@@ -505,13 +538,25 @@ export default function HomeClient() {
                           )}
                         </div>
 
-                        <Link
-                          href={heroSlides[heroSlideIdx].href}
-                          className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl shadow-md transition-all shrink-0 hover:scale-105 active:scale-95"
-                        >
-                          <span>{heroSlides[heroSlideIdx].ctaText}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        {heroSlides[heroSlideIdx].isExternal || heroSlides[heroSlideIdx].href.startsWith("http") ? (
+                          <a
+                            href={heroSlides[heroSlideIdx].href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl shadow-md transition-all shrink-0 hover:scale-105 active:scale-95"
+                          >
+                            <span>{heroSlides[heroSlideIdx].ctaText}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </a>
+                        ) : (
+                          <Link
+                            href={heroSlides[heroSlideIdx].href}
+                            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold rounded-xl shadow-md transition-all shrink-0 hover:scale-105 active:scale-95"
+                          >
+                            <span>{heroSlides[heroSlideIdx].ctaText}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        )}
                       </div>
                     </motion.div>
                   </AnimatePresence>
@@ -537,7 +582,7 @@ export default function HomeClient() {
               </motion.div>
 
               {/* Progress Bar & Slide Indicator Dots */}
-              <div className="flex items-center justify-center w-full max-w-[600px] mt-3 gap-2 px-3">
+              <div className="flex items-center justify-center w-full max-w-[760px] xl:max-w-[820px] mt-4 gap-2 px-3">
                 {heroSlides.map((slide, idx) => {
                   const isActive = heroSlideIdx === idx;
                   return (
@@ -935,13 +980,15 @@ export default function HomeClient() {
                           {comp.spec}
                         </p>
                       </div>
-                      <Link
-                        href={`/products/${comp.categorySlug}/${comp.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent tracking-wider uppercase"
+                      <a
+                        href="https://www.ttrc.store/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent tracking-wider uppercase hover:underline"
                       >
-                        <span>View Details</span>
+                        <span>Buy on TTRC Store</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                      </a>
                     </div>
                   </Card>
                 </div>
@@ -952,13 +999,17 @@ export default function HomeClient() {
           <AnimatedSection className="mt-16 text-center">
             <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-subtle border border-border px-8 py-5 rounded-lg max-w-2xl mx-auto shadow-sm">
               <span className="text-sm font-semibold text-text-secondary font-sans">
-                Need a custom-built competition robot or team mentoring?
+                Need competition-tested robots, chassis platforms or components?
               </span>
-              <Link href="/products">
+              <a
+                href="https://www.ttrc.store/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="primary" size="sm" className="font-bold">
-                  View Competition Kits <ArrowRight className="w-4 h-4 ml-1.5" />
+                  Visit Official TTRC Store <ArrowRight className="w-4 h-4 ml-1.5" />
                 </Button>
-              </Link>
+              </a>
             </div>
           </AnimatedSection>
         </div>
@@ -984,7 +1035,7 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4 relative">
             {[
               { step: "01", title: "Idea", desc: "Requirements, concept scoping & CAD design", icon: FlaskConical, href: "/contact" },
-              { step: "02", title: "Robotics Product", desc: "Competition robots, chassis kits & transmitters", icon: Bot, href: "/products/competition" },
+              { step: "02", title: "Robotics Hardware", desc: "Official robots, chassis & kits on TTRC Store", icon: Bot, href: "https://www.ttrc.store/" },
               { step: "03", title: "Custom Fabrication", desc: "SS laser cutting & precision 3D printing", icon: Scissors, href: "/services/laser-cutting" },
               { step: "04", title: "PCB", desc: "Design, fabrication & board assembly", icon: Cpu, href: "/services/pcb-design-fabrication-assembly" },
               { step: "05", title: "Automation", desc: "Firmware, kinematics, sensor fusion & PLC", icon: Factory, href: "/services/industrial-automation" },

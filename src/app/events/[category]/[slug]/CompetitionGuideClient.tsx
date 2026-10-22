@@ -24,14 +24,11 @@ import {
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { CompetitionGuide } from "@/data/competitionGuides";
-import { Product } from "@/data/products";
-import { ProductCard } from "@/components/products/ProductCard";
 import { QuoteModal, ProductEnquiryContext } from "@/components/forms/QuoteModal";
 import { trackMarketingEvent } from "@/lib/analytics";
 
 interface CompetitionGuideClientProps {
   guide: CompetitionGuide;
-  products: Product[];
 }
 
 const SERVICE_LOOKUP: Record<string, { title: string; desc: string; href: string; icon: any }> = {
@@ -95,7 +92,7 @@ const COURSE_LOOKUP: Record<string, { title: string; desc: string; href: string 
   }
 };
 
-export default function CompetitionGuideClient({ guide, products }: CompetitionGuideClientProps) {
+export default function CompetitionGuideClient({ guide }: CompetitionGuideClientProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [quoteRequirement, setQuoteRequirement] = useState<string | undefined>(undefined);
@@ -382,38 +379,31 @@ export default function CompetitionGuideClient({ guide, products }: CompetitionG
           </div>
         </section>
 
-        {/* 7. RELEVANT COMPETITION ROBOTS & HARDWARE KITS (COMMERCIAL PRODUCTS) */}
-        {products && products.length > 0 && (
-          <section className="mb-14">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF6B00] block mb-1">
-                  Tournament-Tested Hardware
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-950">
-                  Relevant Competition Kits & Components
-                </h2>
+        {/* 7. RELEVANT COMPETITION ROBOTS & HARDWARE KITS (OFFICIAL TTRC STORE) */}
+        <section className="mb-14 bg-gradient-to-r from-orange-50/80 via-white to-amber-50/70 border border-orange-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-100/90 text-[#FF6B00] text-[10px] font-extrabold uppercase tracking-widest mb-2">
+                <span>Official Ecommerce Platform</span>
               </div>
-              <Link
-                href="/products/competition"
-                className="inline-flex items-center gap-1 text-xs font-bold text-[#FF6B00] hover:underline"
-              >
-                <span>View Full Competition Catalogue</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-950 mb-2">
+                Buy Tournament-Tested Hardware at TTRC Store
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Looking to purchase competition-ready line followers, Robo Race drift chassis, Robo Soccer strikers, FlySky transmitters, or high-traction buggy wheels for this tournament? All official Tamizh Tech robotics hardware is sold exclusively through our ecommerce platform.
+              </p>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((prod) => (
-                <ProductCard
-                  key={prod.id}
-                  product={prod}
-                  onEnquire={(p) => handleOpenEnquiry(`Enquiring about ${p.name} for ${guide.title}`)}
-                />
-              ))}
-            </div>
-          </section>
-        )}
+            <a
+              href="https://www.ttrc.store/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF6B00] hover:bg-[#e05e00] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition-all shrink-0 hover:scale-105 active:scale-95"
+            >
+              <span>Visit TTRC Store</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </section>
 
         {/* 8. RECOMMENDED TRAINING & SKILL DEVELOPMENT */}
         {guide.courseSlugs && guide.courseSlugs.length > 0 && (

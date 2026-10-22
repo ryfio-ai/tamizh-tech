@@ -4,13 +4,12 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Search, X, ArrowRight, CornerDownLeft, Box, Wrench, GraduationCap, FolderGit2, BookOpen, Calendar } from "lucide-react";
-import { products } from "@/data/products";
 import { services } from "@/data/services";
 import { courses } from "@/data/courses";
 import { projects } from "@/data/projects";
 import { blogPosts, getBlogCategorySlug } from "@/data/blogPosts";
 import { events } from "@/data/events";
-import { getProductUrl, getCourseUrl, getProjectUrl, getBlogUrl, getEventUrl } from "@/lib/routing";
+import { getCourseUrl, getProjectUrl, getBlogUrl, getEventUrl } from "@/lib/routing";
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -73,35 +72,17 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       }
     }
 
-    // 2. Products
-    for (const p of products) {
-      if (!p.published) continue;
-      const configMatch = p.configurations?.some(
-        c => c.name.toLowerCase().includes(trimmed) || (c.sku && c.sku.toLowerCase().includes(trimmed))
-      );
-      if (
-        p.name.toLowerCase().includes(trimmed) ||
-        (p.sku && p.sku.toLowerCase().includes(trimmed)) ||
-        configMatch ||
-        (p.shortDescription && p.shortDescription.toLowerCase().includes(trimmed)) ||
-        (p.description && p.description.toLowerCase().includes(trimmed)) ||
-        p.category.toLowerCase().includes(trimmed) ||
-        (p.subcategory && p.subcategory.toLowerCase().includes(trimmed)) ||
-        (p.searchKeywords && p.searchKeywords.some(k => k.toLowerCase().includes(trimmed))) ||
-        (p.specs && p.specs.toLowerCase().includes(trimmed)) ||
-        (p.applications && p.applications.some(a => a.toLowerCase().includes(trimmed))) ||
-        (p.highlights && p.highlights.some(h => h.toLowerCase().includes(trimmed))) ||
-        p.slug.toLowerCase().includes(trimmed)
-      ) {
-        matches.push({
-          id: `prod-${p.id}`,
-          type: "product",
-          category: "Products",
-          title: p.name,
-          subtitle: p.shortDescription || p.category,
-          url: getProductUrl(p.categorySlug, p.slug)
-        });
-      }
+    // 2. Official TTRC Store Match
+    const storeKeywords = ["product", "store", "shop", "buy", "robot", "kit", "controller", "flysky", "motor", "wheel", "lfr", "line follower", "chassis", "race", "soccer", "hardware", "ttrc"];
+    if (storeKeywords.some(kw => trimmed.includes(kw) || kw.includes(trimmed))) {
+      matches.push({
+        id: "ttrc-store-ecommerce",
+        type: "product",
+        category: "Official Store",
+        title: "TTRC Store (ttrc.store)",
+        subtitle: "Shop competition robots, line followers, FlySky transmitters, motors & buggy wheels online",
+        url: "https://www.ttrc.store/"
+      });
     }
 
     // 3. Projects
@@ -302,16 +283,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             <div className="space-y-1">
               {results.map((item, index) => {
                 const isSelected = index === selectedIndex;
-                return (
-                  <Link
-                    key={item.id}
-                    href={item.url}
-                    onClick={onClose}
-                    onMouseEnter={() => setSelectedIndex(index)}
-                    className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
-                      isSelected ? "bg-orange-50/80 border border-orange-200/80 text-orange-950" : "hover:bg-slate-50 border border-transparent text-slate-700"
-                    }`}
-                  >
+                const isExternal = item.url.startsWith("http");
+                const itemContent = (
+                  <>
                     <div className="mt-0.5 p-2 rounded-lg bg-white border border-slate-200/70 shadow-2xs shrink-0">
                       {getTypeIcon(item.type)}
                     </div>
@@ -330,6 +304,38 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         <CornerDownLeft className="w-3.5 h-3.5" />
                       </div>
                     )}
+                  </>
+                );
+
+                if (isExternal) {
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
+                        isSelected ? "bg-orange-50/80 border border-orange-200/80 text-orange-950" : "hover:bg-slate-50 border border-transparent text-slate-700"
+                      }`}
+                    >
+                      {itemContent}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.url}
+                    onClick={onClose}
+                    onMouseEnter={() => setSelectedIndex(index)}
+                    className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
+                      isSelected ? "bg-orange-50/80 border border-orange-200/80 text-orange-950" : "hover:bg-slate-50 border border-transparent text-slate-700"
+                    }`}
+                  >
+                    {itemContent}
                   </Link>
                 );
               })}

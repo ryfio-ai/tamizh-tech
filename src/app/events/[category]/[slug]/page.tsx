@@ -1,6 +1,5 @@
 import { events, getEventByCategoryAndSlug } from "@/data/events";
 import { competitionGuides, getCompetitionGuideBySlug } from "@/data/competitionGuides";
-import { products } from "@/data/products";
 import { notFound } from "next/navigation";
 import EventDetailClient from "./EventDetailClient";
 import CompetitionGuideClient from "./CompetitionGuideClient";
@@ -96,15 +95,11 @@ export default async function HierarchicalEventDetailPage({ params }: PageProps)
         { name: guide.title, url: `https://www.tamizhtech.in/events/${guide.categorySlug}/${guide.slug}` },
       ];
 
-      const guideProducts = products.filter((p) => 
-        guide.productSlugs.includes(p.slug) && p.published
-      );
-
       return (
         <>
           <BreadcrumbSchema items={breadcrumbs} />
           <CompetitionGuideSchema guide={guide} />
-          <CompetitionGuideClient guide={guide} products={guideProducts} />
+          <CompetitionGuideClient guide={guide} />
         </>
       );
     }

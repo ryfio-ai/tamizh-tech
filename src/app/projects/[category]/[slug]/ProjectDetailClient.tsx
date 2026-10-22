@@ -50,7 +50,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
     sourcePage: `/projects/${project.categorySlug}/${project.slug}`,
   };
 
-  const coverSrc = project.coverImage || (isCompleted ? "/product/race/race1.png" : "/projects/industrial-manufacturing.jpg");
+  const coverSrc = project.coverImage || (isCompleted ? "/gallery/21.jpeg" : "/projects/industrial-manufacturing.jpg");
 
   return (
     <div className="bg-white min-h-screen pt-28 pb-20 text-neutral-900 font-sans">
